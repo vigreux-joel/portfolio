@@ -1,0 +1,55 @@
+$max-width: 1300px;
+
+$color1: #00962A;
+$color2: #6B5B54;
+$color3: #0551E6;
+$black: #0F1723;
+$gris: #7B7B7B;
+$degrade1: radial-gradient(100% 211.18% at 0% 0%, #13B810 0%, #0E8D41 100%);
+$degrade2: radial-gradient(100.28% 130.52% at 100.24% 100%, #2596A6 0%, #00A040 100%);
+
+@function rem($size, $base: 16){
+  @return round((1rem*$size/$base)*100)/100;
+}
+@function em($size, $base: 16){
+  @return round((1em*$size/$base)*100)/100;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+
+html{
+  scroll-behavior: smooth;
+}
+body{
+  margin: 0;
+}
+.container{
+  padding: 1.25rem;
+}
+
+h1, h2, h3{
+  font-family: 'Montserrat', sans-serif;
+}
+h3.title{
+  color: $color3;
+  font-size: rem(22);
+  text-align: center;
+}
+a, button{
+  font-size: rem(20);
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+}
+p{
+  font-size: rem(20);
+  font-family: 'Roboto', sans-serif;
+}
+
+.nowrap{
+  white-space: nowrap;
+}
+

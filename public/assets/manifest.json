@@ -1,0 +1,10 @@
+{
+  "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/home.css": "http://localhost:8080/assets/home.css",
+  "assets/images/background.jpg": "http://localhost:8080/assets/images/background.jpg",
+  "assets/images/maintenance.svg": "http://localhost:8080/assets/images/maintenance.svg",
+  "assets/images/development.svg": "http://localhost:8080/assets/images/development.svg",
+  "assets/images/design.svg": "http://localhost:8080/assets/images/design.svg",
+  "assets/images/logo.svg": "http://localhost:8080/assets/images/logo.svg",
+  "assets/images/next.svg": "http://localhost:8080/assets/images/next.svg"
+}
