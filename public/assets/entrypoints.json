@@ -8,6 +8,9 @@
     "home": {
       "css": [
         "http://localhost:8080/assets/home.css"
+      ],
+      "js": [
+        "http://localhost:8080/assets/home.js"
       ]
     }
   }

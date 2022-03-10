@@ -74,9 +74,6 @@ header {
   nav{
     max-width: $max-width;
     color: white;
-    li{
-      list-style: none;
-    }
   }
   &.opaque{
     background: rgb(0,0,0,.45);
@@ -114,32 +111,31 @@ header {
       width: 100%;
       padding: 1.25rem;
       box-sizing: border-box;
-      ul{
+      .links{
+        position: relative;
         margin: 0 auto;
         padding: 0;
         width: fit-content;
         display: flex;
-      }
-      a{
-        color: white;
-        font-size: rem(20);
-        margin: 0 1rem;
-        position: relative;
-        &:after{
+        .after{
           transition: 0.3s;
           background-color: #fff;
           position: absolute;
-          bottom: -.35rem;
+          bottom: 0.25rem;
           left: 50%;
-          transform: translateX(-50%);
           content: "";
           width: 0;
+          transform: translateX(-50%);
           height: 2px;
         }
-        &:hover:after{
-          width: 100%;
-        }
       }
+      a{
+        color: white;
+        font-size: 1.25rem;
+        position: relative;
+        padding: 1rem;
+      }
+
       button{
         position: absolute;
         right: 1.25rem;
@@ -159,19 +155,19 @@ header {
       max-width: 100vh;
       margin: 0 0 0 auto;
       font-size: 0;
-      ul {
+      .links {
         transition: width 0.5s;
         margin: 0;
         padding: 0;
       }
-      li {;
+      a {;
         transition: .35s;
         &:hover {
           background-color: #00962A;
         }
       }
       @for $i from 1 to 5 {
-        li:nth-of-type(#{$i}) a {
+        a:nth-of-type(#{$i}) {
           width: 0;
         }
       }
@@ -204,7 +200,7 @@ header {
         right: 0;
         position: absolute;
         @for $i from 1 to 5 {
-          li:nth-of-type(#{$i}) a {
+          a:nth-of-type(#{$i}) {
             $i: 5 - $i;
             transition: 0.1s #{$i*0.02}s;
             opacity: 0;
@@ -253,12 +249,12 @@ header {
       }
       nav{
         font-size: 16px;
-        ul{
+        .links{
           width: 100%;
           padding: 0;
         }
         @for $i from 1 to 5 {
-          li:nth-of-type(#{$i}) a{
+          a:nth-of-type(#{$i}) {
             transition: 0.5s #{$i*0.175+(.15)}s;
             width: 100%;
           }

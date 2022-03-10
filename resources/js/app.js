@@ -1,3 +1,2 @@
-
-import header from './header.js'
-import home from './home.js'
+import header from './header'
+import home from './home'

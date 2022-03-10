@@ -1,5 +1,8 @@
 const buttonMenu = document.getElementById('button-menu');
 const header = document.querySelector('header');
+const links = header.querySelectorAll('.links a');
+const linksAfter = header.querySelector('.links .after')
+
 
 buttonMenu.onclick = () => {
   header.classList.toggle('close')
@@ -32,6 +35,18 @@ function scroll(scrollY){
   }
 }
 
-
-
-
+links.forEach(link => {
+  link.onmouseover = () =>{
+    linksAfter.style.width = (link.offsetWidth-2*16)+'px'
+    linksAfter.style.left = (link.offsetLeft+(link.offsetWidth/2))+'px'
+  }
+})
+links[0].parentNode.onmouseleave = () => {
+  let current = linksAfter.parentNode.querySelector('.current')
+  if (current){
+    linksAfter.style.width = (current.offsetWidth-2*16)+'px'
+    linksAfter.style.left = (current.offsetLeft+(current.offsetWidth/2))+'px'
+  } else {
+    linksAfter.style.width = '0'
+  }
+}

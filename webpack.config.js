@@ -46,7 +46,7 @@ Encore.setPublicPath('/assets')
 |
 */
 Encore.addEntry('app', './resources/js/app.js')
-Encore.addStyleEntry( 'home' , './resources/css/home.scss' )
+Encore.addEntry( 'home' , './resources/css/home.scss' )
 
 /*
 |--------------------------------------------------------------------------

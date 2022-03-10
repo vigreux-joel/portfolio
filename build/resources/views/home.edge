@@ -2,7 +2,7 @@
 
 @section('body')
   <style>
-    #introduction .background{
+    #intro .background{
       background-image:url({{ asset('assets/images/background.jpg')}});
     }
   </style>
@@ -21,22 +21,21 @@
       </div>
     </div>
     <nav>
-      <div class="links">
-        <a href="#services"  title="direction vers les services">Services</a>
-        <a href="#presentation" title="à propos de moi...">À&#160;propos</a>
-        <a title="direction vers mon portfolio">Portfolio</a>
-        <a title="direction vers mes compétances" class="nowrap">Savoir-faire</a>
-        <div class="after"></div>
-      </div>
+      <ul>
+        <li><a href="#services"  title="direction vers les services">Services</a></li>
+        <li><a  title="à propos de moi...">À&#160;propos</a></li>
+        <li><a  title="direction vers mon portfolio">Portfolio</a></li>
+        <li><a  title="direction vers mes compétances" class="nowrap">Savoir-faire</a></li>
+      </ul>
       <button>Me&#160;contacter</button>
     </nav>
   </header>
   <main>
-    <section id="introduction">
+    <section id="intro">
       <div>
         <h1>Developpeur <span class="nowrap">Back-end</span></h1>
         <p>Passionné de programmation et perfectionniste, j’adore créer des applications webs techniques et optimales.</p>
-        <a href="#services" title="Direction vers mes services">Commencer</a>
+        <button>Commencer</button>
       </div>
       <div class="background"></div>
       <svg class="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -88,5 +87,4 @@
       </svg>
     </section>
   </main>
-
 @endsection
