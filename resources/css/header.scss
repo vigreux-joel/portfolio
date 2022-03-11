@@ -9,8 +9,12 @@ header {
   margin: 0 auto;
   left: 0;
   right: 0;
-  >div{
+  .row{
     max-width: $max-width;
+    margin: 0 auto;
+    display: inherit;
+  }
+  .col{
     margin: 0 auto;
     padding: 0.75rem 1.25rem;
     position: relative;
@@ -83,7 +87,7 @@ header {
     &.hidden{
       top: -6rem;
     }
-    >div{
+    .col{
       &:after{
         transition: 0.5s, width 0.5s, height 0.5s, border-radius .5s 0s;
       }
@@ -92,7 +96,12 @@ header {
 
   @media screen and (min-width: 1200px) {
     transition: .5s;
-    >div{
+    .col{
+      svg{
+        path{
+          fill: $color3;
+        }
+      }
       width: fit-content;
       margin: 0;
       z-index: 1;
@@ -142,9 +151,9 @@ header {
         top: 50%;
         transform: translateY(-50%);
         padding: .5rem 1rem;
-        border: solid white 1px;
+        border: solid $color3 2px;
         font-size: rem(20);
-        color: white;
+        color: $color3;
         border-radius: 2rem;
         background: inherit;
       }
@@ -166,7 +175,7 @@ header {
           background-color: #00962A;
         }
       }
-      @for $i from 1 to 5 {
+      @for $i from 1 to 6 {
         a:nth-of-type(#{$i}) {
           width: 0;
         }
@@ -199,7 +208,7 @@ header {
       nav{
         right: 0;
         position: absolute;
-        @for $i from 1 to 5 {
+        @for $i from 1 to 6 {
           a:nth-of-type(#{$i}) {
             $i: 5 - $i;
             transition: 0.1s #{$i*0.02}s;
@@ -217,7 +226,7 @@ header {
       backdrop-filter: blur(10px);
       transition: 1s 0.5s;
       padding: 0;
-      >div{
+      .col{
         padding: 1.25rem;
         #button-menu{
           &:before{
@@ -253,7 +262,7 @@ header {
           width: 100%;
           padding: 0;
         }
-        @for $i from 1 to 5 {
+        @for $i from 1 to 6 {
           a:nth-of-type(#{$i}) {
             transition: 0.5s #{$i*0.175+(.15)}s;
             width: 100%;

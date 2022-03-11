@@ -1,12 +1,12 @@
 $max-width: 1300px;
 
-$color1: #00962A;
-$color2: #6B5B54;
-$color3: #0551E6;
+$color1: #706BFD;
+$color2: #EE04C9;
+$color3: #7BF8FA;
 $black: #0F1723;
 $gris: #7B7B7B;
-$degrade1: radial-gradient(100% 211.18% at 0% 0%, #13B810 0%, #0E8D41 100%);
-$degrade2: radial-gradient(100.28% 130.52% at 100.24% 100%, #2596A6 0%, #00A040 100%);
+$degrade1: linear-gradient(270deg, #6100FF 0%, #EE04C9 100%);
+$degrade2: radial-gradient(100.28% 130.52% at 100.24% 100%, #088AD6 0%, #00A084 100%);
 
 @function rem($size, $base: 16){
   @return round((1rem*$size/$base)*100)/100;
@@ -32,9 +32,8 @@ h1, h2, h3{
   font-family: 'Montserrat', sans-serif;
 }
 h3.title{
-  color: $color3;
+  color: $color1;
   font-size: rem(22);
-  text-align: center;
 }
 a, button{
   font-size: rem(20);
@@ -49,6 +48,9 @@ p{
   font-family: 'Roboto', sans-serif;
 }
 
+.row{
+  display: flex;
+}
 .nowrap{
   white-space: nowrap;
 }

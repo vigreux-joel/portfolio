@@ -2,80 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f3ce7a0-09ff-4d64-9999-89a49b626465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build/.adonisrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ace-manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/app/Controllers/Http/HomeController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/app/Controllers/Http/HomeController.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/app/Exceptions/Handler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/app/Exceptions/Handler.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/commands/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/commands/index.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/app.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/bodyparser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/bodyparser.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/cors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/cors.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/drive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/drive.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/hash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/hash.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/session.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/session.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/shield.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/shield.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/static.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/config/static.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/drive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/drive.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/env.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/events.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/events.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/hash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/contracts/hash.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/env.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/providers/AppProvider.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/providers/AppProvider.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/app.e6a0a9cb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/entrypoints.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/home.51e3aaaa.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/images/background.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/images/design.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/images/development.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/images/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/images/maintenance.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/images/next.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/assets/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/views/errors/not-found.edge" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/views/errors/server-error.edge" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/views/errors/unauthorized.edge" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/views/home.edge" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/views/layout.edge" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/server.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/start/kernel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/start/kernel.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/start/routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/start/routes.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tsconfig.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/photo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/images/pin.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/entrypoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/entrypoints.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/css/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/global.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/css/header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/header.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/css/home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/home.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/design.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/design.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/development.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/development.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/maintenance.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/images/maintenance.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="dev2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -204,7 +141,9 @@
       <workItem from="1646845495625" duration="6521000" />
       <workItem from="1646857389832" duration="2045000" />
       <workItem from="1646859456287" duration="2165000" />
-      <workItem from="1646900984736" duration="10039000" />
+      <workItem from="1646900984736" duration="10165000" />
+      <workItem from="1646913454891" duration="8715000" />
+      <workItem from="1646989423700" duration="3396000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <created>1645222658194</created>
@@ -276,7 +215,21 @@
       <option name="project" value="LOCAL" />
       <updated>1646859762204</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="0.0.3">
+      <created>1646911325085</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1646911325085</updated>
+    </task>
+    <task id="LOCAL-00012" summary="0.0.3">
+      <created>1646911412201</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1646911412201</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
