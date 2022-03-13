@@ -5,7 +5,12 @@ window.addEventListener('scroll', () => {
   const scrollY = window.scrollY
   const background = document.querySelector('.background')
 
-  background.style.backgroundPosition = `50% calc(50% + ${scrollY*0.45}px)`;
+  const images = document.querySelectorAll('.move-y')
+  images.forEach(image => {
+    image.style.backgroundPosition = `50% calc(50% + ${scrollY*0.45}px)`;
+  })
+
+  //background.style.backgroundPosition = `50% calc(50% + ${scrollY*0.45}px)`;
 })
 
 
@@ -14,17 +19,7 @@ observer = new IntersectionObserver(function (entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       el = entry.target
-      // console.log(el.id)
       setCurrentOnglet(el.id)
-      //window.scrollTo(0, el.offsetTop);
-      // current = window.pageYOffset
-      // start = el.offsetTop
-      // end = el.offsetHeight+el.offsetTop
-      // if(current - start > current - end){
-      //   window.scrollTo(0, start)
-      // } else {
-      //   window.scrollTo(0, end)
-      // }
     }
   });
 }, {
@@ -34,7 +29,6 @@ observer = new IntersectionObserver(function (entries) {
 sections.forEach(section => {
   observer.observe(section);
 })
-
 
 const links = document.querySelectorAll('header .links a');
 const linksAfter = document.querySelector('header .links .after')
@@ -54,3 +48,10 @@ function setCurrentOnglet(id){
   }
 }
 
+
+//projet
+document.querySelectorAll('#projets article .images').forEach(images => {
+  images.onclick = () => {
+    images.classList.toggle('active')
+  }
+})

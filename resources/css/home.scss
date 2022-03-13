@@ -50,8 +50,6 @@ main{
       width: 100%;
       height: 97vh;
       object-fit: cover;
-      background-size: cover;
-      background-position: center;
     }
     svg{
       transition: 0.5s;
@@ -144,21 +142,35 @@ main{
     svg:first-of-type{
       transform: rotate(180deg);
     }
+    svg:nth-of-type(2){
+      position: relative;
+      z-index: 1;
+    }
     .row{
       max-width: $max-width;
       margin: 0 auto;
     }
     .left{
       position: absolute;
+      overflow: hidden;
       width: 100%;
       bottom: 0;
       img{
-        width: 100%;
+        margin: 0 auto;
+        display: block;
+        transition: .5s;
+        filter: blur(3px);
+        opacity: 0.1;
+        position: relative;
+        bottom: 5px;
+        max-height: 600px;
       }
     }
     .right{
+      z-index: 1;
       line-height: normal;
-      padding: rem(100) 1.25rem;
+      padding: rem(80) 1.25rem;
+      box-sizing: border-box;
       h3{
         color: $color2;
       }
@@ -166,22 +178,174 @@ main{
         margin-top: 2rem;
         color: white;
       }
-      div{
-        display: flex;
-        h4{
-          margin: 0 0 0 .5rem;
-          font-size: rem(22);
-          color: rgba(255, 255, 255, 0.65);
-        }
+      h4{
+        margin: 0;
+        font-size: rem(22);
+        font-weight: normal;
+        color: rgba(255, 255, 255, 0.65);
       }
-      p{
+      p, a{
         font-size: rem(18);
+      }
+      a{
+        color: $color2;
       }
     }
     @media screen and (min-width: 720px) {
+      .left{
+        max-width: $max-width*0.75;
+      }
       .right{
         margin: 0 0 0 auto;
-        max-width: 50%;
+        max-width: $max-width/2;
+      }
+    }
+    @media screen and (min-width: 1200px) {
+      .left {
+        max-width: $max-width*0.5;
+      }
+    }
+    @media screen and (min-width: 1300px) {
+      .left{
+        img{
+          filter: blur(0);
+          opacity: 1;
+        }
+      }
+    }
+  }
+  #projets{
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    h3{
+      margin-top: 5rem;
+    }
+    h2{
+      margin: 0 auto 5rem auto;
+      max-width: rem(450);
+    }
+    h2,h3{
+      text-align: center;
+    }
+    .row{
+      flex-wrap: wrap;
+      border-radius: rem(50);
+      justify-content: space-between;
+    }
+    article{
+      width: 100%;
+      transition: .5s;
+      border-radius: rem(25);
+      margin-bottom: 4rem;
+      &:hover{
+        box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
+      }
+      .images{
+        position: relative;
+        border-top-left-radius: rem(25);
+        border-top-right-radius: rem(25);
+        padding: rem(25) rem(25) 0;
+        background: $black;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        &:after{
+          transition: .35s;
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          background: black;
+          opacity: 0;
+          top: 0;
+          left: 0;
+          border-top-left-radius: rem(25);
+          border-top-right-radius: rem(25);
+        }
+        &.active, &:hover{
+          &:after{
+            opacity: .5;
+            backdrop-filter: blur(8px);
+          }
+        }
+        img{
+          max-height: rem(400);
+          object-fit: cover;
+          object-position: top;
+          border-top-left-radius: rem(12.5);
+          border-top-right-radius: rem(12.5);
+          &:first-of-type{
+            width: 100%;
+          }
+          &:nth-of-type(2){
+            display: none;
+          }
+        }
+      }
+      .description{
+        display: block;
+        padding: 2rem;
+        background: #1F2733;
+        border-bottom-left-radius: rem(25);
+        border-bottom-right-radius: rem(25);
+        h4{
+          color: white;
+          margin-top: 0;
+          font-size: rem(24);
+        }
+        &:hover{
+          div{
+            p{
+              color: #06D1D4;
+            }
+            path{
+              fill: #06D1D4;
+            }
+          }
+        }
+        div{
+          display: flex;
+          align-items: center;
+          p, path{
+            transition: .35s;
+          }
+          p{
+            margin: 0;
+            color: #5B6373;
+          }
+          svg{
+            margin-left: .75rem;
+          }
+        }
+      }
+    }
+    @media screen and (min-width: 799px) {
+      .row{
+        background: $black;
+        padding: 4rem;
+      }
+      article{
+        width: calc(50% - 2rem);
+        .images{
+          background: radial-gradient(53.11% 57.93% at 74.19% 21.5%, #E9EDF2 0%, #CCCEDD 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+          img{
+            border-radius: 0;
+            &:first-of-type{
+              width: calc(70% - 1rem);
+              filter: drop-shadow(50px 4px 23px rgba(0, 0, 0, 0.2));
+            }
+            &:nth-of-type(2){
+              display: inherit;
+              width: 30%;
+            }
+          }
+        }
+        .description{
+          h4{
+            font-size: rem(24);
+          }
+        }
       }
     }
   }

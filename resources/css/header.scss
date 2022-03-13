@@ -68,7 +68,7 @@ header {
       width: 0;
       z-index: -1;
       content: "";
-      background: $degrade1;
+      background: $color1;
       top: 50%;
       transform: translate(50%, -50%);
       right: 2.25rem;
@@ -172,7 +172,7 @@ header {
       a {;
         transition: .35s;
         &:hover {
-          background-color: #00962A;
+          background: #625de9;
         }
       }
       @for $i from 1 to 6 {
@@ -264,7 +264,7 @@ header {
         }
         @for $i from 1 to 6 {
           a:nth-of-type(#{$i}) {
-            transition: 0.5s #{$i*0.175+(.15)}s;
+            transition: 0.5s #{$i*0.175+(.15)}s, background 0.35s;
             width: 100%;
           }
         }

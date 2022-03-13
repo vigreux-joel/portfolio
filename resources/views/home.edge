@@ -1,11 +1,13 @@
 @layout('layout')
-
-@section('body')
+@section('head')
+  <Link rel="StyleSheet" href="{{ asset('assets/home.css')}}">
   <style>
     #accueil .background{
-      background-image:url({{ asset('assets/images/background.jpg')}});
+      background-image:url({{ asset('assets/images/background.webp')}});
     }
   </style>
+@endsection
+@section('body')
   <header class="close">
     <div class="row">
       <div class="col">
@@ -41,7 +43,7 @@
         <p>Passionné de programmation et perfectionniste, j’adore créer des applications webs techniques et optimales.</p>
         <a href="#services" title="Direction vers mes services">Commencer</a>
       </div>
-      <div class="background"></div>
+      <img src="{{ asset('assets/images/background.webp')}}" alt="background" class="background move-y">
       <svg class="wave" id="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path d="M0 48.0001C0 48.0001 400 0.00012207 720 6.10352e-05C1040 0 1440 48.0001 1440 48.0001H0Z" fill="white"/>
       </svg>
@@ -90,28 +92,63 @@
         <use xlink:href="#wave"/>
       </svg>
       <div class="row">
-        <!--
         <div class="left">
           <img src="{{ asset('assets/images/photo.svg') }}" alt="Illustration">
         </div>
-        -->
         <div class="right">
           <h3 class="title">Bonjour je suis</h3>
           <h2>Vigreux Joël</h2>
-          <div>
-            <img src="{{ asset('assets/images/pin.svg') }}" alt="lieu">
-            <h4>Soissons, France</h4>
-          </div>
-          <p>De formation développeur web et web mobile, j’ai pu me forger une solide experience tout en continuant de me developper dans le domaine du back-end.</p>
-          <p>De formation développeur web et web mobile, j’ai pu me forger une solide experience tout en continuant de me developper dans le domaine du back-end.
-          De formation développeur web et web mobile, j’ai pu me forger une solide experience tout en continuant de me developper dans le domaine du back-end.</p>
-          <p>De formation développeur web et web mobile, j’ai pu me forger une solide experience tout en continuant de me developper dans le domaine du back-end.</p>
+          <h4>Développeur de Soissons, France</h4>
+          <p>De formation développeur web et web mobile, j’ai pu acquérir de bonnes bases en développement web front-end et back-end, que j’ai approfondi de mon temps libre.</p>
+          <p>Naturellement perfectionniste et autodidacte, j’effectue beaucoup de <a href="https://donkey.school/blog/2021-04-16-veille-technologique-une-necessite/" title="La veille technologie une nécessité ?" target="_blank">veille technologique</a>, afin de structurer davantage chacun de mes projets et de leur choisir la technologie la plus convenable.</p>
+          <p>
+            Je m’interesse également à l’<a href="https://esokia.com/fr/blog/ux-ui-quest-ce-que-ca-signifie" title="Qu'est-ce que l'UX ?" target="_blank">UX</a> et <a href="https://www.kisskissbankbank.com/fr/projects/eco-conception-web-l-ecologie-numerique-est-en-marche" title="Qu'est-ce que l'eco-conception ?" target="_blank">l’éco-conception</a> c’est pourquoi j’ai comme objectif de réaliser des applications optimisées et multiplateforme.
+            <br>Je serai ravi de m’entretenir avec vous dans le but d’en connaitre plus sur vos besoins et de vous convaincre de mes compétances.
+          </p>
         </div>
       </div>
       <svg class="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <use xlink:href="#wave"/>
       </svg>
- </section>
-  </main>
+    </section>
+    <section id="projets">
+      <h3 class="title">Mes derniers projets</h3>
+      <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+      <div class="row">
+        <article>
+          <div class="images">
+            <img src="{{ asset('assets/images/project1-desktop.webp')}}" alt="Maquette format ordinateur">
+            <img src="{{ asset('assets/images/project1-mobile.webp')}}" alt="Maquette format mobile">
+          </div>
+          <a class="description">
+            <h4>Site vitre d'un événement fictif "Le Soissons Game Show"</h4>
+            <div>
+              <p>Voir ce projet</p>
+              <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+              </svg>
+            </div>
+          </a>
+        </article>
+        <article>
+          <div class="images">
+            <img src="{{ asset('assets/images/project1-desktop.webp')}}" alt="Maquette format ordinateur">
+            <img src="{{ asset('assets/images/project1-mobile.webp')}}" alt="Maquette format mobile">
+          </div>
+          <a class="description">
+            <h4>Site vitre d'un événement fictif "Le Soissons Game Show"</h4>
+            <div>
+              <p>Voir ce projet</p>
+              <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+              </svg>
+            </div>
+            <div class="technologies">
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+ </main>
 
 @endsection
