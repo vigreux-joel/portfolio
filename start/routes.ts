@@ -25,8 +25,11 @@ Route.group(() => {
   Route
     .get('/', 'HomeController.index')
     .as('home')
+  Route
+    .get('/contact', 'MailController.index')
+    .as('mail')
 })
-  .as('web')
+/*  .as('web')
 
 
 Route.group(() => {
@@ -34,4 +37,4 @@ Route.group(() => {
     .get('/login', 'UsersController.index')
     .as('users.login')
 }).prefix('/api')
-  .as('api')
+  .as('api')*/
