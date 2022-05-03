@@ -9,6 +9,7 @@ header {
   margin: 0 auto;
   left: 0;
   right: 0;
+  backdrop-filter: blur(2px);
   .row{
     max-width: $max-width;
     margin: 0 auto;
