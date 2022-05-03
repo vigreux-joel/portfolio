@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f3ce7a0-09ff-4d64-9999-89a49b626465" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/mail.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contracts/mail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.adonisrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.adonisrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ace-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/ace-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/colors/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/colors/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/manager/build/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/manager/build/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/manager/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/manager/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/src/Helpers/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/src/Helpers/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/src/Helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/src/Helpers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/src/Helpers/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/utils/build/src/Helpers/string.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@poppinss/utils/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@poppinss/utils/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/start/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controllers/Http/MailController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Http/MailController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/test.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/test.edge" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +274,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651567159613</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="mail with MailGun">
+      <created>1651614528767</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1651614528767</updated>
+    </task>
+    <task id="LOCAL-00018" summary="mail with MailGun">
+      <created>1651614540745</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1651614540745</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +318,8 @@
     <MESSAGE value="0.0.3" />
     <MESSAGE value="0.0.4" />
     <MESSAGE value="base" />
-    <option name="LAST_COMMIT_MESSAGE" value="base" />
+    <MESSAGE value="mail with MailGun" />
+    <option name="LAST_COMMIT_MESSAGE" value="mail with MailGun" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
