@@ -2,9 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f3ce7a0-09ff-4d64-9999-89a49b626465" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Mailers/ContactEmail.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Mailers/ReceivedEmail.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/emails/received.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Controllers/Http/MailController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Http/MailController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/attributes.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/attributes.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/attributes.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/attributes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/compile.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/compile.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/compile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/general.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/general.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/general.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/general.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/procedure.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/procedure.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/procedure.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/procedure.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/pseudo-selectors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/pseudo-selectors/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/sort.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/sort.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/types.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/types.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/lib/types.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/lib/types.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-select/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-select/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/parse.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/parse.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/parse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/stringify.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/stringify.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/lib/stringify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-what/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/css-what/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/css-what/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/domhandler/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/domhandler/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/domhandler/lib/node.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/domhandler/lib/node.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/domhandler/lib/node.d.ts.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/domhandler/lib/node.d.ts.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/domhandler/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/domhandler/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/emails/test.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/test.edge" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,6 +197,8 @@
       <workItem from="1648627536506" duration="21000" />
       <workItem from="1651323944920" duration="210000" />
       <workItem from="1651566900139" duration="884000" />
+      <workItem from="1651654054951" duration="4980000" />
+      <workItem from="1651666342902" duration="7450000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <created>1645222658194</created>
@@ -288,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651614540745</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="mail with CPanel">
+      <created>1651617005015</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1651617005015</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +364,8 @@
     <MESSAGE value="0.0.4" />
     <MESSAGE value="base" />
     <MESSAGE value="mail with MailGun" />
-    <option name="LAST_COMMIT_MESSAGE" value="mail with MailGun" />
+    <MESSAGE value="mail with CPanel" />
+    <option name="LAST_COMMIT_MESSAGE" value="mail with CPanel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

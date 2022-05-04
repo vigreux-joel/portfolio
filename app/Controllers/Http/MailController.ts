@@ -1,13 +1,15 @@
-import Mail from '@ioc:Adonis/Addons/Mail'
+import ContactEmail from 'App/Mailers/ContactEmail'
+import ReceivedEmail from 'App/Mailers/ReceivedEmail'
 
 export default class MailController {
   public async index() {
-    await Mail.send((message) => {
-      message
-        .from('contact@vigreux-joel.fr', 'Vigreux Joël - Développeur web')
-        .to('vigreux.joel@hotmail.com')
-        .subject('Welcomme Onboard!')
-        .htmlView('emails/test', { name: 'vigreux' })
-    })
+    let email = {
+      name: 'mon nom',
+      content: 'rferfrferfefrerfe',
+    }
+
+    // await new ContactEmail().send()
+    await new ReceivedEmail(email).send()
+
   }
 }
