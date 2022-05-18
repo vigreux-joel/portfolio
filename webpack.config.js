@@ -62,6 +62,10 @@ Encore.copyFiles({
   from: './resources/images',
   to: 'images/[path][name].[ext]',
 })
+Encore.copyFiles({
+  from: './resources/uploads',
+  to: 'uploads/[path][name].[ext]',
+})
 
 
 /*

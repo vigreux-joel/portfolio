@@ -9,6 +9,14 @@ buttonMenu.onclick = () => {
   header.classList.toggle('close')
   header.classList.toggle('open')
 }
+header.onclick = function (e) {
+  header.classList.contains('open') &&
+    (e.target.classList.contains('row') ||
+      'HEADER' === e.target.nodeName ||
+      'A' === e.target.nodeName ||
+      'BUTTON' === e.target.nodeName) &&
+    buttonMenu.click()
+}
 
 //Allows you to activate once by default the "onscroll" function to check when the user updates this page
 scroll(scrollY)

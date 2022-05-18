@@ -59,8 +59,29 @@ function setCurrentOnglet(id) {
   }
 }
 
+//button
+document.querySelectorAll('.radial-button').forEach(function (e) {
+  window.addEventListener('mousemove', function (t) {
+    const o = window.innerHeight
+    const n = 2 * o + e.clientWidth
+    const r = 2 * o + e.clientHeight
+    const c = t.clientX - e.offsetLeft
+    const l = t.clientY - e.getBoundingClientRect().top
+    c > -o &&
+      l > -o &&
+      c - e.clientWidth < o &&
+      l - e.clientHeight < o &&
+      (e.style.background = 'radial-gradient(100% 175% at '
+        .concat(((c + o) / n) * 100, '% ')
+        .concat(((l + o) / r) * 100, '%, #EE04C9 0%, #6100FF 100%)'))
+  }),
+    (e.onmouseleave = function () {
+      e.style.backgroundPosition = '100% 50%'
+    })
+})
+
 //snow
-let snowCount = 75
+let snowCount = 60
 
 function createSnow(snow_density) {
   for (let x = 0; x < snow_density - 1; x++) {
@@ -70,17 +91,15 @@ function createSnow(snow_density) {
   }
 }
 
-// Append style for each snowflake to the head
 function add_css(rule) {
   const css = document.createElement('style')
-  css.type = 'text/css'
   css.appendChild(document.createTextNode(rule)) // Support for the rest
   document.getElementsByTagName('head')[0].appendChild(css)
 }
 
-// Math
 function randomRange(min = 0, max = 1) {
-  return Math.random() * (max - min) + min
+  const value = Math.random() * (max - min) + min
+  return Math.round(value * 100) / 100
 }
 
 // Create style for snowflake
@@ -89,26 +108,26 @@ function createSnowCSS(snow_density) {
   for (let i = 1; i < snow_density; i++) {
     let xDefault = randomRange(0, 100)
     let xRange = randomRange(-15, 15)
-    let yBreak = randomRange(30, 80) * 100
-    let fallDuration = randomRange(8, 30)
-    let fallDelay = randomRange(8, 30)
+    let yBreak = randomRange(30, 80)
+    let fallDuration = randomRange(8, 20)
+    let fallDelay = randomRange(0, 10)
 
     rule += `
         .snow:nth-child(${i}) {
             opacity: ${randomRange(0, 0.75)};
-            transform: translate(${xDefault}vw, -10px) scale(${Math.random()});
+            transform: translate(${xDefault}vw, -10px) scale(${randomRange(0, 1)});
             animation: fall-${i} ${fallDuration}s ${fallDelay}s linear infinite;
         }
 
         @keyframes fall-${i} {
-            ${yBreak * 100}% {
+            ${yBreak}% {
                 opacity: ${randomRange(0, 0.75)};
-                transform: translate(${xDefault + xRange}vw, ${yBreak}vh) scale(${Math.random()});
+                transform: translate(${xDefault + xRange}vw, ${yBreak}vh) scale(${randomRange(0, 1)});
             }
 
             to {
                 opacity: ${randomRange(0, 0.75)};
-                transform: translate(${xDefault + xRange / 2}vw, 100vh) scale(${Math.random()});
+                transform: translate(${xDefault + xRange / 2}vw, 100vh) scale(${randomRange(0, 1)});
             }
 
         }
@@ -117,6 +136,7 @@ function createSnowCSS(snow_density) {
 
   add_css(rule)
 }
-
-createSnowCSS(snowCount)
-createSnow(snowCount)
+if (window.innerWidth > 1024) {
+  createSnowCSS(snowCount)
+  createSnow(snowCount)
+}
