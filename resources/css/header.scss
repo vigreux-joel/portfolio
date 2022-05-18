@@ -1,0 +1,283 @@
+@import "global";
+
+header {
+  top: 0;
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(2px);
+  .row{
+    max-width: $max-width;
+    margin: 0 auto;
+    display: inherit;
+  }
+  .col{
+    margin: 0 auto;
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    >a{
+      line-height: 0;
+      svg{
+        height: 45px;
+        fill: black;
+      }
+    }
+    #button-menu{
+      position: relative;
+      background: transparent;
+      border: none;
+      height: 40px;
+      width: 40px;
+      padding: 0;
+      cursor: pointer;
+
+      &:before{
+        top: 20%;
+      }
+      div{
+        position: absolute;
+        top: 50%;
+      }
+      &:after{
+        top: 80%;
+      }
+      &:before, &:after{
+        content: '';
+        position: absolute;
+        left: 0;
+      }
+      &:before, &:after, div{
+        width: 100%;
+        transition: .2s, top .4s .2s;
+        height: 3px;
+        background: white;
+        border-radius: 5px;
+      }
+    }
+    &:after{
+      opacity: 0.85;
+      transition: 0.5s, width 0.5s, height 0.5s, border-radius .5s 0.2s;
+      border-radius: 100%;
+      height: 0;
+      width: 0;
+      z-index: -1;
+      content: "";
+      background: $color1;
+      top: 50%;
+      transform: translate(50%, -50%);
+      right: 2.25rem;
+      position: absolute;
+    }
+  }
+  nav{
+    max-width: $max-width;
+    color: white;
+  }
+  &.opaque{
+    background: rgb(0,0,0,.45);
+    backdrop-filter: blur(8px);
+  }
+  &.close{
+    &.hidden{
+      top: -6rem;
+    }
+    .col{
+      &:after{
+        transition: 0.5s, width 0.5s, height 0.5s, border-radius .5s 0s;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    transition: .5s;
+    .col{
+      svg{
+        path{
+          fill: $color3;
+        }
+      }
+      width: fit-content;
+      margin: 0;
+      z-index: 1;
+      #button-menu{
+        display: none;
+      }
+    }
+    nav{
+      display: block;
+      margin: 0 auto;
+      max-width: 1300px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      .links{
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+        width: fit-content;
+        display: flex;
+        .after{
+          transition: 0.3s;
+          background-color: #fff;
+          position: absolute;
+          bottom: 0.25rem;
+          left: 0;
+          content: "";
+          width: 0;
+          transform: translateX(-50%);
+          height: 2px;
+        }
+      }
+      a{
+        color: white;
+        font-size: 1.25rem;
+        position: relative;
+        padding: 1rem;
+      }
+
+      button{
+        position: absolute;
+        right: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: .5rem 1rem;
+        border: solid $color3 2px;
+        font-size: rem(20);
+        color: $color3;
+        border-radius: 2rem;
+        background: inherit;
+      }
+    }
+  }
+  @media screen and (max-width: 1199.9px) {
+    nav{
+      max-width: 100vh;
+      margin: 0 0 0 auto;
+      font-size: 0;
+      .links {
+        transition: width 0.5s;
+        margin: 0;
+        padding: 0;
+      }
+      a {;
+        transition: .35s;
+        &:hover {
+          background: #625de9;
+        }
+      }
+      @for $i from 1 to 6 {
+        a:nth-of-type(#{$i}) {
+          width: 0;
+        }
+      }
+      a {
+        padding: 0;
+        margin: 0 0 0 auto;
+        border-top: solid 1px white;
+        display: block;
+        font-size: 1em;
+        color: white;
+      }
+      button {
+        transition: 0.2s;
+        opacity: 0;
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        top: 3rem;
+        font-size: rem(20);
+        color: $color1;
+        background: white;
+        border: none;
+        border-radius: rem(40);
+        padding: rem(8) rem(16);
+      }
+    }
+    &.close{
+      transition: .5s;
+      nav{
+        right: 0;
+        position: absolute;
+        @for $i from 1 to 6 {
+          a:nth-of-type(#{$i}) {
+            $i: 5 - $i;
+            transition: 0.1s #{$i*0.02}s;
+            opacity: 0;
+            width: 0;
+          }
+        }
+        button {
+          transition: 0.2s;
+        }
+      }
+    }
+    &.open{
+      height: 100vh;
+      backdrop-filter: blur(10px);
+      transition: 1s 0.5s;
+      padding: 0;
+      .col{
+        padding: 1.25rem;
+        #button-menu{
+          &:before{
+            transform: translate(0,  -50%) rotate(45deg);
+          }
+          div{
+            opacity: 0;
+          }
+          &:after{
+            transform: translate(0, -50%) rotate(-45deg);
+          }
+          &:before, &:after{
+            top: 50%;
+            left: 10%;
+            transition: .3s, transform .5s .6s;
+          }
+          &:before, &:after, div{
+            width: 80%;
+            margin: 0 auto;
+            height: 3px;
+          }
+        }
+        &:after{
+          transition: 0.5s, width 0.5s 0.3s, height 0.5s 0.3s, border-radius 0.2s 0.45s;
+          width: 200vh;
+          height: 200vh;
+          border-radius: 0;
+        }
+      }
+      nav{
+        font-size: 16px;
+        .links{
+          width: 100%;
+          padding: 0;
+        }
+        @for $i from 1 to 6 {
+          a:nth-of-type(#{$i}) {
+            transition: 0.5s #{$i*0.175+(.15)}s, background 0.35s;
+            width: 100%;
+          }
+        }
+        a{
+          padding: rem(20);
+          display: block;
+        }
+        button{
+          transition: 0.35s 1.2s;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

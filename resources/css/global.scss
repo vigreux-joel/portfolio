@@ -1,0 +1,72 @@
+$max-width: 1300px;
+
+$color1: #706BFD;
+$color2: #EE04C9;
+$color3: #00E0FF;
+$black: #0F1723;
+$gris: #7B7B7B;
+$degrade1: linear-gradient(270deg, #6100FF 0%, #EE04C9 100%);
+$degrade2: radial-gradient(100.28% 130.52% at 100.24% 100%, #088AD6 0%, #00A084 100%);
+
+@function rem($size, $base: 16){
+  @return round((1rem*$size/$base)*100)/100;
+}
+@function em($size, $base: 16){
+  @return round((1em*$size/$base)*100)/100;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+
+html{
+  scroll-behavior: smooth;
+}
+body{
+  margin: 0;
+}
+.container{
+  padding: 0 1.25rem;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: 'Montserrat', sans-serif;
+}
+h2{
+  max-width: rem(550);
+}
+h3.title{
+  color: $color1;
+}
+a, button{
+  font-size: rem(20);
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+}
+p{
+  font-size: rem(20);
+  font-family: 'Roboto', sans-serif;
+}
+
+.row{
+  display: flex;
+}
+.nowrap{
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 720px) {
+  h2{
+    font-size: rem(32);
+  }
+  h3.title{
+    font-size: rem(22);
+  }
+}
+
+@keyframes slidein {
+  from { transform: translateY(30%); }
+  to   { transform: translateY(-30%); }
+}

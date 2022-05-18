@@ -1,0 +1,201 @@
+@layout('layout')
+@section('head')
+  <Link rel="StyleSheet" href="{{ asset('assets/home.css')}}">
+@endsection
+@section('body')
+  <header class="close">
+    <div class="row">
+      <div class="col">
+        <a href="#intro" title="direction vers l'introduction">
+          <svg width="57" height="49" viewBox="0 0 57 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.03 14.3892L0 6.35922L6.3583 0.000915527L19.7374 13.38C18.1433 15.0651 15.9476 16.0518 13.6291 16.1248C11.6215 16.1865 9.65074 15.5757 8.03 14.3892V14.3892Z" fill="white"/>
+            <path d="M40.8079 6.35828L26.8558 20.3104C25.1445 22.0216 22.8235 22.983 20.4035 22.983C17.9834 22.983 15.6625 22.0216 13.9512 20.3104L8.43787 14.7971C8.95353 15.1771 9.50809 15.5014 10.0922 15.7643C12.3568 16.7792 14.9313 16.855 17.2517 15.9751C18.4181 15.5439 19.4888 14.8885 20.4035 14.0461V14.0461L28.0913 6.35828C28.9262 5.52316 29.9174 4.8607 31.0084 4.40873C32.0994 3.95675 33.2687 3.72412 34.4496 3.72412C35.6305 3.72412 36.7998 3.95675 37.8908 4.40873C38.9817 4.8607 39.973 5.52316 40.8079 6.35828V6.35828Z" fill="white"/>
+            <path d="M30.7148 41.2121C31.2819 40.9563 31.8213 40.6429 32.3244 40.2768L26.8558 45.7436C25.1445 47.4548 22.8236 48.4162 20.4035 48.4162C17.9834 48.4162 15.6625 47.4548 13.9512 45.7436L6.35739 38.1516C5.52224 37.3166 4.85975 36.3253 4.40777 35.2343C3.95578 34.1432 3.72314 32.9738 3.72314 31.7929C3.72314 30.6119 3.95578 29.4425 4.40777 28.3515C4.85975 27.2604 5.52224 26.2691 6.35739 25.4341L20.4035 39.4802C21.3175 40.327 22.3881 40.9869 23.5553 41.4229C25.8758 42.3019 28.45 42.2261 30.7148 41.2121V41.2121Z" fill="white"/>
+            <path d="M53.4314 19.1698L32.7314 39.8699C31.1192 41.0346 29.1668 41.633 27.1788 41.5717C24.8574 41.4985 22.6594 40.5094 21.0651 38.8205L47.1662 12.7166L40.8088 6.35921L47.1671 0L53.4314 6.26431C54.2789 7.11166 54.9511 8.11765 55.4098 9.22481C55.8684 10.332 56.1045 11.5187 56.1045 12.7171C56.1045 13.9155 55.8684 15.1021 55.4098 16.2093C54.9511 17.3165 54.2789 18.3225 53.4314 19.1698Z" fill="white"/>
+          </svg>
+        </a>
+        <div id="button-menu">
+          <div></div>
+        </div>
+      </div>
+      <nav>
+        <div class="links">
+          <a href="#accueil"  title="direction vers les services">Accueil</a>
+          <a href="#services"  title="direction vers les services">Services</a>
+          <a href="#presentation" title="à propos de moi...">À&#160;propos</a>
+          <a href="#projets" title="direction vers mon portfolio">Portfolio</a>
+          <a href="#competences" title="direction vers mes compétances" class="nowrap">Savoir-faire</a>
+          <div class="after"></div>
+        </div>
+        <button>Me&#160;contacter</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section id="accueil">
+      <div>
+        <h1>Developpeur <span class="nowrap">Back-end</span></h1>
+        <p>Passionné de programmation et perfectionniste, j’adore créer des applications webs techniques et optimales.</p>
+        <a href="#services" title="Direction vers mes services">Commencer</a>
+      </div>
+      <div class="background move-y" data-amplifier="-.45" id="snow-div"></div>
+      <img src="{{ asset('assets/images/background.webp')}}" alt="background" class="background move-y" data-amplifier="-.45" >
+      <svg class="wave" id="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 48.0001C0 48.0001 400 0.00012207 720 6.10352e-05C1040 0 1440 48.0001 1440 48.0001H0Z" fill="white"/>
+      </svg>
+    </section>
+    <section class="container" id="services">
+      <h3 class="title">Services</h3>
+      <h2>Des services qui ouvrent la voie à un site web unique</h2>
+      <div class="row">
+        <article>
+          <img alt="Icone de Web Design" src="{{ asset('assets/images/design.svg')}}">
+          <h3>Web Design</h3>
+          <p>De nos jours il est important de concevoir des applications les plus adaptées à ses utilisateurs, c'est pourquoi il est primordial de partir sur de bonnes bases</p>
+          <a>
+            <p>Détails</p>
+            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+            </svg>
+          </a>
+        </article>
+        <article>
+          <img alt="Icone de Web Design" src="{{ asset('assets/images/development.svg')}}">
+          <h3>Développement Web</h3>
+          <p>Un site ne se résume pas à un simple visuel, il faut consevoir son bon fonctionnement tout en le rendant le plus léger et le plus performant possible</p>
+          <a>
+            <p>Détails</p>
+            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+            </svg>
+          </a>
+        </article>
+        <article>
+          <img alt="Icone de Web Design" src="{{ asset('assets/images/maintenance.svg')}}">
+          <h3>Maintenance</h3>
+          <p>Une offre clé en main vous permettant d’assurer votre site en réalisant des sauvegardes régulières et des corrections d’erreurs si nécessaire.</p>
+          <a>
+            <p>Détails</p>
+            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+            </svg>
+          </a>
+        </article>
+      </div>
+    </section>
+    <section id="presentation">
+      <svg class="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <use xlink:href="#wave"/>
+      </svg>
+      <div class="row">
+        <div class="left">
+          <img src="{{ asset('assets/images/photo.svg') }}" alt="Illustration">
+        </div>
+        <div class="right">
+          <h3 class="title">Bonjour je suis</h3>
+          <h2>Vigreux Joël</h2>
+          <h4>Développeur de Soissons, France</h4>
+          <p>De formation développeur web et web mobile, j’ai pu acquérir de bonnes bases en développement web front-end et back-end, que j’ai approfondi de mon temps libre.</p>
+          <p>Naturellement perfectionniste et autodidacte, j’effectue beaucoup de <a href="https://donkey.school/blog/2021-04-16-veille-technologique-une-necessite/" title="La veille technologie une nécessité ?" target="_blank">veille technologique</a>, afin de structurer davantage chacun de mes projets et de leur choisir la technologie la plus convenable.</p>
+          <p>
+            Je m’interesse également à l’<a href="https://esokia.com/fr/blog/ux-ui-quest-ce-que-ca-signifie" title="Qu'est-ce que l'UX ?" target="_blank">UX</a> et <a href="https://www.kisskissbankbank.com/fr/projects/eco-conception-web-l-ecologie-numerique-est-en-marche" title="Qu'est-ce que l'eco-conception ?" target="_blank">l’éco-conception</a> c’est pourquoi j’ai comme objectif de réaliser des applications optimisées et multiplateforme.
+            <br>Je serai ravi de m’entretenir avec vous dans le but d’en connaitre plus sur vos besoins et de vous convaincre de mes compétances.
+          </p>
+        </div>
+      </div>
+      <svg class="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <use xlink:href="#wave"/>
+      </svg>
+    </section>
+    <section id="competences">
+      <h3 class="title">Compétances</h3>
+      <h2>Les technologies que j’utilise.</h2>
+      <div class="row container">
+        <div class="col">
+
+        </div>
+        <div class="col">
+          <figure>
+            <img class="small" src="{{ asset('assets/images/logos/html.svg') }}" alt="HTML">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img class="medium" src="{{ asset('assets/images/logos/css.svg') }}" alt="CSS">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img src="{{ asset('assets/images/logos/sass.svg') }}" alt="Sass">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img class="medium" src="{{ asset('assets/images/logos/javascript.svg') }}" alt="JavaScript">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img src="{{ asset('assets/images/logos/typescript.svg') }}" alt="TypeScript">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img class="small" src="{{ asset('assets/images/logos/nodejs.svg') }}" alt="NodeJs">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img class="big" src="{{ asset('assets/images/logos/adonis.svg') }}" alt="Adonis">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img class="small" src="{{ asset('assets/images/logos/php.svg') }}" alt="PHP">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img src="{{ asset('assets/images/logos/wordpress.svg') }}" alt="WordPress">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+          <figure>
+            <img class="big" src="{{ asset('assets/images/logos/symfony.svg') }}" alt="Symfony">
+            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section id="projets">
+      <h3 class="title">Mes derniers projets</h3>
+      <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+      <div class="row">
+        <article>
+          <div class="images" style="flex-wrap: wrap">
+            <img src="{{ asset('assets/images/project1-desktop.webp')}}" alt="Maquette format ordinateur">
+            <img src="{{ asset('assets/images/project1-mobile.webp')}}" alt="Maquette format mobile">
+          </div>
+          <a class="description">
+            <h4>Site vitre d'un événement fictif "Le Soissons Game Show"</h4>
+            <div>
+              <p>Voir ce projet</p>
+              <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+              </svg>
+            </div>
+          </a>
+        </article>
+        <article>
+          <div class="images">
+            <img src="{{ asset('assets/images/project1-desktop.webp')}}" alt="Maquette format ordinateur">
+            <img src="{{ asset('assets/images/project1-mobile.webp')}}" alt="Maquette format mobile">
+          </div>
+          <a class="description">
+            <h4>Site vitre d'un événement fictif "Le Soissons Game Show"</h4>
+            <div>
+              <p>Voir ce projet</p>
+              <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>
+              </svg>
+            </div>
+            <div class="technologies">
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+ </main>
+
+@endsection
