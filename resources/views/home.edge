@@ -34,7 +34,7 @@
   <main>
     <section id="accueil">
       <div>
-        <h1>Developpeur <span class="nowrap">Back-end</span></h1>
+        <h1>Développeur <span class="nowrap">Back-end</span></h1>
         <p>Passionné de programmation et perfectionniste, j’adore créer des applications webs techniques et optimales.</p>
         <a class="radial-button" href="#services" title="Direction vers mes services">Commencer</a>
       </div>
@@ -62,7 +62,7 @@
         <article>
           <img alt="Icone de Web Design" src="{{ asset('assets/images/development.svg')}}">
           <h3>Développement Web</h3>
-          <p>Un site ne se résume pas à un simple visuel, il faut consevoir son bon fonctionnement tout en le rendant le plus léger et le plus performant possible</p>
+          <p>Un site ne se résume pas à un simple visuel, il faut concevoir son bon fonctionnement tout en le rendant le plus léger et le plus performant possible</p>
           <a>
             <p>Détails</p>
             <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,8 +98,8 @@
           <p>De formation développeur web et web mobile, j’ai pu acquérir de bonnes bases en développement web front-end et back-end, que j’ai approfondi de mon temps libre.</p>
           <p>Naturellement perfectionniste et autodidacte, j’effectue beaucoup de <a href="https://donkey.school/blog/2021-04-16-veille-technologique-une-necessite/" title="La veille technologie une nécessité ?" target="_blank">veille technologique</a>, afin de structurer davantage chacun de mes projets et de leur choisir la technologie la plus convenable.</p>
           <p>
-            Je m’interesse également à l’<a href="https://esokia.com/fr/blog/ux-ui-quest-ce-que-ca-signifie" title="Qu'est-ce que l'UX ?" target="_blank">UX</a> et <a href="https://www.kisskissbankbank.com/fr/projects/eco-conception-web-l-ecologie-numerique-est-en-marche" title="Qu'est-ce que l'eco-conception ?" target="_blank">l’éco-conception</a> c’est pourquoi j’ai comme objectif de réaliser des applications optimisées et multiplateforme.
-            <br>Je serai ravi de m’entretenir avec vous dans le but d’en connaitre plus sur vos besoins et de vous convaincre de mes compétances.
+            Je m’intéresse également à l’<a href="https://esokia.com/fr/blog/ux-ui-quest-ce-que-ca-signifie" title="Qu'est-ce que l'UX ?" target="_blank">UX</a> et <a href="https://www.kisskissbankbank.com/fr/projects/eco-conception-web-l-ecologie-numerique-est-en-marche" title="Qu'est-ce que l'eco-conception ?" target="_blank">l’éco-conception</a> c’est pourquoi j’ai comme objectif de réaliser des applications optimisées et multiplateforme.
+            <br>Je serai ravi de m’entretenir avec vous dans le but d’en connaitre plus sur vos besoins et de vous convaincre de mes competences.
           </p>
           <a href="{{ asset('assets/uploads/curriculum_vitae.pdf') }}" target="_blank" title="Direction vers mes services" class="radial-button" style="background: radial-gradient(100% 175% at 82.6791% 44.2274%, rgb(222, 104, 208) 0%, rgb(97, 0, 255) 100%);">Voir mon CV</a>
         </div>
@@ -109,52 +109,85 @@
       </svg>
     </section>
     <section id="competences">
-      <h3 class="title">Compétances</h3>
-      <h2>Les technologies que j’utilise.</h2>
       <div class="row container">
         <div class="col">
-
+          <h3 class="title">Compétences</h3>
+          <h2>Les technologies que j’utilise couramment</h2>
+          <p>
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi molestias sapiente sunt vitae voluptatum! Amet corporis culpa et eum explicabo nostrum ratione? Atque est illo inventore mollitia odio. Nesciunt, obcaecati?</span>
+          </p>
+          <button class="radial-button">En savoir plus</button>
         </div>
         <div class="col">
-          <figure>
-            <img class="small" src="{{ asset('assets/images/logos/html.svg') }}" alt="HTML">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="small left" id="html">
+            <img src="{{ asset('assets/images/logos/html.svg') }}" alt="HTML">
+            <figcaption>
+              <h4>HTML</h4>
+              <p>Langage de balises utilisé afin de créer et de représenter le contenu d'une page web et sa structure.</p>
+            </figcaption>
           </figure>
-          <figure>
-            <img class="medium" src="{{ asset('assets/images/logos/css.svg') }}" alt="CSS">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="medium left" id="css">
+            <img src="{{ asset('assets/images/logos/css.svg') }}" alt="CSS">
+            <figcaption>
+              <h4>CSS</h4>
+              <p>Langage de feuille de style utilisé pour décrire la présentation d’un document écrit en HTML ou XML.</p>
+            </figcaption>
           </figure>
-          <figure>
+          <figure class="left" id="sass">
             <img src="{{ asset('assets/images/logos/sass.svg') }}" alt="Sass">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+            <figcaption>
+              <h4>Sass</h4>
+              <p>Sass est un langage de script préprocesseur qui est compilé ou interprété en CSS.</p>
+            </figcaption>
           </figure>
-          <figure>
-            <img class="medium" src="{{ asset('assets/images/logos/javascript.svg') }}" alt="JavaScript">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="medium right" id="javascript">
+            <img src="{{ asset('assets/images/logos/javascript.svg') }}" alt="JavaScript">
+            <figcaption>
+              <h4>JavaScript</h4>
+              <p>Langage de programmation de scripts principalement employé dans les pages web interactives et à ce titre est une partie essentielle des applications web.</p>
+            </figcaption>
           </figure>
-          <figure>
+          <figure class="right" id="typescript">
             <img src="{{ asset('assets/images/logos/typescript.svg') }}" alt="TypeScript">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+            <figcaption>
+              <h4>TypeScript</h4>
+              <p>Langage de programmation libre et open source développé par Microsoft qui a pour but d'améliorer et de sécuriser la production de code JavaScript.</p>
+            </figcaption>
           </figure>
-          <figure>
-            <img class="small" src="{{ asset('assets/images/logos/nodejs.svg') }}" alt="NodeJs">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="small right" id="nodejs">
+            <img src="{{ asset('assets/images/logos/nodejs.svg') }}" alt="NodeJs">
+            <figcaption>
+              <h4>NodeJs</h4>
+              <p>Node.js est une plateforme logicielle libre en JavaScript, orientée vers les applications réseau évènementielles hautement concurrentes qui doivent pouvoir monter en charge.</p>
+            </figcaption>
           </figure>
-          <figure>
-            <img class="big" src="{{ asset('assets/images/logos/adonis.svg') }}" alt="Adonis">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="big right" id="adonis">
+            <img src="{{ asset('assets/images/logos/adonis.svg') }}" alt="Adonis">
+            <figcaption>
+              <h4>Adonis</h4>
+              <p>Framework Node.js MVC il offre un écosystème stable pour écrire une application web côté serveur</p>
+            </figcaption>
           </figure>
-          <figure>
-            <img class="small" src="{{ asset('assets/images/logos/php.svg') }}" alt="PHP">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="small left" id="php">
+            <img src="{{ asset('assets/images/logos/php.svg') }}" alt="PHP">
+            <figcaption>
+              <h4>PHP</h4>
+              <p>Langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP.</p>
+            </figcaption>
           </figure>
-          <figure>
+          <figure class="left" id="wordpress">
             <img src="{{ asset('assets/images/logos/wordpress.svg') }}" alt="WordPress">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+            <figcaption>
+              <h4>WordPress</h4>
+              <p>Système de gestion de contenu gratuit, libre et open-source.</p>
+            </figcaption>
           </figure>
-          <figure>
-            <img class="big" src="{{ asset('assets/images/logos/symfony.svg') }}" alt="Symfony">
-            <figcaption>A large feline inhabiting Bodmin Moor.</figcaption>
+          <figure class="big left" id="symfony">
+            <img src="{{ asset('assets/images/logos/symfony.svg') }}" alt="Symfony">
+            <figcaption>
+              <h4>Symfony</h4>
+              <p>Ensemble de composants PHP ainsi qu'un framework MVC libre écrit en PHP.</p>
+            </figcaption>
           </figure>
         </div>
       </div>

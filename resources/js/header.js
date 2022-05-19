@@ -9,7 +9,7 @@ buttonMenu.onclick = () => {
   header.classList.toggle('close')
   header.classList.toggle('open')
 }
-header.onclick = function (e) {
+header.onclick = (e) => {
   header.classList.contains('open') &&
     (e.target.classList.contains('row') ||
       'HEADER' === e.target.nodeName ||

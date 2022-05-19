@@ -80,8 +80,11 @@ document.querySelectorAll('.radial-button').forEach(function (e) {
     })
 })
 
-//snow
-let snowCount = 60
+//js
+let snowCount = Math.round((window.innerWidth / 10) * (2 / 3))
+if (snowCount > 175) {
+  snowCount = 175
+}
 
 function createSnow(snow_density) {
   for (let x = 0; x < snow_density - 1; x++) {
@@ -136,7 +139,23 @@ function createSnowCSS(snow_density) {
 
   add_css(rule)
 }
-if (window.innerWidth > 1024) {
-  createSnowCSS(snowCount)
-  createSnow(snowCount)
+
+createSnowCSS(snowCount)
+createSnow(snowCount)
+
+//compétence
+const competences = document.getElementById('competences')
+const technologies = competences.querySelectorAll('figure')
+technologies.forEach((t) => {
+  t.onclick = () => {
+    t.classList.toggle('open')
+  }
+})
+competences.onclick = (e) => {
+  // console.log(e.target)
+  technologies.forEach((t) => {
+    if (!t.contains(e.target)) {
+      t.classList.remove('open')
+    }
+  })
 }
