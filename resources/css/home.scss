@@ -389,9 +389,6 @@
     font-size: 1.13rem;
     max-width: 600px;
   }
-  button{
-    margin-top: 2rem;
-  }
   .row{
     align-items: center;
     max-width: $max-width;
@@ -403,7 +400,7 @@
     &:last-of-type{
       transform: scale(0.7) translateX(-15%);
       position: relative;
-      margin: 5rem auto 0;
+      margin: 0 auto 0;
       height: 398px;
       width: 130%;
     }
@@ -426,10 +423,11 @@
       }
     }
     &.open{
+      animation: none;
+      transform: scale(1.2);
       padding: 1rem;
       backdrop-filter: blur(20px);
       transition: .35s 0.125s;
-      animation-play-state: paused;
       display: initial;
       z-index: 1;
       filter: none !important;
@@ -554,6 +552,9 @@
         width: 90%;
         max-width: 463px;
       }
+    }
+    .open{
+      transform: none;
     }
   }
   @media screen and (min-width: 899px) {

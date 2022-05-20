@@ -125,7 +125,10 @@ function createSnowCSS(snow_density) {
         @keyframes fall-${i} {
             ${yBreak}% {
                 opacity: ${randomRange(0, 0.75)};
-                transform: translate(${xDefault + xRange}vw, ${yBreak}vh) scale(${randomRange(0, 1)});
+                transform: translate(${xDefault + xRange}vw, ${yBreak}vh) scale(${randomRange(
+      0,
+      1
+    )});
             }
 
             to {
@@ -152,7 +155,6 @@ technologies.forEach((t) => {
   }
 })
 competences.onclick = (e) => {
-  // console.log(e.target)
   technologies.forEach((t) => {
     if (!t.contains(e.target)) {
       t.classList.remove('open')
