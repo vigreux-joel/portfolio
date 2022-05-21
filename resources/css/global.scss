@@ -50,13 +50,14 @@ a, button{
 a{
   text-decoration: none;
 }
-p{
+p, label, input, textarea{
   font-size: rem(20);
   font-family: 'Roboto', sans-serif;
 }
 
 
 .radial-button{
+  cursor: pointer;
   color: white;
   transition: 0.35s;
   background: radial-gradient(100% 200% at 0 50%,#de68d0 0,#6100ff 100%);

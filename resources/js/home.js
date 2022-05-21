@@ -80,7 +80,7 @@ document.querySelectorAll('.radial-button').forEach(function (e) {
     })
 })
 
-//js
+//snow
 let snowCount = Math.round((window.innerWidth / 10) * (2 / 3))
 if (snowCount > 175) {
   snowCount = 175
@@ -142,7 +142,6 @@ function createSnowCSS(snow_density) {
 
   add_css(rule)
 }
-
 createSnowCSS(snowCount)
 createSnow(snowCount)
 
@@ -161,3 +160,14 @@ competences.onclick = (e) => {
     }
   })
 }
+
+//contact
+const contactForm = document.forms.contact
+const submit = contactForm.querySelector("input[type='submit']")
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  fetch(contactForm.action, { method: contactForm.method, body: new FormData(contactForm) })
+    .then(response => response.json())
+    .then(json => console.log(json));
+});

@@ -229,6 +229,68 @@
         </article>
       </div>
     </section>
+    <section class="container" id="contact">
+      <h3 class="title">Contact</h3>
+      <h2>Contactez-moi pour obtenir un devis ou pour demander un renseignement</h2>
+      <form name="contact" method="POST" action="contact">
+        <div class="row">
+          <div class="col coordonnees">
+            <h4>Formulaire de contact</h4>
+            <label>
+              Nom
+              <span class="input-container">
+                <input type="text" name="name" placeholder="Votre nom" required>
+                <img alt="name" src="{{ asset('assets/images/name.svg') }}">
+              </span>
+            </label>
+            <label>
+              Email
+              <span class="input-container">
+                <input type="email" name="email" placeholder="Votre email" required>
+                <img alt="email" src="{{ asset('assets/images/email.svg') }}">
+              </span>
+            </label>
+            <label>
+              Téléphone <span class="weak">(facultatif)</span>
+              <span class="input-container">
+                <input type="tel" name="tel" placeholder="Votre téléphone">
+                <img alt="téléphone" src="{{ asset('assets/images/tel.svg') }}">
+              </span>
+            </label>
+          </div>
+          <div class="col info">
+            <a href="tel:+33617110715">
+              <img alt="téléphone" src="{{ asset('assets/images/tel.svg') }}">
+              <span>06 17 11 07 15</span>
+            </a>
+            <a href="mailto:vigreux@hotmail.com">
+              <img alt="email" src="{{ asset('assets/images/email.svg') }}">
+              <span>vigreux@hotmail.com</span>
+            </a>
+          </div>
+        </div>
+        <label>
+          Message
+          <textarea name="message" placeholder="Votre message" required></textarea>
+        </label>
+        <h4>Services</h4>
+        <div class="row services">
+          <div class="input-container">
+            <input type="radio" name="services" id="web-design">
+            <label for="web-design">Web Design</label>
+          </div>
+          <div class="input-container">
+            <input type="radio" name="services" id="developpement-web" required>
+            <label for="developpement-web">Développement Web</label>
+          </div>
+          <div class="input-container">
+            <input type="radio" name="services" id="maintenance">
+            <label for="maintenance">Maintenance</label>
+          </div>
+        </div>
+        <input class="radial-button" type="submit" value="Envoyer le message">
+      </form>
+    </section>
  </main>
 
 @endsection

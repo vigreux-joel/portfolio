@@ -22,12 +22,8 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route
-    .get('/', 'HomeController.index')
-    .as('home')
-  Route
-    .get('/contact', 'MailController.index')
-    .as('mail')
+  Route.get('/', 'HomeController.index').as('home')
+  Route.post('/contact', 'MailController.index').as('mail')
 })
 /*  .as('web')
 
