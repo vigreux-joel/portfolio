@@ -146,7 +146,7 @@ header {
         padding: 1rem;
       }
 
-      button{
+      .button{
         position: absolute;
         right: 1.25rem;
         top: 50%;
@@ -189,7 +189,7 @@ header {
         font-size: 1em;
         color: white;
       }
-      button {
+      .button {
         transition: 0.2s;
         opacity: 0;
         display: block;
@@ -217,7 +217,7 @@ header {
             width: 0;
           }
         }
-        button {
+        .button {
           transition: 0.2s;
         }
       }
@@ -273,7 +273,7 @@ header {
           padding: rem(20);
           display: block;
         }
-        button{
+        .button{
           transition: 0.35s 1.2s;
           opacity: 1;
         }

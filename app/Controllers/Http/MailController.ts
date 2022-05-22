@@ -1,7 +1,7 @@
 //import ContactEmail from 'App/Mailers/ContactEmail'
 //import ReceivedEmail from 'App/Mailers/ReceivedEmail'
-import {HttpContextContract} from "@ioc:Adonis/Core/HttpContext";
-import {schema, rules} from "@ioc:Adonis/Core/Validator";
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export type Email = {
   email: string
@@ -12,23 +12,27 @@ export type Email = {
 }
 
 export default class MailController {
-  public async index({ request }: HttpContextContract) {
-
-
+  public async index({ request, response }: HttpContextContract) {
     const newPostSchema = schema.create({
-      email: schema.string({
-        rules.email()
-      }),
-      // name: schema.string({
-      //   rules.minLength(10),
-      // }),
-      // tel: schema.string.optional({rules.email})
+      email: schema.string([rules.required(), rules.email()]),
+      name: schema.string([rules.required(), rules.minLength(3)]),
+      tel: schema.string.nullableAndOptional([rules.mobile()]),
+      service: schema.string([rules.required()]),
+      message: schema.string([rules.required()]),
     })
 
     /**
      * Validate request body against the schema
      */
-    const payload = await request.validate({ schema: newPostSchema })
+    let payload
+    try {
+      payload = await request.validate({ schema: newPostSchema })
+    } catch (e) {
+      response.status(400)
+      console.log(e.message)
+      return e.messages
+    }
+
 
     // let email: Email = {
     //   email: request.body().email,

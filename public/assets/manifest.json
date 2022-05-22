@@ -29,6 +29,7 @@
   "assets/images/logo.svg": "http://localhost:8080/assets/images/logo.svg",
   "assets/images/logos/wordpress.svg": "http://localhost:8080/assets/images/logos/wordpress.svg",
   "assets/images/logos/adonis.svg": "http://localhost:8080/assets/images/logos/adonis.svg",
+  "assets/images/tel.svg": "http://localhost:8080/assets/images/tel.svg",
   "assets/images/next.svg": "http://localhost:8080/assets/images/next.svg",
   "assets/images/pin.svg": "http://localhost:8080/assets/images/pin.svg",
   "assets/images/logos/css.svg": "http://localhost:8080/assets/images/logos/css.svg",
@@ -36,9 +37,7 @@
   "assets/images/Guardark/SVG/Logo_White_BG.svg": "http://localhost:8080/assets/images/Guardark/SVG/Logo_White_BG.svg",
   "assets/images/Guardark/SVG/Logo_Green.svg": "http://localhost:8080/assets/images/Guardark/SVG/Logo_Green.svg",
   "assets/images/Guardark/SVG/Logo_White.svg": "http://localhost:8080/assets/images/Guardark/SVG/Logo_White.svg",
+  "assets/images/name.svg": "http://localhost:8080/assets/images/name.svg",
   "assets/images/logos/html.svg": "http://localhost:8080/assets/images/logos/html.svg",
-  "assets/images/Vector.svg": "http://localhost:8080/assets/images/Vector.svg",
-  "assets/images/email.svg": "http://localhost:8080/assets/images/email.svg",
-  "assets/images/tel.svg": "http://localhost:8080/assets/images/tel.svg",
-  "assets/images/name.svg": "http://localhost:8080/assets/images/name.svg"
+  "assets/images/email.svg": "http://localhost:8080/assets/images/email.svg"
 }

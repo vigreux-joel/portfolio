@@ -6,7 +6,7 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import { DriveConfig } from '@ioc:Adonis/Core/Drive'
+import { driveConfig } from '@adonisjs/core/build/config'
 import Application from '@ioc:Adonis/Core/Application'
 
 /*
@@ -18,7 +18,7 @@ import Application from '@ioc:Adonis/Core/Application'
 | defined inside the `contracts` directory.
 |
 */
-const driveConfig: DriveConfig = {
+export default driveConfig({
   /*
   |--------------------------------------------------------------------------
   | Default disk
@@ -101,6 +101,9 @@ const driveConfig: DriveConfig = {
     //   region: Env.get('S3_REGION'),
     //   bucket: Env.get('S3_BUCKET'),
     //   endpoint: Env.get('S3_ENDPOINT'),
+    //
+    //  // For minio to work
+    //  // forcePathStyle: true,
     // },
 
     /*
@@ -140,9 +143,7 @@ const driveConfig: DriveConfig = {
       | console.
       |
       */
-    //   usingUniformAcl: false
+    //   usingUniformAcl: false,
     // },
   },
-}
-
-export default driveConfig
+})

@@ -165,9 +165,33 @@ competences.onclick = (e) => {
 const contactForm = document.forms.contact
 const submit = contactForm.querySelector("input[type='submit']")
 
+contactForm.querySelector('*').oninput = (e) => {
+  e.target.classList.remove('error')
+}
+
 contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  fetch(contactForm.action, { method: contactForm.method, body: new FormData(contactForm) })
-    .then(response => response.json())
-    .then(json => console.log(json));
-});
+  e.preventDefault()
+  fetch(contactForm.action, { method: contactForm.method, body: new FormData(contactForm) }).then(
+    (response) => {
+      if (response.ok) {
+        window.alert('message envoyé!')
+      } else {
+        response.json().then((json) => {
+          let first
+          Object.entries(json).forEach(([key, value]) => {
+            console.log(key, value)
+            let inputError = []
+            inputError.push(contactForm[key])
+            if (first === undefined) {
+              first = inputError[0]
+            }
+            inputError.forEach((input) => {
+              input.classList.add('error')
+            })
+          })
+          first.scrollIntoView({ block: 'center' })
+        })
+      }
+    }
+  )
+})

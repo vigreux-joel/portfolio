@@ -212,7 +212,7 @@
     }
     .right{
       margin: 0 0 0 auto;
-      max-width: $max-width/2;
+      max-width: $max-width*.5;
     }
   }
   @media screen and (min-width: 1200px) {
@@ -419,7 +419,7 @@
     background: rgba(255, 255, 255, 0.5);
     @for $i from 1 to 11 {
       &:nth-of-type(#{$i}){
-        animation-delay: -#{round(random()*100)/100*3}s;
+        animation-delay: -#{calc(round(random() * 100) / 100)*3}s;
       }
     }
     &.open{
@@ -559,7 +559,8 @@
   }
   @media screen and (min-width: 899px) {
     .row{
-      margin: rem(175) auto;
+      padding: rem(175) 0;
+      margin: 0 auto;
       justify-content: space-between;
       flex-direction: row;
     }
@@ -666,6 +667,9 @@
       outline: none;
       width: 100%;
       box-sizing: border-box;
+      &.error, &:invalid:not(:placeholder-shown){
+        border-color: red;
+      }
       &:focus-visible{
         border: $color1 2px solid;
         ~ img{
@@ -681,9 +685,6 @@
         padding-left: .5rem;
         ~ img{
           display: none;
-        }
-        &:invalid{
-          border-color: $color1;
         }
       }
     }
@@ -711,6 +712,9 @@
         color: $color1;
         background: white;
         border-color: $color1;
+      }
+      &:hover ~ label{
+        background: white;
       }
     }
   }
