@@ -22,7 +22,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    >a{
+    >a:not(.button){
       line-height: 0;
       svg{
         height: 45px;
@@ -139,7 +139,7 @@ header {
           height: 2px;
         }
       }
-      a{
+      a:not(.button){
         color: white;
         font-size: 1.25rem;
         position: relative;
@@ -170,18 +170,18 @@ header {
         margin: 0;
         padding: 0;
       }
-      a {;
+      a:not(.button) {;
         transition: .35s;
         &:hover {
           background: #625de9;
         }
       }
       @for $i from 1 to 6 {
-        a:nth-of-type(#{$i}) {
+        a:nth-of-type(#{$i}):not(.button) {
           width: 0;
         }
       }
-      a {
+      a:not(.button) {
         padding: 0;
         margin: 0 0 0 auto;
         border-top: solid 1px white;
@@ -190,6 +190,7 @@ header {
         color: white;
       }
       .button {
+        width: fit-content;
         transition: 0.2s;
         opacity: 0;
         display: block;
@@ -210,7 +211,7 @@ header {
         right: 0;
         position: absolute;
         @for $i from 1 to 6 {
-          a:nth-of-type(#{$i}) {
+          a:nth-of-type(#{$i}):not(.button) {
             $i: 5 - $i;
             transition: 0.1s #{$i*0.02}s;
             opacity: 0;
@@ -264,12 +265,12 @@ header {
           padding: 0;
         }
         @for $i from 1 to 6 {
-          a:nth-of-type(#{$i}) {
+          a:nth-of-type(#{$i}):not(.button) {
             transition: 0.5s #{$i*0.175+(.15)}s, background 0.35s;
             width: 100%;
           }
         }
-        a{
+        a:not(.button){
           padding: rem(20);
           display: block;
         }

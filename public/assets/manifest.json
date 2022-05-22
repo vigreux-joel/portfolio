@@ -1,7 +1,6 @@
 {
   "assets/app.js": "http://localhost:8080/assets/app.js",
   "assets/home.css": "http://localhost:8080/assets/home.css",
-  "assets/home.js": "http://localhost:8080/assets/home.js",
   "assets/images/Guardark/Guardark_branding.eps": "http://localhost:8080/assets/images/Guardark/Guardark_branding.eps",
   "assets/images/Guardark/Guardark_branding.pdf": "http://localhost:8080/assets/images/Guardark/Guardark_branding.pdf",
   "assets/images/Guardark/Guardark_branding.ai": "http://localhost:8080/assets/images/Guardark/Guardark_branding.ai",

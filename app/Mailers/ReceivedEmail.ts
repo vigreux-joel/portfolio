@@ -24,7 +24,7 @@ export default class ReceivedEmail extends BaseMailer {
       message
         .subject('Votre email a bien été recu!')
         .from('contact@vigreux-joel.fr', 'Vigreux Joël - Développeur web')
-        .to(this.email.sender)
+        .to(this.email.email)
         .html(mjml(vue).html)
     })
   }

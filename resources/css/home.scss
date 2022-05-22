@@ -559,7 +559,8 @@
   }
   @media screen and (min-width: 899px) {
     .row{
-      padding: rem(175) 0;
+      padding-top: rem(175);
+      padding-bottom: rem(175);
       margin: 0 auto;
       justify-content: space-between;
       flex-direction: row;
