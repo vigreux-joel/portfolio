@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="autoprefixer">
-      <change afterPath="$PROJECT_DIR$/resources/views/emails/contact.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Http/MailController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Http/MailController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mailers/ContactEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mailers/ContactEmail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mailers/ReceivedEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mailers/ReceivedEmail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/global.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/home.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/received.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/received.edge" afterDir="false" />
-    </list>
+    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="mail" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +53,7 @@
       <workItem from="1653203822929" duration="2205000" />
       <workItem from="1653212324473" duration="3758000" />
       <workItem from="1653251713124" duration="6237000" />
-      <workItem from="1653286084245" duration="13244000" />
+      <workItem from="1653286084245" duration="13338000" />
     </task>
     <task id="LOCAL-00001" summary="form contact">
       <created>1653174244926</created>
@@ -86,7 +76,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653257376160</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="mail">
+      <created>1653300274093</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653300274093</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +105,7 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="form contact" />
     <MESSAGE value="autoprefixer" />
-    <option name="LAST_COMMIT_MESSAGE" value="autoprefixer" />
+    <MESSAGE value="mail" />
+    <option name="LAST_COMMIT_MESSAGE" value="mail" />
   </component>
 </project>
