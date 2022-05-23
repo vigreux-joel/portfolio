@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="mail">
-      <change afterPath="$PROJECT_DIR$/resources/images/project2-desktop.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/global.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/css/home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/home.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/vigre/Documents/site/portfolio/resources/images",
+    "last_opened_file_path": "C:/Users/vigre/Documents/site/portfolio/resources/js",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -44,6 +44,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vigre\Documents\site\portfolio\resources\js" />
+      <recent name="C:\Users\vigre\Documents\site\portfolio\resources\css" />
       <recent name="C:\Users\vigre\Documents\site\portfolio\resources\images" />
       <recent name="C:\Users\vigre\Documents\site\portfolio\resources\views\emails" />
       <recent name="C:\Users\vigre\Documents\site\portfolio\build" />
@@ -61,7 +63,7 @@
       <workItem from="1653203822929" duration="2205000" />
       <workItem from="1653212324473" duration="3758000" />
       <workItem from="1653251713124" duration="6237000" />
-      <workItem from="1653286084245" duration="25398000" />
+      <workItem from="1653286084245" duration="32232000" />
     </task>
     <task id="LOCAL-00001" summary="form contact">
       <created>1653174244926</created>
@@ -98,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653303327723</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="project">
+      <created>1653318590460</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653318590460</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +130,7 @@
     <MESSAGE value="form contact" />
     <MESSAGE value="autoprefixer" />
     <MESSAGE value="mail" />
-    <option name="LAST_COMMIT_MESSAGE" value="mail" />
+    <MESSAGE value="project" />
+    <option name="LAST_COMMIT_MESSAGE" value="project" />
   </component>
 </project>

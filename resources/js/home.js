@@ -141,7 +141,7 @@ function createSnowCSS(snow_density) {
 
   add_css(rule)
 }
-if(window.innerWidth > 720){
+if (window.innerWidth > 720) {
   createSnowCSS(snowCount)
   createSnow(snowCount)
 }

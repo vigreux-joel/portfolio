@@ -1,7 +1,5 @@
 @import "header";
 
-
-
 .wave{
   height: rem(15);
   @media screen and (min-width: 1200px){
@@ -258,25 +256,6 @@
     padding-bottom: rem(180);
     &:hover{
       box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
-      .description{
-        min-height: 100%;
-        max-height: 100%;
-        overflow-y: scroll;
-        ~a{
-          p{
-            color: #06D1D4;
-          }
-          path{
-            fill: #06D1D4;
-          }
-        }
-        .technologies{
-          max-height: 450px !important;
-          transition: .5s .35s !important;
-          opacity: 1 !important;
-        }
-      }
-
     }
     .images{
       overflow: hidden;
@@ -337,6 +316,25 @@
         border-radius: 20px; /* roundness of the scroll thumb */
         border: 3px solid #314157; /* creates padding around scroll thumb */
       }
+      &:hover{
+        min-height: 100%;
+        max-height: 100%;
+        overflow-y: scroll;
+        ~a{
+          p{
+            color: #06D1D4;
+          }
+          path{
+            fill: #06D1D4;
+          }
+        }
+        .technologies{
+          max-height: 450px !important;
+          transition: .5s .35s !important;
+          opacity: 1 !important;
+        }
+      }
+      cursor: pointer;
       bottom: 0;
       width: 100%;
       min-height: rem(180);
@@ -391,6 +389,7 @@
     }
   }
   @media screen and (min-width: 1200px) {
+    padding: 0 1.25rem 6rem 1.25rem;
     article{
       .images{
         img{
