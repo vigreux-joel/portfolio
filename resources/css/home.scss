@@ -107,7 +107,8 @@
         margin-bottom: 3rem;
       }
       a{
-        display: flex;
+        display: none;
+        //display: flex;
         justify-content: center;
         align-items: center;
         p{
@@ -248,12 +249,34 @@
     justify-content: space-between;
   }
   article{
+    overflow: hidden;
+    position: relative;
     width: 100%;
     transition: .5s;
     border-radius: rem(25);
     margin-bottom: 4rem;
+    padding-bottom: rem(180);
     &:hover{
       box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
+      .description{
+        min-height: 100%;
+        max-height: 100%;
+        overflow-y: scroll;
+        ~a{
+          p{
+            color: #06D1D4;
+          }
+          path{
+            fill: #06D1D4;
+          }
+        }
+        .technologies{
+          max-height: 450px !important;
+          transition: .5s .35s !important;
+          opacity: 1 !important;
+        }
+      }
+
     }
     .images{
       overflow: hidden;
@@ -301,28 +324,58 @@
       }
     }
     .description{
+      &::-webkit-scrollbar {
+        width: 12px; /* width of the entire scrollbar */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: inherit;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #314157; /* color of the scroll thumb */
+        border-radius: 20px; /* roundness of the scroll thumb */
+        border: 3px solid #314157; /* creates padding around scroll thumb */
+      }
+      bottom: 0;
+      width: 100%;
+      min-height: rem(180);
+      position: absolute;
+      transition: .5s;
+      box-sizing: border-box;
       display: block;
-      padding: 2rem;
+      padding: 2rem 2rem 5rem;
       background: #1F2733;
-      border-bottom-left-radius: rem(25);
-      border-bottom-right-radius: rem(25);
       h4{
         color: white;
-        margin-top: 0;
+        margin: 0;
         font-size: rem(24);
       }
-      &:hover{
-        div{
-          p{
-            color: #06D1D4;
-          }
-          path{
-            fill: #06D1D4;
-          }
+      .technologies{
+        opacity: 0;
+        max-height: 0;
+        transition: .35s;
+        color: #f6f6f6;
+        p{
+          margin: 1.5rem 0 .5rem;
+        }
+        ul{
+          margin: 0;
+        }
+        li{
+          color: rgba(255, 255, 255, 0.65);
+          font-size: rem(18);
         }
       }
-      div{
+      ~a{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 2rem 2rem;
         display: flex;
+        width: 100%;
+        background: linear-gradient(0deg, rgba(31,39,51,1) 0%, rgba(31,39,51,1) 50%, rgba(31,39,51,0) 100%);
+        box-sizing: border-box;
         align-items: center;
         p, path{
           transition: .35s;
@@ -416,11 +469,14 @@
     animation: 4s ease-in-out infinite alternate slidein;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.6);
     @for $i from 1 to 11 {
       &:nth-of-type(#{$i}){
         animation-delay: -#{calc(round(random() * 100) / 100)*3}s;
       }
+    }
+    &:hover{
+      filter: none !important;
     }
     &.open{
       animation: none;
