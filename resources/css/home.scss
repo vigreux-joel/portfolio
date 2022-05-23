@@ -646,7 +646,15 @@
     color: $gris;
   }
   .radial-button{
-    margin: 2rem auto;
+    transition: .5s;
+    margin: 3rem auto 5rem;
+    &.send{
+      cursor: default;
+      background: $color1 !important;
+      &:hover{
+        transform: none;
+      }
+    }
   }
   .coordonnees .input-container{
     position: relative;
@@ -672,7 +680,7 @@
         border-color: red;
       }
       &:focus-visible{
-        border: $color1 2px solid;
+        border-color: $color1 !important;
         ~ img{
           opacity: 1;
           filter: brightness(1);

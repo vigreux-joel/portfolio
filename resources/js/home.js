@@ -1,10 +1,6 @@
 const sections = document.querySelectorAll('section')
 
 window.addEventListener('scroll', () => {
-  sections.forEach((section) => {
-    observer.observe(section)
-  })
-
   moveYElement()
 })
 moveYElement()
@@ -40,6 +36,9 @@ observer = new IntersectionObserver(
     threshold: [0.6],
   }
 )
+sections.forEach((section) => {
+  observer.observe(section)
+})
 
 const links = document.querySelectorAll('header .links a')
 const linksAfter = document.querySelector('header .links .after')
@@ -71,7 +70,7 @@ document.querySelectorAll('.radial-button').forEach(function (e) {
       l > -o &&
       c - e.clientWidth < o &&
       l - e.clientHeight < o &&
-      (e.style.background = 'radial-gradient(100% 175% at '
+      (e.style.background = 'radial-gradient(150% 225% at '
         .concat(((c + o) / n) * 100, '% ')
         .concat(((l + o) / r) * 100, '%, #EE04C9 0%, #6100FF 100%)'))
   }),
@@ -81,7 +80,7 @@ document.querySelectorAll('.radial-button').forEach(function (e) {
 })
 
 //snow
-let snowCount = Math.round((window.innerWidth / 10) * (2 / 3))
+let snowCount = Math.round((window.innerWidth / 10) * (1 / 3))
 if (snowCount > 175) {
   snowCount = 175
 }
@@ -142,8 +141,10 @@ function createSnowCSS(snow_density) {
 
   add_css(rule)
 }
-createSnowCSS(snowCount)
-createSnow(snowCount)
+if(window.innerWidth > 720){
+  createSnowCSS(snowCount)
+  createSnow(snowCount)
+}
 
 //compétence
 const competences = document.getElementById('competences')
@@ -174,12 +175,20 @@ contactForm.addEventListener('submit', (e) => {
   fetch(contactForm.action, { method: contactForm.method, body: new FormData(contactForm) }).then(
     (response) => {
       if (response.ok) {
-        window.alert('message envoyé!')
+        contactForm.message.value = ''
+
+        let submit = contactForm.querySelector("input[type='submit']")
+        submit.value = 'Message envoyé'
+        submit.classList.add('send')
+
+        setTimeout(() => {
+          submit.value = 'Envoyer le message'
+          submit.classList.remove('send')
+        }, 2000)
       } else {
         response.json().then((json) => {
           let first
           Object.entries(json).forEach(([key, value]) => {
-            console.log(key, value)
             let inputError = []
             inputError.push(contactForm[key])
             if (first === undefined) {
