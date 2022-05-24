@@ -19,8 +19,10 @@ $degrade2: radial-gradient(100.28% 130.52% at 100.24% 100%, #088AD6 0%, #00A084 
 
 html{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 body{
+  overflow-x: hidden;
   margin: 0;
 }
 .container{
