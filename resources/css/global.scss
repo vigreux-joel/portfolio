@@ -9,7 +9,7 @@ $degrade1: linear-gradient(270deg, #6100FF 0%, #EE04C9 100%);
 $degrade2: radial-gradient(100.28% 130.52% at 100.24% 100%, #088AD6 0%, #00A084 100%);
 
 @function rem($size, $base: 16){
-  @return calc(round((calc(1rem * $size / $base)) * 100) / 100);
+  @return round((1rem * $size / $base) * 100) / 100;
 }
 @function em($size, $base: 16){
   @return round((1em*$size/$base)*100)/100;

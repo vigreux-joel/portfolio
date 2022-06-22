@@ -1,83 +1,5 @@
 const sections = document.querySelectorAll('section')
 
-window.addEventListener('scroll', () => {
-  moveYElement()
-})
-moveYElement()
-function moveYElement() {
-  const elements = document.querySelectorAll('.move-y')
-  elements.forEach((element) => {
-    const parent = element.parentNode
-    parent.style.overflowY = 'hidden'
-    element.style.position = 'relative'
-
-    const scrollY = window.scrollY
-    let top = Math.floor(window.scrollY + element.getBoundingClientRect().top)
-
-    let centerYElement = top + element.offsetHeight / 2 - window.innerHeight / 2
-    if (centerYElement < 0) centerYElement = 0
-    let diff = -scrollY + centerYElement
-
-    let amplifier = element.dataset.amplifier ?? 1
-    element.style.top = `${diff * amplifier}px`
-  })
-}
-
-observer = new IntersectionObserver(
-  function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        el = entry.target
-        setCurrentOnglet(el.id)
-      }
-    })
-  },
-  {
-    threshold: [0.6],
-  }
-)
-sections.forEach((section) => {
-  observer.observe(section)
-})
-
-const links = document.querySelectorAll('header .links a')
-const linksAfter = document.querySelector('header .links .after')
-function setCurrentOnglet(id) {
-  history.replaceState({}, '', '#' + id)
-
-  links.forEach((link) => {
-    link.classList.remove('current')
-  })
-  let current = links[0].parentNode.querySelector('a[href="#' + id + '"]')
-  if (current) {
-    current.classList.add('current')
-    linksAfter.style.width = current.offsetWidth - 2 * 16 + 'px'
-    linksAfter.style.left = current.offsetLeft + current.offsetWidth / 2 + 'px'
-  } else {
-    linksAfter.style.width = '0'
-  }
-}
-
-//button
-document.querySelectorAll('.radial-button').forEach(function (e) {
-  window.addEventListener('mousemove', function (t) {
-    const o = window.innerHeight
-    const n = 2 * o + e.clientWidth
-    const r = 2 * o + e.clientHeight
-    const c = t.clientX - e.offsetLeft
-    const l = t.clientY - e.getBoundingClientRect().top
-    c > -o &&
-      l > -o &&
-      c - e.clientWidth < o &&
-      l - e.clientHeight < o &&
-      (e.style.background = 'radial-gradient(150% 225% at '
-        .concat(((c + o) / n) * 100, '% ')
-        .concat(((l + o) / r) * 100, '%, #EE04C9 0%, #6100FF 100%)'))
-  }),
-    (e.onmouseleave = function () {
-      e.style.backgroundPosition = '100% 50%'
-    })
-})
 
 //snow
 let snowCount = Math.round((window.innerWidth / 10) * (1 / 3))
@@ -144,15 +66,123 @@ function createSnowCSS(snow_density) {
 if (window.innerWidth > 720) {
   createSnowCSS(snowCount)
   createSnow(snowCount)
+} else {
+  document.getElementById('snow-div').removeAttribute("data-parallax");
 }
 
+function offsetTop(e, acc = 0){
+  if(e.offsetParent){
+    return offsetTop(e.offsetParent, acc + e.offsetTop)
+  }
+  return acc + e.offsetTop
+}
+class Parallax {
+  constructor(e) {
+    this.e = e
+    this.e.parentNode.style.overflowY = 'hidden'
+    this.e.style.position = 'relative'
+    this.ratio = parseFloat(e.dataset.parallax)
+    this.onScroll = this.onScroll.bind(this)
+    document.addEventListener('scroll', this.onScroll)
+  }
+
+  onScroll(){
+    const elementY = offsetTop(this.e) + this.e.offsetHeight/2
+    const screenCenter = window.innerHeight/2
+    const screenY = window.scrollY + screenCenter
+
+    const diffY = ((elementY<screenCenter)? screenCenter:elementY) - screenY
+    this.e.style.transform = `translateY(${diffY * -1 *this.ratio}px)`
+  }
+
+  static bind(){
+    Array.from(document.querySelectorAll('[data-parallax]')).map((e)=>{
+      return new Parallax(e)
+    })
+  }
+}
+Parallax.bind()
+
+observer = new IntersectionObserver(
+  function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        el = entry.target
+        setCurrentOnglet(el.id)
+      }
+    })
+  },
+  {
+    threshold: [0.6],
+  }
+)
+sections.forEach((section) => {
+  observer.observe(section)
+})
+
+const links = document.querySelectorAll('header .links a')
+const linksAfter = document.querySelector('header .links .after')
+function setCurrentOnglet(id) {
+  history.replaceState({}, '', '#' + id)
+
+  links.forEach((link) => {
+    link.classList.remove('current')
+  })
+  let current = links[0].parentNode.querySelector('a[href="#' + id + '"]')
+  if (current) {
+    current.classList.add('current')
+    linksAfter.style.width = current.offsetWidth - 2 * 16 + 'px'
+    linksAfter.style.left = current.offsetLeft + current.offsetWidth / 2 + 'px'
+  } else {
+    linksAfter.style.width = '0'
+  }
+}
+
+//button
+document.querySelectorAll('.radial-button').forEach(function (e) {
+  window.addEventListener('mousemove', function (t) {
+    const o = window.innerHeight
+    const n = 2 * o + e.clientWidth
+    const r = 2 * o + e.clientHeight
+    const c = t.clientX - e.offsetLeft
+    const l = t.clientY - e.getBoundingClientRect().top
+    c > -o &&
+      l > -o &&
+      c - e.clientWidth < o &&
+      l - e.clientHeight < o &&
+      (e.style.background = 'radial-gradient(150% 225% at '
+        .concat(((c + o) / n) * 100, '% ')
+        .concat(((l + o) / r) * 100, '%, #EE04C9 0%, #6100FF 100%)'))
+  }),
+    (e.onmouseleave = function () {
+      e.style.backgroundPosition = '100% 50%'
+    })
+})
+
+
+
 //compétence
+
 const competences = document.getElementById('competences')
 const technologies = competences.querySelectorAll('figure')
 technologies.forEach((t) => {
+  let isHover;
   t.onclick = () => {
     t.classList.toggle('open')
   }
+  t.onmouseenter = () => {
+    window.clearTimeout(isHover);
+    isHover = setTimeout(() =>{
+      t.classList.add('open')
+    }, 500);
+  }
+  t.onmouseleave = () => {
+    window.clearTimeout(isHover);
+    isHover = setTimeout(() =>{
+      t.classList.remove('open')
+    }, 350);
+  }
+
 })
 competences.onclick = (e) => {
   technologies.forEach((t) => {
@@ -165,10 +195,39 @@ competences.onclick = (e) => {
 //contact
 const contactForm = document.forms.contact
 const submit = contactForm.querySelector("input[type='submit']")
+const otherInput = document.getElementById('other')
+const otherLabel = document.querySelector('#other ~ label')
+const services = document.querySelectorAll('.services .input-container')
 
 contactForm.querySelector('*').oninput = (e) => {
-  e.target.classList.remove('error')
+  const el = e.target
+  el.classList.remove('error')
+  el.labels[0].classList.remove('error')
 }
+
+otherLabel.oninput = () => {
+  otherInput.value = otherLabel.innerHTML
+  otherInput.classList.remove('error')
+  document.getElementById(otherInput.htmlFor).classList.remove('error')
+}
+otherLabel.addEventListener('click', (e) => {
+  if(otherInput.checked){
+    e.preventDefault()
+  } else {
+    e.preventDefault()
+
+    otherInput.checked = true
+    otherLabel.innerHTML = ''
+  }
+})
+services.forEach((service) => {
+  service.onclick = (e) => {
+    if(service.querySelector('label') !== otherLabel){
+      otherInput.checked = false
+      otherLabel.innerHTML = 'Autre'
+    }
+  }
+})
 
 contactForm.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -176,7 +235,6 @@ contactForm.addEventListener('submit', (e) => {
     (response) => {
       if (response.ok) {
         contactForm.message.value = ''
-
         let submit = contactForm.querySelector("input[type='submit']")
         submit.value = 'Message envoyé'
         submit.classList.add('send')
@@ -184,7 +242,7 @@ contactForm.addEventListener('submit', (e) => {
         setTimeout(() => {
           submit.value = 'Envoyer le message'
           submit.classList.remove('send')
-        }, 2000)
+        }, 3500)
       } else {
         response.json().then((json) => {
           let first
@@ -195,7 +253,13 @@ contactForm.addEventListener('submit', (e) => {
               first = inputError[0]
             }
             inputError.forEach((input) => {
-              input.classList.add('error')
+              console.log(input[3])
+              if(input[3] === otherInput){
+                otherInput.classList.add('error')
+              } else {
+                input.classList.add('error')
+                input.labels[0].add('error')
+              }
             })
           })
           first.scrollIntoView({ block: 'center' })
@@ -204,3 +268,24 @@ contactForm.addEventListener('submit', (e) => {
     }
   )
 })
+
+
+//backToTop
+const backToTop = document.getElementById('back-to-top')
+
+end = new IntersectionObserver(
+  function (entries) {
+    entries.forEach( (entry) => {
+      if (entry.isIntersecting) {
+        backToTop.classList.remove('hidden')
+      } else {
+        backToTop.classList.add('hidden')
+      }
+    })
+  },
+  {
+    threshold: [0.25],
+  }
+)
+end.observe(document.getElementById('contact'))
+

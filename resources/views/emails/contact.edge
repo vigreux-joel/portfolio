@@ -37,33 +37,29 @@
         <mj-text color="white" align="center" font-size="13px" padding-top="0" font-weight="bold" text-transform="uppercase" letter-spacing="1px" line-height="20px">
           Développeur web
           <br />
-          Back-stack
+          Back-end
         </mj-text>
 
       </mj-column>
-      <mj-column width='600px' background-color='white' padding-top="32px">
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px"  css-class="body-section">
+      <mj-column width="100%">
+        <mj-text color="#212b35" font-weight="bold" font-size="20px">
+          Message de {{ email.name}}
+        </mj-text>
+        <mj-text color="#637381" font-size="16px">
+          Email: {{ email.email}},
+        </mj-text>
+        <mj-text color="#637381" font-size="16px">
+          Tel:  {{ email.tel}}
+        </mj-text>
+        <mj-text color="#212b35" font-size="16px">
+          <strong>Contenu du message:</strong>
+        </mj-text>
+        <mj-text color="#637381" font-size="16px">
+          {{{ email.content}}}
+        </mj-text>
       </mj-column>
     </mj-section>
-    <mj-wrapper padding-top="0" padding-bottom="0" css-class="body-section">
-      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
-        <mj-column width="100%">
-          <mj-text color="#212b35" font-weight="bold" font-size="20px">
-            Message de {{ email.name}}
-          </mj-text>
-          <mj-text color="#637381" font-size="16px">
-            Email: {{ email.email}},
-          </mj-text>
-          <mj-text color="#637381" font-size="16px">
-            Tel:  {{ email.tel}}
-          </mj-text>
-          <mj-text color="#212b35" font-size="16px">
-            <strong>Contenu du message:</strong>
-          </mj-text>
-          <mj-text color="#637381" font-size="16px">
-            {{{ email.content}}}
-          </mj-text>
-        </mj-column>
-      </mj-section>
-    </mj-wrapper>
   </mj-body>
 </mjml>

@@ -23,6 +23,9 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
   Route.get('/', 'HomeController.index').as('home')
+  Route.get('*', async ({ request,response }) => {
+    response.redirect().toPath('http://' + <string>request.host() /*+ request.url()*/)
+  })
   Route.post('/contact', 'MailController.index').as('mail')
 })
 /*  .as('web')

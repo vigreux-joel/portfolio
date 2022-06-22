@@ -40,38 +40,33 @@
         <mj-text color="white" align="center" font-size="13px" padding-top="0" font-weight="bold" text-transform="uppercase" letter-spacing="1px" line-height="20px">
           Développeur web
           <br />
-          Back-stack
+          Back-end
         </mj-text>
-
-      </mj-column>
-      <mj-column width='600px' background-color='white' padding-top="32px">
       </mj-column>
     </mj-section>
-    <mj-wrapper padding-top="0" padding-bottom="0" css-class="body-section">
-      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
-        <mj-column width="100%">
-          <mj-text color="#212b35" font-weight="bold" font-size="20px">
-            Votre message m’a bien été transmis !
-          </mj-text>
-          <mj-text color="#637381" font-size="16px">
-            Bonjour {{ email.name}},
-          </mj-text>
-          <mj-text color="#637381" font-size="16px">
-            Merci pour votre confiance. Je reviendrais vers vous très prochainement!<br />
-            <br />
-            Cordialement, VIGREUX Joël
-          </mj-text>
-          <mj-text padding-top="32px" color="#212b35" font-size="16px">
-            <strong>Contenu de votre message:</strong>
-          </mj-text>
-          <mj-text padding-bottom="32px" color="#637381" font-size="16px">
-            {{{ email.content}}}
-          </mj-text>
-          <mj-button background-color="#6C41F0" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="https://vigreux-joel.fr" width="300px">
-            Voir mon site
-          </mj-button>
-        </mj-column>
-      </mj-section>
-    </mj-wrapper>
+    <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px"  css-class="body-section">
+      <mj-column width="100%">
+        <mj-text color="#212b35" font-weight="bold" font-size="20px">
+          Votre message m’a bien été transmis !
+        </mj-text>
+        <mj-text color="#637381" font-size="16px">
+          Bonjour {{ email.name}},
+        </mj-text>
+        <mj-text color="#637381" font-size="16px">
+          Merci pour votre confiance. Je reviendrais vers vous très prochainement!<br />
+          <br />
+          Cordialement, VIGREUX Joël
+        </mj-text>
+        <mj-text padding-top="32px" color="#212b35" font-size="16px">
+          <strong>Contenu de votre message:</strong>
+        </mj-text>
+        <mj-text padding-bottom="32px" color="#637381" font-size="16px">
+          {{{ email.content}}}
+        </mj-text>
+        <mj-button border-radius="7px" background-color="#6C41F0" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="https://vigreux-joel.fr" width="300px">
+          Voir mon site
+        </mj-button>
+      </mj-column>
+    </mj-section>
   </mj-body>
 </mjml>
