@@ -83,16 +83,32 @@ class Parallax {
     this.e.style.position = 'relative'
     this.ratio = parseFloat(e.dataset.parallax)
     this.onScroll = this.onScroll.bind(this)
+    // const observer = new IntersectionObserver(this.onIntersection)
+    // observer.observe(e)
     document.addEventListener('scroll', this.onScroll)
+    this.onScroll()
   }
 
-  onScroll(){
-    const elementY = offsetTop(this.e) + this.e.offsetHeight/2
-    const screenCenter = window.innerHeight/2
-    const screenY = window.scrollY + screenCenter
+  // onIntersection(entries){
+  //   for(const entry of entries) {
+  //
+  //     if(entry.isIntersecting){
+  //       document.addEventListener('scroll', this.onScroll)
+  //     } else {
+  //       document.removeEventListener('scroll', this.onScroll)
+  //     }
+  //   }
+  // }
 
-    const diffY = ((elementY<screenCenter)? screenCenter:elementY) - screenY
-    this.e.style.transform = `translateY(${diffY * -1 *this.ratio}px)`
+  onScroll(){
+    window.requestAnimationFrame(() => {
+      const elementY = offsetTop(this.e) + this.e.offsetHeight/2
+      const screenCenter = window.innerHeight/2
+      const screenY = window.scrollY + screenCenter
+
+      const diffY = ((elementY<screenCenter)? screenCenter:elementY) - screenY
+      this.e.style.transform = `translateY(${diffY * -1 *this.ratio}px)`
+    })
   }
 
   static bind(){

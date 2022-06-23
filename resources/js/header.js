@@ -23,19 +23,19 @@ scroll(scrollY)
 
 let scrollYOld = 0
 let scrollAmount = 0
-window.onscroll = () => {
+window.addEventListener('scroll',() => {
   //allows you to hide or show the menu according to the user’s scroll direction
-  if (scrollY > scrollYOld && scrollY !== 0) {
+  if (!header.classList.contains('hidden') && scrollY > scrollYOld && scrollY !== 0) {
     header.classList.add('hidden')
     scrollAmount = window.scrollY - 100
-  } else if (window.scrollY <= scrollAmount || scrollY === 0) {
+  } else if (header.classList.contains('hidden') && window.scrollY <= scrollAmount || scrollY === 0) {
     header.classList.remove('hidden')
   }
   scrollYOld = window.scrollY
 
   //allows to run the "onscroll" function
   scroll(scrollY)
-}
+})
 
 //allows you to add opacity to the menu, if the user is not at the top of the page
 function scroll(scrollY) {
