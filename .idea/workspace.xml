@@ -1,55 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="test https">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/app.64fa85c5.js" beforeDir="false" />
+    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="seo">
       <change beforePath="$PROJECT_DIR$/public/assets/entrypoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/entrypoints.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/home.d1667204.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/Guardark_branding.ai" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/Guardark_branding.eps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/Guardark_branding.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/Guardark_branding.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/PNG/Logo_Green.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/PNG/Logo_Green_BG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/PNG/Logo_White.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/PNG/Logo_White_BG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/SVG/Logo_Green.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/SVG/Logo_Green_BG.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/SVG/Logo_White.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/Guardark/SVG/Logo_White_BG.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/background.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/design.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/development.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/email.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/indent.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/linkedin.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/adonis.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/css.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/html.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/javascript.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/nodejs.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/php.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/sass.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/symfony.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/typescript.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/logos/wordpress.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/maintenance.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/name.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/next.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/photo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/pin.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/project1-desktop.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/project1-mobile.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/project2-desktop.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/project3-desktop.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/images/tel.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/uploads/Curriculum_Vitae_VIGREUX_Joel.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.edge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout.edge" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/files/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/files/robots.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +55,10 @@
       <recent name="C:\Users\vigre\Documents\site\portfolio\resources\images" />
       <recent name="C:\Users\vigre\Documents\site\portfolio\resources\views\emails" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vigre\Documents\site\portfolio\public\assets" />
+      <recent name="C:\Users\vigre\Documents\site\portfolio\public" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -135,7 +94,7 @@
       <workItem from="1655820261784" duration="10843000" />
       <workItem from="1655858089239" duration="5310000" />
       <workItem from="1655935638340" duration="203000" />
-      <workItem from="1655984988262" duration="16008000" />
+      <workItem from="1655984988262" duration="16360000" />
     </task>
     <task id="LOCAL-00001" summary="form contact">
       <created>1653174244926</created>
@@ -228,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656018621827</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="seo">
+      <created>1656021211488</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1656021211488</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +234,7 @@
     <MESSAGE value="fixe" />
     <MESSAGE value="fixe parallax" />
     <MESSAGE value="test https" />
-    <option name="LAST_COMMIT_MESSAGE" value="test https" />
+    <MESSAGE value="seo" />
+    <option name="LAST_COMMIT_MESSAGE" value="seo" />
   </component>
 </project>
