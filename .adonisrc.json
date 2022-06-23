@@ -29,6 +29,8 @@
     "@adonisjs/mail"
   ],
   "metaFiles": [
+    ".env",
+    "sslCert/*",
     {
       "pattern": "public/**",
       "reloadServer": false
