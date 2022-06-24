@@ -101,7 +101,6 @@ class Parallax {
   // }
 
   onScroll(){
-    if(window.innerWidth > 720)
     window.requestAnimationFrame(() => {
       const elementY = offsetTop(this.e) + this.e.offsetHeight/2
       const screenCenter = window.innerHeight/2
@@ -118,6 +117,7 @@ class Parallax {
     })
   }
 }
+if(window.innerWidth > 720)
 Parallax.bind()
 
 observer = new IntersectionObserver(

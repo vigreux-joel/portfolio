@@ -197,12 +197,13 @@ header {
         margin: 0 auto;
         position: relative;
         top: 3rem;
-        font-size: rem(20);
-        color: $color1;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #706BFD;
         background: white;
         border: none;
-        border-radius: rem(40);
-        padding: rem(8) rem(16);
+        border-radius: rem(15);
+        padding: 0.75rem 1.25rem;
       }
     }
     &.close{

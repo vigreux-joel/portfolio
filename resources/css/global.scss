@@ -63,7 +63,7 @@ p, label, input, textarea, li{
   transition: 0.35s;
   background: radial-gradient(100% 200% at 0 50%,#de68d0 0,#6100ff 100%);
   border: none;
-  border-radius: 4rem;
+  border-radius: rem(20);
   box-shadow: 6px 6px 30px rgb(97 0 255 / 50%);
   display: block;
   font-size: 1.38rem;
