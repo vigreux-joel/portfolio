@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="seo fixe h* order">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="8ce6f599-9435-4094-8144-5667c31e8f0e" name="Changes" comment="perf fixe">
       <change beforePath="$PROJECT_DIR$/public/assets/entrypoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/entrypoints.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/home.f52674a6.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.edge" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.edge" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +249,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656059685304</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="perf fixe">
+      <created>1656176426698</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1656176426698</updated>
+    </task>
+    <task id="LOCAL-00023" summary="perf fixe">
+      <created>1656176431967</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1656176431967</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,6 +305,7 @@
     <MESSAGE value="test https" />
     <MESSAGE value="seo site map" />
     <MESSAGE value="seo" />
-    <option name="LAST_COMMIT_MESSAGE" value="seo" />
+    <MESSAGE value="perf fixe" />
+    <option name="LAST_COMMIT_MESSAGE" value="perf fixe" />
   </component>
 </project>
