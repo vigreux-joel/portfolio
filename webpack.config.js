@@ -66,6 +66,11 @@ Encore.copyFiles({
   from: './resources/files',
   to: 'files/[path][name].[ext]',
 })
+Encore.copyFiles({
+  from: './resources/fonts',
+  to: 'fonts/[path][name].[ext]',
+})
+
 
 
 /*
