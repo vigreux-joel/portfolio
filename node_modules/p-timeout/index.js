@@ -1,57 +1,116 @@
-'use strict';
-
-const pFinally = require('p-finally');
-
-class TimeoutError extends Error {
+export class TimeoutError extends Error {
 	constructor(message) {
 		super(message);
 		this.name = 'TimeoutError';
 	}
 }
 
-const pTimeout = (promise, milliseconds, fallback) => new Promise((resolve, reject) => {
-	if (typeof milliseconds !== 'number' || milliseconds < 0) {
-		throw new TypeError('Expected `milliseconds` to be a positive number');
+/**
+An error to be thrown when the request is aborted by AbortController.
+DOMException is thrown instead of this Error when DOMException is available.
+*/
+export class AbortError extends Error {
+	constructor(message) {
+		super();
+		this.name = 'AbortError';
+		this.message = message;
 	}
+}
 
-	if (milliseconds === Infinity) {
-		resolve(promise);
-		return;
-	}
+/**
+TODO: Remove AbortError and just throw DOMException when targeting Node 18.
+*/
+const getDOMException = errorMessage => globalThis.DOMException === undefined
+	? new AbortError(errorMessage)
+	: new DOMException(errorMessage);
 
-	const timer = setTimeout(() => {
-		if (typeof fallback === 'function') {
-			try {
-				resolve(fallback());
-			} catch (error) {
-				reject(error);
+/**
+TODO: Remove below function and just 'reject(signal.reason)' when targeting Node 18.
+*/
+const getAbortedReason = signal => {
+	const reason = signal.reason === undefined
+		? getDOMException('This operation was aborted.')
+		: signal.reason;
+
+	return reason instanceof Error ? reason : getDOMException(reason);
+};
+
+export default function pTimeout(promise, options) {
+	const {
+		milliseconds,
+		fallback,
+		message,
+		customTimers = {setTimeout, clearTimeout},
+	} = options;
+
+	let timer;
+
+	const wrappedPromise = new Promise((resolve, reject) => {
+		if (typeof milliseconds !== 'number' || Math.sign(milliseconds) !== 1) {
+			throw new TypeError(`Expected \`milliseconds\` to be a positive number, got \`${milliseconds}\``);
+		}
+
+		if (options.signal) {
+			const {signal} = options;
+			if (signal.aborted) {
+				reject(getAbortedReason(signal));
 			}
 
+			signal.addEventListener('abort', () => {
+				reject(getAbortedReason(signal));
+			});
+		}
+
+		if (milliseconds === Number.POSITIVE_INFINITY) {
+			promise.then(resolve, reject);
 			return;
 		}
 
-		const message = typeof fallback === 'string' ? fallback : `Promise timed out after ${milliseconds} milliseconds`;
-		const timeoutError = fallback instanceof Error ? fallback : new TimeoutError(message);
+		// We create the error outside of `setTimeout` to preserve the stack trace.
+		const timeoutError = new TimeoutError();
 
-		if (typeof promise.cancel === 'function') {
-			promise.cancel();
-		}
+		timer = customTimers.setTimeout.call(undefined, () => {
+			if (fallback) {
+				try {
+					resolve(fallback());
+				} catch (error) {
+					reject(error);
+				}
 
-		reject(timeoutError);
-	}, milliseconds);
+				return;
+			}
 
-	// TODO: Use native `finally` keyword when targeting Node.js 10
-	pFinally(
-		// eslint-disable-next-line promise/prefer-await-to-then
-		promise.then(resolve, reject),
-		() => {
-			clearTimeout(timer);
-		}
-	);
-});
+			if (typeof promise.cancel === 'function') {
+				promise.cancel();
+			}
 
-module.exports = pTimeout;
-// TODO: Remove this for the next major release
-module.exports.default = pTimeout;
+			if (message === false) {
+				resolve();
+			} else if (message instanceof Error) {
+				reject(message);
+			} else {
+				timeoutError.message = message ?? `Promise timed out after ${milliseconds} milliseconds`;
+				reject(timeoutError);
+			}
+		}, milliseconds);
 
-module.exports.TimeoutError = TimeoutError;
+		(async () => {
+			try {
+				resolve(await promise);
+			} catch (error) {
+				reject(error);
+			}
+		})();
+	});
+
+	const cancelablePromise = wrappedPromise.finally(() => {
+		cancelablePromise.clear();
+	});
+
+	cancelablePromise.clear = () => {
+		customTimers.clearTimeout.call(undefined, timer);
+		timer = undefined;
+	};
+
+	return cancelablePromise;
+}

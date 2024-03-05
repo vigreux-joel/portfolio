@@ -1,34 +1,32 @@
-# p-timeout [![Build Status](https://travis-ci.org/sindresorhus/p-timeout.svg?branch=master)](https://travis-ci.org/sindresorhus/p-timeout)
+# p-timeout
 
 > Timeout a promise after a specified amount of time
 
-
 ## Install
 
+```sh
+npm install p-timeout
 ```
-$ npm install p-timeout
-```
-
 
 ## Usage
 
 ```js
-const delay = require('delay');
-const pTimeout = require('p-timeout');
+import {setTimeout} from 'node:timers/promises';
+import pTimeout from 'p-timeout';
 
-const delayedPromise = delay(200);
+const delayedPromise = setTimeout(200);
 
-pTimeout(delayedPromise, 50).then(() => 'foo');
+await pTimeout(delayedPromise, {
+	milliseconds: 50,
+});
 //=> [TimeoutError: Promise timed out after 50 milliseconds]
 ```
 
-
 ## API
 
-### pTimeout(input, milliseconds, message?)
-### pTimeout(input, milliseconds, fallback?)
+### pTimeout(input, options)
 
-Returns a decorated `input` that times out after `milliseconds` time.
+Returns a decorated `input` that times out after `milliseconds` time. It has a `.clear()` method that clears the timeout.
 
 If you pass in a cancelable promise, specifically a promise with a `.cancel()` method, that method will be called when the `pTimeout` promise times out.
 
@@ -38,7 +36,11 @@ Type: `Promise`
 
 Promise to decorate.
 
-#### milliseconds
+#### options
+
+Type: `object`
+
+##### milliseconds
 
 Type: `number`
 
@@ -46,16 +48,28 @@ Milliseconds before timing out.
 
 Passing `Infinity` will cause it to never time out.
 
-#### message
+##### message
 
-Type: `string` `Error`<br>
+Type: `string | Error | false`\
 Default: `'Promise timed out after 50 milliseconds'`
 
-Specify a custom error message or error.
+Specify a custom error message or error to throw when it times out:
 
-If you do a custom error, it's recommended to sub-class `pTimeout.TimeoutError`.
+- `message: 'too slow'` will throw `TimeoutError('too slow')`
+- `message: new MyCustomError('it’s over 9000')` will throw the same error instance
+- `message: false` will make the promise resolve with `undefined` instead of rejecting
 
-#### fallback
+If you do a custom error, it's recommended to sub-class `TimeoutError`:
+
+```js
+import {TimeoutError} from 'p-timeout';
+
+class MyCustomError extends TimeoutError {
+	name = "MyCustomError";
+}
+```
+
+##### fallback
 
 Type: `Function`
 
@@ -64,20 +78,77 @@ Do something other than rejecting with an error on timeout.
 You could for example retry:
 
 ```js
-const delay = require('delay');
-const pTimeout = require('p-timeout');
+import {setTimeout} from 'node:timers/promises';
+import pTimeout from 'p-timeout';
 
-const delayedPromise = () => delay(200);
+const delayedPromise = () => setTimeout(200);
 
-pTimeout(delayedPromise(), 50, () => {
-	return pTimeout(delayedPromise(), 300);
+await pTimeout(delayedPromise(), {
+	milliseconds: 50,
+	fallback: () => {
+		return pTimeout(delayedPromise(), {milliseconds: 300});
+	},
 });
 ```
 
-### pTimeout.TimeoutError
+##### customTimers
+
+Type: `object` with function properties `setTimeout` and `clearTimeout`
+
+Custom implementations for the `setTimeout` and `clearTimeout` functions.
+
+Useful for testing purposes, in particular to work around [`sinon.useFakeTimers()`](https://sinonjs.org/releases/latest/fake-timers/).
+
+Example:
+
+```js
+import {setTimeout} from 'node:timers/promises';
+import pTimeout from 'p-timeout';
+
+const originalSetTimeout = setTimeout;
+const originalClearTimeout = clearTimeout;
+
+sinon.useFakeTimers();
+
+// Use `pTimeout` without being affected by `sinon.useFakeTimers()`:
+await pTimeout(doSomething(), {
+	milliseconds: 2000,
+	customTimers: {
+		setTimeout: originalSetTimeout,
+		clearTimeout: originalClearTimeout
+	}
+});
+```
+
+#### signal
+
+Type: [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
+
+You can abort the promise using [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
+
+*Requires Node.js 16 or later.*
+
+```js
+import pTimeout from 'p-timeout';
+import delay from 'delay';
+
+const delayedPromise = delay(3000);
+
+const abortController = new AbortController();
+
+setTimeout(() => {
+	abortController.abort();
+}, 100);
+
+await pTimeout(delayedPromise, {
+	milliseconds: 2000,
+	signal: abortController.signal
+});
+```
+
+### TimeoutError
 
 Exposed for instance checking and sub-classing.
-
 
 ## Related
 
