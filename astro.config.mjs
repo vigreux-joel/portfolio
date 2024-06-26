@@ -1,10 +1,11 @@
-import { defineConfig } from 'astro/config';
+import {defineConfig} from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import critters from "astro-critters";
 import robotsTxt from 'astro-robots-txt';
 import compressor from "astro-compressor";
+
 export default defineConfig({
     site: "https://vigreux-joel.fr/",
     compressHTML: true,
@@ -20,7 +21,7 @@ export default defineConfig({
     ],
     vite: {
         ssr: {
-            noExternal: ["primereact", "@mui/material", "react-markdown"]
+            noExternal: [ "react-markdown"]
         }
     }
 });

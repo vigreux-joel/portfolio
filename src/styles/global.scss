@@ -1,0 +1,251 @@
+html {
+  overflow-x: clip;
+  @supports not (overflow-x: clip) {
+    overflow-x: hidden;
+  }
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface;
+
+  margin: 0;
+  overflow-x: clip;
+  @supports not (overflow-x: clip) {
+    overflow-x: hidden;
+  }
+
+  @apply text-on-surface;
+  @apply text-body-medium;
+}
+
+:root {
+  --green-600: #1da750;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0deg;
+  --tw-skew-x: 0deg;
+  --tw-skew-y: 0deg;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-backdrop-blur: blur(0);
+  --tw-backdrop-brightness: brightness(100%);
+  --tw-backdrop-contrast: contrast(100%);
+  --tw-backdrop-grayscale: grayscale(0%);
+  --tw-backdrop-hue-rotate: hue-rotate(0deg);
+  --tw-backdrop-invert: invert(0%);
+  --tw-backdrop-opacity: opacity(100%);
+  --tw-backdrop-saturate: saturate(100%);
+  --tw-backdrop-sepia: sepia(0%);
+
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+
+}
+
+@layer utilities {
+
+  .padding {
+    @apply px-6;
+    @apply md:px-12;
+  }
+
+
+  .section {
+    @apply py-12;
+    @apply md:py-16;
+    @extend .padding;
+
+    @apply max-w-screen-xl;
+    @apply mx-auto;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[class^="title-"],
+[class*=" title-"],
+.sub-title {
+  strong, &.sub-title {
+    &.sub-title:before {
+      @apply to-primary
+    }
+
+    @apply bg-clip-text text-transparent ;
+    @apply bg-gradient-to-r from-primary to-tertiary;
+    --tw-gradient-from-position: ;
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+  }
+}
+
+h1,
+.title-1 {
+  @apply text-display-small xl:text-display-medium;
+  strong {
+    font-weight: inherit;
+  }
+}
+
+h2,
+.title-2 {
+  @apply text-headline-medium;
+}
+
+h3,
+.title-3 {
+  @apply text-headline-small;
+}
+
+h4,
+.title-4 {
+  @apply text-title-large;
+}
+
+h5,
+.title-5 {
+  @apply text-title-medium;
+}
+
+h6,
+.title-6 {
+  @apply text-title-small;
+}
+
+
+.sub-title {
+  @apply font-semibold text-tertiary pl-7 relative uppercase text-base mb-2;
+
+  & + :first-of-type {
+    margin-top: 0;
+  }
+
+  &.text-center,
+  .center {
+    @apply mt-0;
+    @apply pl-0;
+
+    &:before {
+      @apply content-none;
+    }
+  }
+
+  &:before {
+    content: "";
+    transform: translateY(-50%);
+    height: 3px;
+    @apply absolute bg-primary w-5 left-0 top-1/2 rounded-full;
+  }
+}
+
+.square-area {
+  @apply flex;
+  @apply rounded-xl;
+  @apply p-3 md:p-4;
+  box-shadow: 0 4px 10px #00000008, 0 0 2px #0000000f, 0 2px 6px #0000001f !important;
+  @apply bg-surface-container-lowest;
+}
+
+section {
+  position: relative;
+}
+
+
+main section:first-of-type.section, main section:first-of-type .section, .first-section {
+  @apply pt-20 md:pt-28 xl:pt-32;
+}
+
+.buttons {
+  container-type: inline-size;
+  @apply flex flex-wrap gap-4 mt-6;
+
+  a,
+  button {
+    @apply w-full;
+  }
+
+  @container (min-width: 400px) {
+    a,
+    button {
+      width: auto;
+    }
+  }
+}
+
+.twine {
+  content: "";
+  position: absolute;
+  border-radius: 0;
+}
+
+.sticky-scroll {
+  position: sticky !important;
+  top: 20%;
+}
+
+//.tw-custom-passCompWithIcon {
+//  @apply w-[100%];
+//}
+//.tw-custom-passCompWithIcon input {
+//  @apply text-xs pl-8 h-12 w-[100%] #{!important};
+//}
+//.tw-custom-passCompWithoutIcon {
+//  @apply w-[100%];
+//}
+//.tw-custom-passCompWithoutIcon input{
+//  @apply text-xs h-12 w-[100%] #{!important};
+//}
+
+
+//hr {
+//  display: block;
+//  height: 1px;
+//  border: 0;
+//  border-top: 1px solid black;
+//}
+
+.svg-inline--fa {
+  @apply inline-block overflow-visible
+}
+
+.prose-markdown {
+  @apply prose;
+  @apply max-w-none;
+  @apply prose-headings:text-on-surface;
+  @apply prose-h1:lg:text-display-small prose-h1:text-headline-medium;
+  @apply prose-h2:lg:text-headline-medium prose-h2:text-headline-small;
+  @apply prose-h3:lg:text-headline-small prose-h3:text-headline-small;
+  @apply prose-h4:lg:text-title-large prose-h4:text-title-large;
+  @apply prose-a:text-primary    prose-a:text-body-medium;
+  @apply prose-li:text-on-surface-variant    prose-li:text-body-medium;
+  @apply prose-td:text-on-surface-variant    prose-td:text-body-medium;
+  @apply prose-blockquote:text-on-surface-variant    prose-blockquote:text-body-large;
+  strong {
+    @apply text-[inherit];
+  }
+
+  p {
+    @apply text-on-surface-variant text-body-medium;
+  }
+
+  a {
+    &.button {
+      @apply no-underline;
+    }
+
+    &:not(.button) {
+      @apply text-primary    text-body-medium;
+    }
+  }
+}

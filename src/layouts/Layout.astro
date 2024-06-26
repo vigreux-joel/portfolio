@@ -1,0 +1,152 @@
+---
+import Footer from "./Footer.astro";
+import "../styles/base.scss";
+import Header from "@layouts/Header.astro";
+import {ViewTransitions} from "astro:transitions";
+import {SEO} from "astro-seo";
+import {getImage} from "astro:assets";
+export type TwitterCardType = "summary" | "summary_large_image" | "app" | "player";
+
+export interface Link extends HTMLLinkElement {
+    prefetch: boolean;
+    crossorigin: string;
+}
+
+export interface Meta extends HTMLMetaElement {
+    property: string;
+}
+export interface SEOProps {
+    title?: string;
+    titleTemplate?: string;
+    titleDefault?: string;
+    charset?: string;
+    description?: string;
+    canonical?: URL | string;
+    nofollow?: boolean;
+    noindex?: boolean;
+    languageAlternates?: {
+        href: URL | string;
+        hrefLang: string;
+    }[];
+    openGraph?: {
+        basic: {
+            title: string;
+            type: string;
+            image: string;
+            url?: URL | string;
+        };
+        optional?: {
+            audio?: string;
+            description?: string;
+            determiner?: string;
+            locale?: string;
+            localeAlternate?: string[];
+            siteName?: string;
+            video?: string;
+        };
+        image?: {
+            url?: URL | string;
+            secureUrl?: URL | string;
+            type?: string;
+            width?: number;
+            height?: number;
+            alt?: string;
+        };
+        article?: {
+            publishedTime?: string;
+            modifiedTime?: string;
+            expirationTime?: string;
+            authors?: string[];
+            section?: string;
+            tags?: string[];
+        };
+    };
+    twitter?: {
+        card?: TwitterCardType;
+        site?: string;
+        creator?: string;
+        title?: string;
+        description?: string;
+        image?: URL | string;
+        imageAlt?: string;
+    };
+    extend?: {
+        link?: Partial<Link>[];
+        meta?: Partial<Meta>[];
+    };
+    surpressWarnings?: boolean;
+}
+
+interface Props {
+    seo: SEOProps;
+    hiddenFooter: boolean;
+    hiddenMenu: boolean;
+}
+
+const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
+
+// const currentPath = Astro.url.pathname.replace("/fr", "");
+// const domain = Astro.url.origin;
+
+
+// const titleDefault = `NetSimpler - Le web intuitif ! Meilleur outil tout-en-un de ${new Date().getFullYear()}`;
+// const seoDefault: SEOProps = {
+//     titleDefault: titleDefault,
+//     languageAlternates: [
+//         {
+//             href: domain + "/fr" + currentPath,
+//             hrefLang: "fr"
+//         }
+//     ],
+//
+//     ...seo,
+//     canonical: domain + "/fr" + currentPath,
+//     openGraph: {
+//         ...seo?.openGraph,
+//         basic: {
+//             title: seo?.openGraph?.basic.title ?? seo?.title ?? titleDefault,
+//             type: "website",
+//             // image: domain + imageDefault.src,
+//             url: domain + "/fr" + currentPath,
+//             ...seo?.openGraph?.basic
+//         },
+//         optional: {
+//             description: seo?.openGraph?.optional?.description ?? seo?.description,
+//             ...seo?.openGraph?.optional
+//         }
+//     },
+//     twitter: {
+//         title: seo?.twitter?.title ?? seo?.title ?? titleDefault,
+//         // image: domain + imageDefault.src,
+//         description: seo?.twitter?.description ?? seo?.description,
+//         ...seo?.twitter
+//     }
+//
+// };
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+    <noscript>
+        <link rel="stylesheet" href="/styles/font.css"/>
+    </noscript>
+    <link
+            rel="stylesheet"
+            href="/styles/font.css"
+            media="all"
+            onload="this.media='all';"
+    />
+    <!--<SEO {...seoDefault} />-->
+</head>
+<body class="bg-surface">
+<!--<Header />-->
+<main>
+    <slot/>
+</main>
+<!--<Footer/>-->
+<!--<script src="../js/main.js"></script>-->
+</body>
+</html>

@@ -1,101 +1,99 @@
 /** @type {import("tailwindcss").Config} */
-const {
-    createMaterialTheme,
-    Variant,
-    ContrastCurve,
-    ToneDeltaPair,
-    MaterialDynamicColors
-} = require("@udixio/tailwind-material");
-const materialTailwind = createMaterialTheme({
-    colors: {
-        palette: {
-            primary: "#0A65EC",
-            tertiary: "#6752F2",
-            neutral: "#00bbff"
-        },
-        dynamic: {
-            surface: {
-                tone: (s) => (s.isDark ? 6 : 100)
-            },
-            primary: {
-                tone: (s) => s.sourceColorHct.tone,
-                contrastCurve: new ContrastCurve(1, 1, 3, 7),
-                toneDeltaPair: undefined
+import {createTheme} from '@udixio/tailwind-material'
 
-            }
-        }
+const {colors, fontFamily, plugins} = createTheme({
+    colorPalette: {
+        primary: '#4CA66B',
     },
+
     fontFamily: {
-        expressive: ["Montserrat", "sans-serif"],
-        neutral: ["Roboto", "sans-serif"]
+        expressive: ['Montserrat', 'sans-serif'],
+        neutral: ['Roboto', 'sans-serif'],
+    },
+    responsiveBreakPoints: {
+        sm: 1.1,
     },
     fontStyles: {
-        displayLarge: {
-            fontWeight: 700
+        display: {
+            large: {
+                fontWeight: 700,
+            },
+            medium: {
+                fontWeight: 700,
+            },
+            small: {
+                fontWeight: 700,
+            },
         },
-        displayMedium: {
-            fontWeight: 700
+        headline: {
+            large: {
+                fontWeight: 600,
+            },
+            medium: {
+                fontWeight: 600,
+            },
+            small: {
+                fontWeight: 600,
+            },
         },
-        displaySmall: {
-            fontWeight: 700
+        title: {
+            large: {
+                fontWeight: 500,
+            },
+            medium: {
+                fontWeight: 500,
+            },
+            small: {
+                fontWeight: 500,
+            },
         },
-        headlineLarge: {
-            fontWeight: 600
+        body: {
+            // large: {
+            //     fontSize: 1.125,
+            // },
+            // medium: {
+            //     fontSize: 1,
+            //     lineHeight: 1.5,
+            // },
+            // small: {
+            //     fontSize: 0.875,
+            //     lineHeight: 1.125,
+            // },
         },
-        headlineMedium: {
-            fontWeight: 600
-        },
-        headlineSmall: {
-            fontWeight: 600
-        },
-        titleLarge: {
-            fontWeight: 500
-        },
-        titleMedium: {
-            fontWeight: 500
-        },
-        titleSmall: {
-            fontWeight: 500
-        }
-
     },
-    darkMode: "class",
-    variant: Variant.VIBRANT,
-    name: "NetSimpler",
-    themePath: "./theme.json"
+    darkMode: 'class',
+    name: 'NetSimpler',
+    themePath: './theme.json',
     // contrastLevel: -0.59
-});
+})
 
 module.exports = {
-    content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
-        "./node_modules/@udixio/ui/**/*.js"],
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}', './node_modules/@udixio/ui/**/*.js'],
     safelist: [
-        "bg-on-tertiary-fixed-variant",
-        "bg-on-primary-fixed-variant"
-    ],
-    darkMode: "class",
-    theme: {
-        colors: {
-
-            ...materialTailwind.colors
-
+        {
+            pattern: /text-(display|headline|title|label|body)-(large|medium|small)/,
         },
-        fontFamily: materialTailwind.fontFamily,
+    ],
+    darkMode: 'class',
+    theme: {
+        colors: colors,
+        fontFamily: fontFamily,
         extend: {
             boxShadow: {
-                DEFAULT: "0 4px 10px #00000008, 0 0 2px #0000000f, 0 2px 6px #0000001f"
+                DEFAULT: '0 4px 10px #00000008, 0 0 2px #0000000f, 0 2px 6px #0000001f',
+                '1': '0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30)',
+                '2': '0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30)',
+                '3': '0px 1px 3px 0px rgba(0, 0, 0, 0.30), 0px 4px 8px 3px rgba(0, 0, 0, 0.15)',
+                '4': '0px 2px 3px 0px rgba(0, 0, 0, 0.30), 0px 6px 10px 4px rgba(0, 0, 0, 0.15)',
+                '5': '0px 4px 4px 0px rgba(0, 0, 0, 0.30), 0px 8px 12px 6px rgba(0, 0, 0, 0.15)',
             },
             flex: {
-                "2": "2 2 0%"
+                2: '2 2 0%',
             },
             maxWidth: {
-                "prose": "700px",
-                "screen-xl": "1440px"
-            }
-
-
-        }
+                prose: '700px',
+            },
+        },
     },
-    plugins: [...materialTailwind.plugins, require("@tailwindcss/typography")
-    ]
-};
+    plugins: [...plugins, require('@tailwindcss/typography'), require('@tailwindcss/container-queries')],
+}

@@ -14,13 +14,31 @@
     "@astrojs/react": "^3.0.10",
     "@astrojs/sitemap": "^3.1.1",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/ts-plugin": "^1.8.0",
     "@astrojs/vercel": "^7.3.4",
-    "@udixio/tailwind-material": "^1.0.0-beta.14",
+    "@dotlottie/react-player": "^1.6.19",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/pro-duotone-svg-icons": "^6.4.2",
+    "@fortawesome/pro-light-svg-icons": "^6.4.2",
+    "@fortawesome/pro-regular-svg-icons": "^6.5.2",
+    "@fortawesome/pro-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@udixio/tailwind-material": "^1.0.0-beta.18",
+    "@udixio/ui": "^1.0.0-beta.54",
     "astro": "^4.4.11",
     "astro-compressor": "^0.4.1",
     "astro-critters": "^2.1.2",
     "astro-robots-txt": "^1.0.0",
+    "astro-seo": "^0.8.3",
+    "classnames": "^2.5.1",
+    "gsap": "^3.12.5",
+    "simplex-noise": "^4.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.12",
+    "sass": "^1.72.0"
   }
 }
