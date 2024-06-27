@@ -11,7 +11,15 @@ import {Image} from "astro:assets";
 import {DotLottiePlayer} from '@dotlottie/react-player';
 import '@dotlottie/react-player/dist/index.css';
 import astroLogo from "@assets/images/astro-logo.svg?raw"
-import reactLogo from "@assets/images/astro-logo.svg?raw"
+import reactLogo from "@assets/images/react-logo.svg?raw"
+import tsLogo from "@assets/images/react-logo.svg?raw"
+
+import flutterLogo from "@assets/images/flutter-logo.svg?raw"
+import angularLogo from "@assets/images/angular-logo.svg?raw"
+import sassLogo from "@assets/images/sass-logo.svg?raw"
+import flutterLogo from "@assets/images/flutter-logo.svg?raw"
+import tailwindLogo from "@assets/images/tailwind-logo.svg?raw"
+import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
 import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
@@ -70,64 +78,59 @@ import {Techno} from "@components/Techno"
 
         <h2 class="text-title-medium mt-16 mb-4 text-on-surface-variant">À propos de moi</h2>
         <p class="text-body-large max-w-prose !text-xl">
-            Bonjour, je suis Joël Vigreux - Un développeur passionné du ch'nord. Avec trois ans d'expérience intensive
+            Bonjour, je suis Joël Vigreux - Un développeur passionné, du ch'nord. Avec trois ans d'expérience intensive
             dans le domaine du développement web, j'ai acquis une large connaissance des technologies front-end et
             back-end, me permettant de prendre en charge des projets de tous types et de toutes tailles.
         </p>
         <div class="mt-16">
-            <p class="text-title-medium mb-4">Mes compétences Front-End</p>
-            <div class="grid grid-cols-1 -mx-2 md:grid-cols-3 gap-4">
-                <Techno displayMore name="Astro"
-                        description="Depuis que j'ai découvert ce précieux outil, il m'est devenu essentiel pour optimiser efficacement tout en conservant une indépendance vis-à-vis des technologies employées.">
+            <p class="text-title-medium  text-on-surface-variant">Des solutions innovantes pour vos projets</p>
+            <p>Je crée des interfaces utilisateur attrayantes et efficaces pour offrir à vos utilisateurs une expérience
+                fluide et interactive, répondant parfaitement à vos besoins.</p>
+            <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-3 gap-4">
+                <Card>
+                    <Techno image={astroLogo} client:load displayMore name="Astro"
+                            description="Framework JavaScript pour sites web rapides et orientés contenu."
+                            experience="Depuis que j'ai découvert ce précieux outil, il m'est devenu essentiel pour optimiser efficacement tout en conservant une indépendance vis-à-vis des technologies employées.">
+                    </Techno>
+                </Card>
+                <Card>
+                    <Techno image={reactLogo} displayMore name="React"
+                            description="Framework JavaScript pour interfaces web dynamiques et interactives."
+                            experience="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
+                    </Techno>
+                </Card>
+                <Card>
+                    <Techno image={tailwindLogo} displayMore name="Tailwind"
+                            description="Framework CSS pour des designs web personnalisés et efficaces."
+                            experience="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
+                    </Techno>
+                </Card>
+                <Card className="col-span-2 p-4">
+                    <p class="mb-6 mt-2">Mon arsenal technologique diversifié</p>
+                    <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
+                        <Techno image={angularLogo} name="Angular"
+                                description="Framework robuste pour développer des applications web complexes et évolutives.">
+                        </Techno>
+                        <Techno image={sassLogo} name="Sass"
+                                description="Préprocesseur CSS avancé qui facilite l'écriture de styles réutilisables et maintenables.">
+                        </Techno>
+                        <Techno image={tsLogo} name="Typescript"
+                                description="Enrichit JavaScript avec un système de typage statique pour un code robuste et de qualité.">
+                        </Techno>
 
-                    <Fragment set:html={astroLogo}/>
-
-                </Techno>
-                <Techno displayMore name="React"
-                        description="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
-
-                    <Fragment set:html={astroLogo}/>
-
-                </Techno>
-                <Techno displayMore name="Tailwind"
-                        description="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
-
-                    <Fragment set:html={astroLogo}/>
-
-                </Techno>
-                <Techno name="Angular"
-                        description="Framework JavaScript moderne et performant.">
-
-                    <Fragment set:html={astroLogo}/>
-
-                </Techno>
-                <Techno name="Sass"
-                        description="Framework JavaScript moderne et performant.">
-
-                    <Fragment set:html={astroLogo}/>
-
-                </Techno>
-
-                <Techno name="HTML"
-                        description="Framework JavaScript moderne et performant.">
-                    <div className={'w-5 h-5'}>
-                        <Fragment set:html={astroLogo}/>
+                        <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
+                                description=" fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
+                        </Techno>
                     </div>
 
-                </Techno>
-                <Techno name="Javascript"
-                        description="Framework JavaScript moderne et performant.">
-                    <div className={'w-5 h-5'}>
-                        <Fragment set:html={astroLogo}/>
-                    </div>
-                </Techno>
-
-                <Techno name="CSS"
-                        description="Framework JavaScript moderne et performant.">
-                    <div className={'w-5 h-5'}>
-                        <Fragment set:html={astroLogo}/>
-                    </div>
-                </Techno>
+                </Card>
+                <Card>
+                    <Techno image={flutterLogo} displayMore name="Flutter"
+                            description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
+                            experience="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
+                        >
+                    </Techno>
+                </Card>
             </div>
 
 

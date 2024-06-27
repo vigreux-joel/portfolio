@@ -68,7 +68,7 @@ const {colors, fontFamily, plugins} = createTheme({
 })
 
 module.exports = {
-    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}', './node_modules/@udixio/ui/**/*.js'],
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue,svg}', './node_modules/@udixio/ui/**/*.js'],
     safelist: [
         {
             pattern: /text-(display|headline|title|label|body)-(large|medium|small)/,
@@ -93,6 +93,16 @@ module.exports = {
             maxWidth: {
                 prose: '700px',
             },
+            animation: {
+                "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
+            },
+            keyframes: {
+                "border-beam": {
+                    "100%": {
+                        "offset-distance": "100%",
+                    },
+                },
+            }
         },
     },
     plugins: [...plugins, require('@tailwindcss/typography'), require('@tailwindcss/container-queries')],
