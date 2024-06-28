@@ -65,8 +65,8 @@ import {Techno} from "@components/Techno"
             <!--        class="text-label-large text-on-surface-variant">Collaborant avec l'agence Udixio</p>-->
             <!--</div>-->
             <a href="#contact">
-                <div class="px-4 group w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-secondary-container bg-secondary-container rounded-lg">
-                    <div class="group-state-on-secondary-container absolute w-full h-full left-0 top-0">
+                <div class="px-4 group w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
+                    <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">
 
                     </div>
                     <Icon className="h-[18px] text-on-secondary-container" icon={faMessageMiddle}></Icon>
@@ -83,9 +83,7 @@ import {Techno} from "@components/Techno"
             back-end, me permettant de prendre en charge des projets de tous types et de toutes tailles.
         </p>
         <div class="mt-16">
-            <p class="text-title-medium  text-on-surface-variant">Des solutions innovantes pour vos projets</p>
-            <p>Je crée des interfaces utilisateur attrayantes et efficaces pour offrir à vos utilisateurs une expérience
-                fluide et interactive, répondant parfaitement à vos besoins.</p>
+            <p class="text-title-medium  text-on-surface-variant">Mes spécialités en création d'interface</p>
             <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-3 gap-4">
                 <Card>
                     <Techno image={astroLogo} client:load displayMore name="Astro"
@@ -94,19 +92,19 @@ import {Techno} from "@components/Techno"
                     </Techno>
                 </Card>
                 <Card>
-                    <Techno image={reactLogo} displayMore name="React"
+                    <Techno client:load image={reactLogo} displayMore name="React"
                             description="Framework JavaScript pour interfaces web dynamiques et interactives."
                             experience="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
                     </Techno>
                 </Card>
                 <Card>
-                    <Techno image={tailwindLogo} displayMore name="Tailwind"
+                    <Techno client:load image={tailwindLogo} displayMore name="Tailwind"
                             description="Framework CSS pour des designs web personnalisés et efficaces."
                             experience="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
                     </Techno>
                 </Card>
                 <Card className="col-span-2 p-4">
-                    <p class="mb-6 mt-2">Mon arsenal technologique diversifié</p>
+                    <p class="mb-6 mt-2">Quelques diversité</p>
                     <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
                         <Techno image={angularLogo} name="Angular"
                                 description="Framework robuste pour développer des applications web complexes et évolutives.">
@@ -125,7 +123,7 @@ import {Techno} from "@components/Techno"
 
                 </Card>
                 <Card>
-                    <Techno image={flutterLogo} displayMore name="Flutter"
+                    <Techno client:load image={flutterLogo} displayMore name="Flutter"
                             description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
                             experience="Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser toutes vos idées avec efficacité et précision.">
                         >
