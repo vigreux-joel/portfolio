@@ -25,6 +25,7 @@ import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
 import {faMessageMiddle} from "@fortawesome/pro-light-svg-icons";
 import {Techno} from "@components/Techno"
+import TextRevealByWord from "../components/TextReveal";
 ---
 <Layout>
     <section class="section ">
@@ -84,7 +85,7 @@ import {Techno} from "@components/Techno"
         </p>
         <div class="mt-16">
             <p class="text-title-medium  text-on-surface-variant">Mes spécialités en création d'interface</p>
-            <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <Card>
                     <Techno image={astroLogo} client:load displayMore name="Astro"
                             description="Framework JavaScript pour sites web rapides et orientés contenu."
@@ -103,8 +104,15 @@ import {Techno} from "@components/Techno"
                             experience="Grâce à Tailwind, j'ai pu organiser les styles de manière efficace tout en simplifiant la création de palettes de couleurs inspirées de Material Design.">
                     </Techno>
                 </Card>
-                <Card className="col-span-2 p-4">
-                    <p class="mb-6 mt-2">Quelques diversité</p>
+                <Card className="lg:order-1">
+                    <Techno client:load image={flutterLogo} displayMore name="Flutter"
+                            description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
+                            experience="En utilisant Flutter, j'apprécie particulièrement sa capacité à développer des applications multiplateformes avec un design Material par défaut, offrant ainsi une expérience utilisateur homogène et attrayante.">
+                        >
+                    </Techno>
+                </Card>
+                <Card className="md:col-span-2 p-4">
+                    <p class="mb-6 mt-2">Quelques diversités</p>
                     <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
                         <Techno image={angularLogo} name="Angular"
                                 description="Framework robuste pour développer des applications web complexes et évolutives.">
@@ -122,13 +130,7 @@ import {Techno} from "@components/Techno"
                     </div>
 
                 </Card>
-                <Card>
-                    <Techno client:load image={flutterLogo} displayMore name="Flutter"
-                            description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
-                            experience="En utilisant Flutter, j'apprécie particulièrement sa capacité à développer des applications multiplateformes avec un design Material par défaut, offrant ainsi une expérience utilisateur homogène et attrayante.">
-                        >
-                    </Techno>
-                </Card>
+
             </div>
 
 
@@ -136,9 +138,10 @@ import {Techno} from "@components/Techno"
     </section>
 
     <section class="section">
-        <h2>Comment puis-je vous aider ?</h2>
-        <p>Je suis spécialisé dans la création de sites web intuitifs et performants, avec pour objectif d'optimiser
-            l'expérience utilisateur de vos clients.</p>
+        <TextRevealByWord client:load
+                          text="Un petit secret ? Il est courant que seul 20% de l'ensemble d'un site soit visible."/>
+
+
         <!--<div class="flex flex-col md:flex-row gap-4">-->
         <!--    <Card className="p-4 pt-8 flex-1">-->
         <!--        <svg class="fill-on-surface" width="20" height="24" viewBox="0 0 20 24" fill="none"-->
@@ -164,6 +167,58 @@ import {Techno} from "@components/Techno"
         <!--    </Card>-->
         <!--</div>-->
     </section>
+    <div class="dark bg-surface text-on-surface">
+        <section class="section">
+            <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Card>
+                    <Techno image={astroLogo} client:load displayMore name="Nestjs"
+                            description="Framework JavaScript pour sites web rapides et orientés contenu."
+                            experience="Cet outil m'est devenu indispensable pour optimiser vos projets avec efficacité tout en restant indépendant des technologies utilisées.">
+                    </Techno>
+                </Card>
+                <Card>
+                    <Techno client:load image={reactLogo} displayMore name="Express"
+                            description="Framework JavaScript pour interfaces web dynamiques et interactives."
+                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
+                    </Techno>
+                </Card>
+                <Card>
+                    <Techno client:load image={reactLogo} displayMore name="Nodejs"
+                            description="Framework JavaScript pour interfaces web dynamiques et interactives."
+                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
+                    </Techno>
+                </Card>
+                <Card className="lg:order-1">
+                    <Techno client:load image={flutterLogo} displayMore name="Synfony"
+                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision."
+                            description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
+                    >
+                    </Techno>
+                </Card>
+                <Card className="md:col-span-2 p-4">
+                    <p class="mb-6 mt-2">Languages</p>
+                    <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
+                        <Techno image={angularLogo} name="Java"
+                                description="Framework robuste pour développer des applications web complexes et évolutives.">
+                        </Techno>
+                        <Techno image={sassLogo} name="Go"
+                                description="Préprocesseur CSS avancé qui facilite l'écriture de styles réutilisables et maintenables.">
+                        </Techno>
+                        <Techno image={tsLogo} name="Typescript"
+                                description="Enrichit JavaScript avec un système de typage statique pour un code robuste et de qualité.">
+                        </Techno>
+
+                        <Techno image={baseLogo} name="PHP"
+                                description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
+                        </Techno>
+                    </div>
+
+                </Card>
+
+            </div>
+        </section>
+    </div>
+
     <!--<section class="container" id="services">-->
     <!--	<h2 class="title">Services</h2>-->
     <!--	<h3>Des services qui ouvrent la voie à un site web unique</h3>-->

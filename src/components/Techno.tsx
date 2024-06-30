@@ -6,13 +6,15 @@ import {TextGenerateEffect} from "@components/TextGenerateEffect.tsx";
 import {AnimatePresence, motion} from "framer-motion";
 // import WordFadeIn from "@components/WordFadeIn.tsx";
 
-export const Techno = ({image, experience, name, description, className}: {
+export type TechnoProps = {
     name: string
     description: string
     experience?: string
     image: any
     className?: string
-}) => {
+}
+
+export const Techno = ({image, experience, name, description, className}: TechnoProps) => {
 
     const technoRef = useRef(null);
     const [displayMore, setDisplayMore] = useState(false)
@@ -25,7 +27,7 @@ export const Techno = ({image, experience, name, description, className}: {
         <div
             onClick={!displayMore ? handleClick : undefined}
             ref={technoRef}
-            className={classNames("flex min-h-full gap-2 group rounded-xl", className, {
+            className={classNames("flex gap-2 group rounded-xl", className, {
                 " ": !experience,
                 "flex-col p-6 ": experience,
                 "cursor-pointer": experience && !displayMore
