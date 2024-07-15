@@ -1,22 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-
+import {Button, Diviser} from "@udixio/ui"
 import home1 from "@assets/images/home-1.png";
 import home1Left from "@assets/images/home-1-left.png";
 import home1Middle from "@assets/images/home-1-middle.png";
 import home1Right from "@assets/images/home-1-right.png";
 import home1Stars from "@assets/images/home-1-stars.svg";
 import {Image} from "astro:assets";
+import {StickyScroll} from "@components/sticky-scroll-reveal";
 import {DotLottiePlayer} from '@dotlottie/react-player';
 import '@dotlottie/react-player/dist/index.css';
 import astroLogo from "@assets/images/astro-logo.svg?raw"
 import reactLogo from "@assets/images/react-logo.svg?raw"
 import tsLogo from "@assets/images/react-logo.svg?raw"
-
+import {Link} from "@components/Link"
 import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import angularLogo from "@assets/images/angular-logo.svg?raw"
 import sassLogo from "@assets/images/sass-logo.svg?raw"
+import layoutResponsive from "@assets/images/Responsive-pana.svg"
 import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import tailwindLogo from "@assets/images/tailwind-logo.svg?raw"
 import baseLogo from "@assets/images/base-logo.svg?raw"
@@ -26,33 +28,11 @@ import {Card} from "@udixio/ui"
 import {faMessageMiddle} from "@fortawesome/pro-light-svg-icons";
 import {Techno} from "@components/Techno"
 import TextRevealByWord from "../components/TextReveal";
+import {faBrowser} from "@fortawesome/pro-regular-svg-icons";
+import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 ---
 <Layout>
     <section class="section ">
-        <!--<Image  alt="Illustation"-->
-        <!--	   class="object-cover h-full absolute"-->
-        <!--	   src={home1} />-->
-        <!--<Image  alt="Illustation"-->
-        <!--		class="object-cover h-full absolute"-->
-        <!--		src={home1Stars} />-->
-        <!--<DotLottiePlayer client:load-->
-        <!--	src="/lotties/luka37l3.lottie"-->
-        <!--	autoplay-->
-        <!--	loop-->
-        <!--				 className="absolute h-full w-full"-->
-        <!--&gt;-->
-        <!--</DotLottiePlayer>-->
-        <!--<Image  alt="Illustation"-->
-        <!--		class="absolute bottom-0 left-0"-->
-        <!--		src={home1Left} />-->
-        <!--<Image  alt="Illustation"-->
-        <!--		class="absolute bottom-0 left-0 right-0 mx-auto"-->
-        <!--		src={home1Middle} />-->
-        <!--<Image  alt="Illustation"-->
-        <!--		class="absolute bottom-0 right-0"-->
-        <!--		src={home1Right} />-->
-
-
         <Image class="rounded-xl" src={portrait} height={64} width={64} alt="Joël"></Image>
         <h1 class="text-headline-large my-6">
             Joël VIGREUX
@@ -62,11 +42,11 @@ import TextRevealByWord from "../components/TextReveal";
                     class="text-label-large text-on-surface-variant">Développeur
                 full-stack</p>
             </div>
-            <!--<div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p-->
-            <!--        class="text-label-large text-on-surface-variant">Collaborant avec l'agence Udixio</p>-->
-            <!--</div>-->
-            <a href="#contact">
-                <div class="px-4 group w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
+            <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
+                    class="text-label-large text-on-surface-variant">3 années d'experiences</p>
+            </div>
+            <a href="#contact" class="group">
+                <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
                     <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">
 
                     </div>
@@ -77,513 +57,254 @@ import TextRevealByWord from "../components/TextReveal";
             </a>
         </div>
 
-        <h2 class="text-title-medium mt-16 mb-4 text-on-surface-variant">À propos de moi</h2>
-        <p class="text-body-large max-w-prose !text-xl">
-            Bonjour, je suis Joël Vigreux - Un développeur passionné, du ch'nord. Avec trois ans d'expérience intensive
-            dans le domaine du développement web, j'ai acquis une large connaissance des technologies front-end et
-            back-end, me permettant de prendre en charge des projets de tous types et de toutes tailles.
+        <h2 class="text-title-medium mt-16 mb-4 text-tertiary ">À propos de moi</h2>
+        <p class="text-body-large max-w-3xl ">
+            Bonjour, je suis Joël Vigreux - un développeur passionné.<br/> Ayant découvert un vif intérêt pour le
+            <Link client:load href="#back-end">back-end</Link>
+            en
+            débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
+            <Link href="#front-end">front-end</Link>
+            et de <span class="text-nowrap">l'
+            <Link client:load
+                  href="#experience-utilisateur">expérience&nbsp;utilisateur</Link></span>
+            tout en intégrant des pratiques
+            <Link client:load
+                  href="#ecoresponsabilite">écoresponsables
+            </Link>
+            de manière pragmatique.
         </p>
-        <div class="mt-16">
-            <p class="text-title-medium  text-on-surface-variant">Mes spécialités en création d'interface</p>
-            <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Card>
-                    <Techno image={astroLogo} client:load displayMore name="Astro"
-                            description="Framework JavaScript pour sites web rapides et orientés contenu."
-                            experience="Cet outil m'est devenu indispensable pour optimiser vos projets avec efficacité tout en restant indépendant des technologies utilisées.">
+        <Button client:load className="mt-8" label="Me contacter"/>
+    </section>
+    <section id="front-end" class="section">
+        <p class="text-title-medium  text-center text-tertiary">Développement web - front-end</p>
+        <h2 class="text-center mt-2">Des technologies modernes et adaptables pour répondre à une diversité de projets et
+            de besoins</h2>
+        <div class="grid mt-16 grid-cols-1 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card variant="filled" className="group hover:!bg-surface-container-high">
+                <Techno variant="primary" className="p-6" image={astroLogo} client:load displayMore name="Astro"
+                        details="Framework JavaScript pour sites web rapides et orientés contenu."
+                        description="Cet outil m'est devenu indispensable pour optimiser vos projets avec efficacité tout en restant indépendant des technologies utilisées.">
+                </Techno>
+            </Card>
+            <Card variant="filled" className="group hover:!bg-surface-container-high">
+                <Techno variant="primary" className="p-6" client:load image={reactLogo} displayMore name="React"
+                        details="Framework JavaScript pour interfaces web dynamiques et interactives."
+                        description="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
+                </Techno>
+            </Card>
+            <Card variant="filled" className="group hover:!bg-surface-container-high">
+                <Techno variant="primary" className="p-6" client:load image={tailwindLogo} displayMore
+                        name="Tailwind"
+                        details="Framework CSS pour des designs web personnalisés et efficaces."
+                        description="Grâce à Tailwind, j'ai pu organiser les styles de manière efficace tout en simplifiant la création de palettes de couleurs inspirées de Material Design.">
+                </Techno>
+            </Card>
+            <Card variant="filled" className="lg:order-1 group hover:!bg-surface-container-high">
+                <h2>Lorem</h2>
+            </Card>
+            <Card variant="filled" className="md:col-span-2 p-4">
+                <p class="mb-6 mt-2">Quelques diversités</p>
+                <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
+                    <Techno image={angularLogo} name="Angular"
+                            description="Framework robuste pour développer des applications web complexes et évolutives.">
                     </Techno>
-                </Card>
-                <Card>
-                    <Techno client:load image={reactLogo} displayMore name="React"
-                            description="Framework JavaScript pour interfaces web dynamiques et interactives."
-                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
+                    <Techno image={sassLogo} name="Sass"
+                            description="Préprocesseur CSS avancé qui facilite l'écriture de styles réutilisables et maintenables.">
                     </Techno>
-                </Card>
-                <Card>
-                    <Techno client:load image={tailwindLogo} displayMore name="Tailwind"
-                            description="Framework CSS pour des designs web personnalisés et efficaces."
-                            experience="Grâce à Tailwind, j'ai pu organiser les styles de manière efficace tout en simplifiant la création de palettes de couleurs inspirées de Material Design.">
+                    <Techno image={tsLogo} name="Typescript"
+                            description="Enrichit JavaScript avec un système de typage statique pour un code robuste et de qualité.">
                     </Techno>
-                </Card>
-                <Card className="lg:order-1">
-                    <Techno client:load image={flutterLogo} displayMore name="Flutter"
-                            description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
-                            experience="En utilisant Flutter, j'apprécie particulièrement sa capacité à développer des applications multiplateformes avec un design Material par défaut, offrant ainsi une expérience utilisateur homogène et attrayante.">
-                        >
-                    </Techno>
-                </Card>
-                <Card className="md:col-span-2 p-4">
-                    <p class="mb-6 mt-2">Quelques diversités</p>
-                    <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
-                        <Techno image={angularLogo} name="Angular"
-                                description="Framework robuste pour développer des applications web complexes et évolutives.">
-                        </Techno>
-                        <Techno image={sassLogo} name="Sass"
-                                description="Préprocesseur CSS avancé qui facilite l'écriture de styles réutilisables et maintenables.">
-                        </Techno>
-                        <Techno image={tsLogo} name="Typescript"
-                                description="Enrichit JavaScript avec un système de typage statique pour un code robuste et de qualité.">
-                        </Techno>
 
-                        <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
-                                description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
-                        </Techno>
+                    <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
+                            description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
+                    </Techno>
+                </div>
+            </Card>
+        </div>
+    </section>
+    <section>
+        <div class="section ">
+            <div class="flex items-center md:flex-row flex-col">
+                <div class="left">
+                    <p class="text-title-medium  text-tertiary">Développement multiplateforme</p>
+                    <h2 class="mt-2 !text-headline-large max-w-prose">Transformez vos idées en applications adaptées à
+                        tous les appareils</h2>
+                    <p class="max-w-prose mt-8 text-body-large">Flutter me permet de créer des applications pour
+                        mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie particulièrement
+                        son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
+                        travail.</p>
+
+                </div>
+                <div class="right">
+                    <Image class="rounded-xl" src={layoutResponsive} alt="Illustration d'écran responsive"></Image>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
+                <div class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
+                    <Icon className="h-16 w-16" icon={faBrowser}/>
+                    <p>Web</p>
+                </div>
+                <div class="sm:flex-2 w-full md:w-fit">
+                    <div class="flex gap-4 items-center">
+                        <Diviser className="hidden md:block border-primary-container"/>
+                        <p class="text-title-medium text-on-primary-container">Mobile</p>
+                        <Diviser className="hidden md:block border-primary-container"/>
+                    </div>
+                    <div class="flex gap-4 mt-4">
+                        <Diviser orientation="vertical" className="md:hidden border-primary-container"/>
+                        <div class="flex flex-1 flex-wrap gap-8">
+                            <div class="flex-1 platform bg-primary-container text-on-primary-container">
+                                <Icon className="h-16 w-16" icon={faApple}/>
+                                <p>IOS</p>
+                            </div>
+                            <div class="flex-1 platform bg-primary-container text-on-primary-container">
+                                <Icon className="h-16 w-16" icon={faAndroid}/>
+                                <p>Android</p>
+                            </div>
+                        </div>
                     </div>
 
+                </div>
+                <div class="flex-[3] w-full md:w-fit">
+                    <div class="flex gap-4 items-center">
+                        <Diviser className="hidden md:block border-secondary-container"/>
+                        <p class="text-title-medium text-on-secondary-container">Desktop</p>
+                        <Diviser className="hidden md:block border-secondary-container"/>
+                    </div>
+                    <div class="flex gap-4 mt-4">
+                        <Diviser orientation="vertical" className="md:hidden border-secondary-container"/>
+                        <div class="flex flex-1 flex-wrap gap-8">
+                            <div class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
+                                <Icon className="h-16 w-16" icon={faWindows}/>
+                                <p>Windows</p>
+                            </div>
+                            <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
+                                <p>MacOs</p>
+                            </div>
+                            <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                <Icon className="h-16 w-16" icon={faLinux}/>
+                                <p>Linux</p>
+                            </div>
+                        </>
+                    </div>
+                </div>
+                <style is:global>
+                    .platform {
+                        @apply py-4 px-8 rounded-lg flex flex-col items-center gap-4
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="section ">
+            <p class="text-title-medium  text-tertiary text-center">Experience Utilisateur (UX)</p>
+            <h2 class="mt-2 text-center max-w-prose">Besoin de rafraîchir le design de votre site internet ? Offrez-vous
+                une
+                expérience utilisateur exceptionnelle avec mes services.</h2>
+            <!--<div class="flex gap-8 mt-32">-->
+            <!--    <div>-->
+            <!--        <Diviser/>-->
+            <!--        <div class="pt-8 pr-8">-->
+            <!--            <h3 class="">Thèmes couleur personnalisés</h3>-->
+            <!--            <p class="mt-6 text-body-large">Personnalisez facilement vos applications avec des palettes de-->
+            <!--                couleurs cohérentes et dynamiques.</p>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--    <div>-->
+            <!--        <Diviser/>-->
+            <!--        <div class="pt-8 pr-8">-->
+            <!--            <h3 class="">Design réactif et moderne</h3>-->
+            <!--            <p class="mt-6 text-body-large">Offrez une expérience utilisateur fluide avec des composants-->
+            <!--                modernes et réactifs.</p>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--    <div>-->
+            <!--        <Diviser/>-->
+            <!--        <div class="pt-8 pr-8">-->
+            <!--            <h3 class="">Accessibilité améliorée</h3>-->
+            <!--            <p class="mt-6 text-body-large">Garantissez une utilisation optimale pour tous avec des-->
+            <!--                standards élevés d'accessibilité intégrés.</p>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--</div>-->
+            <StickyScroll className="mt-32" client:load/>
+        </div>
+    </section>
+    <!--<section class="section">-->
+    <!--    <TextRevealByWord client:load-->
+    <!--                      text="Un petit secret ? Il est courant que seul 20% de l'ensemble d'un site soit visible."/>-->
+    <!--</section>-->
+
+    <section id="back-end" class="section">
+        <p class="text-center text-title-medium text-tertiary">Back-end</p>
+        <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
+            Derrière chaque application réussie se trouve un robuste développement back-end.</h2>
+        <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, je mise sur des
+            solutions back-end robustes pour la performance de chacun de vos projets.</p>
+        <Card variant="filled" className="!rounded-3xl mt-12">
+            <DotLottiePlayer client:load
+                             src="/lotties/back-end.lottie"
+                             autoplay
+                             loop
+                             className="max-w-3xl mx-auto md:-mt-16"
+            >
+            </DotLottiePlayer>
+        </Card>
+    </section>
+    <section class="section">
+        <p class="text-center text-title-small text-tertiary">Languages & Framework</p>
+        <h2 class="text-center text-headline-small mt-2 max-w-prose mx-auto">La diversité des langages,<br/> une
+            clé pour déverrouiller chaque défi de programmation.</h2>
+        <div class="grid grid-cols-5 gap-4 mt-12">
+            <Card variant="filled" className="col-span-3 row-span-2 p-6">
+                <p class="text-title-medium">Typescript :</p>
+                <Techno buttonLabel="En voir plus" variant="primary" className="flex-1 mt-8 ml-4" image={astroLogo}
+                        client:load name="Nest.Js"
+                        description="Framework progressif pour la construction d'applications côté serveur en utilisant TypeScript."
+                        details="Mon choix préféré depuis plusieurs années pour créer des applications côté serveur. J'apprécie particulièrement son approche modulaire, sa documentation exhaustive, et sa rigueur. Il s'adapte à toutes les situations en assurant toujours la qualité du code."
+                >
+                    <Techno image={astroLogo} client:load displayMore name="Express.Js"
+                            description="Framework minimaliste pour Node.js, facilitant la création rapide d'applications web et API.">
+                    </Techno>
+                    <Techno className="mt-4" image={astroLogo} client:load displayMore name="Node.Js"
+                            description="Environnement d'exécution JavaScript côté serveur pour la création d'applications en réseau évolutives.">
+                    </Techno>
+                </Techno>
+            </Card>
+
+            <Card className="col-span-2 row-span-1" variant="filled">
+                <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore name="Python"
+                        description="Langage de programmation polyvalent adoré pour sa simplicité, utilisé en science des données, IA, développement web, et bien plus.">
+                </Techno>
+            </Card>
+            <Card variant="filled" className="col-span-2 row-span-2">
+                <Techno variant="primary" className="p-6 min-h-full" client:load image={flutterLogo} displayMore
+                        name="PHP"
+                        description="Un langage de script côté serveur populaire pour le développement web dynamique."
+                        details="Le premier langage que j'ai appris lors de mes études, juste après Java. Un souvenir nostalgique de ce qui a lancé ma passion pour le développement web."
+                >
+                    <Techno image={astroLogo} client:load displayMore name="Synfony"
+                            description="Ensemble de composants PHP réutilisables et un framework web full-stack pour les applications d'entreprise.">
+                    </Techno>
+                </Techno>
+            </Card>
+
+            <div class="col-span-3 flex gap-4">
+                <Card className="flex-1" variant="filled">
+                    <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore name="Java"
+                            description="Langage de programmation orienté objet, à usage général, populaire pour la construction d'applications d'entreprise sécurisées et durables.">
+                    </Techno>
                 </Card>
 
+                <Card className="flex-1" variant="filled">
+                    <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore name="Go"
+                            description="Langage de programmation compilé conçu pour l'efficacité, la performance, et la concurrence, souvent utilisé pour les systèmes de back-end.">
+                    </Techno>
+                </Card>
             </div>
-
-
         </div>
     </section>
 
-    <section class="section">
-        <TextRevealByWord client:load
-                          text="Un petit secret ? Il est courant que seul 20% de l'ensemble d'un site soit visible."/>
-
-
-        <!--<div class="flex flex-col md:flex-row gap-4">-->
-        <!--    <Card className="p-4 pt-8 flex-1">-->
-        <!--        <svg class="fill-on-surface" width="20" height="24" viewBox="0 0 20 24" fill="none"-->
-        <!--             xmlns="http://www.w3.org/2000/svg">-->
-        <!--            <path d="M6.18828 20.442C5.10406 19.4508 4.78752 17.3683 5.23925 15.8597C6.02251 16.8108 7.10779 17.1122 8.2319 17.2822C9.96732 17.5447 11.6716 17.4466 13.2837 16.6534C13.4682 16.5626 13.6386 16.4417 13.8401 16.3195C13.9914 16.7582 14.0307 17.2013 13.9779 17.6522C13.8494 18.7505 13.3029 19.5989 12.4337 20.2418C12.0861 20.4991 11.7182 20.729 11.3592 20.9717C10.2564 21.7169 9.95798 22.591 10.3724 23.8625C10.3823 23.8934 10.3911 23.9244 10.4133 24C9.85025 23.748 9.43891 23.381 9.12552 22.8986C8.79449 22.3894 8.637 21.8261 8.62872 21.2167C8.62457 20.9201 8.62457 20.6208 8.58468 20.3285C8.48729 19.6157 8.15266 19.2965 7.5222 19.278C6.87518 19.2593 6.36338 19.6591 6.22764 20.2891C6.2173 20.3374 6.20227 20.3851 6.18725 20.4413L6.18828 20.442Z"/>-->
-        <!--            <path d="M0 15.6082C0 15.6082 3.2106 14.0442 6.43018 14.0442L8.85763 6.53172C8.94852 6.16841 9.21386 5.9215 9.51343 5.9215C9.813 5.9215 10.0784 6.16841 10.1693 6.53172L12.5967 14.0442C16.4098 14.0442 19.027 15.6082 19.027 15.6082C19.027 15.6082 13.5734 0.75192 13.5627 0.722112C13.4062 0.282888 13.142 0 12.7858 0H6.24168C5.88545 0 5.63189 0.282888 5.4647 0.722112C5.45292 0.751368 0 15.6082 0 15.6082Z"/>-->
-        <!--        </svg>-->
-        <!--        <p class="text-title-large mt-2">Astro</p>-->
-        <!--        <p class="mt-4 text-outline">Depuis que j'ai découvert ce précieux outil, il m'est devenu essentiel pour-->
-        <!--            optimiser efficacement tout en conservant une indépendance vis-à-vis des technologies employées.</p>-->
-        <!--    </Card>-->
-        <!--    <Card className="p-4 pt-8 flex-1">-->
-        <!--        <Image src={astroLogo} alt="Logo de Astro"></Image>-->
-        <!--        <p class="text-title-large mt-2">React</p>-->
-        <!--        <p class="mt-4 text-outline">Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience-->
-        <!--            nécessaire pour concrétiser toutes vos idées avec efficacité et précision.</p>-->
-        <!--    </Card>-->
-        <!--    <Card className="p-4 pt-8 flex-1">-->
-        <!--        <Image src={astroLogo} alt="Logo de Astro"></Image>-->
-        <!--        <p class="text-title-large mt-2">Tailwind</p>-->
-        <!--        <p class="mt-4 text-outline">Développant ma propre bibliothèque d'interface, j'ai acquis l'expérience-->
-        <!--            nécessaire pour concrétiser toutes vos idées avec efficacité et précision.</p>-->
-        <!--    </Card>-->
-        <!--</div>-->
-    </section>
-    <div class="dark bg-surface text-on-surface">
-        <section class="section">
-            <div class="grid grid-cols-1 mt-4 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Card>
-                    <Techno image={astroLogo} client:load displayMore name="Nestjs"
-                            description="Framework JavaScript pour sites web rapides et orientés contenu."
-                            experience="Cet outil m'est devenu indispensable pour optimiser vos projets avec efficacité tout en restant indépendant des technologies utilisées.">
-                    </Techno>
-                </Card>
-                <Card>
-                    <Techno client:load image={reactLogo} displayMore name="Express"
-                            description="Framework JavaScript pour interfaces web dynamiques et interactives."
-                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
-                    </Techno>
-                </Card>
-                <Card>
-                    <Techno client:load image={reactLogo} displayMore name="Nodejs"
-                            description="Framework JavaScript pour interfaces web dynamiques et interactives."
-                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
-                    </Techno>
-                </Card>
-                <Card className="lg:order-1">
-                    <Techno client:load image={flutterLogo} displayMore name="Synfony"
-                            experience="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision."
-                            description="Framework multiplateforme pour créer des applications mobiles et web avec une seule base de code."
-                    >
-                    </Techno>
-                </Card>
-                <Card className="md:col-span-2 p-4">
-                    <p class="mb-6 mt-2">Languages</p>
-                    <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
-                        <Techno image={angularLogo} name="Java"
-                                description="Framework robuste pour développer des applications web complexes et évolutives.">
-                        </Techno>
-                        <Techno image={sassLogo} name="Go"
-                                description="Préprocesseur CSS avancé qui facilite l'écriture de styles réutilisables et maintenables.">
-                        </Techno>
-                        <Techno image={tsLogo} name="Typescript"
-                                description="Enrichit JavaScript avec un système de typage statique pour un code robuste et de qualité.">
-                        </Techno>
-
-                        <Techno image={baseLogo} name="PHP"
-                                description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
-                        </Techno>
-                    </div>
-
-                </Card>
-
-            </div>
-        </section>
-    </div>
-
-    <!--<section class="container" id="services">-->
-    <!--	<h2 class="title">Services</h2>-->
-    <!--	<h3>Des services qui ouvrent la voie à un site web unique</h3>-->
-    <!--	<div class="row">-->
-    <!--		<article data-aos="zoom-in-up" data-aos-duration="1000">-->
-    <!--			<img loading="lazy" alt="Icone de Web Design" src="{{ asset('assets/images/development.svg')}}">-->
-    <!--			<h4>Développement Web</h4>-->
-    <!--			<p>Un site ne se résume pas à un simple visuel, il faut concevoir son bon fonctionnement tout en le rendant le plus léger et le plus performant possible</p>-->
-    <!--			&lt;!&ndash;{{&#45;&#45;          <a href="https://example.com" title="redirection invalide">&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;	{{&#45;&#45;            <p>Détails</p>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;	{{&#45;&#45;            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;              <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;            </svg>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;            <a href="https://example.com" title="redirection invalide">&#45;&#45;}}&ndash;&gt;-->
-    <!--		</article>-->
-    <!--		<article data-aos="zoom-in-left" data-aos-duration="1000">-->
-    <!--			<img loading="lazy" alt="Icone de Web Design" src="{{ asset('assets/images/maintenance.svg')}}">-->
-    <!--			<h4>Maintenance</h4>-->
-    <!--			<p>Une offre clé en main vous permettant d’assurer votre site en réalisant des sauvegardes régulières et des corrections de bugs si nécessaire.</p>-->
-    <!--			&lt;!&ndash;{{&#45;&#45;          <a href="https://example.com" title="redirection invalide">&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;	{{&#45;&#45;            <p>Détails</p>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;	{{&#45;&#45;            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;              <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;            </svg>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;          </a>&#45;&#45;}}&ndash;&gt;-->
-    <!--		</article>-->
-    <!--		<article data-aos="zoom-in-right" data-aos-duration="1000">-->
-    <!--			<img loading="lazy" alt="Icone de Web Design" src="{{ asset('assets/images/design.svg')}}">-->
-    <!--			<h4>Web Design</h4>-->
-    <!--			<p>De nos jours il est important de concevoir des applications les plus adaptées à ses utilisateurs, c'est pourquoi il est primordial de partir sur de bonnes bases</p>-->
-    <!--			&lt;!&ndash;{{&#45;&#45;          <a href="https://example.com" title="redirection invalide">&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;	{{&#45;&#45;            <p>Détails</p>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;	{{&#45;&#45;            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;              <path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;            </svg>&#45;&#45;}}&ndash;&gt;-->
-    <!--			&lt;!&ndash;		{{&#45;&#45;          </a>&#45;&#45;}}&ndash;&gt;-->
-    <!--		</article>-->
-    <!--	</div>-->
-    <!--</section>-->
-    <!--<section id="presentation">-->
-    <!--	<svg class="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none">-->
-    <!--		<use xlink:href="#wave"/>-->
-    <!--	</svg>-->
-    <!--	<div class="row">-->
-    <!--		<div class="left">-->
-    <!--			<img src="{{ asset('assets/images/illustration.webp') }}" alt="Illustration">-->
-    <!--		</div>-->
-    <!--		<div class="right" data-aos="fade-left" data-aos-duration="1000">-->
-    <!--			<h2 class="title">Bonjour, je suis</h2>-->
-    <!--			<h3>Vigreux Joël</h3>-->
-    <!--			<h4>Développeur de Béthune, France</h4>-->
-    <!--			<p>Ma formation de développeur web et web mobile, complétée par ma passion, m'a permis d'acquérir une solide expérience notamment dans le développement back-end.</p>-->
-    <!--			<p>Naturellement perfectionniste et autodidacte, j’effectue régulièrement de la <a href="https://donkey.school/blog/2021-04-16-veille-technologique-une-necessite/" title="La veille technologie une nécessité ?" target="_blank">veille technologique</a>, dans le but d'offrir à mes clients la meilleure qualité possible, en utilisant les technologies les plus adaptées à leurs projets.</p>-->
-    <!--			<p>-->
-    <!--				Sensible à l’<a href="https://esokia.com/fr/blog/ux-ui-quest-ce-que-ca-signifie" title="Qu'est-ce que l'UX ?" target="_blank">Expérience Utilisateur</a> et <a href="https://www.kisskissbankbank.com/fr/projects/eco-conception-web-l-ecologie-numerique-est-en-marche" title="Qu'est-ce que l'eco-conception ?" target="_blank">l’éco-conception</a>, j’ai comme objectif de réaliser des applications optimisées et accessibles.-->
-    <!--			</p>-->
-    <!--			<p>-->
-    <!--				Je serai ravi de m’entretenir avec vous dans le but d’en connaitre plus sur vos besoins et votre projet.-->
-    <!--			</p>-->
-    <!--			<a href="{{ asset('assets/files/Curriculum_Vitae_VIGREUX_Joel.pdf') }}" target="_blank" title="Direction vers mes services" class="radial-button" style="background: radial-gradient(100% 175% at 82.6791% 44.2274%, rgb(222, 104, 208) 0%, rgb(97, 0, 255) 100%);">Voir mon CV</a>-->
-    <!--		</div>-->
-    <!--	</div>-->
-    <!--	<svg class="wave" width="100%" height="48" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none">-->
-    <!--		<use xlink:href="#wave"/>-->
-    <!--	</svg>-->
-    <!--</section>-->
-    <!--<section id="competences">-->
-    <!--	<div class="row container">-->
-    <!--		<div class="col" data-aos="fade-right" data-aos-duration="1000">-->
-    <!--			<h2 class="title">Compétences</h2>-->
-    <!--			<h3>Les technologies que j’utilise couramment</h3>-->
-    <!--			<p>-->
-    <!--				Actuellement en train de me spécifier dans la création d'application web, j'étudie Angular et Nest.Js qui à eux d'eux permettent de gérer le front-end et le back-end avec certaines similitudes structurelles.-->
-    <!--			</p>-->
-    <!--		</div>-->
-    <!--		<div class="col">-->
-    <!--			<figure class="small left" id="html">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/html.svg') }}" alt="HTML">-->
-    <!--				<figcaption>-->
-    <!--					<h4>HTML</h4>-->
-    <!--					<p>Langage de balises utilisé afin de créer et de représenter le contenu d'une page web et sa structure.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="medium left" id="css">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/css.svg') }}" alt="CSS">-->
-    <!--				<figcaption>-->
-    <!--					<h4>CSS</h4>-->
-    <!--					<p>Langage de feuille de style utilisé pour décrire la présentation d’un document écrit en HTML ou XML.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="left" id="sass">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/sass.svg') }}" alt="Sass">-->
-    <!--				<figcaption>-->
-    <!--					<h4>Sass</h4>-->
-    <!--					<p>Sass est un langage de script préprocesseur qui est compilé ou interprété en CSS.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="medium right" id="javascript">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/javascript.svg') }}" alt="JavaScript">-->
-    <!--				<figcaption>-->
-    <!--					<h4>JavaScript</h4>-->
-    <!--					<p>Langage de programmation de scripts principalement employé dans les pages web interactives et à ce titre est une partie essentielle des applications web.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="right" id="typescript">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/typescript.svg') }}" alt="TypeScript">-->
-    <!--				<figcaption>-->
-    <!--					<h4>TypeScript</h4>-->
-    <!--					<p>Langage de programmation libre et open source développé par Microsoft qui a pour but d'améliorer et de sécuriser la production de code JavaScript.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="small right" id="nodejs">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/nodejs.svg') }}" alt="NodeJs">-->
-    <!--				<figcaption>-->
-    <!--					<h4>NodeJs</h4>-->
-    <!--					<p>Node.js est une plateforme logicielle libre en JavaScript, orientée vers les applications réseau évènementielles hautement concurrentes qui doivent pouvoir monter en charge.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="right" id="adonis">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/adonis.svg') }}" alt="Adonis">-->
-    <!--				<figcaption>-->
-    <!--					<h4>Adonis</h4>-->
-    <!--					<p>Framework Node.js MVC il offre un écosystème stable pour écrire une application web côté serveur</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="small left" id="php">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/php.svg') }}" alt="PHP">-->
-    <!--				<figcaption>-->
-    <!--					<h4>PHP</h4>-->
-    <!--					<p>Langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="medium left" id="wordpress">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/wordpress.svg') }}" alt="WordPress">-->
-    <!--				<figcaption>-->
-    <!--					<h4>WordPress</h4>-->
-    <!--					<p>Système de gestion de contenu gratuit, libre et open-source.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="big left" id="symfony">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/symfony.svg') }}" alt="Symfony">-->
-    <!--				<figcaption>-->
-    <!--					<h4>Symfony</h4>-->
-    <!--					<p>Ensemble de composants PHP ainsi qu'un framework MVC libre écrit en PHP.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--			<figure class="big left" id="nest">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/logos/nest.svg') }}" alt="nest">-->
-    <!--				<figcaption>-->
-    <!--					<h4>Nest</h4>-->
-    <!--					<p>Framework Node.js progressif pour construire des applications côté serveur efficaces, fiables et évolutives.</p>-->
-    <!--				</figcaption>-->
-    <!--			</figure>-->
-    <!--		</div>-->
-    <!--	</div>-->
-    <!--</section>-->
-    <!--<section id="projets">-->
-    <!--	<h2 class="title">Portfolio</h2>-->
-    <!--	<h3>Mes derniers projets</h3>-->
-    <!--	<div class="row">-->
-    <!--		<article data-aos="zoom-in-up" data-aos-duration="1000">-->
-    <!--			<div class="images">-->
-    <!--				<img height="374" id="nest-bis" loading="lazy" src="{{ asset('assets/images/logos/nest-bis.svg') }}" alt="NodeJs">-->
-    <!--			</div>-->
-    <!--			<div class="description">-->
-    <!--				<h4>Création d'une api REST <span class="state">(En cours)</span></h4>-->
-    <!--				<div class="technologies">-->
-    <!--					<p>Framework:</p>-->
-    <!--					<ul>-->
-    <!--						<li>Nest.js <span class="detail">Basé sur Express</span></li>-->
-    <!--					</ul>-->
-    <!--					<p>Packages:</p>-->
-    <!--					<ul>-->
-    <!--						<li>Bcrypt <span class="detail">Hachage des mots de passe</span></li>-->
-    <!--						<li>Class-transformer <span class="detail">Modifie les réponses ainsi que les requêtes</span></li>-->
-    <!--						<li>Class-validator <span class="detail">Vérifie les données</span></li>-->
-    <!--						<li>Mongoose <span class="detail">ODM pour MongoDB</span></li>-->
-    <!--						<li>Passport <span class="detail">Système d'authentication</span></li>-->
-    <!--						<li>Swagger <span class="detail">Génère la documentation</span></li>-->
-    <!--					</ul>-->
-    <!--					<p>Database:</p>-->
-    <!--					<ul>-->
-    <!--						<li>MongoDB <span class="detail">Base de données NoSQL</span></li>-->
-    <!--					</ul>-->
-    <!--				</div>-->
-    <!--			</div>-->
-    <!--			<a href="https://github.com/vigreux-joel/api-REST/" target="_blank" title="Redirection vers le repository github du projet" >-->
-    <!--				<p>Voir le code du projet</p>-->
-    <!--				<svg width="21" height="16" viewBox="0 0 21 16" fill="none">-->
-    <!--					<path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>-->
-    <!--				</svg>-->
-    <!--			</a>-->
-    <!--		</article>-->
-    <!--		<article data-aos="zoom-in-up" data-aos-duration="1000">-->
-    <!--			<div class="images">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/project1-desktop.webp')}}" alt="Maquette format ordinateur">-->
-    <!--			</div>-->
-    <!--			<div class="description">-->
-    <!--				<h4>Site vitrine événementiel fictif</h4>-->
-    <!--				<div class="technologies">-->
-    <!--					<p>Languages:</p>-->
-    <!--					<ul>-->
-    <!--						<li>PHP</li>-->
-    <!--						<li>HTML</li>-->
-    <!--						<li>SASS</li>-->
-    <!--						<li>JavaScript</li>-->
-    <!--					</ul>-->
-    <!--					<p>CMS</p>-->
-    <!--					<ul>-->
-    <!--						<li>WordPress</li>-->
-    <!--					</ul>-->
-    <!--					<p>Plugins:</p>-->
-    <!--					<ul>-->
-    <!--						<li>Classic Editor<span class="detail">Remet en place le précédent éditeur de WordPress</span></li>-->
-    <!--						<li>ContactForm7<span class="detail">Gère les formulaires de contact</span></li>-->
-    <!--						<li>Flamingo<span class="detail">Sauvegarde les mails</span></li>-->
-    <!--						<li>Advanced Custom Fields<span class="detail">Rajoute des champs personnalisables</span></li>-->
-    <!--					</ul>-->
-    <!--					<p>Librairies:</p>-->
-    <!--					<ul>-->
-    <!--						<li>Animate On Scroll</li>-->
-    <!--					</ul>-->
-    <!--				</div>-->
-    <!--			</div>-->
-    <!--			<a href="https://wordpress.vigreux-joel.fr/" target="_blank" title="Redirection vers la maquette du site" >-->
-    <!--				<p>Voir ce projet</p>-->
-    <!--				<svg width="21" height="16" viewBox="0 0 21 16" fill="none">-->
-    <!--					<path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>-->
-    <!--				</svg>-->
-    <!--			</a>-->
-    <!--		</article>-->
-    <!--		<article data-aos="zoom-in-up" data-aos-duration="1000">-->
-    <!--			<div class="images">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/project3-desktop.webp')}}" alt="Maquette format ordinateur">-->
-    <!--			</div>-->
-    <!--			<div class="description">-->
-    <!--				<h4>site e-commerce de tableaux<span class="state">(En pause)</span></h4>-->
-    <!--				<div class="technologies">-->
-    <!--					<p>Languages:</p>-->
-    <!--					<ul>-->
-    <!--						<li>PHP</li>-->
-    <!--						<li>HTML</li>-->
-    <!--					</ul>-->
-    <!--					<p>Framework</p>-->
-    <!--					<ul>-->
-    <!--						<li>Symfony</li>-->
-    <!--						<li>Bootstrap</li>-->
-    <!--					</ul>-->
-    <!--					<p>Bundle:</p>-->
-    <!--					<ul>-->
-    <!--						<li>EasyAdmin<span class="detail">Génère un tableau de bord automatique</span></li>-->
-    <!--					</ul>-->
-    <!--				</div>-->
-    <!--			</div>-->
-    <!--			<a href="https://github.com/vigreux-joel/Symfony-e-commerce" target="_blank" title="Redirection vers le repository github du projet" >-->
-    <!--				<p>Voir le code du projet</p>-->
-    <!--				<svg width="21" height="16" viewBox="0 0 21 16" fill="none">-->
-    <!--					<path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>-->
-    <!--				</svg>-->
-    <!--			</a>-->
-    <!--		</article>-->
-    <!--		<article data-aos="zoom-in-up" data-aos-duration="1000">-->
-    <!--			<div class="images">-->
-    <!--				<img loading="lazy" src="{{ asset('assets/images/project2-desktop.webp')}}" alt="Maquette format ordinateur">-->
-    <!--			</div>-->
-    <!--			<div class="description">-->
-    <!--				<h4>Intégration d'une maquette</h4>-->
-    <!--				<div class="technologies">-->
-    <!--					<p>Languages:</p>-->
-    <!--					<ul>-->
-    <!--						<li>HTML</li>-->
-    <!--						<li>SASS</li>-->
-    <!--						<li>JavaScript</li>-->
-    <!--					</ul>-->
-    <!--					<p>Librairies:</p>-->
-    <!--					<ul>-->
-    <!--						<li>Animate On Scroll <span class="detail">Ajoute des annimations au scroll</span></li>-->
-    <!--						<li>Highlight.js <span class="detail">Met en évidence la syntaxe d'un code</span></li>-->
-    <!--					</ul>-->
-    <!--				</div>-->
-    <!--			</div>-->
-    <!--			<a href="https://vigreux-joel.github.io/Maquette3/index.html" target="_blank" title="Redirection vers le site" >-->
-    <!--				<p>Voir ce projet</p>-->
-    <!--				<svg width="21" height="16" viewBox="0 0 21 16" fill="none">-->
-    <!--					<path d="M1.0125 8.85074H16.7933L11.3623 14.0846C10.9669 14.4656 10.9669 15.0835 11.362 15.4642C11.7574 15.8453 12.3988 15.8453 12.7942 15.4642L19.9533 8.56486C20.0004 8.51948 20.0424 8.46948 20.0794 8.4163C20.0964 8.39166 20.1083 8.36508 20.1229 8.33946C20.1396 8.30921 20.1589 8.28043 20.1723 8.24848C20.1867 8.21554 20.1948 8.18139 20.2049 8.14724C20.2133 8.12017 20.2242 8.09431 20.23 8.0665C20.2432 8.00308 20.25 7.93917 20.25 7.87502C20.25 7.87428 20.2497 7.87355 20.2497 7.87282C20.2495 7.80964 20.2429 7.74622 20.23 7.68402C20.2239 7.65474 20.2125 7.62767 20.2037 7.59888C20.1938 7.56644 20.1862 7.53351 20.1725 7.50204C20.1579 7.46814 20.1381 7.4374 20.1199 7.40545C20.1062 7.38154 20.0953 7.35715 20.0796 7.33422C20.0427 7.28031 20.0002 7.23006 19.9528 7.18444L12.794 0.285797C12.3986 -0.0952249 11.7574 -0.0952252 11.362 0.285553C10.9666 0.666575 10.9666 1.28446 11.362 1.66572L16.7931 6.89929H1.0125C0.453347 6.89929 0 7.33617 0 7.87502C0 8.41386 0.453347 8.85074 1.0125 8.85074Z" fill="#7B7B7B"/>-->
-    <!--				</svg>-->
-    <!--			</a>-->
-    <!--		</article>-->
-    <!--	</div>-->
-    <!--</section>-->
-    <!--<section class="container" id="contact">-->
-    <!--	<h2 class="title">Contact</h2>-->
-    <!--	<h3>Contactez-moi pour obtenir un devis ou pour demander un renseignement</h3>-->
-    <!--	<form name="contact" method="POST" action="contact">-->
-    <!--		<div class="row">-->
-    <!--			<div class="col coordonnees">-->
-    <!--				<h4>Formulaire de contact</h4>-->
-    <!--				<label>-->
-    <!--					Nom-->
-    <!--					<span class="input-container">-->
-    <!--            <input type="text" name="name" placeholder="Votre nom" required>-->
-    <!--            <img loading="lazy" alt="name" src="{{ asset('assets/images/name.svg') }}">-->
-    <!--          </span>-->
-    <!--				</label>-->
-    <!--				<label>-->
-    <!--					Email-->
-    <!--					<span class="input-container">-->
-    <!--            <input type="email" name="email" placeholder="Votre email" required>-->
-    <!--            <img loading="lazy" alt="email" src="{{ asset('assets/images/email.svg') }}">-->
-    <!--          </span>-->
-    <!--				</label>-->
-    <!--				<label>-->
-    <!--					Téléphone <span class="weak">(facultatif)</span>-->
-    <!--					<span class="input-container">-->
-    <!--            <input type="tel" name="tel" placeholder="Votre téléphone">-->
-    <!--            <img loading="lazy" alt="téléphone" src="{{ asset('assets/images/tel.svg') }}">-->
-    <!--          </span>-->
-    <!--				</label>-->
-    <!--			</div>-->
-    <!--			<div class="col info" >-->
-    <!--				<a href="tel:+33617110715" title="Me contacter par téléphone">-->
-    <!--					<img loading="lazy" alt="téléphone" src="{{ asset('assets/images/tel.svg') }}">-->
-    <!--					<span>06 17 11 07 15</span>-->
-    <!--				</a>-->
-    <!--				<a href="mailto:contact@vigreux-joel.fr" title="Me contacter par mail">-->
-    <!--					<img loading="lazy" alt="email" src="{{ asset('assets/images/email.svg') }}">-->
-    <!--					<span>contact@vigreux-joel.fr</span>-->
-    <!--				</a>-->
-    <!--				<a href="https://www.linkedin.com/in/joel-vigreux-developpeur-web/" title="Voir mon Linkedin" target="_blank">-->
-    <!--					<img loading="lazy" alt="téléphone" src="{{ asset('assets/images/linkedin.svg') }}">-->
-    <!--					<span>Linkedin</span>-->
-    <!--				</a>-->
-    <!--			</div>-->
-    <!--		</div>-->
-    <!--		<label>-->
-    <!--			Message-->
-    <!--			<textarea name="message" placeholder="Votre message ..." required></textarea>-->
-    <!--		</label>-->
-    <!--		<h4>Sujet</h4>-->
-    <!--		<div class="row services">-->
-    <!--			<div class="input-container">-->
-    <!--				<input type="radio" name="service" id="web-design" value="web-design" >-->
-    <!--				<label for="web-design">Web Design</label>-->
-    <!--			</div>-->
-
-
-    <!--			<div class="input-container">-->
-    <!--				<input type="radio" name="service" id="developpement-web" value="web-development" required>-->
-    <!--				<label for="developpement-web">Développement Web</label>-->
-    <!--			</div>-->
-    <!--			<div class="input-container">-->
-    <!--				<input type="radio" name="service" id="maintenance" value="maintenance">-->
-    <!--				<label for="maintenance">Maintenance</label>-->
-    <!--			</div>-->
-    <!--			<div class="input-container">-->
-    <!--				<input type="radio" name="service" id="other" value="">-->
-    <!--				<label data-placeholder="Préciser votre sujet" for="other" contenteditable="true">Autre</label>-->
-    <!--			</div>-->
-    <!--		</div>-->
-    <!--		<input class="radial-button" type="submit" value="Envoyer le message">-->
-    <!--	</form>-->
-    <!--</section>-->
-    <!--<a href="#accueil" id="back-to-top" title="Retourner à l'accueil">-->
-    <!--	<svg width="15" height="30" viewBox="0 0 15 30" fill="none">-->
-    <!--		<path d="M0.290751 8.04224C0.478114 8.22849 0.731566 8.33303 0.995751 8.33303C1.25994 8.33303 1.51339 8.22849 1.70075 8.04224L6.34075 3.48224L6.34075 27.0422C6.34075 27.3075 6.44611 27.5618 6.63364 27.7493C6.82118 27.9369 7.07553 28.0422 7.34075 28.0422C7.60597 28.0422 7.86032 27.9369 8.04786 27.7493C8.23539 27.5618 8.34075 27.3075 8.34075 27.0422L8.34075 3.51224L12.8708 8.04224C12.9637 8.13596 13.0743 8.21036 13.1962 8.26113C13.318 8.3119 13.4487 8.33804 13.5808 8.33804C13.7128 8.33804 13.8435 8.3119 13.9653 8.26113C14.0872 8.21036 14.1978 8.13596 14.2908 8.04224C14.477 7.85487 14.5815 7.60142 14.5815 7.33724C14.5815 7.07305 14.477 6.8196 14.2908 6.63224L7.92075 0.262236C7.75208 0.0943053 7.52376 2.47955e-05 7.28575 2.47955e-05C7.04774 2.47955e-05 6.81942 0.0943053 6.65075 0.262236L0.290751 6.63224C0.104501 6.8196 -4.29153e-05 7.07305 -4.29153e-05 7.33724C-4.29153e-05 7.60142 0.104501 7.85487 0.290751 8.04224Z" fill="white"/>-->
-    <!--	</svg>-->
-    <!--</a>-->
 </Layout>

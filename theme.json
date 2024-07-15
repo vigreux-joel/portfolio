@@ -126,7 +126,7 @@
         "fontFamilyStyle": "Regular",
         "fontWeight": 400,
         "fontSize": 12,
-        "lineHeight": 16,
+        "lineHeight": 18,
         "letterSpacing": 0.4
       }
     }
@@ -339,7 +339,7 @@
   },
   "seed": "#4CA66B",
   "extendedColors": [],
-  "description": "TYPE: CUSTOM\nUdixio UI Theme Builder export 30 Jun 2024 14:58:48",
+  "description": "TYPE: CUSTOM\nUdixio UI Theme Builder export Mon, 15 Jul 2024 07:32:56",
   "coreColors": {
     "primary": "#4CA66B"
   }
