@@ -5,7 +5,6 @@ const {colors, fontFamily, plugins} = createTheme({
     colorPalette: {
         primary: '#4CA66B',
     },
-
     fontFamily: {
         expressive: ['Montserrat', 'sans-serif'],
         neutral: ['Roboto', 'sans-serif'],
@@ -48,17 +47,17 @@ const {colors, fontFamily, plugins} = createTheme({
             },
         },
         body: {
-            // large: {
-            //     fontSize: 1.125,
-            // },
-            // medium: {
-            //     fontSize: 1,
-            //     lineHeight: 1.5,
-            // },
-            // small: {
-            //     fontSize: 0.875,
-            //     lineHeight: 1.125,
-            // },
+            large: {
+                // fontSize: 1.125,
+            },
+            medium: {
+                // fontSize: 1,
+                lineHeight: 1.25,
+            },
+            small: {
+                // fontSize: 0.875,
+                lineHeight: 1.125,
+            },
         },
     },
     darkMode: 'class',
@@ -89,9 +88,6 @@ module.exports = {
             },
             flex: {
                 2: '2 2 0%',
-            },
-            maxWidth: {
-                prose: '700px',
             },
             animation: {
                 "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
