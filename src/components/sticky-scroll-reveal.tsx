@@ -3,7 +3,6 @@ import React, {useRef, useState} from "react";
 import {motion, useMotionValueEvent, useScroll} from "framer-motion";
 import classNames from "classnames";
 import {Link} from "@components/Link.tsx";
-import materialColor from "@assets/images/material-color.png"
 
 const content: { text: React.ReactNode; media: React.ReactNode }[] = [
     {
@@ -45,7 +44,7 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
                 </p>
             </>),
         media: (
-            <img className={"h-full w-full object-cover"} loading={"lazy"} src={materialColor.src}/>
+            <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
     },
     {
@@ -61,7 +60,7 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
                 </p>
             </>),
         media: (
-            <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-color.gif'}/>
+            <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
     },
 

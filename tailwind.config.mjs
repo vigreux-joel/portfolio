@@ -1,70 +1,7 @@
 /** @type {import("tailwindcss").Config} */
-import {createTheme} from '@udixio/tailwind-material'
+import {createTheme} from '@udixio/theme'
 
-const {colors, fontFamily, plugins} = createTheme({
-    colorPalette: {
-        primary: '#4CA66B',
-    },
-    fontFamily: {
-        expressive: ['Montserrat', 'sans-serif'],
-        neutral: ['Roboto', 'sans-serif'],
-    },
-    responsiveBreakPoints: {
-        sm: 1.1,
-    },
-    fontStyles: {
-        display: {
-            large: {
-                fontWeight: 700,
-            },
-            medium: {
-                fontWeight: 700,
-            },
-            small: {
-                fontWeight: 700,
-            },
-        },
-        headline: {
-            large: {
-                fontWeight: 600,
-            },
-            medium: {
-                fontWeight: 600,
-            },
-            small: {
-                fontWeight: 600,
-            },
-        },
-        title: {
-            large: {
-                fontWeight: 500,
-            },
-            medium: {
-                fontWeight: 500,
-            },
-            small: {
-                fontWeight: 500,
-            },
-        },
-        body: {
-            large: {
-                // fontSize: 1.125,
-            },
-            medium: {
-                // fontSize: 1,
-                lineHeight: 1.25,
-            },
-            small: {
-                // fontSize: 0.875,
-                lineHeight: 1.125,
-            },
-        },
-    },
-    darkMode: 'class',
-    name: 'NetSimpler',
-    themePath: './theme.json',
-    // contrastLevel: -0.59
-})
+const {fontFamily, plugins} = createTheme()
 
 module.exports = {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue,svg}', './node_modules/@udixio/ui/**/*.js'],
@@ -75,7 +12,6 @@ module.exports = {
     ],
     darkMode: 'class',
     theme: {
-        colors: colors,
         fontFamily: fontFamily,
         extend: {
             boxShadow: {
