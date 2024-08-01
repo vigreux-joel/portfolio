@@ -26,14 +26,15 @@
     "@fortawesome/pro-regular-svg-icons": "^6.5.2",
     "@fortawesome/pro-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@udixio/theme": "^1.0.0-beta.25",
     "@udixio/tailwind-material": "^1.0.0-beta.18",
+    "@udixio/theme": "^1.0.0-beta.25",
     "@udixio/ui": "^1.0.0-beta.65",
-    "astro": "^4.4.11",
+    "aos": "^2.3.4",
+    "astro": "^4.13.0",
     "astro-compressor": "^0.4.1",
-    "astro-critters": "^2.1.2",
+    "astro-critters": "^2.2.0",
     "astro-robots-txt": "^1.0.0",
-    "astro-seo": "^0.8.3",
+    "astro-seo": "^0.8.4",
     "classnames": "^2.5.1",
     "gsap": "^3.12.5",
     "resize-observer-polyfill": "^1.5.1",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",
+    "@types/aos": "^3.0.7",
     "sass": "^1.72.0"
   }
 }

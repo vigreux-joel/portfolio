@@ -52,77 +52,38 @@ body {
 
 @layer utilities {
 
-  .padding {
+  .padding-x {
     @apply px-6;
     @apply md:px-12;
   }
 
+  .padding-y {
+    @apply pb-24;
+    @apply md:pb-32;
+    //@apply py-12;
+    //@apply md:py-16;
+  }
 
-  .section {
-    @apply py-12;
-    @apply md:py-16;
-    @extend .padding;
+  .padding {
+    @extend .padding-x;
+    @extend .padding-y;
+  }
 
+  .max-width {
     @apply max-w-screen-xl;
     @apply mx-auto;
   }
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-[class^="title-"],
-[class*=" title-"],
-.sub-title {
-  strong, &.sub-title {
-    &.sub-title:before {
-      @apply to-primary
-    }
 
-    @apply bg-clip-text text-transparent ;
-    @apply bg-gradient-to-r from-primary to-tertiary;
-    --tw-gradient-from-position: ;
-    --tw-gradient-via-position: ;
-    --tw-gradient-to-position: ;
+  .section {
+    @extend .padding;
+    @extend .max-width;
   }
 }
 
-h1,
-.title-1 {
-  @apply text-display-small xl:text-display-medium;
-  strong {
-    font-weight: inherit;
-  }
+section {
+  @apply relative z-10 bg-surface
 }
-
-h2,
-.title-2 {
-  @apply text-headline-medium;
-}
-
-h3,
-.title-3 {
-  @apply text-headline-small;
-}
-
-h4,
-.title-4 {
-  @apply text-title-large;
-}
-
-h5,
-.title-5 {
-  @apply text-title-medium;
-}
-
-h6,
-.title-6 {
-  @apply text-title-small;
-}
-
 
 .sub-title {
   @apply font-semibold text-tertiary pl-7 relative uppercase text-base mb-2;
@@ -149,6 +110,10 @@ h6,
   }
 }
 
+.text-gradient {
+  @apply bg-gradient-to-r from-primary to-tertiary text-transparent bg-clip-text;
+}
+
 .square-area {
   @apply flex;
   @apply rounded-xl;
@@ -159,11 +124,6 @@ h6,
 
 section {
   position: relative;
-}
-
-
-main section:first-of-type.section, main section:first-of-type .section, .first-section {
-  @apply pt-20 md:pt-28 xl:pt-32;
 }
 
 .buttons {

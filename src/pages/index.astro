@@ -13,10 +13,12 @@ import {DotLottiePlayer} from '@dotlottie/react-player';
 import '@dotlottie/react-player/dist/index.css';
 import astroLogo from "@assets/images/astro-logo.svg?raw"
 import reactLogo from "@assets/images/react-logo.svg?raw"
-import tsLogo from "@assets/images/react-logo.svg?raw"
+import tsLogo from "@assets/images/ts-logo.svg?raw"
 import {Link} from "@components/Link"
 import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import angularLogo from "@assets/images/angular-logo.svg?raw"
+import materialLogo from "@assets/images/material-design-logo.svg?raw"
+import framerMotionLogo from "@assets/images/framer-motion-logo.svg?raw"
 import sassLogo from "@assets/images/sass-logo.svg?raw"
 import layoutResponsive from "@assets/images/Responsive-pana.svg"
 import flutterLogo from "@assets/images/flutter-logo.svg?raw"
@@ -25,183 +27,252 @@ import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
 import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
-import {faMessageMiddle} from "@fortawesome/pro-light-svg-icons";
+import {
+    faAddressCard,
+    faCircle,
+    faCode,
+    faLaptopMobile,
+    faMessageMiddle
+} from "@fortawesome/pro-light-svg-icons";
 import {Techno} from "@components/Techno"
 import TextRevealByWord from "../components/TextReveal";
-import {faBrowser} from "@fortawesome/pro-regular-svg-icons";
+import {faBrowser, faCircleInfo, faEnvelope,} from "@fortawesome/pro-regular-svg-icons";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
+import {Line} from '@components/Line'
+import {LinearGradient} from "@components/LinearGradient";
 ---
 <Layout>
-    <section class="section ">
-        <Image class="rounded-xl" src={portrait} height={64} width={64} alt="Joël"></Image>
-        <h1 class="text-headline-large my-6">
-            Joël VIGREUX
-        </h1>
-        <div class="flex flex-wrap gap-4">
-            <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
-                    class="text-label-large text-on-surface-variant">Développeur
-                full-stack</p>
-            </div>
-            <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
-                    class="text-label-large text-on-surface-variant">3 années d'experiences</p>
-            </div>
-            <a href="#contact" class="group">
-                <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
-                    <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">
-
-                    </div>
-                    <Icon className="h-[18px] text-on-secondary-container" icon={faMessageMiddle}></Icon>
-                    <p
-                            class="text-label-large text-on-secondary-container">Disponible pour vos projets</p>
+    <section class="pt-20 md:pt-28 xl:pt-32">
+        <div class="max-width">
+            <div class="flex">
+                <div>
+                    <Line client:load visible isFirst icon={faCircle}/>
                 </div>
-            </a>
-        </div>
+                <div class="padding !pb-16">
+                    <Image class="rounded-xl" src={portrait} height={64} width={64} alt="Joël"></Image>
+                    <h1 class="text-headline-large my-6">
+                        Joël VIGREUX
+                    </h1>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
+                                class="text-label-large text-on-surface-variant">Développeur
+                            full-stack</p>
+                        </div>
+                        <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
+                                class="text-label-large text-on-surface-variant">3 années d'experiences</p>
+                        </div>
+                        <a href="#contact" class="group">
+                            <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
+                                <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">
 
-        <h2 class="text-title-medium mt-16 mb-4 text-tertiary ">À propos de moi</h2>
-        <p class="text-body-large max-w-3xl ">
-            Bonjour, je suis Joël Vigreux - un développeur passionné.<br/> Ayant découvert un vif intérêt pour le
-            <Link client:load href="#back-end">back-end</Link>
-            en
-            débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
-            <Link href="#front-end">front-end</Link>
-            et de <span class="text-nowrap">l'
+                                </div>
+                                <Icon className="h-[18px] text-on-secondary-container" icon={faMessageMiddle}></Icon>
+                                <p
+                                        class="text-label-large text-on-secondary-container">Disponible pour vos
+                                    projets</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="flex mt-8">
+                <div>
+                    <Line client:load icon={faAddressCard} nextTheme="purple"/>
+                </div>
+                <div class="padding">
+                    <h2 class="text-title-medium  mb-4 text-tertiary ">À propos de moi</h2>
+                    <p class="text-body-large max-w-3xl ">
+                        Bonjour, je suis Joël Vigreux - un développeur passionné.<br/> Ayant découvert un vif intérêt
+                        pour
+                        le
+                        <Link client:load href="#back-end">back-end</Link>
+                        en
+                        débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
+                        <Link href="#front-end">front-end</Link>
+                        et de <span class="text-nowrap">l'
             <Link client:load
                   href="#experience-utilisateur">expérience&nbsp;utilisateur</Link></span>
-            tout en intégrant des pratiques
-            <Link client:load
-                  href="#ecoresponsabilite">écoresponsables
-            </Link>
-            de manière pragmatique.
-        </p>
-        <Button client:load className="mt-8" label="Me contacter"/>
-    </section>
-    <section id="front-end" class="section">
-        <p class="text-title-medium  text-center text-tertiary">Développement web - front-end</p>
-        <h2 class="text-center mt-2">Des technologies modernes et adaptables pour répondre à une diversité de projets et
-            de besoins</h2>
-        <div class="grid mt-16 grid-cols-1 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Card variant="filled" className="group hover:!bg-surface-container-high">
-                <Techno variant="primary" className="p-6" image={astroLogo} client:load displayMore name="Astro"
-                        details="Framework JavaScript pour sites web rapides et orientés contenu."
-                        description="Cet outil m'est devenu indispensable pour optimiser vos projets avec efficacité tout en restant indépendant des technologies utilisées.">
-                </Techno>
-            </Card>
-            <Card variant="filled" className="group hover:!bg-surface-container-high">
-                <Techno variant="primary" className="p-6" client:load image={reactLogo} displayMore name="React"
-                        details="Framework JavaScript pour interfaces web dynamiques et interactives."
-                        description="En développant ma propre bibliothèque d'interface, j'ai acquis l'expérience nécessaire pour concrétiser vos idées avec efficacité et précision.">
-                </Techno>
-            </Card>
-            <Card variant="filled" className="group hover:!bg-surface-container-high">
-                <Techno variant="primary" className="p-6" client:load image={tailwindLogo} displayMore
-                        name="Tailwind"
-                        details="Framework CSS pour des designs web personnalisés et efficaces."
-                        description="Grâce à Tailwind, j'ai pu organiser les styles de manière efficace tout en simplifiant la création de palettes de couleurs inspirées de Material Design.">
-                </Techno>
-            </Card>
-            <Card variant="filled" className="lg:order-1 group hover:!bg-surface-container-high">
-                <h2>Lorem</h2>
-            </Card>
-            <Card variant="filled" className="md:col-span-2 p-4">
-                <p class="mb-6 mt-2">Quelques diversités</p>
-                <div class=" grid grid-cols-1 gap-x-4 gap-y-6  md:grid-cols-2">
-                    <Techno image={angularLogo} name="Angular"
-                            description="Framework robuste pour développer des applications web complexes et évolutives.">
-                    </Techno>
-                    <Techno image={sassLogo} name="Sass"
-                            description="Préprocesseur CSS avancé qui facilite l'écriture de styles réutilisables et maintenables.">
-                    </Techno>
-                    <Techno image={tsLogo} name="Typescript"
-                            description="Enrichit JavaScript avec un système de typage statique pour un code robuste et de qualité.">
-                    </Techno>
-
-                    <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
-                            description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
-                    </Techno>
-                </div>
-            </Card>
-        </div>
-    </section>
-    <section>
-        <div class="section">
-            <div class="flex items-center md:flex-row flex-col">
-                <div class="left">
-                    <p class="text-title-medium  text-tertiary">Développement multiplateforme</p>
-                    <h2 class="mt-2 !text-headline-large max-w-prose">Transformez vos idées en applications adaptées à
-                        tous les appareils</h2>
-                    <p class="max-w-prose mt-8 text-body-large">Flutter me permet de créer des applications pour
-                        mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie particulièrement
-                        son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
-                        travail.</p>
-
-                </div>
-                <div class="right">
-                    <Image class="rounded-xl" src={layoutResponsive} alt="Illustration d'écran responsive"></Image>
+                        tout en intégrant des pratiques
+                        <Link client:load
+                              href="#ecoresponsabilite">écoresponsables
+                        </Link>
+                        de manière pragmatique.
+                    </p>
+                    <div class="mt-8 flex gap-4">
+                        <Button icon={faEnvelope} client:load label="Me contacter"/>
+                        <Button href="#front-end" icon={faCircleInfo} variant="outlined" client:load
+                                label="En savoir plus"/>
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-                <div class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
-                    <Icon className="h-16 w-16" icon={faBrowser}/>
-                    <p>Web</p>
+        </div>
+        <LinearGradient nextTheme="purple"/>
+    </section>
+    <section id="front-end" class="pt-8 theme-purple">
+        <div class="max-width ">
+            <div class="flex">
+                <div>
+                    <Line client:load icon={faCode} isLast/>
                 </div>
-                <div class="sm:flex-2 w-full md:w-fit">
-                    <div class="flex gap-4 items-center">
-                        <Diviser className="hidden md:block border-primary-container"/>
-                        <p class="text-title-medium text-on-primary-container">Mobile</p>
-                        <Diviser className="hidden md:block border-primary-container"/>
+                <div class="padding ">
+                    <p data-aos="fade-right" class="text-title-large">Développement web - front-end</p>
+                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                        <h2 class="text-gradient">Performances et flexibilité garanties</h2>
+                        <h3>J'assure vos projets avec des technologies modernes et adaptables</h3>
                     </div>
-                    <div class="flex gap-4 mt-4">
-                        <Diviser orientation="vertical" className="md:hidden border-primary-container"/>
-                        <div class="flex flex-1 flex-wrap gap-8">
-                            <div class="flex-1 platform bg-primary-container text-on-primary-container">
-                                <Icon className="h-16 w-16" icon={faApple}/>
-                                <p>IOS</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+                <Card data-aos="zoom-in" variant="filled"
+                      className="group">
+                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load displayMore
+                            name="Astro"
+                            description="Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en générant du contenu statique ultra-performant.">
+                    </Techno>
+                </Card>
+                <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                      className="group">
+                    <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo} displayMore
+                            name="React"
+                            description="facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le développement et la gestion de l'état.">
+                    </Techno>
+                </Card>
+                <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                      className="group">
+                    <Techno variant="primary" className="p-6 pb-10" client:load image={tailwindLogo} displayMore
+                            name="Tailwind"
+                            description="Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant le style des composants flexible et modulaire.">
+                    </Techno>
+                </Card>
+                <!--<Card variant="filled" className="lg:order-1 group hover:!bg-surface-container-high">-->
+                <!--    <h2>Lorem</h2>-->
+                <!--</Card>-->
+                <Card data-aos="zoom-in" data-aos-delay={450} className="md:col-span-3 p-6 pb-10 mb-px">
+                    <p class="mb-8 mt-2">Ma boîte à outils :</p>
+                    <div class=" grid grid-cols-2 gap-x-4 gap-y-6">
+                        <Techno image={framerMotionLogo} name="Framer Motion"
+                                description="Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec facilité.">
+                        </Techno>
+                        <Techno image={materialLogo} name="Material 3"
+                                description="Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives avec des éléments visuels raffinés.s.">
+                        </Techno>
+                        <Techno image={angularLogo} name="Angular"
+                                description="Facilite le développement d'applications web robustes et évolutives avec une structure organisée et des fonctionnalités puissantes intégrées.">
+                        </Techno>
+                        <Techno image={sassLogo} name="Sass"
+                                description="Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles complexes.">
+                        </Techno>
+                        <Techno image={tsLogo} name="Typescript"
+                                description="Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à maintenir.">
+                        </Techno>
+
+                        <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
+                                description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
+                        </Techno>
+                    </div>
+                </Card>
+            </div>
+        </div>
+    </section>
+    <section class="theme-purple">
+        <div class="max-width">
+            <div class="flex h-52">
+                <div>
+                    <Line client:load/>
+                </div>
+            </div>
+            <div class="flex mt-8">
+                <div>
+                    <Line client:load nextTheme="blue" icon={faLaptopMobile}/>
+                </div>
+                <div class="padding">
+                    <div class="flex items-center md:flex-row flex-col">
+                        <div class="left">
+                            <p data-aos="fade-right" class="text-title-large">Développement multiplateforme</p>
+                            <div data-aos="fade-right" data-aos-delay="100"
+                                 class="mt-4 text-display-medium max-w-prose">
+                                <h2 class="text-gradient">Touchez un public plus large</h2>
+                                <h3>Je convertis vos idées en applications adaptables à tous les
+                                    appareils</h3>
                             </div>
-                            <div class="flex-1 platform bg-primary-container text-on-primary-container">
-                                <Icon className="h-16 w-16" icon={faAndroid}/>
-                                <p>Android</p>
+                            <p class="max-w-prose mt-8 text-body-large">Flutter me permet de créer des applications pour
+                                mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
+                                particulièrement
+                                son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
+                                travail.</p>
+
+                        </div>
+                        <!--<div class="right">-->
+                        <!--    <Image class="rounded-xl" src={layoutResponsive}-->
+                        <!--           alt="Illustration d'écran responsive"></Image>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
+                        <div class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
+                            <Icon className="h-16 w-16" icon={faBrowser}/>
+                            <p>Web</p>
+                        </div>
+                        <div class="sm:flex-2 w-full md:w-fit">
+                            <div class="flex gap-4 items-center">
+                                <Diviser className="hidden md:block border-primary-container"/>
+                                <p class="text-title-medium text-on-primary-container">Mobile</p>
+                                <Diviser className="hidden md:block border-primary-container"/>
+                            </div>
+                            <div class="flex gap-4 mt-4">
+                                <Diviser orientation="vertical" className="md:hidden border-primary-container"/>
+                                <div class="flex flex-1 flex-wrap gap-8">
+                                    <div class="flex-1 platform bg-primary-container text-on-primary-container">
+                                        <Icon className="h-16 w-16" icon={faApple}/>
+                                        <p>IOS</p>
+                                    </div>
+                                    <div class="flex-1 platform bg-primary-container text-on-primary-container">
+                                        <Icon className="h-16 w-16" icon={faAndroid}/>
+                                        <p>Android</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="flex-[3] w-full md:w-fit">
+                            <div class="flex gap-4 items-center">
+                                <Diviser className="hidden md:block border-secondary-container"/>
+                                <p class="text-title-medium text-on-secondary-container">Desktop</p>
+                                <Diviser className="hidden md:block border-secondary-container"/>
+                            </div>
+                            <div class="flex gap-4 mt-4">
+                                <Diviser orientation="vertical" className="md:hidden border-secondary-container"/>
+                                <div class="flex flex-1 flex-wrap gap-8">
+                                    <div class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
+                                        <Icon className="h-16 w-16" icon={faWindows}/>
+                                        <p>Windows</p>
+                                    </div>
+                                    <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                        <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
+                                        <p>MacOs</p>
+                                    </div>
+                                    <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                        <Icon className="h-16 w-16" icon={faLinux}/>
+                                        <p>Linux</p>
+                                    </div>
+                                </>
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div class="flex-[3] w-full md:w-fit">
-                    <div class="flex gap-4 items-center">
-                        <Diviser className="hidden md:block border-secondary-container"/>
-                        <p class="text-title-medium text-on-secondary-container">Desktop</p>
-                        <Diviser className="hidden md:block border-secondary-container"/>
-                    </div>
-                    <div class="flex gap-4 mt-4">
-                        <Diviser orientation="vertical" className="md:hidden border-secondary-container"/>
-                        <div class="flex flex-1 flex-wrap gap-8">
-                            <div class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
-                                <Icon className="h-16 w-16" icon={faWindows}/>
-                                <p>Windows</p>
-                            </div>
-                            <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
-                                <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
-                                <p>MacOs</p>
-                            </div>
-                            <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
-                                <Icon className="h-16 w-16" icon={faLinux}/>
-                                <p>Linux</p>
-                            </div>
-                        </>
+                        <style is:global>
+                            .platform {
+                                @apply py-4 px-8 rounded-lg flex flex-col items-center gap-4
+                            }
+                        </style>
                     </div>
                 </div>
-                <style is:global>
-                    .platform {
-                        @apply py-4 px-8 rounded-lg flex flex-col items-center gap-4
-                    }
-                </style>
             </div>
         </div>
+        <LinearGradient nextTheme="blue"/>
     </section>
-    <section>
+    <section class="theme-blue">
         <div class="section ">
-            <p class="text-title-large">Design</p>
+            <p class="text-title-large text-tertiary">Design</p>
             <h2 class="mt-6 max-w-prose text-display-medium ">Offrez une <span
-                    class=" bg-gradient-to-r from-primary to-tertiary text-transparent bg-clip-text">expérience utilisateur</span>
+                    class="text-gradient">expérience utilisateur</span>
                 exceptionnelle avec mes
                 services.</h2>
             <!--<div class="flex gap-8 mt-32">-->

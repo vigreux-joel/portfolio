@@ -8,7 +8,6 @@ import {AnimatePresence, motion} from "framer-motion";
 export type TechnoProps = {
     name: string
     description: string
-    details?: string
     image?: any
     className?: string
     children?: any
@@ -19,12 +18,12 @@ export type TechnoProps = {
 export const Techno = ({
                            children,
                            image,
-                           details,
                            name,
                            description,
                            className,
                            variant = "secondary",
-                           buttonLabel = "Voir mon experience"
+                           buttonLabel = "Voir mon experience",
+                           ...rest
                        }: TechnoProps) => {
 
     const technoRef = useRef(null);
@@ -38,42 +37,38 @@ export const Techno = ({
         <div
             onClick={(children) ? handleClick : undefined}
             ref={technoRef}
-            className={classNames("flex gap-2 min-h-full group rounded-xl", className, {
+            className={classNames("flex gap-4 min-h-full group rounded-xl", className, {
                 " ": variant == "secondary",
                 "flex-col": variant == "primary",
                 "cursor-pointer": (children) && !displayMore
-            })}>
+            })}
+            {...rest}
+        >
             {/*<RippleEffect triggerRef={!displayMore ? technoRef : null}/>*/}
             {image && <div
                 className={classNames("transition-all duration-300 flex items-center  justify-center rounded-lg ",
-                    {"bg-surface-container-high": !((details || children) && (!displayMore)),},
-                    {"bg-secondary-container": (details || children) && (!displayMore),},
-                    {"h-10 w-10 ": variant == "secondary",},
+                    {"bg-surface-container-high": !((children) && (!displayMore)),},
+                    {"bg-secondary-container group-hover:bg-surface-container-highest": (children) && (!displayMore),},
+                    {"h-14 w-14 ": variant == "secondary",},
                     {"h-16 w-16": variant == "primary",}
                 )}>
                 <div dangerouslySetInnerHTML={{__html: image}} className={classNames({
-                    "h-5 w-5": variant == "secondary",
-                    "w-10 h-10": variant == "primary"
+                    "h-6 w-6 fill-on-surface-variant": variant == "secondary",
+                    "w-10 h-10 fill-on-secondary-container": variant == "primary"
                 })}/>
             </div>}
             <div className={"flex-1 flex flex-col justify-between items-start"}>
                 <div>
                     <p className={classNames({
                         "text-title-small": variant == "secondary",
-                        "text-title-medium mb-1 mt-2": variant == "primary"
+                        "text-title-medium mb-2 mt-4": variant == "primary"
                     })}>{name}</p>
 
                     <div className={"relative"}>
-                        <p className={classNames("mb-2 transition-all duration-300 group-hover:delay-0 delay-200 text-on-surface-variant max-w-prose", {
+                        <p className={classNames("transition-all duration-300 delay-200 text-on-surface-variant max-w-prose", {
                             "text-body-small": variant == "secondary",
                             "text-body-medium": variant == "primary",
-                            "group-hover:opacity-0 group-hover:invisible": (details)
                         })}>{description}</p>
-                        {details &&
-                            <p className={classNames("absolute transition-all duration-300 group-hover:delay-200 invisible opacity-0 group-hover:visible group-hover:opacity-100 top-0 text-on-surface-variant max-w-prose", {
-                                "text-body-small": variant == "secondary",
-                                "text-body-medium": variant == "primary"
-                            })}>{details}</p>}
                     </div>
 
 

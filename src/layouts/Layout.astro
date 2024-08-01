@@ -145,6 +145,10 @@ const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
     <slot/>
 </main>
 <!--<Footer/>-->
-<!--<script src="../js/main.js"></script>-->
+<script>
+    import AOS from 'aos'
+
+    AOS.init()
+</script>
 </body>
 </html>
