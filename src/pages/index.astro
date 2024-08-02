@@ -9,7 +9,6 @@ import home1Right from "@assets/images/home-1-right.png";
 import home1Stars from "@assets/images/home-1-stars.svg";
 import {Image} from "astro:assets";
 import {StickyScroll} from "@components/sticky-scroll-reveal";
-import {DotLottiePlayer} from '@dotlottie/react-player';
 import '@dotlottie/react-player/dist/index.css';
 import astroLogo from "@assets/images/astro-logo.svg?raw"
 import reactLogo from "@assets/images/react-logo.svg?raw"
@@ -268,41 +267,51 @@ import {LinearGradient} from "@components/LinearGradient";
         </div>
         <LinearGradient nextTheme="blue"/>
     </section>
-    <section class="theme-blue">
-        <div class="section ">
-            <p class="text-title-large text-tertiary">Design</p>
-            <h2 class="mt-6 max-w-prose text-display-medium ">Offrez une <span
-                    class="text-gradient">expérience utilisateur</span>
-                exceptionnelle avec mes
-                services.</h2>
-            <!--<div class="flex gap-8 mt-32">-->
-            <!--    <div>-->
-            <!--        <Diviser/>-->
-            <!--        <div class="pt-8 pr-8">-->
-            <!--            <h3 class="">Thèmes couleur personnalisés</h3>-->
-            <!--            <p class="mt-6 text-body-large">Personnalisez facilement vos applications avec des palettes de-->
-            <!--                couleurs cohérentes et dynamiques.</p>-->
-            <!--        </div>-->
-            <!--    </div>-->
-            <!--    <div>-->
-            <!--        <Diviser/>-->
-            <!--        <div class="pt-8 pr-8">-->
-            <!--            <h3 class="">Design réactif et moderne</h3>-->
-            <!--            <p class="mt-6 text-body-large">Offrez une expérience utilisateur fluide avec des composants-->
-            <!--                modernes et réactifs.</p>-->
-            <!--        </div>-->
-            <!--    </div>-->
-            <!--    <div>-->
-            <!--        <Diviser/>-->
-            <!--        <div class="pt-8 pr-8">-->
-            <!--            <h3 class="">Accessibilité améliorée</h3>-->
-            <!--            <p class="mt-6 text-body-large">Garantissez une utilisation optimale pour tous avec des-->
-            <!--                standards élevés d'accessibilité intégrés.</p>-->
-            <!--        </div>-->
-            <!--    </div>-->
-            <!--</div>-->
-            <StickyScroll className="mt-32" client:load/>
+    <section class="theme-blue pt-8 !z-20">
+        <div class="max-width">
+            <div class="flex">
+                <div>
+                    <Line isLast client:load icon={faLaptopMobile}/>
+                </div>
+                <div class="padding">
+                    <p data-aos="fade-right" class="text-title-large">Design</p>
+                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                        <h2 class="text-gradient">Augmentez la fidélité de vos utilisateurs</h2>
+                        <h3>Offrez une expérience utilisateur exceptionnelle avec mes services.</h3>
+                    </div>
+                </div>
+            </div>
+            <StickyScroll client:load/>
         </div>
+
+
+        <!--<div class="flex gap-8 mt-32">-->
+        <!--    <div>-->
+        <!--        <Diviser/>-->
+        <!--        <div class="pt-8 pr-8">-->
+        <!--            <h3 class="">Thèmes couleur personnalisés</h3>-->
+        <!--            <p class="mt-6 text-body-large">Personnalisez facilement vos applications avec des palettes de-->
+        <!--                couleurs cohérentes et dynamiques.</p>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--    <div>-->
+        <!--        <Diviser/>-->
+        <!--        <div class="pt-8 pr-8">-->
+        <!--            <h3 class="">Design réactif et moderne</h3>-->
+        <!--            <p class="mt-6 text-body-large">Offrez une expérience utilisateur fluide avec des composants-->
+        <!--                modernes et réactifs.</p>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--    <div>-->
+        <!--        <Diviser/>-->
+        <!--        <div class="pt-8 pr-8">-->
+        <!--            <h3 class="">Accessibilité améliorée</h3>-->
+        <!--            <p class="mt-6 text-body-large">Garantissez une utilisation optimale pour tous avec des-->
+        <!--                standards élevés d'accessibilité intégrés.</p>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+
     </section>
     <!--<section class="section">-->
     <!--    <TextRevealByWord client:load-->
@@ -316,13 +325,13 @@ import {LinearGradient} from "@components/LinearGradient";
         <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, je mise sur des
             solutions back-end robustes pour la performance de chacun de vos projets.</p>
         <Card variant="filled" className="!rounded-3xl mt-12">
-            <DotLottiePlayer client:load
-                             src="/lotties/back-end.lottie"
-                             autoplay
-                             loop
-                             className="max-w-3xl mx-auto md:-mt-16"
-            >
-            </DotLottiePlayer>
+            <!--<DotLottiePlayer client:load-->
+            <!--                 src="/lotties/back-end.lottie"-->
+            <!--                 autoplay-->
+            <!--                 loop-->
+            <!--                 className="max-w-3xl mx-auto md:-mt-16"-->
+            <!--&gt;-->
+            <!--</DotLottiePlayer>-->
         </Card>
     </section>
     <section class="section">

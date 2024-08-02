@@ -1,6 +1,6 @@
 "use client";
 import React, {useRef, useState} from "react";
-import {motion, useMotionValueEvent, useScroll} from "framer-motion";
+import {AnimatePresence, motion, useMotionValueEvent, useScroll} from "framer-motion";
 import classNames from "classnames";
 import {Link} from "@components/Link.tsx";
 
@@ -8,7 +8,7 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
     {
         text: (
             <>
-                <h3 className="">Conception visuelle moderne et fluide</h3>
+                <h3 className="text-headline-small text-primary">Conception visuelle moderne et fluide</h3>
                 <p className="mt-6 text-body-large">Grâce aux guidelines de Material Design 3, je conçois des
                     interfaces fluides et adaptées à tous les écrans, assurant une navigation optimale et une
                     esthétique
@@ -25,7 +25,8 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
     {
         text: (
             <>
-                <h3 className="">Harmonisation des couleurs pour une identité visuelle forte</h3>
+                <h3 className="text-headline-small text-primary">Harmonisation des couleurs pour une identité visuelle
+                    forte</h3>
                 <p className="mt-6 text-body-large">Personnalisez facilement vos applications avec des palettes de
                     couleurs cohérentes et dynamiques, inspirées par Material Design pour optimiser la lisibilité et
                     l'attrait visuel de votre site.</p>
@@ -37,7 +38,8 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
     {
         text: (
             <>
-                <h3 className="">Renforcez votre image de marque et identité visuelle</h3>
+                <h3 className="text-headline-small text-primary">Renforcez votre image de marque et identité
+                    visuelle</h3>
                 <p className="mt-6 text-body-large">J'optimise le design que vous me proposez afin de refléter une
                     identité visuelle forte et
                     cohérente, assurant une présentation professionnelle, attrayante et facilement adaptable.
@@ -50,7 +52,7 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
     {
         text: (
             <>
-                <h3 className="">Dynamisez votre site avec des animations fluides</h3>
+                <h3 className="text-headline-small text-primary">Dynamisez votre site avec des animations fluides</h3>
                 <p className="mt-6 text-body-large">
                     À l'aide de <Link href={"https://www.framer.com/motion/"} target={"_blank"}>Framer motion</Link> je
                     conçois des
@@ -84,6 +86,7 @@ export const StickyScroll = ({
     });
     const cardLength = content.length;
     const [displayText, setDisplayText] = useState(false)
+    const [isOverlay, setIsOverlay] = useState(false)
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
 
@@ -110,6 +113,7 @@ export const StickyScroll = ({
         //     0
         // );
         setDisplayText(latest > 0)
+        setIsOverlay(latest > 0 && latest < 1)
         setActiveCard(closestBreakpointIndex);
     });
 
@@ -125,12 +129,26 @@ export const StickyScroll = ({
     ];
 
 
-    return (
+    return (<>
+        <AnimatePresence>
+            {
+                isOverlay && <motion.div
+                    initial={"hidden"}
+                    variants={{
+                        hidden: {opacity: 0},
+                        visible: {opacity: 1}
+                    }}
+                    animate={"visible"}
+                    transition={{duration: .5}}
+                    exit={"hidden"}
+                    className={"fixed h-screen w-screen bg-surface top-0  z-10 left-0"}>
+
+                </motion.div>
+            }
+        </AnimatePresence>
+
         <motion.div
-            animate={{
-                backgroundColor: backgroundColors[activeCard % backgroundColors.length],
-            }}
-            className={"flex relative rounded-md " + className}
+            className={"flex relative rounded-md z-20 " + className}
             ref={ref}
         >
 
@@ -229,5 +247,5 @@ export const StickyScroll = ({
                 </motion.div>
             </motion.div>
         </motion.div>
-    );
+    </>);
 };
