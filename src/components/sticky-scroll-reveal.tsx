@@ -32,20 +32,6 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
                     l'attrait visuel de votre site.</p>
             </>),
         media: (
-            <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-color.gif'}/>
-        ),
-    },
-    {
-        text: (
-            <>
-                <h3 className="text-headline-small text-primary">Renforcez votre image de marque et identité
-                    visuelle</h3>
-                <p className="mt-6 text-body-large">J'optimise le design que vous me proposez afin de refléter une
-                    identité visuelle forte et
-                    cohérente, assurant une présentation professionnelle, attrayante et facilement adaptable.
-                </p>
-            </>),
-        media: (
             <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
     },

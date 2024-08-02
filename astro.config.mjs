@@ -9,10 +9,9 @@ import compressor from "astro-compressor";
 export default defineConfig({
     site: "https://vigreux-joel.fr/",
     compressHTML: true,
-    experimental: {
-    },
+    experimental: {},
     output: 'static',
-    integrations: [ react(), tailwind({
+    integrations: [react(), tailwind({
         applyBaseStyles: false
     }),
         sitemap(), compressor(), critters({
@@ -21,7 +20,7 @@ export default defineConfig({
     ],
     vite: {
         ssr: {
-            noExternal: [ "react-markdown"]
+            noExternal: ["react-markdown", "@udixio/theme"]
         }
     }
 });

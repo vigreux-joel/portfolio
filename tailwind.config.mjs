@@ -1,4 +1,3 @@
-/** @type {import("tailwindcss").Config} */
 import {createTheme} from '@udixio/theme'
 
 const {fontFamily, plugins} = createTheme()

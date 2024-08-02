@@ -29,7 +29,7 @@ import {Card} from "@udixio/ui"
 import {
     faAddressCard,
     faCircle,
-    faCode,
+    faCode, faGears,
     faLaptopMobile,
     faMessageMiddle
 } from "@fortawesome/pro-light-svg-icons";
@@ -318,74 +318,84 @@ import {LinearGradient} from "@components/LinearGradient";
     <!--                      text="Un petit secret ? Il est courant que seul 20% de l'ensemble d'un site soit visible."/>-->
     <!--</section>-->
 
-    <section id="back-end" class="section">
+    <section id="back-end" class="section pt-32  theme-orange">
         <p class="text-center text-title-medium text-tertiary">Back-end</p>
         <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
-            Derrière chaque application réussie se trouve un robuste développement back-end.</h2>
-        <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, je mise sur des
-            solutions back-end robustes pour la performance de chacun de vos projets.</p>
-        <Card variant="filled" className="!rounded-3xl mt-12">
-            <!--<DotLottiePlayer client:load-->
-            <!--                 src="/lotties/back-end.lottie"-->
-            <!--                 autoplay-->
-            <!--                 loop-->
-            <!--                 className="max-w-3xl mx-auto md:-mt-16"-->
-            <!--&gt;-->
-            <!--</DotLottiePlayer>-->
-        </Card>
+            Derrière chaque application de qualité se cache un <span class="text-gradient">développement back-end</span>
+            solide.</h2>
+        <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, j’assure la
+            performance, la sécurité et la fiabilité de vos projets grâce à des solutions back-end robustes.</p>
     </section>
-    <section class="section">
-        <p class="text-center text-title-small text-tertiary">Languages & Framework</p>
-        <h2 class="text-center text-headline-small mt-2 max-w-prose mx-auto">La diversité des langages,<br/> une
-            clé pour déverrouiller chaque défi de programmation.</h2>
-        <div class="grid grid-cols-5 gap-4 mt-12">
-            <Card variant="filled" className="col-span-3 row-span-2 p-6">
-                <p class="text-title-medium">Typescript :</p>
-                <Techno buttonLabel="En voir plus" variant="primary" className="flex-1 mt-8 ml-4" image={astroLogo}
-                        client:load name="Nest.Js"
-                        description="Framework progressif pour la construction d'applications côté serveur en utilisant TypeScript."
-                        details="Mon choix préféré depuis plusieurs années pour créer des applications côté serveur. J'apprécie particulièrement son approche modulaire, sa documentation exhaustive, et sa rigueur. Il s'adapte à toutes les situations en assurant toujours la qualité du code."
-                >
-                    <Techno image={astroLogo} client:load displayMore name="Express.Js"
-                            description="Framework minimaliste pour Node.js, facilitant la création rapide d'applications web et API.">
-                    </Techno>
-                    <Techno className="mt-4" image={astroLogo} client:load displayMore name="Node.Js"
-                            description="Environnement d'exécution JavaScript côté serveur pour la création d'applications en réseau évolutives.">
-                    </Techno>
-                </Techno>
-            </Card>
+    <section class="section theme-orange">
+        <div class="max-width">
+            <div class="flex">
+                <div>
+                    <Line isLast client:load icon={faGears}/>
+                </div>
+                <div class="padding">
 
-            <Card className="col-span-2 row-span-1" variant="filled">
-                <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore name="Python"
-                        description="Langage de programmation polyvalent adoré pour sa simplicité, utilisé en science des données, IA, développement web, et bien plus.">
-                </Techno>
-            </Card>
-            <Card variant="filled" className="col-span-2 row-span-2">
-                <Techno variant="primary" className="p-6 min-h-full" client:load image={flutterLogo} displayMore
-                        name="PHP"
-                        description="Un langage de script côté serveur populaire pour le développement web dynamique."
-                        details="Le premier langage que j'ai appris lors de mes études, juste après Java. Un souvenir nostalgique de ce qui a lancé ma passion pour le développement web."
-                >
-                    <Techno image={astroLogo} client:load displayMore name="Synfony"
-                            description="Ensemble de composants PHP réutilisables et un framework web full-stack pour les applications d'entreprise.">
-                    </Techno>
-                </Techno>
-            </Card>
-
-            <div class="col-span-3 flex gap-4">
-                <Card className="flex-1" variant="filled">
-                    <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore name="Java"
-                            description="Langage de programmation orienté objet, à usage général, populaire pour la construction d'applications d'entreprise sécurisées et durables.">
+                    <p data-aos="fade-right" class="text-title-large">Languages & Framework</p>
+                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                        <h2 class="text-gradient">Chacune de vos problématiques a une solution</h2>
+                        <h3>La diversité des langages pour déverrouiller chaque défi de programmation</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-5 gap-4 mt-12">
+                <Card variant="filled" className="col-span-3 row-span-2 p-6">
+                    <p class="text-title-medium">Typescript :</p>
+                    <Techno buttonLabel="En voir plus" variant="primary" className="flex-1 mt-8 ml-4"
+                            image={astroLogo}
+                            client:load name="Nest.Js"
+                            description="Framework progressif pour la construction d'applications côté serveur en utilisant TypeScript."
+                            details="Mon choix préféré depuis plusieurs années pour créer des applications côté serveur. J'apprécie particulièrement son approche modulaire, sa documentation exhaustive, et sa rigueur. Il s'adapte à toutes les situations en assurant toujours la qualité du code."
+                    >
+                        <Techno image={astroLogo} client:load displayMore name="Express.Js"
+                                description="Framework minimaliste pour Node.js, facilitant la création rapide d'applications web et API.">
+                        </Techno>
+                        <Techno className="mt-4" image={astroLogo} client:load displayMore name="Node.Js"
+                                description="Environnement d'exécution JavaScript côté serveur pour la création d'applications en réseau évolutives.">
+                        </Techno>
                     </Techno>
                 </Card>
 
-                <Card className="flex-1" variant="filled">
-                    <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore name="Go"
-                            description="Langage de programmation compilé conçu pour l'efficacité, la performance, et la concurrence, souvent utilisé pour les systèmes de back-end.">
+                <Card className="col-span-2 row-span-1" variant="filled">
+                    <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore
+                            name="Python"
+                            description="Langage de programmation polyvalent adoré pour sa simplicité, utilisé en science des données, IA, développement web, et bien plus.">
                     </Techno>
                 </Card>
+                <Card variant="filled" className="col-span-2 row-span-2">
+                    <Techno variant="primary" className="p-6 min-h-full" client:load image={flutterLogo}
+                            displayMore
+                            name="PHP"
+                            description="Un langage de script côté serveur populaire pour le développement web dynamique."
+                            details="Le premier langage que j'ai appris lors de mes études, juste après Java. Un souvenir nostalgique de ce qui a lancé ma passion pour le développement web."
+                    >
+                        <Techno image={astroLogo} client:load displayMore name="Synfony"
+                                description="Ensemble de composants PHP réutilisables et un framework web full-stack pour les applications d'entreprise.">
+                        </Techno>
+                    </Techno>
+                </Card>
+
+                <div class="col-span-3 flex gap-4">
+                    <Card className="flex-1" variant="filled">
+                        <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore
+                                name="Java"
+                                description="Langage de programmation orienté objet, à usage général, populaire pour la construction d'applications d'entreprise sécurisées et durables.">
+                        </Techno>
+                    </Card>
+
+                    <Card className="flex-1" variant="filled">
+                        <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore
+                                name="Go"
+                                description="Langage de programmation compilé conçu pour l'efficacité, la performance, et la concurrence, souvent utilisé pour les systèmes de back-end.">
+                        </Techno>
+                    </Card>
+                </div>
             </div>
         </div>
+
     </section>
 
 </Layout>

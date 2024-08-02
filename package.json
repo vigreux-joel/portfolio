@@ -27,7 +27,7 @@
     "@fortawesome/pro-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@udixio/tailwind-material": "^1.0.0-beta.18",
-    "@udixio/theme": "^1.0.0-beta.25",
+    "@udixio/theme": "^1.0.0-beta.27",
     "@udixio/ui": "^1.0.0-beta.65",
     "aos": "^2.3.4",
     "astro": "^4.13.0",
