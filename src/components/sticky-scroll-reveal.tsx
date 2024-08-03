@@ -3,6 +3,7 @@ import React, {useRef, useState} from "react";
 import {AnimatePresence, motion, useMotionValueEvent, useScroll} from "framer-motion";
 import classNames from "classnames";
 import {Link} from "@components/Link.tsx";
+import {BackgroundColor} from "@components/BackgroundColor.tsx";
 
 const content: { text: React.ReactNode; media: React.ReactNode }[] = [
     {
@@ -84,6 +85,7 @@ export const StickyScroll = ({
             if (cardsBreakpoints[i] > latest) {
                 break;
             }
+            window.screenX
             // Sinon, mettre à jour l'indice du point de rupture le plus proche
             closestBreakpointIndex = i;
         }
@@ -129,6 +131,7 @@ export const StickyScroll = ({
                     exit={"hidden"}
                     className={"fixed h-screen w-screen bg-surface top-0  z-10 left-0"}>
 
+                    <BackgroundColor count={15}/>
                 </motion.div>
             }
         </AnimatePresence>
@@ -209,6 +212,7 @@ export const StickyScroll = ({
                         // ease: [0.1, 0.25, 0.3, 1]
                     }}
                 >
+
                     {content.map((card, index) => {
                         return <motion.div
                             layout
