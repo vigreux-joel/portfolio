@@ -127,7 +127,7 @@ export const StickyScroll = ({
                         visible: {opacity: 1}
                     }}
                     animate={"visible"}
-                    transition={{duration: .5}}
+                    transition={{duration: 1}}
                     exit={"hidden"}
                     className={"fixed h-screen w-screen bg-surface top-0  z-10 left-0"}>
 
@@ -152,7 +152,7 @@ export const StickyScroll = ({
                     ease: [0.1, 0.25, 0.3, 1]
                 }}
                 animate={displayText ? "visible" : "hidden"} layout
-                className="div left md:w-[400px] relative flex flex-col gap-32">
+                className="div mask-inverse left md:w-[400px] relative flex flex-col gap-32">
                 {content.map((item, index) => (
                     <motion.div
                         key={index}

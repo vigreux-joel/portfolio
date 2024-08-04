@@ -14,6 +14,7 @@ export const CircleComponent: React.FC<{
     const [top, setTop] = useState<string>(`${Math.random() * 100}%`);
     const [left, setLeft] = useState<string>(`${Math.random() * 100}%`);
     const [startTime, setStartTime] = useState<Date | null>(null);
+    const [isVisible, setIsVisible] = useState(true)
 
 
     const updateRandomPosition = () => {
@@ -24,18 +25,54 @@ export const CircleComponent: React.FC<{
 
     useEffect(() => {
         if (isAngry) {
-            // Enregistrer le temps de début
             const now = new Date();
             setStartTime(now);
 
             const timerId = setTimeout(() => {
                 setIsAngry(false);
-                setStartTime(null); // Réinitialiser le temps de début
-            }, 2000);
+                setStartTime(null);
+            }, 3000);
         } else {
             updateRandomPosition()
         }
     }, [isAngry]);
+
+    useEffect(() => {
+        const checkIsVisible = () => {
+            const maskInverses = document.querySelectorAll(".mask-inverse")
+            const el = ref.current as unknown as HTMLElement
+            const blur = 1.1
+            const rect1 = {
+                top: el.getBoundingClientRect().top - circleRadius * blur,
+                right: el.getBoundingClientRect().left + circleRadius * blur,
+                bottom: el.getBoundingClientRect().top + circleRadius * blur,
+                left: el.getBoundingClientRect().left - circleRadius * blur
+            };
+            let visible = true
+            for (const maskInverse of maskInverses) {
+                const rect2 = maskInverse.getBoundingClientRect();
+                const overlap = !(rect1.right < rect2.left ||
+                    rect1.left > rect2.right ||
+                    rect1.bottom < rect2.top ||
+                    rect1.top > rect2.bottom)
+                if (overlap) {
+                    visible = false
+                    break;
+                }
+            }
+            setIsVisible(visible)
+
+        };
+
+        checkIsVisible()
+
+        const interval = setInterval(checkIsVisible, 300);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
 
     useEffect(() => {
         const updatePosition = () => {
@@ -48,7 +85,7 @@ export const CircleComponent: React.FC<{
 
         setTimeout(() => updatePosition, 200)
 
-        const interval = setInterval(updatePosition, 10_000);
+        const interval = setInterval(updatePosition, 8_000);
 
         return () => {
             clearInterval(interval);
@@ -64,13 +101,13 @@ export const CircleComponent: React.FC<{
         const magnitude = Math.sqrt(dx * dx + dy * dy);
 
         const elapsedTimeInSeconds = startTime ? ((new Date().getTime() - startTime.getTime()) / 1000) : 0;
-        if (magnitude < circleRadius * 2 && (elapsedTimeInSeconds > 1 || !isAngry)) {
+        if (magnitude < circleRadius * 1.5 && (elapsedTimeInSeconds > 1 || !isAngry) && isVisible) {
             const dirX = dx / magnitude;
             const dirY = dy / magnitude;
 
 
-            const distX = dirX * circleRadius * 2.5;
-            const distY = dirY * circleRadius * 2.5;
+            const distX = dirX * circleRadius * 2;
+            const distY = dirY * circleRadius * 2;
 
 
             const newTopPixels = rect.top + distY;
@@ -94,18 +131,25 @@ export const CircleComponent: React.FC<{
         ref={ref}
         key={index}
         layout={"position"}
-        transition={isAngry ? {duration: 2, ease: "easeOut"} : {duration: 10, ease: "linear"}}
-        className="absolute"
-        style={{top: top, left: left}}
+        transition={isAngry ? {duration: 3, ease: "easeInOut"} : {duration: 8, ease: "easeInOut"}
+        }
+        className="absolute mix-blend-hard-light"
+        style={{
+            top: top, left: left,
+        }}
     >
         <div
-            style={{height: circleRadius * 2, width: circleRadius * 2}}
-            className={classNames("absolute transition-all duration-500 rounded-full transform -translate-y-1/2 -translate-x-1/2 ",
-                {
-                    "bg-primary-container": !isAngry && index % 3 !== 0,
-                    "bg-primary-container/50": !isAngry && index % 3 === 0,
-                    "bg-tertiary-container": isAngry
-                }
+            style={{
+                background: `radial-gradient(circle at center,rgb(var(--colors-${
+                    classNames({
+                        "primary-container)/0.9": !isAngry,
+                        "tertiary-container)/0.9": isAngry
+                    })
+                }) 0,rgb(var(--colors-primary-container)/0) 50%) no-repeat`,
+                height: isVisible ? circleRadius * 2 : 0, width: isVisible ? circleRadius * 2 : 0,
+                transition: ".3s, height 2s, width 2s"
+            }}
+            className={classNames("absolute mix-blend-hard-light rounded-full transform -translate-y-1/2 -translate-x-1/2 ",
             )}></div>
 
     </motion.div>
@@ -114,7 +158,7 @@ export const CircleComponent: React.FC<{
 
 export const BackgroundColor: React.FC<{
     count?: number, radius?: number
-}> = ({count = 10, radius = 175}) => {
+}> = ({count = 5, radius = 400}) => {
 
 
     const isClient = typeof window === 'object';
@@ -144,23 +188,27 @@ export const BackgroundColor: React.FC<{
             <svg style={{visibility: "hidden", position: "absolute"}} width="0" height="0"
                  xmlns="http://www.w3.org/2000/svg">
                 <filter id="gooey">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur"/>
-                    <feColorMatrix mode="matrix" in="blur" result="gooey"
-                                   values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"/>
-                    <feComposite in="SourceGraphic" operator="atop" in2="gooey"/>
+                    <feGaussianBlur
+                        in="SourceGraphic"
+                        stdDeviation="10"
+                        result="blur"
+                    />
+                    <feColorMatrix
+                        in="blur"
+                        mode="matrix"
+                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+                        result="goo"
+                    />
+                    <feBlend in="SourceGraphic" in2="goo"/>
                 </filter>
             </svg>
-
-            {/*<div className={""}>*/}
-            <div className={"blur-[150px] h-full relative"}>
-                <div
-                    style={{filter: "url(#gooey)"}}
-                    className="gooey-spheres w-full h-full absolute">
-                    {circles.map((pos, i) => (
-                            <CircleComponent key={i} index={i} circleRadius={radius} mouse={mouse}/>
-                        )
-                    )}
-                </div>
+            <div
+                style={{filter: "url(#gooey) blur(40px)"}}
+                className="gooey-spheres w-full h-full absolute">
+                {circles.map((pos, i) => (
+                        <CircleComponent key={i} index={i} circleRadius={radius} mouse={mouse}/>
+                    )
+                )}
             </div>
         </div>
     );
