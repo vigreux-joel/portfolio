@@ -5,7 +5,7 @@ import classNames from "classnames";
 import {Link} from "@components/Link.tsx";
 import {BackgroundColor} from "@components/BackgroundColor.tsx";
 
-const content: { text: React.ReactNode; media: React.ReactNode }[] = [
+const content: { text: React.ReactNode; media: React.ReactNode, theme?: string }[] = [
     {
         text: (
             <>
@@ -35,6 +35,7 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
         media: (
             <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
+        theme: "purple"
     },
     {
         text: (
@@ -51,6 +52,7 @@ const content: { text: React.ReactNode; media: React.ReactNode }[] = [
         media: (
             <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
+        theme: "orange"
     },
 
 ]
@@ -63,7 +65,7 @@ export const StickyScroll = ({
 }) => {
 
 
-    const [activeCard, setActiveCard] = React.useState(null);
+    const [activeCard, setActiveCard] = React.useState<number | null>(null);
     const ref = useRef<any>(null);
     const {scrollYProgress} = useScroll({
         // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
@@ -105,17 +107,6 @@ export const StickyScroll = ({
         setActiveCard(closestBreakpointIndex);
     });
 
-    const backgroundColors = [
-        "var(--slate-900)",
-        "var(--black)",
-        "var(--neutral-900)",
-    ];
-    const linearGradients = [
-        "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
-        "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-        "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
-    ];
-
 
     return (<>
         <AnimatePresence>
@@ -129,15 +120,15 @@ export const StickyScroll = ({
                     animate={"visible"}
                     transition={{duration: 1}}
                     exit={"hidden"}
-                    className={"fixed h-screen w-screen bg-surface top-0  z-10 left-0"}>
+                    className={"fixed h-screen w-screen bg-surface top-0  z-10 left-0 " + (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")}>
 
-                    <BackgroundColor count={15}/>
+                    <BackgroundColor/>
                 </motion.div>
             }
         </AnimatePresence>
 
         <motion.div
-            className={"flex relative rounded-md z-20 " + className}
+            className={"flex relative rounded-md z-20 " + className + ' ' + (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")}
             ref={ref}
         >
 

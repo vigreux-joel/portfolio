@@ -9,6 +9,15 @@ export const CircleComponent: React.FC<{
     mouse: MousePosition,
     index: number
 }> = ({circleRadius, mouse, index}) => {
+    const diameter = circleRadius * 2;
+
+    const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
+
+    const diameterDelta = diameter * delta
+    const height = diameter + diameterDelta;
+    const width = diameter - diameterDelta;
+
+
     const ref = React.useRef(null);
     const [isAngry, setIsAngry] = useState(false);
     const [top, setTop] = useState<string>(`${Math.random() * 100}%`);
@@ -41,20 +50,19 @@ export const CircleComponent: React.FC<{
         const checkIsVisible = () => {
             const maskInverses = document.querySelectorAll(".mask-inverse")
             const el = ref.current as unknown as HTMLElement
-            const blur = 1.1
-            const rect1 = {
-                top: el.getBoundingClientRect().top - circleRadius * blur,
-                right: el.getBoundingClientRect().left + circleRadius * blur,
-                bottom: el.getBoundingClientRect().top + circleRadius * blur,
-                left: el.getBoundingClientRect().left - circleRadius * blur
-            };
+            const rect1 = el.getBoundingClientRect()
+            const centerX = (rect1.left + rect1.right) / 2;
+            const centerY = (rect1.top + rect1.bottom) / 2;
             let visible = true
+            const blur = 0.7
             for (const maskInverse of maskInverses) {
                 const rect2 = maskInverse.getBoundingClientRect();
-                const overlap = !(rect1.right < rect2.left ||
-                    rect1.left > rect2.right ||
-                    rect1.bottom < rect2.top ||
-                    rect1.top > rect2.bottom)
+                const overlap = !(
+                    centerX + width / 2 * blur < rect2.left ||
+                    centerX - width / 2 * blur > rect2.right ||
+                    centerY + height / 2 * blur < rect2.top ||
+                    centerY - height / 2 * blur > rect2.bottom
+                )
                 if (overlap) {
                     visible = false
                     break;
@@ -94,20 +102,24 @@ export const CircleComponent: React.FC<{
 
 
     useEffect(() => {
+        const elapsedTimeInSeconds = startTime ? ((new Date().getTime() - startTime.getTime()) / 1000) : 0;
+        if ((elapsedTimeInSeconds < 1 && isAngry) || !isVisible) {
+            return
+        }
 
         const rect = (ref.current as unknown as HTMLElement).getBoundingClientRect();
-        const dy = rect.top - mouse.clientY;
-        const dx = rect.left - mouse.clientX;
+        const dy = rect.top + rect.height / 2 - mouse.clientY;
+        const dx = rect.left + rect.width / 2 - mouse.clientX;
         const magnitude = Math.sqrt(dx * dx + dy * dy);
 
-        const elapsedTimeInSeconds = startTime ? ((new Date().getTime() - startTime.getTime()) / 1000) : 0;
-        if (magnitude < circleRadius * 1.5 && (elapsedTimeInSeconds > 1 || !isAngry) && isVisible) {
+
+        if (magnitude < circleRadius) {
             const dirX = dx / magnitude;
             const dirY = dy / magnitude;
 
 
-            const distX = dirX * circleRadius * 2;
-            const distY = dirY * circleRadius * 2;
+            const distX = dirX * circleRadius * 1.5;
+            const distY = dirY * circleRadius * 1.5;
 
 
             const newTopPixels = rect.top + distY;
@@ -130,35 +142,38 @@ export const CircleComponent: React.FC<{
     return <motion.div
         ref={ref}
         key={index}
-        layout={"position"}
-        transition={isAngry ? {duration: 3, ease: "easeInOut"} : {duration: 8, ease: "easeInOut"}
+        initial={
+            {top: top, left: left,}
         }
-        className="absolute mix-blend-hard-light"
-        style={{
+        transition={
+            {
+                type: "tween",
+                duration: 0.3,
+                top: {duration: isAngry ? 3 : 8, ease: isAngry ? "easeOut" : "linear"},
+                left: {duration: isAngry ? 3 : 8, ease: isAngry ? "easeOut" : "linear"},
+                height: {duration: 1},
+                width: {duration: 1},
+            }
+        }
+        className="absolute mix-blend-hard-light transform -translate-y-1/2 -translate-x-1/2"
+        animate={{
             top: top, left: left,
+            background: `radial-gradient(rgb(var(--colors-${
+                classNames({
+                    "primary-container)/0.9": !isAngry,
+                    "tertiary-container)/0.9": isAngry
+                })
+            }) 0,rgb(var(--colors-primary-container)/0) 50%) no-repeat`,
+            height: isVisible ? height : 0, width: isVisible ? width : 0,
         }}
     >
-        <div
-            style={{
-                background: `radial-gradient(circle at center,rgb(var(--colors-${
-                    classNames({
-                        "primary-container)/0.9": !isAngry,
-                        "tertiary-container)/0.9": isAngry
-                    })
-                }) 0,rgb(var(--colors-primary-container)/0) 50%) no-repeat`,
-                height: isVisible ? circleRadius * 2 : 0, width: isVisible ? circleRadius * 2 : 0,
-                transition: ".3s, height 2s, width 2s"
-            }}
-            className={classNames("absolute mix-blend-hard-light rounded-full transform -translate-y-1/2 -translate-x-1/2 ",
-            )}></div>
-
     </motion.div>
 }
 
 
 export const BackgroundColor: React.FC<{
     count?: number, radius?: number
-}> = ({count = 5, radius = 400}) => {
+}> = ({count = 25, radius = 400}) => {
 
 
     const isClient = typeof window === 'object';
@@ -203,7 +218,7 @@ export const BackgroundColor: React.FC<{
                 </filter>
             </svg>
             <div
-                style={{filter: "url(#gooey) blur(40px)"}}
+                style={{filter: "url(#gooey) blur(100px)"}}
                 className="gooey-spheres w-full h-full absolute">
                 {circles.map((pos, i) => (
                         <CircleComponent key={i} index={i} circleRadius={radius} mouse={mouse}/>
