@@ -24,6 +24,7 @@ import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import tailwindLogo from "@assets/images/tailwind-logo.svg?raw"
 import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
+import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
 import {
@@ -108,6 +109,7 @@ import {LinearGradient} from "@components/LinearGradient";
         <LinearGradient nextTheme="purple"/>
     </section>
     <section id="front-end" class="pt-8 theme-purple">
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-100" client:load/>
         <div class="max-width ">
             <div class="flex">
                 <div>
@@ -171,15 +173,15 @@ import {LinearGradient} from "@components/LinearGradient";
                     </div>
                 </Card>
             </div>
-        </div>
-    </section>
-    <section class="theme-purple">
-        <div class="max-width">
             <div class="flex h-52">
                 <div>
                     <Line client:load/>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="theme-purple">
+        <div class="max-width">
             <div class="flex mt-8">
                 <div>
                     <Line client:load nextTheme="blue" icon={faLaptopMobile}/>
@@ -311,14 +313,14 @@ import {LinearGradient} from "@components/LinearGradient";
         <!--        </div>-->
         <!--    </div>-->
         <!--</div>-->
-
+        <LinearGradient nextTheme="orange"/>
     </section>
     <!--<section class="section">-->
     <!--    <TextRevealByWord client:load-->
     <!--                      text="Un petit secret ? Il est courant que seul 20% de l'ensemble d'un site soit visible."/>-->
     <!--</section>-->
 
-    <section id="back-end" class="pt-32  theme-orange">
+    <section id="back-end" class="pt-64  theme-orange">
         <p class="text-center text-title-medium text-tertiary">Back-end</p>
         <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
             Derrière chaque application de qualité se cache un <span class="text-gradient">développement back-end</span>

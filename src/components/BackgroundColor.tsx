@@ -8,7 +8,8 @@ export const CircleComponent: React.FC<{
     circleRadius: number,
     mouse: MousePosition,
     index: number
-}> = ({circleRadius, mouse, index}) => {
+    canEscape?: boolean
+}> = ({circleRadius, mouse, index, canEscape = true}) => {
     const diameter = circleRadius * 2;
 
     const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
@@ -40,7 +41,7 @@ export const CircleComponent: React.FC<{
             const timerId = setTimeout(() => {
                 setIsAngry(false);
                 setStartTime(null);
-            }, 3000);
+            }, 1000);
         } else {
             updateRandomPosition()
         }
@@ -102,8 +103,11 @@ export const CircleComponent: React.FC<{
 
 
     useEffect(() => {
+        if (!canEscape) {
+            return
+        }
         const elapsedTimeInSeconds = startTime ? ((new Date().getTime() - startTime.getTime()) / 1000) : 0;
-        if ((elapsedTimeInSeconds < 1 && isAngry) || !isVisible) {
+        if ((elapsedTimeInSeconds < 0.75 && isAngry) || !isVisible) {
             return
         }
 
@@ -113,7 +117,7 @@ export const CircleComponent: React.FC<{
         const magnitude = Math.sqrt(dx * dx + dy * dy);
 
 
-        if (magnitude < circleRadius) {
+        if (magnitude < circleRadius * 0.5) {
             const dirX = dx / magnitude;
             const dirY = dy / magnitude;
 
@@ -143,28 +147,31 @@ export const CircleComponent: React.FC<{
         ref={ref}
         key={index}
         initial={
-            {top: top, left: left,}
+            {top: top, left: left}
         }
         transition={
             {
                 type: "tween",
                 duration: 0.3,
-                top: {duration: isAngry ? 3 : 8, ease: isAngry ? "easeOut" : "linear"},
-                left: {duration: isAngry ? 3 : 8, ease: isAngry ? "easeOut" : "linear"},
+                top: {duration: isAngry ? 1 : 8, ease: isAngry ? "easeOut" : "linear"},
+                left: {duration: isAngry ? 1 : 8, ease: isAngry ? "easeOut" : "linear"},
+                background: {duration: 2},
                 height: {duration: 1},
                 width: {duration: 1},
             }
         }
-        className="absolute mix-blend-hard-light transform -translate-y-1/2 -translate-x-1/2"
+        className="absolute transition-all duration-2000 mix-blend-hue transform -translate-y-1/2 -translate-x-1/2"
         animate={{
             top: top, left: left,
             background: `radial-gradient(rgb(var(--colors-${
                 classNames({
-                    "primary-container)/0.9": !isAngry,
-                    "tertiary-container)/0.9": isAngry
+                    "primary-container)/0.9": index % 2 !== 0,
+                    "tertiary-container)/0.6": index % 2 === 0,
+                    // "primary)/0.5": isAngry
                 })
-            }) 0,rgb(var(--colors-primary-container)/0) 50%) no-repeat`,
-            height: isVisible ? height : 0, width: isVisible ? width : 0,
+            }) 0,rgb(var(--colors-surface)/0) 50%) no-repeat`,
+            height: isVisible && !isAngry ? height : 0,
+            width: isVisible && !isAngry ? width : 0,
         }}
     >
     </motion.div>
@@ -172,8 +179,8 @@ export const CircleComponent: React.FC<{
 
 
 export const BackgroundColor: React.FC<{
-    count?: number, radius?: number
-}> = ({count = 25, radius = 400}) => {
+    count?: number, radius?: number, className?: string, canEscape?: boolean
+}> = ({count = 20, radius = 600, className, canEscape}) => {
 
 
     const isClient = typeof window === 'object';
@@ -199,29 +206,29 @@ export const BackgroundColor: React.FC<{
 
 
     return (
-        <div className={"h-full w-full -z-10 absolute"}>
-            <svg style={{visibility: "hidden", position: "absolute"}} width="0" height="0"
-                 xmlns="http://www.w3.org/2000/svg">
-                <filter id="gooey">
-                    <feGaussianBlur
-                        in="SourceGraphic"
-                        stdDeviation="10"
-                        result="blur"
-                    />
-                    <feColorMatrix
-                        in="blur"
-                        mode="matrix"
-                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
-                        result="goo"
-                    />
-                    <feBlend in="SourceGraphic" in2="goo"/>
-                </filter>
-            </svg>
+        <div className={"h-full w-full -z-10 absolute " + className}>
+            {/*<svg style={{visibility: "hidden", position: "absolute"}} width="0" height="0"*/}
+            {/*     xmlns="http://www.w3.org/2000/svg">*/}
+            {/*    <filter id="gooey">*/}
+            {/*        <feGaussianBlur*/}
+            {/*            in="SourceGraphic"*/}
+            {/*            stdDeviation="10"*/}
+            {/*            result="blur"*/}
+            {/*        />*/}
+            {/*        <feColorMatrix*/}
+            {/*            in="blur"*/}
+            {/*            mode="matrix"*/}
+            {/*            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"*/}
+            {/*            result="goo"*/}
+            {/*        />*/}
+            {/*        <feBlend in="SourceGraphic" in2="goo"/>*/}
+            {/*    </filter>*/}
+            {/*</svg>*/}
             <div
-                style={{filter: "url(#gooey) blur(100px)"}}
+                style={{filter: "url(#gooey) blur(40px)"}}
                 className="gooey-spheres w-full h-full absolute">
                 {circles.map((pos, i) => (
-                        <CircleComponent key={i} index={i} circleRadius={radius} mouse={mouse}/>
+                        <CircleComponent key={i} index={i} circleRadius={radius} mouse={mouse} canEscape={canEscape}/>
                     )
                 )}
             </div>

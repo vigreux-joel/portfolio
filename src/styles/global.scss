@@ -82,7 +82,8 @@ body {
 }
 
 section {
-  @apply relative z-10 bg-surface
+  @apply relative;
+  @apply after:bg-surface after:h-full after:w-full after:absolute after:top-0 after:left-0 after:-z-20
 }
 
 .sub-title {

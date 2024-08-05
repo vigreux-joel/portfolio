@@ -1,4 +1,5 @@
 import {defineConfig, FontPlugin, TailwindPlugin} from "@udixio/theme";
+import {DislikeAnalyzer} from "@material/material-color-utilities";
 
 
 module.exports = defineConfig({
@@ -6,7 +7,12 @@ module.exports = defineConfig({
     colors: {
         colors: {
             tertiaryContainer: {
-                tone: (s) => (s.isDark ? 30 : 93),
+                tone: (s) => {
+                    const proposedHct = s
+                        .getPalette('tertiary')
+                        .getHct((s.isDark ? 30 : 93),);
+                    return DislikeAnalyzer.fixIfDisliked(proposedHct).tone;
+                },
             },
         },
     },
