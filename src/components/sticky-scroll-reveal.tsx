@@ -42,7 +42,7 @@ const content: { text: React.ReactNode; media: React.ReactNode, theme?: string }
             <>
                 <h3 className="text-headline-small text-primary">Dynamisez votre site avec des animations fluides</h3>
                 <p className="mt-6 text-body-large">
-                    À l'aide de <Link href={"https://www.framer.com/motion/"} target={"_blank"}>Framer motion</Link> je
+                    À l'aide de <Link href={"https://www.framer.com/motion/"} target={"_blank"}>Framer motion</Link>, je
                     conçois des
                     animations
                     fluides et engageantes qui
@@ -78,30 +78,16 @@ export const StickyScroll = ({
     const [isOverlay, setIsOverlay] = useState(false)
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
-
-
+        
         const cardsBreakpoints = content.map((_, index) => index / cardLength);
         let closestBreakpointIndex = 0;
         for (let i = 0; i < cardsBreakpoints.length; i += 1) {
-            // Si le point de rupture courant est supérieur à latest, interrompre la boucle
             if (cardsBreakpoints[i] > latest) {
                 break;
             }
             window.screenX
-            // Sinon, mettre à jour l'indice du point de rupture le plus proche
             closestBreakpointIndex = i;
         }
-        // const closestBreakpointIndex = cardsBreakpoints.reduce(
-        //     (acc, breakpoint, index) => {
-        //         const distance = Math.abs(latest - breakpoint);
-        //         console.log("distance: ", distance)
-        //         if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-        //             return index;
-        //         }
-        //         return acc;
-        //     },
-        //     0
-        // );
         setDisplayText(latest > 0)
         setIsOverlay(latest > 0 && latest < 1)
         setActiveCard(closestBreakpointIndex);
@@ -128,7 +114,7 @@ export const StickyScroll = ({
         </AnimatePresence>
 
         <motion.div
-            className={"flex relative rounded-md z-20 " + className + ' ' + (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")}
+            className={"flex relative padding-x rounded-md z-20 " + className + ' ' + (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")}
             ref={ref}
         >
 

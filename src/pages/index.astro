@@ -59,7 +59,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             full-stack</p>
                         </div>
                         <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
-                                class="text-label-large text-on-surface-variant">3 années d'experiences</p>
+                                class="text-label-large text-on-surface-variant">3 années d'expériences</p>
                         </div>
                         <a href="#contact" class="group">
                             <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
@@ -116,14 +116,14 @@ import {LinearGradient} from "@components/LinearGradient";
                     <Line client:load icon={faCode} isLast/>
                 </div>
                 <div class="padding ">
-                    <p data-aos="fade-right" class="text-title-large">Développement web - front-end</p>
+                    <p data-aos="fade-right" class="text-title-large">Développement web - Front-end</p>
                     <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
-                        <h2 class="text-gradient">Performances et flexibilité garanties</h2>
+                        <h2 class="text-gradient">Performance et flexibilité garantie</h2>
                         <h3>J'assure vos projets avec des technologies modernes et adaptables</h3>
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 -mx-2 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+            <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
                 <Card data-aos="zoom-in" variant="filled"
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load displayMore
@@ -135,7 +135,7 @@ import {LinearGradient} from "@components/LinearGradient";
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo} displayMore
                             name="React"
-                            description="facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le développement et la gestion de l'état.">
+                            description="Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le développement et la gestion de l'état.">
                     </Techno>
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
@@ -145,17 +145,14 @@ import {LinearGradient} from "@components/LinearGradient";
                             description="Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant le style des composants flexible et modulaire.">
                     </Techno>
                 </Card>
-                <!--<Card variant="filled" className="lg:order-1 group hover:!bg-surface-container-high">-->
-                <!--    <h2>Lorem</h2>-->
-                <!--</Card>-->
-                <Card data-aos="zoom-in" data-aos-delay={450} className="md:col-span-3 p-6 pb-10 mb-px">
+                <Card data-aos="zoom-in" data-aos-delay={450} className="md:col-span-3 p-6 pb-10 mb-px mt-4">
                     <p class="mb-8 mt-2">Ma boîte à outils :</p>
-                    <div class=" grid grid-cols-2 gap-x-4 gap-y-6">
+                    <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
                         <Techno image={framerMotionLogo} name="Framer Motion"
                                 description="Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec facilité.">
                         </Techno>
                         <Techno image={materialLogo} name="Material 3"
-                                description="Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives avec des éléments visuels raffinés.s.">
+                                description="Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives avec des éléments visuels raffinés.">
                         </Techno>
                         <Techno image={angularLogo} name="Angular"
                                 description="Facilite le développement d'applications web robustes et évolutives avec une structure organisée et des fonctionnalités puissantes intégrées.">
@@ -168,7 +165,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         </Techno>
 
                         <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
-                                description="Fondations essentileselles pour créer des sites web interactifs et fonctionnels.">
+                                description="Fondations essentielles pour créer des sites web interactifs et fonctionnels.">
                         </Techno>
                     </div>
                 </Card>
@@ -196,7 +193,8 @@ import {LinearGradient} from "@components/LinearGradient";
                                 <h3>Je convertis vos idées en applications adaptables à tous les
                                     appareils</h3>
                             </div>
-                            <p class="max-w-prose mt-8 text-body-large">Flutter me permet de créer des applications pour
+                            <p data-aos="fade-right" data-aos-delay="100" class="max-w-prose mt-8 text-body-large">
+                                Flutter me permet de créer des applications pour
                                 mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
                                 particulièrement
                                 son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
@@ -209,7 +207,8 @@ import {LinearGradient} from "@components/LinearGradient";
                         <!--</div>-->
                     </div>
                     <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-                        <div class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
+                        <div data-aos="zoom-in"
+                             class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
                             <Icon className="h-16 w-16" icon={faBrowser}/>
                             <p>Web</p>
                         </div>
@@ -222,11 +221,13 @@ import {LinearGradient} from "@components/LinearGradient";
                             <div class="flex gap-4 mt-4">
                                 <Diviser orientation="vertical" className="md:hidden border-primary-container"/>
                                 <div class="flex flex-1 flex-wrap gap-8">
-                                    <div class="flex-1 platform bg-primary-container text-on-primary-container">
+                                    <div data-aos="zoom-in" data-aos-delay={150}
+                                         class="flex-1 platform bg-primary-container text-on-primary-container">
                                         <Icon className="h-16 w-16" icon={faApple}/>
                                         <p>IOS</p>
                                     </div>
-                                    <div class="flex-1 platform bg-primary-container text-on-primary-container">
+                                    <div data-aos="zoom-in" data-aos-delay={150}
+                                         class="flex-1 platform bg-primary-container text-on-primary-container">
                                         <Icon className="h-16 w-16" icon={faAndroid}/>
                                         <p>Android</p>
                                     </div>
@@ -243,15 +244,18 @@ import {LinearGradient} from "@components/LinearGradient";
                             <div class="flex gap-4 mt-4">
                                 <Diviser orientation="vertical" className="md:hidden border-secondary-container"/>
                                 <div class="flex flex-1 flex-wrap gap-8">
-                                    <div class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
+                                    <div data-aos="zoom-in" data-aos-delay={300}
+                                         class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
                                         <Icon className="h-16 w-16" icon={faWindows}/>
                                         <p>Windows</p>
                                     </div>
-                                    <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                    <div data-aos="zoom-in" data-aos-delay={300}
+                                         class="flex-1 platform bg-secondary-container text-on-secondary-container">
                                         <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
                                         <p>MacOs</p>
                                     </div>
-                                    <div class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                    <div data-aos="zoom-in" data-aos-delay={300}
+                                         class="flex-1 platform bg-secondary-container text-on-secondary-container">
                                         <Icon className="h-16 w-16" icon={faLinux}/>
                                         <p>Linux</p>
                                     </div>
@@ -285,50 +289,62 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <StickyScroll client:load/>
         </div>
-
-
-        <!--<div class="flex gap-8 mt-32">-->
-        <!--    <div>-->
-        <!--        <Diviser/>-->
-        <!--        <div class="pt-8 pr-8">-->
-        <!--            <h3 class="">Thèmes couleur personnalisés</h3>-->
-        <!--            <p class="mt-6 text-body-large">Personnalisez facilement vos applications avec des palettes de-->
-        <!--                couleurs cohérentes et dynamiques.</p>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--    <div>-->
-        <!--        <Diviser/>-->
-        <!--        <div class="pt-8 pr-8">-->
-        <!--            <h3 class="">Design réactif et moderne</h3>-->
-        <!--            <p class="mt-6 text-body-large">Offrez une expérience utilisateur fluide avec des composants-->
-        <!--                modernes et réactifs.</p>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--    <div>-->
-        <!--        <Diviser/>-->
-        <!--        <div class="pt-8 pr-8">-->
-        <!--            <h3 class="">Accessibilité améliorée</h3>-->
-        <!--            <p class="mt-6 text-body-large">Garantissez une utilisation optimale pour tous avec des-->
-        <!--                standards élevés d'accessibilité intégrés.</p>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--</div>-->
         <LinearGradient nextTheme="orange"/>
     </section>
-    <!--<section class="section">-->
-    <!--    <TextRevealByWord client:load-->
-    <!--                      text="Un petit secret ? Il est courant que seul 20% de l'ensemble d'un site soit visible."/>-->
-    <!--</section>-->
-
     <section id="back-end" class="pt-64  theme-orange">
-        <p class="text-center text-title-medium text-tertiary">Back-end</p>
-        <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
-            Derrière chaque application de qualité se cache un <span class="text-gradient">développement back-end</span>
-            solide.</h2>
-        <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, j’assure la
-            performance, la sécurité et la fiabilité de vos projets grâce à des solutions back-end robustes.</p>
+        <div class="section">
+            <p class="text-center text-title-medium text-tertiary">Back-end</p>
+            <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
+                Derrière chaque application de qualité se cache un <span
+                    class="text-gradient">développement back-end</span>
+                solide.</h2>
+            <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, j’assure la
+                performance, la sécurité et la fiabilité de vos projets grâce à des solutions back-end robustes.</p>
+        </div>
     </section>
     <section class="theme-orange">
+        <BackgroundColor canEscape={false} count={5} radius={400} className="opacity-70" client:load/>
+        <div class="max-width">
+            <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
+                <Card data-aos="zoom-in" variant="filled"
+                      className="group col-span-2 row-span-2">
+                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load displayMore
+                            name="Api"
+                            description="Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en générant du contenu statique ultra-performant.">
+                    </Techno>
+                </Card>
+                <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                      className="group">
+                    <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo} displayMore
+                            name="Langagues"
+                            description="facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le développement et la gestion de l'état.">
+                        <Button label="En savoir plus"/>
+                    </Techno>
+
+                </Card>
+                <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                      className="group">
+                    <div class="p-4">
+                        <div>
+                            <p class="text-title-medium mb-2">Langagues</p>
+                            <div class="relative"><p
+                                    class="transition-all duration-300 delay-200 text-on-surface-variant max-w-prose text-body-medium">
+                                facilite la création d'interfaces interactives avec des composants réutilisables,
+                                accélérant
+                                le développement et la gestion de l'état.</p></div>
+                        </div>
+                        <Button variant="filledTonal" className="mt-4" label="En savoir plus"/>
+                    </div>
+                </Card>
+            </div>
+            <div class="flex h-52">
+                <div>
+                    <Line client:load/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="theme-orange pt-8">
         <div class="max-width">
             <div class="flex">
                 <div>
@@ -343,7 +359,7 @@ import {LinearGradient} from "@components/LinearGradient";
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-5 gap-4 mt-12">
+            <div class="grid padding-x grid-cols-5 gap-4">
                 <Card variant="filled" className="col-span-3 row-span-2 p-6">
                     <p class="text-title-medium">Typescript :</p>
                     <Techno buttonLabel="En voir plus" variant="primary" className="flex-1 mt-8 ml-4"

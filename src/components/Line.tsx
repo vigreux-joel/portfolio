@@ -26,7 +26,8 @@ export const Line = ({nextTheme, icon, isFirst, isLast, visible}: {
     })
 
     return (
-        <div ref={ref} className={"h-full ml-8 flex flex-col items-center " + (isFirst || !icon ? '' : 'gap-8')}>
+        <div ref={ref}
+             className={"h-full ml-8 md:ml-12 flex flex-col items-center " + (isFirst || !icon ? '' : 'gap-8')}>
             <div className={classNames("relative w-6 flex  transition-all duration-500", {
                 "scale-50 opacity-50": isFirst,
                 "opacity-100": isVisibleIcon,
