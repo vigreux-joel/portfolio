@@ -12,6 +12,8 @@ import {StickyScroll} from "@components/sticky-scroll-reveal";
 import '@dotlottie/react-player/dist/index.css';
 import astroLogo from "@assets/images/astro-logo.svg?raw"
 import reactLogo from "@assets/images/react-logo.svg?raw"
+import nestLogo from "@assets/images/nest-logo.svg?raw"
+import expressLogo from "@assets/images/express-logo.svg?raw"
 import tsLogo from "@assets/images/ts-logo.svg?raw"
 import {Link} from "@components/Link"
 import flutterLogo from "@assets/images/flutter-logo.svg?raw"
@@ -28,16 +30,25 @@ import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
 import {
-    faAddressCard,
-    faCircle,
-    faCode, faGears,
+    faAddressCard, faChartNetwork,
+    faCircle, faCloud,
+    faCode, faCodeBranch, faGears,
     faLaptopMobile,
-    faMessageMiddle
+    faMessageMiddle, faProjectDiagram
 } from "@fortawesome/pro-light-svg-icons";
 import {Techno} from "@components/Techno"
 import TextRevealByWord from "../components/TextReveal";
 import {faBrowser, faCircleInfo, faEnvelope,} from "@fortawesome/pro-regular-svg-icons";
-import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
+import {
+    faAndroid,
+    faApple,
+    faGolang,
+    faJava,
+    faLinux,
+    faNodeJs, faPhp,
+    faPython, faSymfony,
+    faWindows
+} from "@fortawesome/free-brands-svg-icons";
 import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
 ---
@@ -126,46 +137,54 @@ import {LinearGradient} from "@components/LinearGradient";
             <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
                 <Card data-aos="zoom-in" variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load displayMore
+                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load
                             name="Astro"
-                            description="Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en générant du contenu statique ultra-performant.">
+                    ><p>Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en
+                        générant du contenu statique ultra-performant.</p>
                     </Techno>
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo} displayMore
+                    <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo}
                             name="React"
-                            description="Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le développement et la gestion de l'état.">
+                    ><p>Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le
+                        développement et la gestion de l'état.</p>
                     </Techno>
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load image={tailwindLogo} displayMore
+                    <Techno variant="primary" className="p-6 pb-10" client:load image={tailwindLogo}
                             name="Tailwind"
-                            description="Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant le style des composants flexible et modulaire.">
+                    ><p>Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant le
+                        style des composants flexible et modulaire.</p>
                     </Techno>
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={450} className="md:col-span-3 p-6 pb-10 mb-px mt-4">
                     <p class="mb-8 mt-2">Ma boîte à outils :</p>
                     <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
                         <Techno image={framerMotionLogo} name="Framer Motion"
-                                description="Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec facilité.">
+                        ><p>Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec
+                            facilité.</p>
                         </Techno>
                         <Techno image={materialLogo} name="Material 3"
-                                description="Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives avec des éléments visuels raffinés.">
+                        ><p>Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives
+                            avec des éléments visuels raffinés.</p>
                         </Techno>
                         <Techno image={angularLogo} name="Angular"
-                                description="Facilite le développement d'applications web robustes et évolutives avec une structure organisée et des fonctionnalités puissantes intégrées.">
+                        ><p>Facilite le développement d'applications web robustes et évolutives avec une structure
+                            organisée et des fonctionnalités puissantes intégrées.</p>
                         </Techno>
                         <Techno image={sassLogo} name="Sass"
-                                description="Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles complexes.">
+                        ><p>Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles
+                            complexes.</p>
                         </Techno>
                         <Techno image={tsLogo} name="Typescript"
-                                description="Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à maintenir.">
+                        ><p>Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à
+                            maintenir.</p>
                         </Techno>
 
                         <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
-                                description="Fondations essentielles pour créer des sites web interactifs et fonctionnels.">
+                        ><p>Fondations essentielles pour créer des sites web interactifs et fonctionnels.</p>
                         </Techno>
                     </div>
                 </Card>
@@ -177,9 +196,9 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
         </div>
     </section>
-    <section class="theme-purple">
+    <section class="theme-purple pt-8">
         <div class="max-width">
-            <div class="flex mt-8">
+            <div class="flex">
                 <div>
                     <Line client:load nextTheme="blue" icon={faLaptopMobile}/>
                 </div>
@@ -283,7 +302,7 @@ import {LinearGradient} from "@components/LinearGradient";
                     <p data-aos="fade-right" class="text-title-large">Design</p>
                     <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
                         <h2 class="text-gradient">Augmentez la fidélité de vos utilisateurs</h2>
-                        <h3>Offrez une expérience utilisateur exceptionnelle avec mes services.</h3>
+                        <h3>Offrez une expérience utilisateur exceptionnelle avec mes services</h3>
                     </div>
                 </div>
             </div>
@@ -297,44 +316,54 @@ import {LinearGradient} from "@components/LinearGradient";
             <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
                 Derrière chaque application de qualité se cache un <span
                     class="text-gradient">développement back-end</span>
-                solide.</h2>
+                solide</h2>
             <p class="text-center text-body-large max-w-prose mx-auto">En tant que développeur full-stack, j’assure la
                 performance, la sécurité et la fiabilité de vos projets grâce à des solutions back-end robustes.</p>
         </div>
     </section>
     <section class="theme-orange">
-        <BackgroundColor canEscape={false} count={5} radius={400} className="opacity-70" client:load/>
         <div class="max-width">
             <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
                 <Card data-aos="zoom-in" variant="filled"
-                      className="group col-span-2 row-span-2">
-                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load displayMore
-                            name="Api"
-                            description="Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en générant du contenu statique ultra-performant.">
+                      className="group ">
+                    <Techno variant="primary" className="p-6 pb-10"
+                            icon={faChartNetwork}
+                            name="Choix d'APIs Adaptées"
+                    >
+                        <p>Que vous ayez besoin de GraphQL pour des requêtes flexibles, REST pour sa simplicité
+                            éprouvée, ou gRPC pour des performances élevées, je mets en place des APIs adaptées à vos
+                            besoins.</p>
+                        <p class="mt-4">Chaque solution est sélectionnée pour optimiser la communication entre vos
+                            services et offrir une expérience utilisateur fluide.
+                        </p>
                     </Techno>
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo} displayMore
-                            name="Langagues"
-                            description="facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le développement et la gestion de l'état.">
-                        <Button label="En savoir plus"/>
+                    <Techno variant="primary" className="p-6 pb-10" client:load icon={faProjectDiagram}
+                            name="Architecture Flexible et Efficace"
+                    ><p>J'adopte des architectures monolithiques pour la simplicité et des microservices pour une
+                        scalabilité optimale, en intégrant des principes d'inversion de contrôle (IoC) pour une
+                        meilleure modularité.
+                    </p>
+                        <p class="mt-4">
+                            Cela permet de créer des systèmes robustes qui répondent aux besoins spécifiques de votre
+                            entreprise, assurant une croissance fluide et une adaptation facile.
+                        </p>
                     </Techno>
 
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
                       className="group">
-                    <div class="p-4">
-                        <div>
-                            <p class="text-title-medium mb-2">Langagues</p>
-                            <div class="relative"><p
-                                    class="transition-all duration-300 delay-200 text-on-surface-variant max-w-prose text-body-medium">
-                                facilite la création d'interfaces interactives avec des composants réutilisables,
-                                accélérant
-                                le développement et la gestion de l'état.</p></div>
-                        </div>
-                        <Button variant="filledTonal" className="mt-4" label="En savoir plus"/>
-                    </div>
+                    <Techno variant="primary" className="p-6 pb-10" client:load icon={faCloud}
+                            name="Solutions Serverless"
+                    ><p>Pour des applications nécessitant une gestion simplifiée et une scalabilité automatique,
+                        j'implémente des solutions serverless.
+                    </p>
+                        <p class="mt-4">
+                            Cette approche permet de réduire les coûts d'infrastructure et de se concentrer sur le
+                            développement de vos fonctionnalités, sans les tracas liés à la gestion des serveurs.</p>
+                    </Techno>
                 </Card>
             </div>
             <div class="flex h-52">
@@ -345,6 +374,7 @@ import {LinearGradient} from "@components/LinearGradient";
         </div>
     </section>
     <section class="theme-orange pt-8">
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-50" client:load/>
         <div class="max-width">
             <div class="flex">
                 <div>
@@ -354,63 +384,75 @@ import {LinearGradient} from "@components/LinearGradient";
 
                     <p data-aos="fade-right" class="text-title-large">Languages & Framework</p>
                     <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
-                        <h2 class="text-gradient">Chacune de vos problématiques a une solution</h2>
-                        <h3>La diversité des langages pour déverrouiller chaque défi de programmation</h3>
+                        <h2 class="text-gradient">Chaque défi a sa solution</h2>
+                        <h3>Ma maîtrise de divers langages m'aide à relever une large gamme de défis</h3>
                     </div>
                 </div>
             </div>
-            <div class="grid padding-x grid-cols-5 gap-4">
-                <Card variant="filled" className="col-span-3 row-span-2 p-6">
-                    <p class="text-title-medium">Typescript :</p>
-                    <Techno buttonLabel="En voir plus" variant="primary" className="flex-1 mt-8 ml-4"
-                            image={astroLogo}
+            <div class="grid padding-x lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
+                <Card data-aos="zoom-in" variant="filled" className="lg:col-span-3 md:col-span-2 p-6">
+                    <Techno buttonLabel="En voir plus" variant="primary" className=""
+                            image={nestLogo}
                             client:load name="Nest.Js"
-                            description="Framework progressif pour la construction d'applications côté serveur en utilisant TypeScript."
-                            details="Mon choix préféré depuis plusieurs années pour créer des applications côté serveur. J'apprécie particulièrement son approche modulaire, sa documentation exhaustive, et sa rigueur. Il s'adapte à toutes les situations en assurant toujours la qualité du code."
                     >
-                        <Techno image={astroLogo} client:load displayMore name="Express.Js"
-                                description="Framework minimaliste pour Node.js, facilitant la création rapide d'applications web et API.">
+                        <p>Offre une structure modulaire et un support TypeScript pour créer des applications back-end
+                            robustes et évolutives.</p>
+                    </Techno>
+                    <p class="mt-8 text-label-large">Maîtriser NestJS implique également l'utilisation de :</p>
+                    <div class="mt-4 flex flex-col gap-4">
+                        <Techno image={expressLogo} client:load name="Express.Js">
+                            <p>Simplifie la création d'applications web avec une API légère et flexible pour le routage
+                                et la gestion des requêtes.</p>
                         </Techno>
-                        <Techno className="mt-4" image={astroLogo} client:load displayMore name="Node.Js"
-                                description="Environnement d'exécution JavaScript côté serveur pour la création d'applications en réseau évolutives.">
+                        <Techno icon={faNodeJs} client:load name="Node.Js">
+                            <p>Permet d'exécuter JavaScript côté serveur pour créer des applications rapides et
+                                évolutives avec un accès aux ressources système.</p>
                         </Techno>
+                        <Techno image={tsLogo} client:load name="Typescript">
+                            <p>Renforce JavaScript avec des types statiques pour un code plus sûr, clair et facile à
+                                maintenir.</p>
+                        </Techno>
+                    </div>
+                </Card>
+                <Card data-aos="zoom-in" data-aos-delay={150} className="lg:col-span-2 row-span-1" variant="filled">
+                    <Techno variant="primary" className="p-6" client:load icon={faGolang}
+                            name="Go"
+                    ><p>Offre une performance élevée et une gestion efficace de la concurrence, idéal pour des
+                        applications rapides et pour des systèmes variés grâce à sa compilation en binaire.</p>
                     </Techno>
                 </Card>
 
-                <Card className="col-span-2 row-span-1" variant="filled">
-                    <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore
-                            name="Python"
-                            description="Langage de programmation polyvalent adoré pour sa simplicité, utilisé en science des données, IA, développement web, et bien plus.">
-                    </Techno>
-                </Card>
-                <Card variant="filled" className="col-span-2 row-span-2">
-                    <Techno variant="primary" className="p-6 min-h-full" client:load image={flutterLogo}
-                            displayMore
-                            name="PHP"
-                            description="Un langage de script côté serveur populaire pour le développement web dynamique."
-                            details="Le premier langage que j'ai appris lors de mes études, juste après Java. Un souvenir nostalgique de ce qui a lancé ma passion pour le développement web."
-                    >
-                        <Techno image={astroLogo} client:load displayMore name="Synfony"
-                                description="Ensemble de composants PHP réutilisables et un framework web full-stack pour les applications d'entreprise.">
-                        </Techno>
-                    </Techno>
-                </Card>
-
-                <div class="col-span-3 flex gap-4">
-                    <Card className="flex-1" variant="filled">
-                        <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore
+                <div class="lg:col-span-3 flex lg:flex-row flex-col gap-6 lg:order-1">
+                    <Card data-aos="zoom-in" data-aos-delay={300} className="flex-1" variant="filled">
+                        <Techno variant="primary" className="p-6" client:load icon={faJava}
                                 name="Java"
-                                description="Langage de programmation orienté objet, à usage général, populaire pour la construction d'applications d'entreprise sécurisées et durables.">
+                        ><p>Offre une plateforme robuste et évolutive pour développer des applications back-end
+                            complexes, idéale pour les systèmes d'entreprise et les services web.</p>
                         </Techno>
                     </Card>
-
-                    <Card className="flex-1" variant="filled">
-                        <Techno variant="primary" className="p-6" client:load image={flutterLogo} displayMore
-                                name="Go"
-                                description="Langage de programmation compilé conçu pour l'efficacité, la performance, et la concurrence, souvent utilisé pour les systèmes de back-end.">
+                    <Card data-aos="zoom-in" data-aos-delay={450} className="flex-1" variant="filled">
+                        <Techno variant="primary" className="p-6" client:load icon={faPython}
+                                name="Python">
+                            <p>Offre une syntaxe claire et simple pour développer rapidement des applications
+                                puissantes,
+                                idéal pour l'analyse de données, l'intelligence artificielle et le développement
+                                web.</p>
                         </Techno>
                     </Card>
                 </div>
+                <Card data-aos="zoom-in" data-aos-delay={600} variant="filled"
+                      className="md:col-span-2 p-6 ">
+                    <Techno variant="primary" className="" client:load icon={faPhp}
+                            name="PHP"
+                    >
+                        <p>Langage serveur largement utilisé pour créer des sites web dynamiques et interactifs, avec
+                            une vaste communauté et de nombreuses solutions prêtes à l'emploi.</p>
+                    </Techno>
+                    <Techno className="mt-6" client:load icon={faSymfony} name="Symfony"
+                    ><p>Fournit un framework PHP flexible et puissant pour développer des applications web complexes
+                        avec une architecture robuste et des composants réutilisables.</p>
+                    </Techno>
+                </Card>
             </div>
         </div>
 

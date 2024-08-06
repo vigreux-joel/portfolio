@@ -42,7 +42,7 @@ export const Line = ({nextTheme, icon, isFirst, isLast, visible}: {
                     style={{
                         height: isVisibleLine ? "100%" : 0,
                     }}
-                    className={"h-full transition-all duration-500 relative rounded-full overflow-hidden"}>
+                    className={"h-full transition-all duration-500 delay-300 relative rounded-full overflow-hidden"}>
                     <div className={classNames("w-full h-full absolute", {
                         'bg-primary': !isFirst && icon && !isLast
                     })}>

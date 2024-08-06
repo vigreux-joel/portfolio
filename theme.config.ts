@@ -88,6 +88,7 @@ module.exports = defineConfig({
                 sm: 1.125,
             },
             subThemes: {
+                blue: '#1A73E8',
                 green: '#4CA66B',
                 purple: "#7852A9",
                 orange: '#F5704B'
