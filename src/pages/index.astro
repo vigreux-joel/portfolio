@@ -96,22 +96,22 @@ import {LinearGradient} from "@components/LinearGradient";
                         Bonjour, je suis Joël Vigreux - un développeur passionné.<br/> Ayant découvert un vif intérêt
                         pour
                         le
-                        <Link client:load href="#back-end">back-end</Link>
+                        <Link href="#back-end">back-end</Link>
                         en
                         débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
                         <Link href="#front-end">front-end</Link>
                         et de <span class="text-nowrap">l'
-            <Link client:load
-                  href="#experience-utilisateur">expérience&nbsp;utilisateur</Link></span>
+            <Link
+                    href="#experience-utilisateur">expérience&nbsp;utilisateur</Link></span>
                         tout en intégrant des pratiques
-                        <Link client:load
-                              href="#ecoresponsabilite">écoresponsables
+                        <Link
+                                href="#ecoresponsabilite">écoresponsables
                         </Link>
                         de manière pragmatique.
                     </p>
                     <div class="mt-8 flex gap-4">
-                        <Button icon={faEnvelope} client:load label="Me contacter"/>
-                        <Button href="#front-end" icon={faCircleInfo} variant="outlined" client:load
+                        <Button icon={faEnvelope} label="Me contacter"/>
+                        <Button href="#front-end" icon={faCircleInfo} variant="outlined"
                                 label="En savoir plus"/>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ import {LinearGradient} from "@components/LinearGradient";
             <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
                 <Card data-aos="zoom-in" variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo} client:load
+                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
                             name="Astro"
                     ><p>Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en
                         générant du contenu statique ultra-performant.</p>
@@ -145,7 +145,7 @@ import {LinearGradient} from "@components/LinearGradient";
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load image={reactLogo}
+                    <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
                             name="React"
                     ><p>Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le
                         développement et la gestion de l'état.</p>
@@ -153,7 +153,7 @@ import {LinearGradient} from "@components/LinearGradient";
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load image={tailwindLogo}
+                    <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
                             name="Tailwind"
                     ><p>Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant le
                         style des composants flexible et modulaire.</p>
@@ -340,7 +340,7 @@ import {LinearGradient} from "@components/LinearGradient";
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load icon={faProjectDiagram}
+                    <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
                             name="Architecture Flexible et Efficace"
                     ><p>J'adopte des architectures monolithiques pour la simplicité et des microservices pour une
                         scalabilité optimale, en intégrant des principes d'inversion de contrôle (IoC) pour une
@@ -355,7 +355,7 @@ import {LinearGradient} from "@components/LinearGradient";
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
                       className="group">
-                    <Techno variant="primary" className="p-6 pb-10" client:load icon={faCloud}
+                    <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
                             name="Solutions Serverless"
                     ><p>Pour des applications nécessitant une gestion simplifiée et une scalabilité automatique,
                         j'implémente des solutions serverless.
@@ -368,7 +368,7 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <div class="flex h-52">
                 <div>
-                    <Line client:load/>
+                    <Line/>
                 </div>
             </div>
         </div>
@@ -393,45 +393,44 @@ import {LinearGradient} from "@components/LinearGradient";
                 <Card data-aos="zoom-in" variant="filled" className="lg:col-span-3 md:col-span-2 p-6">
                     <Techno buttonLabel="En voir plus" variant="primary" className=""
                             image={nestLogo}
-                            client:load name="Nest.Js"
+                            name="Nest.Js"
                     >
                         <p>Offre une structure modulaire et un support TypeScript pour créer des applications back-end
                             robustes et évolutives.</p>
                     </Techno>
                     <p class="mt-8 text-label-large">Maîtriser NestJS implique également l'utilisation de :</p>
                     <div class="mt-4 flex flex-col gap-4">
-                        <Techno image={expressLogo} client:load name="Express.Js">
+                        <Techno image={expressLogo} name="Express.Js">
                             <p>Simplifie la création d'applications web avec une API légère et flexible pour le routage
                                 et la gestion des requêtes.</p>
                         </Techno>
-                        <Techno icon={faNodeJs} client:load name="Node.Js">
+                        <Techno icon={faNodeJs} name="Node.Js">
                             <p>Permet d'exécuter JavaScript côté serveur pour créer des applications rapides et
                                 évolutives avec un accès aux ressources système.</p>
                         </Techno>
-                        <Techno image={tsLogo} client:load name="Typescript">
+                        <Techno image={tsLogo} name="Typescript">
                             <p>Renforce JavaScript avec des types statiques pour un code plus sûr, clair et facile à
                                 maintenir.</p>
                         </Techno>
                     </div>
                 </Card>
                 <Card data-aos="zoom-in" data-aos-delay={150} className="lg:col-span-2 row-span-1" variant="filled">
-                    <Techno variant="primary" className="p-6" client:load icon={faGolang}
+                    <Techno variant="primary" className="p-6" icon={faGolang}
                             name="Go"
                     ><p>Offre une performance élevée et une gestion efficace de la concurrence, idéal pour des
                         applications rapides et pour des systèmes variés grâce à sa compilation en binaire.</p>
                     </Techno>
                 </Card>
-
                 <div class="lg:col-span-3 flex lg:flex-row flex-col gap-6 lg:order-1">
                     <Card data-aos="zoom-in" data-aos-delay={300} className="flex-1" variant="filled">
-                        <Techno variant="primary" className="p-6" client:load icon={faJava}
+                        <Techno variant="primary" className="p-6" icon={faJava}
                                 name="Java"
                         ><p>Offre une plateforme robuste et évolutive pour développer des applications back-end
                             complexes, idéale pour les systèmes d'entreprise et les services web.</p>
                         </Techno>
                     </Card>
                     <Card data-aos="zoom-in" data-aos-delay={450} className="flex-1" variant="filled">
-                        <Techno variant="primary" className="p-6" client:load icon={faPython}
+                        <Techno variant="primary" className="p-6" icon={faPython}
                                 name="Python">
                             <p>Offre une syntaxe claire et simple pour développer rapidement des applications
                                 puissantes,
@@ -442,13 +441,13 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
                 <Card data-aos="zoom-in" data-aos-delay={600} variant="filled"
                       className="md:col-span-2 p-6 ">
-                    <Techno variant="primary" className="" client:load icon={faPhp}
+                    <Techno variant="primary" className="" icon={faPhp}
                             name="PHP"
                     >
                         <p>Langage serveur largement utilisé pour créer des sites web dynamiques et interactifs, avec
                             une vaste communauté et de nombreuses solutions prêtes à l'emploi.</p>
                     </Techno>
-                    <Techno className="mt-6" client:load icon={faSymfony} name="Symfony"
+                    <Techno className="mt-6" icon={faSymfony} name="Symfony"
                     ><p>Fournit un framework PHP flexible et puissant pour développer des applications web complexes
                         avec une architecture robuste et des composants réutilisables.</p>
                     </Techno>
