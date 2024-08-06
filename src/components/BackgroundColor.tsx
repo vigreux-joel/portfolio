@@ -10,6 +10,22 @@ export const CircleComponent: React.FC<{
     index: number
     canEscape?: boolean
 }> = ({circleRadius, mouse, index, canEscape = true}) => {
+    const [isMd, setIsMd] = useState(false);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const initialIsLg = window.innerWidth > 768;
+            setIsMd(initialIsLg);
+            const handleResize = () => {
+                setIsMd(window.innerWidth > 768);
+            }
+            window.addEventListener('resize', handleResize);
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            }
+        }
+    }, []);
+
     const diameter = circleRadius * 2;
 
     const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
@@ -70,20 +86,25 @@ export const CircleComponent: React.FC<{
                 }
             }
             setIsVisible(visible)
-
         };
 
         checkIsVisible()
 
+        if (!isMd) {
+            return;
+        }
         const interval = setInterval(checkIsVisible, 300);
 
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [isMd]);
 
 
     useEffect(() => {
+        if (!isMd) {
+            return;
+        }
         const updatePosition = () => {
             if (
                 !isAngry
@@ -99,11 +120,11 @@ export const CircleComponent: React.FC<{
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [isMd]);
 
 
     useEffect(() => {
-        if (!canEscape) {
+        if (!canEscape || !isMd) {
             return
         }
         const elapsedTimeInSeconds = startTime ? ((new Date().getTime() - startTime.getTime()) / 1000) : 0;
@@ -140,7 +161,7 @@ export const CircleComponent: React.FC<{
             }
             setIsAngry(true)
         }
-    }, [mouse]);
+    }, [mouse, isMd]);
 
 
     return <motion.div

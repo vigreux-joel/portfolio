@@ -4,11 +4,11 @@ import classNames from "classnames";
 import {useRef, useState} from "react";
 import {useMotionValueEvent, useScroll} from "framer-motion";
 
-export const Line = ({nextTheme, icon, isFirst, isLast, visible}: {
+export const Line = ({nextTheme, icon, isFirst = false, isLast = false, visible}: {
     nextTheme?: string
     icon?: IconDefinition
-    isFirst: boolean
-    isLast: boolean
+    isFirst?: boolean
+    isLast?: boolean
     visible?: boolean
 }) => {
 
@@ -33,7 +33,7 @@ export const Line = ({nextTheme, icon, isFirst, isLast, visible}: {
                 "opacity-100": isVisibleIcon,
                 "opacity-0": !isVisibleIcon,
             })}>
-                <Icon className={"h-6 w-full relative z-10  "} icon={icon}/>
+                {Icon && <Icon className={"h-6 w-full relative z-10  "} icon={icon}/>}
                 <div
                     className={"bg-primary blur-lg rounded-full h-full w-full absolute top-0 left-0 scale-125 " + (isFirst ? 'hidden' : '')}></div>
             </div>
