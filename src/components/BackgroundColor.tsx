@@ -31,7 +31,7 @@ export const CircleComponent: React.FC<{
     const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
 
     const diameterDelta = diameter * delta
-    const height = diameter + diameterDelta;
+    const height = diameter + diameterDelta
     const width = diameter - diameterDelta;
 
 
@@ -50,6 +50,7 @@ export const CircleComponent: React.FC<{
 
 
     useEffect(() => {
+        if (!isMd) return
         if (isAngry) {
             const now = new Date();
             setStartTime(now);
@@ -168,7 +169,17 @@ export const CircleComponent: React.FC<{
         ref={ref}
         key={index}
         initial={
-            {top: top, left: left}
+            {
+                top: top, left: left, background: `radial-gradient(rgb(var(--colors-${
+                    classNames({
+                        "primary-container)/0.9": index % 2 !== 0,
+                        "tertiary-container)/0.6": index % 2 === 0,
+                        // "primary)/0.5": isAngry
+                    })
+                }) 0,rgb(var(--colors-surface)/0) 50%) no-repeat`,
+                height: isVisible && !isAngry ? height : 0,
+                width: isVisible && !isAngry ? width : 0,
+            }
         }
         transition={
             {
