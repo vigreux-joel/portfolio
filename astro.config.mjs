@@ -5,7 +5,9 @@ import sitemap from '@astrojs/sitemap';
 import critters from "astro-critters";
 import robotsTxt from 'astro-robots-txt';
 import compressor from "astro-compressor";
+import vercel from '@astrojs/vercel/static';
 
+// https://astro.build/config
 export default defineConfig({
     site: "https://vigreux-joel.fr/",
     compressHTML: true,
@@ -13,14 +15,13 @@ export default defineConfig({
     output: 'static',
     integrations: [react(), tailwind({
         applyBaseStyles: false
-    }),
-        sitemap(), compressor(), critters({
-            Exclude: ["File.html"]
-        }), robotsTxt(),
-    ],
+    }), sitemap(), compressor(), critters({
+        Exclude: ["File.html"]
+    }), robotsTxt()],
     vite: {
         ssr: {
             noExternal: ["react-markdown", "@udixio/theme"]
         }
-    }
+    },
+    adapter: vercel()
 });
