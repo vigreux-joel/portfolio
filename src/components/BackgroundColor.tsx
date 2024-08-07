@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {motion} from 'framer-motion';
 import useMouse, {type MousePosition} from "@react-hook/mouse-position";
 import classNames from "classnames";
 
@@ -119,7 +118,7 @@ export const CircleComponent: React.FC<{
             }
         };
 
-        setTimeout(() => updatePosition, 200)
+        setTimeout(() => updatePosition(), 200)
 
         const interval = setInterval(updatePosition, 8_000);
 
@@ -170,48 +169,29 @@ export const CircleComponent: React.FC<{
     }, [mouse, isMd]);
 
 
-    return <motion.div
+    return <div
         ref={ref}
         key={index}
-        initial={
+        style={
             {
                 top: top, left: left, background: `radial-gradient(rgb(var(--colors-${
                     classNames({
                         "primary-container)/0.9": index % 2 !== 0,
                         "tertiary-container)/0.6": index % 2 === 0,
-                        // "primary)/0.5": isAngry
                     })
                 }) 0,rgb(var(--colors-surface)/0) 50%) no-repeat`,
                 height: isVisible && !isAngry ? height : 0,
                 width: isVisible && !isAngry ? width : 0,
-            }
-        }
-        transition={
-            {
-                type: "tween",
-                duration: 0.3,
-                top: {duration: isAngry ? 1 : 8, ease: isAngry ? "easeOut" : "linear"},
-                left: {duration: isAngry ? 1 : 8, ease: isAngry ? "easeOut" : "linear"},
-                background: {duration: 2},
-                height: {duration: 1},
-                width: {duration: 1},
+                transition: `top ${isAngry ? 1 : 8}s ${isAngry ? "ease-out" : "linear"},
+                     left ${isAngry ? 1 : 8}s ${isAngry ? "ease-out" : "linear"},
+                     background 2s,
+                     height 1s,
+                     width 1s`,
             }
         }
         className="absolute transition-all duration-2000 mix-blend-hue transform -translate-y-1/2 -translate-x-1/2"
-        animate={{
-            top: top, left: left,
-            background: `radial-gradient(rgb(var(--colors-${
-                classNames({
-                    "primary-container)/0.9": index % 2 !== 0,
-                    "tertiary-container)/0.6": index % 2 === 0,
-                    // "primary)/0.5": isAngry
-                })
-            }) 0,rgb(var(--colors-surface)/0) 50%) no-repeat`,
-            height: isVisible && !isAngry ? height : 0,
-            width: isVisible && !isAngry ? width : 0,
-        }}
     >
-    </motion.div>
+    </div>
 }
 
 
