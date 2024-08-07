@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {motion} from 'framer-motion';
 import useMouse, {type MousePosition} from "@react-hook/mouse-position";
 import classNames from "classnames";
@@ -48,8 +48,13 @@ export const CircleComponent: React.FC<{
         setLeft(`${Math.random() * 100}%`)
     }
 
+    const firstUpdate = useRef(true);
 
     useEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        }
         if (!isMd) return
         if (isAngry) {
             const now = new Date();
@@ -239,25 +244,8 @@ export const BackgroundColor: React.FC<{
 
     return (
         <div className={"h-full w-full -z-10 absolute " + className}>
-            {/*<svg style={{visibility: "hidden", position: "absolute"}} width="0" height="0"*/}
-            {/*     xmlns="http://www.w3.org/2000/svg">*/}
-            {/*    <filter id="gooey">*/}
-            {/*        <feGaussianBlur*/}
-            {/*            in="SourceGraphic"*/}
-            {/*            stdDeviation="10"*/}
-            {/*            result="blur"*/}
-            {/*        />*/}
-            {/*        <feColorMatrix*/}
-            {/*            in="blur"*/}
-            {/*            mode="matrix"*/}
-            {/*            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"*/}
-            {/*            result="goo"*/}
-            {/*        />*/}
-            {/*        <feBlend in="SourceGraphic" in2="goo"/>*/}
-            {/*    </filter>*/}
-            {/*</svg>*/}
             <div
-                style={{filter: "url(#gooey) blur(40px)"}}
+                style={{filter: "blur(40px)"}}
                 className="gooey-spheres w-full h-full absolute">
                 {circles.map((pos, i) => (
                         <CircleComponent key={i} index={i} circleRadius={radius} mouse={mouse} canEscape={canEscape}/>
