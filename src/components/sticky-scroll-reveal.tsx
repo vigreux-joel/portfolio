@@ -22,6 +22,7 @@ const content: { text: React.ReactNode; media: React.ReactNode, theme?: string }
                 Sorry, your browser doesn't support embedded videos.
             </video>
         ),
+        theme: "purple"
     },
     {
         text: (
@@ -36,7 +37,7 @@ const content: { text: React.ReactNode; media: React.ReactNode, theme?: string }
         media: (
             <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
-        theme: "purple"
+        theme: "blue"
     },
     {
         text: (
@@ -53,7 +54,7 @@ const content: { text: React.ReactNode; media: React.ReactNode, theme?: string }
         media: (
             <img className={"h-full w-full object-cover"} loading={"lazy"} src={'/images/material-theme.webp'}/>
         ),
-        theme: "orange"
+        theme: "green"
     },
 
 ]
