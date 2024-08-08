@@ -7,6 +7,7 @@ import home1Left from "@assets/images/home-1-left.png";
 import home1Middle from "@assets/images/home-1-middle.png";
 import home1Right from "@assets/images/home-1-right.png";
 import home1Stars from "@assets/images/home-1-stars.svg";
+import {TextField} from "@udixio/ui";
 import {Image} from "astro:assets";
 import {StickyScroll} from "@components/sticky-scroll-reveal";
 import '@dotlottie/react-player/dist/index.css';
@@ -25,15 +26,16 @@ import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import tailwindLogo from "@assets/images/tailwind-logo.svg?raw"
 import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
+import {FormContact} from "@components/FormContact";
 import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
 import {
     faAddressCard, faChartNetwork,
     faCircle, faCloud,
-    faCode, faCodeBranch, faGears,
+    faCode, faCodeBranch, faComments, faGears,
     faLaptopMobile,
-    faMessageMiddle, faProjectDiagram
+    faMessageMiddle, faPhone, faProjectDiagram
 } from "@fortawesome/pro-light-svg-icons";
 import {Techno} from "@components/Techno"
 import TextRevealByWord from "../components/TextReveal";
@@ -291,7 +293,7 @@ import {LinearGradient} from "@components/LinearGradient";
         </div>
         <LinearGradient nextTheme="blue"/>
     </section>
-    <section class="theme-blue pt-8 !z-20">
+    <section class="theme-purple pt-8 !z-20">
         <div class="max-width">
             <div class="flex">
                 <div>
@@ -307,9 +309,9 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <StickyScroll client:load/>
         </div>
-        <LinearGradient nextTheme="orange"/>
+        <LinearGradient nextTheme="green"/>
     </section>
-    <section id="back-end" class="pt-64  theme-orange">
+    <section id="back-end" class="pt-64  theme-green">
         <div class="section">
             <p class="text-center text-title-medium text-tertiary">Back-end</p>
             <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
@@ -320,7 +322,7 @@ import {LinearGradient} from "@components/LinearGradient";
                 performance, la sécurité et la fiabilité de vos projets grâce à des solutions back-end robustes.</p>
         </div>
     </section>
-    <section class="theme-orange">
+    <section class="theme-green">
         <div class="max-width">
             <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
                 <Card data-aos="zoom-in" variant="filled"
@@ -372,8 +374,8 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
         </div>
     </section>
-    <section class="theme-orange pt-8">
-        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-50" client:load/>
+    <section class="theme-green pt-8">
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-80" client:load/>
         <div class="max-width">
             <div class="flex">
                 <div>
@@ -458,110 +460,106 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
         </div>
     </section>
-    <section class="theme-orange pt-8">
-        <div class="max-width">
-            <div class="flex">
-                <div>
-                    <Line client:load icon={faGears}/>
-                </div>
-                <div class="padding">
-                    <p data-aos="fade-right" class="text-title-large">CMS</p>
-                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
-                        <h2 class="text-gradient">Restez maître de votre contenu</h2>
-                        <h3>Je sélectionne les CMS adaptés pour répondre précisément à vos besoins.</h3>
+    <div class="overflow-hidden">
+        <section class="theme-green pt-8">
+            <div class="max-width">
+                <div class="flex">
+                    <div>
+                        <Line isLast client:load icon={faGears}/>
                     </div>
-                    <div class="flex md:flex-row flex-col gap-8 mt-16">
-                        <Card data-aos="zoom-in" variant="filled"
-                              className="group ">
-                            <Techno variant="primary" className="p-6 pb-10"
-                                    icon={faChartNetwork}
-                                    name="Sanity"
-                            >
-                                <p>CMS headless offrant une gestion efficace des contenus structurés, parfait pour des
-                                    projets nécessitant une séparation entre contenu et présentation.</p>
-                            </Techno>
-                        </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
-                              className="group">
-                            <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
-                                    name="Builder.io"
-                            ><p>CMS drag-and-drop facilitant la création de pages dynamiques sans codage, idéal pour des
-                                mises à jour rapides et une intégration fluide avec des frameworks modernes.
-                            </p>
-                            </Techno>
-                        </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
-                              className="group">
-                            <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
-                                    name="Wordpress"
-                            ><p>Le CMS le plus populaire pour sa flexibilité, ses thèmes et plugins variés, idéal pour
-                                blogs et sites d'entreprise avec une gestion facile du contenu..
-                            </p>
-                            </Techno>
-                        </Card>
-                    </div>
-                    <div data-aos="fade-right" data-aos-delay="100">
-                        <p class="text-body-large max-w-prose mt-8">Si votre CMS préféré n’est pas dans cette liste, pas
-                            d'inquiétude ! J'ai hâte de le découvrir et d'apporter mon expérience pour vous aider à
-                            l'intégrer parfaitement à votre projet.</p>
-                        <Button className="w-fit mt-4" href="#contact" icon={faEnvelope} label="Contactez-moi"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <LinearGradient nextTheme="green"/>
-    </section>
-    <section class="theme-green pt-8">
-        <div class="max-width">
-            <div class="flex">
-                <div>
-                    <Line client:load icon={faGears}/>
-                </div>
-                <div class="padding">
-                    <p data-aos="fade-right" class="text-title-large">CMS</p>
-                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
-                        <h2 class="text-gradient">Restez maître de votre contenu</h2>
-                        <h3>Je sélectionne les CMS adaptés pour répondre précisément à vos besoins.</h3>
-                    </div>
-                    <div class="flex gap-8 mt-16">
-                        <Card data-aos="zoom-in" variant="filled"
-                              className="group ">
-                            <Techno variant="primary" className="p-6 pb-10"
-                                    icon={faChartNetwork}
-                                    name="Sanity"
-                            >
-                                <p>CMS headless offrant une gestion efficace des contenus structurés, parfait pour des
-                                    projets nécessitant une séparation entre contenu et présentation.</p>
-                            </Techno>
-                        </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
-                              className="group">
-                            <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
-                                    name="Builder.io"
-                            ><p>CMS drag-and-drop facilitant la création de pages dynamiques sans codage, idéal pour des
-                                mises à jour rapides et une intégration fluide avec des frameworks modernes.
-                            </p>
-                            </Techno>
-                        </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
-                              className="group">
-                            <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
-                                    name="Wordpress"
-                            ><p>Le CMS le plus populaire pour sa flexibilité, ses thèmes et plugins variés, idéal pour
-                                blogs et sites d'entreprise avec une gestion facile du contenu..
-                            </p>
-                            </Techno>
-                        </Card>
-                    </div>
-                    <div data-aos="fade-right" data-aos-delay="100">
-                        <p class="text-body-large max-w-prose mt-8">Si votre CMS préféré n’est pas dans cette liste, pas
-                            d'inquiétude ! J'ai hâte de le découvrir et d'apporter mon expérience pour vous aider à
-                            l'intégrer parfaitement à votre projet.</p>
-                        <Button className="w-fit mt-4" href="#contact" icon={faEnvelope} label="Me contacter"/>
+                    <div class="padding">
+                        <p data-aos="fade-right" class="text-title-large">CMS</p>
+                        <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                            <h2 class="text-gradient">Restez maître de votre contenu</h2>
+                            <h3>Je sélectionne les CMS adaptés pour répondre précisément à vos besoins.</h3>
+                        </div>
+                        <div class="flex md:flex-row flex-col gap-8 mt-16">
+                            <Card data-aos="zoom-in" variant="filled"
+                                  className="group ">
+                                <Techno variant="primary" className="p-6 pb-10"
+                                        icon={faChartNetwork}
+                                        name="Sanity"
+                                >
+                                    <p>CMS headless offrant une gestion efficace des contenus structurés, parfait pour
+                                        des
+                                        projets nécessitant une séparation entre contenu et présentation.</p>
+                                </Techno>
+                            </Card>
+                            <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                                  className="group">
+                                <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
+                                        name="Builder.io"
+                                ><p>CMS drag-and-drop facilitant la création de pages dynamiques sans codage, idéal pour
+                                    des
+                                    mises à jour rapides et une intégration fluide avec des frameworks modernes.
+                                </p>
+                                </Techno>
+                            </Card>
+                            <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                                  className="group">
+                                <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
+                                        name="Wordpress"
+                                ><p>Le CMS le plus populaire pour sa flexibilité, ses thèmes et plugins variés, idéal
+                                    pour
+                                    blogs et sites d'entreprise avec une gestion facile du contenu..
+                                </p>
+                                </Techno>
+                            </Card>
+                        </div>
+                        <div data-aos="fade-right" data-aos-delay="100">
+                            <p class="text-body-large max-w-prose mt-8">Si votre CMS préféré n’est pas dans cette liste,
+                                pas
+                                d'inquiétude ! J'ai hâte de le découvrir et d'apporter mon expérience pour vous aider à
+                                l'intégrer parfaitement à votre projet.</p>
+                            <!--<Button className="w-fit mt-4" href="#contact" icon={faEnvelope} label="Contactez-moi"/>-->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <LinearGradient nextTheme="green"/>
-    </section>
+            <LinearGradient nextTheme="blue"/>
+        </section>
+        <section id="contact" class="theme-blue py-32">
+            <BackgroundColor className="" canEscape={false} count={5} radius={800} client:load/>
+            <div data-aos="zoom-in"
+                 class="bg-surface-container-highest max-w-screen-2xl mx-auto flex rounded-3xl overflow-hidden">
+                <div class="left flex-1 padding pt-8">
+                    <div class="flex gap-4 group rounded-xl mt-2">
+                        <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
+                            <Icon className="h-6 w-6 fill-on-surface-variant" icon={faComments}></Icon>
+                        </div>
+                        <div><p class="text-title-small mt-0.5">Discuter avec nous</p>
+                            <div class="text-on-surface-variant max-w-prose text-body-small">
+                                <p class="mt-1">Notre équipe est là pour vous aider.</p>
+                                <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="flex gap-4 mt-12 group rounded-xl ">-->
+                    <!--    <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">-->
+                    <!--        <Icon className="h-6 w-6 fill-on-surface-variant" icon={faPhone}></Icon>-->
+                    <!--    </div>-->
+                    <!--    <div><p class="text-title-small mt-0.5">Discuter avec nous</p>-->
+                    <!--        <div class="text-on-surface-variant max-w-prose text-body-small">-->
+                    <!--            <p class="mt-1">Notre équipe est là pour vous aider.</p>-->
+                    <!--            <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com-->
+                    <!--            </Link>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
+                </div>
+                <div class="right padding bg-surface-container-low flex-2 m-2 pt-8 rounded-2xl">
+                    <p class="text-display-small max-w-prose"><span class="text-gradient">Restons en contact</span><br/>
+                        pour
+                        donner vie à vos idées</p>
+                    <p class="mt-4 max-w-prose">Partagez les détails de votre projet et découvrons ensemble, comment je
+                        peux vous
+                        accompagner
+                        dans sa réalisation</p>
+                    <FormContact client:only="react"/>
+                </div>
+            </div>
+        </section>
+    </div>
+
 </Layout>
