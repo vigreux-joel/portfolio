@@ -26,6 +26,7 @@ import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import tailwindLogo from "@assets/images/tailwind-logo.svg?raw"
 import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
+import {FormContact} from "@components/FormContact";
 import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui"
 import {Card} from "@udixio/ui"
@@ -555,35 +556,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         peux vous
                         accompagner
                         dans sa réalisation</p>
-                    <form class="mt-8 max-w-prose">
-                        <TextField client:load
-                                   variant={'outlined'}
-                                   type="text"
-                                   name="name"
-                                   label={'Nom et prénom'}
-                                   placeholder={'Votre prénom'}
-                                   showSupportingText
-                        ></TextField>
-                        <TextField client:load
-                                   variant={'outlined'}
-                                   type="text"
-                                   name="email"
-                                   label={'E-mail'}
-                                   placeholder={'Votre e-mail'}
-                                   showSupportingText
-                        ></TextField>
-                        <TextField client:only="react"
-                                   textLine="multiLine"
-                                   variant={'outlined'}
-                                   type="text"
-                                   name="message"
-                                   label={'Message'}
-                                   placeholder={'Votre message'}
-                                   supportingText="Parlez-nous un peu de votre projet"
-                                   showSupportingText
-                        ></TextField>
-                        <Button className="mt-8" label="Envoyer le message"/>
-                    </form>
+                    <FormContact client:only="react"/>
                 </div>
             </div>
         </section>

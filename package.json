@@ -38,6 +38,7 @@
     "astro-robots-txt": "^1.0.0",
     "astro-seo": "^0.8.4",
     "classnames": "^2.5.1",
+    "formik": "^2.4.6",
     "gsap": "^3.12.5",
     "resize-observer-polyfill": "^1.5.1",
     "sharp": "^0.33.4",
