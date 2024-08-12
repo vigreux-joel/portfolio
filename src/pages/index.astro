@@ -52,6 +52,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
+
+const recipient = import.meta.env.PUBLIC_EMAIL_RECIPIENT
 ---
 <Layout>
     <style is:global>
@@ -543,8 +545,8 @@ import {LinearGradient} from "@components/LinearGradient";
                                     <p class="mt-1">Je suis là pour vous aider.</p>
                                     <Obfuscate
                                             className="mt-4 inline-block underline-offset-4 underline !text-bold text-secondary focus-visible:text-primary hover:text-primary"
+                                            email={recipient}
                                             client:only="react"
-                                            email={import.meta.env.PUBLIC_EMAIL_RECIPIENT}
                                             headers={{
                                                 body: `Bonjour,
 
