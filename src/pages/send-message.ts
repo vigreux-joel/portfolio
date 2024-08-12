@@ -1,5 +1,5 @@
-import sendmail from "sendmail";
 import validator from "validator";
+import nodemailer from "nodemailer";
 import xss from "xss";
 
 export const prerender = false;
@@ -60,27 +60,53 @@ export const POST: ({
       },
     );
   } else {
-    sendmail({})(
-      {
-        from: "no-reply@" + import.meta.env.PUBLIC_DOMAIN,
-        to: import.meta.env.PUBLIC_EMAIL_RECIPIENT,
-        subject: "contact",
-        html: xss(message),
+    let transporter = nodemailer.createTransport({
+      host: import.meta.env.EMAIL_HOST,
+      port: 465,
+      secure: true,
+      auth: {
+        user: import.meta.env.EMAIL_FROM,
+        pass: import.meta.env.EMAIL_PASSWORD,
       },
-      (err, reply) => {
-        throw new Error();
-      },
-    );
+    });
+    let mailOptions = {
+      from: import.meta.env.EMAIL_FROM,
+      to: import.meta.env.PUBLIC_EMAIL_TO,
+      subject: "contact",
+      html: `
+        <h1>Nouveau message de ${xss(name)}</h1>
+        <p>
+            Nom: ${xss(name)}<br>
+            Email: ${xss(email)}<br>
+            Message: ${xss(message)}
+        </p>
+    `,
+    };
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("Email envoyé avec succès !");
+      return new Response(
+        JSON.stringify({
+          status: 200,
+          message: "success",
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          status: 200,
+        },
+      );
+    } catch (err) {
+      console.warn('Une erreur est survenue lors de l"envoi de l"email', err);
+    }
   }
-
   return new Response(
     JSON.stringify({
-      status: 200,
-      message: "success",
+      status: 400,
+      message: "Une erreur est survenue lors de l'envoi de l'email",
     }),
     {
       headers: { "Content-Type": "application/json" },
-      status: 200,
+      status: 400,
     },
   );
 };
