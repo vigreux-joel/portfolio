@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import Obfuscate from 'react-obfuscate';
 import {Button, Diviser} from "@udixio/ui"
 import home1 from "@assets/images/home-1.png";
 import home1Left from "@assets/images/home-1-left.png";
@@ -54,6 +54,11 @@ import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
 ---
 <Layout>
+    <style is:global>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
     <section class="pt-20 md:pt-28 xl:pt-32">
         <div class="max-width">
             <div class="flex">
@@ -110,7 +115,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         </Link>
                         de manière pragmatique.
                     </p>
-                    <div class="mt-8 flex gap-4">
+                    <div class="mt-8 flex md:flex-row flex-col gap-4">
                         <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
                         <Button href="#front-end" icon={faCircleInfo} variant="outlined"
                                 label="En savoir plus"/>
@@ -129,7 +134,8 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
                 <div class="padding ">
                     <p data-aos="fade-right" class="text-title-large">Développement web - Front-end</p>
-                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                    <div data-aos="fade-right" data-aos-delay="100"
+                         class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                         <h2 class="text-gradient">Performance et flexibilité garantie</h2>
                         <h3>J'assure vos projets avec des technologies modernes et adaptables</h3>
                     </div>
@@ -208,7 +214,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         <div class="left">
                             <p data-aos="fade-right" class="text-title-large">Développement multiplateforme</p>
                             <div data-aos="fade-right" data-aos-delay="100"
-                                 class="mt-4 text-display-medium max-w-prose">
+                                 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                                 <h2 class="text-gradient">Touchez un public plus large</h2>
                                 <h3>Je convertis vos idées en applications adaptables à tous les
                                     appareils</h3>
@@ -301,7 +307,8 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
                 <div class="padding">
                     <p data-aos="fade-right" class="text-title-large">Design</p>
-                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                    <div data-aos="fade-right" data-aos-delay="100"
+                         class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                         <h2 class="text-gradient">Augmentez la fidélité de vos utilisateurs</h2>
                         <h3>Offrez une expérience utilisateur exceptionnelle avec mes services</h3>
                     </div>
@@ -314,7 +321,7 @@ import {LinearGradient} from "@components/LinearGradient";
     <section id="back-end" class="pt-64  theme-green">
         <div class="section">
             <p class="text-center text-title-medium text-tertiary">Back-end</p>
-            <h2 class="text-center text-display-medium mt-2 mb-8 max-w-prose mx-auto">
+            <h2 class="text-center text-headline-large md:text-display-medium mt-2 mb-8 max-w-prose mx-auto">
                 Derrière chaque application de qualité se cache un <span
                     class="text-gradient">développement back-end</span>
                 solide</h2>
@@ -383,7 +390,8 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
                 <div class="padding">
                     <p data-aos="fade-right" class="text-title-large">Languages & Frameworks</p>
-                    <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                    <div data-aos="fade-right" data-aos-delay="100"
+                         class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                         <h2 class="text-gradient">Chaque défi a sa solution</h2>
                         <h3>Ma maîtrise de divers langages m'aide à relever une large gamme de défis</h3>
                     </div>
@@ -469,7 +477,8 @@ import {LinearGradient} from "@components/LinearGradient";
                     </div>
                     <div class="padding">
                         <p data-aos="fade-right" class="text-title-large">CMS</p>
-                        <div data-aos="fade-right" data-aos-delay="100" class="mt-4 text-display-medium max-w-prose">
+                        <div data-aos="fade-right" data-aos-delay="100"
+                             class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                             <h2 class="text-gradient">Restez maître de votre contenu</h2>
                             <h3>Je sélectionne les CMS adaptés pour répondre précisément à vos besoins.</h3>
                         </div>
@@ -518,45 +527,69 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <LinearGradient nextTheme="blue"/>
         </section>
-        <section id="contact" class="theme-blue py-32">
+        <section id="contact" class="theme-blue py-16 md:py-32">
             <BackgroundColor className="" canEscape={false} count={5} radius={800} client:load/>
+
             <div data-aos="zoom-in"
-                 class="bg-surface-container-highest max-w-screen-2xl mx-auto flex rounded-3xl overflow-hidden">
-                <div class="left flex-1 padding pt-8">
-                    <div class="flex gap-4 group rounded-xl mt-2">
-                        <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
-                            <Icon className="h-6 w-6 fill-on-surface-variant" icon={faComments}></Icon>
-                        </div>
-                        <div><p class="text-title-small mt-0.5">Discuter avec nous</p>
-                            <div class="text-on-surface-variant max-w-prose text-body-small">
-                                <p class="mt-1">Notre équipe est là pour vous aider.</p>
-                                <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com
-                                </Link>
+                 class=" md:px-6 max-w-screen-2xl mx-auto ">
+                <div class="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
+                    <div class="left flex-1 padding !pb-12 pt-8">
+                        <div class="flex gap-4 group rounded-xl mt-2">
+                            <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
+                                <Icon className="h-6 w-6 fill-on-surface-variant" icon={faComments}></Icon>
+                            </div>
+                            <div><p class="text-title-small mt-0.5">Discuter avec moi</p>
+                                <div class="text-on-surface-variant max-w-prose text-body-small">
+                                    <p class="mt-1">Je suis là pour vous aider.</p>
+                                    <Obfuscate
+                                            className="mt-4 inline-block underline-offset-4 underline !text-bold text-secondary focus-visible:text-primary hover:text-primary"
+                                            client:only="react"
+                                            email={import.meta.env.PUBLIC_EMAIL_RECIPIENT}
+                                            headers={{
+                                                body: `Bonjour,
+
+Je m'appelle [Nom], et je souhaiterais vous parler d'un projet. Voici quelques détails :
+
+Projet : [Brève description]
+Objectifs : [Principaux objectifs]
+Délai : [Délai souhaité]
+Budget : [Budget estimé]
+Je suis disponible pour en parler. Vous pouvez me contacter par email à [Votre Email] ou au [Votre Numéro].
+
+Cordialement,
+
+[Nom]`,
+                                            }}
+                                    />
+                                </div>
                             </div>
                         </div>
+                        <!--<div class="flex gap-4 mt-12 group rounded-xl ">-->
+                        <!--    <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">-->
+                        <!--        <Icon className="h-6 w-6 fill-on-surface-variant" icon={faPhone}></Icon>-->
+                        <!--    </div>-->
+                        <!--    <div><p class="text-title-small mt-0.5">Discuter avec nous</p>-->
+                        <!--        <div class="text-on-surface-variant max-w-prose text-body-small">-->
+                        <!--            <p class="mt-1">Notre équipe est là pour vous aider.</p>-->
+                        <!--            <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com-->
+                        <!--            </Link>-->
+                        <!--        </div>-->
+                        <!--    </div>-->
+                        <!--</div>-->
                     </div>
-                    <!--<div class="flex gap-4 mt-12 group rounded-xl ">-->
-                    <!--    <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">-->
-                    <!--        <Icon className="h-6 w-6 fill-on-surface-variant" icon={faPhone}></Icon>-->
-                    <!--    </div>-->
-                    <!--    <div><p class="text-title-small mt-0.5">Discuter avec nous</p>-->
-                    <!--        <div class="text-on-surface-variant max-w-prose text-body-small">-->
-                    <!--            <p class="mt-1">Notre équipe est là pour vous aider.</p>-->
-                    <!--            <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com-->
-                    <!--            </Link>-->
-                    <!--        </div>-->
-                    <!--    </div>-->
-                    <!--</div>-->
-                </div>
-                <div class="right padding bg-surface-container-low flex-2 m-2 pt-8 rounded-2xl">
-                    <p class="text-display-small max-w-prose"><span class="text-gradient">Restons en contact</span><br/>
-                        pour
-                        donner vie à vos idées</p>
-                    <p class="mt-4 max-w-prose">Partagez les détails de votre projet et découvrons ensemble, comment je
-                        peux vous
-                        accompagner
-                        dans sa réalisation</p>
-                    <FormContact client:only="react"/>
+                    <div class="right padding bg-surface-container-low flex-2 m-2 pt-8 rounded-2xl">
+                        <p class="text-display-small max-w-prose"><span
+                                class="text-gradient">Restons en contact</span><br/>
+                            pour
+                            donner vie à vos idées</p>
+                        <p class="mt-4 max-w-prose">Partagez les détails de votre projet et découvrons ensemble, comment
+                            je
+                            peux vous
+                            accompagner
+                            dans sa réalisation</p>
+                        <FormContact client:only="react"/>
+                    </div>
+
                 </div>
             </div>
         </section>
