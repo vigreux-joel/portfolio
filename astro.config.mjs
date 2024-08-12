@@ -20,7 +20,7 @@ export default defineConfig({
     }), robotsTxt()],
     vite: {
         ssr: {
-            noExternal: ["react-markdown", "@udixio/theme", "react-google-recaptcha-v3"]
+            noExternal: ["react-markdown", "@udixio/theme", "react-obfuscate", "react-google-recaptcha-v3"]
         }
     },
     adapter: vercel()
