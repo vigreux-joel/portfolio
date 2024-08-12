@@ -94,6 +94,7 @@ export const FormContact = () => {
                 "Merci pour votre message. Je reviendrai vers vous dans les plus brefs délais.",
               );
               formik.setFieldValue("message", "");
+              formik.setTouched({ ...formik.touched, message: false });
             } else {
               if (data.errors) {
                 const newErrors: Record<string, string> = {};
