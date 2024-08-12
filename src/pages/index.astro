@@ -54,6 +54,11 @@ import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
 ---
 <Layout>
+    <style is:global>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
     <section class="pt-20 md:pt-28 xl:pt-32">
         <div class="max-width">
             <div class="flex">
@@ -530,7 +535,9 @@ import {LinearGradient} from "@components/LinearGradient";
                         <div><p class="text-title-small mt-0.5">Discuter avec nous</p>
                             <div class="text-on-surface-variant max-w-prose text-body-small">
                                 <p class="mt-1">Notre équipe est là pour vous aider.</p>
-                                <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com
+                                <Link className="mt-4 block"
+                                      href={"mailto:" + import.meta.env.PUBLIC_EMAIL_RECIPIENT}
+                                      }>{import.meta.env.PUBLIC_EMAIL_RECIPIENT}
                                 </Link>
                             </div>
                         </div>

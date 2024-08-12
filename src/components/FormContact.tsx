@@ -1,6 +1,6 @@
-import { Button, TextField } from "@udixio/ui";
+import { Button, Snackbar, TextField } from "@udixio/ui";
 import { useFormik } from "formik";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   GoogleReCaptchaProvider,
   useGoogleReCaptcha,
@@ -10,13 +10,22 @@ function isValidEmail(email: string) {
   return email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 }
 
-const ButtonCaptcha = ({ setRecaptchaToken }: { setRecaptchaToken: any }) => {
+const ButtonCaptcha = ({
+  tokenRecaptcha,
+  setRecaptchaToken,
+  className,
+  loading,
+}: {
+  loading: boolean;
+  className?: string;
+  tokenRecaptcha: string | null;
+  setRecaptchaToken: any;
+}) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  // Create an event handler so you can call the verification on button click event or form submit
   const handleReCaptchaVerify = useCallback(async () => {
     if (!executeRecaptcha) {
-      console.log("Execute recaptcha not yet available");
+      console.warn("Execute recaptcha not yet available");
       return;
     }
 
@@ -26,20 +35,24 @@ const ButtonCaptcha = ({ setRecaptchaToken }: { setRecaptchaToken: any }) => {
 
   return (
     <Button
-      onClick={() => handleReCaptchaVerify()}
+      className={className}
+      loading={loading}
+      onClick={(e) => {
+        if (!tokenRecaptcha) {
+          e.preventDefault();
+          handleReCaptchaVerify();
+        }
+      }}
       type="submit"
-      className="mt-8"
       label="Envoyer le message"
     />
   );
 };
 
-export const FormContact = ({
-  apiErrors = {},
-}: {
-  apiErrors?: Record<string, string>;
-}) => {
-  const [recaptchaToken, setRecaptchaToken] = useState(null);
+export const FormContact = () => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const formik = useFormik({
     initialValues: {
@@ -64,6 +77,7 @@ export const FormContact = ({
       return errors;
     },
     onSubmit: async (values, formikBag) => {
+      setIsSubmitting(true);
       if (formRef.current !== null && recaptchaToken !== null) {
         fetch("/send-message", {
           method: "POST",
@@ -75,21 +89,45 @@ export const FormContact = ({
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log("Success:", data);
-            formik.setFieldValue("message", "");
-            // Traitez la réponse ici ...
+            if (data.status === 200) {
+              setMessage(
+                "Merci pour votre message. Je reviendrai vers vous dans les plus brefs délais.",
+              );
+              formik.setFieldValue("message", "");
+            } else {
+              if (data.errors) {
+                const newErrors: Record<string, string> = {};
+                Object.entries(data.errors).forEach(([key, error]) => {
+                  if (typeof error === "string") {
+                    newErrors[key] = error;
+                  }
+                });
+                formik.setErrors(newErrors);
+              } else {
+                console.log("Error:", data);
+                setMessage(data.message);
+              }
+            }
           })
           .catch((error) => {
             console.error("Error:", error);
+          })
+          .finally(() => {
+            setIsSubmitting(false);
           });
+      } else {
+        console.warn("Recaptcha token not available");
       }
     },
   });
   const isFormFieldInvalid = (name: keyof typeof formik.values): string => {
-    let result = apiErrors[name] ?? "";
-    if (formik.touched[name]) result = formik.errors[name] ?? "";
-    return result;
+    if (formik.touched[name]) return formik.errors[name] ?? "";
+    return "";
   };
+
+  useEffect(() => {
+    if (recaptchaToken) formik.handleSubmit();
+  }, [recaptchaToken]);
 
   const getFormErrorMessage = (name: keyof typeof formik.values) => {
     return isFormFieldInvalid(name);
@@ -98,7 +136,7 @@ export const FormContact = ({
     <form
       ref={formRef}
       onSubmit={formik.handleSubmit}
-      className="mt-8 max-w-prose"
+      className="mt-8 max-w-prose relative"
     >
       <TextField
         variant={"outlined"}
@@ -110,7 +148,6 @@ export const FormContact = ({
         errorText={getFormErrorMessage("name")}
         onChange={(e) => {
           formik.setFieldValue("name", e);
-          if (apiErrors.name) delete apiErrors.name;
         }}
         supportingText={"\u00A0"}
         showSupportingText
@@ -125,7 +162,6 @@ export const FormContact = ({
         errorText={getFormErrorMessage("email")}
         onChange={(e) => {
           formik.setFieldValue("email", e);
-          if (apiErrors.email) delete apiErrors.email;
         }}
         supportingText={"\u00A0"}
         showSupportingText
@@ -139,7 +175,6 @@ export const FormContact = ({
         value={formik.values.message}
         onChange={(e) => {
           formik.setFieldValue("message", e);
-          if (apiErrors.message) delete apiErrors.message;
         }}
         placeholder={"Votre message"}
         errorText={getFormErrorMessage("message")}
@@ -149,8 +184,38 @@ export const FormContact = ({
       <GoogleReCaptchaProvider
         reCaptchaKey={import.meta.env.PUBLIC_RECAPTCHA_KEY}
       >
-        <ButtonCaptcha setRecaptchaToken={setRecaptchaToken} />
+        <p className={"text-body-small text-outline mt-8 mb-4"}>
+          Ce site est protégé par reCAPTCHA et la{" "}
+          <a
+            className={"text-secondary"}
+            href="https://policies.google.com/privacy"
+          >
+            politique de confidentialité
+          </a>{" "}
+          et les{" "}
+          <a
+            className={"text-secondary"}
+            href="https://policies.google.com/terms"
+          >
+            conditions d’utilisation
+          </a>{" "}
+          de Google s’appliquent.
+        </p>
+        <ButtonCaptcha
+          tokenRecaptcha={recaptchaToken}
+          setRecaptchaToken={setRecaptchaToken}
+          loading={isSubmitting}
+        />
       </GoogleReCaptchaProvider>
+      {message && (
+        <Snackbar
+          key={message}
+          className={"!absolute -bottom-20"}
+          duration={5000}
+          supportingText={message}
+          onClose={() => setMessage(null)}
+        />
+      )}
     </form>
   );
 };
