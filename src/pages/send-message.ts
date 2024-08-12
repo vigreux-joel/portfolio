@@ -9,8 +9,6 @@ export const POST: ({
 }: {
   request: any;
 }) => Promise<Response> = async ({ request }) => {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { name, email, message } = await request.json();
   let errors: Record<string, string> = {};
 

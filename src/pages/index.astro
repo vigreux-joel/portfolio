@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import Obfuscate from 'react-obfuscate';
 import {Button, Diviser} from "@udixio/ui"
 import home1 from "@assets/images/home-1.png";
 import home1Left from "@assets/images/home-1-left.png";
@@ -532,13 +532,29 @@ import {LinearGradient} from "@components/LinearGradient";
                         <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
                             <Icon className="h-6 w-6 fill-on-surface-variant" icon={faComments}></Icon>
                         </div>
-                        <div><p class="text-title-small mt-0.5">Discuter avec nous</p>
+                        <div><p class="text-title-small mt-0.5">Discuter avec moi</p>
                             <div class="text-on-surface-variant max-w-prose text-body-small">
-                                <p class="mt-1">Notre équipe est là pour vous aider.</p>
-                                <Link className="mt-4 block"
-                                      href={"mailto:" + import.meta.env.PUBLIC_EMAIL_RECIPIENT}
-                                      }>{import.meta.env.PUBLIC_EMAIL_RECIPIENT}
-                                </Link>
+                                <p class="mt-1">Je suis là pour vous aider.</p>
+                                <Obfuscate
+                                        className="mt-4 inline-block underline-offset-4 underline !text-bold text-secondary focus-visible:text-primary hover:text-primary"
+                                        client:only="react"
+                                        email={import.meta.env.PUBLIC_EMAIL_RECIPIENT}
+                                        headers={{
+                                            body: `Bonjour,
+
+Je m'appelle [Nom], et je souhaiterais vous parler d'un projet. Voici quelques détails :
+
+Projet : [Brève description]
+Objectifs : [Principaux objectifs]
+Délai : [Délai souhaité]
+Budget : [Budget estimé]
+Je suis disponible pour en parler. Vous pouvez me contacter par email à [Votre Email] ou au [Votre Numéro].
+
+Cordialement,
+
+[Nom]`,
+                                        }}
+                                />
                             </div>
                         </div>
                     </div>
