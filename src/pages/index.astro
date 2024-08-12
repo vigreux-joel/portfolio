@@ -128,7 +128,7 @@ const recipient = import.meta.env.PUBLIC_EMAIL_RECIPIENT
         <LinearGradient nextTheme="purple"/>
     </section>
     <section id="front-end" class="pt-8 theme-purple">
-        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-100" client:visible/>
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-100" client:idle/>
         <div class="max-width ">
             <div class="flex">
                 <div>
@@ -384,7 +384,7 @@ const recipient = import.meta.env.PUBLIC_EMAIL_RECIPIENT
         </div>
     </section>
     <section class="theme-green pt-8">
-        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-80" client:visible/>
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-80" client:idle/>
         <div class="max-width">
             <div class="flex">
                 <div>
@@ -530,7 +530,7 @@ const recipient = import.meta.env.PUBLIC_EMAIL_RECIPIENT
             <LinearGradient nextTheme="blue"/>
         </section>
         <section id="contact" class="theme-blue py-16 md:py-32">
-            <BackgroundColor className="" canEscape={false} count={5} radius={800} client:visible/>
+            <BackgroundColor className="" canEscape={false} count={5} radius={800} client:idle/>
 
             <div data-aos="zoom-in"
                  class=" md:px-6 max-w-screen-2xl mx-auto ">
@@ -544,7 +544,7 @@ const recipient = import.meta.env.PUBLIC_EMAIL_RECIPIENT
                                 <div class="text-on-surface-variant max-w-prose text-body-small">
                                     <p class="mt-1">Je suis là pour vous aider.</p>
                                     <Obfuscate
-                                            client:idle
+                                            client:visible
                                             className="mt-4 inline-block underline-offset-4 underline !text-bold text-secondary focus-visible:text-primary hover:text-primary"
                                             email={recipient}
                                             headers={{
