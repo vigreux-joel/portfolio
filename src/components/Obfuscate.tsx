@@ -65,25 +65,29 @@ const generateLink = ({
   return "";
 };
 
-const Obfuscate = ({
-  element = "a",
-  children,
-  tel,
-  sms,
-  facetime,
-  email,
-  href,
-  headers,
-  obfuscate,
-  obfuscateChildren,
-  linkText,
-  style,
-  onClick,
-  ...others
-}: ObfuscateProps) => {
+const Obfuscate = (args: ObfuscateProps) => {
+  const {
+    element = "a",
+    children,
+    tel,
+    sms,
+    facetime,
+    email,
+    href,
+    headers,
+    obfuscate,
+    obfuscateChildren,
+    linkText,
+    style,
+    onClick,
+    ...others
+  } = args;
   const [humanInteraction, setHumanInteraction] = useState(false);
   const linkProps = children || tel || sms || facetime || email || href;
   const Component = element;
+
+  console.log("args", args);
+  console.log("obfuscateEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", linkProps);
 
   const handleClick = () => {
     // Allow instantiator to provide an onClick method to be called
