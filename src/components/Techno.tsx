@@ -63,28 +63,21 @@ export const Techno = ({
         </div>
       )}
       <div className={"flex-1 flex flex-col justify-between items-start"}>
-        <div>
-          <p
-            className={classNames({
-              "text-title-small": variant == "secondary",
-              "text-title-medium mb-4 mt-2": variant == "primary",
-            })}
-          >
-            {name}
-          </p>
-          <div className={"relative"}>
-            <div
-              className={classNames(
-                "transition-all duration-300 delay-200 text-on-surface-variant max-w-prose",
-                {
-                  "text-body-small": variant == "secondary",
-                  "text-body-medium": variant == "primary",
-                },
-              )}
-            >
-              {children}
-            </div>
-          </div>
+        <p
+          className={classNames({
+            "text-title-small": variant == "secondary",
+            "text-title-medium mb-4 mt-2": variant == "primary",
+          })}
+        >
+          {name}
+        </p>
+        <div
+          className={classNames("text-on-surface-variant max-w-prose", {
+            "text-body-small": variant == "secondary",
+            "text-body-medium": variant == "primary",
+          })}
+        >
+          {children}
         </div>
       </div>
     </div>
