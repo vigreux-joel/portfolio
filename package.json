@@ -42,7 +42,6 @@
     "gsap": "^3.12.5",
     "nodemailer": "^6.9.14",
     "react-google-recaptcha-v3": "^1.10.1",
-    "react-obfuscate": "^3.7.0",
     "resize-observer-polyfill": "^1.5.1",
     "sendmail": "^1.6.1",
     "sharp": "^0.33.4",
