@@ -2,10 +2,11 @@ import {defineConfig} from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import critters from "astro-critters";
 import robotsTxt from 'astro-robots-txt';
 import compressor from "astro-compressor";
 import vercel from '@astrojs/vercel/serverless';
+
+import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,9 +16,7 @@ export default defineConfig({
     output: 'hybrid',
     integrations: [react(), tailwind({
         applyBaseStyles: false
-    }), sitemap(), compressor(), critters({
-        Exclude: ["File.html"]
-    }), robotsTxt()],
+    }), sitemap(), robotsTxt(), compress(), compressor()],
     vite: {
         ssr: {
             noExternal: ["react-markdown", "@udixio/theme", "react-obfuscate", "react-google-recaptcha-v3"]
