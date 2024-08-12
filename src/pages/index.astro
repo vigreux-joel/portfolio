@@ -52,6 +52,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
+
+const recipient = import.meta.env.PUBLIC_EMAIL_RECIPIENT
 ---
 <Layout>
     <style is:global>
@@ -63,7 +65,7 @@ import {LinearGradient} from "@components/LinearGradient";
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line client:load visible isFirst icon={faCircle}/>
+                    <Line client:idle visible isFirst icon={faCircle}/>
                 </div>
                 <div class="padding !pb-16">
                     <Image class="rounded-xl" src={portrait} height={64} width={64} alt="Joël"></Image>
@@ -94,7 +96,7 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <div class="flex mt-8">
                 <div>
-                    <Line client:load icon={faAddressCard} nextTheme="purple"/>
+                    <Line client:idle icon={faAddressCard} nextTheme="purple"/>
                 </div>
                 <div class="padding">
                     <h2 class="text-title-medium  mb-4 text-tertiary ">À propos de moi</h2>
@@ -126,11 +128,11 @@ import {LinearGradient} from "@components/LinearGradient";
         <LinearGradient nextTheme="purple"/>
     </section>
     <section id="front-end" class="pt-8 theme-purple">
-        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-100" client:load/>
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-100" client:visible/>
         <div class="max-width ">
             <div class="flex">
                 <div>
-                    <Line client:load icon={faCode} isLast/>
+                    <Line client:idle icon={faCode} isLast/>
                 </div>
                 <div class="padding ">
                     <p data-aos="fade-right" class="text-title-large">Développement web - Front-end</p>
@@ -198,7 +200,7 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <div class="flex h-52">
                 <div>
-                    <Line client:load/>
+                    <Line client:idle/>
                 </div>
             </div>
         </div>
@@ -207,7 +209,7 @@ import {LinearGradient} from "@components/LinearGradient";
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line client:load nextTheme="blue" icon={faLaptopMobile}/>
+                    <Line client:idle nextTheme="blue" icon={faLaptopMobile}/>
                 </div>
                 <div class="padding">
                     <div class="flex items-center md:flex-row flex-col">
@@ -303,7 +305,7 @@ import {LinearGradient} from "@components/LinearGradient";
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line isLast client:load icon={faLaptopMobile}/>
+                    <Line isLast client:idle icon={faLaptopMobile}/>
                 </div>
                 <div class="padding">
                     <p data-aos="fade-right" class="text-title-large">Design</p>
@@ -376,17 +378,17 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <div class="flex h-52">
                 <div>
-                    <Line client:load isFirst/>
+                    <Line client:idle isFirst/>
                 </div>
             </div>
         </div>
     </section>
     <section class="theme-green pt-8">
-        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-80" client:load/>
+        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-80" client:visible/>
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line isLast client:load icon={faGears}/>
+                    <Line isLast client:idle icon={faGears}/>
                 </div>
                 <div class="padding">
                     <p data-aos="fade-right" class="text-title-large">Languages & Frameworks</p>
@@ -463,7 +465,7 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <div class="flex h-52">
                 <div>
-                    <Line client:load isFirst/>
+                    <Line client:idle isFirst/>
                 </div>
             </div>
         </div>
@@ -473,7 +475,7 @@ import {LinearGradient} from "@components/LinearGradient";
             <div class="max-width">
                 <div class="flex">
                     <div>
-                        <Line isLast client:load icon={faGears}/>
+                        <Line isLast client:idle icon={faGears}/>
                     </div>
                     <div class="padding">
                         <p data-aos="fade-right" class="text-title-large">CMS</p>
@@ -528,7 +530,7 @@ import {LinearGradient} from "@components/LinearGradient";
             <LinearGradient nextTheme="blue"/>
         </section>
         <section id="contact" class="theme-blue py-16 md:py-32">
-            <BackgroundColor className="" canEscape={false} count={5} radius={800} client:load/>
+            <BackgroundColor className="" canEscape={false} count={5} radius={800} client:visible/>
 
             <div data-aos="zoom-in"
                  class=" md:px-6 max-w-screen-2xl mx-auto ">
@@ -542,9 +544,9 @@ import {LinearGradient} from "@components/LinearGradient";
                                 <div class="text-on-surface-variant max-w-prose text-body-small">
                                     <p class="mt-1">Je suis là pour vous aider.</p>
                                     <Obfuscate
+                                            client:idle
                                             className="mt-4 inline-block underline-offset-4 underline !text-bold text-secondary focus-visible:text-primary hover:text-primary"
-                                            client:only="react"
-                                            email={import.meta.env.PUBLIC_EMAIL_RECIPIENT}
+                                            email={recipient}
                                             headers={{
                                                 body: `Bonjour,
 
