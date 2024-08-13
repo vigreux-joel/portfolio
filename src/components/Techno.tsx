@@ -62,15 +62,15 @@ export const Techno = ({
           )}
         </div>
       )}
-      <div className={"flex-1 flex flex-col justify-between items-start"}>
-        <p
+      <div className={"flex-1 flex flex-col items-start"}>
+        <h4
           className={classNames({
             "text-title-small": variant == "secondary",
             "text-title-medium mb-4 mt-2": variant == "primary",
           })}
         >
           {name}
-        </p>
+        </h4>
         <div
           className={classNames("text-on-surface-variant max-w-prose", {
             "text-body-small": variant == "secondary",

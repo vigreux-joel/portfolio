@@ -12,9 +12,9 @@ const content: {
   {
     text: (
       <>
-        <h3 className="text-headline-small text-primary">
+        <h4 className="text-headline-small text-primary">
           Conception visuelle moderne et fluide
-        </h3>
+        </h4>
         <p className="lg:mt-6 mt-2 text-body-large">
           Grâce aux guidelines de Material Design 3, je conçois des interfaces
           fluides et adaptées à tous les écrans, assurant une navigation
@@ -38,9 +38,9 @@ const content: {
   {
     text: (
       <>
-        <h3 className="text-headline-small text-primary">
+        <h4 className="text-headline-small text-primary">
           Harmonisation des couleurs pour une identité visuelle forte
-        </h3>
+        </h4>
         <p className="lg:mt-6 mt-2 text-body-large">
           Personnalisez facilement vos applications avec des palettes de
           couleurs cohérentes et dynamiques, inspirées par Material Design pour
@@ -61,9 +61,9 @@ const content: {
   {
     text: (
       <>
-        <h3 className="text-headline-small text-primary">
+        <h4 className="text-headline-small text-primary">
           Dynamisez votre site avec des animations fluides
-        </h3>
+        </h4>
         <p className="lg:mt-6 mt-2 text-body-large">
           À l'aide de{" "}
           <Link href={"https://www.framer.com/motion/"} target={"_blank"}>
