@@ -52,6 +52,7 @@ const content: {
       <img
         className={"w-full md:h-[320px] h-[200px] lg:h-full object-cover"}
         loading={"lazy"}
+        alt={"Illustration de layout"}
         src={"/images/material-theme.webp"}
       />
     ),
