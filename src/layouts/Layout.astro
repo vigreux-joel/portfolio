@@ -100,10 +100,11 @@ const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
 
 
 const titleDefault = `Joël Vigreux - Développeur Full-Stack`;
+const canonical = domain + currentPath
 const seoDefault: SEOProps = {
     titleDefault: titleDefault,
     ...seo,
-    canonical: domain + currentPath,
+    canonical: canonical.endsWith('/') ? canonical.substr(0, canonical.length - 1) : canonical,
     openGraph: {
         ...seo?.openGraph,
         basic: {

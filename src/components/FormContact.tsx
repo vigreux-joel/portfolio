@@ -145,7 +145,7 @@ export const FormContact = () => {
         type="text"
         name="name"
         value={formik.values.name}
-        label={"Nom et prénom"}
+        label={"Nom & prénom"}
         placeholder={"Votre prénom"}
         errorText={getFormErrorMessage("name")}
         onChange={(e) => {
@@ -180,7 +180,7 @@ export const FormContact = () => {
         }}
         placeholder={"Votre message"}
         errorText={getFormErrorMessage("message")}
-        supportingText="Parlez-nous un peu de votre projet"
+        supportingText="Parlez-nous un peu de votre projet."
         showSupportingText
       ></TextField>
       <GoogleReCaptchaProvider
