@@ -1,14 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import classNames from "classnames";
 import { Link } from "@components/Link.tsx";
-import { BackgroundColor } from "@components/BackgroundColor.tsx";
 
 const content: {
   text: React.ReactNode;
@@ -29,7 +23,12 @@ const content: {
       </>
     ),
     media: (
-      <video className={"h-full w-full object-cover"} autoPlay loop muted>
+      <video
+        className={"md:h-[320px] h-[200px] lg:h-full w-full object-cover"}
+        autoPlay
+        loop
+        muted
+      >
         <source src="/video/output.mp4" type="video/mp4" />
         Sorry, your browser doesn't support embedded videos.
       </video>
@@ -51,7 +50,7 @@ const content: {
     ),
     media: (
       <img
-        className={"h-full w-full object-cover"}
+        className={"w-full md:h-[320px] h-[200px] lg:h-full object-cover"}
         loading={"lazy"}
         src={"/images/material-theme.webp"}
       />
@@ -77,7 +76,7 @@ const content: {
     media: (
       <div
         className={
-          "bg-primary/80 w-full h-full flex items-center justify-center backdrop-blur"
+          "bg-primary/80 w-full md:h-[320px] h-[200px] lg:h-full flex items-center justify-center backdrop-blur"
         }
       >
         <div className={"h-32 w-32 p-6 bg-surface-variant rounded-2xl"}>
@@ -163,27 +162,6 @@ export const StickyScroll = () => {
 
   return (
     <>
-      <AnimatePresence>
-        {isOverlay && (
-          <motion.div
-            initial={"hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1 },
-            }}
-            animate={"visible"}
-            transition={{ duration: 1 }}
-            exit={"hidden"}
-            className={
-              "fixed h-screen w-screen bg-surface top-0  z-10 left-0 " +
-              (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")
-            }
-          >
-            {isLg && <BackgroundColor />}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <motion.div
         className={
           "flex relative padding-x rounded-md z-20 " +
@@ -268,8 +246,8 @@ export const StickyScroll = () => {
                 minWidth: "100%",
               }}
               variants={{
-                hidden: { height: "auto" },
-                visible: { height: 500 },
+                hidden: { maxHeight: "auto" },
+                visible: { maxHeight: 500 },
               }}
               initial="hidden"
               animate={displayText ? "visible" : "hidden"}
@@ -299,7 +277,7 @@ export const StickyScroll = () => {
                         },
                       },
                     }}
-                    className={classNames("w-full h-full", {
+                    className={classNames("w-full h-[500px]", {
                       "!block":
                         index == activeCard ||
                         (activeCard == null && index == 0),

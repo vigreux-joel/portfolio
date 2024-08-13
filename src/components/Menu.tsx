@@ -22,7 +22,6 @@ export const Menu = ({
   const observers = useRef<IntersectionObserver[]>([]);
 
   const isScrolling = useRef(false);
-  // console.log(featureIds); = useRef(false);
 
   useEffect(() => {
     const features = Array.from(document.querySelectorAll(".tab-menu"));

@@ -40,7 +40,6 @@ export const Header = () => {
 
   useEffect(() => {
     const handleThemeChange = (event) => {
-      console.log("Le thème a changé:", event.detail);
       setTheme(event.detail);
     };
 
