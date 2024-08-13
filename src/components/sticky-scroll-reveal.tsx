@@ -111,7 +111,7 @@ const content: {
   },
 ];
 
-export const StickyScroll = ({ className }: { className?: string }) => {
+export const StickyScroll = () => {
   const [isLg, setIsLg] = useState(false);
 
   useEffect(() => {
@@ -155,6 +155,10 @@ export const StickyScroll = ({ className }: { className?: string }) => {
     }
     setDisplayText(latest > 0);
     setActiveCard(closestBreakpointIndex);
+    const themeChangeEvent = new CustomEvent("themeChange", {
+      detail: "theme-" + content[closestBreakpointIndex].theme,
+    });
+    window.dispatchEvent(themeChangeEvent);
   });
 
   return (
@@ -183,8 +187,6 @@ export const StickyScroll = ({ className }: { className?: string }) => {
       <motion.div
         className={
           "flex relative padding-x rounded-md z-20 " +
-          className +
-          " " +
           (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")
         }
         ref={ref}
