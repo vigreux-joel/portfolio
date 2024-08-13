@@ -2,7 +2,6 @@
 import Footer from "./Footer.astro";
 import "../styles/base.scss";
 import Header from "@layouts/Header.astro";
-import {ViewTransitions} from "astro:transitions";
 import {SEO} from "astro-seo";
 import {getImage} from "astro:assets";
 export type TwitterCardType = "summary" | "summary_large_image" | "app" | "player";
@@ -10,12 +9,18 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/600.css";
+import {getImage} from "astro:assets";
+import defaultImage from "@assets/images/img.png";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
     crossorigin: string;
 }
 
+const currentPath = Astro.url.pathname
+const domain = Astro.url.origin;
+
+const imageDefault = await getImage({src: defaultImage, format: "png"})
 
 export interface Meta extends HTMLMetaElement {
     property: string;
@@ -94,40 +99,33 @@ const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
 // const domain = Astro.url.origin;
 
 
-// const titleDefault = `NetSimpler - Le web intuitif ! Meilleur outil tout-en-un de ${new Date().getFullYear()}`;
-// const seoDefault: SEOProps = {
-//     titleDefault: titleDefault,
-//     languageAlternates: [
-//         {
-//             href: domain + "/fr" + currentPath,
-//             hrefLang: "fr"
-//         }
-//     ],
-//
-//     ...seo,
-//     canonical: domain + "/fr" + currentPath,
-//     openGraph: {
-//         ...seo?.openGraph,
-//         basic: {
-//             title: seo?.openGraph?.basic.title ?? seo?.title ?? titleDefault,
-//             type: "website",
-//             // image: domain + imageDefault.src,
-//             url: domain + "/fr" + currentPath,
-//             ...seo?.openGraph?.basic
-//         },
-//         optional: {
-//             description: seo?.openGraph?.optional?.description ?? seo?.description,
-//             ...seo?.openGraph?.optional
-//         }
-//     },
-//     twitter: {
-//         title: seo?.twitter?.title ?? seo?.title ?? titleDefault,
-//         // image: domain + imageDefault.src,
-//         description: seo?.twitter?.description ?? seo?.description,
-//         ...seo?.twitter
-//     }
-//
-// };
+const titleDefault = `Joël Vigreux - Développeur Full-Stack`;
+const seoDefault: SEOProps = {
+    titleDefault: titleDefault,
+    ...seo,
+    canonical: domain + currentPath,
+    openGraph: {
+        ...seo?.openGraph,
+        basic: {
+            title: seo?.openGraph?.basic.title ?? seo?.title ?? titleDefault,
+            type: "website",
+            image: domain + imageDefault.src,
+            url: domain + currentPath,
+            ...seo?.openGraph?.basic
+        },
+        optional: {
+            description: seo?.openGraph?.optional?.description ?? seo?.description,
+            ...seo?.openGraph?.optional
+        }
+    },
+    twitter: {
+        title: seo?.twitter?.title ?? seo?.title ?? titleDefault,
+        image: domain + imageDefault.src,
+        description: seo?.twitter?.description ?? seo?.description,
+        ...seo?.twitter
+    }
+
+};
 ---
 <!DOCTYPE html>
 <html class="dark-mode" lang="fr">
@@ -137,14 +135,14 @@ const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
     <link rel="icon" type="image/png" href="/favicon.png"/>
 
 
-    <!--<SEO {...seoDefault} />-->
+    <SEO {...seoDefault}/>
 </head>
 <body class="bg-surface">
 <Header/>
 <main>
     <slot/>
 </main>
-<!--<Footer/>-->
+<Footer/>
 <script>
     import AOS from 'aos'
 
