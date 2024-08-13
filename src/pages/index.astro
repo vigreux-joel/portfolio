@@ -51,7 +51,10 @@ import {
 import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
 ---
-<Layout>
+<Layout seo={{
+    title: `Joël Vigreux - Développeur Full-Stack`,
+    description: "Joël Vigreux, développeur full-stack avec 3 ans d'expérience, maîtrise le back-end, front-end, et des CMS comme Sanity et WordPress. Expert en technologies modernes telles que React, NestJS, et Astro, il crée des applications performantes et sur mesure. Contactez Joël pour transformer vos idées en projets web remarquables.",
+}}>
     <style is:global>
         .grecaptcha-badge {
             visibility: hidden;
@@ -104,9 +107,8 @@ import {LinearGradient} from "@components/LinearGradient";
                         en
                         débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
                         <Link href="#front-end">front-end</Link>
-                        et de <span class="text-nowrap">l'
-            <Link
-                    href="#ux">expérience&nbsp;utilisateur</Link></span>
+                        et de <span class="text-nowrap">l'<Link
+                            href="#ux">expérience&nbsp;utilisateur</Link> ,</span>
                         tout en intégrant des pratiques
                         <Link
                                 href="#ecoresponsabilite">écoresponsables
