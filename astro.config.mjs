@@ -16,7 +16,7 @@ export default defineConfig({
     output: 'hybrid',
     integrations: [react(), tailwind({
         applyBaseStyles: false
-    }), sitemap(), robotsTxt(), compress(), compressor()],
+    }), sitemap(), robotsTxt(), compress(), compressor(),],
     vite: {
         ssr: {
             noExternal: ["react-markdown", "@udixio/theme", "react-obfuscate", "react-google-recaptcha-v3"]
