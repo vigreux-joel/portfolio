@@ -1,25 +1,25 @@
 import {defineConfig} from 'astro/config';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import compressor from "astro-compressor";
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
+import tailwindcss from '@tailwindcss/vite';
 
 import compress from "astro-compress";
+import {vitePlugin} from "@udixio/theme";
 
 // https://astro.build/config
 export default defineConfig({
     site: "https://vigreux-joel.fr/",
     compressHTML: true,
     experimental: {},
-    output: 'hybrid',
-    integrations: [react(), tailwind({
-        applyBaseStyles: false
-    }), sitemap(), robotsTxt(), compress(), compressor(),],
+    output: 'static',
+    integrations: [react(), sitemap(), robotsTxt(), compress(), compressor(),],
     vite: {
+        plugins: [tailwindcss(), vitePlugin()],
         ssr: {
-            noExternal: ["react-markdown", "@udixio/theme", "react-obfuscate", "react-google-recaptcha-v3"]
+            noExternal: ["react-markdown", "@udixio/theme", "@udixio/tailwind", "@udixio/ui-react", "react-obfuscate", "react-google-recaptcha-v3"]
         }
     },
     adapter: vercel()

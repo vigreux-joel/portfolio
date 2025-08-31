@@ -1,34 +1,9 @@
-import {defineConfig, FontPlugin, TailwindPlugin, VariantModel} from "@udixio/theme";
-import {DislikeAnalyzer, sanitizeDegreesDouble, TonalPalette} from "@material/material-color-utilities";
+import {defineConfig, FontPlugin,} from "@udixio/theme";
+import {TailwindPlugin} from "@udixio/tailwind";
 
 
-module.exports = defineConfig({
+export default defineConfig({
     sourceColor: '#1A73E8',
-    variant: {
-        ...VariantModel.tonalSpot,
-        palettes: {
-            ...VariantModel.tonalSpot.palettes,
-            secondary: (sourceColorHct) =>
-                TonalPalette.fromHueAndChroma(sourceColorHct.hue, 24.0),
-            tertiary: (sourceColorHct) =>
-                TonalPalette.fromHueAndChroma(
-                    sanitizeDegreesDouble(sourceColorHct.hue + 45.0),
-                    24.0
-                ),
-        }
-    },
-    colors: {
-        colors: {
-            tertiaryContainer: {
-                tone: (s) => {
-                    const proposedHct = s
-                        .getPalette('tertiary')
-                        .getHct((s.isDark ? 30 : 93),);
-                    return DislikeAnalyzer.fixIfDisliked(proposedHct).tone;
-                },
-            },
-        },
-    },
     plugins: [
         new FontPlugin({
             fontStyles: {

@@ -1,9 +1,8 @@
 import {faCommentSmile} from "@fortawesome/pro-light-svg-icons";
-import {Fab} from "@udixio/ui";
-import {useEffect, useRef, useState} from "react";
+import {classNames, Fab} from "@udixio/ui-react";
 import {Menu} from "@components/Menu.tsx";
-import classNames from "classnames";
-import {motion} from "framer-motion";
+import {motion} from "motion/react";
+import {useEffect, useRef, useState} from "react";
 
 export const Header = () => {
     const [isMenuVisible, setIsMenuVisible] = useState(true);

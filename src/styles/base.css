@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+@import "./udixio.css";
+
+@source "../../node_modules/@udixio/ui-react";
+@source "../../src/";
+
+@import "./global.css";
+@import "aos/dist/aos.css";

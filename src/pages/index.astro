@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Obfuscate from 'react-obfuscate';
-import {Button, Diviser} from "@udixio/ui"
+import {Button, Divider} from "@udixio/ui-react"
 import home1 from "@assets/images/home-1.png";
 import home1Left from "@assets/images/home-1-left.png";
 import home1Middle from "@assets/images/home-1-middle.png";
@@ -27,8 +27,8 @@ import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
 import {FormContact} from "@components/FormContact";
 import {BackgroundColor} from "@components/BackgroundColor";
-import {Icon} from "@udixio/ui"
-import {Card} from "@udixio/ui"
+import {Icon} from "@udixio/ui-react"
+import {Card} from "@udixio/ui-react"
 import {
     faAddressCard, faChartNetwork,
     faCircle, faCloud,
@@ -231,26 +231,26 @@ import {LinearGradient} from "@components/LinearGradient";
                     </div>
                     <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
                         <div data-aos="zoom-in"
-                             class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
+                             class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
                             <Icon className="h-16 w-16" icon={faBrowser}/>
                             <h4>Web</h4>
                         </div>
                         <div class="sm:flex-2 w-full md:w-fit">
                             <div class="flex gap-4 items-center">
-                                <Diviser className="hidden md:block border-primary-container"/>
+                                <Divider className="hidden md:block border-primary-container"/>
                                 <h4 class="text-title-medium text-on-primary-container">Mobile</h4>
-                                <Diviser className="hidden md:block border-primary-container"/>
+                                <Divider className="hidden md:block border-primary-container"/>
                             </div>
                             <div class="flex gap-4 mt-4">
-                                <Diviser orientation="vertical" className="md:hidden border-primary-container"/>
+                                <Divider orientation="vertical" className="md:hidden border-primary-container"/>
                                 <div class="flex flex-1 flex-wrap gap-8">
                                     <div data-aos="zoom-in" data-aos-delay={150}
-                                         class="flex-1 platform bg-primary-container text-on-primary-container">
+                                         class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
                                         <Icon className="h-16 w-16" icon={faApple}/>
                                         <p>IOS</p>
                                     </div>
                                     <div data-aos="zoom-in" data-aos-delay={150}
-                                         class="flex-1 platform bg-primary-container text-on-primary-container">
+                                         class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
                                         <Icon className="h-16 w-16" icon={faAndroid}/>
                                         <p>Android</p>
                                     </div>
@@ -260,36 +260,31 @@ import {LinearGradient} from "@components/LinearGradient";
                         </div>
                         <div class="flex-[3] w-full md:w-fit">
                             <div class="flex gap-4 items-center">
-                                <Diviser className="hidden md:block border-secondary-container"/>
+                                <Divider className="hidden md:block border-secondary-container"/>
                                 <h4 class="text-title-medium text-on-secondary-container">Desktop</h4>
-                                <Diviser className="hidden md:block border-secondary-container"/>
+                                <Divider className="hidden md:block border-secondary-container"/>
                             </div>
                             <div class="flex gap-4 mt-4">
-                                <Diviser orientation="vertical" className="md:hidden border-secondary-container"/>
+                                <Divider orientation="vertical" className="md:hidden border-secondary-container"/>
                                 <div class="flex flex-1 flex-wrap gap-8">
                                     <div data-aos="zoom-in" data-aos-delay={300}
-                                         class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
+                                         class="flex-[100%] lg:flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                                         <Icon className="h-16 w-16" icon={faWindows}/>
                                         <p>Windows</p>
                                     </div>
                                     <div data-aos="zoom-in" data-aos-delay={300}
-                                         class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                         class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                                         <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
                                         <p>MacOs</p>
                                     </div>
                                     <div data-aos="zoom-in" data-aos-delay={300}
-                                         class="flex-1 platform bg-secondary-container text-on-secondary-container">
+                                         class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                                         <Icon className="h-16 w-16" icon={faLinux}/>
                                         <p>Linux</p>
                                     </div>
                                 </>
                             </div>
                         </div>
-                        <style is:global>
-                            .platform {
-                                @apply py-4 px-8 rounded-lg flex flex-col items-center gap-4
-                            }
-                        </style>
                     </div>
                 </div>
             </div>
