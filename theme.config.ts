@@ -1,9 +1,24 @@
-import {defineConfig, FontPlugin,} from "@udixio/theme";
+import {defineConfig, FontPlugin, getRotatedHue, Variants,} from "@udixio/theme";
 import {TailwindPlugin} from "@udixio/tailwind";
+import {TonalPalette} from "@material/material-color-utilities";
 
 
 export default defineConfig({
-    sourceColor: '#1A73E8',
+    sourceColor: '#93b5cb',
+    variant: {
+        ...Variants.Fidelity, palettes: {
+            ...Variants.Fidelity.palettes,
+            tertiary: ({sourceColorHct}) =>
+                TonalPalette.fromHueAndChroma(
+                    getRotatedHue(
+                        sourceColorHct,
+                        [0, 20, 71, 161, 333, 360],
+                        [-40, 48, -32, 40, -32],
+                    ),
+                    48,
+                ),
+        }
+    },
     plugins: [
         new FontPlugin({
             fontStyles: {

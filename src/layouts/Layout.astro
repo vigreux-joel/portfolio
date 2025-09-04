@@ -11,6 +11,7 @@ import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/600.css";
 import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
+import {BackgroundColor} from "@components/BackgroundColor"
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -141,6 +142,9 @@ const seoDefault: SEOProps = {
 <body class="bg-surface">
 <Header/>
 <main>
+    <BackgroundColor size="80%" className="fixed opacity-50 top-0 h-screen w-screen pointer-events-none "
+                     transition:name="background-color"
+                     transition:persist client:only="react"/>
     <slot/>
 </main>
 <Footer/>

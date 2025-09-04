@@ -90,11 +90,11 @@ const content: {
                             variants={{
                                 hidden: {
                                     pathLength: 0,
-                                    fill: "rgb(var(--colors-inverse-primary)/0)",
+                                    fill: "rgb(var(--color-inverse-primary)/0)",
                                 },
                                 visible: {
                                     pathLength: 1,
-                                    fill: "rgb(var(--colors-surface)/1)",
+                                    fill: "rgb(var(--color-surface)/1)",
                                 },
                             }}
                             className="stroke-2 stroke-surface"
