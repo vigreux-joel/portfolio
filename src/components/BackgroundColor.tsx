@@ -158,7 +158,7 @@ export const BackgroundColor = ({count = 10, size = "75%", className}: {
 
     return (
 
-        <div className={className}>
+        <div className={className + " background-color"}>
 
             {Array.from({length: count}, (_, i) => {
                 return (
