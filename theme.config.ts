@@ -1,21 +1,22 @@
-import {defineConfig, FontPlugin, getRotatedHue, Variants,} from "@udixio/theme";
+import {defineConfig, FontPlugin, Variants,} from "@udixio/theme";
 import {TailwindPlugin} from "@udixio/tailwind";
-import {TonalPalette} from "@material/material-color-utilities";
+import {argbFromHex, Hct, hexFromArgb, sanitizeDegreesDouble, TonalPalette} from "@material/material-color-utilities";
+
+argbFromHex('#93b5cb')
+
+const source = Hct.fromInt(argbFromHex('#93b5cb'))
+const newSource = Hct.from(source.hue, 50, 30)
 
 
 export default defineConfig({
-    sourceColor: '#93b5cb',
+    sourceColor: hexFromArgb(newSource.toInt()),
     variant: {
         ...Variants.Fidelity, palettes: {
             ...Variants.Fidelity.palettes,
             tertiary: ({sourceColorHct}) =>
                 TonalPalette.fromHueAndChroma(
-                    getRotatedHue(
-                        sourceColorHct,
-                        [0, 20, 71, 161, 333, 360],
-                        [-40, 48, -32, 40, -32],
-                    ),
-                    48,
+                    sanitizeDegreesDouble(sourceColorHct.hue + 75),
+                    sourceColorHct.chroma + 20,
                 ),
         }
     },
