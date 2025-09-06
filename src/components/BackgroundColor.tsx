@@ -39,10 +39,11 @@ function getCSSVariableColor(variableName: string): [number, number, number] {
 }
 
 
-export const BackgroundColor = ({count = 10, size = "75%", className}: {
+export const BackgroundColor = ({count = 10, size = "75%", className, speed}: {
     count?: number,
     size?: string,
     className?: string
+    speed?: number
 }) => {
 
     const [theme, setTheme] = useState<string>("theme-blue");
@@ -158,11 +159,12 @@ export const BackgroundColor = ({count = 10, size = "75%", className}: {
 
     return (
 
-        <div className={className + " background-color"}>
+        <div className={className + " pointer-events-none"}>
 
             {Array.from({length: count}, (_, i) => {
                 return (
                     <CircleComponent
+                        speed={speed}
                         width={size}
                         key={i} // Une clé unique pour chaque élément
                         position={positions[i]} color={colors ? colors[i] : "#000000"}/>

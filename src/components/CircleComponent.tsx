@@ -8,8 +8,9 @@ export const CircleComponent: FC<{
     position: {
         x: number; y: number
     }
+    speed?: number;
     isVisible?: boolean;
-}> = ({width, color, position, isVisible = true}) => {
+}> = ({width, color, position, isVisible = true, speed = 5_000}) => {
 
     const [uuid, setUuid] = useState(uuidv4())
 
@@ -43,14 +44,14 @@ export const CircleComponent: FC<{
             }
         };
 
-        const initialDelay = Math.random() * 5000;
+        const initialDelay = Math.random() * speed;
 
         const timeout = setTimeout(() => {
             mouve(); // premier mouvement décalé
 
             const interval = setInterval(() => {
                 mouve();
-            }, 5000); // ensuite, bouge toutes les 5s
+            }, speed); // ensuite, bouge toutes les 5s
 
             // cleanup
             return () => clearInterval(interval);
@@ -71,7 +72,7 @@ export const CircleComponent: FC<{
                 transition: `top 8s linear,
                      left 8s linear,
                      background 2s,
-                     transform 5s linear
+                     transform ${speed / 1000}s linear
                      `,
             }}
             className="absolute h-auto transition-all duration-2000 mix-blend-hue"

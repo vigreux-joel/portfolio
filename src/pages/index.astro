@@ -28,7 +28,7 @@ import portrait from "@assets/images/portrait.jpg"
 import {FormContact} from "@components/FormContact";
 import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui-react"
-import {Card} from "@udixio/ui-react"
+import {Card} from "@components/Card"
 import {
     faAddressCard, faChartNetwork,
     faCircle, faCloud,
@@ -60,86 +60,133 @@ import {LinearGradient} from "@components/LinearGradient";
             visibility: hidden;
         }
     </style>
-    <section id="accueil" class="tab-menu pt-20 md:pt-36 xl:pt-48">
-        <div class="max-width">
-            <div class="flex">
-                <div>
-                    <Line client:idle visible isFirst icon={faCircle}/>
-                </div>
-                <div class="padding !pb-16">
-                    <Image class="rounded-xl h-16 w-16" src={portrait} height={96} width={96} alt="Joël"></Image>
-                    <h1 class="text-headline-large my-6">
-                        Joël VIGREUX
-                    </h1>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><h2
-                                class="text-label-large text-on-surface-variant">Développeur
-                            full stack</h2>
+    <section id="accueil" class="tab-menu  ">
+        <div class="max-width flex  h-full">
+            <div class="relative z-10 flex flex-col">
+                <div class="min-h-[80vh] flex flex-col pt-20 md:pt-36 xl:pt-48">
+                    <div class="flex">
+                        <div>
+                            <Line client:idle visible isFirst icon={faCircle}/>
                         </div>
-                        <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
-                                class="text-label-large text-on-surface-variant">3 années d'expériences</p>
-                        </div>
-                        <a href="#contact" class="group">
-                            <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
-                                <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">
+                        <div class="padding !pb-16">
+                            <h1 class="text-display-large my-6">
+                                Joël VIGREUX <span class="block text-on-surface-variant">Développeur full-stack</span>
+                            </h1>
+                            <!--<div class="flex flex-wrap gap-4">-->
+                            <!--    <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><h2-->
+                            <!--            class="text-label-large text-on-surface-variant">Développeur-->
+                            <!--        full stack</h2>-->
+                            <!--    </div>-->
+                            <!--    <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p-->
+                            <!--            class="text-label-large text-on-surface-variant">3 années d'expériences</p>-->
+                            <!--    </div>-->
+                            <!--    <a href="#contact" class="group">-->
+                            <!--        <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">-->
+                            <!--            <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">-->
 
-                                </div>
-                                <Icon className="h-[18px] text-on-primary-container" icon={faMessageMiddle}></Icon>
-                                <p
-                                        class="text-label-large text-on-primary-container">Disponible pour vos
-                                    projets</p>
+                            <!--            </div>-->
+                            <!--            <Icon className="h-[18px] text-on-primary-container" icon={faMessageMiddle}></Icon>-->
+                            <!--            <p-->
+                            <!--                    class="text-label-large text-on-primary-container">Disponible pour vos-->
+                            <!--                projets</p>-->
+                            <!--        </div>-->
+                            <!--    </a>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="flex flex-1 mt-8">
+                        <div>
+                            <Line client:load icon={faAddressCard} nextTheme="purple"/>
+                        </div>
+                        <div class="padding-x pb-16">
+                            <h2 class="text-headline-small  mb-4 text-tertiary ">À propos de moi</h2>
+                            <p class="text-body-large max-w-3xl ">
+                                Passionné de développement web, je conçois et développe des interfaces légères et
+                                accessibles, alliant design et maintenabilité.
+                            </p>
+                            <!--<div class="-ml-6 mr-6 mt-8 flex gap-8 max-w-screen-md">-->
+                            <!--    <Card variant="elevated"-->
+                            <!--          className="p-4 px-6 bg-surface-container-high/50 w-fit flex-col flex">-->
+                            <!--        <div class="flex-1">-->
+                            <!--            <p class="text-title-medium">Front-end</p>-->
+                            <!--            <p class="mt-2 text-on-surface-variant">-->
+                            <!--                Expert en sites web et applications multiplateformes-->
+                            <!--            </p>-->
+                            <!--        </div>-->
+
+                            <!--        <Button className="mt-2" variant="text" size="xSmall" disableTextMargins>En savoir plus-->
+                            <!--        </Button>-->
+                            <!--    </Card>-->
+                            <!--    <Card variant="elevated"-->
+                            <!--          className="p-4 px-6 bg-surface-container-high/50 w-fit flex-col flex">-->
+                            <!--        <div class="flex-1">-->
+                            <!--            <p class="text-title-medium">Design & UX</p>-->
+                            <!--            <p class="mt-2 text-on-surface-variant">-->
+                            <!--                Parcours et navigation optimisés pour une expérience fluide et agréable-->
+                            <!--            </p>-->
+                            <!--        </div>-->
+
+                            <!--        <Button className="mt-2" variant="text" size="xSmall" disableTextMargins>En savoir plus-->
+                            <!--        </Button>-->
+                            <!--    </Card>-->
+                            <!--    <Card variant="elevated"-->
+                            <!--          className="p-4 px-6 bg-surface-container-high/50 w-fit flex-col flex">-->
+                            <!--        <div class="flex-1">-->
+                            <!--            <p class="text-title-medium">Back-end</p>-->
+                            <!--            <p class="mt-2 text-on-surface-variant">-->
+                            <!--                Fonctionnalités serveur et APIs fiables pour des projets performants et-->
+                            <!--                sécurisés-->
+                            <!--            </p>-->
+                            <!--        </div>-->
+
+                            <!--        <Button className="mt-2" variant="text" size="xSmall" disableTextMargins>En savoir plus-->
+                            <!--        </Button>-->
+                            <!--    </Card>-->
+                            <!--</div>-->
+                            <div class="mt-12 flex md:flex-row flex-col gap-4">
+                                <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
                             </div>
-                        </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex mt-8 pb-16">
+                    <div>
+                        <Line client:idle icon={faCode} isLast/>
+                    </div>
+                    <div class="padding-x max-w-screen-md">
+                        <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement web -
+                            Front-end</h2>
+                        <div data-aos="fade-right" data-aos-delay="100"
+                             class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                            <h3 class="text-gradient">Performance et flexibilité garantie</h3>
+                            <p>J'assure vos projets avec des technologies modernes et adaptables</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="flex mt-8">
-                <div>
-                    <Line client:idle icon={faAddressCard} nextTheme="purple"/>
-                </div>
-                <div class="padding">
-                    <h2 class="text-title-medium  mb-4 text-tertiary ">À propos de moi</h2>
-                    <p class="text-body-large max-w-3xl ">
-                        Bonjour, je suis Joël Vigreux - un développeur passionné.<br/> Ayant découvert un vif intérêt
-                        pour
-                        le
-                        <Link href="#back-end">back-end</Link>
-                        en
-                        débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
-                        <Link href="#front-end">front-end</Link>
-                        et de <span class="text-nowrap">l'<Link
-                            href="#ux">expérience&nbsp;utilisateur</Link> ,</span>
-                        tout en intégrant des pratiques
-                        écoresponsables
-                        de manière pragmatique.
-                    </p>
-                    <div class="mt-8 flex md:flex-row flex-col gap-4">
-                        <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
-                        <Button href="#front-end" icon={faCircleInfo} variant="outlined"
-                                label="En savoir plus"/>
-                    </div>
+            <div class="flex-1 flex flex-col justify-end">
+                <BackgroundColor speed={7_500} size={"75%"} count={5} client:idle
+                                 className="absolute opacity-40 size-full top-0 left-0"></BackgroundColor>
+                <div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-surface to-transparent  via-surface/60 h-[75vh]"></div>
+                <div class="sticky bottom-0 translete-x-1/2 ">
+                    <img style={{filer: "brightness(1.5) drop-shadow(13px 2px 5px black)"}}
+                         class="opacity-80 h-full"
+                         src="/images/photo.webp">
+                    <!--<div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-transparent to-surface"></div>-->
                 </div>
             </div>
+
+
         </div>
+
         <LinearGradient nextTheme="purple"/>
     </section>
-    <section id="front-end" class="pt-8 tab-menu theme-purple">
+    <section id="front-end" class=" tab-menu theme-purple">
         <div class="max-width ">
-            <div class="flex">
-                <div>
-                    <Line client:idle icon={faCode} isLast/>
-                </div>
-                <div class="padding ">
-                    <h2 data-aos="fade-right" class="text-title-large">Développement web - Front-end</h2>
-                    <div data-aos="fade-right" data-aos-delay="100"
-                         class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-                        <h3 class="text-gradient">Performance et flexibilité garantie</h3>
-                        <p>J'assure vos projets avec des technologies modernes et adaptables</p>
-                    </div>
-                </div>
-            </div>
+
             <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                <Card data-aos="zoom-in" variant="filled"
+                <Card data-aos="zoom-in"
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
                             name="Astro"
@@ -147,7 +194,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         générant du contenu statique ultra-performant.</p>
                     </Techno>
                 </Card>
-                <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                <Card data-aos="zoom-in" data-aos-delay={150}
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
                             name="React"
@@ -155,7 +202,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         développement et la gestion de l'état.</p>
                     </Techno>
                 </Card>
-                <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                <Card data-aos="zoom-in" data-aos-delay={300}
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
                             name="Tailwind"
@@ -174,10 +221,6 @@ import {LinearGradient} from "@components/LinearGradient";
                         ><p>Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives
                             avec des éléments visuels raffinés.</p>
                         </Techno>
-                        <Techno image={angularLogo} name="Angular"
-                        ><p>Facilite le développement d'applications web robustes et évolutives avec une structure
-                            organisée et des fonctionnalités puissantes intégrées.</p>
-                        </Techno>
                         <Techno image={sassLogo} name="Sass"
                         ><p>Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles
                             complexes.</p>
@@ -185,9 +228,6 @@ import {LinearGradient} from "@components/LinearGradient";
                         <Techno image={tsLogo} name="Typescript"
                         ><p>Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à
                             maintenir.</p>
-                        </Techno>
-                        <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
-                        ><p>Fondations essentielles pour créer des sites web interactifs et fonctionnels.</p>
                         </Techno>
                     </div>
                 </Card>
@@ -208,7 +248,8 @@ import {LinearGradient} from "@components/LinearGradient";
                 <div class="padding">
                     <div class="flex items-center md:flex-row flex-col">
                         <div class="left">
-                            <h2 data-aos="fade-right" class="text-title-large">Développement multiplateforme</h2>
+                            <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement
+                                multiplateforme</h2>
                             <div data-aos="fade-right" data-aos-delay="100"
                                  class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                                 <h3 class="text-gradient">Touchez un public plus large</h3>
