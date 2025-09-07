@@ -30,8 +30,35 @@ export const Menu = ({
         setIds(featureIds);
     }, []);
 
+
+    const previousEl = useRef<{ el: Element, index: number } | null>(null);
+    const currentEl = useRef<{ el: Element, index: number } | null>(null);
     useEffect(() => {
         if (!ids) return;
+
+        const setCurrent = (current: { el: Element, index: number }) => {
+
+            if (currentEl.current) {
+                previousEl.current = currentEl.current;
+            }
+            currentEl.current = current;
+
+            const classes = current.el.className.split(" ");
+            const themeClass =
+                classes.find((cls) => cls.startsWith("theme-")) ?? "blue";
+
+            themeService.updateTheme(themeClass.replace("theme-", ""));
+
+            if (current.index == ids.length - 1) {
+                setActiveTab(null);
+                setFabVisible(false);
+                themeService.updateTheme("purple");
+                return
+            }
+
+            setActiveTab(current.index);
+            setFabVisible(true);
+        }
 
         // Initialize Intersection Observers for each feature
         const initObservers = () => {
@@ -40,17 +67,15 @@ export const Menu = ({
                 const observer = new IntersectionObserver(
                     ([entry]) => {
                         if (entry.isIntersecting && !isScrolling.current) {
-                            const classes = entry.target.className.split(" ");
-                            const themeClass =
-                                classes.find((cls) => cls.startsWith("theme-")) ?? "blue";
-
-                            themeService.updateTheme(themeClass.replace("theme-", ""));
-
-                            setActiveTab(index);
-                            setFabVisible(true);
+                            setCurrent({el, index});
+                        } else if (!isScrolling.current && entry.target == currentEl.current?.el && previousEl.current) {
+                            setCurrent(previousEl.current);
                         }
-                    },
-                    {threshold: [0.2]},
+                    }, {
+                        root: null, // null = viewport
+                        threshold: 0, // déclenche dès qu'il y a intersection
+                        rootMargin: "-20% 0px"
+                    }
                 );
                 observer.observe(el);
                 return observer;
@@ -82,24 +107,6 @@ export const Menu = ({
         };
     }, []);
 
-    useEffect(() => {
-        const featuresDiv = document.getElementById("contact")!;
-
-        const featuresObserver = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setActiveTab(null);
-                    setFabVisible(false);
-                    themeService.updateTheme("purple");
-                }
-            },
-            {threshold: [0]},
-        );
-        featuresObserver.observe(featuresDiv);
-
-        return () => featuresObserver.disconnect();
-    }, []);
-
     return (
         <div
             className={classNames(
@@ -114,15 +121,24 @@ export const Menu = ({
                 className={"max-w-3xl  border-none  md:overflow-hidden"}
                 variant={"secondary"}
             >
-                {ids.map((id, index) => (
-                    <Tab
-                        className={"bg-transparent md:h-full"}
-                        selected={index === activeTab}
-                        href={`#${id}`}
-                        label={formatLabel(id)}
-                        // key={id}
-                    ></Tab>
-                ))}
+                {ids.map((id, index) => {
+                    if (index == ids.length - 1) {
+                        return null
+                    }
+
+                    return (
+
+                        <Tab
+                            className={"bg-transparent md:h-full"}
+                            selected={index === activeTab}
+                            href={`#${id}`}
+                            label={formatLabel(id)}
+                            // key={id}
+                        ></Tab>
+
+                    );
+
+                })}
             </Tabs>
             <Button
                 href={"#contact"}
