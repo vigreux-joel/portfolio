@@ -1,5 +1,7 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import {CircleComponent} from "@components/CircleComponent.tsx";
+import {useStore} from "@nanostores/react";
+import {themeStore} from "@/stores/themeStore.ts";
 
 
 const getColorHex = (colorSource: number[]): string => {
@@ -45,29 +47,14 @@ export const BackgroundColor = ({count = 10, size = "75%", className, speed}: {
     className?: string
     speed?: number
 }) => {
+    const $theme = useStore(themeStore)
 
-    const [theme, setTheme] = useState<string>("theme-blue");
 
     // const mouse = useMouse(document.querySelector("body")!, {
     //     fps: 10,
     //     enterDelay: 100,
     //     leaveDelay: 100,
     // })
-
-    useEffect(() => {
-        const handleThemeChange = (event: CustomEvent) => {
-            setTheme(event.detail);
-        };
-
-        window.addEventListener("themeChange", handleThemeChange as EventListener);
-        return () => {
-            window.removeEventListener(
-                "themeChange",
-                handleThemeChange as EventListener
-            );
-        };
-    }, []);
-
 
     const [colorSurface, setColorSurface] = useState<[x: number, y: number, z: number]>([18, 19, 24]);
     useEffect(() => {
@@ -111,47 +98,12 @@ export const BackgroundColor = ({count = 10, size = "75%", className, speed}: {
 
 
         for (let i = 0; i < numPoints; i++) {
-
-            const primary = i % 3 === 0 ? getCSSVariableColor('tertiary-container') : getCSSVariableColor('primary-container');
-
-
-            const sensitivity = 0.6;
-
-            const colorSource = Array.from({length: 3}, (_, i) => {
-                if (!colorSurface) {
-                    throw new Error("An unexpected error occurred while calculating color values.");
-                }
-
-                const minColorPourcent = Math.max(
-                    ...primary, // Éclate les valeurs de primary
-                    ...colorSurface // Éclate les valeurs de surface
-                ) / (255 * 3);
-
-
-                const min = Math.min(primary[i], colorSurface[i]);
-                const max = Math.max(primary[i], colorSurface[i]);
-
-
-                const randomFactor = (1 - sensitivity) + Math.random() * (1 - (1 - sensitivity));
-
-
-                // Ajuste le calcul de Math.random() en fonction de minColorPourcent
-                return min + (minColorPourcent + randomFactor * (1 - minColorPourcent)) * (max - min);
-
-            });
-
-            // Couleur en utilisant la variable CSS 'primary' convertie en valeur hexadécimale
-
-// Usage:
-            // Couleur aléatoire
-            colors[i] = getColorHex(colorSource); // Rougeconsole.log(colors[i])
-
-            // Taille aléatoire (0.1 à 1.0)
+            colors[i] = i % 3 === 0 ? 'var(--color-tertiary-container)' : 'var(--color-primary-container)';
         }
 
 
         setColors(colors)
-    }, [theme]);
+    }, [$theme]);
 
 
     const updatedPositions = useRef(positions);

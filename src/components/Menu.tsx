@@ -1,5 +1,6 @@
 import {Button, classNames, Tab, Tabs} from "@udixio/ui-react";
 import React, {useEffect, useRef, useState} from "react";
+import {themeService} from "@/stores/themeStore.ts";
 
 
 function formatLabel(id) {
@@ -41,13 +42,11 @@ export const Menu = ({
                         if (entry.isIntersecting && !isScrolling.current) {
                             const classes = entry.target.className.split(" ");
                             const themeClass =
-                                classes.find((cls) => cls.startsWith("theme-")) ?? "theme-blue";
-                            const themeChangeEvent = new CustomEvent("themeChange", {
-                                detail: themeClass,
-                            });
-                            window.dispatchEvent(themeChangeEvent);
-                            setActiveTab(index);
+                                classes.find((cls) => cls.startsWith("theme-")) ?? "blue";
 
+                            themeService.updateTheme(themeClass.replace("theme-", ""));
+
+                            setActiveTab(index);
                             setFabVisible(true);
                         }
                     },
@@ -91,10 +90,7 @@ export const Menu = ({
                 if (entry.isIntersecting) {
                     setActiveTab(null);
                     setFabVisible(false);
-                    const themeChangeEvent = new CustomEvent("themeChange", {
-                        detail: "theme-purple",
-                    });
-                    window.dispatchEvent(themeChangeEvent);
+                    themeService.updateTheme("purple");
                 }
             },
             {threshold: [0]},
@@ -132,6 +128,7 @@ export const Menu = ({
                 href={"#contact"}
                 className={"m-2 hidden md:block"}
                 label={"Contact"}
+                allowShapeTransformation={false}
             />
         </div>
     );

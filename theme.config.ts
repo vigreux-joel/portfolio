@@ -7,6 +7,12 @@ argbFromHex('#93b5cb')
 const source = Hct.fromInt(argbFromHex('#93b5cb'))
 const newSource = Hct.from(source.hue, 50, 30)
 
+export const subThemes = {
+    blue: '#94abdf',
+    green: '#81b88e',
+    purple: "#bba1da",
+    orange: '#e69883'
+}
 
 export default defineConfig({
     sourceColor: hexFromArgb(newSource.toInt()),
@@ -80,12 +86,7 @@ export default defineConfig({
             responsiveBreakPoints: {
                 sm: 1.125,
             },
-            subThemes: {
-                blue: '#1A73E8',
-                green: '#4CA66B',
-                purple: "#7852A9",
-                orange: '#F5704B'
-            }
+            subThemes
         }),
 
     ],

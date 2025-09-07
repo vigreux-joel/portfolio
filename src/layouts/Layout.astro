@@ -12,6 +12,7 @@ import "@fontsource/montserrat/600.css";
 import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
+import {ThemeProvider} from "../components/ThemeProvider";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -139,10 +140,11 @@ const seoDefault: SEOProps = {
 
     <SEO {...seoDefault}/>
 </head>
-<body class="bg-surface">
+<body class="bg-surface dynamic">
 <Header/>
 <main>
     <slot/>
+    <ThemeProvider client:idle/>
 </main>
 <Footer/>
 <script>

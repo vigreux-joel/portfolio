@@ -11,8 +11,6 @@ export const Header = () => {
     const hideMenuScrollPosition = useRef(0);
     const showMenuScrollPosition = useRef(0);
     const [scrollY, setScrollY] = useState<number>(0);
-    const [theme, setTheme] = useState<string>("theme-blue");
-
     const [fabVisible, setFabVisible] = useState(true);
 
     const onScroll = (currentScrollPosition: number) => {
@@ -36,20 +34,6 @@ export const Header = () => {
             previousScrollPosition.current = currentScrollPosition;
         }
     };
-
-    useEffect(() => {
-        const handleThemeChange = (event: CustomEvent) => {
-            setTheme(event.detail);
-        };
-
-        window.addEventListener("themeChange", handleThemeChange as EventListener);
-        return () => {
-            window.removeEventListener(
-                "themeChange",
-                handleThemeChange as EventListener
-            );
-        };
-    }, []);
 
     useEffect(() => {
         onScroll(scrollY);
@@ -79,7 +63,6 @@ export const Header = () => {
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: 0.5}}
-            className={theme}
         >
             <Menu setFabVisible={setFabVisible} fabVisible={fabVisible}/>
             <Fab

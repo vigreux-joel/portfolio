@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {motion, useMotionValueEvent, useScroll} from "motion/react";
 import {Link} from "@components/Link.tsx";
 import {classNames} from "@udixio/ui-react";
+import {themeService} from "@/stores/themeStore.ts";
 
 const content: {
     text: React.ReactNode;
@@ -154,10 +155,10 @@ export const StickyScroll = () => {
         }
         setDisplayText(latest > 0);
         setActiveCard(closestBreakpointIndex);
-        const themeChangeEvent = new CustomEvent("themeChange", {
-            detail: "theme-" + content[closestBreakpointIndex].theme,
-        });
-        window.dispatchEvent(themeChangeEvent);
+
+        const theme = content[closestBreakpointIndex].theme
+        if (theme)
+            themeService.updateTheme(theme);
     });
 
     return (
