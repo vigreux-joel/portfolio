@@ -8,23 +8,27 @@ export const CircleComponent: FC<{
     position: {
         x: number; y: number
     }
-    speed?: number;
+    className?: string
+    speed?: number | null;
     isVisible?: boolean;
-}> = ({width, color, position, isVisible = true, speed = 5_000}) => {
+    ref?: any
+}> = ({width, color, position, isVisible = true, speed = 5_000, className, ref: defaultRef, ...restProps}) => {
+
 
     const [uuid, setUuid] = useState(uuidv4())
 
     const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
 
 
-    const ref = useRef(null);
+    const resolvedRef = defaultRef ?? useRef(null);
 
 
     const [transformPosition, setTransformPosition] = useState({x: 0, y: 0});
 
     useEffect(() => {
+        if (speed === null) return;
         const mouve = () => {
-            const parent = (ref.current as any).parentElement;
+            const parent = (resolvedRef.current as any).parentElement;
             if (parent) {
                 const parentWidth = parent.clientWidth;
                 const parentHeight = parent.clientHeight;
@@ -56,14 +60,14 @@ export const CircleComponent: FC<{
             // cleanup
             return () => clearInterval(interval);
         }, initialDelay);
-    }, []);
+    }, [speed]);
 
     return (
         <svg
-            ref={ref}
+            ref={resolvedRef}
             style={{
-                top: position.x + "%",
-                left: position.y + "%",
+                top: position.y * 100 + "%",
+                left: position.x * 100 + "%",
                 width,
                 aspectRatio: 1,
                 opacity: isVisible ? 1 : 0,
@@ -72,11 +76,14 @@ export const CircleComponent: FC<{
                 transition: `top 8s linear,
                      left 8s linear,
                      background 2s,
-                     transform ${speed / 1000}s linear
+                     transform ${(speed ?? 5000) / 1000}s linear
                      `,
             }}
-            className="absolute h-auto transition-all duration-2000 mix-blend-hue"
-            xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+            className={"absolute h-auto transition-all duration-2000 mix-blend-hue " + className}
+            xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"
+            {...restProps}
+
+        >
             <radialGradient id={"grad-" + uuid} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                 <stop
                     offset="0%"

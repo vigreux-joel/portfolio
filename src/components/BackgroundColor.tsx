@@ -70,8 +70,8 @@ export const BackgroundColor = ({count = 10, size = "75%", className, speed}: {
 
         for (let i = 0; i < numPoints; i++) {
             // Position aléatoire dans l'espace 3D (-5 à 5 pour chaque coordonnée)
-            const x = (Math.random()) * 100;
-            const y = (Math.random()) * 100;
+            const x = (Math.random());
+            const y = (Math.random());
 
 
             positions[i] = {
@@ -119,7 +119,8 @@ export const BackgroundColor = ({count = 10, size = "75%", className, speed}: {
                         speed={speed}
                         width={size}
                         key={i} // Une clé unique pour chaque élément
-                        position={positions[i]} color={colors ? colors[i] : "#000000"}/>
+                        position={positions[i]} color={colors ? colors[i] : "#000000"}
+                    />
                 )
             })}
         </div>

@@ -189,7 +189,7 @@ import {LinearGradient} from "@components/LinearGradient";
             <div class="max-width ">
 
                 <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                    <Card data-aos="zoom-in"
+                    <Card client:visible data-aos="zoom-in"
                           className="group">
                         <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
                                 name="Astro"
@@ -198,7 +198,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             générant du contenu statique ultra-performant.</p>
                         </Techno>
                     </Card>
-                    <Card data-aos="zoom-in" data-aos-delay={150}
+                    <Card client:visible data-aos="zoom-in" data-aos-delay={150}
                           className="group">
                         <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
                                 name="React"
@@ -207,7 +207,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             développement et la gestion de l'état.</p>
                         </Techno>
                     </Card>
-                    <Card data-aos="zoom-in" data-aos-delay={300}
+                    <Card client:visible data-aos="zoom-in" data-aos-delay={300}
                           className="group">
                         <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
                                 name="Tailwind"
@@ -216,7 +216,8 @@ import {LinearGradient} from "@components/LinearGradient";
                             style des composants flexible et modulaire.</p>
                         </Techno>
                     </Card>
-                    <Card data-aos="zoom-in" data-aos-delay={450} className="md:col-span-3 p-6 pb-10 mb-px mt-4">
+                    <Card client:visible data-aos="zoom-in" data-aos-delay={450}
+                          className="md:col-span-3 p-6 pb-10 mb-px mt-4">
                         <p class="mb-8 mt-2">Ma boîte à outils :</p>
                         <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
                             <Techno image={framerMotionLogo} name="Framer Motion"
@@ -377,7 +378,7 @@ import {LinearGradient} from "@components/LinearGradient";
             <section>
                 <div class="max-width">
                     <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                        <Card data-aos="zoom-in" variant="filled"
+                        <Card client:visible data-aos="zoom-in" variant="filled"
                               className="group ">
                             <Techno variant="primary" className="p-6 pb-10"
                                     icon={faChartNetwork}
@@ -391,7 +392,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                 </p>
                             </Techno>
                         </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
                                     name="Architecture Flexible et Efficace"
@@ -405,7 +406,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             </Techno>
 
                         </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
                                     name="Solutions Serverless"
@@ -444,7 +445,8 @@ import {LinearGradient} from "@components/LinearGradient";
                         </div>
                     </div>
                     <div class="grid padding-x lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
-                        <Card data-aos="zoom-in" variant="filled" className="lg:col-span-3 md:col-span-2 p-6">
+                        <Card client:visible data-aos="zoom-in" variant="filled"
+                              className="lg:col-span-3 md:col-span-2 p-6">
                             <Techno buttonLabel="En voir plus" variant="primary" className=""
                                     image={nestLogo}
                                     name="Nest.Js"
@@ -471,7 +473,8 @@ import {LinearGradient} from "@components/LinearGradient";
                                 </Techno>
                             </div>
                         </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={150} className="lg:col-span-2 row-span-1"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={150}
+                              className="lg:col-span-2 row-span-1"
                               variant="filled">
                             <Techno variant="primary" className="p-6" icon={faGolang}
                                     name="Go"
@@ -481,14 +484,16 @@ import {LinearGradient} from "@components/LinearGradient";
                             </Techno>
                         </Card>
                         <div class="lg:col-span-3 flex lg:flex-row flex-col gap-6 lg:order-1">
-                            <Card data-aos="zoom-in" data-aos-delay={300} className="flex-1" variant="filled">
+                            <Card client:visible data-aos="zoom-in" data-aos-delay={300} className="flex-1"
+                                  variant="filled">
                                 <Techno variant="primary" className="p-6" icon={faJava}
                                         name="Java"
                                 ><p>Permet une plateforme robuste et évolutive pour développer des applications back-end
                                     complexes, idéale pour les systèmes d'entreprise et les services web.</p>
                                 </Techno>
                             </Card>
-                            <Card data-aos="zoom-in" data-aos-delay={450} className="flex-1" variant="filled">
+                            <Card client:visible data-aos="zoom-in" data-aos-delay={450} className="flex-1"
+                                  variant="filled">
                                 <Techno variant="primary" className="p-6" icon={faPython}
                                         name="Python">
                                     <p>Accorde une syntaxe claire et simple pour développer rapidement des applications
@@ -498,7 +503,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                 </Techno>
                             </Card>
                         </div>
-                        <Card data-aos="zoom-in" data-aos-delay={600} variant="filled"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={600} variant="filled"
                               className="md:col-span-2 p-6 ">
                             <Techno variant="primary" className="" icon={faPhp}
                                     name="PHP"
@@ -537,7 +542,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                 <p>Je sélectionne le CMS adapté pour répondre précisément à vos besoins.</p>
                             </div>
                             <div class="flex md:flex-row flex-col gap-8 mt-16">
-                                <Card data-aos="zoom-in" variant="filled"
+                                <Card client:visible data-aos="zoom-in" variant="filled"
                                       className="group ">
                                     <Techno variant="primary" className="p-6 pb-10"
                                             icon={faChartNetwork}
@@ -549,7 +554,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                             projets nécessitant une séparation entre contenu et présentation.</p>
                                     </Techno>
                                 </Card>
-                                <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                                <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
                                       className="group">
                                     <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
                                             name="Builder.io"
@@ -560,7 +565,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                     </p>
                                     </Techno>
                                 </Card>
-                                <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                                <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
                                       className="group">
                                     <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
                                             name="Wordpress"

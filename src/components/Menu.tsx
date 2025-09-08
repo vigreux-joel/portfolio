@@ -43,7 +43,6 @@ export const Menu = ({
         if (themeEls.length == 0) return;
 
         const setCurrentMenu = (current: { el: Element, index: number }) => {
-            console.log("setCurrent", current.index, current.el);
 
             if (currentMenuEl.current) {
                 previousMenuEl.current = currentMenuEl.current;
