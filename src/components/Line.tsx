@@ -64,13 +64,13 @@ export const Line = ({
                     }
                 >
                     <div
-                        className={classNames("w-full h-full absolute", {
+                        className={classNames("not-detect-theme w-full h-full absolute", {
                             "bg-primary": !isFirst && icon && !isLast,
                         })}
                     ></div>
                     <div
                         className={classNames(
-                            "w-full h-full theme-" + nextTheme + " bg-gradient-to-b absolute",
+                            "not-detect-theme w-full h-full theme-" + nextTheme + " bg-gradient-to-b absolute",
                             {
                                 "from-primary to-transparent": isLast,
                                 "from-transparent to-primary": !isLast,

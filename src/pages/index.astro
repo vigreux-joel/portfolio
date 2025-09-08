@@ -63,14 +63,14 @@ import {LinearGradient} from "@components/LinearGradient";
     <section id="accueil" class="tab-menu  ">
         <div class="max-width flex  h-full">
             <div class="relative z-10 flex flex-col">
-                <div class="theme-blue min-h-[80vh] flex flex-col pt-20 md:pt-36 xl:pt-48">
+                <div class="theme-blue min-h-screen flex flex-col pt-20 md:pt-36 xl:pt-48">
                     <div class="flex">
                         <div>
                             <Line client:idle visible isFirst icon={faCircle}/>
                         </div>
                         <div class="padding !pb-16">
                             <h1 class="text-display-large my-6">
-                                Joël VIGREUX <span class="block text-on-surface-variant">Développeur full-stack</span>
+                                Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
                             </h1>
                             <!--<div class="flex flex-wrap gap-4">-->
                             <!--    <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><h2-->
@@ -151,14 +151,16 @@ import {LinearGradient} from "@components/LinearGradient";
                     </div>
                 </div>
                 <div class="flex mt-8 pb-24">
-                    <div>
+                    <div class="theme-purple not-detect-theme">
                         <Line client:idle icon={faCode} isLast/>
                     </div>
-                    <div class="padding-x max-w-screen-md">
-                        <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement web -
+                    <div data-aos="fade-right" class="padding-x max-w-screen-md">
+                        <h2 class="text-title-large text-tertiary transition-all duration-1000">
+                            Développement
+                            web -
                             Front-end</h2>
-                        <div data-aos="fade-right" data-aos-delay="100"
-                             class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                        <div
+                                class="mt-4 text-headline-large md:text-display-medium max-w-prose transition-all duration-1000">
                             <h3 class="text-gradient">Performance et flexibilité garantie</h3>
                             <p>J'assure vos projets avec des technologies modernes et adaptables</p>
                         </div>
@@ -167,7 +169,7 @@ import {LinearGradient} from "@components/LinearGradient";
             </div>
             <div class="flex-1 flex flex-col justify-end">
                 <BackgroundColor speed={7_500} size={"75%"} count={5} client:idle
-                                 className="absolute opacity-40 size-full top-0 left-0"></BackgroundColor>
+                                 className="absolute opacity-30 size-full top-0 left-0"></BackgroundColor>
                 <div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-surface to-transparent  via-surface/60 h-[75vh]"></div>
                 <div class="sticky bottom-0 translete-x-1/2 ">
                     <img style={{filer: "brightness(1.5) drop-shadow(13px 2px 5px black)"}}
@@ -424,6 +426,8 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
             </section>
             <section class="pt-8">
+                <BackgroundColor speed={5_000} size={"100%"} count={5} client:idle
+                                 className="absolute opacity-20 size-full top-0 left-0"></BackgroundColor>
                 <div class="max-width">
                     <div class="flex">
                         <div>
@@ -588,6 +592,8 @@ import {LinearGradient} from "@components/LinearGradient";
 
             <div data-aos="zoom-in"
                  class=" md:px-6 max-w-screen-2xl mx-auto ">
+                <BackgroundColor speed={5_000} size={"75%"} count={5} client:idle
+                                 className="absolute opacity-30 size-full top-0 left-0 -z-10"></BackgroundColor>
                 <div class="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
                     <div class="left flex-1 padding !pb-12 pt-8">
                         <div class="flex gap-4 group rounded-xl mt-2">

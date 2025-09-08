@@ -17,7 +17,8 @@ export const Menu = ({
     fabVisible: boolean;
     setFabVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    const [ids, setIds] = useState<string[]>([]); // Initial ids array is set to empty
+    const [menuEls, setMenuEls] = useState<Element[]>([]); // Initial ids array is set to empty
+    const [themeEls, setThemeEls] = useState<Element[]>([]); // Initial ids array is set to empty
 
     const [activeTab, setActiveTab] = useState<number | null>(1);
     const observers = useRef<IntersectionObserver[]>([]);
@@ -25,23 +26,44 @@ export const Menu = ({
     const isScrolling = useRef(false);
 
     useEffect(() => {
-        const features = Array.from(document.querySelectorAll(".tab-menu"));
-        const featureIds = features.map((feature) => feature.id).filter(String);
-        setIds(featureIds);
+        const menuEls = Array.from(document.querySelectorAll(".tab-menu"));
+        const themeEls = Array.from(document.querySelectorAll(
+            ":is([class^='theme-'], [class*=' theme-']):not(.theme-undefined, .not-detect-theme )"
+        ));
+        setMenuEls(menuEls);
+        setThemeEls(themeEls);
     }, []);
 
 
-    const previousEl = useRef<{ el: Element, index: number } | null>(null);
-    const currentEl = useRef<{ el: Element, index: number } | null>(null);
+    const previousMenuEl = useRef<{ el: Element, index: number } | null>(null);
+    const currentMenuEl = useRef<{ el: Element, index: number } | null>(null);
+    const previousThemeEl = useRef<{ el: Element, index: number } | null>(null);
+    const currentThemeEl = useRef<{ el: Element, index: number } | null>(null);
     useEffect(() => {
-        if (!ids) return;
+        if (themeEls.length == 0) return;
 
-        const setCurrent = (current: { el: Element, index: number }) => {
+        const setCurrentMenu = (current: { el: Element, index: number }) => {
+            console.log("setCurrent", current.index, current.el);
 
-            if (currentEl.current) {
-                previousEl.current = currentEl.current;
+            if (currentMenuEl.current) {
+                previousMenuEl.current = currentMenuEl.current;
             }
-            currentEl.current = current;
+            currentMenuEl.current = current;
+
+            if (current.index == themeEls.length - 1) {
+                setActiveTab(null);
+                setFabVisible(false);
+                return
+            }
+
+            setActiveTab(current.index);
+            setFabVisible(true);
+        }
+        const setCurrentTheme = (current: { el: Element, index: number }) => {
+            if (currentThemeEl.current) {
+                previousThemeEl.current = currentThemeEl.current;
+            }
+            currentThemeEl.current = current;
 
             const classes = current.el.className.split(" ");
             const themeClass =
@@ -49,37 +71,53 @@ export const Menu = ({
 
             themeService.updateTheme(themeClass.replace("theme-", ""));
 
-            if (current.index == ids.length - 1) {
-                setActiveTab(null);
-                setFabVisible(false);
+            if (current.index == themeEls.length - 1) {
                 themeService.updateTheme("purple");
                 return
             }
-
-            setActiveTab(current.index);
-            setFabVisible(true);
         }
 
         // Initialize Intersection Observers for each feature
         const initObservers = () => {
-            observers.current = ids.map((id, index) => {
-                const el = document.getElementById(id)!;
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting && !isScrolling.current) {
-                            setCurrent({el, index});
-                        } else if (!isScrolling.current && entry.target == currentEl.current?.el && previousEl.current) {
-                            setCurrent(previousEl.current);
+
+            observers.current = [
+                ...menuEls.map((el, index) => {
+                    const observer = new IntersectionObserver(
+                        ([entry]) => {
+                            if (entry.isIntersecting && !isScrolling.current) {
+                                setCurrentMenu({el, index});
+                            } else if (!isScrolling.current && entry.target == currentMenuEl.current?.el && previousMenuEl.current) {
+                                setCurrentMenu(previousMenuEl.current);
+                            }
+
+                        }, {
+                            root: null, // null = viewport
+                            threshold: 0, // déclenche dès qu'il y a intersection
+                            rootMargin: "-20% 0px"
                         }
-                    }, {
-                        root: null, // null = viewport
-                        threshold: 0, // déclenche dès qu'il y a intersection
-                        rootMargin: "-20% 0px"
-                    }
-                );
-                observer.observe(el);
-                return observer;
-            });
+                    );
+                    observer.observe(el);
+                    return observer;
+                }),
+                ...themeEls.map((el, index) => {
+                    const observer = new IntersectionObserver(
+                        ([entry]) => {
+                            if (entry.isIntersecting && !isScrolling.current) {
+                                setCurrentTheme({el, index});
+                            } else if (!isScrolling.current && entry.target == currentThemeEl.current?.el && previousThemeEl.current) {
+                                setCurrentTheme(previousThemeEl.current);
+                            }
+
+                        }, {
+                            root: null, // null = viewport
+                            threshold: 0, // déclenche dès qu'il y a intersection
+                            rootMargin: "-10% 0px"
+                        }
+                    );
+                    observer.observe(el);
+                    return observer;
+                })
+            ];
         };
 
         // Clean up observers on unmount
@@ -90,7 +128,7 @@ export const Menu = ({
         initObservers();
 
         return cleanUpObservers;
-    }, [ids]);
+    }, [themeEls]);
 
     useEffect(() => {
         const handleHashChange = () => {
@@ -121,18 +159,18 @@ export const Menu = ({
                 className={"max-w-3xl  border-none  md:overflow-hidden"}
                 variant={"secondary"}
             >
-                {ids.map((id, index) => {
-                    if (index == ids.length - 1) {
+                {menuEls.map((el, index) => {
+                    if (index == themeEls.length - 1) {
                         return null
                     }
-
                     return (
 
                         <Tab
+                            key={index}
                             className={"bg-transparent md:h-full"}
                             selected={index === activeTab}
-                            href={`#${id}`}
-                            label={formatLabel(id)}
+                            href={`#${el.id}`}
+                            label={formatLabel(el.id)}
                             // key={id}
                         ></Tab>
 
