@@ -4,24 +4,24 @@ import {argbFromHex, Hct, hexFromArgb, sanitizeDegreesDouble, TonalPalette} from
 
 argbFromHex('#93b5cb')
 
-const source = Hct.fromInt(argbFromHex('#93b5cb'))
-const newSource = Hct.from(source.hue, 50, 30)
+const source = Hct.fromInt(argbFromHex('#169fff'))
+const newSource = Hct.from(source.hue, 60, 25)
 
 export const subThemes = {
-    blue: '#94abdf',
+    blue: hexFromArgb(newSource.toInt()),
     green: '#81b88e',
     purple: "#bba1da",
     orange: '#e69883'
 }
 
 export default defineConfig({
-    sourceColor: hexFromArgb(newSource.toInt()),
+    sourceColor: subThemes.blue,
     variant: {
         ...Variants.Fidelity, palettes: {
             ...Variants.Fidelity.palettes,
             tertiary: ({sourceColorHct}) =>
                 TonalPalette.fromHueAndChroma(
-                    sanitizeDegreesDouble(sourceColorHct.hue + 75),
+                    sanitizeDegreesDouble(sourceColorHct.hue + 55),
                     sourceColorHct.chroma + 20,
                 ),
         }

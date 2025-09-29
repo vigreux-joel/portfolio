@@ -36,8 +36,8 @@ export const Techno = ({
                 <div
                     className={classNames(
                         "transition-all duration-300 flex items-center  justify-center rounded-lg ",
-                        {"h-14 w-14  bg-surface-container-high": variant == "secondary"},
-                        {"h-16 w-16 bg-secondary-container": variant == "primary"},
+                        {"h-14 w-14": variant == "secondary"},
+                        {"h-16 w-16": variant == "primary"},
                     )}
                 >
                     {image && (

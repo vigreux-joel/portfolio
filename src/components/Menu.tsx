@@ -159,7 +159,7 @@ export const Menu = ({
                 variant={"secondary"}
             >
                 {menuEls.map((el, index) => {
-                    if (index == themeEls.length - 1) {
+                    if (index == menuEls.length - 1) {
                         return null
                     }
                     return (

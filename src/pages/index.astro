@@ -13,6 +13,7 @@ import {StickyScroll} from "@components/sticky-scroll-reveal";
 import astroLogo from "@assets/images/astro-logo.svg?raw"
 import reactLogo from "@assets/images/react-logo.svg?raw"
 import nestLogo from "@assets/images/nest-logo.svg?raw"
+import photo from "@assets/images/photo.png"
 import expressLogo from "@assets/images/express-logo.svg?raw"
 import tsLogo from "@assets/images/ts-logo.svg?raw"
 import {Link} from "@components/Link"
@@ -69,9 +70,18 @@ import {LinearGradient} from "@components/LinearGradient";
                             <Line client:idle visible isFirst icon={faCircle}/>
                         </div>
                         <div class="padding !pb-16">
-                            <h1 class="text-display-large my-6">
-                                Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
-                            </h1>
+                            <div class="flex items-center gap-8">
+                                <div>
+                                    <Image class="aspect-square rounded-4xl" height={150}
+                                           alt="Joël Vigreux"
+                                           src={photo}></Image>
+                                </div>
+
+                                <h1 class="text-display-large">
+                                    Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
+                                </h1>
+                            </div>
+
                             <!--<div class="flex flex-wrap gap-4">-->
                             <!--    <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><h2-->
                             <!--            class="text-label-large text-on-surface-variant">Développeur-->
@@ -168,15 +178,9 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
             </div>
             <div class="flex-1 flex flex-col justify-end">
-                <BackgroundColor speed={7_500} size={"75%"} count={5} client:idle
+                <BackgroundColor speed={7_500} size="max(50vw, 800px)" count={5} client:idle
                                  className="absolute opacity-30 size-full top-0 left-0"></BackgroundColor>
                 <div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-surface to-transparent  via-surface/60 h-[75vh]"></div>
-                <div class="sticky bottom-0 translete-x-1/2 ">
-                    <img style={{filer: "brightness(1.5) drop-shadow(13px 2px 5px black)"}}
-                         class="opacity-80 h-full"
-                         src="/images/photo.webp">
-                    <!--<div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-transparent to-surface"></div>-->
-                </div>
             </div>
 
 
@@ -427,7 +431,7 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
             </section>
             <section class="pt-8">
-                <BackgroundColor speed={5_000} size={"100%"} count={5} client:idle
+                <BackgroundColor speed={5_000} size="max(60vw, 800px)" count={5} client:idle
                                  className="absolute opacity-20 size-full top-0 left-0"></BackgroundColor>
                 <div class="max-width">
                     <div class="flex">
@@ -597,9 +601,9 @@ import {LinearGradient} from "@components/LinearGradient";
 
             <div data-aos="zoom-in"
                  class=" md:px-6 max-w-screen-2xl mx-auto ">
-                <BackgroundColor speed={5_000} size={"75%"} count={5} client:idle
+                <BackgroundColor speed={5_000} size="max(50vw, 800px)" count={5} client:idle
                                  className="absolute opacity-30 size-full top-0 left-0 -z-10"></BackgroundColor>
-                <div class="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
+                <Card client:load className="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
                     <div class="left flex-1 padding !pb-12 pt-8">
                         <div class="flex gap-4 group rounded-xl mt-2">
                             <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
@@ -658,7 +662,7 @@ Cordialement,
                         <FormContact client:visible/>
                     </div>
 
-                </div>
+                </Card>
             </div>
         </section>
     </div>

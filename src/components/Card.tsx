@@ -14,7 +14,7 @@ export const Card = ({children, className, variant = "elevated"}) => {
 
 
     const [uuid, setUuid] = useState(uuidv4())
-    return <UiCard ref={ref} className={className + " bg-surface-container-highest/70"} variant={variant}>
+    return <UiCard ref={ref} className={className + " bg-surface-container/80"} variant={variant}>
         <AnimatePresence>
             {(x != null && y != null) &&
                 <motion.svg
@@ -29,7 +29,7 @@ export const Card = ({children, className, variant = "elevated"}) => {
                         translateX: "-50%",
                         translateY: "-50%",
                     }}
-                    className={"absolute -z-10 h-auto  text-secondary-container/30 top-0 left-0 pointer-events-none"}
+                    className={"absolute -z-10 h-auto  text-surface-variant top-0 left-0 pointer-events-none"}
                     xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"
 
                 >
