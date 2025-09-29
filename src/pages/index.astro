@@ -65,43 +65,22 @@ import {LinearGradient} from "@components/LinearGradient";
         <div class="max-width flex  h-full">
             <div class="relative z-10 flex flex-col">
                 <div class="theme-blue min-h-screen flex flex-col pt-20 md:pt-36 xl:pt-48">
+                    <div class="flex items-center mb-8 gap-8">
+                        <div>
+                            <Image class="aspect-square rounded-full" height={150}
+                                   alt="Joël Vigreux"
+                                   src={photo}></Image>
+                        </div>
+
+                        <h1 class="text-display-large">
+                            Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
+                        </h1>
+                    </div>
                     <div class="flex">
                         <div>
-                            <Line client:idle visible isFirst icon={faCircle}/>
+                            <Line client:load visible isFirst/>
                         </div>
                         <div class="padding !pb-16">
-                            <div class="flex items-center gap-8">
-                                <div>
-                                    <Image class="aspect-square rounded-4xl" height={150}
-                                           alt="Joël Vigreux"
-                                           src={photo}></Image>
-                                </div>
-
-                                <h1 class="text-display-large">
-                                    Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
-                                </h1>
-                            </div>
-
-                            <!--<div class="flex flex-wrap gap-4">-->
-                            <!--    <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><h2-->
-                            <!--            class="text-label-large text-on-surface-variant">Développeur-->
-                            <!--        full stack</h2>-->
-                            <!--    </div>-->
-                            <!--    <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p-->
-                            <!--            class="text-label-large text-on-surface-variant">3 années d'expériences</p>-->
-                            <!--    </div>-->
-                            <!--    <a href="#contact" class="group">-->
-                            <!--        <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">-->
-                            <!--            <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">-->
-
-                            <!--            </div>-->
-                            <!--            <Icon className="h-[18px] text-on-primary-container" icon={faMessageMiddle}></Icon>-->
-                            <!--            <p-->
-                            <!--                    class="text-label-large text-on-primary-container">Disponible pour vos-->
-                            <!--                projets</p>-->
-                            <!--        </div>-->
-                            <!--    </a>-->
-                            <!--</div>-->
                         </div>
                     </div>
                     <div class="flex flex-1 mt-8">

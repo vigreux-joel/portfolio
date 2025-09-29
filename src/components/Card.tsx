@@ -4,7 +4,7 @@ import {useRef, useState} from "react";
 import {AnimatePresence, motion} from "motion/react";
 import {v4 as uuidv4} from "uuid";
 
-export const Card = ({children, className, variant = "elevated"}) => {
+export const Card = ({children, className, variant = "elevated", ...restProps}) => {
 
     const ref = useRef<any>(null);
     const {x, y} = useMouse(ref, {
@@ -14,7 +14,7 @@ export const Card = ({children, className, variant = "elevated"}) => {
 
 
     const [uuid, setUuid] = useState(uuidv4())
-    return <UiCard ref={ref} className={className + " bg-surface-container/80"} variant={variant}>
+    return <UiCard ref={ref} className={className + " bg-surface-container/80"} variant={variant} {...restProps}>
         <AnimatePresence>
             {(x != null && y != null) &&
                 <motion.svg
