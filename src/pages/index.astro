@@ -60,19 +60,64 @@ import {LinearGradient} from "@components/LinearGradient";
         .grecaptcha-badge {
             visibility: hidden;
         }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            50% { transform: translateY(-6px) translateX(2px) rotate(2deg); }
+            100% { transform: translateY(0) translateX(0) rotate(0deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            50% { transform: translateY(-10px) translateX(-2px) rotate(-2deg); }
+            100% { transform: translateY(0) translateX(0) rotate(0deg); }
+        }
+        .animate-float-slow { animation: float 6s ease-in-out infinite; }
+        .animate-float-medium { animation: float2 5s ease-in-out infinite; }
+        .animate-float-fast { animation: float 4s ease-in-out infinite; }
     </style>
     <section id="accueil" class="tab-menu  ">
         <div class="max-width flex  h-full">
             <div class="relative z-10 flex flex-col">
                 <div class="theme-blue min-h-screen flex flex-col pt-20 md:pt-36 xl:pt-48">
                     <div class="flex items-center mb-8 gap-8">
-                        <div>
-                            <Image class="aspect-square rounded-full" height={150}
+                        <div class="relative">
+                            <!-- Halo gradient derrière la photo -->
+                            <div class="absolute inset-0 -z-10 blur-2xl rounded-full pointer-events-none"
+                                 aria-hidden="true"
+                                 style="background: conic-gradient(from 0deg at 50% 50%, var(--color-primary-container), var(--color-tertiary-container), var(--color-secondary-container), var(--color-primary-container)); opacity: .6;"></div>
+                            <Image class="aspect-square rounded-full ring-4 ring-surface-container-high/60" height={150}
                                    alt="Joël Vigreux"
                                    src={photo}></Image>
+
+                            <!-- Icônes flottantes autour de la photo -->
+                            <div class="absolute -top-4 -left-6 w-8 h-8 md:w-10 md:h-10 animate-float-slow opacity-80">
+                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
+                                    <div class="size-full" set:html={reactLogo}></div>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-3 -left-10 w-7 h-7 md:w-9 md:h-9 animate-float-medium [animation-delay:150ms] opacity-80">
+                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
+                                    <div class="size-full" set:html={astroLogo}></div>
+                                </div>
+                            </div>
+                            <div class="absolute -top-5 -right-8 w-7 h-7 md:w-9 md:h-9 animate-float-fast [animation-delay:300ms] opacity-80">
+                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
+                                    <div class="size-full" set:html={tsLogo}></div>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 -right-10 w-8 h-8 md:w-10 md:h-10 animate-float-medium [animation-delay:500ms] opacity-80">
+                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
+                                    <div class="size-full" set:html={tailwindLogo}></div>
+                                </div>
+                            </div>
+                            <div class="absolute top-12 -left-14 hidden md:block w-8 h-8 animate-float-slow [animation-delay:700ms] opacity-80">
+                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
+                                    <div class="size-full" set:html={nestLogo}></div>
+                                </div>
+                            </div>
                         </div>
 
-                        <h1 class="text-display-large">
+                        <h1 class="text-display-large relative">
+                            <span class="absolute -inset-x-6 -inset-y-2 -z-10 bg-primary/0 bg-[radial-gradient(60%_60%_at_50%_40%,theme(colors.primary/0.04),transparent_60%)] rounded-xl"></span>
                             Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
                         </h1>
                     </div>
