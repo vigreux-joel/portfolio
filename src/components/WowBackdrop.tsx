@@ -107,22 +107,16 @@ export const WowBackdrop: React.FC<WowBackdropProps> = ({
 
             // background halos with inner bias and safe margin so color never hits edges
             const margin = Math.min(w, h) * 0.08; // keep glow away from edges (~8%)
-            ctx.save();
-            // clip to inner safe area so no blob or halo can bleed to the edge
-            ctx.beginPath();
-            ctx.rect(margin, margin, w - margin * 2, h - margin * 2);
-            ctx.clip();
-
             const cx = Math.min(w - margin, Math.max(margin, w * 0.62));
             const cy = Math.min(h - margin, Math.max(margin, h * 0.62));
             // Narrower central luminous core by reducing inner radius and tightening stops
-            const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, Math.max(w, h) * 0.45);
+            const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, Math.max(w, h) * 0.55);
             grad.addColorStop(0, `${themeColors.primary}44`);
             grad.addColorStop(0.22, `${themeColors.tertiary}26`);
-            grad.addColorStop(0.55, `${themeColors.secondary}12`);
+            grad.addColorStop(0.6, `${themeColors.secondary}12`);
             grad.addColorStop(1, "transparent");
             ctx.fillStyle = grad;
-            ctx.fillRect(margin, margin, w - margin * 2, h - margin * 2);
+            ctx.fillRect(0, 0, w, h);
 
             // moving blobs with soft light
             ctx.globalCompositeOperation = "lighter";
@@ -141,10 +135,8 @@ export const WowBackdrop: React.FC<WowBackdropProps> = ({
                 ctx.fill();
             });
             ctx.globalCompositeOperation = "source-over";
-            // end of clipped area for halos and blobs
-            ctx.restore();
 
-            // dotted orbits (kept inside safe area as well)
+            // dotted orbits
             ctx.save();
             ctx.translate(
                 Math.min(w - margin, Math.max(margin, w * 0.5)),
@@ -188,6 +180,28 @@ export const WowBackdrop: React.FC<WowBackdropProps> = ({
             });
             ctx.restore();
 
+            // Soft-edge mask to avoid any hard cutoff: fade out near edges horizontally and vertically
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-in";
+            const fade = Math.min(w, h) * 0.08; // soft fade width near edges
+            // Horizontal fade
+            let lg = ctx.createLinearGradient(0, 0, w, 0);
+            lg.addColorStop(0, "rgba(0,0,0,0)");
+            lg.addColorStop(fade / w, "rgba(0,0,0,1)");
+            lg.addColorStop(1 - fade / w, "rgba(0,0,0,1)");
+            lg.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = lg;
+            ctx.fillRect(0, 0, w, h);
+            // Vertical fade
+            lg = ctx.createLinearGradient(0, 0, 0, h);
+            lg.addColorStop(0, "rgba(0,0,0,0)");
+            lg.addColorStop(fade / h, "rgba(0,0,0,1)");
+            lg.addColorStop(1 - fade / h, "rgba(0,0,0,1)");
+            lg.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = lg;
+            ctx.fillRect(0, 0, w, h);
+            ctx.restore();
+
             raf = requestAnimationFrame(draw);
         };
 
@@ -227,7 +241,7 @@ export const WowBackdrop: React.FC<WowBackdropProps> = ({
     }
 
     return (
-        <div ref={containerRef} className={"relative pointer-events-none " + className} aria-hidden="true">
+        <div ref={containerRef} className={" pointer-events-none " + className} aria-hidden="true">
             <canvas ref={canvasRef} className="block"/>
         </div>
     );

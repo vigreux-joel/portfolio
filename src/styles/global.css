@@ -59,6 +59,7 @@ body {
 @utility padding-y {
     @apply py-12;
     @apply md:py-16;
+    @apply xl:py-32;
 }
 
 @utility padding {

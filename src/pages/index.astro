@@ -105,68 +105,52 @@ import WowBackdrop from "@components/WowBackdrop";
         }
     </style>
     <section id="accueil" class="tab-menu  ">
-        <div class="max-width flex  h-full">
+        <div class="max-width relative z-10 flex flex-col md:flex-row-reverse min-[120rem]:flex-row justify-end min-[120rem]:justify-start min-[120rem]:px-0 items-start md:items-center mb-8 gap-12 md:gap-24 padding-x pt-32 md:pt-42 xl:pt-54">
+            <div class="relative ml-8 md:ml-0">
+                <!-- Halo gradient derrière la photo -->
+                <div class="absolute inset-0 -z-10 blur-2xl rounded-full pointer-events-none"
+                     aria-hidden="true"
+                     style="background: conic-gradient(from 0deg at 50% 50%, var(--color-primary-container), var(--color-tertiary-container), var(--color-secondary-container), var(--color-primary-container)); opacity: .6;"></div>
+                <Image class="aspect-square rounded-full ring-4 ring-surface-container-high/60 size-24 md:size-auto"
+                       height={150}
+                       alt="Joël Vigreux"
+                       src={photo}></Image>
+
+                <!-- Icônes flottantes autour de la photo -->
+                <div class="absolute -top-4 -left-6 w-8 h-8 md:w-10 md:h-10 animate-float-slow opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={reactLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-3 -left-10 w-7 h-7 md:w-9 md:h-9 animate-float-medium [animation-delay:150ms] opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={astroLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute -top-5 -right-8 w-7 h-7 md:w-9 md:h-9 animate-float-fast [animation-delay:300ms] opacity-80">
+                    <div class="size-full rounded-full overflow-hidden fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full scale-130" set:html={tsLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 -right-10 w-8 h-8 md:w-10 md:h-10 animate-float-medium [animation-delay:500ms] opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={tailwindLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute top-12 -left-14 hidden md:block w-8 h-8 animate-float-slow [animation-delay:700ms] opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={nestLogo}></div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-display-medium xl:text-display-large relative">
+                Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
+            </h1>
+        </div>
+        <div class="max-width flex justify-between  h-full">
             <div class="relative z-10 flex flex-col overflow-visible">
-                <div class="theme-blue min-h-screen flex flex-col pt-20 md:pt-36 xl:pt-48 relative ">
-                    <!-- Décor bas-droite pour combler l'espace sur grands écrans -->
-                    <div aria-hidden="true"
-                         class="pointer-events-none hidden lg:block absolute -bottom-24 -right-24 z-0 overflow-visible">
-                        <div class="relative">
-                            <div class="w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px] rounded-full blur-3xl opacity-25"
-                                 style="background: radial-gradient(50% 50% at 50% 50%, var(--color-primary-container) 0%, transparent 60%), radial-gradient(35% 35% at 65% 35%, var(--color-tertiary-container) 0%, transparent 70%), radial-gradient(25% 25% at 35% 65%, var(--color-secondary-container) 0%, transparent 70%);"></div>
-                            <!-- points décoratifs -->
-                            <div class="absolute inset-0 -z-10">
-                                <div class="absolute right-[20%] bottom-[30%] w-2 h-2 rounded-full bg-primary/30"></div>
-                                <div class="absolute right-[35%] bottom-[45%] w-1.5 h-1.5 rounded-full bg-tertiary/30"></div>
-                                <div class="absolute right-[10%] bottom-[50%] w-1.5 h-1.5 rounded-full bg-secondary/30"></div>
-                            </div>
-                            <!-- Animation abstraite "wow" en sous-composant React -->
-                            <WowBackdrop client:load className="absolute right-0 bottom-0 translate-x-1/3 translate-y-1/3 opacity-80 overflow-visible w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px]" density={7} speed={0.25} />
-                        </div>
-                    </div>
-                    <div class="flex items-center mb-8 gap-8">
-                        <div class="relative">
-                            <!-- Halo gradient derrière la photo -->
-                            <div class="absolute inset-0 -z-10 blur-2xl rounded-full pointer-events-none"
-                                 aria-hidden="true"
-                                 style="background: conic-gradient(from 0deg at 50% 50%, var(--color-primary-container), var(--color-tertiary-container), var(--color-secondary-container), var(--color-primary-container)); opacity: .6;"></div>
-                            <Image class="aspect-square rounded-full ring-4 ring-surface-container-high/60" height={150}
-                                   alt="Joël Vigreux"
-                                   src={photo}></Image>
+                <div class="theme-blue  flex flex-col  relative ">
 
-                            <!-- Icônes flottantes autour de la photo -->
-                            <div class="absolute -top-4 -left-6 w-8 h-8 md:w-10 md:h-10 animate-float-slow opacity-80">
-                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
-                                    <div class="size-full" set:html={reactLogo}></div>
-                                </div>
-                            </div>
-                            <div class="absolute -bottom-3 -left-10 w-7 h-7 md:w-9 md:h-9 animate-float-medium [animation-delay:150ms] opacity-80">
-                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
-                                    <div class="size-full" set:html={astroLogo}></div>
-                                </div>
-                            </div>
-                            <div class="absolute -top-5 -right-8 w-7 h-7 md:w-9 md:h-9 animate-float-fast [animation-delay:300ms] opacity-80">
-                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
-                                    <div class="size-full" set:html={tsLogo}></div>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-2 -right-10 w-8 h-8 md:w-10 md:h-10 animate-float-medium [animation-delay:500ms] opacity-80">
-                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
-                                    <div class="size-full" set:html={tailwindLogo}></div>
-                                </div>
-                            </div>
-                            <div class="absolute top-12 -left-14 hidden md:block w-8 h-8 animate-float-slow [animation-delay:700ms] opacity-80">
-                                <div class="size-full rounded-full bg-surface-container/60 backdrop-blur-md ring-1 ring-outline/30 flex items-center justify-center p-1">
-                                    <div class="size-full" set:html={nestLogo}></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h1 class="text-display-large relative">
-                            <span class="absolute -inset-x-6 -inset-y-2 -z-10 bg-primary/0 bg-[radial-gradient(60%_60%_at_50%_40%,theme(colors.primary/0.04),transparent_60%)] rounded-xl"></span>
-                            Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
-                        </h1>
-                    </div>
                     <div class="flex">
                         <div>
                             <Line client:load visible isFirst/>
@@ -178,7 +162,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         <div>
                             <Line client:load icon={faAddressCard} nextTheme="purple"/>
                         </div>
-                        <div class="padding-x pb-16 xl:pb-8">
+                        <div class="padding pt-0">
                             <h2 class="text-headline-small  mb-4 text-tertiary ">À propos de moi</h2>
                             <p class="text-body-large max-w-3xl ">
                                 Passionné de développement web, je conçois et développe des interfaces légères et
@@ -225,16 +209,18 @@ import WowBackdrop from "@components/WowBackdrop";
                             <!--</div>-->
                             <div class="mt-12 flex md:flex-row flex-col gap-4">
                                 <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
+                                <Button variant="outlined" href="#front-end" icon={faCircleInfo}
+                                        label="En savoir plus"/>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div class="flex mt-8 pb-24">
+                <div class="flex mt-8 ">
                     <div class="theme-purple not-detect-theme">
                         <Line client:idle icon={faCode} isLast/>
                     </div>
-                    <div data-aos="fade-right" class="padding-x max-w-screen-md">
+                    <div data-aos="fade-right" class="padding pt-0 max-w-screen-lg">
                         <h2 class="text-title-large text-tertiary transition-all duration-1000">
                             Développement
                             web -
@@ -247,10 +233,21 @@ import WowBackdrop from "@components/WowBackdrop";
                     </div>
                 </div>
             </div>
-            <div class="flex-1 flex flex-col justify-end">
+            <div class="flex flex-col justify-end ">
                 <BackgroundColor speed={7_500} size="max(50vw, 800px)" count={5} client:idle
                                  className="absolute opacity-30 size-full top-0 left-0"></BackgroundColor>
                 <div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-surface to-transparent  via-surface/60 h-[75vh]"></div>
+                <div class="absolute inset-0 -z-10">
+                    <div class="absolute right-[20%] bottom-[30%] w-2 h-2 rounded-full bg-primary/30"></div>
+                    <div class="absolute right-[35%] bottom-[45%] w-1.5 h-1.5 rounded-full bg-tertiary/30"></div>
+                    <div class="absolute right-[10%] bottom-[50%] w-1.5 h-1.5 rounded-full bg-secondary/30"></div>
+                </div>
+                <div class="sticky bottom-0 h-[800px] hidden xl:block">
+                    <WowBackdrop client:load
+                                 className="absolute right-0 translate-x-1/3 opacity-80 overflow-visible w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px]"
+                                 density={7} speed={.25}/>
+                </div>
+
             </div>
 
 
@@ -314,7 +311,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         </div>
                     </Card>
                 </div>
-                <div class="flex h-52">
+                <div class="flex h-64">
                     <div>
                         <Line client:idle/>
                     </div>
@@ -327,7 +324,7 @@ import WowBackdrop from "@components/WowBackdrop";
                     <div>
                         <Line client:idle nextTheme="blue" icon={faLaptopMobile}/>
                     </div>
-                    <div class="padding">
+                    <div class="padding pt-0">
                         <div class="flex items-center md:flex-row flex-col">
                             <div class="left">
                                 <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement
@@ -421,7 +418,7 @@ import WowBackdrop from "@components/WowBackdrop";
                 <div>
                     <Line isLast client:idle icon={faLaptopMobile}/>
                 </div>
-                <div class="padding">
+                <div class="padding pt-0">
                     <h2 data-aos="fade-right" class="text-title-large">Design & Ux</h2>
                     <div data-aos="fade-right" data-aos-delay="100"
                          class="mt-4 text-headline-large md:text-display-medium max-w-prose">
@@ -436,7 +433,7 @@ import WowBackdrop from "@components/WowBackdrop";
     </section>
     <div class="overflow-hidden">
         <div id="back-end" class="tab-menu theme-green">
-            <section class="pt-64 ">
+            <section class="md:pt-64 pt-48">
                 <div class="section">
                     <h2 class="text-center text-title-medium text-tertiary">Back-end</h2>
                     <h3 class="text-center text-headline-large md:text-display-medium mt-2 mb-8 max-w-prose mx-auto">
@@ -493,7 +490,7 @@ import WowBackdrop from "@components/WowBackdrop";
                             </Techno>
                         </Card>
                     </div>
-                    <div class="flex h-52">
+                    <div class="flex h-64">
                         <div>
                             <Line client:idle isFirst/>
                         </div>
@@ -508,7 +505,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         <div>
                             <Line isLast client:idle icon={faGears}/>
                         </div>
-                        <div class="padding">
+                        <div class="padding pt-0">
                             <h2 data-aos="fade-right" class="text-title-large">Languages & Frameworks</h2>
                             <div data-aos="fade-right" data-aos-delay="100"
                                  class="mt-4 text-headline-large md:text-display-medium max-w-prose">
@@ -593,7 +590,7 @@ import WowBackdrop from "@components/WowBackdrop";
                             </Techno>
                         </Card>
                     </div>
-                    <div class="flex h-52">
+                    <div class="flex h-64">
                         <div>
                             <Line client:idle isFirst/>
                         </div>
@@ -606,7 +603,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         <div>
                             <Line isLast client:idle icon={faGears}/>
                         </div>
-                        <div class="padding">
+                        <div class="padding pt-0">
                             <h2 data-aos="fade-right" class="text-title-large"><strong>C</strong>ontent
                                 <strong>M</strong>anagement
                                 <strong>S</strong>ystem</h2>
