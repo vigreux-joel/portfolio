@@ -1,33 +1,30 @@
-import {defineConfig, FontPlugin, TailwindPlugin, VariantModel} from "@udixio/theme";
-import {DislikeAnalyzer, sanitizeDegreesDouble, TonalPalette} from "@material/material-color-utilities";
+import {defineConfig, FontPlugin, Variants,} from "@udixio/theme";
+import {TailwindPlugin} from "@udixio/tailwind";
+import {argbFromHex, Hct, hexFromArgb, sanitizeDegreesDouble, TonalPalette} from "@material/material-color-utilities";
 
+argbFromHex('#93b5cb')
 
-module.exports = defineConfig({
-    sourceColor: '#1A73E8',
+const source = Hct.fromInt(argbFromHex('#169fff'))
+const newSource = Hct.from(source.hue, 60, 25)
+
+export const subThemes = {
+    blue: hexFromArgb(newSource.toInt()),
+    green: '#81b88e',
+    purple: "#bba1da",
+    orange: '#e69883'
+}
+
+export default defineConfig({
+    sourceColor: subThemes.blue,
     variant: {
-        ...VariantModel.tonalSpot,
-        palettes: {
-            ...VariantModel.tonalSpot.palettes,
-            secondary: (sourceColorHct) =>
-                TonalPalette.fromHueAndChroma(sourceColorHct.hue, 24.0),
-            tertiary: (sourceColorHct) =>
+        ...Variants.Fidelity, palettes: {
+            ...Variants.Fidelity.palettes,
+            tertiary: ({sourceColorHct}) =>
                 TonalPalette.fromHueAndChroma(
-                    sanitizeDegreesDouble(sourceColorHct.hue + 45.0),
-                    24.0
+                    sanitizeDegreesDouble(sourceColorHct.hue + 55),
+                    sourceColorHct.chroma + 20,
                 ),
         }
-    },
-    colors: {
-        colors: {
-            tertiaryContainer: {
-                tone: (s) => {
-                    const proposedHct = s
-                        .getPalette('tertiary')
-                        .getHct((s.isDark ? 30 : 93),);
-                    return DislikeAnalyzer.fixIfDisliked(proposedHct).tone;
-                },
-            },
-        },
     },
     plugins: [
         new FontPlugin({
@@ -89,12 +86,7 @@ module.exports = defineConfig({
             responsiveBreakPoints: {
                 sm: 1.125,
             },
-            subThemes: {
-                blue: '#1A73E8',
-                green: '#4CA66B',
-                purple: "#7852A9",
-                orange: '#F5704B'
-            }
+            subThemes
         }),
 
     ],

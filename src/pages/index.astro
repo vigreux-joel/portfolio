@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Obfuscate from 'react-obfuscate';
-import {Button, Diviser} from "@udixio/ui"
+import {Button, Divider} from "@udixio/ui-react"
 import home1 from "@assets/images/home-1.png";
 import home1Left from "@assets/images/home-1-left.png";
 import home1Middle from "@assets/images/home-1-middle.png";
@@ -13,6 +13,7 @@ import {StickyScroll} from "@components/sticky-scroll-reveal";
 import astroLogo from "@assets/images/astro-logo.svg?raw"
 import reactLogo from "@assets/images/react-logo.svg?raw"
 import nestLogo from "@assets/images/nest-logo.svg?raw"
+import photo from "@assets/images/photo.png"
 import expressLogo from "@assets/images/express-logo.svg?raw"
 import tsLogo from "@assets/images/ts-logo.svg?raw"
 import {Link} from "@components/Link"
@@ -27,8 +28,8 @@ import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/portrait.jpg"
 import {FormContact} from "@components/FormContact";
 import {BackgroundColor} from "@components/BackgroundColor";
-import {Icon} from "@udixio/ui"
-import {Card} from "@udixio/ui"
+import {Icon} from "@udixio/ui-react"
+import {Card} from "@components/Card"
 import {
     faAddressCard, faChartNetwork,
     faCircle, faCloud,
@@ -50,6 +51,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {Line} from '@components/Line'
 import {LinearGradient} from "@components/LinearGradient";
+import WowBackdrop from "@components/WowBackdrop";
 ---
 <Layout seo={{
     title: `Joël Vigreux - Développeur full stack - Spécialiste Astro, React & NestJS`,
@@ -59,250 +61,364 @@ import {LinearGradient} from "@components/LinearGradient";
         .grecaptcha-badge {
             visibility: hidden;
         }
-    </style>
-    <section id="accueil" class="tab-menu pt-20 md:pt-36 xl:pt-48">
-        <div class="max-width">
-            <div class="flex">
-                <div>
-                    <Line client:idle visible isFirst icon={faCircle}/>
-                </div>
-                <div class="padding !pb-16">
-                    <Image class="rounded-xl h-16 w-16" src={portrait} height={96} width={96} alt="Joël"></Image>
-                    <h1 class="text-headline-large my-6">
-                        Joël VIGREUX
-                    </h1>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><h2
-                                class="text-label-large text-on-surface-variant">Développeur
-                            full stack</h2>
-                        </div>
-                        <div class="px-4 w-fit py-1.5 border border-outline-variant rounded-lg"><p
-                                class="text-label-large text-on-surface-variant">3 années d'expériences</p>
-                        </div>
-                        <a href="#contact" class="group">
-                            <div class="px-4 w-fit py-1.5 items-center flex gap-2 border relative overflow-hidden border-primary-container bg-primary-container rounded-lg">
-                                <div class="group-state-on-primary-container absolute w-full h-full left-0 top-0">
 
-                                </div>
-                                <Icon className="h-[18px] text-on-secondary-container" icon={faMessageMiddle}></Icon>
-                                <p
-                                        class="text-label-large text-on-secondary-container">Disponible pour vos
-                                    projets</p>
-                            </div>
-                        </a>
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-6px) translateX(2px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+
+        @keyframes float2 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-2px) rotate(-2deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+
+        .animate-float-slow {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-medium {
+            animation: float2 5s ease-in-out infinite;
+        }
+
+        .animate-float-fast {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float-slow, .animate-float-medium, .animate-float-fast {
+                animation: none;
+            }
+        }
+    </style>
+    <section id="accueil" class="tab-menu  ">
+        <div class="max-width relative z-10 flex flex-col md:flex-row-reverse min-[120rem]:flex-row justify-end min-[120rem]:justify-start min-[120rem]:px-0 items-start md:items-center mb-8 gap-12 md:gap-24 padding-x pt-32 md:pt-42 xl:pt-54">
+            <div class="relative ml-8 md:ml-0">
+                <!-- Halo gradient derrière la photo -->
+                <div class="absolute inset-0 -z-10 blur-2xl rounded-full pointer-events-none"
+                     aria-hidden="true"
+                     style="background: conic-gradient(from 0deg at 50% 50%, var(--color-primary-container), var(--color-tertiary-container), var(--color-secondary-container), var(--color-primary-container)); opacity: .6;"></div>
+                <Image class="aspect-square rounded-full ring-4 ring-surface-container-high/60 size-24 md:size-auto"
+                       height={150}
+                       alt="Joël Vigreux"
+                       src={photo}></Image>
+
+                <!-- Icônes flottantes autour de la photo -->
+                <div class="absolute -top-4 -left-6 w-8 h-8 md:w-10 md:h-10 animate-float-slow opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={reactLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-3 -left-10 w-7 h-7 md:w-9 md:h-9 animate-float-medium [animation-delay:150ms] opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={astroLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute -top-5 -right-8 w-7 h-7 md:w-9 md:h-9 animate-float-fast [animation-delay:300ms] opacity-80">
+                    <div class="size-full rounded-full overflow-hidden fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full scale-130" set:html={tsLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 -right-10 w-8 h-8 md:w-10 md:h-10 animate-float-medium [animation-delay:500ms] opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={tailwindLogo}></div>
+                    </div>
+                </div>
+                <div class="absolute top-12 -left-14 hidden md:block w-8 h-8 animate-float-slow [animation-delay:700ms] opacity-80">
+                    <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                        <div class="size-full" set:html={nestLogo}></div>
                     </div>
                 </div>
             </div>
-            <div class="flex mt-8">
-                <div>
-                    <Line client:idle icon={faAddressCard} nextTheme="purple"/>
-                </div>
-                <div class="padding">
-                    <h2 class="text-title-medium  mb-4 text-tertiary ">À propos de moi</h2>
-                    <p class="text-body-large max-w-3xl ">
-                        Bonjour, je suis Joël Vigreux - un développeur passionné.<br/> Ayant découvert un vif intérêt
-                        pour
-                        le
-                        <Link href="#back-end">back-end</Link>
-                        en
-                        débutant ma carrière, je me suis ensuite laissé porter par l'univers fascinant du
-                        <Link href="#front-end">front-end</Link>
-                        et de <span class="text-nowrap">l'<Link
-                            href="#ux">expérience&nbsp;utilisateur</Link> ,</span>
-                        tout en intégrant des pratiques
-                        écoresponsables
-                        de manière pragmatique.
-                    </p>
-                    <div class="mt-8 flex md:flex-row flex-col gap-4">
-                        <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
-                        <Button href="#front-end" icon={faCircleInfo} variant="outlined"
-                                label="En savoir plus"/>
-                    </div>
-                </div>
-            </div>
+            <h1 class="text-display-medium xl:text-display-large relative">
+                Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
+            </h1>
         </div>
+        <div class="max-width flex justify-between  h-full">
+            <div class="relative z-10 flex flex-col overflow-visible">
+                <div class="theme-blue  flex flex-col  relative ">
+
+                    <div class="flex">
+                        <div>
+                            <Line client:load visible isFirst/>
+                        </div>
+                        <div class="padding !pb-16">
+                        </div>
+                    </div>
+                    <div class="flex flex-1 mt-8">
+                        <div>
+                            <Line client:load icon={faAddressCard} nextTheme="purple"/>
+                        </div>
+                        <div class="padding pt-0">
+                            <h2 class="text-headline-small  mb-4 text-tertiary ">À propos de moi</h2>
+                            <p class="text-body-large max-w-3xl ">
+                                Passionné de développement web, je conçois et développe des interfaces légères et
+                                accessibles, alliant design et maintenabilité.
+                            </p>
+                            <!--<div class="-ml-6 mr-6 mt-8 flex gap-8 max-w-screen-md">-->
+                            <!--    <Card variant="elevated"-->
+                            <!--          className="p-4 px-6 bg-surface-container-high/50 w-fit flex-col flex">-->
+                            <!--        <div class="flex-1">-->
+                            <!--            <p class="text-title-medium">Front-end</p>-->
+                            <!--            <p class="mt-2 text-on-surface-variant">-->
+                            <!--                Expert en sites web et applications multiplateformes-->
+                            <!--            </p>-->
+                            <!--        </div>-->
+
+                            <!--        <Button className="mt-2" variant="text" size="xSmall" disableTextMargins>En savoir plus-->
+                            <!--        </Button>-->
+                            <!--    </Card>-->
+                            <!--    <Card variant="elevated"-->
+                            <!--          className="p-4 px-6 bg-surface-container-high/50 w-fit flex-col flex">-->
+                            <!--        <div class="flex-1">-->
+                            <!--            <p class="text-title-medium">Design & UX</p>-->
+                            <!--            <p class="mt-2 text-on-surface-variant">-->
+                            <!--                Parcours et navigation optimisés pour une expérience fluide et agréable-->
+                            <!--            </p>-->
+                            <!--        </div>-->
+
+                            <!--        <Button className="mt-2" variant="text" size="xSmall" disableTextMargins>En savoir plus-->
+                            <!--        </Button>-->
+                            <!--    </Card>-->
+                            <!--    <Card variant="elevated"-->
+                            <!--          className="p-4 px-6 bg-surface-container-high/50 w-fit flex-col flex">-->
+                            <!--        <div class="flex-1">-->
+                            <!--            <p class="text-title-medium">Back-end</p>-->
+                            <!--            <p class="mt-2 text-on-surface-variant">-->
+                            <!--                Fonctionnalités serveur et APIs fiables pour des projets performants et-->
+                            <!--                sécurisés-->
+                            <!--            </p>-->
+                            <!--        </div>-->
+
+                            <!--        <Button className="mt-2" variant="text" size="xSmall" disableTextMargins>En savoir plus-->
+                            <!--        </Button>-->
+                            <!--    </Card>-->
+                            <!--</div>-->
+                            <div class="mt-12 flex md:flex-row flex-col gap-4">
+                                <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
+                                <Button variant="outlined" href="#front-end" icon={faCircleInfo}
+                                        label="En savoir plus"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex mt-8 ">
+                    <div class="theme-purple not-detect-theme">
+                        <Line client:idle icon={faCode} isLast/>
+                    </div>
+                    <div data-aos="fade-right" class="padding pt-0 max-w-screen-lg">
+                        <h2 class="text-title-large text-tertiary transition-all duration-1000">
+                            Développement
+                            web -
+                            Front-end</h2>
+                        <div
+                                class="mt-4 text-headline-large md:text-display-medium max-w-prose transition-all duration-1000">
+                            <h3 class="text-gradient">Performance et flexibilité garantie</h3>
+                            <p>J'assure vos projets avec des technologies modernes et adaptables</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end ">
+                <BackgroundColor speed={7_500} size="max(50vw, 800px)" count={5} client:idle
+                                 className="absolute opacity-30 size-full top-0 left-0"></BackgroundColor>
+                <div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-surface to-transparent  via-surface/60 h-[75vh]"></div>
+                <div class="absolute inset-0 -z-10">
+                    <div class="absolute right-[20%] bottom-[30%] w-2 h-2 rounded-full bg-primary/30"></div>
+                    <div class="absolute right-[35%] bottom-[45%] w-1.5 h-1.5 rounded-full bg-tertiary/30"></div>
+                    <div class="absolute right-[10%] bottom-[50%] w-1.5 h-1.5 rounded-full bg-secondary/30"></div>
+                </div>
+                <div class="sticky bottom-0 h-[800px] hidden xl:block">
+                    <WowBackdrop client:load
+                                 className="absolute right-0 translate-x-1/3 opacity-80 overflow-visible w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px]"
+                                 density={7} speed={.25}/>
+                </div>
+
+            </div>
+
+
+        </div>
+
         <LinearGradient nextTheme="purple"/>
     </section>
-    <section id="front-end" class="pt-8 tab-menu theme-purple">
-        <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-100" client:idle/>
-        <div class="max-width ">
-            <div class="flex">
-                <div>
-                    <Line client:idle icon={faCode} isLast/>
-                </div>
-                <div class="padding ">
-                    <h2 data-aos="fade-right" class="text-title-large">Développement web - Front-end</h2>
-                    <div data-aos="fade-right" data-aos-delay="100"
-                         class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-                        <h3 class="text-gradient">Performance et flexibilité garantie</h3>
-                        <p>J'assure vos projets avec des technologies modernes et adaptables</p>
-                    </div>
-                </div>
-            </div>
-            <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                <Card data-aos="zoom-in" variant="filled"
-                      className="group">
-                    <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
-                            name="Astro"
-                    ><p>Optimise la création de sites web rapides en permettant l'intégration de divers frameworks et en
-                        générant du contenu statique ultra-performant.</p>
-                    </Techno>
-                </Card>
-                <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
-                      className="group">
-                    <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
-                            name="React"
-                    ><p>Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant le
-                        développement et la gestion de l'état.</p>
-                    </Techno>
-                </Card>
-                <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
-                      className="group">
-                    <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
-                            name="Tailwind"
-                    ><p>Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant le
-                        style des composants flexible et modulaire.</p>
-                    </Techno>
-                </Card>
-                <Card data-aos="zoom-in" data-aos-delay={450} className="md:col-span-3 p-6 pb-10 mb-px mt-4">
-                    <p class="mb-8 mt-2">Ma boîte à outils :</p>
-                    <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
-                        <Techno image={framerMotionLogo} name="Framer Motion"
-                        ><p>Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec
-                            facilité.</p>
-                        </Techno>
-                        <Techno image={materialLogo} name="Material 3"
-                        ><p>Apporte des designs modernes et élégants, offrant des interfaces cohérentes et intuitives
-                            avec des éléments visuels raffinés.</p>
-                        </Techno>
-                        <Techno image={angularLogo} name="Angular"
-                        ><p>Facilite le développement d'applications web robustes et évolutives avec une structure
-                            organisée et des fonctionnalités puissantes intégrées.</p>
-                        </Techno>
-                        <Techno image={sassLogo} name="Sass"
-                        ><p>Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles
-                            complexes.</p>
-                        </Techno>
-                        <Techno image={tsLogo} name="Typescript"
-                        ><p>Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à
-                            maintenir.</p>
-                        </Techno>
-                        <Techno image={baseLogo} name="Les bases (HTML, CSS et JavaScript)"
-                        ><p>Fondations essentielles pour créer des sites web interactifs et fonctionnels.</p>
-                        </Techno>
-                    </div>
-                </Card>
-            </div>
-            <div class="flex h-52">
-                <div>
-                    <Line client:idle/>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="theme-purple pt-8">
-        <div class="max-width">
-            <div class="flex">
-                <div>
-                    <Line client:idle nextTheme="blue" icon={faLaptopMobile}/>
-                </div>
-                <div class="padding">
-                    <div class="flex items-center md:flex-row flex-col">
-                        <div class="left">
-                            <h2 data-aos="fade-right" class="text-title-large">Développement multiplateforme</h2>
-                            <div data-aos="fade-right" data-aos-delay="100"
-                                 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-                                <h3 class="text-gradient">Touchez un public plus large</h3>
-                                <p>Je convertis vos idées en applications adaptables à tous les
-                                    appareils</p>
-                            </div>
-                            <p data-aos="fade-right" data-aos-delay="100" class="max-w-prose mt-8 text-body-large">
-                                Flutter me permet de créer des applications pour
-                                mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
-                                particulièrement
-                                son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
-                                travail.</p>
+    <div id="front-end" class=" tab-menu theme-purple">
+        <section>
+            <div class="max-width ">
 
+                <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
+                    <Card client:visible data-aos="zoom-in"
+                          className="group">
+                        <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
+                                name="Astro"
+                        ><p>Optimise la création de sites web rapides en permettant l'intégration de divers frameworks
+                            et en
+                            générant du contenu statique ultra-performant.</p>
+                        </Techno>
+                    </Card>
+                    <Card client:visible data-aos="zoom-in" data-aos-delay={150}
+                          className="group">
+                        <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
+                                name="React"
+                        ><p>Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant
+                            le
+                            développement et la gestion de l'état.</p>
+                        </Techno>
+                    </Card>
+                    <Card client:visible data-aos="zoom-in" data-aos-delay={300}
+                          className="group">
+                        <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
+                                name="Tailwind"
+                        ><p>Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant
+                            le
+                            style des composants flexible et modulaire.</p>
+                        </Techno>
+                    </Card>
+                    <Card client:visible data-aos="zoom-in" data-aos-delay={450}
+                          className="md:col-span-3 p-6 pb-10 mb-px mt-4">
+                        <p class="mb-8 mt-2">Ma boîte à outils :</p>
+                        <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
+                            <Techno image={framerMotionLogo} name="Framer Motion"
+                            ><p>Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec
+                                facilité.</p>
+                            </Techno>
+                            <Techno image={materialLogo} name="Material 3"
+                            ><p>Apporte des designs modernes et élégants, offrant des interfaces cohérentes et
+                                intuitives
+                                avec des éléments visuels raffinés.</p>
+                            </Techno>
+                            <Techno image={sassLogo} name="Sass"
+                            ><p>Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles
+                                complexes.</p>
+                            </Techno>
+                            <Techno image={tsLogo} name="Typescript"
+                            ><p>Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à
+                                maintenir.</p>
+                            </Techno>
                         </div>
-                        <!--<div class="right">-->
-                        <!--    <Image class="rounded-xl" src={layoutResponsive}-->
-                        <!--           alt="Illustration d'écran responsive"></Image>-->
-                        <!--</div>-->
+                    </Card>
+                </div>
+                <div class="flex h-64">
+                    <div>
+                        <Line client:idle/>
                     </div>
-                    <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-                        <div data-aos="zoom-in"
-                             class=" sm:mt-[42px] platform bg-tertiary-container/70 text-on-tertiary-container">
-                            <Icon className="h-16 w-16" icon={faBrowser}/>
-                            <h4>Web</h4>
-                        </div>
-                        <div class="sm:flex-2 w-full md:w-fit">
-                            <div class="flex gap-4 items-center">
-                                <Diviser className="hidden md:block border-primary-container"/>
-                                <h4 class="text-title-medium text-on-primary-container">Mobile</h4>
-                                <Diviser className="hidden md:block border-primary-container"/>
+                </div>
+            </div>
+        </section>
+        <section class=" pt-8">
+            <div class="max-width">
+                <div class="flex">
+                    <div>
+                        <Line client:idle nextTheme="blue" icon={faLaptopMobile}/>
+                    </div>
+                    <div class="padding pt-0">
+                        <div class="flex items-center md:flex-row flex-col">
+                            <div class="left">
+                                <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement
+                                    multiplateforme</h2>
+                                <div data-aos="fade-right" data-aos-delay="100"
+                                     class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                                    <h3 class="text-gradient">Touchez un public plus large</h3>
+                                    <p>Je convertis vos idées en applications adaptables à tous les
+                                        appareils</p>
+                                </div>
+                                <p data-aos="fade-right" data-aos-delay="100" class="max-w-prose mt-8 text-body-large">
+                                    Flutter me permet de créer des applications pour
+                                    mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
+                                    particulièrement
+                                    son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
+                                    travail.</p>
+
                             </div>
-                            <div class="flex gap-4 mt-4">
-                                <Diviser orientation="vertical" className="md:hidden border-primary-container"/>
-                                <div class="flex flex-1 flex-wrap gap-8">
-                                    <div data-aos="zoom-in" data-aos-delay={150}
-                                         class="flex-1 platform bg-primary-container text-on-primary-container">
-                                        <Icon className="h-16 w-16" icon={faApple}/>
-                                        <p>IOS</p>
-                                    </div>
-                                    <div data-aos="zoom-in" data-aos-delay={150}
-                                         class="flex-1 platform bg-primary-container text-on-primary-container">
-                                        <Icon className="h-16 w-16" icon={faAndroid}/>
-                                        <p>Android</p>
+                            <!--<div class="right">-->
+                            <!--    <Image class="rounded-xl" src={layoutResponsive}-->
+                            <!--           alt="Illustration d'écran responsive"></Image>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
+                            <div data-aos="zoom-in"
+                                 class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
+                                <Icon className="h-16 w-16" icon={faBrowser}/>
+                                <h4>Web</h4>
+                            </div>
+                            <div class="sm:flex-2 w-full md:w-fit">
+                                <div class="flex gap-4 items-center">
+                                    <Divider className="hidden md:block border-primary-container"/>
+                                    <h4 class="text-title-medium text-on-primary-container">Mobile</h4>
+                                    <Divider className="hidden md:block border-primary-container"/>
+                                </div>
+                                <div class="flex gap-4 mt-4">
+                                    <Divider orientation="vertical" className="md:hidden border-primary-container"/>
+                                    <div class="flex flex-1 flex-wrap gap-8">
+                                        <div data-aos="zoom-in" data-aos-delay={150}
+                                             class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
+                                            <Icon className="h-16 w-16" icon={faApple}/>
+                                            <p>IOS</p>
+                                        </div>
+                                        <div data-aos="zoom-in" data-aos-delay={150}
+                                             class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
+                                            <Icon className="h-16 w-16" icon={faAndroid}/>
+                                            <p>Android</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="flex-[3] w-full md:w-fit">
-                            <div class="flex gap-4 items-center">
-                                <Diviser className="hidden md:block border-secondary-container"/>
-                                <h4 class="text-title-medium text-on-secondary-container">Desktop</h4>
-                                <Diviser className="hidden md:block border-secondary-container"/>
                             </div>
-                            <div class="flex gap-4 mt-4">
-                                <Diviser orientation="vertical" className="md:hidden border-secondary-container"/>
-                                <div class="flex flex-1 flex-wrap gap-8">
-                                    <div data-aos="zoom-in" data-aos-delay={300}
-                                         class="flex-[100%] lg:flex-1 platform bg-secondary-container text-on-secondary-container">
-                                        <Icon className="h-16 w-16" icon={faWindows}/>
-                                        <p>Windows</p>
-                                    </div>
-                                    <div data-aos="zoom-in" data-aos-delay={300}
-                                         class="flex-1 platform bg-secondary-container text-on-secondary-container">
-                                        <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
-                                        <p>MacOs</p>
-                                    </div>
-                                    <div data-aos="zoom-in" data-aos-delay={300}
-                                         class="flex-1 platform bg-secondary-container text-on-secondary-container">
-                                        <Icon className="h-16 w-16" icon={faLinux}/>
-                                        <p>Linux</p>
-                                    </div>
-                                </>
+                            <div class="flex-[3] w-full md:w-fit">
+                                <div class="flex gap-4 items-center">
+                                    <Divider className="hidden md:block border-secondary-container"/>
+                                    <h4 class="text-title-medium text-on-secondary-container">Desktop</h4>
+                                    <Divider className="hidden md:block border-secondary-container"/>
+                                </div>
+                                <div class="flex gap-4 mt-4">
+                                    <Divider orientation="vertical" className="md:hidden border-secondary-container"/>
+                                    <div class="flex flex-1 flex-wrap gap-8">
+                                        <div data-aos="zoom-in" data-aos-delay={300}
+                                             class="flex-[100%] lg:flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
+                                            <Icon className="h-16 w-16" icon={faWindows}/>
+                                            <p>Windows</p>
+                                        </div>
+                                        <div data-aos="zoom-in" data-aos-delay={300}
+                                             class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
+                                            <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
+                                            <p>MacOs</p>
+                                        </div>
+                                        <div data-aos="zoom-in" data-aos-delay={300}
+                                             class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
+                                            <Icon className="h-16 w-16" icon={faLinux}/>
+                                            <p>Linux</p>
+                                        </div>
+                                    </>
+                                </div>
                             </div>
                         </div>
-                        <style is:global>
-                            .platform {
-                                @apply py-4 px-8 rounded-lg flex flex-col items-center gap-4
-                            }
-                        </style>
                     </div>
                 </div>
             </div>
-        </div>
-        <LinearGradient nextTheme="blue"/>
-    </section>
+            <LinearGradient nextTheme="blue"/>
+        </section>
+    </div>
+
     <section id="ux" class="tab-menu theme-purple pt-8 !z-20">
         <div class="max-width">
             <div class="flex">
                 <div>
                     <Line isLast client:idle icon={faLaptopMobile}/>
                 </div>
-                <div class="padding">
+                <div class="padding pt-0">
                     <h2 data-aos="fade-right" class="text-title-large">Design & Ux</h2>
                     <div data-aos="fade-right" data-aos-delay="100"
                          class="mt-4 text-headline-large md:text-display-medium max-w-prose">
@@ -317,7 +433,7 @@ import {LinearGradient} from "@components/LinearGradient";
     </section>
     <div class="overflow-hidden">
         <div id="back-end" class="tab-menu theme-green">
-            <section class="pt-64 ">
+            <section class="md:pt-64 pt-48">
                 <div class="section">
                     <h2 class="text-center text-title-medium text-tertiary">Back-end</h2>
                     <h3 class="text-center text-headline-large md:text-display-medium mt-2 mb-8 max-w-prose mx-auto">
@@ -333,7 +449,7 @@ import {LinearGradient} from "@components/LinearGradient";
             <section>
                 <div class="max-width">
                     <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                        <Card data-aos="zoom-in" variant="filled"
+                        <Card client:visible data-aos="zoom-in" variant="filled"
                               className="group ">
                             <Techno variant="primary" className="p-6 pb-10"
                                     icon={faChartNetwork}
@@ -347,7 +463,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                 </p>
                             </Techno>
                         </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
                                     name="Architecture Flexible et Efficace"
@@ -361,7 +477,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             </Techno>
 
                         </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
                                     name="Solutions Serverless"
@@ -374,7 +490,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             </Techno>
                         </Card>
                     </div>
-                    <div class="flex h-52">
+                    <div class="flex h-64">
                         <div>
                             <Line client:idle isFirst/>
                         </div>
@@ -382,13 +498,14 @@ import {LinearGradient} from "@components/LinearGradient";
                 </div>
             </section>
             <section class="pt-8">
-                <BackgroundColor canEscape={false} count={5} radius={800} className="opacity-80" client:idle/>
+                <BackgroundColor speed={5_000} size="max(60vw, 800px)" count={5} client:idle
+                                 className="absolute opacity-20 size-full top-0 left-0"></BackgroundColor>
                 <div class="max-width">
                     <div class="flex">
                         <div>
                             <Line isLast client:idle icon={faGears}/>
                         </div>
-                        <div class="padding">
+                        <div class="padding pt-0">
                             <h2 data-aos="fade-right" class="text-title-large">Languages & Frameworks</h2>
                             <div data-aos="fade-right" data-aos-delay="100"
                                  class="mt-4 text-headline-large md:text-display-medium max-w-prose">
@@ -399,7 +516,8 @@ import {LinearGradient} from "@components/LinearGradient";
                         </div>
                     </div>
                     <div class="grid padding-x lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
-                        <Card data-aos="zoom-in" variant="filled" className="lg:col-span-3 md:col-span-2 p-6">
+                        <Card client:visible data-aos="zoom-in" variant="filled"
+                              className="lg:col-span-3 md:col-span-2 p-6">
                             <Techno buttonLabel="En voir plus" variant="primary" className=""
                                     image={nestLogo}
                                     name="Nest.Js"
@@ -426,7 +544,8 @@ import {LinearGradient} from "@components/LinearGradient";
                                 </Techno>
                             </div>
                         </Card>
-                        <Card data-aos="zoom-in" data-aos-delay={150} className="lg:col-span-2 row-span-1"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={150}
+                              className="lg:col-span-2 row-span-1"
                               variant="filled">
                             <Techno variant="primary" className="p-6" icon={faGolang}
                                     name="Go"
@@ -436,14 +555,16 @@ import {LinearGradient} from "@components/LinearGradient";
                             </Techno>
                         </Card>
                         <div class="lg:col-span-3 flex lg:flex-row flex-col gap-6 lg:order-1">
-                            <Card data-aos="zoom-in" data-aos-delay={300} className="flex-1" variant="filled">
+                            <Card client:visible data-aos="zoom-in" data-aos-delay={300} className="flex-1"
+                                  variant="filled">
                                 <Techno variant="primary" className="p-6" icon={faJava}
                                         name="Java"
                                 ><p>Permet une plateforme robuste et évolutive pour développer des applications back-end
                                     complexes, idéale pour les systèmes d'entreprise et les services web.</p>
                                 </Techno>
                             </Card>
-                            <Card data-aos="zoom-in" data-aos-delay={450} className="flex-1" variant="filled">
+                            <Card client:visible data-aos="zoom-in" data-aos-delay={450} className="flex-1"
+                                  variant="filled">
                                 <Techno variant="primary" className="p-6" icon={faPython}
                                         name="Python">
                                     <p>Accorde une syntaxe claire et simple pour développer rapidement des applications
@@ -453,7 +574,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                 </Techno>
                             </Card>
                         </div>
-                        <Card data-aos="zoom-in" data-aos-delay={600} variant="filled"
+                        <Card client:visible data-aos="zoom-in" data-aos-delay={600} variant="filled"
                               className="md:col-span-2 p-6 ">
                             <Techno variant="primary" className="" icon={faPhp}
                                     name="PHP"
@@ -469,7 +590,7 @@ import {LinearGradient} from "@components/LinearGradient";
                             </Techno>
                         </Card>
                     </div>
-                    <div class="flex h-52">
+                    <div class="flex h-64">
                         <div>
                             <Line client:idle isFirst/>
                         </div>
@@ -482,7 +603,7 @@ import {LinearGradient} from "@components/LinearGradient";
                         <div>
                             <Line isLast client:idle icon={faGears}/>
                         </div>
-                        <div class="padding">
+                        <div class="padding pt-0">
                             <h2 data-aos="fade-right" class="text-title-large"><strong>C</strong>ontent
                                 <strong>M</strong>anagement
                                 <strong>S</strong>ystem</h2>
@@ -492,7 +613,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                 <p>Je sélectionne le CMS adapté pour répondre précisément à vos besoins.</p>
                             </div>
                             <div class="flex md:flex-row flex-col gap-8 mt-16">
-                                <Card data-aos="zoom-in" variant="filled"
+                                <Card client:visible data-aos="zoom-in" variant="filled"
                                       className="group ">
                                     <Techno variant="primary" className="p-6 pb-10"
                                             icon={faChartNetwork}
@@ -504,7 +625,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                             projets nécessitant une séparation entre contenu et présentation.</p>
                                     </Techno>
                                 </Card>
-                                <Card data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                                <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
                                       className="group">
                                     <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
                                             name="Builder.io"
@@ -515,7 +636,7 @@ import {LinearGradient} from "@components/LinearGradient";
                                     </p>
                                     </Techno>
                                 </Card>
-                                <Card data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                                <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
                                       className="group">
                                     <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
                                             name="Wordpress"
@@ -543,12 +664,13 @@ import {LinearGradient} from "@components/LinearGradient";
         </div>
 
 
-        <section id="contact" class=" theme-blue py-16 md:py-32">
-            <BackgroundColor className="" canEscape={false} count={5} radius={800} client:idle/>
+        <section id="contact" class="tab-menu theme-blue py-16 md:py-32">
 
             <div data-aos="zoom-in"
                  class=" md:px-6 max-w-screen-2xl mx-auto ">
-                <div class="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
+                <BackgroundColor speed={5_000} size="max(50vw, 800px)" count={5} client:idle
+                                 className="absolute opacity-30 size-full top-0 left-0 -z-10"></BackgroundColor>
+                <Card client:load className="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
                     <div class="left flex-1 padding !pb-12 pt-8">
                         <div class="flex gap-4 group rounded-xl mt-2">
                             <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
@@ -607,7 +729,7 @@ Cordialement,
                         <FormContact client:visible/>
                     </div>
 
-                </div>
+                </Card>
             </div>
         </section>
     </div>

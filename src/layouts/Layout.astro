@@ -1,6 +1,6 @@
 ---
 import Footer from "./Footer.astro";
-import "../styles/base.scss";
+import "../styles/base.css";
 import Header from "@layouts/Header.astro";
 import {SEO} from "astro-seo";
 import {getImage} from "astro:assets";
@@ -11,6 +11,8 @@ import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/600.css";
 import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
+import {BackgroundColor} from "@components/BackgroundColor"
+import {ThemeProvider} from "../components/ThemeProvider";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -129,7 +131,7 @@ const seoDefault: SEOProps = {
 };
 ---
 <!DOCTYPE html>
-<html class="dark-mode" lang="fr">
+<html class="dark" lang="fr">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
@@ -138,10 +140,11 @@ const seoDefault: SEOProps = {
 
     <SEO {...seoDefault}/>
 </head>
-<body class="bg-surface">
+<body class="bg-surface dynamic">
 <Header/>
 <main>
     <slot/>
+    <ThemeProvider client:idle/>
 </main>
 <Footer/>
 <script>

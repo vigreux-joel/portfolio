@@ -1,9 +1,8 @@
 import {faCommentSmile} from "@fortawesome/pro-light-svg-icons";
-import {Fab} from "@udixio/ui";
-import {useEffect, useRef, useState} from "react";
+import {classNames, Fab} from "@udixio/ui-react";
 import {Menu} from "@components/Menu.tsx";
-import classNames from "classnames";
-import {motion} from "framer-motion";
+import {motion} from "motion/react";
+import {useEffect, useRef, useState} from "react";
 
 export const Header = () => {
     const [isMenuVisible, setIsMenuVisible] = useState(true);
@@ -12,8 +11,6 @@ export const Header = () => {
     const hideMenuScrollPosition = useRef(0);
     const showMenuScrollPosition = useRef(0);
     const [scrollY, setScrollY] = useState<number>(0);
-    const [theme, setTheme] = useState<string>("theme-blue");
-
     const [fabVisible, setFabVisible] = useState(true);
 
     const onScroll = (currentScrollPosition: number) => {
@@ -37,20 +34,6 @@ export const Header = () => {
             previousScrollPosition.current = currentScrollPosition;
         }
     };
-
-    useEffect(() => {
-        const handleThemeChange = (event: CustomEvent) => {
-            setTheme(event.detail);
-        };
-
-        window.addEventListener("themeChange", handleThemeChange as EventListener);
-        return () => {
-            window.removeEventListener(
-                "themeChange",
-                handleThemeChange as EventListener
-            );
-        };
-    }, []);
 
     useEffect(() => {
         onScroll(scrollY);
@@ -80,7 +63,6 @@ export const Header = () => {
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: 0.5}}
-            className={theme}
         >
             <Menu setFabVisible={setFabVisible} fabVisible={fabVisible}/>
             <Fab

@@ -1,0 +1,155 @@
+html {
+    overflow-x: clip;
+    @supports not (overflow-x: clip) {
+        overflow-x: hidden;
+    }
+    scroll-behavior: smooth;
+}
+
+body {
+    @apply bg-surface;
+
+    margin: 0;
+    overflow-x: clip;
+    @supports not (overflow-x: clip) {
+        overflow-x: hidden;
+    }
+
+    @apply text-on-surface;
+    @apply text-body-medium;
+}
+
+:root {
+    --green-600: #1da750;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0deg;
+    --tw-skew-x: 0deg;
+    --tw-skew-y: 0deg;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-backdrop-blur: blur(0);
+    --tw-backdrop-brightness: brightness(100%);
+    --tw-backdrop-contrast: contrast(100%);
+    --tw-backdrop-grayscale: grayscale(0%);
+    --tw-backdrop-hue-rotate: hue-rotate(0deg);
+    --tw-backdrop-invert: invert(0%);
+    --tw-backdrop-opacity: opacity(100%);
+    --tw-backdrop-saturate: saturate(100%);
+    --tw-backdrop-sepia: sepia(0%);
+
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+
+}
+
+
+@utility padding-x {
+    @apply px-6;
+    @apply md:px-12;
+}
+
+@utility padding-y {
+    @apply py-12;
+    @apply md:py-16;
+    @apply xl:py-32;
+}
+
+@utility padding {
+    @apply padding-x;
+    @apply padding-y;
+}
+
+@utility max-width {
+    @apply max-w-screen-2xl mx-auto;
+}
+
+@utility section {
+    @apply padding max-width;
+}
+
+section {
+    @apply relative;
+    @apply after:bg-surface after:h-full after:w-full after:absolute after:top-0 after:left-0 after:-z-20
+}
+
+.sub-title {
+    @apply font-semibold text-tertiary pl-7 relative uppercase text-base mb-2;
+
+    & + :first-of-type {
+        margin-top: 0;
+    }
+
+    &.text-center,
+    .center {
+        @apply mt-0;
+        @apply pl-0;
+
+        &:before {
+            @apply content-none;
+        }
+    }
+
+    &:before {
+        content: "";
+        transform: translateY(-50%);
+        height: 3px;
+        @apply absolute bg-primary w-5 left-0 top-1/2 rounded-full;
+    }
+}
+
+.text-gradient {
+    @apply bg-gradient-to-r from-primary to-tertiary text-transparent bg-clip-text;
+}
+
+.square-area {
+    @apply flex;
+    @apply rounded-xl;
+    @apply p-3 md:p-4;
+    box-shadow: 0 4px 10px #00000008, 0 0 2px #0000000f, 0 2px 6px #0000001f !important;
+    @apply bg-surface-container-lowest;
+}
+
+section {
+    position: relative;
+}
+
+.buttons {
+    container-type: inline-size;
+    @apply flex flex-wrap gap-4 mt-6;
+
+    a,
+    button {
+        @apply w-full;
+    }
+
+    @container (min-width: 400px) {
+        a,
+        button {
+            width: auto;
+        }
+    }
+}
+
+.twine {
+    content: "";
+    position: absolute;
+    border-radius: 0;
+}
+
+.sticky-scroll {
+    position: sticky !important;
+    top: 20%;
+}
+
+
+.svg-inline--fa {
+    @apply inline-block overflow-visible
+}
