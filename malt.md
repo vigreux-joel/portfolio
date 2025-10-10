@@ -1,32 +1,39 @@
 # Développeur Full‑Stack — Astro, React, NestJS (TypeScript, SEO, performance)
 
-Je conçois et développe des sites web et applications qui **chargent vite, se positionnent mieux et augmentent vos conversions**. Avec 4 ans d’expérience, je garantis **des performances techniques mesurables**: Core Web Vitals conformes, UX soignée et SEO efficace.
+Je conçois des sites et apps qui chargent vite, se positionnent mieux et convertissent. 4 ans d’expérience. 🚀 Core Web Vitals conformes, UX soignée, SEO technique propre, CI/CD fiable.
 
-## Offres clés (selon votre besoin)
+## Offres clés
 
-- ⚡ **Kickstart 7 jours:** Audit rapide (technique, SEO, UX) + prototype cliquable ou mini-MVP, une roadmap priorisée et un chiffrage clair.
-- 🚀 **MVP 3–6 semaines:** Spécification allégée, itérations courtes, tests utilisateurs, suivi des métriques de performance et mise en production optimisée.
-- 🔧 **Refonte ou Scale:** Optimisation des performances (LCP, CLS, TBT), accessibilité AA, modularisation, surveillance et résolution de la dette technique.
+- ⚡ Kickstart 7 jours : audit (tech/SEO/UX), prototype ou mini‑MVP, roadmap + chiffrage.
+- 🚀 MVP 3–6 semaines : spécification allégée, itérations courtes, tests, métriques, mise en prod.
+- 🔧 Refonte/scale : perfs (LCP/CLS/TBT), accessibilité AA, SEO, modularisation, monitoring.
 
 ## Ce que je prends en charge
 
-- 🎨 **Front & UX:** Astro · React/Next.js · Tailwind CSS, animations Framer Motion, design Material 3, accessibilité AA. Des interfaces soignées qui **convertissent rapidement**.
-- ⚙️ **Back‑end & API:** NestJS · Node.js · TypeScript. Solutions REST/GraphQL, architectures monolithiques ou microservices, **scalabilité serverless** (AWS Lambda), tests unitaires et E2E, pipelines CI/CD robustes.
-- 📱 **Multiplateforme:** Flutter pour partager votre vision sur **web, mobile et desktop**.
-- 🧩 **CMS & contenu:** Sanity, Builder.io, WordPress, Shopify... Des systèmes flexibles adaptés à vos objectifs (marketing, e-commerce, éditorial).
+- 🎨 Front & UX : Astro · React/Next.js · Tailwind, animations, Material 3, accessibilité AA, interfaces rapides qui convertissent.
+- ⚙️ Back‑end & API : NestJS · Node.js · TypeScript, REST/GraphQL, monolithe ou microservices, serverless (AWS Lambda), tests unitaires/E2E, CI/CD.
+- 📱 Multiplateforme : Flutter pour web, mobile et desktop.
+- 🧩 CMS & contenu : Sanity, Builder.io, WordPress, Shopify.
 
-## Ma façon de travailler
+## Méthodologie
 
-1) **Cadrage express (45 min offerte):** Obtenez rapidement un périmètre clair et des KPI définis.
-2) **Prototype ou POC :** Validez vos concepts avant tout investissement lourd.
-3) **Implémentation robuste :** Code testé (unitaires et E2E), revues itératives, suivi des métriques clés.
-4) **Lancement final :** Mise en production contrôlée, documentation complète et assurance de votre autonomie.
+1) Discovery express (45 min offerte) — objectifs et KPI cadrés.
+2) Prototype/POC — valider l’usage avant d’investir.
+3) Implémentation robuste — code testé, revues, suivi des métriques.
+4) Mise en production — doc claire, transfert, autonomie.
 
 ## Garanties
 
-- **Devis clair sous 24 h** et visibilité transparente sur les délais.
-- Tests approfondis, communication fluide et suivie (points hebdomadaires).
-- Libre de tout lock‑in: vous gardez **100 % des accès et de la propriété**.
-- Résultats mesurables: Lighthouse >90, LCP < 2,5 s, SEO en amélioration continue.
+- Devis détaillé sous 24 h et visibilité sur le planning.
+- Communication asynchrone + point hebdomadaire.
+- Code propre, testé, documenté. Pas de lock‑in : vous gardez tous les accès.
+- Résultats mesurables : Lighthouse 90+, LCP < 2,5 s.
+- ✅ Démarrage sous 7 jours.
 
-**Prêt à booster vos projets ? Discutons de vos besoins dès aujourd’hui.**
+👥 Clients : startups, PME, e‑commerce, SaaS, agences.  
+📍 France — remote/présentiel possible.
+
+## Stack & mots‑clés
+- Front : Astro, React, Next.js, Tailwind, accessibilité, Framer Motion.
+- Back/Cloud : NestJS, Node.js, TypeScript, REST, GraphQL, microservices, serverless (AWS Lambda), CI/CD, Core Web Vitals, Lighthouse.
+- CMS/Projets : Sanity, Builder.io, WordPress, Shopify · landing page, site vitrine, e‑commerce, SaaS, audit technique.
