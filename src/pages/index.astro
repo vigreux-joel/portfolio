@@ -26,7 +26,7 @@ import flutterLogo from "@assets/images/flutter-logo.svg?raw"
 import tailwindLogo from "@assets/images/tailwind-logo.svg?raw"
 import baseLogo from "@assets/images/base-logo.svg?raw"
 import portrait from "@assets/images/photo.png"
-import {FormContact} from "@components/FormContact";
+import {Contact} from "@components/Contact";
 import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui-react"
 import {Card} from "@components/Card"
@@ -56,6 +56,29 @@ import WowBackdrop from "@components/WowBackdrop";
 <Layout seo={{
     title: `Joël Vigreux - Développeur full stack - Spécialiste Astro, React & NestJS`,
     description: "Expert en technologies modernes telles que Astro, NestJS et React ! Joël VIGREUX : Développeur full stack vous accompagne du back-end au frontend",
+    openGraph: {
+        basic: {
+            title: "Joël Vigreux - Développeur full stack",
+            type: "website",
+            image: "https://vigreux-joel.fr/images/photo.webp",
+            url: "https://vigreux-joel.fr/"
+        },
+        optional: {
+            siteName: "Joël Vigreux",
+            locale: "fr_FR",
+            description: "Expert en technologies modernes telles que Astro, NestJS et React !"
+        },
+        image: {
+            alt: "Portrait de Joël Vigreux, développeur full-stack"
+        }
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Joël Vigreux - Développeur full stack",
+        description: "Spécialiste Astro, React & NestJS. Du back-end au front-end.",
+        image: "https://vigreux-joel.fr/images/photo.webp",
+        imageAlt: "Portrait de Joël Vigreux"
+    }
 }}>
     <style is:global>
         .grecaptcha-badge {
@@ -104,6 +127,33 @@ import WowBackdrop from "@components/WowBackdrop";
             }
         }
     </style>
+    <script type="application/ld+json" is:inline>
+        {
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Joël Vigreux",
+                "jobTitle": "Développeur full-stack",
+                "url": "https://vigreux-joel.fr/",
+                "image": "https://vigreux-joel.fr/images/photo.webp"
+            })
+        }
+    </script>
+    <script type="application/ld+json" is:inline>
+        {
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Joël Vigreux - Développeur full-stack",
+                "url": "https://vigreux-joel.fr/",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://vigreux-joel.fr/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            })
+        }
+    </script>
     <section id="accueil" class="tab-menu  ">
         <div class="max-width relative z-10 flex flex-col md:flex-row-reverse min-[120rem]:flex-row justify-end min-[120rem]:justify-start min-[120rem]:px-0 items-start md:items-center mb-8 gap-12 md:gap-24 padding-x pt-32 md:pt-42 xl:pt-54">
             <div class="relative ml-8 md:ml-0">
@@ -401,7 +451,7 @@ import WowBackdrop from "@components/WowBackdrop";
                                             <Icon className="h-16 w-16" icon={faLinux}/>
                                             <p>Linux</p>
                                         </div>
-                                    </>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -670,66 +720,7 @@ import WowBackdrop from "@components/WowBackdrop";
                  class=" md:px-6 max-w-screen-2xl mx-auto ">
                 <BackgroundColor speed={5_000} size="max(50vw, 800px)" count={5} client:idle
                                  className="absolute opacity-30 size-full top-0 left-0 -z-10"></BackgroundColor>
-                <Card client:load className="bg-surface-container-highest lg:flex rounded-3xl overflow-hidden">
-                    <div class="left flex-1 padding !pb-12 pt-8">
-                        <div class="flex gap-4 group rounded-xl mt-2">
-                            <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
-                                <Icon className="h-6 w-6 fill-on-surface-variant" icon={faComments}></Icon>
-                            </div>
-                            <div><p class="text-title-small mt-0.5">Discuter avec moi</p>
-                                <div class="text-on-surface-variant max-w-prose text-body-small">
-                                    <p class="mt-1">Je suis là pour vous aider.</p>
-                                    <Obfuscate
-                                            client:visible
-                                            className="mt-4 inline-block underline-offset-4 underline !text-bold text-secondary focus-visible:text-primary hover:text-primary"
-                                            email={import.meta.env.PUBLIC_EMAIL_TO}
-                                            headers={{
-                                                body: `Bonjour,
-
-Je m'appelle [Nom], et je souhaiterais vous parler d'un projet. Voici quelques détails :
-
-Projet : [Brève description]
-Objectifs : [Principaux objectifs]
-Délai : [Délai souhaité]
-Budget : [Budget estimé]
-Je suis disponible pour en parler. Vous pouvez me contacter par email à [Votre Email] ou au [Votre Numéro].
-
-Cordialement,
-
-[Nom]`,
-                                            }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <!--<div class="flex gap-4 mt-12 group rounded-xl ">-->
-                        <!--    <div class="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">-->
-                        <!--        <Icon className="h-6 w-6 fill-on-surface-variant" icon={faPhone}></Icon>-->
-                        <!--    </div>-->
-                        <!--    <div><p class="text-title-small mt-0.5">Discuter avec nous</p>-->
-                        <!--        <div class="text-on-surface-variant max-w-prose text-body-small">-->
-                        <!--            <p class="mt-1">Notre équipe est là pour vous aider.</p>-->
-                        <!--            <Link className="mt-4 block" href="mailto:example@gmaim.com">example@gmaim.com-->
-                        <!--            </Link>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
-                    </div>
-                    <div class="right padding bg-surface-container-low flex-2 m-2 pt-8 rounded-2xl">
-                        <h2 class="text-display-small max-w-prose"><span
-                                class="text-gradient">Restons en contact</span><br/>
-                            pour
-                            donner vie à votre projet !</h2>
-                        <p class="mt-4 max-w-prose">Partagez les détails de votre projet, vos idées et découvrons
-                            ensemble comment
-                            je
-                            peux vous
-                            accompagner
-                            dans sa réalisation.</p>
-                        <FormContact client:visible/>
-                    </div>
-
-                </Card>
+                <Contact client:visible/>
             </div>
         </section>
     </div>
