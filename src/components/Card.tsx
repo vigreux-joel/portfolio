@@ -1,4 +1,4 @@
-import {Card as UiCard} from "@udixio/ui-react"
+import {Card as UiCard, classNames} from "@udixio/ui-react"
 import useMouse from "@react-hook/mouse-position";
 import {useRef, useState} from "react";
 import {AnimatePresence, motion} from "motion/react";
@@ -14,48 +14,59 @@ export const Card = ({children, className, variant = "elevated", ...restProps}) 
 
 
     const [uuid, setUuid] = useState(uuidv4())
-    return <UiCard ref={ref} className={className + " bg-surface-container/80"} variant={variant} {...restProps}>
+    return <UiCard ref={ref}
+                   style={{ cornerShape: "superellipse(2)" }}
+                    className={classNames(
+        "rounded-[1.5rem] bg-surface-container-high/50 bg-radial-[at_90%_90%]" ,
+          " from-secondary-container/20 to-transparent backdrop-blur-xl overflow-clip",
+          "group",
+        className,
+      )} variant={variant} {...restProps}>
+
+        {/* Bordure lumineuse qui suit la souris (Spotlight Border) */}
         <AnimatePresence>
-            {(x != null && y != null) &&
-                <motion.svg
-                    initial={{width: 0, opacity: 1}}
-                    animate={{width: "clamp(1000px, 200%, 9999px)", opacity: 1}}
-                    transition={{duration: 0.5}}
-                    exit={{width: 0, opacity: 0}}
-                    layoutId={"card-svg"}
+            {(x != null && y != null) && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
                     style={{
-                        y,
-                        x,
-                        translateX: "-50%",
-                        translateY: "-50%",
+                        padding: "1px", // Épaisseur fine pour la bordure
+                        background: `radial-gradient(300px circle at ${x}px ${y}px, var(--color-primary), transparent 100%) border-box`,
+                        WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                        WebkitMaskComposite: "xor",
+                        maskComposite: "exclude"
                     }}
-                    className={"absolute -z-10 h-auto  text-surface-variant top-0 left-0 pointer-events-none"}
-                    xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"
-
-                >
-                    <radialGradient id={"grad-" + uuid} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                        <stop
-                            offset="0%"
-                            style={{
-                                stopColor: "currentColor",
-                                stopOpacity: 1,
-                                transition: "1s"
-                            }}
-                        />
-
-                        <stop
-                            offset="100%"
-                            className={" text-surface-container-highest/70"}
-                            style={{
-                                stopColor: "currentColor",
-                                stopOpacity: 0,
-                                transition: "1s"
-                            }}
-                        />
-                    </radialGradient>
-                    <circle cx="128" cy="128" r="128" fill={`url(#${"grad-" + uuid})`}/>
-                </motion.svg>}
+                />
+            )}
         </AnimatePresence>
+
+        {/* Halo lumineux intérieur très doux et sans banding */}
+        <AnimatePresence>
+            {(x != null && y != null) && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
+                    style={{
+                        // Utilisation d'un dégradé CSS (bien plus lisse que le SVG étiré)
+                        background: `radial-gradient(500px circle at ${x}px ${y}px, rgba(255, 255, 255, 0.05), transparent 100%)`,
+                    }}
+                />
+            )}
+        </AnimatePresence>
+
+        {/* Calque de bruit propre à la carte pour lisser le halo et donner de la texture */}
+        <div
+            className="absolute inset-0 z-0 pointer-events-none opacity-10 mix-blend-overlay rounded-[inherit]"
+            style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+            }}
+        />
 
         {children}
     </UiCard>
