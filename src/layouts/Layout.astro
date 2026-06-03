@@ -150,7 +150,11 @@ const seoDefault: SEOProps = {
 <script>
     import AOS from 'aos'
 
-    AOS.init()
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+    });
 </script>
 </body>
 </html>
