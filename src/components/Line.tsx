@@ -54,13 +54,34 @@ export const Line = ({
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const streamRef = useRef<HTMLDivElement>(null);
+    const sparkRef = useRef<HTMLDivElement>(null);
     
+    // On utilise un state pour gérer précisément la valeur en pixels (indépendamment de la hauteur de l'écran)
+    const [offsetProgress, setOffsetProgress] = useState<[string, string]>(["start 85%", "end 85%"]);
+
+    useEffect(() => {
+        const updateOffset = () => {
+            // AOS utilise 200px depuis le bas de l'écran.
+            // On convertit cela en une valeur pixel exacte depuis le HAUT de l'écran pour Framer Motion.
+            const triggerY = window.innerHeight - 300;
+            setOffsetProgress([`start ${triggerY}px`, `end ${triggerY}px`]);
+        };
+        updateOffset();
+        window.addEventListener("resize", updateOffset);
+        return () => window.removeEventListener("resize", updateOffset);
+    }, []);
+
     const {scrollYProgress} = useScroll({
         target: ref,
-        offset: ["start 85%", "end 85%"],
+        offset: offsetProgress,
     });
 
     const heightProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    // Le spark est strictement visible UNIQUEMENT pendant le tracé (0 < progress < 1)
+    // On élargit les marges (0.01 et 0.99) pour s'assurer qu'arrondis ou non, il disparaisse.
+    const sparkOpacityNormal = useTransform(scrollYProgress, [0, 0.01, 0.99, 1], [0, 1, 1, 0]);
+    // Pour la dernière ligne, il disparaît progressivement pour se fondre dans le to-transparent
+    const sparkOpacityLast = useTransform(scrollYProgress, [0, 0.01, 0.8, 0.9], [0, 1, 0, 0]);
     
     const [isVisibleIcon, setIsVisibleIcon] = useState(visible);
     const [isFlashing, setIsFlashing] = useState(false);
@@ -93,6 +114,18 @@ export const Line = ({
                         streamRef.current.style.transform = `translateY(${localY - 200}px)`;
                     } else {
                         streamRef.current.style.display = "none";
+                    }
+                }
+
+                // Réaction de la tête de lecture (spark) à l'impact du flux d'énergie
+                if (sparkRef.current) {
+                    const progress = visible ? 1 : scrollYProgress.get();
+                    const sparkY = rect.height * progress;
+
+                    if (localY >= sparkY && localY - 200 <= sparkY) {
+                        sparkRef.current.classList.add("spark-active");
+                    } else {
+                        sparkRef.current.classList.remove("spark-active");
                     }
                 }
 
@@ -134,6 +167,17 @@ export const Line = ({
                     100% { transform: scale(1); filter: blur(2px); opacity: 0.8; }
                 }
                 .animate-hit-orb { animation: hit-flare 0.4s ease-out forwards; }
+
+                .spark-glow, .spark-core {
+                    opacity: 0.5;
+                    transform: scale(1);
+                    transition: opacity 2s ease-out, transform 2s ease-out;
+                }
+                .spark-active .spark-glow, .spark-active .spark-core {
+                    opacity: 1;
+                    transform: scale(1.6);
+                    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+                }
             `}</style>
             
             {/* Conteneur de l'icône : largeur fixée à w-6 pour alignement X parfait */}
@@ -142,20 +186,7 @@ export const Line = ({
                 "h-0": !icon,
                 "scale-50 opacity-50": isFirst, 
             })}>
-                {/* Boule d'énergie (fermée) : on la cache complètement si la ligne n'est pas encore visible */}
-                {icon && !isFirst && (
-                    <div
-                        className={classNames(
-                            "absolute w-4 h-4 bg-primary rounded-full transition-all duration-700 ease-out z-20",
-                            {
-                                "scale-[4] opacity-0": isVisibleIcon || visible, // Éclate pour laisser passer l'icône
-                                "opacity-0 scale-0": !isVisibleIcon && !visible, // Cachée tant que non visible (sous la progression)
-                            }
-                        )}
-                    ></div>
-                )}
-                
-                {/* L'icone : apparait quand la boule d'énergie éclate */}
+                {/* L'icone : apparait quand la progression du scroll l'atteint */}
                 {icon && (
                     <div className="relative z-10 flex justify-center items-center w-full h-full">
                         
@@ -202,13 +233,14 @@ export const Line = ({
             </div>
             
             <div className={"w-[3px] h-full relative"}>
-                {/* Le overflow-hidden est le secret : Le flux d'énergie ne peut PAS déborder sous la progression actuelle du scroll ! */}
+
+                {/* 1. Tracé de base (sans overflow-hidden pour laisser déborder la tête de lecture) */}
                 <motion.div
                     style={{
                         height: visible ? "100%" : heightProgress,
                     }}
                     className={
-                        "relative rounded-full overflow-hidden w-full not-detect-theme theme-" + nextTheme
+                        "absolute top-0 left-0 w-full rounded-full not-detect-theme theme-" + nextTheme
                     }
                 >
                     {/* Le fond de la ligne tracée, opacity-50 pour être 50% de la lumière d'énergie */}
@@ -218,6 +250,28 @@ export const Line = ({
                         "bg-primary": !isFirst && icon && !isLast,
                     })}></div>
                     
+                    {/* Tête de lecture (spark) créative pour masquer la coupure nette en bas */}
+                    <motion.div
+                        style={{ opacity: visible ? 0 : (isLast ? sparkOpacityLast : sparkOpacityNormal) }}
+                        className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-10 pointer-events-none"
+                    >
+                        {/* Wrapper interne pour l'animation pulse qui n'écrase pas l'opacité de Framer Motion */}
+                        <div ref={sparkRef} className="flex flex-col items-center justify-center animate-pulse spark-base">
+                            <div className="spark-glow w-[12px] h-[12px] bg-primary rounded-full blur-[3px]"></div>
+                            <div className="spark-core w-[6px] h-[6px] bg-primary rounded-full absolute shadow-[0_0_8px_var(--color-primary)]"></div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+
+                {/* 2. Flux d'énergie (AVEC overflow-hidden pour le bloquer sous la progression) */}
+                <motion.div
+                    style={{
+                        height: visible ? "100%" : heightProgress,
+                    }}
+                    className={
+                        "absolute top-0 left-0 w-full h-full rounded-full overflow-hidden not-detect-theme theme-" + nextTheme
+                    }
+                >
                     {/* Courant d'énergie unique coordonné par rapport au VIEWPORT */}
                     <div 
                         ref={streamRef}
