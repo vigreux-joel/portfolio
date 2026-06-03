@@ -79,29 +79,31 @@ export const CircleComponent: FC<{
                      transform ${(speed ?? 5000) / 1000}s linear
                      `,
             }}
-            className={"absolute h-auto transition-all duration-2000 mix-blend-hue " + className}
+            className={"absolute mix-blend-hue h-auto transition-all duration-2000 " + className}
             xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"
             {...restProps}
 
         >
-            <radialGradient id={"grad-" + uuid} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop
-                    offset="0%"
-                    style={{
-                        stopColor: color,
-                        stopOpacity: 1,
-                        transition: "1s"
-                    }}
-                />
+            <defs>
+                <radialGradient id={"grad-" + uuid} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop
+                        offset="0%"
+                        style={{
+                            stopColor: color,
+                            stopOpacity: 1,
+                            transition: "1s"
+                        }}
+                    />
 
-                <stop
-                    offset="100%"
-                    style={{
-                        stopColor: `var(--color-surface)`,
-                        stopOpacity: 0
-                    }}
-                />
-            </radialGradient>
+                    <stop
+                        offset="100%"
+                        style={{
+                            stopColor: `var(--color-surface)`,
+                            stopOpacity: 0
+                        }}
+                    />
+                </radialGradient>
+            </defs>
             <circle cx="128" cy="128" r="128" fill={`url(#${"grad-" + uuid})`}/>
         </svg>
 
