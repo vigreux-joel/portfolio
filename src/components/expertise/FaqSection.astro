@@ -1,0 +1,42 @@
+---
+import {Button} from "@udixio/ui-react";
+import {iMail} from "@udixio/icons-outlined-400/mail";
+---
+<section id="faq" class="tab-menu theme-blue py-16">
+    <div class="max-width padding">
+        <h2 class="text-title-large text-tertiary">FAQ</h2>
+        <div class="mt-4 grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-headline-small">Quels services proposez-vous ?</h3>
+                <p>Développement front-end (Astro, React, Tailwind), back-end (NestJS, Node.js), et applications multiplateformes avec Flutter.</p>
+            </div>
+            <div>
+                <h3 class="text-headline-small">Travaillez-vous avec des PME et indépendants ?</h3>
+                <p>Oui, j’accompagne les entrepreneurs, TPE/PME et agences sur mesure, avec un suivi clair et des livrables testés.</p>
+            </div>
+            <div>
+                <h3 class="text-headline-small">Quel est votre délai moyen ?</h3>
+                <p>Selon la complexité : de quelques jours pour un site vitrine à plusieurs semaines pour une application complète.</p>
+            </div>
+            <div>
+                <h3 class="text-headline-small">Comment démarrer un projet ?</h3>
+                <p>Expliquez votre besoin et obtenez une estimation rapide via le formulaire de contact. Premier échange gratuit.</p>
+            </div>
+        </div>
+        <div class="mt-8">
+            <Button href="/contact" icon={iMail} label="Parler de mon projet"/>
+        </div>
+        <script type="application/ld+json" is:inline>
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {"@type": "Question","name": "Quels services proposez-vous ?","acceptedAnswer": {"@type": "Answer","text": "Développement front-end (Astro, React, Tailwind), back-end (NestJS, Node.js), et applications multiplateformes avec Flutter."}},
+              {"@type": "Question","name": "Travaillez-vous avec des PME et indépendants ?","acceptedAnswer": {"@type": "Answer","text": "Oui, j’accompagne les entrepreneurs, TPE/PME et agences sur mesure, avec un suivi clair et des livrables testés."}},
+              {"@type": "Question","name": "Quel est votre délai moyen ?","acceptedAnswer": {"@type": "Answer","text": "Selon la complexité : de quelques jours pour un site vitrine à plusieurs semaines pour une application complète."}},
+              {"@type": "Question","name": "Comment démarrer un projet ?","acceptedAnswer": {"@type": "Answer","text": "Expliquez votre besoin et obtenez une estimation rapide via le formulaire de contact. Premier échange gratuit."}}
+            ]
+          })}
+        </script>
+    </div>
+</section>

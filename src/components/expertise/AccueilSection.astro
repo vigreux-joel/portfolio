@@ -1,0 +1,120 @@
+---
+import {Image} from "astro:assets";
+import {Button} from "@udixio/ui-react";
+import {Line} from '@components/Line';
+import {BackgroundColor} from "@components/BackgroundColor";
+import {LinearGradient} from "@components/LinearGradient";
+
+import photo from "@assets/images/photo.png";
+import reactLogo from "@assets/images/react-logo.svg?raw";
+import astroLogo from "@assets/images/astro-logo.svg?raw";
+import tsLogo from "@assets/images/ts-logo.svg?raw";
+import tailwindLogo from "@assets/images/tailwind-logo.svg?raw";
+import nestLogo from "@assets/images/nest-logo.svg?raw";
+
+import {iIdCard} from "@udixio/icons-outlined-400/id_card";
+import {iMail} from "@udixio/icons-outlined-400/mail";
+import {iInfo} from "@udixio/icons-outlined-400/info";
+import {iCode} from "@udixio/icons-outlined-400/code";
+---
+<section id="accueil" class="tab-menu  ">
+    <div class="max-width relative z-10 flex flex-col md:flex-row-reverse min-[120rem]:flex-row justify-end min-[120rem]:justify-start min-[120rem]:px-0 items-start md:items-center mb-8 gap-12 md:gap-24 padding-x pt-32 md:pt-42 xl:pt-54">
+        <div class="relative ml-8 md:ml-0">
+            <!-- Halo gradient derrière la photo -->
+            <div class="absolute inset-0 -z-10 blur-2xl rounded-full pointer-events-none"
+                 aria-hidden="true"
+                 style="background: conic-gradient(from 0deg at 50% 50%, var(--color-primary-container), var(--color-tertiary-container), var(--color-secondary-container), var(--color-primary-container)); opacity: .6;"></div>
+            <Image class="aspect-square rounded-full ring-4 ring-surface-container-high/60 size-24 md:size-auto"
+                   height={150}
+                   alt="Joël Vigreux"
+                   src={photo}></Image>
+
+            <!-- Icônes flottantes autour de la photo -->
+            <div class="absolute -top-4 -left-6 w-8 h-8 md:w-10 md:h-10 animate-float-slow opacity-80">
+                <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                    <div class="size-full" set:html={reactLogo}></div>
+                </div>
+            </div>
+            <div class="absolute -bottom-3 -left-10 w-7 h-7 md:w-9 md:h-9 animate-float-medium [animation-delay:150ms] opacity-80">
+                <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                    <div class="size-full" set:html={astroLogo}></div>
+                </div>
+            </div>
+            <div class="absolute -top-5 -right-8 w-7 h-7 md:w-9 md:h-9 animate-float-fast [animation-delay:300ms] opacity-80">
+                <div class="size-full rounded-full overflow-hidden fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                    <div class="size-full scale-130" set:html={tsLogo}></div>
+                </div>
+            </div>
+            <div class="absolute bottom-2 -right-10 w-8 h-8 md:w-10 md:h-10 animate-float-medium [animation-delay:500ms] opacity-80">
+                <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                    <div class="size-full" set:html={tailwindLogo}></div>
+                </div>
+            </div>
+            <div class="absolute top-12 -left-14 hidden md:block w-8 h-8 animate-float-slow [animation-delay:700ms] opacity-80">
+                <div class="size-full rounded-full fill-secondary bg-on-surface-container/50 backdrop-blur-md ring-1 ring-outline flex items-center justify-center p-1">
+                    <div class="size-full" set:html={nestLogo}></div>
+                </div>
+            </div>
+        </div>
+        <h1 class="text-display-medium xl:text-display-large relative">
+            Joël VIGREUX <span class="block text-gradient">Développeur full-stack</span>
+        </h1>
+    </div>
+    <div class="max-width flex justify-between  h-full">
+        <div class="relative z-10 flex flex-col overflow-visible">
+            <div class="theme-blue  flex flex-col  relative ">
+
+                <div class="flex">
+                    <div>
+                        <Line client:load visible isFirst/>
+                    </div>
+                    <div class="padding !pb-16">
+                    </div>
+                </div>
+                <div class="flex flex-1 mt-8">
+                    <div>
+                        <Line client:load icon={iIdCard } nextTheme="purple"/>
+                    </div>
+                    <div class="padding pt-0">
+                        <h2 class="text-headline-small  mb-4 text-tertiary ">À propos de moi</h2>
+                        <p class="text-body-large max-w-3xl ">
+                            Passionné de développement web, je conçois et développe des interfaces légères et
+                            accessibles, alliant design et maintenabilité.
+                        </p>
+                        <div class="mt-12 flex md:flex-row flex-col gap-4">
+                            <Button href="/contact" icon={iMail} label="Me contacter"/>
+                            <Button variant="outlined" href="#front-end" icon={iInfo}
+                                    label="En savoir plus"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex mt-8 ">
+                <div class="theme-purple not-detect-theme">
+                    <Line client:idle icon={iCode} isLast/>
+                </div>
+                <div data-aos="fade-right" class="padding pt-0 max-w-screen-lg">
+                    <h2 class="text-title-large text-tertiary transition-all duration-1000">
+                        Développement
+                        web -
+                        Front-end</h2>
+                    <div
+                            class="mt-4 text-headline-large md:text-display-medium max-w-prose transition-all duration-1000">
+                        <h3 class="text-gradient">Performance et flexibilité garantie</h3>
+                        <p>J'assure vos projets avec des technologies modernes et adaptables</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col justify-end ">
+            <BackgroundColor speed={7_500} size="max(50vw, 800px)" count={5} client:idle
+                             className="absolute opacity-30 size-full top-0 left-0"></BackgroundColor>
+
+        </div>
+
+
+    </div>
+
+    <LinearGradient nextTheme="purple"/>
+</section>
