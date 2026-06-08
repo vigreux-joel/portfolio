@@ -2,13 +2,11 @@ import {Button, classNames, Tab, Tabs} from "@udixio/ui-react";
 import React, {useEffect, useRef, useState} from "react";
 import {themeService} from "@/stores/themeStore.ts";
 
-
-function formatLabel(id) {
-    return id
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-}
+const MENU_ITEMS = [
+    { label: "Accueil", href: "/" },
+    { label: "Projets", href: "/projets" },
+    { label: "Expertise", href: "/expertise" },
+];
 
 export const Menu = ({
                          setFabVisible,
@@ -17,47 +15,38 @@ export const Menu = ({
     fabVisible: boolean;
     setFabVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    const [menuEls, setMenuEls] = useState<Element[]>([]); // Initial ids array is set to empty
-    const [themeEls, setThemeEls] = useState<Element[]>([]); // Initial ids array is set to empty
-
-    const [activeTab, setActiveTab] = useState<number | null>(1);
+    const [themeEls, setThemeEls] = useState<Element[]>([]);
+    const [activeTab, setActiveTab] = useState<number | null>(null);
+    const [isContactActive, setIsContactActive] = useState(false);
     const observers = useRef<IntersectionObserver[]>([]);
-
     const isScrolling = useRef(false);
 
     useEffect(() => {
-        const menuEls = Array.from(document.querySelectorAll(".tab-menu"));
         const themeEls = Array.from(document.querySelectorAll(
             ":is([class^='theme-'], [class*=' theme-']):not(.theme-undefined, .not-detect-theme )"
         ));
-        setMenuEls(menuEls);
         setThemeEls(themeEls);
-    }, []);
+        
+        // Determiner l'onglet actif selon l'URL
+        const path = window.location.pathname;
+        const index = MENU_ITEMS.findIndex(item => {
+            if (item.href === "/") return path === "/";
+            return path.startsWith(item.href);
+        });
+        setActiveTab(index >= 0 ? index : null);
+        setIsContactActive(path.startsWith("/contact"));
+        
+        // Le FAB (contact button en bas) doit se cacher si on est sur la page contact
+        setFabVisible(!path.startsWith("/contact"));
+    }, [setFabVisible]);
 
 
-    const previousMenuEl = useRef<{ el: Element, index: number } | null>(null);
-    const currentMenuEl = useRef<{ el: Element, index: number } | null>(null);
     const previousThemeEl = useRef<{ el: Element, index: number } | null>(null);
     const currentThemeEl = useRef<{ el: Element, index: number } | null>(null);
+    
     useEffect(() => {
         if (themeEls.length == 0) return;
 
-        const setCurrentMenu = (current: { el: Element, index: number }) => {
-
-            if (currentMenuEl.current) {
-                previousMenuEl.current = currentMenuEl.current;
-            }
-            currentMenuEl.current = current;
-
-            if (current.index == themeEls.length - 1) {
-                setActiveTab(null);
-                setFabVisible(false);
-                return
-            }
-
-            setActiveTab(current.index);
-            setFabVisible(true);
-        }
         const setCurrentTheme = (current: { el: Element, index: number }) => {
             if (currentThemeEl.current) {
                 previousThemeEl.current = currentThemeEl.current;
@@ -76,28 +65,9 @@ export const Menu = ({
             }
         }
 
-        // Initialize Intersection Observers for each feature
+        // Initialize Intersection Observers for themes
         const initObservers = () => {
-
             observers.current = [
-                ...menuEls.map((el, index) => {
-                    const observer = new IntersectionObserver(
-                        ([entry]) => {
-                            if (entry.isIntersecting && !isScrolling.current) {
-                                setCurrentMenu({el, index});
-                            } else if (!isScrolling.current && entry.target == currentMenuEl.current?.el && previousMenuEl.current) {
-                                setCurrentMenu(previousMenuEl.current);
-                            }
-
-                        }, {
-                            root: null, // null = viewport
-                            threshold: 0, // déclenche dès qu'il y a intersection
-                            rootMargin: "-20% 0px"
-                        }
-                    );
-                    observer.observe(el);
-                    return observer;
-                }),
                 ...themeEls.map((el, index) => {
                     const observer = new IntersectionObserver(
                         ([entry]) => {
@@ -147,39 +117,31 @@ export const Menu = ({
     return (
         <div
             className={classNames(
-                "fixed max-w-full flex transition-opacity left-1/2 duration-300 ease-in-out top-8 z-50 mx-2 backdrop-blur-lg -translate-x-1/2 overflow-hidden rounded-full border border-surface-container-highest bg-surface-container-low/80",
-                {"opacity-0": activeTab === null},
+                "fixed max-w-full flex transition-opacity left-1/2 duration-300 ease-in-out top-8 z-50 mx-2 backdrop-blur-lg -translate-x-1/2 overflow-hidden rounded-full border border-surface-container-highest bg-surface-container-low/80"
             )}
         >
             <Tabs
                 scrollable
-                selectedTab={activeTab}
-                setSelectedTab={setActiveTab}
-                className={"max-w-3xl  border-none  md:overflow-hidden"}
+                selectedTab={activeTab !== null ? activeTab : (isContactActive ? MENU_ITEMS.length : null)}
+                setSelectedTab={() => {}}
+                className={"max-w-3xl border-none bg-transparent md:overflow-hidden"}
                 variant={"secondary"}
             >
-                {menuEls.map((el, index) => {
-                    if (index == menuEls.length - 1) {
-                        return null
-                    }
-                    return (
-
-                        <Tab
-                            key={index}
-                            className={"bg-transparent md:h-full"}
-                            selected={index === activeTab}
-                            href={`#${el.id}`}
-                            label={formatLabel(el.id)}
-                            // key={id}
-                        ></Tab>
-
-                    );
-
-                })}
+                {MENU_ITEMS.map((item, index) => (
+                    <Tab
+                        key={index}
+                        className={" md:h-full whitespace-nowrap"}
+                        selected={index === activeTab}
+                        href={item.href}
+                        label={item.label}
+                    />
+                ))}
             </Tabs>
             <Button
-                href={"#contact"}
-                className={"m-2 hidden md:block"}
+                href={"/contact"}
+                className={classNames("m-2 hidden md:block", {
+                    "ring-2 ring-primary": isContactActive
+                })}
                 label={"Contact"}
                 allowShapeTransformation={false}
             />

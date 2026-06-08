@@ -30,28 +30,33 @@ import {Contact} from "@components/Contact";
 import {BackgroundColor} from "@components/BackgroundColor";
 import {Icon} from "@udixio/ui-react"
 import {Card} from "@components/Card"
-import {
-    faAddressCard, faChartNetwork,
-    faCircle, faCloud,
-    faCode, faCodeBranch, faComments, faGears,
-    faLaptopMobile,
-    faMessageMiddle, faPhone, faProjectDiagram
-} from "@fortawesome/pro-light-svg-icons";
+
 import {Techno} from "@components/Techno"
-import {faBrowser, faCircleInfo, faEnvelope,} from "@fortawesome/pro-regular-svg-icons";
+
+
+import {Line} from '@components/Line'
+import {LinearGradient} from "@components/LinearGradient";
+import WowBackdrop from "@components/WowBackdrop";
+import {iIdCard} from "@udixio/icons-outlined-400/id_card";
+import {iMail} from "@udixio/icons-outlined-400/mail";
+import {iInfo} from "@udixio/icons-outlined-400/info";
+import {iDevices} from "@udixio/icons-outlined-400/devices";
+import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
 import {
     faAndroid,
     faApple,
     faGolang,
     faJava,
-    faLinux,
-    faNodeJs, faPhp,
-    faPython, faSymfony,
+    faLinux, faNodeJs,
+    faPhp,
+    faPython,
+    faSymfony,
     faWindows
 } from "@fortawesome/free-brands-svg-icons";
-import {Line} from '@components/Line'
-import {LinearGradient} from "@components/LinearGradient";
-import WowBackdrop from "@components/WowBackdrop";
+import {iApi} from "@udixio/icons-outlined-400/api";
+import {iManufacturing} from "@udixio/icons-outlined-400/manufacturing";
+import {iCode} from "@udixio/icons-outlined-400/code";
+
 ---
 <Layout seo={{
     title: `Joël Vigreux - Développeur full stack - Spécialiste Astro, React & NestJS`,
@@ -81,9 +86,6 @@ import WowBackdrop from "@components/WowBackdrop";
     }
 }}>
     <style is:global>
-        .grecaptcha-badge {
-            visibility: hidden;
-        }
 
         @keyframes float {
             0% {
@@ -210,7 +212,7 @@ import WowBackdrop from "@components/WowBackdrop";
                     </div>
                     <div class="flex flex-1 mt-8">
                         <div>
-                            <Line client:load icon={faAddressCard} nextTheme="purple"/>
+                            <Line client:load icon={iIdCard } nextTheme="purple"/>
                         </div>
                         <div class="padding pt-0">
                             <h2 class="text-headline-small  mb-4 text-tertiary ">À propos de moi</h2>
@@ -258,8 +260,8 @@ import WowBackdrop from "@components/WowBackdrop";
                             <!--    </Card>-->
                             <!--</div>-->
                             <div class="mt-12 flex md:flex-row flex-col gap-4">
-                                <Button href="#contact" icon={faEnvelope} label="Me contacter"/>
-                                <Button variant="outlined" href="#front-end" icon={faCircleInfo}
+                                <Button href="/contact" icon={iMail} label="Me contacter"/>
+                                <Button variant="outlined" href="#front-end" icon={iInfo}
                                         label="En savoir plus"/>
                             </div>
                         </div>
@@ -268,7 +270,7 @@ import WowBackdrop from "@components/WowBackdrop";
                 </div>
                 <div class="flex mt-8 ">
                     <div class="theme-purple not-detect-theme">
-                        <Line client:idle icon={faCode} isLast/>
+                        <Line client:idle icon={iCode} isLast/>
                     </div>
                     <div data-aos="fade-right" class="padding pt-0 max-w-screen-lg">
                         <h2 class="text-title-large text-tertiary transition-all duration-1000">
@@ -286,17 +288,6 @@ import WowBackdrop from "@components/WowBackdrop";
             <div class="flex flex-col justify-end ">
                 <BackgroundColor speed={7_500} size="max(50vw, 800px)" count={5} client:idle
                                  className="absolute opacity-30 size-full top-0 left-0"></BackgroundColor>
-                <div class="absolute  size-full top-0 left-0 bg-gradient-to-b from-surface to-transparent  via-surface/60 h-[75vh]"></div>
-                <div class="absolute inset-0 -z-10">
-                    <div class="absolute right-[20%] bottom-[30%] w-2 h-2 rounded-full bg-primary/30"></div>
-                    <div class="absolute right-[35%] bottom-[45%] w-1.5 h-1.5 rounded-full bg-tertiary/30"></div>
-                    <div class="absolute right-[10%] bottom-[50%] w-1.5 h-1.5 rounded-full bg-secondary/30"></div>
-                </div>
-                <div class="sticky bottom-0 h-[800px] hidden xl:block">
-                    <WowBackdrop client:load
-                                 className="absolute right-0 translate-x-1/3 opacity-80 overflow-visible w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] min-w-[400px] min-h-[400px]"
-                                 density={7} speed={.25}/>
-                </div>
 
             </div>
 
@@ -372,7 +363,7 @@ import WowBackdrop from "@components/WowBackdrop";
             <div class="max-width">
                 <div class="flex">
                     <div>
-                        <Line client:idle nextTheme="blue" icon={faLaptopMobile}/>
+                        <Line client:idle nextTheme="blue" icon={iDevices}/>
                     </div>
                     <div class="padding pt-0">
                         <div class="flex items-center md:flex-row flex-col">
@@ -401,7 +392,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
                             <div data-aos="zoom-in"
                                  class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
-                                <Icon className="h-16 w-16" icon={faBrowser}/>
+                                <Icon className="h-16 w-16" icon={iSelectWindow}/>
                                 <h4>Web</h4>
                             </div>
                             <div class="sm:flex-2 w-full md:w-fit">
@@ -443,7 +434,7 @@ import WowBackdrop from "@components/WowBackdrop";
                                         </div>
                                         <div data-aos="zoom-in" data-aos-delay={300}
                                              class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
-                                            <Icon className="h-16 w-16" sName="h-10" icon={faApple}/>
+                                            <Icon className="h-16 w-16" icon={faApple}/>
                                             <p>MacOs</p>
                                         </div>
                                         <div data-aos="zoom-in" data-aos-delay={300}
@@ -466,7 +457,7 @@ import WowBackdrop from "@components/WowBackdrop";
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line isLast client:idle icon={faLaptopMobile}/>
+                    <Line isLast client:idle icon={iDevices}/>
                 </div>
                 <div class="padding pt-0">
                     <h2 data-aos="fade-right" class="text-title-large">Design & Ux</h2>
@@ -502,7 +493,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         <Card client:visible data-aos="zoom-in" variant="filled"
                               className="group ">
                             <Techno variant="primary" className="p-6 pb-10"
-                                    icon={faChartNetwork}
+                                    icon={iApi}
                                     name="Choix d'APIs Adaptées"
                             >
                                 <p>Selon les besoins du projet, des solutions telles que GraphQL, REST ou gRPC sont
@@ -515,7 +506,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         </Card>
                         <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
                               className="group">
-                            <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
+                            <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                     name="Architecture Flexible et Efficace"
                             ><p>Optez pour des architectures monolithiques simples ou des microservices flexibles, avec
                                 une modularité accrue grâce à l’inversion de contrôle (IoC).
@@ -529,7 +520,7 @@ import WowBackdrop from "@components/WowBackdrop";
                         </Card>
                         <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
                               className="group">
-                            <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
+                            <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                     name="Solutions Serverless"
                             ><p>Les solutions serverless sont privilégiées pour une gestion simplifiée et une
                                 scalabilité automatique. Cette méthode réduit la complexité de l'infrastructure.
@@ -553,7 +544,7 @@ import WowBackdrop from "@components/WowBackdrop";
                 <div class="max-width">
                     <div class="flex">
                         <div>
-                            <Line isLast client:idle icon={faGears}/>
+                            <Line isLast client:idle icon={iManufacturing }/>
                         </div>
                         <div class="padding pt-0">
                             <h2 data-aos="fade-right" class="text-title-large">Languages & Frameworks</h2>
@@ -604,41 +595,6 @@ import WowBackdrop from "@components/WowBackdrop";
                                 applications rapides et pour des systèmes variés grâce à sa compilation en binaire.</p>
                             </Techno>
                         </Card>
-                        <div class="lg:col-span-3 flex lg:flex-row flex-col gap-6 lg:order-1">
-                            <Card client:visible data-aos="zoom-in" data-aos-delay={300} className="flex-1"
-                                  variant="filled">
-                                <Techno variant="primary" className="p-6" icon={faJava}
-                                        name="Java"
-                                ><p>Permet une plateforme robuste et évolutive pour développer des applications back-end
-                                    complexes, idéale pour les systèmes d'entreprise et les services web.</p>
-                                </Techno>
-                            </Card>
-                            <Card client:visible data-aos="zoom-in" data-aos-delay={450} className="flex-1"
-                                  variant="filled">
-                                <Techno variant="primary" className="p-6" icon={faPython}
-                                        name="Python">
-                                    <p>Accorde une syntaxe claire et simple pour développer rapidement des applications
-                                        puissantes,
-                                        idéal pour l'analyse de données, l'intelligence artificielle et le développement
-                                        web.</p>
-                                </Techno>
-                            </Card>
-                        </div>
-                        <Card client:visible data-aos="zoom-in" data-aos-delay={600} variant="filled"
-                              className="md:col-span-2 p-6 ">
-                            <Techno variant="primary" className="" icon={faPhp}
-                                    name="PHP"
-                            >
-                                <p>Langage serveur largement utilisé pour créer des sites web dynamiques et interactifs,
-                                    avec
-                                    une vaste communauté et de nombreuses solutions prêtes à l'emploi.</p>
-                            </Techno>
-                            <Techno className="mt-6" icon={faSymfony} name="Symfony"
-                            ><p>Fournit un framework PHP flexible et puissant pour développer des applications web
-                                complexes
-                                avec une architecture robuste et des composants réutilisables.</p>
-                            </Techno>
-                        </Card>
                     </div>
                     <div class="flex h-64">
                         <div>
@@ -651,7 +607,7 @@ import WowBackdrop from "@components/WowBackdrop";
                 <div class="max-width">
                     <div class="flex">
                         <div>
-                            <Line isLast client:idle icon={faGears}/>
+                            <Line isLast client:idle icon={iManufacturing }/>
                         </div>
                         <div class="padding pt-0">
                             <h2 data-aos="fade-right" class="text-title-large"><strong>C</strong>ontent
@@ -666,7 +622,7 @@ import WowBackdrop from "@components/WowBackdrop";
                                 <Card client:visible data-aos="zoom-in" variant="filled"
                                       className="group ">
                                     <Techno variant="primary" className="p-6 pb-10"
-                                            icon={faChartNetwork}
+                                            icon={iApi}
                                             name="Sanity"
                                     >
                                         <p>CMS headless offrant une gestion efficace des contenus structurés. Idéal
@@ -677,7 +633,7 @@ import WowBackdrop from "@components/WowBackdrop";
                                 </Card>
                                 <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
                                       className="group">
-                                    <Techno variant="primary" className="p-6 pb-10" icon={faProjectDiagram}
+                                    <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                             name="Builder.io"
                                     ><p>CMS drag-and-drop facilitant la création de pages dynamiques sans codage. Idéal
                                         pour
@@ -688,7 +644,7 @@ import WowBackdrop from "@components/WowBackdrop";
                                 </Card>
                                 <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
                                       className="group">
-                                    <Techno variant="primary" className="p-6 pb-10" icon={faCloud}
+                                    <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                             name="Wordpress"
                                     ><p>Le CMS le plus populaire pour sa flexibilité, ses thèmes et plugins variés.
                                         Idéal
@@ -704,7 +660,7 @@ import WowBackdrop from "@components/WowBackdrop";
                                     d'inquiétude !<br/> Cette liste n'est pas exhaustive ! Et même si celui-ci m'est
                                     inconnu, je suis prêt à le prendre en main et à l'intégrer parfaitement à votre
                                     projet.</p>
-                                <!--<Button className="w-fit mt-4" href="#contact" icon={faEnvelope} label="Contactez-moi"/>-->
+                                <Button className="w-fit mt-4" href="/contact" icon={iMail} label="Contactez-moi"/>
                             </div>
                         </div>
                     </div>
@@ -713,16 +669,46 @@ import WowBackdrop from "@components/WowBackdrop";
             </section>
         </div>
 
-
-        <section id="contact" class="tab-menu theme-blue py-16 md:py-32">
-
-            <div data-aos="zoom-in"
-                 class=" md:px-6 max-w-screen-2xl mx-auto ">
-                <BackgroundColor speed={5_000} size="max(50vw, 800px)" count={5} client:idle
-                                 className="absolute opacity-30 size-full top-0 left-0 -z-10"></BackgroundColor>
-                <Contact client:visible/>
+        <section id="faq" class="tab-menu theme-blue py-16">
+            <div class="max-width padding">
+                <h2 class="text-title-large text-tertiary">FAQ</h2>
+                <div class="mt-4 grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-headline-small">Quels services proposez-vous ?</h3>
+                        <p>Développement front-end (Astro, React, Tailwind), back-end (NestJS, Node.js), et applications multiplateformes avec Flutter.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-headline-small">Travaillez-vous avec des PME et indépendants ?</h3>
+                        <p>Oui, j’accompagne les entrepreneurs, TPE/PME et agences sur mesure, avec un suivi clair et des livrables testés.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-headline-small">Quel est votre délai moyen ?</h3>
+                        <p>Selon la complexité : de quelques jours pour un site vitrine à plusieurs semaines pour une application complète.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-headline-small">Comment démarrer un projet ?</h3>
+                        <p>Expliquez votre besoin et obtenez une estimation rapide via le formulaire de contact. Premier échange gratuit.</p>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <Button href="/contact" icon={iMail} label="Parler de mon projet"/>
+                </div>
+                <script type="application/ld+json" is:inline>
+                  {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                      {"@type": "Question","name": "Quels services proposez-vous ?","acceptedAnswer": {"@type": "Answer","text": "Développement front-end (Astro, React, Tailwind), back-end (NestJS, Node.js), et applications multiplateformes avec Flutter."}},
+                      {"@type": "Question","name": "Travaillez-vous avec des PME et indépendants ?","acceptedAnswer": {"@type": "Answer","text": "Oui, j’accompagne les entrepreneurs, TPE/PME et agences sur mesure, avec un suivi clair et des livrables testés."}},
+                      {"@type": "Question","name": "Quel est votre délai moyen ?","acceptedAnswer": {"@type": "Answer","text": "Selon la complexité : de quelques jours pour un site vitrine à plusieurs semaines pour une application complète."}},
+                      {"@type": "Question","name": "Comment démarrer un projet ?","acceptedAnswer": {"@type": "Answer","text": "Expliquez votre besoin et obtenez une estimation rapide via le formulaire de contact. Premier échange gratuit."}}
+                    ]
+                  })}
+                </script>
             </div>
         </section>
+
+
     </div>
 
 </Layout>

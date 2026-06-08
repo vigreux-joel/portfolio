@@ -13,6 +13,7 @@ import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
+import {ExpertiseSidebarReact} from "../components/expertise/ExpertiseSidebarReact";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -91,11 +92,12 @@ export interface SEOProps {
 
 interface Props {
     seo: SEOProps;
-    hiddenFooter: boolean;
-    hiddenMenu: boolean;
+    hiddenFooter?: boolean;
+    hiddenMenu?: boolean;
+    showSidebar?: boolean;
 }
 
-const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
+const {seo, hiddenFooter = false, hiddenMenu = false, showSidebar = true}: Props = Astro.props;
 
 // const currentPath = Astro.url.pathname.replace("/fr", "");
 // const domain = Astro.url.origin;
@@ -150,10 +152,13 @@ const seoDefault: SEOProps = {
     }}
 ></div>
 <Header/>
-<main>
-    <slot/>
-    <ThemeProvider client:idle/>
-</main>
+<div class="flex items-start">
+    {showSidebar && <ExpertiseSidebarReact client:load />}
+    <main class="flex-1 w-full min-w-0">
+        <slot/>
+        <ThemeProvider client:idle/>
+    </main>
+</div>
 <Footer/>
 <script>
     import AOS from 'aos'

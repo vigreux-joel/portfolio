@@ -1,7 +1,8 @@
 import {FormContact} from "./FormContact"
-import {faComments} from "@fortawesome/pro-light-svg-icons";
+
 import {Card, Icon} from "@udixio/ui-react";
 import Obfuscate from "react-obfuscate";
+import {iComment} from "@udixio/icons-outlined-400/comment";
 
 export const Contact = () => {
     return <Card variant={"filled"} className="lg:flex rounded-3xl overflow-hidden">
@@ -9,7 +10,7 @@ export const Contact = () => {
             <div className="flex gap-4 group rounded-xl mt-2">
                 <div
                     className="transition-all duration-300 flex items-center  justify-center rounded-lg  h-12 w-12 border border-outline-variant">
-                    <Icon className="h-6 w-6 fill-on-surface-variant" icon={faComments}></Icon>
+                    <Icon className="h-6 w-6 fill-on-surface-variant" icon={iComment}></Icon>
                 </div>
                 <div><p className="text-title-small mt-0.5">Discuter avec moi</p>
                     <div className="text-on-surface-variant max-w-prose text-body-small">

@@ -1,6 +1,6 @@
-import {defineConfig, FontPlugin, Variants,} from "@udixio/theme";
-import {TailwindPlugin} from "@udixio/tailwind";
-import {argbFromHex, Hct, hexFromArgb, sanitizeDegreesDouble, TonalPalette} from "@material/material-color-utilities";
+import {argbFromHex, hexFromArgb} from "@material/material-color-utilities";
+import {defineConfig} from '@udixio/ui-react';
+import {Hct} from "@udixio/theme";
 
 argbFromHex('#93b5cb')
 
@@ -16,78 +16,61 @@ export const subThemes = {
 
 export default defineConfig({
     sourceColor: subThemes.blue,
-    variant: {
-        ...Variants.Fidelity, palettes: {
-            ...Variants.Fidelity.palettes,
-            tertiary: ({sourceColorHct}) =>
-                TonalPalette.fromHueAndChroma(
-                    sanitizeDegreesDouble(sourceColorHct.hue + 55),
-                    sourceColorHct.chroma + 20,
-                ),
-        }
+    fontStyles: {
+        // display: {
+        //     large: {
+        //         fontWeight: 600,
+        //     },
+        //     medium: {
+        //         fontWeight: 600,
+        //     },
+        //     small: {
+        //         fontWeight: 600,
+        //     },
+        // },
+        // headline: {
+        //     large: {
+        //         fontWeight: 600,
+        //     },
+        //     medium: {
+        //         fontWeight: 600,
+        //     },
+        //     small: {
+        //         fontWeight: 600,
+        //     },
+        // },
+        // title: {
+        //     large: {
+        //         fontWeight: 500,
+        //     },
+        //     medium: {
+        //         fontWeight: 500,
+        //     },
+        //     small: {
+        //         fontWeight: 500,
+        //     },
+        // },
+        body: {
+            large: {
+                // fontSize: 1.125,
+            },
+            medium: {
+                // fontSize: 1,
+                lineHeight: 1.25,
+            },
+            small: {
+                // fontSize: 0.875,
+                lineHeight: 1.125,
+            },
+        },
     },
-    plugins: [
-        new FontPlugin({
-            fontStyles: {
-                // display: {
-                //     large: {
-                //         fontWeight: 600,
-                //     },
-                //     medium: {
-                //         fontWeight: 600,
-                //     },
-                //     small: {
-                //         fontWeight: 600,
-                //     },
-                // },
-                // headline: {
-                //     large: {
-                //         fontWeight: 600,
-                //     },
-                //     medium: {
-                //         fontWeight: 600,
-                //     },
-                //     small: {
-                //         fontWeight: 600,
-                //     },
-                // },
-                // title: {
-                //     large: {
-                //         fontWeight: 500,
-                //     },
-                //     medium: {
-                //         fontWeight: 500,
-                //     },
-                //     small: {
-                //         fontWeight: 500,
-                //     },
-                // },
-                body: {
-                    large: {
-                        // fontSize: 1.125,
-                    },
-                    medium: {
-                        // fontSize: 1,
-                        lineHeight: 1.25,
-                    },
-                    small: {
-                        // fontSize: 0.875,
-                        lineHeight: 1.125,
-                    },
-                },
-            },
-            fontFamily: {
-                expressive: ['Montserrat', 'sans-serif'],
-                neutral: ['Roboto', 'sans-serif'],
-            },
-        }),
-        new TailwindPlugin({
-            darkMode: 'class',
-            responsiveBreakPoints: {
-                sm: 1.125,
-            },
-            subThemes
-        }),
+    fontFamily: {
+        expressive: ['Montserrat', 'sans-serif'],
+        neutral: ['Roboto', 'sans-serif'],
+    },
+    responsiveBreakPoints: {
+        sm: 1.125,
+    },
+    subThemes
 
-    ],
 })
