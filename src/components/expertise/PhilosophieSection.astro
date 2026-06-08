@@ -1,0 +1,45 @@
+---
+import {Card} from "@components/Card";
+import {Techno} from "@components/Techno";
+import {Line} from '@components/Line';
+import {iInfo} from "@udixio/icons-outlined-400/info";
+---
+<div id="philosophie" class="tab-menu theme-blue">
+    <section class="pt-8 relative">
+        <div class="max-width relative z-10">
+            <div class="flex">
+                <div>
+                    <Line client:idle icon={iInfo}/>
+                </div>
+                <div class="padding pt-0" data-aos="fade-right">
+                    <h2 class="text-title-large text-tertiary">La Philosophie</h2>
+                    <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                        <h3 class="text-gradient">Le filtre Anti-Vibe Coding</h3>
+                        <p>L'IA comme moteur de vélocité, l'humain comme architecte.</p>
+                    </div>
+                    <p class="text-body-large max-w-prose mt-8">
+                        Je m'oppose au code généré aveuglément ("Vibe Coding"). L'intelligence artificielle est un formidable accélérateur de productivité, mais elle ne remplace pas l'ingénierie logicielle. Mon workflow intègre l'IA pour la vélocité d'exécution, couplée à une rigueur humaine implacable sur les choix d'architecture et les standards de qualité.
+                    </p>
+                </div>
+            </div>
+            <div class="padding-x grid grid-cols-1 md:grid-cols-2 gap-6 md:ml-12 lg:ml-16 mt-8 mb-16 relative z-10">
+                <Card client:visible data-aos="zoom-in" variant="filled" className="group h-full">
+                    <Techno variant="primary" className="p-6 pb-10 h-full" name="L'Humain Architecte">
+                        <p>Les décisions critiques (architecture système, choix des patterns, sécurité des données) sont toujours prises et validées par l'humain. L'IA exécute le plan, l'humain en est le stratège technique de haut niveau.</p>
+                    </Techno>
+                </Card>
+                <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled" className="group h-full">
+                    <Techno variant="primary" className="p-6 pb-10 h-full" name="Code Review Systématique">
+                        <p>Aucune ligne n'est poussée en production sans une revue de code stricte. C'est le pare-feu absolu contre la dette technique, garantissant un code propre, performant, testé et aligné avec les standards du projet.</p>
+                    </Techno>
+                </Card>
+            </div>
+            
+            <div class="flex h-32">
+                <div>
+                    <Line client:idle isLast />
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
