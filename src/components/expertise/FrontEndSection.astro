@@ -7,11 +7,7 @@ import {Icon, Divider} from "@udixio/ui-react";
 
 import astroLogo from "@assets/images/astro-logo.svg?raw";
 import reactLogo from "@assets/images/react-logo.svg?raw";
-import tailwindLogo from "@assets/images/tailwind-logo.svg?raw";
-import framerMotionLogo from "@assets/images/framer-motion-logo.svg?raw";
-import materialLogo from "@assets/images/material-design-logo.svg?raw";
-import sassLogo from "@assets/images/sass-logo.svg?raw";
-import tsLogo from "@assets/images/ts-logo.svg?raw";
+import angularLogo from "@assets/images/angular-logo.svg?raw";
 
 import {iDevices} from "@udixio/icons-outlined-400/devices";
 import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
@@ -21,57 +17,52 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
   <section>
     <div class="max-width ">
 
-      <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-        <Card client:visible data-aos="zoom-in"
-              className="group">
-          <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
-                  name="Astro"
-          ><p>Optimise la création de sites web rapides en permettant l'intégration de divers frameworks
-            et en
-            générant du contenu statique ultra-performant.</p>
-          </Techno>
-        </Card>
-        <Card client:visible data-aos="zoom-in" data-aos-delay={150}
-              className="group">
-          <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
-                  name="React"
-          ><p>Facilite la création d'interfaces interactives avec des composants réutilisables, accélérant
-            le
-            développement et la gestion de l'état.</p>
-          </Techno>
-        </Card>
-        <Card client:visible data-aos="zoom-in" data-aos-delay={300}
-              className="group">
-          <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
-                  name="Tailwind"
-          ><p>Permet de créer des designs personnalisés rapidement avec des classes utilitaires, rendant
-            le
-            style des composants flexible et modulaire.</p>
-          </Techno>
-        </Card>
-        <Card client:visible data-aos="zoom-in" data-aos-delay={450}
-              className="md:col-span-3 p-6 pb-10 mb-px mt-4">
-          <p class="mb-8 mt-2">Ma boîte à outils :</p>
-          <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
-            <Techno image={framerMotionLogo} name="Framer Motion"
-            ><p>Rend les animations web simples et fluides, ajoutant du dynamisme à vos interfaces avec
-              facilité.</p>
-            </Techno>
-            <Techno image={materialLogo} name="Material 3"
-            ><p>Apporte des designs modernes et élégants, offrant des interfaces cohérentes et
-              intuitives
-              avec des éléments visuels raffinés.</p>
-            </Techno>
-            <Techno image={sassLogo} name="Sass"
-            ><p>Simplifie le CSS avec des variables et des fonctions, facilitant la gestion des styles
-              complexes.</p>
-            </Techno>
-            <Techno image={tsLogo} name="Typescript"
-            ><p>Améliore le JavaScript avec des types, rendant le code plus sûr et plus facile à
-              maintenir.</p>
-            </Techno>
+      <div class="padding-x grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Bloc narration expertise fondations -->
+        <Card client:visible data-aos="fade-up" className="lg:col-span-12 p-8 md:p-12 flex flex-col lg:flex-row gap-8 items-center">
+          <div class="flex-1">
+            <h3 class="text-headline-medium text-on-surface mb-6 text-gradient">L'Ingénierie au service de l'Expérience</h3>
+            <p class="text-body-large text-on-surface-variant max-w-prose">
+              Une interface d'exception repose sur des fondations techniques solides. J'intègre systématiquement un <strong>typage strict avec TypeScript</strong> pour sécuriser le code, une structuration modulaire via <strong>Tailwind CSS & Material 3</strong>, ainsi que des animations fluides grâce à <strong>Framer Motion</strong>. Chaque décision, y compris le respect des normes d'<strong>accessibilité (a11y)</strong>, vise à maximiser la conversion et la pérennité du produit.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-4 lg:w-1/3 justify-center">
+             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">TypeScript</div>
+             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Tailwind CSS</div>
+             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Accessibilité (a11y)</div>
+             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Framer Motion</div>
+             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Material 3</div>
           </div>
         </Card>
+
+        <!-- Astro -->
+        <Card client:visible data-aos="fade-up" data-aos-delay="100" className="lg:col-span-4 p-8 flex flex-col group">
+          <Techno variant="primary" className="h-full flex flex-col" image={astroLogo} name="Performance & SEO (Astro)">
+            <p>
+              Génération de sites ultra-performants. Un temps de chargement réduit garantit un engagement optimal et un meilleur référencement naturel.
+            </p>
+          </Techno>
+        </Card>
+
+        <!-- React -->
+        <Card client:visible data-aos="fade-up" data-aos-delay="200" className="lg:col-span-4 p-8 flex flex-col group">
+          <Techno variant="primary" className="h-full flex flex-col" image={reactLogo} name="Interactivité (React)">
+            <p>
+              Création d'interfaces riches et dynamiques avec des composants réutilisables, offrant une fluidité proche du natif pour vos utilisateurs.
+            </p>
+          </Techno>
+        </Card>
+
+        <!-- Angular -->
+        <Card client:visible data-aos="fade-up" data-aos-delay="300" className="lg:col-span-4 p-8 flex flex-col group">
+          <Techno variant="primary" className="h-full flex flex-col" image={angularLogo} name="Robustesse (Angular)">
+            <p>
+              Conception d'applications d'entreprise structurées. Une architecture rigoureuse qui assure scalabilité, maintenabilité et sécurité sur le long terme.
+            </p>
+          </Techno>
+        </Card>
+
       </div>
       <div class="flex h-64">
         <div>
