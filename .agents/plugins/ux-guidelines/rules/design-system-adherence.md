@@ -1,12 +1,12 @@
-# Règle — Adhérence au design system
+# Rule — Design system adherence
 
-Le design system du projet est la source de vérité visuelle.
+The project's design system is the visual source of truth.
 
-- **Lis `design.md`** (racine du projet) avant toute décision visuelle.
-- **Si `design.md` est absent**, lance d'abord le skill `detect-design-system`.
-- **Aucune valeur en dur** : couleurs, espacements, rayons, polices passent par les tokens documentés dans `design.md`, jamais par une valeur littérale (`#3b82f6`, `17px`…).
-- Toute nouvelle valeur réellement nécessaire doit d'abord être ajoutée au design system, puis documentée dans `design.md`.
+- **Read `design.md`** (project root) before any visual decision.
+- **If `design.md` is absent**, run the `detect-design-system` skill first.
+- **No hardcoded values**: colours, spacing, radii, fonts go through the tokens documented in `design.md`, never as literal values (`#3b82f6`, `17px`…).
+- Any genuinely necessary new value must first be added to the design system, then documented in `design.md`.
 
 ## Red Flags — STOP
-- Tu allais écrire une couleur hexadécimale ou une taille en px directement dans un composant.
-- Tu prends une décision de police/espacement sans avoir ouvert `design.md`.
+- You were about to write a hex colour or pixel size directly in a component.
+- You make a font/spacing decision without having opened `design.md`.

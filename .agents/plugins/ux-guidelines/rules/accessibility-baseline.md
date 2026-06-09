@@ -1,14 +1,12 @@
-# Règle — Socle d'accessibilité
+# Rule — Accessibility baseline
 
-Contraintes a11y non négociables sur toute UI produite ou modifiée.
+Non-negotiable a11y constraints on any produced or modified UI.
 
-- **Contraste** : texte/contenu au minimum WCAG AA (4.5:1 texte normal, 3:1 grand texte / éléments d'interface).
-- **Cibles tactiles** : zone interactive d'au moins 24×24 px (viser 44×44 px sur mobile).
-- **HTML sémantique** : balises de sens (`button`, `nav`, `main`, `header`…), pas de `div` cliquable sans rôle.
-- **Hiérarchie de titres** : un seul `h1`, pas de saut de niveau (`h2` → `h4`).
-- **Formulaires** : chaque champ a un `label` associé.
-- **Images** : `alt` pertinent (ou `alt=""` si purement décoratif).
-- **Focus** : état de focus visible sur tout élément interactif.
-- **Mouvement** : respecter `prefers-reduced-motion`.
-
-Ces points sont vérifiables automatiquement par le skill `design-review`.
+- **Contrast**: text/content at minimum WCAG AA (4.5:1 normal text, 3:1 large text / interface elements).
+- **Touch targets**: interactive area of at least 24×24 px (aim for 44×44 px on mobile).
+- **Semantic HTML**: meaningful tags (`button`, `nav`, `main`, `header`…), no clickable `div` without a role.
+- **Heading hierarchy**: a single `h1`, no level skips (`h2` → `h4`).
+- **Forms**: every field has an associated `label`.
+- **Images**: meaningful `alt` (or `alt=""` if purely decorative).
+- **Focus**: visible focus state on every interactive element.
+- **Motion**: respect `prefers-reduced-motion`.

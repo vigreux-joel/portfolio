@@ -1,38 +1,38 @@
-# ux-guidelines — plugin Antigravity
+# ux-guidelines — Antigravity plugin
 
-Pipeline UX/UI guidé pour créer et modifier des interfaces sans erreur de design : auto-détection du design system, conseils d'experts (stratégie, copy, UI, motion) et vérification hybride.
+Guided UX/UI pipeline to create and modify interfaces without design errors: auto-detection of the design system, expert personas (strategy, copy, UI, motion) and qualitative verification.
 
 ## Installation
 
-Usage local (recommandé pour démarrer) : le plugin est lu directement depuis ce dossier source.
+Local usage (recommended to start): the plugin is read directly from this source folder.
 
-Déploiement vers le répertoire de plugins Antigravity CLI :
-
-```bash
-./install.sh           # global : ~/.gemini/antigravity-cli/plugins/ux-guidelines
-./install.sh <dir>     # dans un répertoire cible
-```
-
-`install.sh` compile les agents Markdown (`agents/*.md`) en `agent.json`.
-
-## Contenu
-
-- **Rules** (toujours actives) : anti-AI-slop, socle a11y, adhérence au design system.
-- **Agents** (personas) : ux-strategist, ux-copywriter, ui-designer, motion-designer, design-reviewer.
-- **Skills** :
-  - `detect-design-system` — génère `design.md` (tokens, polices, palette, composants).
-  - `design-review` — vérification hybride (contraste, drift de tokens, walls of text, a11y) + revue qualitative.
-  - `design-feature` — pipeline guidé avec approval gates et handover par artefacts.
-- **Hook** : avertissement non-bloquant de drift de tokens après édition d'un fichier UI.
-
-## Développement
+Deploy to the Antigravity CLI plugins directory:
 
 ```bash
-node --test tests/*.test.mjs      # lance la suite de tests (Node 22+, aucune dépendance)
+./install.sh           # global: ~/.gemini/antigravity-cli/plugins/ux-guidelines
+./install.sh <dir>     # to a target directory
 ```
 
-## À confirmer selon la version d'Antigravity
+`install.sh` compiles Markdown agents (`agents/*.md`) into `agent.json`.
 
-- Schéma exact de `plugin.json` et de `agent.json` (champ `model`).
-- Format de `hooks.json` (clés d'événements / variables `${TOOL_FILE_PATH}`).
-- Convention `.agent/` vs `.agents/` pour une install workspace.
+## Contents
+
+- **Rules** (always active): anti-AI-slop, a11y baseline, design system adherence.
+- **Agents** (personas): ux-strategist, ux-copywriter, ui-designer, motion-designer, design-reviewer.
+- **Skills**:
+  - `detect-design-system` — generates `design.md` (tokens, fonts, palette, components).
+  - `design-review` — qualitative review (spec fidelity, visual coherence, copy quality).
+  - `design-feature` — guided 7-phase pipeline with approval gates, resume support, and artefact handover.
+- **Hook**: non-blocking token drift warning after editing a UI file.
+
+## Development
+
+```bash
+node --test tests/*.test.mjs      # run the test suite (Node 22+, no dependencies)
+```
+
+## To confirm depending on Antigravity version
+
+- Exact schema for `plugin.json` and `agent.json` (`model` field).
+- Format of `hooks.json` (event keys / `${TOOL_FILE_PATH}` variable).
+- `.agent/` vs `.agents/` convention for workspace install.

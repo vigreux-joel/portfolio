@@ -1,22 +1,22 @@
 ---
 name: detect-design-system
-description: Utilise quand un projet n'a pas de design.md, qu'il vient de changer de tokens/polices/composants, ou avant de lancer une feature UI sur un projet inconnu.
+description: Use when a project has no design.md, when tokens/fonts/components have changed, or before launching a UI feature on an unknown project.
 ---
 
-# Détection du design system → design.md
+# Design system detection → design.md
 
-## Objectif
-Produire (ou rafraîchir) le manifeste `design.md` à la racine du projet, source d'auto-détection lue par tout le pipeline.
+## Objective
+Produce (or refresh) the `design.md` manifest at the project root — the auto-detection source read by the entire pipeline.
 
 ## Instructions
-1. Lance le scan :
+1. Run the scan:
    ```bash
    node "${PLUGIN_ROOT}/skills/detect-design-system/scripts/detect.mjs" "$PWD"
    ```
-2. Ouvre le `design.md` généré. Les sections **Tokens / Polices / Palette / Composants** sont remplies automatiquement.
-3. Complète à la main la section **Charte UX & Writing** (positionnement, cibles, ton de voix) — la détection ne peut pas l'inférer.
-4. Confirme à l'utilisateur le résumé (nb de tokens/polices/composants) et invite-le à relire.
+2. Open the generated `design.md`. The **Tokens / Fonts / Palette / Components** sections are filled automatically.
+3. Manually complete the **UX & Writing Charter** section (positioning, targets, tone of voice) — detection cannot infer it.
+4. Confirm to the user the summary (number of tokens/fonts/components) and invite them to review.
 
-## Règles d'engagement
-- Ne réécris jamais à la main les sections auto-générées : relance le script.
-- Ne supprime pas la charte UX rédigée par l'humain lors d'un rafraîchissement (à terme, fusionner ; pour l'instant, prévenir avant d'écraser).
+## Engagement rules
+- Never rewrite auto-generated sections by hand: re-run the script.
+- Don't delete the human-written UX charter when refreshing (eventually merge; for now, warn before overwriting).

@@ -1,52 +1,67 @@
 ---
 name: design-feature
-description: Utilise quand l'utilisateur veut créer ou refondre une section/feature d'interface complète et veut un accompagnement guidé de bout en bout.
+description: Use when the user wants to create or redesign a complete interface section/feature and wants guided end-to-end support.
 ---
 
-# Pipeline UX guidé
+# Guided UX pipeline
 
-## Objectif
-Accompagner la création d'une feature UI de la stratégie à la vérification, avec un point de validation humaine à chaque étape.
+## Objective
+Guide the creation of a UI feature from strategy to verification, with a human validation point at each step.
 
-## Pré-requis
-Si `design.md` est absent à la racine, lance d'abord le skill `detect-design-system`.
+## Prerequisites
+If `design.md` is absent at the root, run the `detect-design-system` skill first.
 
-## Routage dynamique
-On n'exécute pas toujours les 5 phases. Adapte à l'ampleur :
+## Dynamic routing
+Not all 7 phases are always executed. Adapt to the scope:
 
 ```dot
 digraph routing {
-  "Ampleur du changement ?" [shape=diamond];
-  "Micro-ajustement\n(style, wording court)" [shape=box];
-  "Nouvelle section /\nrefonte" [shape=box];
-  "design-review seul" [shape=box];
-  "Pipeline complet" [shape=box];
-  "Ampleur du changement ?" -> "Micro-ajustement\n(style, wording court)";
-  "Ampleur du changement ?" -> "Nouvelle section /\nrefonte";
-  "Micro-ajustement\n(style, wording court)" -> "design-review seul";
-  "Nouvelle section /\nrefonte" -> "Pipeline complet";
+  "Scope of change?" [shape=diamond];
+  "Micro-adjustment\n(style, short wording)" [shape=box];
+  "New section /\nredesign" [shape=box];
+  "design-review only" [shape=box];
+  "Full pipeline" [shape=box];
+  "Scope of change?" -> "Micro-adjustment\n(style, short wording)";
+  "Scope of change?" -> "New section /\nredesign";
+  "Micro-adjustment\n(style, short wording)" -> "design-review only";
+  "New section /\nredesign" -> "Full pipeline";
 }
 ```
 
-## Phases (pipeline complet)
-Chaque phase délègue à une persona, écrit un artefact, puis **s'arrête pour validation** (approval gate) avant la suivante.
+## Phases (full pipeline)
+Each phase delegates to a persona, writes an artefact, then **stops for validation** (approval gate) before the next.
 
-1. **Stratégie** — `ux-strategist` → `docs/design/<feature-slug>/strategy.md` — **gate**
+1. **Strategy** — `ux-strategist` → `docs/design/<feature-slug>/strategy.md` — **gate**
 2. **Copy** — `ux-copywriter` → `docs/design/<feature-slug>/copy.md` — **gate**
 3. **Layout** — `ui-designer` → `docs/design/<feature-slug>/layout.md` — **gate**
 4. **Motion** — `motion-designer` → `docs/design/<feature-slug>/motion.md` — **gate**
-5. **Revue des artefacts** — `design-reviewer` lit l'ensemble des docs (`strategy.md`, `copy.md`, `layout.md`, `motion.md`) et vérifie leur cohérence mutuelle et leur qualité avant tout code → `docs/design/<feature-slug>/review-report.md` — **gate**
-6. **Implémentation** — traduire `layout.md` + `motion.md` en code, **section par section** : une sous-section à la fois, vérifier la fidélité à la spec avant d'enchaîner. Ne jamais implémenter la feature entière en une seule passe. — **gate**
-7. **Vérification du rendu** — `design-reviewer` vérifie la fidélité du code aux specs et la cohérence visuelle du résultat → mise à jour de `review-report.md`
+5. **Artefact review** — `design-reviewer` reads all docs (`strategy.md`, `copy.md`, `layout.md`, `motion.md`) and verifies their mutual coherence and quality before any code → `docs/design/<feature-slug>/review-report.md` — **gate**
+6. **Implementation** — translate `layout.md` + `motion.md` into code, **section by section**: one sub-section at a time, verify spec fidelity before moving on. Never implement the full feature in a single pass. — **gate**
+7. **Render verification** — `design-reviewer` verifies code fidelity to specs and visual coherence of the result → updates `review-report.md`
 
-## Approval gate (règle stricte)
-À chaque gate : présente l'artefact, demande une validation **explicite**, n'enchaîne pas sans accord. Si l'utilisateur amende l'artefact, relance la persona concernée sur le fichier amendé.
+## Resuming mid-pipeline
+If artefacts already exist in `docs/design/<feature-slug>/`, check which files are present and skip completed phases:
+
+| Files present | Start from |
+|---|---|
+| none | Phase 1 — Strategy |
+| `strategy.md` | Phase 2 — Copy |
+| + `copy.md` | Phase 3 — Layout |
+| + `layout.md` | Phase 4 — Motion |
+| + `motion.md` | Phase 5 — Artefact review |
+| `review-report.md` with `READY FOR IMPLEMENTATION` | Phase 6 — Implementation |
+| Code exists but review-report has issues | Phase 6 — Fix implementation |
+
+Always read existing artefacts before resuming to understand what was validated.
+
+## Approval gate (strict rule)
+At each gate: present the artefact, ask for **explicit** validation, do not proceed without agreement. If the user amends an artefact, re-run the relevant persona on the amended file.
 
 ## Handover
-Chaque persona lit les artefacts des phases précédentes dans `docs/design/<feature-slug>/`. C'est le canal de transmission entre étapes.
+Each persona reads the artefacts from previous phases in `docs/design/<feature-slug>/`. That is the transmission channel between steps.
 
 ## Red Flags — STOP
-- Tu enchaînes deux phases sans validation explicite.
-- Tu écris du code applicatif avant que `layout.md` soit validé.
-- Tu implémentes toute la feature en une seule passe sans vérification intermédiaire.
-- Tu conclus sans passer par `design-review`.
+- You chain two phases without explicit validation.
+- You write application code before `layout.md` is validated.
+- You implement the entire feature in a single pass without intermediate verification.
+- You conclude without going through `design-review`.
