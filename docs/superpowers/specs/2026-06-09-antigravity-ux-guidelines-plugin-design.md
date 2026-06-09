@@ -28,6 +28,10 @@ repart de 0 sur le **format plugin CLI Antigravity**.
   (jamais le résumé du process), flowcharts réservés aux routages non-évidents,
   tables de rationalisation + listes de Red Flags pour blinder les règles de
   discipline, handover par fichiers d'artefacts.
+- **Langue** : prose des rules / personas / skills **et** les `description`
+  (matchées contre l'intention du dev) rédigées en **français**. La liste de
+  mots bannis reste **bilingue** (le slop existe en FR et EN). Seuls les `name`
+  (identifiants kebab) et les noms de `tools` restent en **anglais**.
 
 ## 2. Plateforme cible — format plugin CLI Antigravity
 
