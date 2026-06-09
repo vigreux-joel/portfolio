@@ -1,0 +1,8 @@
+:root {
+  --color-primary: #3b82f6;
+  --color-surface: #ffffff;
+  --space-3: 16px;
+  --radius-md: 8px;
+  font-family: "Montserrat", sans-serif;
+}
+body { font-family: "Roboto", sans-serif; }
