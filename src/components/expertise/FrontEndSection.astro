@@ -13,64 +13,122 @@ import {iDevices} from "@udixio/icons-outlined-400/devices";
 import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 ---
-<div id="front-end" class=" tab-menu theme-purple">
-  <section>
-    <div class="max-width ">
-
-      <div class="padding-x grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Bloc narration expertise fondations -->
-        <Card client:visible data-aos="fade-up" className="lg:col-span-12 p-8 md:p-12 flex flex-col lg:flex-row gap-8 items-center">
-          <div class="flex-1">
-            <h3 class="text-headline-medium text-on-surface mb-6 text-gradient">L'Ingénierie au service de l'Expérience</h3>
-            <p class="text-body-large text-on-surface-variant max-w-prose">
-              Une interface d'exception repose sur des fondations techniques solides. J'intègre systématiquement un <strong>typage strict avec TypeScript</strong> pour sécuriser le code, une structuration modulaire via <strong>Tailwind CSS & Material 3</strong>, ainsi que des animations fluides grâce à <strong>Framer Motion</strong>. Chaque décision, y compris le respect des normes d'<strong>accessibilité (a11y)</strong>, vise à maximiser la conversion et la pérennité du produit.
-            </p>
-          </div>
-          <div class="flex flex-wrap gap-4 lg:w-1/3 justify-center">
-             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">TypeScript</div>
-             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Tailwind CSS</div>
-             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Accessibilité (a11y)</div>
-             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Framer Motion</div>
-             <div class="px-4 py-2 rounded-full border border-surface-variant text-label-large text-on-surface-variant">Material 3</div>
-          </div>
-        </Card>
-
-        <!-- Astro -->
-        <Card client:visible data-aos="fade-up" data-aos-delay="100" className="lg:col-span-4 p-8 flex flex-col group">
-          <Techno variant="primary" className="h-full flex flex-col" image={astroLogo} name="Performance & SEO (Astro)">
-            <p>
-              Génération de sites ultra-performants. Un temps de chargement réduit garantit un engagement optimal et un meilleur référencement naturel.
-            </p>
-          </Techno>
-        </Card>
-
-        <!-- React -->
-        <Card client:visible data-aos="fade-up" data-aos-delay="200" className="lg:col-span-4 p-8 flex flex-col group">
-          <Techno variant="primary" className="h-full flex flex-col" image={reactLogo} name="Interactivité (React)">
-            <p>
-              Création d'interfaces riches et dynamiques avec des composants réutilisables, offrant une fluidité proche du natif pour vos utilisateurs.
-            </p>
-          </Techno>
-        </Card>
-
-        <!-- Angular -->
-        <Card client:visible data-aos="fade-up" data-aos-delay="300" className="lg:col-span-4 p-8 flex flex-col group">
-          <Techno variant="primary" className="h-full flex flex-col" image={angularLogo} name="Robustesse (Angular)">
-            <p>
-              Conception d'applications d'entreprise structurées. Une architecture rigoureuse qui assure scalabilité, maintenabilité et sécurité sur le long terme.
-            </p>
-          </Techno>
-        </Card>
-
-      </div>
-      <div class="flex h-64">
-        <div>
-          <Line client:idle/>
-        </div>
+<div id="front-end" class="theme-purple bg-surface">
+  <section class="max-width padding-x">
+    
+    <!-- Introduction de Section -->
+    <div class="min-h-[50vh] flex flex-col justify-center text-center relative pt-24 pb-16">
+      <h2 
+        class="text-display-large text-on-surface"
+        data-aos="fade-up" 
+        data-aos-duration="1000"
+      >
+        Ingénierie Front-End.<br/>
+        <span class="text-on-surface-variant">La technologie adaptée au produit.</span>
+      </h2>
+      
+      <!-- Split line effect using CSS -->
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-16 bg-primary/50 hidden md:block"></div>
+      <div class="absolute bottom-0 left-[25%] w-[50%] h-[3px] bg-primary/50 hidden md:block"></div>
+      <div class="absolute -bottom-16 left-[25%] w-[3px] h-16 bg-primary/50 hidden md:block"></div>
+      <div class="absolute -bottom-16 left-[75%] w-[3px] h-16 bg-primary/50 hidden md:block"></div>
+      
+      <!-- Mobile line -->
+      <div class="absolute bottom-0 h-32 md:hidden">
+         <Line client:idle isFirst={true} nextTheme="purple" />
       </div>
     </div>
+
+    <!-- Séquence 1 : Le Duel Structurel -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 mt-16 md:mt-32 relative">
+      
+      <!-- Astro (Left) -->
+      <div class="relative pt-8 md:pt-0" data-aos="fade-up">
+        <Techno variant="primary" name="Astro" image={astroLogo}>
+          Performances d'affichage maximales pour les plateformes éditoriales. L'architecture en îlots élimine la charge JavaScript superflue en générant un HTML statique pur. Le contenu est livré instantanément avec un score SEO parfait et une consommation mémoire minimale côté client.
+          
+          <span class="block mt-6 text-label-medium text-tertiary uppercase tracking-widest font-bold">
+            Portfolios • Plateformes éditoriales • Sites institutionnels
+          </span>
+        </Techno>
+      </div>
+
+      <!-- Angular (Right) -->
+      <div class="relative" data-aos="fade-up" data-aos-delay="100">
+        <Card client:load className="p-8 md:p-12 w-full h-full">
+          <Techno variant="primary" name="Angular" image={angularLogo}>
+            Robustesse et prédictibilité pour les systèmes à grande échelle. La compartimentation stricte des modules et l'injection de dépendances sécurisent le produit contre les régressions. Une architecture conçue pour garantir la maintenabilité de bases de code massives destinées à évoluer sur de longues périodes.
+            
+            <span class="block mt-6 text-label-medium text-tertiary uppercase tracking-widest font-bold">
+              Systèmes ERP • Portails bancaires • Apps institutionnelles
+            </span>
+          </Techno>
+        </Card>
+      </div>
+      
+    </div>
+
+    <!-- Connecteur fusion vers React -->
+    <div class="relative h-[100px] mt-16 md:mt-32 hidden md:block">
+      <div class="absolute top-0 left-[25%] w-[3px] h-[50px] bg-primary/50"></div>
+      <div class="absolute top-0 left-[75%] w-[3px] h-[50px] bg-primary/50"></div>
+      <div class="absolute top-[50px] left-[25%] w-[50%] h-[3px] bg-primary/50"></div>
+      <div class="absolute top-[50px] left-1/2 w-[3px] h-[50px] bg-primary/50 -translate-x-1/2"></div>
+    </div>
+
   </section>
+
+  <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
+  <div class="w-full bg-gradient-to-b from-purple-900/30 to-surface py-24 px-4 md:px-16">
+    <div class="max-w-6xl mx-auto" data-aos="zoom-in" data-aos-duration="1000">
+      <Card client:load variant="elevated" className="p-8 md:p-16 lg:p-24 overflow-hidden relative">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 relative z-10">
+          
+          <!-- Colonne Gauche : Identité & Techno -->
+          <div class="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <Techno variant="primary" name="React & Motion" image={reactLogo}>
+                <div class="mt-8 text-label-medium text-tertiary uppercase tracking-widest font-bold">
+                  SaaS • Dashboards • Outils métiers
+                </div>
+              </Techno>
+            </div>
+            
+            <div class="hidden lg:block mt-24">
+              <Line client:idle isLast={true} visible={true} />
+            </div>
+          </div>
+          
+          <!-- Colonne Droite : Le discours narratif aéré -->
+          <div class="lg:col-span-7 flex flex-col justify-center">
+            
+            <p class="text-headline-medium md:text-display-small text-on-surface mb-12 font-light leading-tight">
+              L'animation n'est pas cosmétique. <br/>
+              <span class="text-primary italic font-serif">Elle dirige le regard.</span>
+            </p>
+            
+            <p class="text-body-large md:text-title-large text-on-surface-variant leading-relaxed mb-8 max-w-prose">
+              Développement d'interfaces hautement interactives où le mouvement guide l'expérience. Masquer intelligemment la latence réseau et valider les actions complexes de l'utilisateur de façon organique.
+            </p>
+            
+            <div class="border-l-2 border-white/10 pl-8 mt-8">
+              <p class="text-title-medium text-on-surface leading-relaxed">
+                Le résultat est une interface vivante qui augmente directement la qualité perçue du produit final.
+              </p>
+            </div>
+            
+          </div>
+          
+        </div>
+      </Card>
+      
+      <!-- Ligne de sortie Mobile uniquement -->
+      <div class="flex justify-center mt-16 h-32 lg:hidden">
+         <Line client:idle isLast={true} />
+      </div>
+    </div>
+  </div>
   <section class=" pt-8">
     <div class="max-width">
       <div class="flex">
