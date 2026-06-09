@@ -9,6 +9,8 @@ Permanent guardrail on all generated copy or interface text.
 - **Walls of text**: long dense paragraphs. Short, scannable sentences.
 - **False marketing claims** (attributing to an approach or subject a virtue it doesn't have).
 - **Badges / Pills** to list attributes or keywords: the #1 visual pattern of AI-generated interfaces.
+- **Numbered prefixes on visible labels** ("01 —", "02.", "03 :"…): using sequential numbers as decorative titles in the rendered interface. Numbers can exist in a spec as structural references, never as final copy.
+- **Oversized decorative numbers** as background or watermark elements: the large-number-behind-content pattern is a dated AI-design cliché with no narrative purpose.
 - **Pejorative vocabulary about subjects covered**: describing something by its perceived flaw or by negative contrast to something else. Every subject is described by its strength in context.
 
 ## Instead
