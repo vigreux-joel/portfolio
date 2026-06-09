@@ -20,7 +20,7 @@ Proactive triggering to ensure modifications don't introduce AI slop.
 </commentary>
 </example>
 
-model: inherit
+model: haiku
 color: blue
 tools: ["Read"]
 ---

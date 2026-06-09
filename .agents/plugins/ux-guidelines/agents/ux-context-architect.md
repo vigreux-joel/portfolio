@@ -20,7 +20,7 @@ Triggers proactively before writing code to establish a cohesive UX structure.
 </commentary>
 </example>
 
-model: inherit
+model: haiku
 color: cyan
 tools: ["Read", "ListDir", "Grep"]
 ---

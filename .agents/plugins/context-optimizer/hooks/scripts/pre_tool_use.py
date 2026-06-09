@@ -66,6 +66,7 @@ def main():
         # Read hook input from stdin
         input_data = json.load(sys.stdin)
     except Exception:
+        print(json.dumps({"continue": True}))
         sys.exit(0)
 
     session_id = input_data.get('session_id')
@@ -74,6 +75,7 @@ def main():
     transcript_path = input_data.get('transcript_path')
 
     if not session_id or not tool_name:
+        print(json.dumps({"continue": True}))
         sys.exit(0)
 
     project_dir = os.environ.get('ANTIGRAVITY_PROJECT_DIR') or os.getcwd()
@@ -96,6 +98,7 @@ def main():
 
     if not is_main_session:
         # Inside subagents, allow everything
+        print(json.dumps({"continue": True}))
         sys.exit(0)
 
     # 2. Analyze tool call and context
@@ -106,6 +109,7 @@ def main():
     if tool_name == 'run_command':
         cmd = tool_input.get('CommandLine', '')
         if is_safe_command(cmd):
+            print(json.dumps({"continue": True}))
             sys.exit(0) # Safe read command, allow
         else:
             block = True
@@ -162,6 +166,7 @@ def main():
         sys.stderr.write(json.dumps(response))
         sys.exit(2)
 
+    print(json.dumps({"continue": True}))
     sys.exit(0)
 
 if __name__ == '__main__':

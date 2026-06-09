@@ -1,6 +1,6 @@
 ---
 name: Context Optimization Guidance
-description: This skill should be used when you need to optimize task-level context, decide whether to use a subagent, or when you are blocked by the context-optimizer plugin. It helps you design and invoke subagents correctly.
+description: This skill should be used when the agent needs to optimize task-level context, when a task requires delegation, or when the agent is blocked by the context-optimizer plugin. Trigger this skill on phrases like "delegate to a subagent", "optimize context", or "create a subagent".
 version: 1.0.0
 ---
 
@@ -18,9 +18,9 @@ To prevent context clutter, slow responses, and high token usage in the main con
    - Do NOT run complex build, test, lint, or run commands directly in the main session.
 
 2. **Delegate Modifying Tasks**:
-   - As soon as a task requires writing code, modifying files, running shell commands, or doing deep research, you must delegate it.
-   - Use [define_subagent](file:///.agents/plugins/plugin-dev/skills/agent-development/SKILL.md) to define a specialized subagent if no existing subagent fits the task.
-   - Use [invoke_subagent](file:///.agents/plugins/plugin-dev/skills/agent-development/SKILL.md) to launch the subagent.
+   - As soon as a task requires writing code, modifying files, running shell commands, or doing deep research, delegate it immediately.
+   - Use the `define_subagent` tool to define a specialized subagent if no existing subagent fits the task. Reference [Agent Development](file:///home/joel/Documents/projets/vigreux-joel.fr/.agents/plugins/plugin-dev/skills/agent-development/SKILL.md) for details.
+   - Use the `invoke_subagent` tool to launch the subagent.
 
 3. **Workspace Modes**:
    - Use `branch` or `share` workspace mode for subagents when they need to work on isolated features.
@@ -28,10 +28,10 @@ To prevent context clutter, slow responses, and high token usage in the main con
 
 ## How to Delegate a Task
 
-When the user asks you to perform a task:
+When processing a user request:
 
 1. **Analyze the Request**: Determine if it is a simple query (e.g., "Where is class X?") or a complex request (e.g., "Implement feature Y").
-2. **Define a Subagent**:
+2. **Define a Subagent**: Call the `define_subagent` tool using this payload structure:
    ```json
    {
      "name": "feature-developer",
@@ -40,7 +40,7 @@ When the user asks you to perform a task:
      "enable_write_tools": true
    }
    ```
-3. **Invoke the Subagent**:
+3. **Invoke the Subagent**: Call the `invoke_subagent` tool using this payload structure:
    ```json
    {
      "Subagents": [
@@ -54,5 +54,5 @@ When the user asks you to perform a task:
    ```
 4. **Communicate and Wait**:
    - Stop calling tools to allow the subagent to run.
-   - Use `send_message` if you need to provide additional details or get status updates.
+   - Use the `send_message` tool if necessary to provide additional details or get status updates.
    - Once the subagent is done, merge the results and report back to the user.

@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/session_start.py"
+            "command": "python3 \"${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/session_start.py\""
           }
         ]
       }
@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/session_end.py"
+            "command": "python3 \"${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/session_end.py\""
           }
         ]
       }
@@ -29,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/pre_tool_use.py"
+            "command": "python3 \"${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/pre_tool_use.py\""
           }
         ]
       }
