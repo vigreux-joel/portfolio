@@ -36,6 +36,7 @@ Each phase delegates to a persona, writes an artefact, then **stops for validati
 3. **Layout** — `ui-designer` → `docs/design/<feature-slug>/layout.md` — **gate**
 4. **Motion** — `motion-designer` → `docs/design/<feature-slug>/motion.md` — **gate**
 5. **Artefact review** — `design-reviewer` reads all docs (`strategy.md`, `copy.md`, `layout.md`, `motion.md`) and verifies their mutual coherence and quality before any code → `docs/design/<feature-slug>/review-report.md` — **gate**
+5b. **Wireframe** *(optional)* — after the artefact review gate, ask the user: *"Would you like a visual HTML wireframe of the layout before implementation?"* If yes: `ui-designer` generates `docs/design/<feature-slug>/wireframe.html` based on `layout.md` and `copy.md` — **gate if generated, skip if declined**
 6. **Implementation** — translate `layout.md` + `motion.md` into code, **section by section**: one sub-section at a time, verify spec fidelity before moving on. Never implement the full feature in a single pass. — **gate**
 7. **Render verification** — `design-reviewer` verifies code fidelity to specs and visual coherence of the result → updates `review-report.md`
 
