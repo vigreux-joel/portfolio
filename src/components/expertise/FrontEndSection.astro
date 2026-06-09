@@ -1,25 +1,26 @@
 ---
-import { Card } from "@components/Card";
-import { Techno } from "@components/Techno";
-import { Line } from "@components/Line";
-import { LinearGradient } from "@components/LinearGradient";
-import { Icon, Divider } from "@udixio/ui-react";
+import {Card} from "@components/Card";
+import {Techno} from "@components/Techno";
+import {Line} from '@components/Line';
+import {LinearGradient} from "@components/LinearGradient";
+import {Icon, Divider} from "@udixio/ui-react";
+
 import astroLogo from "@assets/images/astro-logo.svg?raw";
 import reactLogo from "@assets/images/react-logo.svg?raw";
-import angularLogo from "@assets/images/angular-logo.svg?raw";
-import { iDevices } from "@udixio/icons-outlined-400/devices";
-import { iSelectWindow } from "@udixio/icons-outlined-400/select_window";
-import {
-  faAndroid,
-  faApple,
-  faLinux,
-  faWindows,
-} from "@fortawesome/free-brands-svg-icons";
----
+import tailwindLogo from "@assets/images/tailwind-logo.svg?raw";
+import framerMotionLogo from "@assets/images/framer-motion-logo.svg?raw";
+import materialLogo from "@assets/images/material-design-logo.svg?raw";
+import sassLogo from "@assets/images/sass-logo.svg?raw";
+import tsLogo from "@assets/images/ts-logo.svg?raw";
 
-<div id="front-end" class="tab-menu theme-purple">
+import {iDevices} from "@udixio/icons-outlined-400/devices";
+import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
+import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
+---
+<div id="front-end" class=" tab-menu theme-purple">
   <section>
-    <div class="max-width">
+    <div class="max-width ">
+
       <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
         <Card client:visible data-aos="zoom-in"
               className="group">
@@ -74,127 +75,88 @@ import {
       </div>
       <div class="flex h-64">
         <div>
-          <Line client:idle />
+          <Line client:idle/>
         </div>
       </div>
     </div>
   </section>
-  <section class="pt-8">
+  <section class=" pt-8">
     <div class="max-width">
       <div class="flex">
         <div>
-          <Line client:idle nextTheme="blue" icon={iDevices} />
+          <Line client:idle nextTheme="blue" icon={iDevices}/>
         </div>
         <div class="padding pt-0">
           <div class="flex items-center md:flex-row flex-col">
             <div class="left">
-              <h2 data-aos="fade-right" class="text-title-large text-tertiary">
-                Développement multiplateforme
-              </h2>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="100"
-                class="mt-4 text-headline-large md:text-display-medium max-w-prose"
-              >
+              <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement
+                multiplateforme</h2>
+              <div data-aos="fade-right" data-aos-delay="100"
+                   class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                 <h3 class="text-gradient">Touchez un public plus large</h3>
-                <p>
-                  Je convertis vos idées en applications adaptables à tous les
-                  appareils
-                </p>
+                <p>Je convertis vos idées en applications adaptables à tous les
+                  appareils</p>
               </div>
-              <p
-                data-aos="fade-right"
-                data-aos-delay="100"
-                class="max-w-prose mt-8 text-body-large"
-              >
-                Flutter me permet de créer des applications pour mobiles, web,
-                bureau et intégrés à partir d'une seule base de code. J'apprécie
-                particulièrement son efficacité dans le développement
-                multiplateforme, ce qui facilite grandement mon travail.
-              </p>
+              <p data-aos="fade-right" data-aos-delay="100" class="max-w-prose mt-8 text-body-large">
+                Flutter me permet de créer des applications pour
+                mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
+                particulièrement
+                son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
+                travail.</p>
+
             </div>
           </div>
           <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-            <div
-              data-aos="zoom-in"
-              class="sm:mt-[42px] py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container"
-            >
-              <Icon className="h-16 w-16" icon={iSelectWindow} />
+            <div data-aos="zoom-in"
+                 class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
+              <Icon className="h-16 w-16" icon={iSelectWindow}/>
               <h4>Web</h4>
             </div>
             <div class="sm:flex-2 w-full md:w-fit">
               <div class="flex gap-4 items-center">
-                <Divider className="hidden md:block border-primary-container" />
-                <h4 class="text-title-medium text-on-primary-container">
-                  Mobile
-                </h4>
-                <Divider className="hidden md:block border-primary-container" />
+                <Divider className="hidden md:block border-primary-container"/>
+                <h4 class="text-title-medium text-on-primary-container">Mobile</h4>
+                <Divider className="hidden md:block border-primary-container"/>
               </div>
               <div class="flex gap-4 mt-4">
-                <Divider
-                  orientation="vertical"
-                  className="md:hidden border-primary-container"
-                />
+                <Divider orientation="vertical" className="md:hidden border-primary-container"/>
                 <div class="flex flex-1 flex-wrap gap-8">
-                  <div
-                    data-aos="zoom-in"
-                    data-aos-delay={150}
-                    class="flex-1 py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container"
-                  >
-                    <Icon className="h-16 w-16" icon={faApple} />
+                  <div data-aos="zoom-in" data-aos-delay={150}
+                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
+                    <Icon className="h-16 w-16" icon={faApple}/>
                     <p>IOS</p>
                   </div>
-                  <div
-                    data-aos="zoom-in"
-                    data-aos-delay={150}
-                    class="flex-1 py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container"
-                  >
-                    <Icon className="h-16 w-16" icon={faAndroid} />
+                  <div data-aos="zoom-in" data-aos-delay={150}
+                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
+                    <Icon className="h-16 w-16" icon={faAndroid}/>
                     <p>Android</p>
                   </div>
                 </div>
               </div>
+
             </div>
             <div class="flex-[3] w-full md:w-fit">
               <div class="flex gap-4 items-center">
-                <Divider
-                  className="hidden md:block border-secondary-container"
-                />
-                <h4 class="text-title-medium text-on-secondary-container">
-                  Desktop
-                </h4>
-                <Divider
-                  className="hidden md:block border-secondary-container"
-                />
+                <Divider className="hidden md:block border-secondary-container"/>
+                <h4 class="text-title-medium text-on-secondary-container">Desktop</h4>
+                <Divider className="hidden md:block border-secondary-container"/>
               </div>
               <div class="flex gap-4 mt-4">
-                <Divider
-                  orientation="vertical"
-                  className="md:hidden border-secondary-container"
-                />
+                <Divider orientation="vertical" className="md:hidden border-secondary-container"/>
                 <div class="flex flex-1 flex-wrap gap-8">
-                  <div
-                    data-aos="zoom-in"
-                    data-aos-delay={300}
-                    class="flex-[100%] lg:flex-1 py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container"
-                  >
-                    <Icon className="h-16 w-16" icon={faWindows} />
+                  <div data-aos="zoom-in" data-aos-delay={300}
+                       class="flex-[100%] lg:flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
+                    <Icon className="h-16 w-16" icon={faWindows}/>
                     <p>Windows</p>
                   </div>
-                  <div
-                    data-aos="zoom-in"
-                    data-aos-delay={300}
-                    class="flex-1 py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container"
-                  >
-                    <Icon className="h-16 w-16" icon={faApple} />
+                  <div data-aos="zoom-in" data-aos-delay={300}
+                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
+                    <Icon className="h-16 w-16" icon={faApple}/>
                     <p>MacOs</p>
                   </div>
-                  <div
-                    data-aos="zoom-in"
-                    data-aos-delay={300}
-                    class="flex-1 py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container"
-                  >
-                    <Icon className="h-16 w-16" icon={faLinux} />
+                  <div data-aos="zoom-in" data-aos-delay={300}
+                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
+                    <Icon className="h-16 w-16" icon={faLinux}/>
                     <p>Linux</p>
                   </div>
                 </div>
@@ -204,6 +166,6 @@ import {
         </div>
       </div>
     </div>
-    <LinearGradient nextTheme="blue" />
+    <LinearGradient nextTheme="blue"/>
   </section>
 </div>
