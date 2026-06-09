@@ -44,12 +44,25 @@ Writing is the pillar that transforms an aesthetic interface into a conversion t
 
 ---
 
-## 4. Dedicated Subagents for Specialized Tasks (Mandatory)
+## 4. The "Quality Gate" UX Pipeline (Mandatory Workflow)
 
-To ensure the best possible UX and avoid blind mistakes, delegate specific tasks to the dedicated subagents provided in this plugin:
-*   **`ux-context-architect`**: Before any major structural change, spawn this subagent to research the repository. Its role is to read surrounding files, understand the existing layout patterns, map out the overall narrative of the page, and propose conceptual directions.
-*   **`ux-code-reviewer`**: After proposing or generating code, use this subagent to review the code for "AI slop", structural flaws, accessibility (a11y) issues, and exact alignment with `design.md` constraints before presenting the final result to the user.
+To ensure the highest level of quality, do not execute UX/UI tasks blindly or skip steps based on the size of the task. Follow this strict pipeline:
 
+**Step 1: Validation of Needs & CX Strategy (The "Shift-Left")**
+Always confirm the CX strategy, narrative, and target audience with the user *before* coding or wireframing.
+- **`ux-strategist`** (Heavy Model): Defines the business goal, target audience, and core message.
+- **`ux-copywriter`** (Heavy Model): Structures the Information Architecture (e.g., stopping unfair comparisons between libraries and frameworks) and writes punchy, non-generic copy.
+- *Action:* Ask the user for validation of the narrative.
+
+**Step 2: Execution (Dynamic Routing)**
+Once the narrative is approved, invoke only the necessary specialized execution agents:
+- **`ux-architect`** (Light Model): Maps the validated text to existing codebase components (e.g., `Line`, `StickyScroll`) and creates a structural wireframe plan.
+- **`ux-ui-designer`** (Light Model): Applies visual constraints (asymmetry, glassmorphism, design system tokens, typography).
+- **`ux-interaction-designer`** (Light Model): Designs the temporal flow, scroll-reveals, and Framer Motion logic to guarantee the "Wow effect" without being cheesy.
+
+**Step 3: Mandatory QA Review (The Quality Gate)**
+Every UX/UI change, no matter how small, MUST be audited before final delivery.
+- **`ux-qa-reviewer`** (Light Model): This agent is strictly an auditor. It checks for "AI Slop" aesthetics, Accessibility (A11y) violations, semantic HTML, and ensures the original CX intent was respected.
 ---
 
 ## 5. Maintenance of the `design.md` file
