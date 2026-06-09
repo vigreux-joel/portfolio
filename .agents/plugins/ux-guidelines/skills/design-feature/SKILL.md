@@ -36,7 +36,7 @@ Each phase delegates to a persona, writes an artefact, then **stops for validati
 3. **Layout** — `ui-designer` → `docs/design/<feature-slug>/layout.md` — **gate**
 4. **Motion** — `motion-designer` → `docs/design/<feature-slug>/motion.md` — **gate**
 5. **Artefact review** — `design-reviewer` reads all docs (`strategy.md`, `copy.md`, `layout.md`, `motion.md`) and verifies their mutual coherence and quality before any code → `docs/design/<feature-slug>/review-report.md` — **gate**
-5b. **Wireframe** *(optional)* — after the artefact review gate, ask the user: *"Would you like a visual HTML wireframe of the layout before implementation?"* If yes: `ui-designer` generates `docs/design/<feature-slug>/wireframe.html` based on `layout.md` and `copy.md` — **gate if generated, skip if declined**
+5b. **Wireframe offer** *(mandatory question, optional output)* — after the artefact review gate, **always ask** the user: *"Would you like a visual HTML wireframe of the layout before implementation?"* If yes: `ui-designer` generates `docs/design/<feature-slug>/wireframe.html` based on `layout.md` and `copy.md` — **gate if generated**. If no: proceed to Phase 6. Never skip this question.
 6. **Implementation** — translate `layout.md` + `motion.md` into code, **section by section**: one sub-section at a time, verify spec fidelity before moving on. Never implement the full feature in a single pass. — **gate**
 7. **Render verification** — `design-reviewer` verifies code fidelity to specs and visual coherence of the result → updates `review-report.md`
 
@@ -50,7 +50,7 @@ If artefacts already exist in `docs/design/<feature-slug>/`, check which files a
 | + `copy.md` | Phase 3 — Layout |
 | + `layout.md` | Phase 4 — Motion |
 | + `motion.md` | Phase 5 — Artefact review |
-| `review-report.md` with `READY FOR IMPLEMENTATION` | Phase 6 — Implementation |
+| `review-report.md` with `READY FOR IMPLEMENTATION` | Phase 5b — Wireframe offer (ask before Phase 6) |
 | Code exists but review-report has issues | Phase 6 — Fix implementation |
 
 Always read existing artefacts before resuming to understand what was validated.
@@ -67,4 +67,5 @@ Each persona reads the artefacts from previous phases in `docs/design/<feature-s
 - You chain two phases without explicit validation.
 - You write application code before `layout.md` is validated.
 - You implement the entire feature in a single pass without intermediate verification.
+- You proceed to Phase 6 without having asked about the wireframe (step 5b).
 - You conclude without going through `design-review`.
