@@ -57,6 +57,8 @@ Always read existing artefacts before resuming to understand what was validated.
 ## Approval gate (strict rule)
 At each gate: present the artefact, ask for **explicit** validation, do not proceed without agreement. If the user amends an artefact, re-run the relevant persona on the amended file.
 
+When a gate rejection identifies an issue originating from an upstream artefact, fix the upstream artefact first (re-run the relevant persona on it), then regenerate the current one. Never patch a downstream file to work around an upstream problem.
+
 ## Handover
 Each persona reads the artefacts from previous phases in `docs/design/<feature-slug>/`. That is the transmission channel between steps.
 
