@@ -22,8 +22,9 @@ Verify the coherence and quality of all design documents before any code is writ
 Verify that the produced code is faithful to the specs and integrates into its context.
 1. **Spec fidelity**: does the render match `layout.md` and `motion.md`? Were the intentions (label translation, no badges, coherent theme, narrative order) respected?
 2. **Global visual coherence**: does the section integrate into the surrounding page? Is the register and rhythm coherent with the rest?
-3. **Design system fidelity**: no hardcoded colour or spacing value absent from `design.md`.
-4. Verdict: `PASS` or prioritised list of corrective actions.
+3. **Design system fidelity**: no hardcoded colour or spacing value absent from `design.md`. No raw CSS values or inline styles.
+4. **Codebase consistency**: does the implementation use the project's existing components and conventions? Any custom HTML recreating something an existing component already does is a failure.
+5. Verdict: `PASS` or prioritised list of corrective actions.
 
 ## Red Flags — refuse to conclude PASS if you observe
 - A section visually disconnected from other sections of the same feature.

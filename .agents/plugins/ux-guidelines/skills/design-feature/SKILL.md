@@ -37,7 +37,10 @@ Each phase delegates to a persona, writes an artefact, then **stops for validati
 4. **Motion** — `motion-designer` → `docs/design/<feature-slug>/motion.md` — **gate**
 5. **Artefact review** — `design-reviewer` reads all docs (`strategy.md`, `copy.md`, `layout.md`, `motion.md`) and verifies their mutual coherence and quality before any code → `docs/design/<feature-slug>/review-report.md` — **gate**
 5b. **Wireframe offer** *(mandatory question, optional output)* — after the artefact review gate, **always ask** the user: *"Would you like a visual HTML wireframe of the layout before implementation?"* If yes: `ui-designer` generates `docs/design/<feature-slug>/wireframe.html` based on `layout.md` and `copy.md` — **gate if generated**. If no: proceed to Phase 6. Never skip this question.
-6. **Implementation** — translate `layout.md` + `motion.md` into code, **section by section**: one sub-section at a time, verify spec fidelity before moving on. Never implement the full feature in a single pass. — **gate**
+6. **Implementation** — translate `layout.md` + `motion.md` into production code, **section by section**: one sub-section at a time, verify spec fidelity before moving on. Never implement the full feature in a single pass.
+   - **Before writing anything**: read the existing codebase to identify available components, patterns and conventions. Use them.
+   - **The wireframe is a visual validation only** — never copy or adapt it. The implementation sources are `layout.md`, `motion.md` and the existing project code.
+   - **All styling through design system tokens** — no raw CSS values or inline styles. — **gate**
 7. **Render verification** — `design-reviewer` verifies code fidelity to specs and visual coherence of the result → updates `review-report.md`
 
 ## Resuming mid-pipeline
@@ -67,5 +70,8 @@ Each persona reads the artefacts from previous phases in `docs/design/<feature-s
 - You chain two phases without explicit validation.
 - You write application code before `layout.md` is validated.
 - You implement the entire feature in a single pass without intermediate verification.
+- You copy or adapt the wireframe HTML as production code.
+- You use raw CSS values instead of design system tokens.
+- You recreate custom HTML for something an existing project component already handles.
 - You proceed to Phase 6 without having asked about the wireframe (step 5b).
 - You conclude without going through `design-review`.
