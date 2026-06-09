@@ -1,0 +1,17 @@
+{
+  "name": "ux-guidelines",
+  "version": "1.0.0",
+  "description": "Consignes UI/UX globales, charte de writing et outils de maintenance du design.md basés sur le système de design existant.",
+  "author": {
+    "name": "Joël Vigreux",
+    "email": "vigreux.joel@hotmail.com"
+  },
+  "keywords": [
+    "ui-design",
+    "ux",
+    "writing",
+    "copywriting",
+    "design-system",
+    "maintain-design"
+  ]
+}
