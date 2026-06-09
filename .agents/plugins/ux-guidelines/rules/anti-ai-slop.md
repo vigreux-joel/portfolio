@@ -7,7 +7,9 @@ Garde-fou permanent sur toute copy ou texte d'interface généré.
 - **Mots/formules bannis** (EN) : revolutionize, innovate, shape the future, unlock, seamless, effortless, cutting-edge, leverage, supercharge, game-changer, "Discover how…".
 - **Em-dash décoratif** (—) pour styliser un titre ou séparer des fragments.
 - **Walls of text** : paragraphes longs et denses. Phrases courtes et scannables.
-- Affirmations marketing fausses (prêter à une techno une vertu qu'elle n'a pas).
+- **Affirmations marketing fausses** (prêter à une approche ou une techno une vertu qu'elle n'a pas).
+- **Badges / Pills** pour lister des attributs ou mots-clés : pattern visuel n°1 des interfaces générées par IA.
+- **Vocabulaire dépréciatif sur les sujets traités** : décrire quelque chose par son défaut perçu ou par opposition négative à autre chose ("lourd", "rigide", "usine à gaz"). Chaque sujet se décrit par sa force dans son contexte.
 
 ## À la place
 - Verbes d'action concrets, faits vérifiables, valeur métier explicite.
