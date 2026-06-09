@@ -4,8 +4,7 @@ Permanent guardrail on all generated copy or interface text.
 
 ## Banned
 
-- **Banned words/phrases (FR)**: révolutionner, innover, façonner l'avenir, libérer le potentiel, sans effort, en toute simplicité, solution clé en main, propulsé par l'IA, game-changer.
-- **Banned words/phrases (EN)**: revolutionize, innovate, shape the future, unlock, seamless, effortless, cutting-edge, leverage, supercharge, game-changer, "Discover how…".
+- **Banned words/phrases** (applies regardless of copy language): révolutionner / revolutionize, innover / innovate, façonner l'avenir / shape the future, libérer le potentiel / unlock, sans effort / effortless, en toute simplicité / seamless, solution clé en main, propulsé par l'IA, cutting-edge, leverage, supercharge, game-changer, "Discover how…".
 - **Decorative em-dash** (—) to style a title or separate fragments.
 - **Walls of text**: long dense paragraphs. Short, scannable sentences.
 - **False marketing claims** (attributing to an approach or subject a virtue it doesn't have).
