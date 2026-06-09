@@ -35,7 +35,8 @@ Chaque phase délègue à une persona, écrit un artefact, puis **s'arrête pour
 2. **Copy** — `ux-copywriter` → `docs/design/<feature-slug>/copy.md` — **gate**
 3. **Layout** — `ui-designer` → `docs/design/<feature-slug>/layout.md` — **gate**
 4. **Motion** — `motion-designer` → `docs/design/<feature-slug>/motion.md` — **gate**
-5. **Vérification** — `design-reviewer` (skill `design-review`) → `docs/design/<feature-slug>/review-report.md`
+5. **Implémentation** — traduire `layout.md` + `motion.md` en code, **section par section** : une sous-section à la fois, vérifier la fidélité à la spec avant d'enchaîner. Ne jamais implémenter la feature entière en une seule passe. — **gate**
+6. **Vérification** — `design-reviewer` (skill `design-review`) → `docs/design/<feature-slug>/review-report.md`
 
 ## Approval gate (règle stricte)
 À chaque gate : présente l'artefact, demande une validation **explicite**, n'enchaîne pas sans accord. Si l'utilisateur amende l'artefact, relance la persona concernée sur le fichier amendé.
@@ -46,4 +47,5 @@ Chaque persona lit les artefacts des phases précédentes dans `docs/design/<fea
 ## Red Flags — STOP
 - Tu enchaînes deux phases sans validation explicite.
 - Tu écris du code applicatif avant que `layout.md` soit validé.
+- Tu implémentes toute la feature en une seule passe sans vérification intermédiaire.
 - Tu conclus sans passer par `design-review`.

@@ -1,26 +1,20 @@
 ---
 name: design-review
-description: Utilise après toute création ou modification d'UI pour vérifier le code contre l'accessibilité, le drift de tokens et les walls of text avant de livrer.
+description: Utilise après toute création ou modification d'UI pour vérifier le rendu contre la spec de design, la cohérence visuelle et la copy avant de livrer.
 ---
 
-# Vérification hybride d'une UI
+# Revue de design
 
 ## Objectif
-Garantir qu'une UI ne contient aucune erreur de design avant livraison, via des checks déterministes **et** une revue qualitative.
+Garantir qu'une UI respecte ses intentions de design et s'intègre visuellement dans son contexte avant livraison. La revue est qualitative — elle s'appuie sur la lecture des artefacts et du code, pas sur des scripts automatiques.
 
 ## Instructions
-1. **Checks déterministes** sur chaque fichier modifié :
-   ```bash
-   node "${PLUGIN_ROOT}/skills/design-review/scripts/review.mjs" <fichier>
-   ```
-   Code de sortie `0` = PASS, `1` = findings à corriger.
-2. **Contraste** sur les paires couleur texte/fond issues de `design.md`. `contrast.mjs` est un module autonome exportant `contrastRatio(fg, bg)` et `wcagLevel(ratio)` :
-   ```bash
-   node -e 'import("./.agents/plugins/ux-guidelines/skills/design-review/scripts/contrast.mjs").then(m=>console.log(m.wcagLevel(m.contrastRatio("#111","#fff"))))'
-   ```
-   Vérifie chaque paire texte/fond : viser au minimum `AA`.
-3. **Revue qualitative** (persona `design-reviewer`) : AI slop, cohérence narrative avec la page, fidélité au design system.
-4. Écris le verdict consolidé dans `docs/design/<feature-slug>/review-report.md`.
+1. Lire `layout.md` et `motion.md` de la feature : ce sont les intentions de référence.
+2. Lire le code produit et vérifier point par point que les intentions ont été respectées.
+3. Vérifier la cohérence visuelle entre toutes les sections de la feature : registre commun, rythme spatial, logique de navigation.
+4. Vérifier la copy contre la règle `anti-ai-slop` et l'absence de labels structurels transcrits tels quels.
+5. Vérifier l'absence de valeurs en dur (couleurs, espacements) non documentées dans `design.md`.
+6. Écrire le verdict consolidé dans `docs/design/<feature-slug>/review-report.md`.
 
 ## Règle de verdict
-`PASS` seulement si checks déterministes **et** revue qualitative passent. Sinon, liste d'actions correctives priorisées — jamais de PASS de complaisance.
+`PASS` seulement si la spec est respectée, la cohérence visuelle est assurée et la copy est propre. Sinon, liste d'actions correctives priorisées — jamais de PASS de complaisance.
