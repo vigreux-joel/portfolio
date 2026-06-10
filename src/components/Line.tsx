@@ -9,26 +9,90 @@ declare global {
 }
 
 const ENERGY_SPEED = 1000;
-let globalStreamY = -500;
-let prevStreamY = -500;
+
+let globalDistance = 0;
 let lastFrameTime = 0;
-const linesSet = new Set<{ tick: (y: number, py: number) => void }>();
+
+interface LineRegistration {
+    getTop: () => number;
+    getBottom: () => number;
+    getTotal: () => number;
+    tick: (localY: number) => void;
+}
+const linesSet = new Set<LineRegistration>();
 
 const loop = (time: number) => {
     if (!lastFrameTime) lastFrameTime = time;
     const dt = (time - lastFrameTime) / 1000;
     lastFrameTime = time;
 
-    const vh = window.innerHeight;
-    prevStreamY = globalStreamY;
-    globalStreamY += ENERGY_SPEED * dt;
+    globalDistance += ENERGY_SPEED * dt;
 
-    if (globalStreamY > vh + 300) {
-        globalStreamY = -300;
-        prevStreamY = -300;
+    // 1. Récupérer et trier toutes les lignes par position verticale
+    const lines = Array.from(linesSet).map(l => ({
+        reg: l,
+        top: l.getTop(),
+        bottom: l.getBottom(),
+        total: l.getTotal(),
+        trackStart: 0
+    })).sort((a, b) => a.top - b.top);
+
+    // 2. Grouper les lignes qui sont parallèles (sur la même ligne horizontale)
+    const groupedLines: (typeof lines)[] = [];
+    for (const line of lines) {
+        let added = false;
+        for (const group of groupedLines) {
+            if (Math.abs(group[0].top - line.top) < 50) {
+                group.push(line);
+                added = true;
+                break;
+            }
+        }
+        if (!added) groupedLines.push([line]);
     }
 
-    linesSet.forEach(line => line.tick(globalStreamY, prevStreamY));
+    // 3. Construire le chemin 1D continu
+    let currentTrackPos = 0;
+    let prevBottom = 0;
+
+    for (let i = 0; i < groupedLines.length; i++) {
+        const group = groupedLines[i];
+        const groupTop = Math.min(...group.map(l => l.top));
+        
+        if (i > 0) {
+            const gap = Math.max(0, groupTop - prevBottom);
+            currentTrackPos += gap;
+        }
+
+        let maxTotal = 0;
+        let maxBottom = 0;
+        for (const line of group) {
+            line.trackStart = currentTrackPos;
+            maxTotal = Math.max(maxTotal, line.total);
+            maxBottom = Math.max(maxBottom, line.bottom);
+        }
+        
+        currentTrackPos += maxTotal;
+        prevBottom = maxBottom;
+    }
+
+    // Le délai entre chaque comète est basé sur la plus longue ligne * 3
+    // ou au minimum l'équivalent de 2-3 écrans de haut (environ 2500px)
+    const longestLine = Math.max(...lines.map(l => l.total));
+    const COMET_SPACING = Math.max(longestLine + 1000, window.innerHeight * 2);
+
+    // 4. Mettre à jour chaque ligne avec une infinité de comètes espacées
+    for (const group of groupedLines) {
+        for (const line of group) {
+            let mod = (globalDistance - line.trackStart) % COMET_SPACING;
+            if (mod < 0) mod += COMET_SPACING;
+            
+            // On décale de la taille de la comète (200px)
+            const localY = mod - 200;
+            line.reg.tick(localY);
+        }
+    }
+
     requestAnimationFrame(loop);
 };
 
@@ -155,18 +219,29 @@ export const Line = ({
     });
 
     useEffect(() => {
-        const lineObj = {
-            tick: (y: number, prevY: number) => {
-                if (!ref.current || !streamPathRef.current || !streamGradRef.current) return;
+        let prevLocalY = -1000;
+        const lineObj: LineRegistration = {
+            getTop: () => {
+                if (!ref.current) return 0;
+                return ref.current.getBoundingClientRect().top + window.scrollY;
+            },
+            getBottom: () => {
+                if (!ref.current) return 0;
                 const rect = ref.current.getBoundingClientRect();
-                const localY = y - rect.top;
+                return rect.top + window.scrollY + rect.height;
+            },
+            getTotal: () => {
+                if (!streamPathRef.current) return 0;
+                return streamPathRef.current.getTotalLength();
+            },
+            tick: (localY: number) => {
+                if (!ref.current || !streamPathRef.current || !streamGradRef.current) return;
+                
                 const path = streamPathRef.current;
                 const total = path.getTotalLength();
                 const streamLen = 200;
                 
                 // La position du flux (tête) est directement la distance `localY`.
-                // Cela garantit une vitesse de parcours constante (1px/sec) sur le SVG 
-                // indépendamment des courbes ou lignes horizontales !
                 const inRange = localY > -streamLen && localY < total + streamLen;
 
                 if (!inRange) {
@@ -214,12 +289,13 @@ export const Line = ({
                     }
                 }
 
-                if (y >= rect.top && prevY < rect.top) {
+                if (localY >= 0 && prevLocalY < 0) {
                     if (isLineActiveRef.current && hasIconRef.current) {
                         setIsFlashing(true);
                         setTimeout(() => setIsFlashing(false), 400);
                     }
                 }
+                prevLocalY = localY;
             }
         };
 
