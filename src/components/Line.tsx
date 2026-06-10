@@ -84,6 +84,7 @@ export const Line = ({
     const ref = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
     const streamPathRef = useRef<SVGPathElement>(null);
+    const streamGradRef = useRef<SVGLinearGradientElement>(null);
     const sparkRef = useRef<HTMLDivElement>(null);
 
     const rawId = useId();
@@ -156,7 +157,7 @@ export const Line = ({
     useEffect(() => {
         const lineObj = {
             tick: (y: number, prevY: number) => {
-                if (!ref.current || !streamPathRef.current) return;
+                if (!ref.current || !streamPathRef.current || !streamGradRef.current) return;
                 const rect = ref.current.getBoundingClientRect();
                 const localY = y - rect.top;
                 const path = streamPathRef.current;
@@ -195,6 +196,15 @@ export const Line = ({
                     path.style.strokeDasharray = `0 ${clampedTail} ${clampedHead - clampedTail} ${total}`;
                 }
                 path.style.strokeDashoffset = "0";
+
+                // Mise à jour du dégradé linéaire
+                const headPoint = path.getPointAtLength(Math.min(clampedHead, total));
+                const tailPoint = path.getPointAtLength(Math.min(Math.max(clampedTail, 0), total));
+                
+                streamGradRef.current.setAttribute("x1", String(tailPoint.x));
+                streamGradRef.current.setAttribute("y1", String(tailPoint.y));
+                streamGradRef.current.setAttribute("x2", String(headPoint.x));
+                streamGradRef.current.setAttribute("y2", String(headPoint.y));
 
                 if (sparkRef.current) {
                     if (actualHead >= revealedLen && actualTail <= revealedLen) {
@@ -238,13 +248,10 @@ export const Line = ({
                         <stop className={`theme-${nextTheme}`} offset="100%" stopColor="var(--color-primary)" stopOpacity="1"/>
                     </linearGradient>
                 )}
-                <filter id={glowId} x="-100%" y="-10%" width="300%" height="120%">
-                    <feGaussianBlur stdDeviation="3" result="blur"/>
-                    <feMerge>
-                        <feMergeNode in="blur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
+                <linearGradient id={`streamGrad-${uid}`} ref={streamGradRef} gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0"/>
+                    <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="1"/>
+                </linearGradient>
             </defs>
             <motion.path
                 d={pathD}
@@ -258,12 +265,12 @@ export const Line = ({
             <path
                 ref={streamPathRef}
                 d={pathD}
-                stroke="var(--color-primary)"
+                stroke={`url(#streamGrad-${uid})`}
                 strokeWidth={3}
                 fill="none"
                 strokeLinecap="round"
                 strokeDasharray="0 99999"
-                filter={`url(#${glowId})`}
+                style={{ filter: "drop-shadow(0px 0px 2px var(--color-primary))" }}
             />
         </>
     ) : null;
