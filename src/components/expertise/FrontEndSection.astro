@@ -15,7 +15,12 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
 ---
 <div id="front-end" class="theme-purple bg-surface">
   <section class="max-width padding-x">
-    
+
+    <!-- Connecteur entrant depuis HeroSection -->
+    <div class="relative h-16">
+      <Line fromX={0.03} toX={0.03} client:idle />
+    </div>
+
     <!-- Introduction de Section -->
     <div class="min-h-[50vh] flex flex-col justify-center text-center pt-24 pb-0">
       <h2
