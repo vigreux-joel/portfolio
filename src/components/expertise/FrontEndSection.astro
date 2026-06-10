@@ -22,7 +22,10 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
         class="text-display-large text-on-surface"
       >
         Ingénierie Front-End.<br/>
-        <span class="text-on-surface-variant">La technologie adaptée au produit.</span>
+        <span class="relative reveal-light inline-block group">
+          <span class="text-on-surface-variant transition-opacity duration-1000 group-[.light]:opacity-0">La technologie adaptée au produit.</span>
+          <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">La technologie adaptée au produit.</span>
+        </span>
       </h2>
     </div>
 
@@ -33,7 +36,12 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
     </div>
 
     <!-- Séquence 1 : Le Duel Structurel -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 relative">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 relative pb-16 md:pb-32">
+      <!-- Lignes verticales pour relier le split au merge de manière continue -->
+      <div class="absolute inset-0 pointer-events-none hidden md:block">
+        <Line fromX={0.03} toX={0.03} client:idle />
+        <Line fromX={0.97} toX={0.97} client:idle />
+      </div>
       
       <!-- Astro (Left) -->
       <div class="relative pt-8 md:pt-0">
@@ -62,7 +70,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
     </div>
 
     <!-- Connecteur merge : gauche + droite convergent vers le centre -->
-    <div class="relative h-24 md:h-32 mt-16 md:mt-32">
+    <div class="relative h-24 md:h-32">
       <Line fromX={0.03} toX={0.5} client:idle nextTheme="purple" />
       <Line fromX={0.97} toX={0.5} client:idle nextTheme="purple" />
     </div>
@@ -70,7 +78,18 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
   </section>
 
   <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
-  <div class="w-full bg-gradient-to-b from-surface-container to-surface py-24">
+  <div class="w-full">
+    
+    <!-- Ligne de connexion au-dessus de la carte -->
+    <div class="max-width padding-x">
+      <div class="relative h-24 hidden md:block">
+        <Line fromX={0.5} toX={0.5} client:idle />
+      </div>
+      <div class="relative h-12 md:hidden">
+        <Line fromX={0.5} toX={0.5} client:idle />
+      </div>
+    </div>
+
     <div class="max-width padding-x">
       <Card client:load variant="elevated" className="p-8 md:p-16 lg:p-24 overflow-hidden relative">
         
@@ -115,8 +134,15 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
       </Card>
       
       <!-- Ligne de sortie Mobile uniquement -->
-      <div class="flex justify-center mt-16 h-32 lg:hidden">
+      <div class="flex justify-center h-24 lg:hidden">
          <Line client:idle />
+      </div>
+    </div>
+
+    <!-- Ligne de connexion en-dessous de la carte -->
+    <div class="max-width padding-x">
+      <div class="relative h-24 hidden md:block">
+        <Line fromX={0.5} toX={0.5} client:idle />
       </div>
     </div>
   </div>
@@ -128,13 +154,13 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
     </div>
   </div>
 
-  <section class=" pt-8">
+  <section>
     <div class="max-width">
       <div class="flex">
         <div>
           <Line client:idle nextTheme="blue" icon={iDevices}/>
         </div>
-        <div class="padding pt-0">
+        <div class="padding pt-8">
           <div class="flex items-center md:flex-row flex-col">
             <div class="left">
               <h2 class="text-title-large text-tertiary">Développement

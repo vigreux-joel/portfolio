@@ -19,14 +19,14 @@ import { iDevices } from "@udixio/icons-outlined-400/devices";
 import { Icon } from "@udixio/ui-react";
 ---
 
-<section id="accueil" class="tab-menu relative overflow-hidden">
+<section id="accueil" class="tab-menu relative ">
   <!-- Fond animé spécifique à l'intro -->
   <BackgroundColor
     speed={5_000}
     size="max(50vw, 800px)"
     count={5}
     client:idle
-    className="absolute opacity-20 size-full top-0 left-0 -z-10"
+    className="absolute opacity-20 size-full top-0 left-0"
   />
 
   <div class="max-width flex justify-between h-full pt-32 md:pt-42 xl:pt-54">
@@ -49,24 +49,14 @@ import { Icon } from "@udixio/ui-react";
       </div>
 
       <div class="flex mt-8">
-        <div class="theme-purple not-detect-theme">
-          <Line client:idle icon={iCode} />
+        <div>
+          <Line client:load icon={iIdCard } nextTheme="purple"/>
         </div>
-        <div class="padding pt-0 max-w-screen-lg">
-          <h2
-            class="text-title-large text-tertiary transition-all duration-1000"
-          >
-            Développement web - Front-end
-          </h2>
-          <div
-            class="mt-4 text-headline-large md:text-display-medium max-w-prose transition-all duration-1000"
-          >
-            <h3 class="text-gradient">Performance et flexibilité garantie</h3>
-            <p>
-              J'assure vos projets avec des technologies modernes et adaptables
-            </p>
-          </div>
-        </div>
+        <div class="padding pt-0">
+          <h2 class="text-headline-small  mb-4 text-tertiary ">Mon parcours</h2>
+          <p class="text-body-large max-w-3xl ">
+            Fort d'une année d'expérience intense en tant que développeur full-stack, j'ai forgé une solide maîtrise des technologies modernes de développement. Passionné par l'alliance entre le design et la technique, je conçois des applications complètes, légères et accessibles, toujours avec le souci de la maintenabilité et de l'expérience utilisateur.
+          </p>
       </div>
     </div>
   </div>
