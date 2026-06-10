@@ -17,33 +17,26 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
   <section class="max-width padding-x">
     
     <!-- Introduction de Section -->
-    <div class="min-h-[50vh] flex flex-col justify-center text-center relative pt-24 pb-16">
-      <h2 
+    <div class="min-h-[50vh] flex flex-col justify-center text-center pt-24 pb-0">
+      <h2
         class="text-display-large text-on-surface"
-        data-aos="fade-up" 
-        data-aos-duration="1000"
       >
         Ingénierie Front-End.<br/>
         <span class="text-on-surface-variant">La technologie adaptée au produit.</span>
       </h2>
-      
-      <!-- Split line effect using CSS -->
-      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-16 bg-primary/50 hidden md:block"></div>
-      <div class="absolute bottom-0 left-[25%] w-[50%] h-[3px] bg-primary/50 hidden md:block"></div>
-      <div class="absolute -bottom-16 left-[25%] w-[3px] h-16 bg-primary/50 hidden md:block"></div>
-      <div class="absolute -bottom-16 left-[75%] w-[3px] h-16 bg-primary/50 hidden md:block"></div>
-      
-      <!-- Mobile line -->
-      <div class="absolute bottom-0 h-32 md:hidden">
-         <Line client:idle isFirst={true} nextTheme="purple" />
-      </div>
+    </div>
+
+    <!-- Connecteur split : ligne reste à gauche + branche va à droite -->
+    <div class="relative h-24 md:h-32">
+      <Line fromX={0.03} toX={0.03} client:idle nextTheme="purple" />
+      <Line fromX={0.03} toX={0.97} client:idle nextTheme="purple" />
     </div>
 
     <!-- Séquence 1 : Le Duel Structurel -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 mt-16 md:mt-32 relative">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 relative">
       
       <!-- Astro (Left) -->
-      <div class="relative pt-8 md:pt-0" data-aos="fade-up">
+      <div class="relative pt-8 md:pt-0">
         <Techno variant="primary" name="Astro" image={astroLogo}>
           Performances d'affichage maximales pour les plateformes éditoriales. L'architecture en îlots élimine la charge JavaScript superflue en générant un HTML statique pur. Le contenu est livré instantanément avec un score SEO parfait et une consommation mémoire minimale côté client.
           
@@ -54,7 +47,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
       </div>
 
       <!-- Angular (Right) -->
-      <div class="relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="relative">
         <Card client:load className="p-8 md:p-12 w-full h-full">
           <Techno variant="primary" name="Angular" image={angularLogo}>
             Robustesse et prédictibilité pour les systèmes à grande échelle. La compartimentation stricte des modules et l'injection de dépendances sécurisent le produit contre les régressions. Une architecture conçue pour garantir la maintenabilité de bases de code massives destinées à évoluer sur de longues périodes.
@@ -68,19 +61,17 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
       
     </div>
 
-    <!-- Connecteur fusion vers React -->
-    <div class="relative h-[100px] mt-16 md:mt-32 hidden md:block">
-      <div class="absolute top-0 left-[25%] w-[3px] h-[50px] bg-primary/50"></div>
-      <div class="absolute top-0 left-[75%] w-[3px] h-[50px] bg-primary/50"></div>
-      <div class="absolute top-[50px] left-[25%] w-[50%] h-[3px] bg-primary/50"></div>
-      <div class="absolute top-[50px] left-1/2 w-[3px] h-[50px] bg-primary/50 -translate-x-1/2"></div>
+    <!-- Connecteur merge : gauche + droite convergent vers le centre -->
+    <div class="relative h-24 md:h-32 mt-16 md:mt-32">
+      <Line fromX={0.03} toX={0.5} client:idle nextTheme="purple" />
+      <Line fromX={0.97} toX={0.5} client:idle nextTheme="purple" />
     </div>
 
   </section>
 
   <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
-  <div class="w-full bg-gradient-to-b from-purple-900/30 to-surface py-24 px-4 md:px-16">
-    <div class="max-w-6xl mx-auto" data-aos="zoom-in" data-aos-duration="1000">
+  <div class="w-full bg-gradient-to-b from-surface-container to-surface py-24">
+    <div class="max-width padding-x">
       <Card client:load variant="elevated" className="p-8 md:p-16 lg:p-24 overflow-hidden relative">
         
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 relative z-10">
@@ -96,7 +87,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
             </div>
             
             <div class="hidden lg:block mt-24">
-              <Line client:idle isLast={true} visible={true} />
+              <Line client:idle visible={true} />
             </div>
           </div>
           
@@ -112,7 +103,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
               Développement d'interfaces hautement interactives où le mouvement guide l'expérience. Masquer intelligemment la latence réseau et valider les actions complexes de l'utilisateur de façon organique.
             </p>
             
-            <div class="border-l-2 border-white/10 pl-8 mt-8">
+            <div class="border-l-2 border-outline-variant pl-8 mt-8">
               <p class="text-title-medium text-on-surface leading-relaxed">
                 Le résultat est une interface vivante qui augmente directement la qualité perçue du produit final.
               </p>
@@ -125,10 +116,18 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
       
       <!-- Ligne de sortie Mobile uniquement -->
       <div class="flex justify-center mt-16 h-32 lg:hidden">
-         <Line client:idle isLast={true} />
+         <Line client:idle />
       </div>
     </div>
   </div>
+
+  <!-- Connecteur return : centre revient à gauche -->
+  <div class="max-width padding-x">
+    <div class="relative h-24 md:h-32">
+      <Line fromX={0.5} toX={0.03} client:idle nextTheme="blue" />
+    </div>
+  </div>
+
   <section class=" pt-8">
     <div class="max-width">
       <div class="flex">
@@ -138,15 +137,15 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
         <div class="padding pt-0">
           <div class="flex items-center md:flex-row flex-col">
             <div class="left">
-              <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement
+              <h2 class="text-title-large text-tertiary">Développement
                 multiplateforme</h2>
-              <div data-aos="fade-right" data-aos-delay="100"
+              <div
                    class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                 <h3 class="text-gradient">Touchez un public plus large</h3>
                 <p>Je convertis vos idées en applications adaptables à tous les
                   appareils</p>
               </div>
-              <p data-aos="fade-right" data-aos-delay="100" class="max-w-prose mt-8 text-body-large">
+              <p class="max-w-prose mt-8 text-body-large">
                 Flutter me permet de créer des applications pour
                 mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
                 particulièrement
@@ -156,7 +155,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
             </div>
           </div>
           <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-            <div data-aos="zoom-in"
+            <div
                  class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
               <Icon className="h-16 w-16" icon={iSelectWindow}/>
               <h4>Web</h4>
@@ -170,12 +169,12 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
               <div class="flex gap-4 mt-4">
                 <Divider orientation="vertical" className="md:hidden border-primary-container"/>
                 <div class="flex flex-1 flex-wrap gap-8">
-                  <div data-aos="zoom-in" data-aos-delay={150}
+                  <div
                        class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
                     <Icon className="h-16 w-16" icon={faApple}/>
                     <p>IOS</p>
                   </div>
-                  <div data-aos="zoom-in" data-aos-delay={150}
+                  <div
                        class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
                     <Icon className="h-16 w-16" icon={faAndroid}/>
                     <p>Android</p>
@@ -193,17 +192,17 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
               <div class="flex gap-4 mt-4">
                 <Divider orientation="vertical" className="md:hidden border-secondary-container"/>
                 <div class="flex flex-1 flex-wrap gap-8">
-                  <div data-aos="zoom-in" data-aos-delay={300}
+                  <div
                        class="flex-[100%] lg:flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                     <Icon className="h-16 w-16" icon={faWindows}/>
                     <p>Windows</p>
                   </div>
-                  <div data-aos="zoom-in" data-aos-delay={300}
+                  <div
                        class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                     <Icon className="h-16 w-16" icon={faApple}/>
                     <p>MacOs</p>
                   </div>
-                  <div data-aos="zoom-in" data-aos-delay={300}
+                  <div
                        class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                     <Icon className="h-16 w-16" icon={faLinux}/>
                     <p>Linux</p>

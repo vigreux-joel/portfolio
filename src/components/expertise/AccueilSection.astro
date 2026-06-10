@@ -36,9 +36,9 @@ import { Icon } from "@udixio/ui-react";
         <!-- Intro / Hero ancré à la timeline -->
         <div class="flex">
           <div>
-            <Line client:load visible isFirst icon={iCode} nextTheme="purple" />
+            <Line client:load visible icon={iCode} nextTheme="purple" />
           </div>
-          <div class="padding pt-0 pb-16 relative w-full" data-aos="fade-right">
+          <div class="padding pt-0 pb-16 relative w-full">
             <h1
               class="text-display-medium xl:text-display-large relative z-10 text-tertiary mb-8"
             >
@@ -50,9 +50,9 @@ import { Icon } from "@udixio/ui-react";
 
       <div class="flex mt-8">
         <div class="theme-purple not-detect-theme">
-          <Line client:idle icon={iCode} isLast />
+          <Line client:idle icon={iCode} />
         </div>
-        <div data-aos="fade-right" class="padding pt-0 max-w-screen-lg">
+        <div class="padding pt-0 max-w-screen-lg">
           <h2
             class="text-title-large text-tertiary transition-all duration-1000"
           >

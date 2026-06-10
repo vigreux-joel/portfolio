@@ -1,0 +1,5 @@
+{"type":"server-started","port":61726,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:61726","screen_dir":"/home/joel/Documents/projets/vigreux-joel.fr/.superpowers/brainstorm/397375-1781038523/content","state_dir":"/home/joel/Documents/projets/vigreux-joel.fr/.superpowers/brainstorm/397375-1781038523/state"}
+{"type":"screen-added","file":"/home/joel/Documents/projets/vigreux-joel.fr/.superpowers/brainstorm/397375-1781038523/content/connector-animation.html"}
+{"type":"screen-added","file":"/home/joel/Documents/projets/vigreux-joel.fr/.superpowers/brainstorm/397375-1781038523/content/connector-path-flow.html"}
+{"type":"screen-added","file":"/home/joel/Documents/projets/vigreux-joel.fr/.superpowers/brainstorm/397375-1781038523/content/waiting-1.html"}
+{"type":"server-stopped","reason":"idle timeout"}

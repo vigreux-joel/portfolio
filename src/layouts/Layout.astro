@@ -161,12 +161,21 @@ const seoDefault: SEOProps = {
 </div>
 <Footer/>
 <script>
-    import AOS from 'aos'
+    document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('light');
+                } else {
+                    entry.target.classList.remove('light');
+                }
+            });
+        }, {
+            // Déclenchement exactement aux 2/3 de l'écran (la box s'arrête à 66.6% depuis le haut)
+            rootMargin: '10000px 0px -33.3% 0px' 
+        });
 
-    AOS.init({
-      offset: 200,
-      duration: 600,
-      easing: 'ease-in-sine',
+        document.querySelectorAll('.reveal-light').forEach(el => observer.observe(el));
     });
 </script>
 </body>

@@ -272,7 +272,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                     <div class="theme-purple not-detect-theme">
                         <Line client:idle icon={iCode} isLast/>
                     </div>
-                    <div data-aos="fade-right" class="padding pt-0 max-w-screen-lg">
+                    <div class="padding pt-0 max-w-screen-lg">
                         <h2 class="text-title-large text-tertiary transition-all duration-1000">
                             Développement
                             web -
@@ -301,7 +301,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
             <div class="max-width ">
 
                 <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                    <Card client:visible data-aos="zoom-in"
+                    <Card client:visible
                           className="group">
                         <Techno variant="primary" className="p-6 pb-10" image={astroLogo}
                                 name="Astro"
@@ -310,7 +310,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             générant du contenu statique ultra-performant.</p>
                         </Techno>
                     </Card>
-                    <Card client:visible data-aos="zoom-in" data-aos-delay={150}
+                    <Card client:visible
                           className="group">
                         <Techno variant="primary" className="p-6 pb-10" image={reactLogo}
                                 name="React"
@@ -319,7 +319,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             développement et la gestion de l'état.</p>
                         </Techno>
                     </Card>
-                    <Card client:visible data-aos="zoom-in" data-aos-delay={300}
+                    <Card client:visible
                           className="group">
                         <Techno variant="primary" className="p-6 pb-10" image={tailwindLogo}
                                 name="Tailwind"
@@ -328,7 +328,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             style des composants flexible et modulaire.</p>
                         </Techno>
                     </Card>
-                    <Card client:visible data-aos="zoom-in" data-aos-delay={450}
+                    <Card client:visible
                           className="md:col-span-3 p-6 pb-10 mb-px mt-4">
                         <p class="mb-8 mt-2">Ma boîte à outils :</p>
                         <div class=" grid md:grid-cols-2 gap-x-4 gap-y-6">
@@ -368,15 +368,15 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                     <div class="padding pt-0">
                         <div class="flex items-center md:flex-row flex-col">
                             <div class="left">
-                                <h2 data-aos="fade-right" class="text-title-large text-tertiary">Développement
+                                <h2 class="text-title-large text-tertiary">Développement
                                     multiplateforme</h2>
-                                <div data-aos="fade-right" data-aos-delay="100"
+                                <div
                                      class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                                     <h3 class="text-gradient">Touchez un public plus large</h3>
                                     <p>Je convertis vos idées en applications adaptables à tous les
                                         appareils</p>
                                 </div>
-                                <p data-aos="fade-right" data-aos-delay="100" class="max-w-prose mt-8 text-body-large">
+                                <p class="max-w-prose mt-8 text-body-large">
                                     Flutter me permet de créer des applications pour
                                     mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
                                     particulièrement
@@ -390,7 +390,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             <!--</div>-->
                         </div>
                         <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-                            <div data-aos="zoom-in"
+                            <div
                                  class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
                                 <Icon className="h-16 w-16" icon={iSelectWindow}/>
                                 <h4>Web</h4>
@@ -404,12 +404,12 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                 <div class="flex gap-4 mt-4">
                                     <Divider orientation="vertical" className="md:hidden border-primary-container"/>
                                     <div class="flex flex-1 flex-wrap gap-8">
-                                        <div data-aos="zoom-in" data-aos-delay={150}
+                                        <div
                                              class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
                                             <Icon className="h-16 w-16" icon={faApple}/>
                                             <p>IOS</p>
                                         </div>
-                                        <div data-aos="zoom-in" data-aos-delay={150}
+                                        <div
                                              class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
                                             <Icon className="h-16 w-16" icon={faAndroid}/>
                                             <p>Android</p>
@@ -427,17 +427,17 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                 <div class="flex gap-4 mt-4">
                                     <Divider orientation="vertical" className="md:hidden border-secondary-container"/>
                                     <div class="flex flex-1 flex-wrap gap-8">
-                                        <div data-aos="zoom-in" data-aos-delay={300}
+                                        <div
                                              class="flex-[100%] lg:flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                                             <Icon className="h-16 w-16" icon={faWindows}/>
                                             <p>Windows</p>
                                         </div>
-                                        <div data-aos="zoom-in" data-aos-delay={300}
+                                        <div
                                              class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                                             <Icon className="h-16 w-16" icon={faApple}/>
                                             <p>MacOs</p>
                                         </div>
-                                        <div data-aos="zoom-in" data-aos-delay={300}
+                                        <div
                                              class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
                                             <Icon className="h-16 w-16" icon={faLinux}/>
                                             <p>Linux</p>
@@ -460,8 +460,8 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                     <Line isLast client:idle icon={iDevices}/>
                 </div>
                 <div class="padding pt-0">
-                    <h2 data-aos="fade-right" class="text-title-large">Design & Ux</h2>
-                    <div data-aos="fade-right" data-aos-delay="100"
+                    <h2 class="text-title-large">Design & Ux</h2>
+                    <div
                          class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                         <h3 class="text-gradient">Augmentez la fidélité de vos utilisateurs</h3>
                         <p>Offrez une expérience utilisateur exceptionnelle avec mes services</p>
@@ -490,7 +490,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
             <section>
                 <div class="max-width">
                     <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                        <Card client:visible data-aos="zoom-in" variant="filled"
+                        <Card client:visible variant="filled"
                               className="group ">
                             <Techno variant="primary" className="p-6 pb-10"
                                     icon={iApi}
@@ -504,7 +504,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                 </p>
                             </Techno>
                         </Card>
-                        <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                        <Card client:visible variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                     name="Architecture Flexible et Efficace"
@@ -518,7 +518,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             </Techno>
 
                         </Card>
-                        <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                        <Card client:visible variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                     name="Solutions Serverless"
@@ -547,8 +547,8 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             <Line isLast client:idle icon={iManufacturing }/>
                         </div>
                         <div class="padding pt-0">
-                            <h2 data-aos="fade-right" class="text-title-large">Languages & Frameworks</h2>
-                            <div data-aos="fade-right" data-aos-delay="100"
+                            <h2 class="text-title-large">Languages & Frameworks</h2>
+                            <div
                                  class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                                 <h3 class="text-gradient">Chaque project a ses solutions</h3>
                                 <p>Je vous accompagne à l'aide ma maîtrise de divers langages à choisir les bonnes
@@ -557,7 +557,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                         </div>
                     </div>
                     <div class="grid padding-x lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
-                        <Card client:visible data-aos="zoom-in" variant="filled"
+                        <Card client:visible variant="filled"
                               className="lg:col-span-3 md:col-span-2 p-6">
                             <Techno buttonLabel="En voir plus" variant="primary" className=""
                                     image={nestLogo}
@@ -585,7 +585,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                 </Techno>
                             </div>
                         </Card>
-                        <Card client:visible data-aos="zoom-in" data-aos-delay={150}
+                        <Card client:visible
                               className="lg:col-span-2 row-span-1"
                               variant="filled">
                             <Techno variant="primary" className="p-6" icon={faGolang}
@@ -610,16 +610,16 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                             <Line isLast client:idle icon={iManufacturing }/>
                         </div>
                         <div class="padding pt-0">
-                            <h2 data-aos="fade-right" class="text-title-large"><strong>C</strong>ontent
+                            <h2 class="text-title-large"><strong>C</strong>ontent
                                 <strong>M</strong>anagement
                                 <strong>S</strong>ystem</h2>
-                            <div data-aos="fade-right" data-aos-delay="100"
+                            <div
                                  class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                                 <h3 class="text-gradient">Restez maître de votre contenu</h3>
                                 <p>Je sélectionne le CMS adapté pour répondre précisément à vos besoins.</p>
                             </div>
                             <div class="flex md:flex-row flex-col gap-8 mt-16">
-                                <Card client:visible data-aos="zoom-in" variant="filled"
+                                <Card client:visible variant="filled"
                                       className="group ">
                                     <Techno variant="primary" className="p-6 pb-10"
                                             icon={iApi}
@@ -631,7 +631,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                             projets nécessitant une séparation entre contenu et présentation.</p>
                                     </Techno>
                                 </Card>
-                                <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                                <Card client:visible variant="filled"
                                       className="group">
                                     <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                             name="Builder.io"
@@ -642,7 +642,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                     </p>
                                     </Techno>
                                 </Card>
-                                <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                                <Card client:visible variant="filled"
                                       className="group">
                                     <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                             name="Wordpress"
@@ -654,7 +654,7 @@ import {iCode} from "@udixio/icons-outlined-400/code";
                                     </Techno>
                                 </Card>
                             </div>
-                            <div data-aos="fade-right" data-aos-delay="100">
+                            <div>
                                 <p class="text-body-large max-w-prose mt-8">Votre CMS préféré n’est pas dans cette
                                     liste ? Pas
                                     d'inquiétude !<br/> Cette liste n'est pas exhaustive ! Et même si celui-ci m'est

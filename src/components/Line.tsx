@@ -1,6 +1,6 @@
 import {classNames, Icon} from "@udixio/ui-react";
-import {useEffect, useRef, useState} from "react";
-import {motion, useMotionValueEvent, useScroll, useTransform} from "motion/react";
+import {useEffect, useId, useRef, useState} from "react";
+import {motion, useMotionValueEvent, useScroll, useSpring, useTransform} from "motion/react";
 
 declare global {
     interface Window {
@@ -8,7 +8,7 @@ declare global {
     }
 }
 
-const ENERGY_SPEED = 1000; // pixels per second
+const ENERGY_SPEED = 1000;
 let globalStreamY = -500;
 let prevStreamY = -500;
 let lastFrameTime = 0;
@@ -20,7 +20,6 @@ const loop = (time: number) => {
     lastFrameTime = time;
 
     const vh = window.innerHeight;
-    
     prevStreamY = globalStreamY;
     globalStreamY += ENERGY_SPEED * dt;
 
@@ -30,7 +29,6 @@ const loop = (time: number) => {
     }
 
     linesSet.forEach(line => line.tick(globalStreamY, prevStreamY));
-
     requestAnimationFrame(loop);
 };
 
@@ -39,57 +37,115 @@ if (typeof window !== "undefined" && !window.__ENERGY_VIEWPORT_LOOP) {
     requestAnimationFrame(loop);
 }
 
+/** Elbow path: straight lines + rounded corners.
+ *  When x1 === x2, the arc radius is 0 → degenerates to a straight vertical line.
+ */
+function buildPath(w: number, h: number, x1: number, x2: number): string {
+    const px1 = x1 * w;
+    const px2 = x2 * w;
+    const dx = px2 - px1;
+    if (Math.abs(dx) < 1) {
+        return `M${px1},0 L${px2},${h}`;
+    }
+    const r = Math.min(32, Math.abs(dx) / 2, h / 2 - 1);
+    const dir = Math.sign(dx);
+    // First corner (down→horizontal) and second corner (horizontal→down) need opposite sweeps
+    // for smooth tangent-continuous, outward-facing arcs.
+    const s1 = dx > 0 ? 0 : 1;
+    const s2 = dx > 0 ? 1 : 0;
+    const mid = h / 2;
+    return [
+        `M${px1},0`,
+        `L${px1},${mid - r}`,
+        `A${r},${r} 0 0,${s1} ${px1 + dir * r},${mid}`,
+        `L${px2 - dir * r},${mid}`,
+        `A${r},${r} 0 0,${s2} ${px2},${mid + r}`,
+        `L${px2},${h}`,
+    ].join(' ');
+}
+
+const SIDEBAR_W = 3;
+
 export const Line = ({
-                         nextTheme,
-                         icon,
-                         isFirst = false,
-                         isLast = false,
-                         visible,
-                     }: {
+    nextTheme,
+    icon,
+    visible,
+    fromX,
+    toX,
+}: {
     nextTheme?: string;
     icon?: Icon;
-    isFirst?: boolean;
-    isLast?: boolean;
     visible?: boolean;
+    /** Connector mode: horizontal start position (0–1 fraction of container width) */
+    fromX?: number;
+    /** Connector mode: horizontal end position (0–1). Defaults to fromX. */
+    toX?: number;
 }) => {
     const ref = useRef<HTMLDivElement>(null);
-    const streamRef = useRef<HTMLDivElement>(null);
+    const bodyRef = useRef<HTMLDivElement>(null);
+    const streamPathRef = useRef<SVGPathElement>(null);
     const sparkRef = useRef<HTMLDivElement>(null);
-    
-    // On utilise un state pour gérer précisément la valeur en pixels (indépendamment de la hauteur de l'écran)
-    const [offsetProgress, setOffsetProgress] = useState<[string, string]>(["start 85%", "end 85%"]);
+
+    const rawId = useId();
+    const uid = rawId.replace(/:/g, '');
+
+    const isConnector = fromX !== undefined;
+    const effectiveToX = toX ?? fromX ?? 0;
+
+    const [yRange, setYRange] = useState<[number, number]>([0, 1]);
+    const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
-        const updateOffset = () => {
-            // AOS utilise 200px depuis le bas de l'écran.
-            // On convertit cela en une valeur pixel exacte depuis le HAUT de l'écran pour Framer Motion.
-            const triggerY = window.innerHeight - 300;
-            setOffsetProgress([`start ${triggerY}px`, `end ${triggerY}px`]);
+        const update = () => {
+            if (!ref.current) return;
+            const rect = ref.current.getBoundingClientRect();
+            // Position absolue sur le document
+            const absoluteTop = rect.top + window.scrollY;
+            const height = rect.height;
+            // On déclenche quand les 2/3 de l'écran touchent l'élément.
+            const triggerOffset = window.innerHeight * 0.666; 
+            
+            const start = absoluteTop - triggerOffset;
+            const end = start + height;
+            
+            // Si c'est une ligne horizontale (height == 0), on donne une toute petite marge pour ne pas diviser par zéro
+            setYRange([start, Math.max(start + 1, end)]);
         };
-        updateOffset();
-        window.addEventListener("resize", updateOffset);
-        return () => window.removeEventListener("resize", updateOffset);
+        update();
+        window.addEventListener("resize", update);
+        window.addEventListener("scroll", update, { passive: true }); // Optionnel si la layout change
+        return () => {
+            window.removeEventListener("resize", update);
+            window.removeEventListener("scroll", update);
+        }
     }, []);
 
-    const {scrollYProgress} = useScroll({
-        target: ref,
-        offset: offsetProgress,
-    });
+    useEffect(() => {
+        const el = isConnector ? ref.current : bodyRef.current;
+        if (!el) return;
+        const ro = new ResizeObserver(([entry]) => {
+            setSvgSize({ width: entry.contentRect.width, height: entry.contentRect.height });
+        });
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, [isConnector]);
 
-    const heightProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-    // Le spark est strictement visible UNIQUEMENT pendant le tracé (0 < progress < 1)
-    // On élargit les marges (0.01 et 0.99) pour s'assurer qu'arrondis ou non, il disparaisse.
-    const sparkOpacityNormal = useTransform(scrollYProgress, [0, 0.01, 0.99, 1], [0, 1, 1, 0]);
-    // Pour la dernière ligne, il disparaît progressivement pour se fondre dans le to-transparent
-    const sparkOpacityLast = useTransform(scrollYProgress, [0, 0.01, 0.8, 0.9], [0, 1, 0, 0]);
+    const { scrollY } = useScroll();
+    // 1. On lisse UNIQUEMENT la valeur du scroll global !
+    const smoothedScrollY = useSpring(scrollY, { stiffness: 60, damping: 25, restDelta: 0.001 });
     
+    // 2. On map ce scroll lissé directement sur la progression (de 0 à 1)
+    // Il n'y a plus aucun autre smooth. Si la ligne est horizontale (start == end),
+    // elle s'affichera presque instantanément quand le scroll la touchera.
+    const pathLengthProgress = useTransform(smoothedScrollY, yRange, [0, 1], { clamp: true });
+    const sparkOpacity = useTransform(pathLengthProgress, [0, 0.01, 0.99, 1], [0, 1, 1, 0]);
+
     const [isVisibleIcon, setIsVisibleIcon] = useState(visible);
     const [isFlashing, setIsFlashing] = useState(false);
-    
     const isLineActiveRef = useRef(visible);
-    const hasIconRef = useRef(!!icon && !isFirst);
+    const hasIconRef = useRef(!!icon);
 
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    useMotionValueEvent(pathLengthProgress, "change", (latest) => {
         if (!visible) {
             const active = latest > 0;
             setIsVisibleIcon(active);
@@ -100,38 +156,55 @@ export const Line = ({
     useEffect(() => {
         const lineObj = {
             tick: (y: number, prevY: number) => {
-                if (!ref.current) return;
+                if (!ref.current || !streamPathRef.current) return;
                 const rect = ref.current.getBoundingClientRect();
-                
-                // Le rect.top est la position Y du haut de ce bloc par rapport à l'écran (viewport)
                 const localY = y - rect.top;
+                const path = streamPathRef.current;
+                const total = path.getTotalLength();
+                const streamLen = 200;
                 
-                // Mettre à jour visuellement le flux d'énergie (sans setState pour du 60fps parfait)
-                if (streamRef.current) {
-                    if (localY > -200 && localY < rect.height + 200) {
-                        streamRef.current.style.display = "block";
-                        // On translate de `localY - 200` car la div fait 200px de haut
-                        streamRef.current.style.transform = `translateY(${localY - 200}px)`;
-                    } else {
-                        streamRef.current.style.display = "none";
-                    }
+                // La position du flux (tête) est directement la distance `localY`.
+                // Cela garantit une vitesse de parcours constante (1px/sec) sur le SVG 
+                // indépendamment des courbes ou lignes horizontales !
+                const inRange = localY > -streamLen && localY < total + streamLen;
+
+                if (!inRange) {
+                    path.style.strokeDasharray = "0 99999";
+                    return;
                 }
 
-                // Réaction de la tête de lecture (spark) à l'impact du flux d'énergie
-                if (sparkRef.current) {
-                    const progress = visible ? 1 : scrollYProgress.get();
-                    const sparkY = rect.height * progress;
+                if (total <= 0) return;
+                const currentProgress = visible ? 1 : pathLengthProgress.get();
+                const revealedLen = currentProgress * total;
+                
+                const actualHead = localY;
+                const actualTail = actualHead - streamLen;
 
-                    if (localY >= sparkY && localY - 200 <= sparkY) {
+                // Restreindre le flux à la partie visible (progression)
+                const clampedHead = Math.min(actualHead, revealedLen);
+                const clampedTail = Math.max(0, actualTail);
+
+                if (clampedTail >= clampedHead) {
+                    path.style.strokeDasharray = "0 99999";
+                    return;
+                }
+
+                if (clampedTail === 0) {
+                    path.style.strokeDasharray = `${clampedHead} ${total}`;
+                } else {
+                    path.style.strokeDasharray = `0 ${clampedTail} ${clampedHead - clampedTail} ${total}`;
+                }
+                path.style.strokeDashoffset = "0";
+
+                if (sparkRef.current) {
+                    if (actualHead >= revealedLen && actualTail <= revealedLen) {
                         sparkRef.current.classList.add("spark-active");
                     } else {
                         sparkRef.current.classList.remove("spark-active");
                     }
                 }
 
-                // Flash quand la pointe de l'énergie (y) traverse le haut de ce bloc (rect.top)
                 if (y >= rect.top && prevY < rect.top) {
-                    // Seulement si l'icône est présente ET que la zone a commencé à être révélée par le scroll
                     if (isLineActiveRef.current && hasIconRef.current) {
                         setIsFlashing(true);
                         setTimeout(() => setIsFlashing(false), 400);
@@ -141,18 +214,77 @@ export const Line = ({
         };
 
         linesSet.add(lineObj);
-        return () => {
-            linesSet.delete(lineObj);
-        };
+        return () => { linesSet.delete(lineObj); };
     }, []);
+
+    const svgW = isConnector ? svgSize.width : SIDEBAR_W;
+    const pathFromX = isConnector ? fromX! : 0.5;
+    const pathToX = isConnector ? effectiveToX : 0.5;
+    const pathD = svgSize.height > 0 && svgW > 0
+        ? buildPath(svgW, svgSize.height, pathFromX, pathToX)
+        : "";
+
+    const pathLengthVal = visible ? 1 : pathLengthProgress;
+
+    const glowId = `glow-${uid}`;
+    const gradId = `lg-${uid}`;
+
+    const svgContent = pathD ? (
+        <>
+            <defs>
+                {nextTheme && (
+                    <linearGradient id={gradId} x1="0" y1="0" x2="0" y2={svgSize.height} gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="1"/>
+                        <stop className={`theme-${nextTheme}`} offset="100%" stopColor="var(--color-primary)" stopOpacity="1"/>
+                    </linearGradient>
+                )}
+                <filter id={glowId} x="-100%" y="-10%" width="300%" height="120%">
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <motion.path
+                d={pathD}
+                style={{ pathLength: pathLengthVal as any }}
+                stroke={nextTheme ? `url(#${gradId})` : "var(--color-primary)"}
+                strokeOpacity={0.5}
+                strokeWidth={3}
+                fill="none"
+                strokeLinecap="round"
+            />
+            <path
+                ref={streamPathRef}
+                d={pathD}
+                stroke="var(--color-primary)"
+                strokeWidth={3}
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray="0 99999"
+                filter={`url(#${glowId})`}
+            />
+        </>
+    ) : null;
+
+    if (isConnector) {
+        return (
+            <div
+                ref={ref}
+                className={`absolute inset-0 not-detect-theme theme-${nextTheme}`}
+            >
+                <svg className="w-full h-full overflow-visible">
+                    {svgContent}
+                </svg>
+            </div>
+        );
+    }
 
     return (
         <div
             ref={ref}
-            className={
-                "h-full ml-4 md:ml-12 flex flex-col items-center " +
-                (isFirst || !icon ? "" : "gap-8")
-            }
+            className={"h-full ml-4 md:ml-12 flex flex-col items-center " + (!icon ? "" : "gap-8")}
         >
             <style>{`
                 @keyframes wait-flare {
@@ -160,50 +292,32 @@ export const Line = ({
                     50% { transform: scale(1.2); filter: blur(6px); opacity: 1; }
                 }
                 .animate-wait-orb { animation: wait-flare 2s ease-in-out infinite; }
-                
                 @keyframes hit-flare {
                     0% { transform: scale(1.2); filter: blur(6px); opacity: 1; }
                     50% { transform: scale(2.2); filter: blur(8px); opacity: 1; background-color: #fff; }
                     100% { transform: scale(1); filter: blur(2px); opacity: 0.8; }
                 }
                 .animate-hit-orb { animation: hit-flare 0.4s ease-out forwards; }
-
                 .spark-glow, .spark-core {
-                    opacity: 0.5;
-                    transform: scale(1);
+                    opacity: 0.5; transform: scale(1);
                     transition: opacity 2s ease-out, transform 2s ease-out;
                 }
                 .spark-active .spark-glow, .spark-active .spark-core {
-                    opacity: 1;
-                    transform: scale(1.6);
+                    opacity: 1; transform: scale(1.6);
                     transition: opacity 0.1s ease-out, transform 0.1s ease-out;
                 }
             `}</style>
-            
-            {/* Conteneur de l'icône : largeur fixée à w-6 pour alignement X parfait */}
+
             <div className={classNames("relative flex justify-center items-center transition-all duration-500 w-6", {
                 "h-6": icon,
                 "h-0": !icon,
-                "scale-50 opacity-50": isFirst, 
             })}>
-                {/* L'icone : apparait quand la progression du scroll l'atteint */}
                 {icon && (
                     <div className="relative z-10 flex justify-center items-center w-full h-full">
-                        
-                        {/* Halo de base : apparaît progressivement après le zoom de l'icône */}
-                        <div
-                            className={classNames(
-                                "bg-primary blur-md rounded-full h-full w-full absolute top-0 left-0 scale-150 transition-opacity duration-1000",
-                                {
-                                    "hidden": isFirst,
-                                    "opacity-0": !isVisibleIcon && !visible,
-                                    "opacity-40 delay-300": isVisibleIcon || visible,
-                                }
-                            )}
-                        ></div>
-
-                        {/* Halo de flash : s'allume au passage de l'énergie (2x plus puissant) */}
-                        {/* On s'assure qu'il reste à opacity-0 si l'icône n'est pas encore active */}
+                        <div className={classNames(
+                            "bg-primary blur-md rounded-full h-full w-full absolute top-0 left-0 scale-150 transition-opacity duration-1000",
+                            { "opacity-0": !isVisibleIcon && !visible, "opacity-40 delay-300": isVisibleIcon || visible }
+                        )}/>
                         <div
                             style={{
                                 transitionProperty: "opacity",
@@ -213,79 +327,34 @@ export const Line = ({
                             className={classNames(
                                 "bg-primary blur-lg rounded-full h-full w-full absolute top-0 left-0 scale-150",
                                 {
-                                    "hidden": isFirst,
                                     "opacity-0": !isFlashing || (!isVisibleIcon && !visible),
                                     "opacity-80": isFlashing && (isVisibleIcon || visible),
                                 }
                             )}
-                        ></div>
-
-                        {/* Icône avec zoom simple (0 à 100%) */}
-                        <Icon 
+                        />
+                        <Icon
                             className={classNames("h-6 w-full relative z-10 transition-transform duration-500 ease-out", {
                                 "scale-0": !isVisibleIcon && !visible,
                                 "scale-100": isVisibleIcon || visible,
-                            })} 
+                            })}
                             icon={icon}
                         />
                     </div>
                 )}
             </div>
-            
-            <div className={"w-[3px] h-full relative"}>
 
-                {/* 1. Tracé de base (sans overflow-hidden pour laisser déborder la tête de lecture) */}
+            <div ref={bodyRef} className="flex-1 w-[3px] relative overflow-visible">
+                <svg style={{width: SIDEBAR_W, height: "100%"}} className="overflow-visible">
+                    {svgContent}
+                </svg>
                 <motion.div
-                    style={{
-                        height: visible ? "100%" : heightProgress,
-                    }}
-                    className={
-                        "absolute top-0 left-0 w-full rounded-full not-detect-theme theme-" + nextTheme
-                    }
+                    style={{ opacity: visible ? 0 : sparkOpacity }}
+                    className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-10 pointer-events-none"
                 >
-                    {/* Le fond de la ligne tracée, opacity-50 pour être 50% de la lumière d'énergie */}
-                    <div className={classNames("w-full h-full absolute bg-gradient-to-b opacity-50", {
-                        "from-primary to-transparent": isLast,
-                        "from-transparent to-primary": !isLast,
-                        "bg-primary": !isFirst && icon && !isLast,
-                    })}></div>
-                    
-                    {/* Tête de lecture (spark) créative pour masquer la coupure nette en bas */}
-                    <motion.div
-                        style={{ opacity: visible ? 0 : (isLast ? sparkOpacityLast : sparkOpacityNormal) }}
-                        className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-10 pointer-events-none"
-                    >
-                        {/* Wrapper interne pour l'animation pulse qui n'écrase pas l'opacité de Framer Motion */}
-                        <div ref={sparkRef} className="flex flex-col items-center justify-center animate-pulse spark-base">
-                            <div className="spark-glow w-[12px] h-[12px] bg-primary rounded-full blur-[3px]"></div>
-                            <div className="spark-core w-[6px] h-[6px] bg-primary rounded-full absolute shadow-[0_0_8px_var(--color-primary)]"></div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                {/* 2. Flux d'énergie (AVEC overflow-hidden pour le bloquer sous la progression) */}
-                <motion.div
-                    style={{
-                        height: visible ? "100%" : heightProgress,
-                    }}
-                    className={
-                        "absolute top-0 left-0 w-full h-full rounded-full overflow-hidden not-detect-theme theme-" + nextTheme
-                    }
-                >
-                    {/* Courant d'énergie unique coordonné par rapport au VIEWPORT */}
-                    <div 
-                        ref={streamRef}
-                        className={classNames("absolute w-full rounded-full left-0", {
-                            "bg-gradient-to-b from-transparent via-primary/80 to-primary": !isLast,
-                            "bg-gradient-to-b from-transparent via-primary/40 to-transparent": isLast,
-                        })}
-                        style={{
-                            height: 200, 
-                            display: 'none',
-                            top: 0,
-                            willChange: 'transform'
-                        }}
-                    ></div>
+                    <div ref={sparkRef} className="flex flex-col items-center justify-center animate-pulse spark-base">
+                        <div className="spark-glow w-[12px] h-[12px] bg-primary rounded-full blur-[3px]"/>
+                        <div className="spark-core w-[6px] h-[6px] bg-primary rounded-full absolute shadow-[0_0_8px_var(--color-primary)]"/>
+                    </div>
                 </motion.div>
             </div>
         </div>

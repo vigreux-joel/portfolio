@@ -30,7 +30,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
     <section>
         <div class="max-width">
             <div class="padding-x grid grid-cols-1 -mx-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-4">
-                <Card client:visible data-aos="zoom-in" variant="filled"
+                <Card client:visible variant="filled"
                       className="group ">
                     <Techno variant="primary" className="p-6 pb-10"
                             icon={iApi}
@@ -41,7 +41,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                         </p>
                     </Techno>
                 </Card>
-                <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                <Card client:visible variant="filled"
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                             name="Architectures Distribuées & Microservices"
@@ -53,7 +53,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                     </Techno>
 
                 </Card>
-                <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                <Card client:visible variant="filled"
                       className="group">
                     <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                             name="AWS & Infrastructure Cloud"
@@ -66,7 +66,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
             </div>
             <div class="flex h-64">
                 <div>
-                    <Line client:idle isFirst/>
+                    <Line client:idle/>
                 </div>
             </div>
         </div>
@@ -77,11 +77,11 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line isLast client:idle icon={iManufacturing }/>
+                    <Line client:idle icon={iManufacturing }/>
                 </div>
                 <div class="padding pt-0">
-                    <h2 data-aos="fade-right" class="text-title-large">Languages & Frameworks</h2>
-                    <div data-aos="fade-right" data-aos-delay="100"
+                    <h2 class="text-title-large">Languages & Frameworks</h2>
+                    <div
                          class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                         <h3 class="text-gradient">Chaque projet a ses solutions</h3>
                         <p>Je vous accompagne à l'aide de ma maîtrise de divers langages à choisir les bonnes
@@ -90,7 +90,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                 </div>
             </div>
             <div class="grid padding-x lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-6">
-                <Card client:visible data-aos="zoom-in" variant="filled"
+                <Card client:visible variant="filled"
                       className="lg:col-span-3 md:col-span-2 p-6">
                     <Techno buttonLabel="En voir plus" variant="primary" className=""
                             image={nestLogo}
@@ -118,7 +118,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                         </Techno>
                     </div>
                 </Card>
-                <Card client:visible data-aos="zoom-in" data-aos-delay={150}
+                <Card client:visible
                       className="lg:col-span-2 row-span-1"
                       variant="filled">
                     <Techno variant="primary" className="p-6" icon={faGolang}
@@ -131,7 +131,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
             </div>
             <div class="flex h-64">
                 <div>
-                    <Line client:idle isFirst/>
+                    <Line client:idle/>
                 </div>
             </div>
         </div>
@@ -140,19 +140,19 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
         <div class="max-width">
             <div class="flex">
                 <div>
-                    <Line isLast client:idle icon={iManufacturing }/>
+                    <Line nextTheme="blue" client:idle icon={iManufacturing }/>
                 </div>
                 <div class="padding pt-0">
-                    <h2 data-aos="fade-right" class="text-title-large"><strong>C</strong>ontent
+                    <h2 class="text-title-large"><strong>C</strong>ontent
                         <strong>M</strong>anagement
                         <strong>S</strong>ystem</h2>
-                    <div data-aos="fade-right" data-aos-delay="100"
+                    <div
                          class="mt-4 text-headline-large md:text-display-medium max-w-prose">
                         <h3 class="text-gradient">Restez maître de votre contenu</h3>
                         <p>Je sélectionne le CMS adapté pour répondre précisément à vos besoins.</p>
                     </div>
                     <div class="flex md:flex-row flex-col gap-8 mt-16">
-                        <Card client:visible data-aos="zoom-in" variant="filled"
+                        <Card client:visible variant="filled"
                               className="group ">
                             <Techno variant="primary" className="p-6 pb-10"
                                     icon={iApi}
@@ -164,7 +164,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                                     projets nécessitant une séparation entre contenu et présentation.</p>
                             </Techno>
                         </Card>
-                        <Card client:visible data-aos="zoom-in" data-aos-delay={150} variant="filled"
+                        <Card client:visible variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                     name="Builder.io"
@@ -175,7 +175,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                             </p>
                             </Techno>
                         </Card>
-                        <Card client:visible data-aos="zoom-in" data-aos-delay={300} variant="filled"
+                        <Card client:visible variant="filled"
                               className="group">
                             <Techno variant="primary" className="p-6 pb-10" icon={iApi}
                                     name="Wordpress"
@@ -187,7 +187,7 @@ import tsLogo from "@assets/images/ts-logo.svg?raw";
                             </Techno>
                         </Card>
                     </div>
-                    <div data-aos="fade-right" data-aos-delay="100">
+                    <div>
                         <p class="text-body-large max-w-prose mt-8">Votre CMS préféré n’est pas dans cette
                             liste ? Pas
                             d'inquiétude !<br/> Cette liste n'est pas exhaustive ! Et même si celui-ci m'est
