@@ -1,0 +1,149 @@
+<h2>Flux des Lines — AccueilSection → FrontEndSection</h2>
+<p class="subtitle">La 3e Line "Domaines" est acquise. La question : comment relier ça au heading "Ingénierie Front-End." ?</p>
+
+<div class="split" style="gap: 32px; align-items: start;">
+
+  <!-- Current state -->
+  <div class="mockup" style="flex: 1;">
+    <div class="mockup-header" style="background: #c0392b22; color: #e57373;">État actuel — gaps en rouge</div>
+    <div class="mockup-body" style="font-family: monospace; font-size: 12px; padding: 16px; line-height: 2;">
+
+      <div style="display:flex; gap:8px; align-items:center;">
+        <span style="color:#7c6af5;">●</span>
+        <span style="color:#7c6af5; font-size:10px;">iCode</span>
+        <span style="color:#e8e6f0; margin-left:8px;">H1 — Mon Expertise Technique</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px solid #7c6af555; height:16px;"></div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <span style="color:#c084fc;">●</span>
+        <span style="color:#c084fc; font-size:10px;">iIdCard</span>
+        <span style="color:#e8e6f0; margin-left:8px;">Bio / Mon parcours</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px dashed #ff5252; height:24px;"></div>
+      <div style="background:#c0392b22; border:1px dashed #ff5252; border-radius:6px; padding:8px 12px; color:#e57373; font-size:11px;">
+        ⚠ LinearGradient → thème purple<br/>
+        ⚠ Heading "Ingénierie Front-End." <strong>sans Line</strong>
+      </div>
+      <div style="margin-left:6px; border-left:2px dashed #ff5252; height:24px;"></div>
+      <div style="display:flex; gap:8px; align-items:center; opacity:0.5;">
+        <span style="color:#888;">↔</span>
+        <span style="color:#888; font-size:11px;">split 3% → 97%</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px solid #7c6af555; height:16px;"></div>
+      <div style="display:flex; gap:8px; align-items:center; opacity:0.7;">
+        <span style="color:#7c6af5; font-size:11px;">[ Astro ]</span>
+        <span style="color:#888;">·</span>
+        <span style="color:#7c6af5; font-size:11px;">[ Angular ]</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px solid #7c6af555; height:16px;"></div>
+      <div style="display:flex; gap:8px; align-items:center; opacity:0.7;">
+        <span style="color:#888;">↔</span>
+        <span style="color:#888; font-size:11px;">merge → 50%</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px solid #7c6af555; height:16px;"></div>
+      <div style="display:flex; gap:8px; align-items:center; opacity:0.7;">
+        <span style="color:#7c6af5; font-size:11px;">[ React + Motion ] (carte immersive)</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px solid #7c6af555; height:16px;"></div>
+      <div style="display:flex; gap:8px; align-items:center; opacity:0.5;">
+        <span style="color:#888;">↩</span>
+        <span style="color:#888; font-size:11px;">return 50% → 3%</span>
+      </div>
+      <div style="margin-left:6px; border-left:2px solid #7c6af555; height:16px;"></div>
+      <div style="display:flex; gap:8px; align-items:center; opacity:0.5;">
+        <span style="color:#888;">●</span>
+        <span style="color:#888; font-size:10px;">iDevices</span>
+        <span style="color:#888; margin-left:8px;">Multiplateforme (hors scope)</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)" style="flex:1;">
+    <div class="card-image" style="padding: 0;">
+      <div class="mockup-header" style="border-radius: 8px 8px 0 0;">Option A — Heading intégré dans les Lines</div>
+      <div class="mockup-body" style="font-family: monospace; font-size: 12px; padding: 16px; line-height: 2; background: #0d0d1a; border-radius: 0 0 8px 8px;">
+
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:#7c6af5;">●</span>
+          <span style="color:#7c6af5; font-size:10px;">iCode</span>
+          <span style="color:#e8e6f0; margin-left:8px;">H1 — Mon Expertise Technique</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:#c084fc;">●</span>
+          <span style="color:#c084fc; font-size:10px;">iIdCard</span>
+          <span style="color:#e8e6f0; margin-left:8px;">Bio (autodidacte 2022...)</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #c084fc; height:16px;"></div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:#4ade80;">●</span>
+          <span style="color:#4ade80; font-size:10px;">iLayers</span>
+          <span style="color:#e8e6f0; margin-left:8px;">Domaines [chips]</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #4ade8066; height:16px;"></div>
+        <div style="background: #7c6af522; border:1px solid #7c6af5; border-radius:6px; padding:8px 12px; color:#c084fc; font-size:11px; margin: 4px 0;">
+          ✦ Line iSelectWindow → <strong>H2 "Ingénierie Front-End."</strong><br/>
+          <span style="color:#a89fc8;">Même layout que AccueilSection : Line gauche, texte à droite</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="opacity:0.7; font-size:11px; color:#888; margin-left:4px;">↔ split → [ Astro ] · [ Angular ]</div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="opacity:0.7; font-size:11px; color:#888; margin-left:4px;">↩ merge → [ React ] → return</div>
+
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Heading dans la timeline</h3>
+      <p>Le H2 "Ingénierie Front-End." devient une Line entry comme dans AccueilSection. Cohérent, mais perd le côté "grand moment visuel" centré.</p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)" style="flex:1;">
+    <div class="card-image" style="padding:0;">
+      <div class="mockup-header" style="border-radius: 8px 8px 0 0;">Option B — Line de transition avant le heading</div>
+      <div class="mockup-body" style="font-family: monospace; font-size: 12px; padding: 16px; line-height: 2; background: #0d0d1a; border-radius: 0 0 8px 8px;">
+
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:#7c6af5;">●</span>
+          <span style="color:#7c6af5; font-size:10px;">iCode</span>
+          <span style="color:#e8e6f0; margin-left:8px;">H1 — Mon Expertise Technique</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:#c084fc;">●</span>
+          <span style="color:#c084fc; font-size:10px;">iIdCard</span>
+          <span style="color:#e8e6f0; margin-left:8px;">Bio (autodidacte 2022...)</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #c084fc; height:16px;"></div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="color:#4ade80;">●</span>
+          <span style="color:#4ade80; font-size:10px;">iLayers</span>
+          <span style="color:#e8e6f0; margin-left:8px;">Domaines [chips]</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #4ade80; height:16px;"></div>
+        <div style="background: #7c6af522; border:1px solid #7c6af5; border-radius:6px; padding:8px 12px; color:#c084fc; font-size:11px; margin: 4px 0;">
+          ✦ Line simple (pas d'icône, pas de contenu)<br/>
+          <span style="color:#a89fc8;">→ descend vers le heading centré plein-écran</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="background: #1a1a2e; border-radius:6px; padding:8px 12px; color:#e8e6f0; font-size:13px; text-align:center; margin: 4px 0;">
+          <strong>"Ingénierie Front-End."</strong><br/>
+          <span style="color:#a89fc8; font-size:11px;">La technologie adaptée au produit.</span>
+        </div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="opacity:0.7; font-size:11px; color:#888; margin-left:4px;">↔ split → [ Astro ] · [ Angular ]</div>
+        <div style="margin-left:6px; border-left:2px solid #7c6af5; height:16px;"></div>
+        <div style="opacity:0.7; font-size:11px; color:#888; margin-left:4px;">↩ merge → [ React ] → return</div>
+
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Line de transition, heading reste centré</h3>
+      <p>Une Line sans contenu "connecte" visuellement le fil depuis AccueilSection vers le heading plein-écran. Le grand moment visuel est préservé.</p>
+    </div>
+  </div>
+
+</div>

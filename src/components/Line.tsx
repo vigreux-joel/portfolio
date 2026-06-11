@@ -152,7 +152,7 @@ export const Line = ({
     const bodyRef = useRef<HTMLDivElement>(null);
     const streamPathRef = useRef<SVGPathElement>(null);
     const streamGradRef = useRef<SVGLinearGradientElement>(null);
-    const sparkRef = useRef<HTMLDivElement>(null);
+    const sparkRef = useRef<SVGGElement>(null);
 
     const rawId = useId();
     const uid = rawId.replace(/:/g, '');
@@ -207,6 +207,7 @@ export const Line = ({
     // elle s'affichera presque instantanément quand le scroll la touchera.
     const pathLengthProgress = useTransform(smoothedScrollY, yRange, [0, 1], { clamp: true });
     const sparkOpacity = useTransform(pathLengthProgress, [0, 0.01, 0.99, 1], [0, 1, 1, 0]);
+    const pathOpacity = useTransform(pathLengthProgress, [0, 0.001], [0, 1]);
 
     const [isVisibleIcon, setIsVisibleIcon] = useState(visible);
     const [isFlashing, setIsFlashing] = useState(false);
@@ -243,20 +244,25 @@ export const Line = ({
                 
                 const path = streamPathRef.current;
                 const total = path.getTotalLength();
+                if (total <= 0) return;
+                const currentProgress = visible ? 1 : pathLengthProgress.get();
+                const revealedLen = currentProgress * total;
+
+                if (sparkRef.current) {
+                    const pt = path.getPointAtLength(revealedLen);
+                    sparkRef.current.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
+                }
+
                 const streamLen = 200;
                 
                 // La position du flux (tête) est directement la distance `localY`.
                 const inRange = localY > -streamLen && localY < total + streamLen;
 
                 if (!inRange) {
-                    path.style.strokeDasharray = "0 99999";
+                    path.style.display = "none";
                     return;
                 }
 
-                if (total <= 0) return;
-                const currentProgress = visible ? 1 : pathLengthProgress.get();
-                const revealedLen = currentProgress * total;
-                
                 const actualHead = localY;
                 const actualTail = actualHead - streamLen;
 
@@ -265,10 +271,11 @@ export const Line = ({
                 const clampedTail = Math.max(0, actualTail);
 
                 if (clampedTail >= clampedHead) {
-                    path.style.strokeDasharray = "0 99999";
+                    path.style.display = "none";
                     return;
                 }
 
+                path.style.display = "block";
                 if (clampedTail === 0) {
                     path.style.strokeDasharray = `${clampedHead} ${total}`;
                 } else {
@@ -335,7 +342,10 @@ export const Line = ({
             </defs>
             <motion.path
                 d={pathD}
-                style={{ pathLength: pathLengthVal as any }}
+                style={{ 
+                    pathLength: pathLengthVal as any,
+                    opacity: visible ? 1 : pathOpacity 
+                }}
                 stroke={nextTheme ? `url(#${gradId})` : "var(--color-primary)"}
                 strokeOpacity={0.5}
                 strokeWidth={3}
@@ -352,6 +362,14 @@ export const Line = ({
                 strokeDasharray="0 99999"
                 style={{ filter: "drop-shadow(0px 0px 2px var(--color-primary))" }}
             />
+            <motion.g
+                ref={sparkRef}
+                style={{ opacity: visible ? 0 : sparkOpacity }}
+                className="spark-base"
+            >
+                <circle cx={0} cy={0} r={6} className="spark-glow fill-primary" style={{ filter: 'blur(3px)' }} />
+                <circle cx={0} cy={0} r={3} className="spark-core fill-primary" style={{ filter: 'drop-shadow(0 0 8px var(--color-primary))' }} />
+            </motion.g>
         </>
     ) : null;
 
@@ -444,15 +462,6 @@ export const Line = ({
                 <svg style={{width: SIDEBAR_W, height: "100%"}} className="overflow-visible">
                     {svgContent}
                 </svg>
-                <motion.div
-                    style={{ opacity: visible ? 0 : sparkOpacity }}
-                    className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 flex flex-col items-center justify-center z-10 pointer-events-none"
-                >
-                    <div ref={sparkRef} className="flex flex-col items-center justify-center animate-pulse spark-base">
-                        <div className="spark-glow w-[12px] h-[12px] bg-primary rounded-full blur-[3px]"/>
-                        <div className="spark-core w-[6px] h-[6px] bg-primary rounded-full absolute shadow-[0_0_8px_var(--color-primary)]"/>
-                    </div>
-                </motion.div>
             </div>
         </div>
     );
