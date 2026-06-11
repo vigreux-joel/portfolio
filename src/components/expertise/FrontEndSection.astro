@@ -15,96 +15,76 @@ import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 ---
 <div id="front-end" class="theme-purple bg-surface">
-  <section class="max-width padding-x">
+  <section class="max-width">
 
-
-    <!-- Introduction de Section : composition éditoriale asymétrique -->
-    <div class="min-h-[55vh] flex flex-col justify-center pt-24 pb-8">
-      <div class="grid lg:grid-cols-12 gap-x-8 gap-y-10 items-end">
-        <div class="lg:col-span-8">
-          <span class="block text-label-large uppercase tracking-[0.25em] text-tertiary mb-6">
-            Ingénierie Front-End
-          </span>
-          <h2
-            class="relative reveal-light group text-display-medium md:text-display-large leading-[0.95] text-on-surface"
-            data-sidebar-label="Front-end"
-          >
-            <span class="text-on-surface-variant transition-opacity duration-1000 group-[.light]:opacity-0">La technologie<br/>adaptée au produit.</span>
-            <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">La technologie<br/>adaptée au produit.</span>
-          </h2>
-        </div>
-        <div class="lg:col-span-4 lg:pb-3">
-          <p class="text-body-large text-on-surface-variant max-w-prose">
-            Je ne pars jamais d'un framework par défaut. Je choisis l'architecture front-end selon votre produit, ses contraintes de performance et l'échelle visée.
-          </p>
-        </div>
+    <!-- Introduction de Section : sur le spine (ligne continue, alignée au Hero) -->
+    <div class="flex min-h-[55vh] pb-8">
+      <div>
+        <Line client:idle nextTheme="purple" />
       </div>
-    </div>
-
-    <!-- En-tête : le socle web — deux technologies complémentaires -->
-    <div class="grid lg:grid-cols-12 gap-x-8 gap-y-6 items-end pt-8">
-      <div class="lg:col-span-7">
-        <span class="block text-label-large uppercase tracking-[0.25em] text-tertiary mb-4">
-          Le socle web
+      <div class="padding flex flex-col justify-center max-w-4xl">
+        <span class="block text-label-large uppercase tracking-[0.25em] text-tertiary mb-6">
+          Ingénierie Front-End
         </span>
-        <h3 class="text-headline-large md:text-display-small text-on-surface leading-tight">
-          Deux technologies qui se complètent,
-          <span class="text-on-surface-variant">pas qui s'opposent.</span>
-        </h3>
-      </div>
-      <div class="lg:col-span-5 lg:pb-2">
-        <p class="text-body-large text-on-surface-variant max-w-prose">
-          Du site de contenu à l'application métier, chaque produit a son point d'équilibre. Je pose la fondation web là où elle sert vraiment l'usage.
+        <h2
+          class="relative reveal-light group text-display-medium md:text-display-large leading-[0.95] text-on-surface"
+          data-sidebar-label="Front-end"
+        >
+          <span class="text-on-surface-variant transition-opacity duration-1000 group-[.light]:opacity-0">Tout ce que l'utilisateur<br/>voit et touche.</span>
+          <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Tout ce que l'utilisateur<br/>voit et touche.</span>
+        </h2>
+        <p class="mt-8 text-body-large text-on-surface-variant max-w-prose">
+          Je ne pars jamais d'un framework par défaut. Je choisis l'architecture front-end selon votre produit, ses contraintes de performance et l'échelle visée.
         </p>
       </div>
     </div>
 
-    <!-- Connecteur split : la ligne se dédouble vers les deux rôles -->
-    <div class="relative h-24 md:h-32">
-      <Line fromX={0.03} toX={0.03} client:idle nextTheme="purple" />
-      <Line fromX={0.03} toX={0.97} client:idle nextTheme="purple" />
+    <!-- Le tracé se dédouble : Astro descend tout droit, Angular bifurque -->
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0.04} toX={0.04} client:idle nextTheme="purple" />
+      <Line fromX={0.04} toX={0.56} client:idle nextTheme="purple" />
     </div>
 
-    <!-- Séquence 1 : deux rôles complémentaires (Astro = le contenu, Angular = l'application) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 relative pb-16 md:pb-32">
-      <!-- Lignes verticales pour relier le split au merge de manière continue -->
-      <div class="absolute inset-0 pointer-events-none hidden md:block">
-        <Line fromX={0.03} toX={0.03} client:idle />
-        <Line fromX={0.97} toX={0.97} client:idle />
-      </div>
-
+    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12">
       <!-- Astro : le contenu -->
-      <div class="relative pt-8 md:pt-0">
-        <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary mb-5">Le contenu</span>
-        <Techno variant="primary" name="Astro" image={astroLogo}>
-          <span class="block text-title-medium text-on-surface mb-3">Livré instantanément.</span>
-          Performances d'affichage maximales pour les plateformes éditoriales. L'architecture en îlots élimine la charge JavaScript superflue en générant un HTML statique pur : contenu instantané, score SEO parfait, empreinte mémoire minimale côté client.
-
-          <span class="block mt-6 text-label-medium text-tertiary uppercase">
-            Portfolios • Plateformes éditoriales • Sites institutionnels
+      <div class="flex">
+        <div>
+          <Line client:idle image={astroLogo} nextTheme="purple" />
+        </div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">Le contenu</span>
+          <h3 class="text-headline-small md:text-headline-medium text-on-surface mt-2">Astro</h3>
+          <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
+            Pour les sites où la performance et le référencement priment : Astro génère un HTML statique, sans JavaScript superflu. Le contenu s'affiche instantanément, avec un SEO optimal et une empreinte minimale côté visiteur.
+          </p>
+          <span class="block mt-5 text-label-medium text-tertiary uppercase">
+            Portfolios • Sites éditoriaux • Sites vitrines
           </span>
-        </Techno>
+        </div>
       </div>
 
-      <!-- Angular : l'application — décalé vers le bas (rôles distincts, pas un face-à-face) -->
-      <div class="relative md:mt-32">
-        <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary mb-5">L'application</span>
-        <Techno variant="primary" name="Angular" image={angularLogo}>
-          <span class="block text-title-medium text-on-surface mb-3">Conçue pour durer.</span>
-          Robustesse et prédictibilité pour les systèmes à grande échelle. La compartimentation stricte des modules et l'injection de dépendances sécurisent le produit contre les régressions, garantissant la maintenabilité de bases de code massives destinées à évoluer sur de longues périodes.
-
-          <span class="block mt-6 text-label-medium text-tertiary uppercase">
-            Systèmes ERP • Portails bancaires • Apps institutionnelles
+      <!-- Angular : l'application -->
+      <div class="flex">
+        <div>
+          <Line client:idle image={angularLogo} nextTheme="purple" />
+        </div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">L'application</span>
+          <h3 class="text-headline-small md:text-headline-medium text-on-surface mt-2">Angular</h3>
+          <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
+            Pour les applications complexes destinées à durer : structure stricte, modules cloisonnés et injection de dépendances gardent une grande base de code fiable et maintenable dans le temps.
+          </p>
+          <span class="block mt-5 text-label-medium text-tertiary uppercase">
+            ERP • Portails métier • Applications internes
           </span>
-        </Techno>
+        </div>
       </div>
-
     </div>
 
-    <!-- Connecteur merge : gauche + droite convergent vers le centre -->
-    <div class="relative h-24 md:h-32">
-      <Line fromX={0.03} toX={0.5} client:idle nextTheme="purple" />
-      <Line fromX={0.97} toX={0.5} client:idle nextTheme="purple" />
+    <!-- Convergence vers le même but (React & Motion) -->
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0.04} toX={0.5} client:idle nextTheme="purple" />
+      <Line fromX={0.56} toX={0.5} client:idle nextTheme="purple" />
     </div>
 
   </section>
@@ -112,7 +92,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
   <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
   <div class="w-full">
     
-    <!-- Ligne de connexion au-dessus de la carte -->
+    <!-- Ligne de connexion au-dessus de la carte (le merge arrive déjà au centre) -->
     <div class="max-width padding-x">
       <div class="relative h-24 hidden md:block">
         <Line fromX={0.5} toX={0.5} client:idle />
@@ -203,7 +183,7 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
     </div>
   </div>
 
-  <section>
+  <section id="multiplateforme">
     <div class="max-width">
       <div class="flex">
         <div>

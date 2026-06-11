@@ -2,10 +2,14 @@
 import { Line } from "@components/Line";
 import { BackgroundColor } from "@components/BackgroundColor";
 import { LinearGradient } from "@components/LinearGradient";
+import { Icon } from "@udixio/ui-react";
 
 import { iCode } from "@udixio/icons-outlined-400/code";
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 import { iApps } from "@udixio/icons-outlined-400/apps";
+import { iDevices } from "@udixio/icons-outlined-400/devices";
+import { iApi } from "@udixio/icons-outlined-400/api";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 ---
 
 <section id="accueil" class="tab-menu relative">
@@ -54,11 +58,31 @@ import { iApps } from "@udixio/icons-outlined-400/apps";
           <Line client:load icon={iApps} nextTheme="purple" />
         </div>
         <div class="padding pt-0">
-          <div class="flex flex-wrap gap-3 mt-2">
-            <span class="px-4 py-1 rounded-full text-label-medium bg-secondary-container text-on-secondary-container">Front-End</span>
-            <span class="px-4 py-1 rounded-full text-label-medium bg-secondary-container text-on-secondary-container">Back-End</span>
-            <span class="px-4 py-1 rounded-full text-label-medium bg-secondary-container text-on-secondary-container">UX / UI</span>
-            <span class="px-4 py-1 rounded-full text-label-medium bg-secondary-container text-on-secondary-container">Multiplateforme</span>
+          <div class="grid sm:grid-cols-3 gap-4 max-w-3xl">
+            <a href="#front-end" class="group rounded-2xl bg-surface-container-high/50 ring-1 ring-outline/15 hover:ring-primary/50 hover:bg-surface-container-high transition-all duration-300 p-5 flex flex-col gap-3">
+              <Icon icon={iCode} className="h-7 w-7 text-primary" />
+              <span class="text-title-small text-on-surface">Front-End</span>
+              <span class="text-body-small text-on-surface-variant flex-1">Interfaces web — Astro, Angular &amp; React</span>
+              <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </a>
+            <a href="#multiplateforme" class="group rounded-2xl bg-surface-container-high/50 ring-1 ring-outline/15 hover:ring-primary/50 hover:bg-surface-container-high transition-all duration-300 p-5 flex flex-col gap-3">
+              <Icon icon={iDevices} className="h-7 w-7 text-primary" />
+              <span class="text-title-small text-on-surface">Multiplateforme</span>
+              <span class="text-body-small text-on-surface-variant flex-1">Apps mobile, desktop &amp; web — Flutter</span>
+              <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </a>
+            <a href="#back-end" class="group rounded-2xl bg-surface-container-high/50 ring-1 ring-outline/15 hover:ring-primary/50 hover:bg-surface-container-high transition-all duration-300 p-5 flex flex-col gap-3">
+              <Icon icon={iApi} className="h-7 w-7 text-primary" />
+              <span class="text-title-small text-on-surface">Back-End</span>
+              <span class="text-body-small text-on-surface-variant flex-1">APIs &amp; architecture — NestJS</span>
+              <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </a>
           </div>
         </div>
       </div>

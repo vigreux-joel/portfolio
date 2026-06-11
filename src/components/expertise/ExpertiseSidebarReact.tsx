@@ -10,7 +10,7 @@ import { iSelectWindow } from "@udixio/icons-outlined-400/select_window";
 const initialLinks = [
     { id: "accueil", label: "Intro", icon: iInfo },
     { id: "front-end", label: "Front-end", icon: iDevices },
-    { id: "ux", label: "Design & UX", icon: iSelectWindow },
+    { id: "multiplateforme", label: "Multiplateforme", icon: iSelectWindow },
     { id: "back-end", label: "Back-end", icon: iApi },
     { id: "philosophie", label: "Philosophie", icon: iManufacturing },
     { id: "faq", label: "FAQ", icon: iInfo },
@@ -23,7 +23,7 @@ export const ExpertiseSidebarReact = () => {
     const [dynamicLinks, setDynamicLinks] = useState(initialLinks.map(l => ({ ...l, svgHtml: null as string | null })));
 
     useEffect(() => {
-        const sections = document.querySelectorAll('#accueil, #front-end, #ux, #back-end, #philosophie, #faq');
+        const sections = document.querySelectorAll('#accueil, #front-end, #multiplateforme, #back-end, #philosophie, #faq');
 
         // Dynamic content update
         const updatedLinks = [...dynamicLinks];

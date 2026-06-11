@@ -133,12 +133,15 @@ const SIDEBAR_W = 3;
 export const Line = ({
     nextTheme,
     icon,
+    image,
     visible,
     fromX,
     toX,
 }: {
     nextTheme?: string;
     icon?: Icon;
+    /** Raw SVG string (e.g. a techno logo) rendered as the line node instead of an icon. */
+    image?: string;
     visible?: boolean;
     /** Connector mode: horizontal start position (0–1 fraction of container width) */
     fromX?: number;
@@ -208,7 +211,8 @@ export const Line = ({
     const [isVisibleIcon, setIsVisibleIcon] = useState(visible);
     const [isFlashing, setIsFlashing] = useState(false);
     const isLineActiveRef = useRef(visible);
-    const hasIconRef = useRef(!!icon);
+    const hasNode = !!icon || !!image;
+    const hasIconRef = useRef(hasNode);
 
     useMotionValueEvent(pathLengthProgress, "change", (latest) => {
         if (!visible) {
@@ -367,7 +371,7 @@ export const Line = ({
     return (
         <div
             ref={ref}
-            className={"h-full ml-4 md:ml-12 flex flex-col items-center " + (!icon ? "" : "gap-8")}
+            className={"h-full ml-4 md:ml-12 flex flex-col items-center " + (!hasNode ? "" : "gap-8")}
         >
             <style>{`
                 @keyframes wait-flare {
@@ -392,10 +396,10 @@ export const Line = ({
             `}</style>
 
             <div className={classNames("relative flex justify-center items-center transition-all duration-500 w-6", {
-                "h-6": icon,
-                "h-0": !icon,
+                "h-6": hasNode,
+                "h-0": !hasNode,
             })}>
-                {icon && (
+                {hasNode && (
                     <div className="relative z-10 flex justify-center items-center w-full h-full">
                         <div className={classNames(
                             "bg-primary blur-md rounded-full h-full w-full absolute top-0 left-0 scale-150 transition-opacity duration-1000",
@@ -415,13 +419,23 @@ export const Line = ({
                                 }
                             )}
                         />
-                        <Icon
-                            className={classNames("h-6 w-full relative z-10 transition-transform duration-500 ease-out", {
-                                "scale-0": !isVisibleIcon && !visible,
-                                "scale-100": isVisibleIcon || visible,
-                            })}
-                            icon={icon}
-                        />
+                        {icon ? (
+                            <Icon
+                                className={classNames("h-6 w-full relative z-10 transition-transform duration-500 ease-out", {
+                                    "scale-0": !isVisibleIcon && !visible,
+                                    "scale-100": isVisibleIcon || visible,
+                                })}
+                                icon={icon}
+                            />
+                        ) : (
+                            <div
+                                dangerouslySetInnerHTML={{ __html: image! }}
+                                className={classNames("h-6 w-6 relative z-10 flex items-center justify-center fill-on-surface transition-transform duration-500 ease-out [&>svg]:h-full [&>svg]:w-full", {
+                                    "scale-0": !isVisibleIcon && !visible,
+                                    "scale-100": isVisibleIcon || visible,
+                                })}
+                            />
+                        )}
                     </div>
                 )}
             </div>
