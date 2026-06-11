@@ -3,7 +3,7 @@ import {Card} from "@components/Card";
 import {Techno} from "@components/Techno";
 import {Line} from '@components/Line';
 import {LinearGradient} from "@components/LinearGradient";
-import {Icon, Divider} from "@udixio/ui-react";
+import {Icon, Button} from "@udixio/ui-react";
 
 import astroLogo from "@assets/images/astro-logo.svg?raw";
 import reactLogo from "@assets/images/react-logo.svg?raw";
@@ -11,67 +11,94 @@ import angularLogo from "@assets/images/angular-logo.svg?raw";
 
 import {iDevices} from "@udixio/icons-outlined-400/devices";
 import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
+import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 ---
 <div id="front-end" class="theme-purple bg-surface">
   <section class="max-width padding-x">
 
-    <!-- Connecteur entrant depuis HeroSection -->
-    <div class="relative h-16">
-      <Line fromX={0.03} toX={0.03} client:idle />
+
+    <!-- Introduction de Section : composition éditoriale asymétrique -->
+    <div class="min-h-[55vh] flex flex-col justify-center pt-24 pb-8">
+      <div class="grid lg:grid-cols-12 gap-x-8 gap-y-10 items-end">
+        <div class="lg:col-span-8">
+          <span class="block text-label-large uppercase tracking-[0.25em] text-tertiary mb-6">
+            Ingénierie Front-End
+          </span>
+          <h2
+            class="relative reveal-light group text-display-medium md:text-display-large leading-[0.95] text-on-surface"
+            data-sidebar-label="Front-end"
+          >
+            <span class="text-on-surface-variant transition-opacity duration-1000 group-[.light]:opacity-0">La technologie<br/>adaptée au produit.</span>
+            <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">La technologie<br/>adaptée au produit.</span>
+          </h2>
+        </div>
+        <div class="lg:col-span-4 lg:pb-3">
+          <p class="text-body-large text-on-surface-variant max-w-prose">
+            Je ne pars jamais d'un framework par défaut. Je choisis l'architecture front-end selon votre produit, ses contraintes de performance et l'échelle visée.
+          </p>
+        </div>
+      </div>
     </div>
 
-    <!-- Introduction de Section -->
-    <div class="min-h-[50vh] flex flex-col justify-center text-center pt-24 pb-0">
-      <h2
-        class="text-display-large text-on-surface"
-      >
-        Ingénierie Front-End.<br/>
-        <span class="relative reveal-light inline-block group">
-          <span class="text-on-surface-variant transition-opacity duration-1000 group-[.light]:opacity-0">La technologie adaptée au produit.</span>
-          <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">La technologie adaptée au produit.</span>
+    <!-- En-tête : le socle web — deux technologies complémentaires -->
+    <div class="grid lg:grid-cols-12 gap-x-8 gap-y-6 items-end pt-8">
+      <div class="lg:col-span-7">
+        <span class="block text-label-large uppercase tracking-[0.25em] text-tertiary mb-4">
+          Le socle web
         </span>
-      </h2>
+        <h3 class="text-headline-large md:text-display-small text-on-surface leading-tight">
+          Deux technologies qui se complètent,
+          <span class="text-on-surface-variant">pas qui s'opposent.</span>
+        </h3>
+      </div>
+      <div class="lg:col-span-5 lg:pb-2">
+        <p class="text-body-large text-on-surface-variant max-w-prose">
+          Du site de contenu à l'application métier, chaque produit a son point d'équilibre. Je pose la fondation web là où elle sert vraiment l'usage.
+        </p>
+      </div>
     </div>
 
-    <!-- Connecteur split : ligne reste à gauche + branche va à droite -->
+    <!-- Connecteur split : la ligne se dédouble vers les deux rôles -->
     <div class="relative h-24 md:h-32">
       <Line fromX={0.03} toX={0.03} client:idle nextTheme="purple" />
       <Line fromX={0.03} toX={0.97} client:idle nextTheme="purple" />
     </div>
 
-    <!-- Séquence 1 : Le Duel Structurel -->
+    <!-- Séquence 1 : deux rôles complémentaires (Astro = le contenu, Angular = l'application) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 relative pb-16 md:pb-32">
       <!-- Lignes verticales pour relier le split au merge de manière continue -->
       <div class="absolute inset-0 pointer-events-none hidden md:block">
         <Line fromX={0.03} toX={0.03} client:idle />
         <Line fromX={0.97} toX={0.97} client:idle />
       </div>
-      
-      <!-- Astro (Left) -->
+
+      <!-- Astro : le contenu -->
       <div class="relative pt-8 md:pt-0">
+        <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary mb-5">Le contenu</span>
         <Techno variant="primary" name="Astro" image={astroLogo}>
-          Performances d'affichage maximales pour les plateformes éditoriales. L'architecture en îlots élimine la charge JavaScript superflue en générant un HTML statique pur. Le contenu est livré instantanément avec un score SEO parfait et une consommation mémoire minimale côté client.
-          
+          <span class="block text-title-medium text-on-surface mb-3">Livré instantanément.</span>
+          Performances d'affichage maximales pour les plateformes éditoriales. L'architecture en îlots élimine la charge JavaScript superflue en générant un HTML statique pur : contenu instantané, score SEO parfait, empreinte mémoire minimale côté client.
+
           <span class="block mt-6 text-label-medium text-tertiary uppercase">
             Portfolios • Plateformes éditoriales • Sites institutionnels
           </span>
         </Techno>
       </div>
 
-      <!-- Angular (Right) -->
-      <div class="relative">
-        <Card client:load className="p-8 md:p-12 w-full h-full">
-          <Techno variant="primary" name="Angular" image={angularLogo}>
-            Robustesse et prédictibilité pour les systèmes à grande échelle. La compartimentation stricte des modules et l'injection de dépendances sécurisent le produit contre les régressions. Une architecture conçue pour garantir la maintenabilité de bases de code massives destinées à évoluer sur de longues périodes.
-            
-            <span class="block mt-6 text-label-medium text-tertiary uppercase">
-              Systèmes ERP • Portails bancaires • Apps institutionnelles
-            </span>
-          </Techno>
-        </Card>
+      <!-- Angular : l'application — décalé vers le bas (rôles distincts, pas un face-à-face) -->
+      <div class="relative md:mt-32">
+        <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary mb-5">L'application</span>
+        <Techno variant="primary" name="Angular" image={angularLogo}>
+          <span class="block text-title-medium text-on-surface mb-3">Conçue pour durer.</span>
+          Robustesse et prédictibilité pour les systèmes à grande échelle. La compartimentation stricte des modules et l'injection de dépendances sécurisent le produit contre les régressions, garantissant la maintenabilité de bases de code massives destinées à évoluer sur de longues périodes.
+
+          <span class="block mt-6 text-label-medium text-tertiary uppercase">
+            Systèmes ERP • Portails bancaires • Apps institutionnelles
+          </span>
+        </Techno>
       </div>
-      
+
     </div>
 
     <!-- Connecteur merge : gauche + droite convergent vers le centre -->
@@ -96,48 +123,65 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
     </div>
 
     <div class="max-width padding-x">
-      <Card client:load variant="elevated" className="p-8 md:p-16 lg:p-24 overflow-hidden relative">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 relative z-10">
-          
-          <!-- Colonne Gauche : Identité & Techno -->
-          <div class="lg:col-span-5 flex flex-col justify-between">
-            <div>
-              <Techno variant="primary" name="React & Motion" image={reactLogo}>
-                <div class="mt-8 text-label-medium text-tertiary uppercase">
-                  SaaS • Dashboards • Outils métiers
-                </div>
-              </Techno>
-            </div>
-            
-            <div class="hidden lg:block mt-24">
-              <Line client:idle visible={true} />
-            </div>
-          </div>
-          
-          <!-- Colonne Droite : Le discours narratif aéré -->
-          <div class="lg:col-span-7 flex flex-col justify-center">
-            
-            <p class="text-headline-medium md:text-display-small text-on-surface mb-12 font-light leading-tight">
+      <Card client:load variant="elevated" className="overflow-hidden relative p-0">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[540px] relative z-10">
+
+          <!-- Colonne Gauche : Identité + discours animation & Material Design 3 -->
+          <div class="lg:col-span-6 relative z-20 p-8 md:p-16 lg:py-24 lg:pl-24 lg:pr-12 flex flex-col justify-center">
+            <Techno variant="primary" name="React & Motion" image={reactLogo}>
+              <div class="mt-6 text-label-medium text-tertiary uppercase">
+                SaaS • Dashboards • Outils métiers
+              </div>
+            </Techno>
+
+            <p class="mt-10 text-headline-medium md:text-display-small text-on-surface font-light leading-tight">
               L'animation n'est pas cosmétique. <br/>
               <span class="text-primary italic font-serif">Elle dirige le regard.</span>
             </p>
-            
-            <p class="text-body-large md:text-title-large text-on-surface-variant leading-relaxed mb-8 max-w-prose">
-              Développement d'interfaces hautement interactives où le mouvement guide l'expérience. Masquer intelligemment la latence réseau et valider les actions complexes de l'utilisateur de façon organique.
+
+            <p class="mt-8 text-body-large md:text-title-large text-on-surface-variant leading-relaxed max-w-prose">
+              Des interfaces hautement interactives, conçues selon les guidelines
+              <span class="text-on-surface">Material Design 3</span> : un design system fluide et cohérent
+              où le mouvement, orchestré avec <span class="text-on-surface">Framer Motion</span>, guide
+              l'expérience, masque la latence réseau et valide les actions de façon organique.
             </p>
-            
-            <div class="border-l-2 border-outline-variant pl-8 mt-8">
-              <p class="text-title-medium text-on-surface leading-relaxed">
-                Le résultat est une interface vivante qui augmente directement la qualité perçue du produit final.
-              </p>
-            </div>
-            
           </div>
-          
+
+          <!-- Colonne Droite : la vidéo, visuel pleine hauteur (bleed), menant à l'étude de cas -->
+          <a
+            href="/projets/udixio-ui"
+            aria-label="Voir l'étude de cas de ma librairie UI Material 3"
+            class="group relative block lg:col-span-6 min-h-[260px] sm:min-h-[340px] lg:min-h-0 overflow-hidden"
+          >
+            <video
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              autoplay
+              loop
+              muted
+              playsinline
+            >
+              <source src="/video/output.mp4" type="video/mp4" />
+            </video>
+            <!-- liseré dégradé pour fondre la vidéo dans la carte côté texte -->
+            <div class="absolute inset-0 hidden lg:block pointer-events-none bg-gradient-to-r from-surface/70 via-transparent to-transparent"></div>
+          </a>
+
         </div>
+
+        <!-- Panneau preuve flottant : chevauche la frontière texte / vidéo -->
+        <div class="relative z-30 m-6 lg:m-0 lg:absolute lg:bottom-10 lg:left-[42%] lg:max-w-sm">
+          <div class="rounded-2xl bg-surface-container-high/95 backdrop-blur shadow-lg ring-1 ring-outline-variant/40 p-6">
+            <p class="text-body-medium text-on-surface-variant">
+              <span class="text-on-surface font-medium">Ma librairie UI</span> — une adaptation de
+              Material Design 3 en Tailwind, que je développe sur mon temps personnel depuis 2024.
+            </p>
+            <Button client:visible className="w-fit mt-4" variant="text" href="/projets/udixio-ui" icon={iArrowOutward} label="Voir l'étude de cas" />
+          </div>
+        </div>
+
       </Card>
-      
+
       <!-- Ligne de sortie Mobile uniquement -->
       <div class="flex justify-center h-24 lg:hidden">
          <Line client:idle />
@@ -185,66 +229,39 @@ import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-s
 
             </div>
           </div>
-          <div class="flex flex-wrap gap-y-8 gap-x-12 mt-16 items-start">
-            <div
-                 class=" sm:mt-[42px]  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-tertiary-container/70 text-on-tertiary-container">
-              <Icon className="h-16 w-16" icon={iSelectWindow}/>
-              <h4>Web</h4>
-            </div>
-            <div class="sm:flex-2 w-full md:w-fit">
-              <div class="flex gap-4 items-center">
-                <Divider className="hidden md:block border-primary-container"/>
-                <h4 class="text-title-medium text-on-primary-container">Mobile</h4>
-                <Divider className="hidden md:block border-primary-container"/>
+          <!-- Bandeau d'icônes plateformes : une base de code, tous les écrans -->
+          <div class="mt-12">
+            <span class="text-label-large uppercase tracking-wide text-tertiary">Une base de code → tous les écrans</span>
+            <div class="mt-6 flex flex-wrap items-start gap-x-10 gap-y-6 text-on-surface-variant">
+              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+                <Icon className="h-9 w-9" icon={iSelectWindow}/>
+                <span class="text-label-medium">Web</span>
               </div>
-              <div class="flex gap-4 mt-4">
-                <Divider orientation="vertical" className="md:hidden border-primary-container"/>
-                <div class="flex flex-1 flex-wrap gap-8">
-                  <div
-                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
-                    <Icon className="h-16 w-16" icon={faApple}/>
-                    <p>IOS</p>
-                  </div>
-                  <div
-                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-primary-container text-on-primary-container">
-                    <Icon className="h-16 w-16" icon={faAndroid}/>
-                    <p>Android</p>
-                  </div>
-                </div>
+              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+                <Icon className="h-9 w-9" icon={faApple}/>
+                <span class="text-label-medium">iOS</span>
               </div>
-
-            </div>
-            <div class="flex-[3] w-full md:w-fit">
-              <div class="flex gap-4 items-center">
-                <Divider className="hidden md:block border-secondary-container"/>
-                <h4 class="text-title-medium text-on-secondary-container">Desktop</h4>
-                <Divider className="hidden md:block border-secondary-container"/>
+              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+                <Icon className="h-9 w-9" icon={faAndroid}/>
+                <span class="text-label-medium">Android</span>
               </div>
-              <div class="flex gap-4 mt-4">
-                <Divider orientation="vertical" className="md:hidden border-secondary-container"/>
-                <div class="flex flex-1 flex-wrap gap-8">
-                  <div
-                       class="flex-[100%] lg:flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
-                    <Icon className="h-16 w-16" icon={faWindows}/>
-                    <p>Windows</p>
-                  </div>
-                  <div
-                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
-                    <Icon className="h-16 w-16" icon={faApple}/>
-                    <p>MacOs</p>
-                  </div>
-                  <div
-                       class="flex-1  py-4 px-8 rounded-lg flex flex-col items-center gap-4 bg-secondary-container text-on-secondary-container">
-                    <Icon className="h-16 w-16" icon={faLinux}/>
-                    <p>Linux</p>
-                  </div>
-                </div>
+              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+                <Icon className="h-9 w-9" icon={faWindows}/>
+                <span class="text-label-medium">Windows</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+                <Icon className="h-9 w-9" icon={faApple}/>
+                <span class="text-label-medium">macOS</span>
+              </div>
+              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+                <Icon className="h-9 w-9" icon={faLinux}/>
+                <span class="text-label-medium">Linux</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <LinearGradient nextTheme="blue"/>
+    <LinearGradient nextTheme="green"/>
   </section>
 </div>

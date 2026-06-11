@@ -33,9 +33,14 @@ export const ExpertiseSidebarReact = () => {
             const section = document.getElementById(link.id);
             if (section) {
                 const h2 = section.querySelector('h2');
-                if (h2 && h2.textContent && h2.textContent.trim() !== updatedLinks[index].label) {
-                    updatedLinks[index].label = h2.textContent.trim();
-                    hasChanges = true;
+                if (h2) {
+                    const overrideLabel = section.getAttribute('data-sidebar-label') || h2.getAttribute('data-sidebar-label');
+                    const labelText = overrideLabel || (h2.textContent ? h2.textContent.trim() : null);
+                    
+                    if (labelText && labelText !== updatedLinks[index].label) {
+                        updatedLinks[index].label = labelText;
+                        hasChanges = true;
+                    }
                 }
 
                 const lineSvg = section.querySelector('.w-6 svg');
@@ -72,8 +77,9 @@ export const ExpertiseSidebarReact = () => {
     const visibleId = hoveredId || activeId;
 
     return (
-        <div className="hidden 2xl:flex sticky top-0 h-screen flex-col justify-center px-8 z-40 shrink-0 group/sidebar">
+        <div className={`hidden 2xl:flex sticky top-0 h-screen flex-col justify-center px-8 z-40 shrink-0 group/sidebar transition-all duration-500 ${activeId === 'accueil' ? 'opacity-0 pointer-events-none -translate-x-4' : 'opacity-100 translate-x-0'}`}>
             {dynamicLinks.map(link => {
+                if (link.id === "accueil") return null;
                 const isActive = activeId === link.id;
 
                 return (
