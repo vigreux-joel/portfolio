@@ -13,13 +13,20 @@ const ENERGY_SPEED = 1000;
 let globalDistance = 0;
 let lastFrameTime = 0;
 
-interface LineRegistration {
+export interface EnergyNodeRegistration {
     getTop: () => number;
     getBottom: () => number;
     getTotal: () => number;
     tick: (localY: number) => void;
 }
-const linesSet = new Set<LineRegistration>();
+const linesSet = new Set<EnergyNodeRegistration>();
+
+export const registerEnergyNode = (node: EnergyNodeRegistration) => {
+    linesSet.add(node);
+};
+export const unregisterEnergyNode = (node: EnergyNodeRegistration) => {
+    linesSet.delete(node);
+};
 
 const loop = (time: number) => {
     if (!lastFrameTime) lastFrameTime = time;
@@ -104,9 +111,9 @@ if (typeof window !== "undefined" && !window.__ENERGY_VIEWPORT_LOOP) {
 /** Elbow path: straight lines + rounded corners.
  *  When x1 === x2, the arc radius is 0 → degenerates to a straight vertical line.
  */
-function buildPath(w: number, h: number, x1: number, x2: number): string {
-    const px1 = x1 * w;
-    const px2 = x2 * w;
+function buildPath(w: number, h: number, x1: number, x2: number, px1Offset: number = 0, px2Offset: number = 0): string {
+    const px1 = x1 * w + px1Offset;
+    const px2 = x2 * w + px2Offset;
     const dx = px2 - px1;
     if (Math.abs(dx) < 1) {
         return `M${px1},0 L${px2},${h}`;
@@ -137,6 +144,8 @@ export const Line = ({
     visible,
     fromX,
     toX,
+    fromPx,
+    toPx,
 }: {
     nextTheme?: string;
     icon?: Icon;
@@ -147,6 +156,10 @@ export const Line = ({
     fromX?: number;
     /** Connector mode: horizontal end position (0–1). Defaults to fromX. */
     toX?: number;
+    /** Connector mode: pixel offset added to fromX (to anchor on a fixed px lane like the spine ml-12). */
+    fromPx?: number;
+    /** Connector mode: pixel offset added to toX. Defaults to fromPx. */
+    toPx?: number;
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
@@ -211,6 +224,8 @@ export const Line = ({
 
     const [isVisibleIcon, setIsVisibleIcon] = useState(visible);
     const [isFlashing, setIsFlashing] = useState(false);
+    const flashTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+    const sparkLastHitRef = useRef<number>(0);
     const isLineActiveRef = useRef(visible);
     const hasNode = !!icon || !!image;
     const hasIconRef = useRef(hasNode);
@@ -225,7 +240,7 @@ export const Line = ({
 
     useEffect(() => {
         let prevLocalY = -1000;
-        const lineObj: LineRegistration = {
+        const lineObj: EnergyNodeRegistration = {
             getTop: () => {
                 if (!ref.current) return 0;
                 return ref.current.getBoundingClientRect().top + window.scrollY;
@@ -248,23 +263,52 @@ export const Line = ({
                 const currentProgress = visible ? 1 : pathLengthProgress.get();
                 const revealedLen = currentProgress * total;
 
-                if (sparkRef.current) {
-                    const pt = path.getPointAtLength(revealedLen);
-                    sparkRef.current.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
-                }
-
                 const streamLen = 200;
                 
                 // La position du flux (tête) est directement la distance `localY`.
                 const inRange = localY > -streamLen && localY < total + streamLen;
 
+                const actualHead = localY;
+                const actualTail = actualHead - streamLen;
+
+                if (sparkRef.current) {
+                    const pt = path.getPointAtLength(revealedLen);
+                    
+                    let scale = 1;
+                    let opacity = 0.2;
+                    const now = Date.now();
+
+                    if (actualHead >= revealedLen && actualTail <= revealedLen) {
+                        sparkLastHitRef.current = now;
+                        scale = 2.5;
+                        opacity = 1;
+                    } else if (sparkLastHitRef.current > 0) {
+                        const elapsed = now - sparkLastHitRef.current;
+                        const duration = 5000;
+                        if (elapsed < duration) {
+                            const progress = elapsed / duration;
+                            // ease-out-ish decay
+                            const easeProgress = 1 - Math.pow(1 - progress, 3);
+                            scale = 2.5 - 1.5 * easeProgress;
+                            opacity = 1 - 0.8 * easeProgress;
+                        }
+                    }
+
+                    // Cache l'étincelle complètement si la ligne n'est pas en cours de dessin (ni à 0% ni à 100%)
+                    if (currentProgress <= 0 || currentProgress >= 1) {
+                        opacity = 0;
+                        scale = 0;
+                    }
+
+                    // Apply the transforms to the group. The opacity will affect the whole group.
+                    sparkRef.current.style.transform = `translate(${pt.x}px, ${pt.y}px) scale(${scale})`;
+                    sparkRef.current.style.opacity = String(opacity);
+                }
+
                 if (!inRange) {
                     path.style.display = "none";
                     return;
                 }
-
-                const actualHead = localY;
-                const actualTail = actualHead - streamLen;
 
                 // Restreindre le flux à la partie visible (progression)
                 const clampedHead = Math.min(actualHead, revealedLen);
@@ -292,18 +336,11 @@ export const Line = ({
                 streamGradRef.current.setAttribute("x2", String(headPoint.x));
                 streamGradRef.current.setAttribute("y2", String(headPoint.y));
 
-                if (sparkRef.current) {
-                    if (actualHead >= revealedLen && actualTail <= revealedLen) {
-                        sparkRef.current.classList.add("spark-active");
-                    } else {
-                        sparkRef.current.classList.remove("spark-active");
-                    }
-                }
-
                 if (localY >= 0 && prevLocalY < 0) {
                     if (isLineActiveRef.current && hasIconRef.current) {
                         setIsFlashing(true);
-                        setTimeout(() => setIsFlashing(false), 400);
+                        if (flashTimeoutRef.current) clearTimeout(flashTimeoutRef.current);
+                        flashTimeoutRef.current = setTimeout(() => setIsFlashing(false), 200);
                     }
                 }
                 prevLocalY = localY;
@@ -317,8 +354,19 @@ export const Line = ({
     const svgW = isConnector ? svgSize.width : SIDEBAR_W;
     const pathFromX = isConnector ? fromX! : 0.5;
     const pathToX = isConnector ? effectiveToX : 0.5;
+    
+    // Auto-adjust pixel offsets for mobile spine (28px) vs desktop spine (60px) if they match 60
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+    let finalFromPx = fromPx ?? 0;
+    let finalToPx = toPx ?? fromPx ?? 0;
+    
+    if (isMobile) {
+        if (finalFromPx === 60) finalFromPx = 28;
+        if (finalToPx === 60) finalToPx = 28;
+    }
+
     const pathD = svgSize.height > 0 && svgW > 0
-        ? buildPath(svgW, svgSize.height, pathFromX, pathToX)
+        ? buildPath(svgW, svgSize.height, pathFromX, pathToX, finalFromPx, finalToPx)
         : "";
 
     const pathLengthVal = visible ? 1 : pathLengthProgress;
@@ -367,8 +415,8 @@ export const Line = ({
                 style={{ opacity: visible ? 0 : sparkOpacity }}
                 className="spark-base"
             >
-                <circle cx={0} cy={0} r={6} className="spark-glow fill-primary" style={{ filter: 'blur(3px)' }} />
-                <circle cx={0} cy={0} r={3} className="spark-core fill-primary" style={{ filter: 'drop-shadow(0 0 8px var(--color-primary))' }} />
+                <circle cx={0} cy={0} r={4} className="spark-glow fill-primary" style={{ filter: 'blur(2px)' }} />
+                <circle cx={0} cy={0} r={2} className="spark-core fill-primary" style={{ filter: 'drop-shadow(0 0 6px var(--color-primary))' }} />
             </motion.g>
         </>
     ) : null;
@@ -403,14 +451,6 @@ export const Line = ({
                     100% { transform: scale(1); filter: blur(2px); opacity: 0.8; }
                 }
                 .animate-hit-orb { animation: hit-flare 0.4s ease-out forwards; }
-                .spark-glow, .spark-core {
-                    opacity: 0.5; transform: scale(1);
-                    transition: opacity 2s ease-out, transform 2s ease-out;
-                }
-                .spark-active .spark-glow, .spark-active .spark-core {
-                    opacity: 1; transform: scale(1.6);
-                    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
-                }
             `}</style>
 
             <div className={classNames("relative flex justify-center items-center transition-all duration-500 w-6", {

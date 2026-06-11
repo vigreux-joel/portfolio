@@ -27,7 +27,7 @@ export const Card = ({children, className, variant = "elevated", ...restProps}) 
        "transition-bg duration-1000",
         {
             "bg-surface-container-high/50": isPowered,
-            "bg-surface-container-low": !isPowered
+            "bg-surface-container-low ": !isPowered
         },
                         className,
       )} variant={variant} {...restProps}>
@@ -42,7 +42,7 @@ export const Card = ({children, className, variant = "elevated", ...restProps}) 
                     transition={{ duration: 1 }}
                     className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
                     style={{
-                        padding: "1px", // Épaisseur fine pour la bordure
+                        padding: "2px", // Épaisseur fine pour la bordure
                         background: `radial-gradient(300px circle at ${x !== null ? x + 'px' : '50%'} ${y !== null ? y + 'px' : '50%'}, var(--color-primary), transparent 100%) border-box`,
                         WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                         WebkitMaskComposite: "xor",
@@ -60,10 +60,10 @@ export const Card = ({children, className, variant = "elevated", ...restProps}) 
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1 }}
-                    className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
+                    className="absolute inset-0 z-0 pointer-events-none rounded-[inherit] "
                     style={{
                         // Utilisation d'un dégradé CSS (bien plus lisse que le SVG étiré)
-                        background: `radial-gradient(500px circle at ${x !== null ? x + 'px' : '50%'} ${y !== null ? y + 'px' : '50%'}, rgba(255, 255, 255, 0.05), transparent 100%)`,
+                        background: `radial-gradient(750px circle at ${x !== null ? x + 'px' : '50%'} ${y !== null ? y + 'px' : '50%'}, rgba(255, 255, 255, 0.05), transparent 100%)`,
                     }}
                 />
             )}

@@ -17,59 +17,48 @@ export const subThemes = {
 export default defineConfig({
     sourceColor: subThemes.blue,
     fontStyles: {
-        // display: {
-        //     large: {
-        //         fontWeight: 600,
-        //     },
-        //     medium: {
-        //         fontWeight: 600,
-        //     },
-        //     small: {
-        //         fontWeight: 600,
-        //     },
-        // },
-        // headline: {
-        //     large: {
-        //         fontWeight: 600,
-        //     },
-        //     medium: {
-        //         fontWeight: 600,
-        //     },
-        //     small: {
-        //         fontWeight: 600,
-        //     },
-        // },
-        // title: {
-        //     large: {
-        //         fontWeight: 500,
-        //     },
-        //     medium: {
-        //         fontWeight: 500,
-        //     },
-        //     small: {
-        //         fontWeight: 500,
-        //     },
-        // },
-        body: {
+        display: {
             large: {
-                // fontSize: 1.125,
+                fontWeight: 500,
+                // fontSize: 5,
+                // lineHeight: 5.8,
             },
             medium: {
-                // fontSize: 1,
-                lineHeight: 1.25,
+                fontWeight: 500,
+                // fontSize: 4,
+                // lineHeight: 4.5,
             },
             small: {
-                // fontSize: 0.875,
-                lineHeight: 1.125,
+                fontWeight: 500,
+                // fontSize: 3,
+                // lineHeight: 3.5,
+            },
+        },
+        headline: {
+            large: {
+                fontWeight: 500,
+                // fontSize: 2.5,
+                // lineHeight: 3.5,
+            },
+            medium: {
+                fontWeight: 500,
+                // fontSize: 2,
+                // lineHeight: 2.6,
+            },
+            small: {
+                fontWeight: 500,
+                // fontSize: 1.5,
+                // lineHeight: 2,
             },
         },
     },
     fontFamily: {
-        expressive: ['Montserrat', 'sans-serif'],
-        neutral: ['Roboto', 'sans-serif'],
+        expressive: ["var(--font-clash-grotesk)"],
+        neutral: ["var(--font-inter)"],
     },
     responsiveBreakPoints: {
-        sm: 1.125,
+        lg: 1.2,
+        xl: 1.4,
     },
     subThemes
 

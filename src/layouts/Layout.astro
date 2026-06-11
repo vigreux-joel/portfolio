@@ -14,6 +14,7 @@ import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
 import {ExpertiseSidebarReact} from "../components/expertise/ExpertiseSidebarReact";
+import Font from "astro/components/Font.astro";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -139,7 +140,8 @@ const seoDefault: SEOProps = {
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/png" href="/favicon.png"/>
 
-
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-clash-grotesk" preload />
     <SEO {...seoDefault}/>
 </head>
 <body class="bg-surface dynamic">

@@ -3,6 +3,7 @@ import {Card} from "@components/Card";
 import {Techno} from "@components/Techno";
 import {Line} from '@components/Line';
 import {LinearGradient} from "@components/LinearGradient";
+
 import {Icon, Button} from "@udixio/ui-react";
 
 import astroLogo from "@assets/images/astro-logo.svg?raw";
@@ -42,11 +43,11 @@ import { iCode } from "@udixio/icons-outlined-400/code";
 
     <!-- Le tracé se dédouble : Astro descend tout droit, Angular bifurque -->
     <div class="relative h-20 md:h-28 hidden md:block">
-      <Line fromX={0.04} toX={0.04} client:idle nextTheme="purple" />
-      <Line fromX={0.04} toX={0.56} client:idle nextTheme="purple" />
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle nextTheme="purple" />
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle nextTheme="purple" />
     </div>
 
-    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12">
+    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
       <!-- Astro : le contenu -->
       <div class="flex">
         <div>
@@ -84,8 +85,8 @@ import { iCode } from "@udixio/icons-outlined-400/code";
 
     <!-- Convergence vers le même but (React & Motion) -->
     <div class="relative h-20 md:h-28 hidden md:block">
-      <Line fromX={0.04} toX={0.5} client:idle nextTheme="purple" />
-      <Line fromX={0.56} toX={0.5} client:idle nextTheme="purple" />
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={0} client:idle nextTheme="purple" />
+      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={0} client:idle nextTheme="purple" />
     </div>
 
   </section>
@@ -94,7 +95,7 @@ import { iCode } from "@udixio/icons-outlined-400/code";
   <div class="w-full">
     
     <!-- Ligne de connexion au-dessus de la carte (le merge arrive déjà au centre) -->
-    <div class="max-width padding-x">
+    <div class="max-width">
       <div class="relative h-24 hidden md:block">
         <Line fromX={0.5} toX={0.5} client:idle />
       </div>
@@ -104,64 +105,67 @@ import { iCode } from "@udixio/icons-outlined-400/code";
     </div>
 
     <div class="max-width padding-x">
-      <Card client:load variant="elevated" className="overflow-hidden relative p-0">
+      <div class="relative w-full z-0">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[540px] relative z-10">
+        <Card client:load variant="elevated" className="overflow-hidden relative z-10 p-0 w-full shadow-2xl">
 
-          <!-- Colonne Gauche : Identité + discours animation & Material Design 3 -->
-          <div class="lg:col-span-6 relative z-20 p-8 md:p-16 lg:py-24 lg:pl-24 lg:pr-12 flex flex-col justify-center">
-            <Techno variant="primary" name="React & Motion" image={reactLogo}>
-              <div class="mt-6 text-label-medium text-tertiary uppercase">
-                SaaS • Dashboards • Outils métiers
-              </div>
-            </Techno>
+          <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[540px] relative z-10">
 
-            <p class="mt-10 text-headline-medium md:text-display-small text-on-surface font-light leading-tight">
-              L'animation n'est pas cosmétique. <br/>
-              <span class="text-primary italic font-serif">Elle dirige le regard.</span>
-            </p>
+            <!-- Colonne Gauche : Identité + discours animation & Material Design 3 -->
+            <div class="lg:col-span-6 relative z-20 p-8 md:p-16 lg:py-24 lg:pl-24 lg:pr-12 flex flex-col justify-center">
+              <Techno variant="primary" name="React & Motion" image={reactLogo}>
+                <div class="mt-6 text-label-medium text-tertiary uppercase">
+                  SaaS • Dashboards • Outils métiers
+                </div>
+              </Techno>
 
-            <p class="mt-8 text-body-large md:text-title-large text-on-surface-variant leading-relaxed max-w-prose">
-              Des interfaces hautement interactives, conçues selon les guidelines
-              <span class="text-on-surface">Material Design 3</span> : un design system fluide et cohérent
-              où le mouvement, orchestré avec <span class="text-on-surface">Framer Motion</span>, guide
-              l'expérience, masque la latence réseau et valide les actions de façon organique.
-            </p>
-          </div>
+              <p class="mt-10 text-headline-medium md:text-display-small text-on-surface font-light leading-tight">
+                L'animation n'est pas cosmétique. <br/>
+                <span class="text-primary  ">Elle dirige le regard.</span>
+              </p>
 
-          <!-- Colonne Droite : la vidéo, visuel pleine hauteur (bleed), menant à l'étude de cas -->
-          <a
-            href="/projets/udixio-ui"
-            aria-label="Voir l'étude de cas de ma librairie UI Material 3"
-            class="group relative block lg:col-span-6 min-h-[260px] sm:min-h-[340px] lg:min-h-0 overflow-hidden"
-          >
-            <video
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              autoplay
-              loop
-              muted
-              playsinline
+              <p class="mt-8 text-body-large md:text-title-large text-on-surface-variant leading-relaxed max-w-prose">
+                Des interfaces hautement interactives, conçues selon les guidelines
+                <span class="text-on-surface">Material Design 3</span> : un design system fluide et cohérent
+                où le mouvement, orchestré avec <span class="text-on-surface">Framer Motion</span>, guide
+                l'expérience, masque la latence réseau et valide les actions de façon organique.
+              </p>
+            </div>
+
+            <!-- Colonne Droite : la vidéo, visuel pleine hauteur (bleed), menant à l'étude de cas -->
+            <a
+              href="/projets/udixio-ui"
+              aria-label="Voir l'étude de cas de ma librairie UI Material 3"
+              class="group relative block lg:col-span-6 min-h-[260px] sm:min-h-[340px] lg:min-h-0 overflow-hidden"
             >
-              <source src="/video/output.mp4" type="video/mp4" />
-            </video>
-            <!-- liseré dégradé pour fondre la vidéo dans la carte côté texte -->
-            <div class="absolute inset-0 hidden lg:block pointer-events-none bg-gradient-to-r from-surface/70 via-transparent to-transparent"></div>
-          </a>
+              <video
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                autoplay
+                loop
+                muted
+                playsinline
+              >
+                <source src="/video/output.mp4" type="video/mp4" />
+              </video>
+              <!-- liseré dégradé pour fondre la vidéo dans la carte côté texte -->
+              <div class="absolute inset-0 hidden lg:block pointer-events-none bg-gradient-to-r from-surface/70 via-transparent to-transparent"></div>
+            </a>
 
-        </div>
-
-        <!-- Panneau preuve flottant : chevauche la frontière texte / vidéo -->
-        <div class="relative z-30 m-6 lg:m-0 lg:absolute lg:bottom-10 lg:left-[42%] lg:max-w-sm">
-          <div class="rounded-2xl bg-surface-container-high/95 backdrop-blur shadow-lg ring-1 ring-outline-variant/40 p-6">
-            <p class="text-body-medium text-on-surface-variant">
-              <span class="text-on-surface font-medium">Ma librairie UI</span> — une adaptation de
-              Material Design 3 en Tailwind, que je développe sur mon temps personnel depuis 2024.
-            </p>
-            <Button client:visible className="w-fit mt-4" variant="text" href="/projets/udixio-ui" icon={iArrowOutward} label="Voir l'étude de cas" />
           </div>
-        </div>
 
-      </Card>
+          <!-- Panneau preuve flottant : chevauche la frontière texte / vidéo -->
+
+            <Card variant="elevated" client:load className="p-6  z-30 m-6 lg:m-0 lg:absolute lg:bottom-10 lg:left-[42%] lg:max-w-sm">
+              <p class="text-body-medium text-on-surface-variant">
+                <span class="text-on-surface font-medium">Ma librairie UI</span> — une adaptation de
+                Material Design 3 en Tailwind, que je développe sur mon temps personnel depuis 2024.
+              </p>
+              <Button client:visible className="w-fit mt-4" variant="text" href="/projets/udixio-ui" icon={iArrowOutward} label="Voir l'étude de cas" />
+            </Card>
+
+
+        </Card>
+      </div>
 
       <!-- Ligne de sortie Mobile uniquement -->
       <div class="flex justify-center h-24 lg:hidden">
@@ -170,7 +174,7 @@ import { iCode } from "@udixio/icons-outlined-400/code";
     </div>
 
     <!-- Ligne de connexion en-dessous de la carte -->
-    <div class="max-width padding-x">
+    <div class="max-width">
       <div class="relative h-24 hidden md:block">
         <Line fromX={0.5} toX={0.5} client:idle />
       </div>
@@ -178,9 +182,9 @@ import { iCode } from "@udixio/icons-outlined-400/code";
   </div>
 
   <!-- Connecteur return : centre revient à gauche -->
-  <div class="max-width padding-x">
+  <div class="max-width">
     <div class="relative h-24 md:h-32">
-      <Line fromX={0.5} toX={0.03} client:idle nextTheme="blue" />
+      <Line fromX={0.5} fromPx={0} toX={0} toPx={60} client:idle nextTheme="blue" />
     </div>
   </div>
 
