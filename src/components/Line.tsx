@@ -83,10 +83,12 @@ const loop = (time: number) => {
         prevBottom = maxBottom;
     }
 
-    // Le délai entre chaque comète est basé sur la plus longue ligne * 3
-    // ou au minimum l'équivalent de 2-3 écrans de haut (environ 2500px)
+    // Espacement entre deux comètes : juste un peu plus long que le plus grand
+    // élément (marge +400) pour que la suivante arrive ~0,2 s après que la
+    // précédente soit sortie, sans que deux comètes se chevauchent sur un même
+    // élément. Plancher innerHeight*2 pour les pages sans grand élément.
     const longestLine = Math.max(...lines.map(l => l.total));
-    const COMET_SPACING = Math.max(longestLine + 1000, window.innerHeight * 2);
+    const COMET_SPACING = Math.max(longestLine + 300, window.innerHeight * 1.3);
 
     // 4. Mettre à jour chaque ligne avec une infinité de comètes espacées
     for (const group of groupedLines) {
