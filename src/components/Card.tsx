@@ -13,7 +13,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
     // réagissent dès que le curseur s'APPROCHE (plus seulement au survol).
     //   mx,my = position du curseur relative à la carte (peut sortir de [0,w]/[0,h])
     //   prox  = 0 (au-delà du rayon) → 1 (sur la carte), selon la distance au rectangle
-    const PROXIMITY = 320; // rayon d'activation autour de la carte (px)
+    const PROXIMITY = 500; // rayon d'activation autour de la carte (px)
     const [mouse, setMouse] = useState<{ mx: number; my: number; prox: number }>({ mx: 0, my: 0, prox: 0 });
     useEffect(() => {
         const onMove = (e: MouseEvent) => {
@@ -112,6 +112,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
                 else if (segR <= lenR) { rx = w - (segR - topR - H); ry = H; }
                 else { rx = w - botR; ry = H + (segR - lenR); }
 
+                el.style.setProperty('--energy-r', `${H * 0.5}px`); // lueur = 50% de la hauteur
                 el.style.setProperty('--ex-l', `${lx}px`);
                 el.style.setProperty('--ey-l', `${ly}px`);
                 el.style.setProperty('--ex-r', `${rx}px`);
@@ -173,7 +174,8 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
                     // (haut) vers le point de sortie (bas). tick() déplace les points
                     // (--ex-l,--ey-l) et (--ex-r,--ey-r) le long du contour ; le masque
                     // ne garde que l'anneau de 2px → la lueur suit réellement le bord.
-                    background: `radial-gradient(160px circle at var(--ex-l, -1000px) var(--ey-l, -1000px), var(--color-primary), transparent 70%), radial-gradient(160px circle at var(--ex-r, -1000px) var(--ey-r, -1000px), var(--color-primary), transparent 70%)`,
+                    // Rayon de la lueur = --energy-r (réglé par tick() à 50% de la hauteur de la carte).
+                    background: `radial-gradient(var(--energy-r, 160px) circle at var(--ex-l, -1000px) var(--ey-l, -1000px), var(--color-primary), transparent 70%), radial-gradient(var(--energy-r, 160px) circle at var(--ex-r, -1000px) var(--ey-r, -1000px), var(--color-primary), transparent 70%)`,
                     WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     WebkitMaskComposite: "xor",
                     maskComposite: "exclude",
