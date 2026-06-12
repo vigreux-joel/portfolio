@@ -15,9 +15,18 @@ import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
 import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 import { iCode } from "@udixio/icons-outlined-400/code";
+import {BackgroundColor} from "@components/BackgroundColor.tsx";
 ---
-<div id="front-end" class="theme-purple bg-surface">
+<div id="front-end" class="theme-purple ">
+
   <section class="max-width">
+    <BackgroundColor
+        speed={5_000}
+        size="max(50vw, 800px)"
+        count={5}
+        client:idle
+        className="absolute opacity-20 size-full top-0 left-0"
+    />
 
     <!-- Introduction de Section : sur le spine (ligne continue, alignée au Hero) -->
     <div class="flex  mt-8">
@@ -107,7 +116,7 @@ import { iCode } from "@udixio/icons-outlined-400/code";
     <div class="max-width padding-x">
       <div class="relative w-full z-0">
 
-        <Card energyX="50%" client:load variant="elevated" className="overflow-hidden relative z-10 p-0 w-full shadow-2xl">
+        <Card energyX="50%" client:load variant="elevated" className="group/react overflow-hidden relative z-10 p-0 w-full shadow-2xl">
 
           <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[540px] relative z-10">
 
@@ -155,7 +164,7 @@ import { iCode } from "@udixio/icons-outlined-400/code";
 
           <!-- Panneau preuve flottant : chevauche la frontière texte / vidéo -->
 
-            <Card variant="elevated" client:load className="p-6  z-30 m-6 lg:m-0 lg:absolute lg:bottom-10 lg:left-[42%] lg:max-w-sm">
+            <Card variant="elevated" client:load className="p-6 z-30 m-6 lg:m-0 lg:absolute lg:bottom-8 lg:right-8 lg:max-w-sm opacity-0 translate-y-4 group-hover/react:opacity-100 group-hover/react:translate-y-0 transition-all duration-500 pointer-events-none group-hover/react:pointer-events-auto">
               <p class="text-body-medium text-on-surface-variant">
                 <span class="text-on-surface font-medium">Ma librairie UI</span> : une adaptation de
                 Material Design 3 en Tailwind, que je développe sur mon temps personnel depuis 2024.

@@ -2,6 +2,7 @@
 import { Line } from "@components/Line";
 import { BackgroundColor } from "@components/BackgroundColor";
 import { LinearGradient } from "@components/LinearGradient";
+import { Card } from "@components/Card";
 import { Icon } from "@udixio/ui-react";
 
 import { iCode } from "@udixio/icons-outlined-400/code";
@@ -13,14 +14,6 @@ import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 ---
 
 <section id="accueil" class="tab-menu relative">
-  <BackgroundColor
-    speed={5_000}
-    size="max(50vw, 800px)"
-    count={5}
-    client:idle
-    className="absolute opacity-20 size-full top-0 left-0"
-  />
-
   <div class="max-width flex justify-between h-full pt-32 md:pt-42 xl:pt-54">
     <div class="relative z-10 flex flex-col overflow-visible w-full">
 
@@ -31,7 +24,7 @@ import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
           </div>
           <div class="padding pt-0 pb-16 relative w-full">
             <h1
-              class="text-display-medium xl:text-display-large relative z-10  mb-8"
+              class="text-display-medium xl:text-display-large relative z-10  "
             >
               Mon <span class="block text-gradient">Expertise Technique</span>
             </h1>
@@ -45,35 +38,47 @@ import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
         </div>
         <div class="padding pt-0">
           <p class="text-body-large max-w-3xl">
-            Développeur full-stack depuis 2022, parti d'un titre professionnel
-            Dev Web &amp; Mobile, je conçois aujourd'hui des interfaces React,
-            Astro et Angular, des architectures NestJS scalables et des apps
-            multiplateformes Flutter.
+            Développeur depuis 2022 et diplômé d'un titre pro Web & Mobile, j'accompagne les entreprises dans la création de leurs outils numériques.</p>
+          <p  class=" max-w-3xl mt-8 text-on-surface-variant"> De la conception d'interfaces utilisateurs intuitives à la mise en place en production, je développe des solutions sur-mesure qui répondent à vos enjeux métiers.
           </p>
-          <div class="grid sm:grid-cols-3 gap-4 mt-8 max-w-3xl">
-            <a href="#front-end" class="group rounded-2xl bg-surface-container-high/50 ring-1 ring-outline/15 hover:ring-primary/50 hover:bg-surface-container-high transition-all duration-300 p-5 flex flex-col gap-3">
-              <Icon icon={iCode} className="h-7 w-7 text-primary" />
-              <span class="text-title-small text-on-surface">Front-End</span>
-              <span class="text-body-small text-on-surface-variant flex-1">Interfaces web : Astro, Angular &amp; React</span>
-              <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+          <div class="grid sm:grid-cols-3 gap-4 mt-8 max-w-5xl">
+            <a href="#front-end" class="block outlinenone group">
+              <Card client:load className="h-full p-5 flex items-start gap-4 cursor-pointer ">
+                <Icon icon={iCode} className="h-7 w-7 text-secondary shrink-0 mt-0.5" />
+                <div class="flex flex-col h-full">
+                  <span class="text-title-small ">Interfaces Web</span>
+                  <span class="text-body-small text-on-surface-variant flex-1 mt-1 mb-3">Des applications rapides et interactives, pensées pour vos utilisateurs.</span>
+                  <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                    Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Card>
             </a>
-            <a href="#multiplateforme" class="group rounded-2xl bg-surface-container-high/50 ring-1 ring-outline/15 hover:ring-primary/50 hover:bg-surface-container-high transition-all duration-300 p-5 flex flex-col gap-3">
-              <Icon icon={iDevices} className="h-7 w-7 text-primary" />
-              <span class="text-title-small text-on-surface">Multiplateforme</span>
-              <span class="text-body-small text-on-surface-variant flex-1">Apps mobile, desktop &amp; web : Flutter</span>
-              <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+            <a href="#multiplateforme" class="block  group">
+              <Card client:load className="h-full p-5 flex items-start gap-4 cursor-pointer ">
+                <Icon icon={iDevices} className="h-7 w-7 text-primary shrink-0 mt-0.5" />
+                <div class="flex flex-col h-full">
+                  <span class="text-title-small text-on-surface">Applications Mobiles</span>
+
+                  <span class="text-body-small text-on-surface-variant flex-1 mt-1 mb-3">Une seule application fluide et native pour iOS et Android.</span>
+                  <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                    Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Card>
             </a>
-            <a href="#back-end" class="group rounded-2xl bg-surface-container-high/50 ring-1 ring-outline/15 hover:ring-primary/50 hover:bg-surface-container-high transition-all duration-300 p-5 flex flex-col gap-3">
-              <Icon icon={iApi} className="h-7 w-7 text-primary" />
-              <span class="text-title-small text-on-surface">Back-End</span>
-              <span class="text-body-small text-on-surface-variant flex-1">APIs &amp; architecture : NestJS</span>
-              <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+            <a href="#back-end" class="block  group">
+              <Card client:load className="h-full p-5 flex items-start gap-4 ">
+                <Icon icon={iApi} className="h-7 w-7 text-primary shrink-0 mt-0.5" />
+                <div class="flex flex-col h-full">
+                  <span class="text-title-small text-on-surface">APIs & Architecture</span>
+
+                  <span class="text-body-small text-on-surface-variant flex-1 mt-1mb-3">La logique serveur robuste et sécurisée qui propulse votre projet.</span>
+                  <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                    Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Card>
             </a>
           </div>
         </div>
