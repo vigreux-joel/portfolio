@@ -98,7 +98,7 @@ export const BackgroundColor = ({count = 10, size = "75%", className, speed}: {
 
 
         for (let i = 0; i < numPoints; i++) {
-            colors[i] = i % 3 === 0 ? 'var(--color-tertiary-container)' : 'var(--color-primary-container)';
+            colors[i] = i % 3 === 0 ? 'var(--color-tertiary)' : 'var(--color-primary)';
         }
 
 

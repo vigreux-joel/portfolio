@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {motion, useMotionValueEvent, useScroll} from "motion/react";
 import {Link} from "@components/Link.tsx";
 import {classNames} from "@udixio/ui-react";
-import {themeService} from "@/stores/themeStore.ts";
+import {updateTheme} from "@components/ThemeProvider.tsx";
 
 const content: {
     text: React.ReactNode;
@@ -158,7 +158,7 @@ export const StickyScroll = () => {
 
         const theme = content[closestBreakpointIndex].theme
         if (theme)
-            themeService.updateTheme(theme);
+            updateTheme(theme);
     });
 
     return (

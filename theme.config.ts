@@ -1,21 +1,18 @@
-import {argbFromHex, hexFromArgb} from "@material/material-color-utilities";
+import {hexFromArgb} from "@material/material-color-utilities";
 import {defineConfig} from '@udixio/ui-react';
 import {Hct} from "@udixio/theme";
 
-argbFromHex('#93b5cb')
-
-const source = Hct.fromInt(argbFromHex('#169fff'))
-const newSource = Hct.from(source.hue, 60, 25)
+export const sourceColor = Hct.from(270, 55, 75)
 
 export const subThemes = {
-    blue: hexFromArgb(newSource.toInt()),
+    blue: hexFromArgb(sourceColor.toInt()),
     green: '#81b88e',
     purple: "#bba1da",
     orange: '#e69883'
 }
 
 export default defineConfig({
-    sourceColor: subThemes.blue,
+    sourceColor,
     fontStyles: {
         display: {
             large: {
@@ -61,5 +58,4 @@ export default defineConfig({
         xl: 1.4,
     },
     subThemes
-
 })

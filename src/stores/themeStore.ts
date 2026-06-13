@@ -1,30 +1,12 @@
-import {atom} from 'nanostores'
-import config, {subThemes} from '../../theme.config.ts'
+import {atom} from "nanostores";
+import config from "../../theme.config";
+import {type ConfigInterface} from "@udixio/ui-react";
 
-export const themeStore = atom({
-        sourceColorHex: config.sourceColor
-    }
-)
+export const themeStore = atom<
+    ConfigInterface
+>({...config, subThemes: undefined});
 
+// export const themeServiceStore = atom<API | null>(null);
 
-export const themeService = {
-
-
-    updateTheme: (color: string | keyof typeof subThemes) => {
-
-
-        if (Object.keys(subThemes).includes(color)) {
-            color = subThemes[color as keyof typeof subThemes]
-        }
-
-        if (themeStore.get().sourceColorHex == color) {
-            return
-        }
-        
-
-        themeStore.set({
-            ...themeStore.get(),
-            sourceColorHex: color
-        })
-    },
-}
+// Hex actuellement appliqué au thème (initialisé par ThemeProvider depuis le SSR)
+export const currentSourceHexStore = atom<string | undefined>(undefined);

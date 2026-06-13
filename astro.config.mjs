@@ -72,7 +72,14 @@ export default defineConfig({
         plugins: [tailwindcss(), vitePlugin()],
         ssr: {
             noExternal: ["react-markdown", "@udixio/theme", "@udixio/tailwind", "@udixio/ui-react", "react-obfuscate", "react-google-recaptcha-v3", "tailwindcss"]
-        }
+        },
+        optimizeDeps: {
+            exclude: [
+                "@udixio/ui-react",
+                "@udixio/ui-react/theme-worker",
+
+            ],
+        },
     },
     adapter: vercel()
 });

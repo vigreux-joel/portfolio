@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Icon } from "@udixio/ui-react";
-import { iInfo } from "@udixio/icons-outlined-400/info";
-import { iDevices } from "@udixio/icons-outlined-400/devices";
-import { iApi } from "@udixio/icons-outlined-400/api";
-import { iManufacturing } from "@udixio/icons-outlined-400/manufacturing";
-import { iSelectWindow } from "@udixio/icons-outlined-400/select_window";
+import {useEffect, useRef, useState} from "react";
+import {AnimatePresence, motion} from "motion/react";
+import {Icon} from "@udixio/ui-react";
+import {iInfo} from "@udixio/icons-outlined-400/info";
+import {iDevices} from "@udixio/icons-outlined-400/devices";
+import {iApi} from "@udixio/icons-outlined-400/api";
+import {iManufacturing} from "@udixio/icons-outlined-400/manufacturing";
+import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
+import {updateTheme} from "@components/ThemeProvider.tsx";
 
 const initialLinks = [
     { id: "accueil", label: "Intro", icon: iInfo },
@@ -21,6 +22,48 @@ export const ExpertiseSidebarReact = () => {
     const [hoveredId, setHoveredId] = useState<string | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [dynamicLinks, setDynamicLinks] = useState(initialLinks.map(l => ({ ...l, svgHtml: null as string | null })));
+
+    // Synchronisation du thème global du site (couleurs neutres : FAB, fond, etc.)
+    // au fil du scroll, à partir de la classe `theme-*` portée par chaque section.
+    // Les classes `theme-*` restent sur les sections pour leur theming local ;
+    // ici on ne fait que piloter la couleur source globale.
+    //
+    // On observe UNIQUEMENT les sections déclarées dans la sidebar, et pas tous les
+    // éléments `theme-*` : la page contient aussi des dégradés décoratifs (overlays,
+    // <stop> SVG dont `className` n'est pas une string) qui fausseraient la couleur
+    // — ou la feraient planter. On lit la classe via `classList` (robuste sur SVG).
+    // On réutilise la même bande d'observation que le lien actif (~40% de l'écran)
+    // pour qu'une seule section pilote le thème à la fois. Les sections sans classe
+    // `theme-*` (ex: #multiplateforme, imbriquée dans #front-end) sont ignorées :
+    // le thème de la section parente persiste alors naturellement.
+    useEffect(() => {
+        const themedSections = initialLinks
+            .map((link) => document.getElementById(link.id))
+            .filter(
+                (el): el is HTMLElement =>
+                    !!el && Array.from(el.classList).some((cls) => cls.startsWith("theme-"))
+            );
+        if (themedSections.length === 0) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const themeClass = Array.from(entry.target.classList).find((cls) =>
+                        cls.startsWith("theme-")
+                    );
+                    if (themeClass) {
+                        updateTheme(themeClass.replace("theme-", ""));
+                    }
+                });
+            },
+            { rootMargin: "-40% 0px -60% 0px" }
+        );
+
+        themedSections.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const sections = document.querySelectorAll('#accueil, #front-end, #multiplateforme, #back-end, #philosophie, #faq');
