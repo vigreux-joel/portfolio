@@ -5,7 +5,7 @@ import {v4 as uuidv4} from "uuid";
 import {useIsPowered} from "../hooks/useIsPowered";
 import {type EnergyNodeRegistration, registerEnergyNode, unregisterEnergyNode} from "./Line";
 
-export const Card = ({children, className, variant = "elevated", energyX, energyXOut, ...restProps}: any) => {
+export const Card = ({children, className, variant = "elevated", energyX, energyXOut, proximityPercent = 100, ...restProps}: any) => {
 
     const ref = useRef<any>(null);
 
@@ -13,18 +13,20 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
     // réagissent dès que le curseur s'APPROCHE (plus seulement au survol).
     //   mx,my = position du curseur relative à la carte (peut sortir de [0,w]/[0,h])
     //   prox  = 0 (au-delà du rayon) → 1 (sur la carte), selon la distance au rectangle
-    const PROXIMITY = 500; // rayon d'activation autour de la carte (px)
     const [mouse, setMouse] = useState<{ mx: number; my: number; prox: number }>({ mx: 0, my: 0, prox: 0 });
     useEffect(() => {
         const onMove = (e: MouseEvent) => {
             const el = ref.current;
             if (!el) return;
             const rect = el.getBoundingClientRect();
+            // rayon d'activation autour de la carte basé sur un pourcentage de sa taille maximale
+            const proximityPx = Math.max(rect.width, rect.height) * (proximityPercent / 100);
             // distance du curseur au rectangle de la carte (0 si à l'intérieur)
             const dx = Math.max(rect.left - e.clientX, 0, e.clientX - rect.right);
             const dy = Math.max(rect.top - e.clientY, 0, e.clientY - rect.bottom);
             const dist = Math.hypot(dx, dy);
-            const prox = Math.max(0, 1 - dist / PROXIMITY);
+            // evite la division par zéro si proximityPx est 0
+            const prox = proximityPx > 0 ? Math.max(0, 1 - dist / proximityPx) : (dist === 0 ? 1 : 0);
             setMouse(prev => {
                 // loin et déjà éteint → on évite un re-render à chaque mouvement de souris
                 if (prox === 0 && prev.prox === 0) return prev;
