@@ -3,7 +3,6 @@ import {Card} from "@components/Card";
 import {Techno} from "@components/Techno";
 import {Line} from '@components/Line';
 import {LinearGradient} from "@components/LinearGradient";
-import {FrontEndUxScroll} from "@components/expertise/FrontEndUxScroll";
 
 import {Icon, Button} from "@udixio/ui-react";
 
@@ -53,11 +52,11 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
       <!-- Astro : le contenu -->
       <div class="flex">
         <div>
-          <Line client:idle image={astroLogo}  />
+          <Line client:idle image={astroLogo} isLast  />
         </div>
         <div class="padding pt-8 md:pt-0">
           <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">Le contenu</span>
-          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Astro & React</h3>
+          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Astro / React</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
             Pour les sites où la performance prime : Astro génère un HTML statique ultra-rapide pour un SEO optimal, tandis que React s'intègre par îlots pour apporter une interactivité riche et dynamique exactement là où c'est nécessaire.
           </p>
@@ -74,7 +73,7 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
         </div>
         <div class="padding pt-8 md:pt-0">
           <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">L'application</span>
-          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Angular & Svelte</h3>
+          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Angular / Svelte</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
             Pour les applications web avancées : Angular offre une architecture stricte et robuste pour maintenir de grandes bases de code dans le temps, tandis que Svelte apporte une réactivité native inégalée et une légèreté maximale pour des interfaces fluides.
           </p>
@@ -85,11 +84,6 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
       </div>
     </div>
 
-    <!-- Fade out de la ligne gauche avant le bandeau. La ligne droite continue. -->
-    <div class="relative h-16 md:h-24 hidden md:block">
-      <Line fromX={0} fromPx={60} toX={0} toPx={60} isLast client:idle />
-      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={76} client:idle />
-    </div>
 
     <!-- Bandeau technique (sans espace à gauche) -->
     <div class="max-width relative">
@@ -123,124 +117,19 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
       </div>
     </div>
 
-    <!-- Fade in de la ligne gauche après le bandeau. La ligne droite continue. -->
-    <div class="relative h-16 md:h-24 hidden md:block">
-      <Line fromX={0} fromPx={60} toX={0} toPx={60} isFirst client:idle />
-      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={76} client:idle />
-    </div>
 
-    <!-- Convergence directement vers le centre -->
+
+    <!-- Convergence vers la gauche -->
     <div class="relative h-20 md:h-28 hidden md:block">
-      <Line fromX={0} fromPx={60} toX={0.5} toPx={0} client:idle />
-      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={0} client:idle  />
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle  />
     </div>
 
-    <!-- Ligne de fin de Séquence 1 (isLast, centrée) -->
+    <!-- Ligne de fin de Séquence 1 (isLast, à gauche) -->
     <div class="relative h-16 md:h-24 hidden md:block">
-      <Line fromX={0.5} toX={0.5} isLast client:idle />
+      <Line fromX={0} fromPx={60} toX={0} toPx={60}  client:idle  />
     </div>
 
     </div>
-  </section>
-
-  <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
-  <section >
-
-
-
-
-    <!-- Titre de la section (centré, suite logique de la ligne) -->
-    <div class="max-width padding-x text-center mt-8 mb-12 md:mb-16">
-      <h2 class="text-title-large text-tertiary">Experience utilisateur</h2>
-      <h3 class="relative reveal-light group mt-6 text-headline-medium md:text-display-small font-light leading-tight">
-        <span class="text-on-surface transition-opacity duration-1000 group-[.light]:opacity-0">Démarquez votre produit au premier regard</span>
-        <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Démarquez votre produit au premier regard</span>
-      </h3>
-      <p class="mt-4 text-headline-small md:text-headline-medium text-on-surface-variant max-w-prose mx-auto">
-        J'anime vos interfaces avec des animations qui captent l'attention
-      </p>
-    </div>
-
-    <div class="max-width relative z-20">
-      <FrontEndUxScroll client:idle />
-    </div>
-
-    <!-- Ligne de connexion en-dessous de la carte -->
-    <div class="max-width">
-      <div class="relative h-24 hidden md:block">
-        <Line fromX={0.5} toX={0.5} client:idle />
-      </div>
-    </div>
-
-    <!-- Connecteur return : centre revient à gauche -->
-    <div class="max-width">
-      <div class="relative h-24 md:h-32">
-        <Line fromX={0.5} fromPx={0} toX={0} toPx={60} client:idle />
-      </div>
-    </div>
-  </section>
-
-
-
-  <section id="multiplateforme">
-    <div class="max-width">
-      <div class="flex">
-        <div>
-          <Line client:idle  icon={iDevices}/>
-        </div>
-        <div class="padding pt-8">
-          <div class="flex items-center md:flex-row flex-col">
-            <div class="left">
-              <h2 class="text-title-large text-tertiary">Développement
-                multiplateforme</h2>
-              <div
-                   class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-                <h3 class="text-gradient">Touchez un public plus large</h3>
-                <p>Je convertis vos idées en applications adaptables à tous les
-                  appareils</p>
-              </div>
-              <p class="max-w-prose mt-8 text-body-large">
-                Flutter me permet de créer des applications pour
-                mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
-                particulièrement
-                son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
-                travail.</p>
-
-            </div>
-          </div>
-          <!-- Bandeau d'icônes plateformes : une base de code, tous les écrans -->
-          <div class="mt-12">
-            <span class="text-label-large uppercase tracking-wide text-tertiary">Une base de code → tous les écrans</span>
-            <div class="mt-6 flex flex-wrap items-start gap-x-10 gap-y-6 text-on-surface-variant">
-              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-                <Icon className="h-9 w-9" icon={iSelectWindow}/>
-                <span class="text-label-medium">Web</span>
-              </div>
-              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-                <Icon className="h-9 w-9" icon={faApple}/>
-                <span class="text-label-medium">iOS</span>
-              </div>
-              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-                <Icon className="h-9 w-9" icon={faAndroid}/>
-                <span class="text-label-medium">Android</span>
-              </div>
-              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-                <Icon className="h-9 w-9" icon={faWindows}/>
-                <span class="text-label-medium">Windows</span>
-              </div>
-              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-                <Icon className="h-9 w-9" icon={faApple}/>
-                <span class="text-label-medium">macOS</span>
-              </div>
-              <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-                <Icon className="h-9 w-9" icon={faLinux}/>
-                <span class="text-label-medium">Linux</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <LinearGradient nextTheme="green"/>
   </section>
 </div>

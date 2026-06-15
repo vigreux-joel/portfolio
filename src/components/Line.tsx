@@ -176,7 +176,7 @@ export const Line = ({
     const rawId = useId();
     const uid = rawId.replace(/:/g, '');
 
-    const isConnector = fromX !== undefined;
+    const isConnector = fromX !== undefined || toX !== undefined;
     const effectiveToX = toX ?? fromX ?? 0;
 
     const [yRange, setYRange] = useState<[number, number]>([0, 1]);
@@ -356,15 +356,14 @@ export const Line = ({
         linesSet.add(lineObj);
         return () => { linesSet.delete(lineObj); };
     }, []);
-
     const svgW = isConnector ? svgSize.width : SIDEBAR_W;
-    const pathFromX = isConnector ? fromX! : 0.5;
-    const pathToX = isConnector ? effectiveToX : 0.5;
+    const pathFromX = isConnector ? (fromX ?? 0) : 0.5;
+    const pathToX = isConnector ? (toX ?? pathFromX) : 0.5;
     
     // Auto-adjust pixel offsets for mobile spine (28px) vs desktop spine (60px) if they match 60
     const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
-    let finalFromPx = fromPx ?? 0;
-    let finalToPx = toPx ?? fromPx ?? 0;
+    let finalFromPx = fromPx ?? (pathFromX === 0 || pathFromX === 1 ? 60 : 0);
+    let finalToPx = toPx ?? (pathToX === 0 || pathToX === 1 ? 60 : 0);
     
     if (isMobile) {
         if (finalFromPx === 60) finalFromPx = 28;
