@@ -3,6 +3,7 @@ import {Card} from "@components/Card";
 import {Techno} from "@components/Techno";
 import {Line} from '@components/Line';
 import {LinearGradient} from "@components/LinearGradient";
+import {FrontEndUxScroll} from "@components/expertise/FrontEndUxScroll";
 
 import {Icon, Button} from "@udixio/ui-react";
 
@@ -84,24 +85,20 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
       </div>
     </div>
 
-    <!-- Convergence vers le même but -->
-    <div class="relative h-20 md:h-28 hidden md:block">
-      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
-      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle  />
-    </div>
-
-    <!-- Ligne au-dessus du bandeau (isLast) -->
+    <!-- Fade out de la ligne gauche avant le bandeau. La ligne droite continue. -->
     <div class="relative h-16 md:h-24 hidden md:block">
       <Line fromX={0} fromPx={60} toX={0} toPx={60} isLast client:idle />
+      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={76} client:idle />
     </div>
 
-    <!-- Bandeau technique -->
-    <div class="max-width">
-      <div class="flex">
-        <!-- Espace pour s'aligner parfaitement avec les blocs Astro/Angular -->
-        <div>
-          <Line visible={false} client:idle />
-        </div>
+    <!-- Bandeau technique (sans espace à gauche) -->
+    <div class="max-width relative">
+      <!-- La ligne droite continue en arrière-plan -->
+      <div class="absolute inset-0 hidden md:block z-0">
+         <Line fromX={0.5} fromPx={76} toX={0.5} toPx={76} client:idle />
+      </div>
+
+      <div class="flex relative z-10">
         <div class="padding py-8 md:py-12 w-full">
           <span class="text-label-large uppercase tracking-[0.2em] text-tertiary block text-left">Des fondations robustes</span>
           <div class="mt-6 flex flex-wrap justify-start gap-x-10 gap-y-6 text-on-surface-variant">
@@ -125,100 +122,47 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
         </div>
       </div>
     </div>
+
+    <!-- Fade in de la ligne gauche après le bandeau. La ligne droite continue. -->
+    <div class="relative h-16 md:h-24 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} isFirst client:idle />
+      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={76} client:idle />
+    </div>
+
+    <!-- Convergence directement vers le centre -->
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={0} client:idle />
+      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={0} client:idle  />
+    </div>
+
+    <!-- Ligne de fin de Séquence 1 (isLast, centrée) -->
+    <div class="relative h-16 md:h-24 hidden md:block">
+      <Line fromX={0.5} toX={0.5} isLast client:idle />
+    </div>
+
     </div>
   </section>
 
   <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
   <section >
 
-    <!-- Ligne de connexion au-dessus de la carte -->
-    <div class="max-width">
-      <div class="relative h-24 hidden md:block">
-        <Line fromX={0} fromPx={60} toX={0.5} toPx={0} isFirst client:idle />
-      </div>
-      <div class="relative h-12 md:hidden">
-        <Line fromX={0} fromPx={28} toX={0.5} toPx={0} isFirst client:idle />
-      </div>
+
+
+
+    <!-- Titre de la section (centré, suite logique de la ligne) -->
+    <div class="max-width padding-x text-center mt-8 mb-12 md:mb-16">
+      <h2 class="text-title-large text-tertiary">Experience utilisateur</h2>
+      <h3 class="relative reveal-light group mt-6 text-headline-medium md:text-display-small font-light leading-tight">
+        <span class="text-on-surface transition-opacity duration-1000 group-[.light]:opacity-0">Démarquez votre produit au premier regard</span>
+        <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Démarquez votre produit au premier regard</span>
+      </h3>
+      <p class="mt-4 text-headline-small md:text-headline-medium text-on-surface-variant max-w-prose mx-auto">
+        J'anime vos interfaces avec des animations qui captent l'attention
+      </p>
     </div>
 
-    <div class="max-width padding-x relative">
-      <BackgroundColor
-          speed={7_500}
-          size="max(100%, 800px)"
-          count={3}
-          client:idle
-          className="absolute opacity-40 size-full top-0 left-0 "
-      />
-      <div class="relative w-full z-0">
-
-        <Card energyX="50%" client:load variant="elevated" className="group/react overflow-hidden relative z-10 p-0 w-full shadow-2xl">
-
-          <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[540px] relative z-10">
-
-            <!-- Colonne Gauche : Identité + discours animation & Material Design 3 -->
-            <div class="lg:col-span-6 relative z-20  padding flex flex-col justify-center ">
-
-              <h2 class="text-title-large text-tertiary">Experience utilisateur</h2>
-
-              <h3 class="relative reveal-light group mt-10 text-headline-medium md:text-display-small font-light leading-tight">
-                <span class="text-on-surface transition-opacity duration-1000 group-[.light]:opacity-0">Démarquez votre produit au premier regard</span>
-                <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Démarquez votre produit au premier regard</span>
-              </h3>
-
-              <p class="mt-4 text-headline-small md:text-headline-medium text-on-surface">
-                J'anime vos interfaces avec des animations qui captent l'attention
-              </p>
-
-              <div class="mt-8 flex flex-col gap-6 text-body-large text-on-surface-variant leading-relaxed max-w-prose">
-                <p>
-                  <strong class="text-on-surface font-medium">Architecture UI :</strong> 
-                  Habitué aux standards comme <a href="/projets/udixio-ui" class="text-on-surface underline hover:text-primary transition-colors">Material 3</a>, j'intègre vos maquettes avec une exigence millimétrée. Je traduis votre charte graphique en un système technique solide, pour garantir un rendu visuel harmonieux, sans la moindre friction pour vous.
-                </p>
-                <p>
-                  <strong class="text-on-surface font-medium">Motion Design & Fluidité :</strong> 
-                  Je maîtrise pleinement Motion, ce qui me permet de créer rapidement des designs fluides, des transitions organiques et des comportements animés 100% customisés.
-                </p>
-              </div>
-            </div>
-
-            <!-- Colonne Droite : la vidéo, visuel pleine hauteur (bleed), menant à l'étude de cas -->
-            <a
-              href="/projets/udixio-ui"
-              aria-label="Voir l'étude de cas de ma librairie UI Material 3"
-              class="group relative block lg:col-span-6 min-h-[260px] sm:min-h-[340px] lg:min-h-0 overflow-hidden"
-            >
-              <video
-                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                autoplay
-                loop
-                muted
-                playsinline
-              >
-                <source src="/video/output.mp4" type="video/mp4" />
-              </video>
-              <!-- liseré dégradé pour fondre la vidéo dans la carte côté texte -->
-              <div class="absolute inset-0 hidden lg:block pointer-events-none bg-gradient-to-r from-surface/70 via-transparent to-transparent"></div>
-            </a>
-
-          </div>
-
-          <!-- Panneau preuve flottant : chevauche la frontière texte / vidéo -->
-
-            <Card variant="elevated" client:load className="p-6 z-30 m-6 lg:m-0 lg:absolute lg:bottom-8 lg:right-8 lg:max-w-sm opacity-0 translate-y-4 group-hover/react:opacity-100 group-hover/react:translate-y-0 transition-all duration-500 pointer-events-none group-hover/react:pointer-events-auto">
-              <p class="text-body-medium text-on-surface-variant">
-                Découvrez <span class="text-on-surface font-medium">Udixio UI</span>, mon étude de cas sur l'architecture et l'intégration de composants selon les standards Material 3.
-              </p>
-              <Button client:visible className="w-fit mt-4" variant="text" href="/projets/udixio-ui" icon={iArrowOutward} label="Voir l'étude de cas" />
-            </Card>
-
-
-        </Card>
-      </div>
-
-      <!-- Ligne de sortie Mobile uniquement -->
-      <div class="flex justify-center h-24 lg:hidden">
-         <Line client:idle />
-      </div>
+    <div class="max-width relative z-20">
+      <FrontEndUxScroll client:idle />
     </div>
 
     <!-- Ligne de connexion en-dessous de la carte -->
