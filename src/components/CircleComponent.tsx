@@ -23,7 +23,10 @@ export const CircleComponent: FC<{
     const resolvedRef = defaultRef ?? useRef(null);
 
 
-    const [transformPosition, setTransformPosition] = useState({x: 0, y: 0});
+    const [currentPos, setCurrentPos] = useState<{x: number | string, y: number | string}>({
+        x: position.x * 100 + "%",
+        y: position.y * 100 + "%"
+    });
 
     useEffect(() => {
         if (speed === null) return;
@@ -35,16 +38,26 @@ export const CircleComponent: FC<{
                 const elemWidth = 50;
                 const elemHeight = 50;
 
+                // position actuelle en pixels
+                const currentX = typeof currentPos.x === "string" ? parentWidth * position.x : currentPos.x;
+                const currentY = typeof currentPos.y === "string" ? parentHeight * position.y : currentPos.y;
+
                 // delta limité pour lisser le mouvement
                 const maxStep = 1000; // distance max à parcourir par mouvement
-                let newX = transformPosition.x + (Math.random() * 2 - 1) * maxStep;
-                let newY = transformPosition.y + (Math.random() * 2 - 1) * maxStep;
+                
+                // On calcule la nouvelle position absolue souhaitée
+                let absoluteX = currentX + (Math.random() * 2 - 1) * maxStep;
+                let absoluteY = currentY + (Math.random() * 2 - 1) * maxStep;
 
                 // clamp pour ne pas sortir du parent
-                newX = Math.min(parentWidth - elemWidth, Math.max(0, newX));
-                newY = Math.min(parentHeight - elemHeight, Math.max(0, newY));
+                absoluteX = Math.min(parentWidth - elemWidth / 2, Math.max(elemWidth / 2, absoluteX));
+                absoluteY = Math.min(parentHeight - elemHeight / 2, Math.max(elemHeight / 2, absoluteY));
 
-                setTransformPosition({x: newX, y: newY});
+                // on met à jour la position top/left directement
+                setCurrentPos({
+                    x: absoluteX, 
+                    y: absoluteY
+                });
             }
         };
 
@@ -60,23 +73,25 @@ export const CircleComponent: FC<{
             // cleanup
             return () => clearInterval(interval);
         }, initialDelay);
-    }, [speed]);
+    }, [speed, position, currentPos]);
 
     return (
         <svg
             ref={resolvedRef}
             style={{
-                top: position.y * 100 + "%",
-                left: position.x * 100 + "%",
+                top: typeof currentPos.y === 'number' ? `${currentPos.y}px` : currentPos.y,
+                left: typeof currentPos.x === 'number' ? `${currentPos.x}px` : currentPos.x,
                 width,
                 aspectRatio: 1,
                 opacity: isVisible ? 1 : 0,
-                transform: `translate(${transformPosition.x}px, ${transformPosition.y}px) translate(-50%, -50%)`,
+                // Utilisation de la propriété CSS "translate" moderne (indépendante de "transform")
+                // pour le centrage, ce qui permet à top/left de gérer tout le déplacement.
+                translate: "-50% -50%",
                 transformOrigin: "center",
-                transition: `top 8s linear,
-                     left 8s linear,
-                     background 2s,
-                     transform ${(speed ?? 5000) / 1000}s linear
+                willChange: "top, left",
+                transition: `top ${(speed ?? 5000) / 1000}s linear,
+                     left ${(speed ?? 5000) / 1000}s linear,
+                     background 2s
                      `,
             }}
             className={"absolute mix-blend-hue h-auto transition-all duration-2000 " + className}

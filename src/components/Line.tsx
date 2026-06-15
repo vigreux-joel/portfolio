@@ -148,6 +148,8 @@ export const Line = ({
     toX,
     fromPx,
     toPx,
+    isFirst,
+    isLast,
 }: {
     nextTheme?: string;
     icon?: Icon;
@@ -162,6 +164,8 @@ export const Line = ({
     fromPx?: number;
     /** Connector mode: pixel offset added to toX. Defaults to fromPx. */
     toPx?: number;
+    isFirst?: boolean;
+    isLast?: boolean;
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
@@ -376,13 +380,16 @@ export const Line = ({
     const glowId = `glow-${uid}`;
     const gradId = `lg-${uid}`;
 
+    const needsGradient = nextTheme || isFirst || isLast;
+
     const svgContent = pathD ? (
         <>
             <defs>
-                {nextTheme && (
+                {needsGradient && (
                     <linearGradient id={gradId} x1="0" y1="0" x2="0" y2={svgSize.height} gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="1"/>
-                        <stop className={`theme-${nextTheme}`} offset="100%" stopColor="var(--color-primary)" stopOpacity="1"/>
+                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={isFirst ? "0" : "1"}/>
+                        {(isFirst || isLast) && <stop offset="50%" stopColor="var(--color-primary)" stopOpacity="1"/>}
+                        <stop className={nextTheme ? `theme-${nextTheme}` : ""} offset="100%" stopColor="var(--color-primary)" stopOpacity={isLast ? "0" : "1"}/>
                     </linearGradient>
                 )}
                 <linearGradient id={`streamGrad-${uid}`} ref={streamGradRef} gradientUnits="userSpaceOnUse">
@@ -396,7 +403,7 @@ export const Line = ({
                     pathLength: pathLengthVal as any,
                     opacity: visible ? 1 : pathOpacity 
                 }}
-                stroke={nextTheme ? `url(#${gradId})` : "var(--color-primary)"}
+                stroke={needsGradient ? `url(#${gradId})` : "var(--color-primary)"}
                 strokeOpacity={0.5}
                 strokeWidth={3}
                 fill="none"

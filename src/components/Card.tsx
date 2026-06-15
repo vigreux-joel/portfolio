@@ -162,7 +162,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
         </AnimatePresence>
 
         {/* Bordure lumineuse (Energie qui passe) */}
-        {resolvedEnergyX !== undefined && (
+        {resolvedEnergyX !== undefined && isPowered && (
             <div
                 ref={energyBorderRef}
                 // z-30 : au-dessus du contenu (vidéo, texte) pour que la lueur du bord

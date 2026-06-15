@@ -9,6 +9,10 @@ import {Icon, Button} from "@udixio/ui-react";
 import astroLogo from "@assets/images/astro-logo.svg?raw";
 import reactLogo from "@assets/images/react-logo.svg?raw";
 import angularLogo from "@assets/images/angular-logo.svg?raw";
+import tsLogo from "@assets/images/ts-logo.svg?raw";
+import tailwindLogo from "@assets/images/tailwind-logo.svg?raw";
+import motionLogo from "@assets/images/framer-motion-logo.svg?raw";
+import sassLogo from "@assets/images/sass-logo.svg?raw";
 
 import {iDevices} from "@udixio/icons-outlined-400/devices";
 import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
@@ -27,16 +31,11 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
         <Line client:idle icon={iCode} nextTheme="purple" />
       </div>
       <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
-        <span class="block text-label-large uppercase tracking-[0.25em] text-tertiary mb-6">
-          Ingénierie Front-End
-        </span>
-        <h2
-          class="relative reveal-light group text-display-medium md:text-display-large leading-[0.95] text-on-surface"
-          data-sidebar-label="Front-end"
-        >
-          <span class="text-on-surface-variant transition-opacity duration-1000 group-[.light]:opacity-0">Tout ce que l'utilisateur<br/>voit et touche.</span>
-          <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Tout ce que l'utilisateur<br/>voit et touche.</span>
-        </h2>
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Front-end">Ingénierie Front-End</h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+          <h3 class="text-gradient">Un produit bien construit fait la différence</h3>
+          <p>Je pose les fondations techniques pour qu'il dure et s'adapte à vos besoins</p>
+        </div>
         <p class="mt-8 text-body-large text-on-surface-variant max-w-prose">
           Je ne pars jamais d'un framework par défaut. Je choisis l'architecture front-end selon votre produit, ses contraintes de performance et l'échelle visée.
         </p>
@@ -57,9 +56,9 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
         </div>
         <div class="padding pt-8 md:pt-0">
           <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">Le contenu</span>
-          <h3 class="text-headline-small md:text-headline-medium text-on-surface mt-2">Astro</h3>
+          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Astro & React</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
-            Pour les sites où la performance et le référencement priment : Astro génère un HTML statique, sans JavaScript superflu. Le contenu s'affiche instantanément, avec un SEO optimal et une empreinte minimale côté visiteur.
+            Pour les sites où la performance prime : Astro génère un HTML statique ultra-rapide pour un SEO optimal, tandis que React s'intègre par îlots pour apporter une interactivité riche et dynamique exactement là où c'est nécessaire.
           </p>
           <span class="block mt-5 text-label-medium text-tertiary uppercase">
             Portfolios • Sites éditoriaux • Sites vitrines
@@ -74,9 +73,9 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
         </div>
         <div class="padding pt-8 md:pt-0">
           <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">L'application</span>
-          <h3 class="text-headline-small md:text-headline-medium text-on-surface mt-2">Angular</h3>
+          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Angular & Svelte</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
-            Pour les applications complexes destinées à durer : structure stricte, modules cloisonnés et injection de dépendances gardent une grande base de code fiable et maintenable dans le temps.
+            Pour les applications web avancées : Angular offre une architecture stricte et robuste pour maintenir de grandes bases de code dans le temps, tandis que Svelte apporte une réactivité native inégalée et une légèreté maximale pour des interfaces fluides.
           </p>
           <span class="block mt-5 text-label-medium text-tertiary uppercase">
             ERP • Portails métier • Applications internes
@@ -85,28 +84,71 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
       </div>
     </div>
 
-    <!-- Convergence vers le même but (React & Motion) -->
+    <!-- Convergence vers le même but -->
     <div class="relative h-20 md:h-28 hidden md:block">
-      <Line fromX={0} fromPx={60} toX={0.5} toPx={0} client:idle />
-      <Line fromX={0.5} fromPx={76} toX={0.5} toPx={0} client:idle  />
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle  />
+    </div>
+
+    <!-- Ligne au-dessus du bandeau (isLast) -->
+    <div class="relative h-16 md:h-24 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} isLast client:idle />
+    </div>
+
+    <!-- Bandeau technique -->
+    <div class="max-width">
+      <div class="flex">
+        <!-- Espace pour s'aligner parfaitement avec les blocs Astro/Angular -->
+        <div>
+          <Line visible={false} client:idle />
+        </div>
+        <div class="padding py-8 md:py-12 w-full">
+          <span class="text-label-large uppercase tracking-[0.2em] text-tertiary block text-left">Des fondations robustes</span>
+          <div class="mt-6 flex flex-wrap justify-start gap-x-10 gap-y-6 text-on-surface-variant">
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={tsLogo} />
+              <span class="text-label-medium">TypeScript</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={tailwindLogo} />
+              <span class="text-label-medium">Tailwind CSS</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={motionLogo} />
+              <span class="text-label-medium">Motion</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={sassLogo} />
+              <span class="text-label-medium">CSS / Sass</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     </div>
   </section>
 
   <!-- Séquence 2 : L'Apothéose Immersive (React + Motion) -->
   <section >
-    
-    <!-- Ligne de connexion au-dessus de la carte (le merge arrive déjà au centre) -->
+
+    <!-- Ligne de connexion au-dessus de la carte -->
     <div class="max-width">
       <div class="relative h-24 hidden md:block">
-        <Line fromX={0.5} toX={0.5} client:idle />
+        <Line fromX={0} fromPx={60} toX={0.5} toPx={0} isFirst client:idle />
       </div>
       <div class="relative h-12 md:hidden">
-        <Line fromX={0.5} toX={0.5} client:idle />
+        <Line fromX={0} fromPx={28} toX={0.5} toPx={0} isFirst client:idle />
       </div>
     </div>
 
-    <div class="max-width padding-x">
+    <div class="max-width padding-x relative">
+      <BackgroundColor
+          speed={7_500}
+          size="max(100%, 800px)"
+          count={3}
+          client:idle
+          className="absolute opacity-40 size-full top-0 left-0 "
+      />
       <div class="relative w-full z-0">
 
         <Card energyX="50%" client:load variant="elevated" className="group/react overflow-hidden relative z-10 p-0 w-full shadow-2xl">
@@ -114,24 +156,29 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
           <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[540px] relative z-10">
 
             <!-- Colonne Gauche : Identité + discours animation & Material Design 3 -->
-            <div class="lg:col-span-6 relative z-20 p-8 md:p-16 lg:py-24 lg:pl-24 lg:pr-12 flex flex-col justify-center">
-              <Techno variant="primary" name="React & Motion" image={reactLogo}>
-                <div class="mt-6 text-label-medium text-tertiary uppercase">
-                  SaaS • Dashboards • Outils métiers
-                </div>
-              </Techno>
+            <div class="lg:col-span-6 relative z-20  padding flex flex-col justify-center ">
 
-              <p class="mt-10 text-headline-medium md:text-display-small text-on-surface font-light leading-tight">
-                L'animation n'est pas cosmétique. <br/>
-                <span class="text-primary  ">Elle dirige le regard.</span>
+              <h2 class="text-title-large text-tertiary">Experience utilisateur</h2>
+
+              <h3 class="relative reveal-light group mt-10 text-headline-medium md:text-display-small font-light leading-tight">
+                <span class="text-on-surface transition-opacity duration-1000 group-[.light]:opacity-0">Démarquez votre produit au premier regard</span>
+                <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Démarquez votre produit au premier regard</span>
+              </h3>
+
+              <p class="mt-4 text-headline-small md:text-headline-medium text-on-surface">
+                J'anime vos interfaces avec des animations qui captent l'attention
               </p>
 
-              <p class="mt-8 text-body-large md:text-title-large text-on-surface-variant leading-relaxed max-w-prose">
-                Des interfaces hautement interactives, conçues selon les guidelines
-                <span class="text-on-surface">Material Design 3</span> : un design system fluide et cohérent
-                où le mouvement, orchestré avec <span class="text-on-surface">Framer Motion</span>, guide
-                l'expérience, masque la latence réseau et valide les actions de façon organique.
-              </p>
+              <div class="mt-8 flex flex-col gap-6 text-body-large text-on-surface-variant leading-relaxed max-w-prose">
+                <p>
+                  <strong class="text-on-surface font-medium">Architecture UI :</strong> 
+                  Habitué aux standards comme <a href="/projets/udixio-ui" class="text-on-surface underline hover:text-primary transition-colors">Material 3</a>, j'intègre vos maquettes avec une exigence millimétrée. Je traduis votre charte graphique en un système technique solide, pour garantir un rendu visuel harmonieux, sans la moindre friction pour vous.
+                </p>
+                <p>
+                  <strong class="text-on-surface font-medium">Motion Design & Fluidité :</strong> 
+                  Je maîtrise pleinement Motion, ce qui me permet de créer rapidement des designs fluides, des transitions organiques et des comportements animés 100% customisés.
+                </p>
+              </div>
             </div>
 
             <!-- Colonne Droite : la vidéo, visuel pleine hauteur (bleed), menant à l'étude de cas -->
@@ -159,8 +206,7 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
 
             <Card variant="elevated" client:load className="p-6 z-30 m-6 lg:m-0 lg:absolute lg:bottom-8 lg:right-8 lg:max-w-sm opacity-0 translate-y-4 group-hover/react:opacity-100 group-hover/react:translate-y-0 transition-all duration-500 pointer-events-none group-hover/react:pointer-events-auto">
               <p class="text-body-medium text-on-surface-variant">
-                <span class="text-on-surface font-medium">Ma librairie UI</span> : une adaptation de
-                Material Design 3 en Tailwind, que je développe sur mon temps personnel depuis 2024.
+                Découvrez <span class="text-on-surface font-medium">Udixio UI</span>, mon étude de cas sur l'architecture et l'intégration de composants selon les standards Material 3.
               </p>
               <Button client:visible className="w-fit mt-4" variant="text" href="/projets/udixio-ui" icon={iArrowOutward} label="Voir l'étude de cas" />
             </Card>

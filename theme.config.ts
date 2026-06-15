@@ -6,7 +6,7 @@ export const sourceColor = Hct.from(270, 55, 75)
 
 export const subThemes = {
     blue: hexFromArgb(sourceColor.toInt()),
-    green: '#81b88e',
+    green: '#7cb894',
     purple: "#bba1da",
     orange: '#e69883'
 }
