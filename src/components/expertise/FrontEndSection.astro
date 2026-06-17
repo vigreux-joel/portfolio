@@ -19,6 +19,7 @@ import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
 import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 import { iCode } from "@udixio/icons-outlined-400/code";
+import { iCheck } from "@udixio/icons-outlined-400/check";
 import {BackgroundColor} from "@components/BackgroundColor.tsx";
 ---
 <div id="front-end" class="theme-purple surface">
@@ -55,14 +56,16 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
           <Line client:idle image={astroLogo} isLast  />
         </div>
         <div class="padding pt-8 md:pt-0">
-          <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">Le contenu</span>
-          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Astro / React</h3>
+          <span class="block text-label-large  text-tertiary">Le contenu</span>
+          <h3 class=" text-headline-small md:text-headline-medium mt-2 w-fit">Astro / React</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
             Pour les sites où la performance prime : Astro génère un HTML statique ultra-rapide pour un SEO optimal, tandis que React s'intègre par îlots pour apporter une interactivité riche et dynamique exactement là où c'est nécessaire.
           </p>
-          <span class="block mt-5 text-label-medium text-tertiary uppercase">
-            Portfolios • Sites éditoriaux • Sites vitrines
-          </span>
+          <ul class="mt-6 flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-3 text-body-medium text-on-surface">
+            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Portfolios créatifs</li>
+            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Blogs & Médias</li>
+            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Sites vitrines</li>
+          </ul>
         </div>
       </div>
 
@@ -72,14 +75,16 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
           <Line client:idle image={angularLogo}  />
         </div>
         <div class="padding pt-8 md:pt-0">
-          <span class="block text-label-large uppercase tracking-[0.2em] text-tertiary">L'application</span>
-          <h3 class="text-gradient text-headline-small md:text-headline-medium mt-2 w-fit">Angular / Svelte</h3>
+          <span class="block text-label-large text-tertiary">L'application</span>
+          <h3 class=" text-headline-small md:text-headline-medium mt-2 w-fit">Angular / Svelte</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
             Pour les applications web avancées : Angular offre une architecture stricte et robuste pour maintenir de grandes bases de code dans le temps, tandis que Svelte apporte une réactivité native inégalée et une légèreté maximale pour des interfaces fluides.
           </p>
-          <span class="block mt-5 text-label-medium text-tertiary uppercase">
-            ERP • Portails métier • Applications internes
-          </span>
+          <ul class="mt-6 flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-3 text-body-medium text-on-surface">
+            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Applications internes</li>
+            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Portails métiers complexes</li>
+            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Dashboards</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -93,23 +98,23 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
       </div>
 
       <div class="flex relative z-10">
-        <div class="padding py-8 md:py-12 w-full">
-          <span class="text-label-large uppercase tracking-[0.2em] text-tertiary block text-left">Des fondations robustes</span>
+        <div class="padding  w-full">
+          <span class="text-label-large  text-tertiary block ">Des fondations robustes</span>
           <div class="mt-6 flex flex-wrap justify-start gap-x-10 gap-y-6 text-on-surface-variant">
-            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={tsLogo} />
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={tsLogo}></Icon>
               <span class="text-label-medium">TypeScript</span>
             </div>
-            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={tailwindLogo} />
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={tailwindLogo}></Icon>
               <span class="text-label-medium">Tailwind CSS</span>
             </div>
-            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={motionLogo} />
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={motionLogo}></Icon>
               <span class="text-label-medium">Motion</span>
             </div>
-            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
-              <div class="h-9 w-9 flex items-center justify-center [&>svg]:max-w-full [&>svg]:max-h-full fill-current" set:html={sassLogo} />
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={sassLogo}></Icon>
               <span class="text-label-medium">CSS / Sass</span>
             </div>
           </div>

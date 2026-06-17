@@ -18,13 +18,18 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
             const initialIsLg = window.innerWidth > 1024;
             setIsLg(initialIsLg);
 
+            let timeoutId: any;
             const handleResize = () => {
-                setIsLg(window.innerWidth > 1024);
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    setIsLg(window.innerWidth > 1024);
+                }, 100);
             };
 
             window.addEventListener("resize", handleResize);
 
             return () => {
+                clearTimeout(timeoutId);
                 window.removeEventListener("resize", handleResize);
             };
         }
@@ -38,10 +43,8 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
     });
     const cardLength = content.length;
     const [displayText, setDisplayText] = useState(false);
-    const [isOverlay, setIsOverlay] = useState(false);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        setIsOverlay(latest > 0 && latest < 1);
         if (!isLg) return;
         const cardsBreakpoints = content.map((_, index) => index / cardLength);
         let closestBreakpointIndex = 0;
@@ -49,15 +52,17 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
             if (cardsBreakpoints[i] > latest) {
                 break;
             }
-            window.screenX;
             closestBreakpointIndex = i;
         }
         setDisplayText(latest > 0);
-        setActiveCard(closestBreakpointIndex);
-
-        const theme = content[closestBreakpointIndex].theme
-        if (theme)
-            updateTheme(theme);
+        
+        if (closestBreakpointIndex !== activeCard) {
+            setActiveCard(closestBreakpointIndex);
+            const theme = content[closestBreakpointIndex].theme;
+            if (theme) {
+                updateTheme(theme);
+            }
+        }
     });
 
     return (
@@ -160,6 +165,7 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
                             {content.map((card, index) => {
                                 return (
                                     <motion.div
+                                        key={index}
                                         layout
                                         variants={{
                                             hidden: {

@@ -23,6 +23,7 @@ export const FrontEndUxScroll = () => {
                     autoPlay
                     loop
                     muted
+                    playsInline
                 >
                     <source src="/video/output.mp4" type="video/mp4"/>
                     Sorry, your browser doesn't support embedded videos.
