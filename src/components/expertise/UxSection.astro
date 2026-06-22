@@ -5,7 +5,7 @@ import { LinearGradient } from "@components/LinearGradient";
 ---
 
 <div class="theme-purple">
-  <section id="ux">
+  <section id="ux" class="reveal-light opacity-50 [.light]:opacity-100 transition-opacity duration-2000 delay-200">
   <!-- Ligne de connexion au-dessus du titre (gauche vers centre) -->
   <div class="max-width">
     <div class="relative h-24 hidden md:block">
@@ -17,13 +17,12 @@ import { LinearGradient } from "@components/LinearGradient";
   </div>
 
   <!-- Titre de la section (centré, suite logique de la ligne) -->
-  <div class="max-width padding-x text-center mt-8 mb-12 md:mb-16">
-    <h2 class="text-title-large text-tertiary">Experience utilisateur</h2>
-    <h3 class="relative reveal-light group mt-6 text-headline-medium md:text-display-small font-light leading-tight">
-      <span class="text-on-surface transition-opacity duration-1000 group-[.light]:opacity-0">Démarquez votre produit au premier regard</span>
-      <span class="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary opacity-0 transition-opacity duration-1000 group-[.light]:opacity-100" aria-hidden="true">Démarquez votre produit au premier regard</span>
+  <div class="max-width padding-x text-center mt-8 mb-12 md:mb-16 ">
+    <h2 class="text-title-large transition-colors duration-1000 text-tertiary">Experience utilisateur</h2>
+    <h3 class="relative mt-6 text-headline-medium md:text-display-small text-gradient">
+   Démarquez votre produit au premier regard
     </h3>
-    <p class="mt-4 text-headline-small md:text-headline-medium text-on-surface-variant max-w-prose mx-auto">
+    <p class="  mt-4 text-headline-small md:text-headline-medium max-w-prose mx-auto">
       J'anime vos interfaces avec des animations qui captent l'attention
     </p>
   </div>
