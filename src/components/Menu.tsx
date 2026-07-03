@@ -5,6 +5,7 @@ const MENU_ITEMS = [
     { label: "Accueil", href: "/" },
     { label: "Projets", href: "/projets" },
     { label: "Expertise", href: "/expertise" },
+    { label: "Méthode", href: "/methode" },
 ];
 
 export const Menu = ({

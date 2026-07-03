@@ -5,10 +5,29 @@ import FrontEndSection from "../components/expertise/FrontEndSection.astro";
 import MultiplatformSection from "../components/expertise/MultiplatformSection.astro";
 import UxSection from "../components/expertise/UxSection.astro";
 import BackEndSection from "../components/expertise/BackEndSection.astro";
-import PhilosophieSection from "../components/expertise/PhilosophieSection.astro";
-import FaqSection from "../components/expertise/FaqSection.astro";
+
+const faq = [
+    {
+        question: "Quelles technos maîtrisez-vous ?",
+        answer: "Astro, React, Angular, Svelte côté front-end ; NestJS, Node.js, Prisma, PostgreSQL côté back-end ; Flutter pour le multiplateforme. Je m'adapte aussi à des stacks existantes."
+    },
+    {
+        question: "Travaillez-vous sur du code existant ?",
+        answer: "Oui. Je reprends des projets en cours, refactore le legacy et intègre de nouvelles fonctionnalités sans casser l'existant, avec une attention particulière à la dette technique."
+    },
+    {
+        question: "Choisissez-vous la stack ou s'impose-t-elle ?",
+        answer: "Je recommande la stack la plus pertinente selon votre produit, vos contraintes et votre public — pas la plus tendance. Mais si vous êtes déjà équipé, je m'appuie sur l'existant."
+    },
+    {
+        question: "Proposez-vous de l'hébergement ?",
+        answer: "Je vous oriente vers l'hébergement le plus adapté : plateforme managée (Vercel), hébergeur français (OVH) ou VPS Docker que je gère de bout en bout."
+    }
+];
 ---
-<Layout seo={{
+<Layout
+    faq={faq}
+    seo={{
     title: `Joël Vigreux - Développeur full stack - Spécialiste Astro, React & NestJS`,
     description: "Expert en technologies modernes telles que Astro, NestJS et React ! Joël VIGREUX : Développeur full stack vous accompagne du back-end au frontend",
     openGraph: {
@@ -113,8 +132,6 @@ import FaqSection from "../components/expertise/FaqSection.astro";
         <MultiplatformSection />
         <UxSection />
         <BackEndSection />
-        <PhilosophieSection />
-        <FaqSection />
 
 
 </Layout>

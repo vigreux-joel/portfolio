@@ -15,6 +15,8 @@ import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
 import {ExpertiseSidebarReact} from "../components/expertise/ExpertiseSidebarReact";
 import Font from "astro/components/Font.astro";
+import CtaSection from "@components/CtaSection.astro";
+import FaqSection, {type FaqItem} from "@components/FaqSection.astro";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -93,12 +95,14 @@ export interface SEOProps {
 
 interface Props {
     seo: SEOProps;
+    faq: FaqItem[];
     hiddenFooter?: boolean;
     hiddenMenu?: boolean;
     showSidebar?: boolean;
+    showCta?: boolean;
 }
 
-const {seo, hiddenFooter = false, hiddenMenu = false, showSidebar = true}: Props = Astro.props;
+const {seo, faq, hiddenFooter = false, hiddenMenu = false, showSidebar = true, showCta = true}: Props = Astro.props;
 
 // const currentPath = Astro.url.pathname.replace("/fr", "");
 // const domain = Astro.url.origin;
@@ -163,6 +167,8 @@ const seoDefault: SEOProps = {
 
 </div>
 <ThemeProvider transition:name="theme-provider" client:idle/>
+<FaqSection questions={faq} />
+{showCta && <CtaSection />}
 <Footer/>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

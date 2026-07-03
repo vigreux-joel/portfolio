@@ -1,0 +1,36 @@
+---
+export interface FaqItem {
+    question: string;
+    answer: string;
+}
+
+interface Props {
+    questions: FaqItem[];
+}
+
+const {questions} = Astro.props;
+
+const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": questions.map(q => ({
+        "@type": "Question",
+        "name": q.question,
+        "acceptedAnswer": {"@type": "Answer", "text": q.answer}
+    }))
+};
+---
+<section id="faq" class="tab-menu theme-blue py-16">
+    <div class="max-width padding">
+        <h2 class="text-title-large text-tertiary">FAQ</h2>
+        <div class="mt-4 grid md:grid-cols-2 gap-6">
+            {questions.map(item => (
+                <div>
+                    <h3 class="text-headline-small">{item.question}</h3>
+                    <p set:html={item.answer}></p>
+                </div>
+            ))}
+        </div>
+    </div>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+</section>

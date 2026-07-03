@@ -1,0 +1,22 @@
+---
+import { Card } from "@components/Card";
+import { Button } from "@udixio/ui-react";
+import { iMail } from "@udixio/icons-outlined-400/mail";
+---
+
+<section class="tab-menu theme-blue">
+    <div class="max-width py-16">
+        <Card client:visible variant="filled" className="w-full" energyX>
+            <div class="p-8 md:p-12 flex flex-col items-start gap-6">
+                <div class="text-headline-large md:text-display-medium max-w-prose">
+                    <h2 class="text-gradient">Un projet en tête ?</h2>
+                    <p>Parlons-en dès maintenant — premier échange gratuit.</p>
+                </div>
+                <p class="text-body-large max-w-prose text-on-surface-variant">
+                    Décrivez-moi votre besoin, je vous propose une estimation rapide et sans engagement.
+                </p>
+                <Button className="w-fit" href="/contact" icon={iMail} label="Démarrer mon projet" />
+            </div>
+        </Card>
+    </div>
+</section>
