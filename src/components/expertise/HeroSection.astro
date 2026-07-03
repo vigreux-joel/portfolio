@@ -2,7 +2,6 @@
 import { Line } from "@components/Line";
 import { BackgroundColor } from "@components/BackgroundColor";
 import { LinearGradient } from "@components/LinearGradient";
-import { Card } from "@components/Card";
 import { Icon } from "@udixio/ui-react";
 
 import { iCode } from "@udixio/icons-outlined-400/code";
@@ -48,44 +47,21 @@ import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
             Développeur depuis 2022 et diplômé d'un titre pro Web & Mobile, j'accompagne les entreprises dans la création de leurs outils numériques.</p>
           <p  class=" max-w-3xl mt-8 text-on-surface-variant"> De la conception d'interfaces utilisateurs intuitives à la mise en place en production, je développe des solutions sur-mesure qui répondent à vos enjeux métiers.
           </p>
-          <div class="grid sm:grid-cols-3 gap-4 mt-8 max-w-5xl">
-            <a href="#front-end" class="block outlinenone group">
-              <Card client:load className="h-full p-5 flex items-start gap-4 cursor-pointer ">
-                <Icon icon={iCode} className="h-7 w-7 text-secondary shrink-0 mt-0.5" />
-                <div class="flex flex-col h-full">
-                  <span class="text-title-small ">Interfaces Web</span>
-                  <span class="text-body-small text-on-surface-variant flex-1 mt-1 mb-3">Des applications rapides et interactives, pensées pour vos utilisateurs.</span>
-                  <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                    Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Card>
+          <div class="flex flex-col sm:flex-row sm:flex-wrap gap-x-8 gap-y-3 mt-8">
+            <a href="#front-end" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+              <Icon icon={iCode} className="h-5 w-5 text-secondary" />
+              <span>Interfaces Web</span>
+              <Icon icon={iArrowForward} className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </a>
-            <a href="#multiplateforme" class="block  group">
-              <Card client:load className="h-full p-5 flex items-start gap-4 cursor-pointer ">
-                <Icon icon={iDevices} className="h-7 w-7 text-primary shrink-0 mt-0.5" />
-                <div class="flex flex-col h-full">
-                  <span class="text-title-small text-on-surface">Applications Mobiles</span>
-
-                  <span class="text-body-small text-on-surface-variant flex-1 mt-1 mb-3">Une seule application fluide et native pour iOS et Android.</span>
-                  <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                    Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Card>
+            <a href="#multiplateforme" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+              <Icon icon={iDevices} className="h-5 w-5 text-primary" />
+              <span>Applications Mobiles</span>
+              <Icon icon={iArrowForward} className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </a>
-            <a href="#back-end" class="block  group">
-              <Card client:load className="h-full p-5 flex items-start gap-4 ">
-                <Icon icon={iApi} className="h-7 w-7 text-primary shrink-0 mt-0.5" />
-                <div class="flex flex-col h-full">
-                  <span class="text-title-small text-on-surface">APIs & Architecture</span>
-
-                  <span class="text-body-small text-on-surface-variant flex-1 mt-1mb-3">La logique serveur robuste et sécurisée qui propulse votre projet.</span>
-                  <span class="text-label-medium text-primary inline-flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                    Explorer <Icon icon={iArrowForward} className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Card>
+            <a href="#back-end" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+              <Icon icon={iApi} className="h-5 w-5 text-primary" />
+              <span>APIs & Architecture</span>
+              <Icon icon={iArrowForward} className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </a>
           </div>
         </div>

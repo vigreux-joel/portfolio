@@ -4,7 +4,6 @@ import {Icon} from "@udixio/ui-react";
 import {iInfo} from "@udixio/icons-outlined-400/info";
 import {iDevices} from "@udixio/icons-outlined-400/devices";
 import {iApi} from "@udixio/icons-outlined-400/api";
-import {iManufacturing} from "@udixio/icons-outlined-400/manufacturing";
 import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
 import {updateTheme} from "@components/ThemeProvider.tsx";
 
@@ -13,7 +12,6 @@ const initialLinks = [
     { id: "front-end", label: "Front-end", icon: iDevices },
     { id: "multiplateforme", label: "Multiplateforme", icon: iSelectWindow },
     { id: "back-end", label: "Back-end", icon: iApi },
-    { id: "philosophie", label: "Philosophie", icon: iManufacturing },
     { id: "faq", label: "FAQ", icon: iInfo },
 ];
 
@@ -66,7 +64,7 @@ export const ExpertiseSidebarReact = () => {
     }, []);
 
     useEffect(() => {
-        const sections = document.querySelectorAll('#accueil, #front-end, #multiplateforme, #back-end, #philosophie, #faq');
+        const sections = document.querySelectorAll('#accueil, #front-end, #multiplateforme, #back-end, #faq');
 
         // Dynamic content update
         const updatedLinks = [...dynamicLinks];

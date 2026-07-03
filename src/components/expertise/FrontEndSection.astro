@@ -19,7 +19,6 @@ import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
 import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
 import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
 import { iCode } from "@udixio/icons-outlined-400/code";
-import { iCheck } from "@udixio/icons-outlined-400/check";
 import {BackgroundColor} from "@components/BackgroundColor.tsx";
 ---
 <div id="front-end" class="theme-purple surface">
@@ -56,16 +55,19 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
           <Line client:idle image={astroLogo} isLast  />
         </div>
         <div class="padding pt-8 md:pt-0">
-          <span class="block text-label-large  text-tertiary">Le contenu</span>
+          <span class="block text-title-medium  text-tertiary">Le contenu</span>
           <h3 class=" text-headline-small md:text-headline-medium mt-2 w-fit">Astro / React</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
             Pour les sites où la performance prime : Astro génère un HTML statique ultra-rapide pour un SEO optimal, tandis que React s'intègre par îlots pour apporter une interactivité riche et dynamique exactement là où c'est nécessaire.
           </p>
-          <ul class="mt-6 flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-3 text-body-medium text-on-surface">
-            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Portfolios créatifs</li>
-            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Blogs & Médias</li>
-            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Sites vitrines</li>
-          </ul>
+          <p class="mt-6 text-body-medium text-on-surface-variant max-w-prose">
+            Là où la vitesse sert vraiment le contenu : du
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">portfolio créatif</span>
+            au
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">média éditorial</span>,
+            jusqu'aux
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">vitrines à fort trafic</span>.
+          </p>
         </div>
       </div>
 
@@ -75,16 +77,17 @@ import {BackgroundColor} from "@components/BackgroundColor.tsx";
           <Line client:idle image={angularLogo}  />
         </div>
         <div class="padding pt-8 md:pt-0">
-          <span class="block text-label-large text-tertiary">L'application</span>
+          <span class="block text-title-medium text-tertiary">L'application</span>
           <h3 class=" text-headline-small md:text-headline-medium mt-2 w-fit">Angular / Svelte</h3>
           <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
             Pour les applications web avancées : Angular offre une architecture stricte et robuste pour maintenir de grandes bases de code dans le temps, tandis que Svelte apporte une réactivité native inégalée et une légèreté maximale pour des interfaces fluides.
           </p>
-          <ul class="mt-6 flex flex-col sm:flex-row flex-wrap gap-x-6 gap-y-3 text-body-medium text-on-surface">
-            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Applications internes</li>
-            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Portails métiers complexes</li>
-            <li class="flex items-center gap-2"><Icon className="text-primary size-5" icon={iCheck} /> Dashboards</li>
-          </ul>
+          <p class="mt-6 text-body-medium text-on-surface-variant max-w-prose">
+            Pour les interfaces poussées en production au quotidien :
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">applications internes</span>,
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">portails métiers complexes</span>,
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">dashboards</span>.
+          </p>
         </div>
       </div>
     </div>
