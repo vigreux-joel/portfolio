@@ -1,0 +1,48 @@
+---
+import { Line } from "@components/Line";
+import { LinearGradient } from "@components/LinearGradient";
+
+import { iSearch } from "@udixio/icons-outlined-400/search";
+---
+
+<div id="constat" class="theme-orange surface">
+  <section class="max-width">
+    <div class="flex pt-8">
+      <div>
+        <Line client:idle icon={iSearch} nextTheme="orange" />
+      </div>
+      <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Constat">Le constat</h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+          <h3 class="text-gradient">La vitesse de l'IA a un prix caché</h3>
+        </div>
+
+        <div class="mt-8 max-w-prose space-y-6 text-body-large text-on-surface-variant">
+          <p>
+            L'IA produit du code vite — beaucoup de code. C'est un gain réel, et je
+            l'utilise au quotidien. Mais vitesse n'est pas justesse. Sans pilotage,
+            le code généré s'empile : il compile, il fonctionne, et il installe une
+            dette silencieuse.
+          </p>
+          <p>
+            Le scénario est connu : une fonctionnalité livrée vite, des tests absents,
+            une architecture non pensée, des failles de sécurité invisibles. Trois mois
+            plus tard, chaque évolution coûte deux fois plus cher. Six mois plus tard,
+            personne n'ose plus toucher au code.
+          </p>
+          <p class="text-on-surface text-headline-small md:text-headline-medium">
+            Ce n'est pas un problème d'IA. C'est un problème de <span class="text-gradient font-medium">pilotage</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex h-24">
+      <div>
+        <Line client:idle />
+      </div>
+    </div>
+  </section>
+
+  <LinearGradient nextTheme="orange" />
+</div>

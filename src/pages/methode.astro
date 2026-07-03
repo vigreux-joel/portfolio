@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSection from "../components/methode/HeroSection.astro";
+import ConstatSection from "../components/methode/ConstatSection.astro";
+import DemarcationSection from "../components/methode/DemarcationSection.astro";
+import LegitimiteSection from "../components/methode/LegitimiteSection.astro";
+import ProcessSection from "../components/methode/ProcessSection.astro";
+import CtaMethodeSection from "../components/methode/CtaMethodeSection.astro";
+
+const faq = [
+    {
+        question: "Comment se passe l'estimation ?",
+        answer: "Après un premier échange sur votre besoin, je vous transmets une estimation transparente et un découpage en lots livrables. Aucun engagement avant validation des deux côtés."
+    },
+    {
+        question: "Utilisez-vous l'IA pour coder ?",
+        answer: "Oui, comme moteur de vélocité : l'IA accélère l'exécution, mais je pilote l'architecture, la sécurité et la revue de code. Pas de vibe coding aveugle : chaque ligne est lue et validée."
+    },
+    {
+        question: "Intégrez-vous une équipe existante ?",
+        answer: "Oui. Je m'adapte à vos outils, vos conventions et votre workflow. Code review, pair programming, mentorat : je m'intègre sans friction dans un collectif déjà en place."
+    },
+    {
+        question: "Que se passe-t-il après la livraison ?",
+        answer: "Le projet vous appartient : documentation et transmission incluses. Je reste disponible pour le suivi, les évolutions et la maintenance, sur des créneaux définis ensemble."
+    }
+];
+---
+<Layout
+  showSidebar={false}
+  showCta={false}
+  faq={faq}
+  seo={{
+    title: `Joël Vigreux - Méthode - L'IA génère du code, l'ingénierie construit des solutions`,
+    description: "Ma méthode : l'IA accélère l'écriture du code, l'ingénierie construit des solutions pérennes. Architecture, sécurité et revue de code systématique — du cadrage à la mise en production.",
+    openGraph: {
+      basic: {
+        title: "Joël Vigreux - Méthode de travail",
+        type: "website",
+        image: "https://vigreux-joel.fr/images/photo.webp",
+        url: "https://vigreux-joel.fr/methode",
+      },
+      optional: {
+        siteName: "Joël Vigreux",
+        locale: "fr_FR",
+        description: "L'IA génère du code, l'ingénierie construit des solutions. Découvrez ma méthode de développement, du cadrage à la mise en production.",
+      },
+      image: {
+        alt: "Portrait de Joël Vigreux, développeur full-stack",
+      },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Joël Vigreux - Méthode de travail",
+      description: "L'IA génère du code, l'ingénierie construit des solutions.",
+      image: "https://vigreux-joel.fr/images/photo.webp",
+      imageAlt: "Portrait de Joël Vigreux",
+    },
+  }}
+>
+  <style is:global>
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); }
+      50% { transform: translateY(-6px) translateX(2px) rotate(2deg); }
+      100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    }
+    .animate-float-slow { animation: float 6s ease-in-out infinite; }
+    .animate-float-medium { animation: float 5s ease-in-out infinite; }
+    .animate-float-fast { animation: float 4s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-float-slow, .animate-float-medium, .animate-float-fast { animation: none; }
+    }
+  </style>
+
+  <script type="application/ld+json" is:inline>
+    {
+      JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Joël Vigreux",
+        "jobTitle": "Développeur full-stack",
+        "url": "https://vigreux-joel.fr/methode",
+        "image": "https://vigreux-joel.fr/images/photo.webp"
+      })
+    }
+  </script>
+
+  <HeroSection />
+  <ConstatSection />
+  <DemarcationSection />
+  <LegitimiteSection />
+  <ProcessSection />
+  <CtaMethodeSection />
+</Layout>

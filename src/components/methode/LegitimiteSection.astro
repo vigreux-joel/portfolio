@@ -1,0 +1,58 @@
+---
+import { Line } from "@components/Line";
+import { LinearGradient } from "@components/LinearGradient";
+
+import { iIdCard } from "@udixio/icons-outlined-400/id_card";
+---
+
+<div class="theme-purple surface">
+  <section class="max-width">
+    <div class="flex pt-8">
+      <div>
+        <Line client:idle icon={iIdCard} nextTheme="purple" />
+      </div>
+      <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Légitimité">La légitimité</h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+          <h3 class="text-gradient">On ne pilote pas une machine qu'on ne comprend pas</h3>
+        </div>
+
+        <div class="mt-8 max-w-prose space-y-6 text-body-large text-on-surface-variant">
+          <p>
+            L'IA génère du code à partir de patterns. Elle ne sait pas <em>pourquoi</em>
+            une décision a été prise, ni <em>pourquoi</em> une autre serait dangereuse
+            dans votre contexte. Cette intuition-là ne s'invente pas : elle se construit
+            en construisant, en cassant, en réparant.
+          </p>
+          <p>
+            Je viens du back-end. C'est-à-dire du côté des fondations — la donnée, la
+            structure, l'architecture — là où la moindre erreur de conception ne pardonne
+            pas. Cette origine m'a donné des réflexes que je garde aujourd'hui sur l'ensemble
+            d'un produit : concevoir un projet de bout en bout, des fondations jusqu'à
+            l'expérience utilisateur, c'est un profil que je crois précieux et trop rare.
+          </p>
+          <p>
+            Savoir concevoir des systèmes complexes, de zéro, c'est aussi savoir relire
+            ce que l'IA produit : on voit immédiatement où elle a triché, là où un œil
+            moins exercé ne verra qu'un code qui a l'air correct.
+          </p>
+          <p>
+            Mon rapport à l'IA n'est pas idéologique. Je m'en sers tous les jours. Mais
+            à plusieurs reprises, son résultat est passé sous mon seuil d'exigence — sans
+            que ce soit visible au premier regard. C'est précisément le risque pour votre
+            projet : un code qui a l'air correct, et qui ne l'est pas. C'est pour ça que
+            <span class="text-on-surface">chaque ligne est lue, testée, corrigée.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex h-24">
+      <div>
+        <Line client:idle />
+      </div>
+    </div>
+  </section>
+
+  <LinearGradient nextTheme="purple" />
+</div>

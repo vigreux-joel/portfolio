@@ -1,0 +1,104 @@
+---
+import { Card } from "@components/Card";
+import { Techno } from "@components/Techno";
+import { Line } from '@components/Line';
+import { LinearGradient } from "@components/LinearGradient";
+
+import { iRoute } from "@udixio/icons-outlined-400/route";
+import { iSearch } from "@udixio/icons-outlined-400/search";
+import { iRocketLaunch } from "@udixio/icons-outlined-400/rocket_launch";
+import { iShield } from "@udixio/icons-outlined-400/shield";
+---
+
+<div id="process" class="theme-purple surface">
+  <section>
+    <div class="max-width">
+      <!-- Introduction -->
+      <div class="flex pt-8">
+        <div>
+          <Line client:idle icon={iRoute} nextTheme="purple" />
+        </div>
+        <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
+          <h2 class="text-title-large text-tertiary" data-sidebar-label="Process">Les preuves</h2>
+          <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+            <h3 class="text-gradient">Trois phases, un seul objectif : un produit qui tient</h3>
+          </div>
+          <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+            Pas de tunnel opaque ni de promesses en l'air. Un déroulé clair, où l'IA et
+            l'expertise humaine interviennent chacune au bon moment — et où chaque phase
+            neutralise un risque précis pour votre projet.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bento asymétrique : phase 02 dominante, 01 & 03 plus compactes -->
+      <div class="padding-x mt-12 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-min">
+
+        <!-- Phase 01 -->
+        <Card client:visible variant="filled" className="group md:col-span-1">
+          <Techno variant="primary" className="p-6 pb-10 h-full" icon={iSearch} name="01 · Cadrage & Vision">
+            <div class="mb-4">
+              <span class="box-decoration-clone bg-primary/15 px-2 py-1 font-medium text-primary text-body-small">100% humain</span>
+            </div>
+            <p>
+              Avant la moindre ligne de code : on aligne le périmètre, les enjeux métier
+              et les contraintes. Vous repartez avec une vision nette, une estimation
+              transparente et un découpage en lots validé.
+            </p>
+            <p class="mt-6 pt-4 border-t border-outline-variant/40 text-body-small text-tertiary">
+              Risque neutralisé : <span class="text-on-surface">partir dans la mauvaise direction.</span>
+            </p>
+          </Techno>
+        </Card>
+
+        <!-- Phase 02 : card dominante (2 colonnes, sur 2 lignes) -->
+        <Card client:visible variant="filled" className="group md:col-span-2 md:row-span-2">
+          <Techno variant="primary" className="p-6 md:p-10 pb-10 h-full" icon={iRocketLaunch} name="02 · Exécution propulsée">
+            <div class="mb-4">
+              <span class="box-decoration-clone bg-tertiary/15 px-2 py-1 font-medium text-on-surface text-body-small">IA comme levier</span>
+            </div>
+            <p class="md:text-body-large">
+              L'IA entre en scène pour accélérer : maquettes, tuyauterie technique, tâches
+              répétitives. Le time-to-market se raccourcit sans que la qualité baisse.
+            </p>
+            <p class="mt-4 md:text-body-large">
+              C'est précisément ici que la frontière se joue : rien de ce qui est généré
+              n'est livré à l'aveugle. Chaque morceau de code produit par la machine est
+              relu, compris et validé avant d'entrer dans votre produit.
+            </p>
+            <p class="mt-6 pt-4 border-t border-outline-variant/40 text-body-small text-tertiary">
+              Risque neutralisé : <span class="text-on-surface">la lenteur, sans céder sur la fiabilité.</span>
+            </p>
+          </Techno>
+        </Card>
+
+        <!-- Phase 03 -->
+        <Card client:visible variant="filled" className="group md:col-span-1">
+          <Techno variant="primary" className="p-6 pb-10 h-full" icon={iShield} name="03 · Rigueur & Contrôle">
+            <div class="mb-4">
+              <span class="box-decoration-clone bg-primary/15 px-2 py-1 font-medium text-primary text-body-small">Expertise humaine</span>
+            </div>
+            <p>
+              C'est ici que la dette technique se bloque. Revue de code intraitable,
+              tests automatisés, sécurisation : tout ce que l'IA a produit est lu, compris
+              et validé avant de vivre dans votre produit.
+            </p>
+            <p class="mt-6 pt-4 border-t border-outline-variant/40 text-body-small text-tertiary">
+              Risque neutralisé : <span class="text-on-surface">le code qui tombe en marche.</span>
+            </p>
+          </Techno>
+        </Card>
+
+      </div>
+
+      <!-- Line transition -->
+      <div class="flex h-24">
+        <div>
+          <Line client:idle />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <LinearGradient nextTheme="blue" />
+</div>
