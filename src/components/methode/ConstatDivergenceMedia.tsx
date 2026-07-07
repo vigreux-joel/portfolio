@@ -56,7 +56,11 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
             style={{left: feature.x, top: feature.y, opacity, scale}}
         >
             <motion.div
-                className={`relative whitespace-nowrap rounded-full px-4 py-2 text-[11px] font-medium text-on-surface ${selectedGlow}`}
+                className={`relative rounded-full text-[11px] font-medium text-on-surface ${selectedGlow} ${
+                    feature.selected
+                        ? "grid h-[46px] w-[92px] place-items-center"
+                        : "whitespace-nowrap px-4 py-2"
+                }`}
                 animate={shouldReduceMotion ? undefined : {y: [0, -2, 0]}}
                 transition={{duration: 3 + feature.at * 5, repeat: Infinity, ease: "easeInOut"}}
             >
@@ -168,10 +172,10 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
             className="absolute left-[168px] top-[292px] z-30 h-[46px] w-[92px] -translate-x-1/2 -translate-y-1/2"
             style={{opacity: panelOpacity, scale: panelScale, transformOrigin: "50% 50%"}}
         >
-            <div className="absolute left-0 top-1/2 hidden -translate-x-[86%] -translate-y-1/2 text-[2px] font-medium text-on-surface-variant sm:block">
+            <div className="absolute right-[calc(100%+4px)] top-1/2 hidden -translate-y-1/2 rounded-full border border-outline-variant bg-surface-container-low px-1.5 py-0.5 text-[2px] font-medium text-on-surface-variant sm:block">
                 Panier
             </div>
-            <div className="absolute right-0 top-1/2 hidden translate-x-[92%] -translate-y-1/2 text-[2px] font-medium text-on-surface-variant sm:block">
+            <div className="absolute left-[calc(100%+4px)] top-1/2 hidden -translate-y-1/2 rounded-full border border-outline-variant bg-surface-container-low px-1.5 py-0.5 text-[2px] font-medium text-on-surface-variant sm:block">
                 Commandes
             </div>
 
@@ -245,13 +249,13 @@ function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
 
 export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const cameraX = useTransform(progress, [0.4, 0.8, 1], [0, shouldReduceMotion ? 96 : 713, shouldReduceMotion ? 96 : 713]);
-    const cameraY = useTransform(progress, [0.4, 0.8, 1], [0, shouldReduceMotion ? -66 : -497, shouldReduceMotion ? -66 : -497]);
-    const cameraScale = useTransform(progress, [0.4, 0.8, 1], [1, shouldReduceMotion ? 1.18 : 5.4, shouldReduceMotion ? 1.18 : 5.4]);
+    const cameraX = useTransform(progress, [0.4, 0.8, 1], [0, shouldReduceMotion ? 96 : 1294, shouldReduceMotion ? 96 : 1294]);
+    const cameraY = useTransform(progress, [0.4, 0.8, 1], [0, shouldReduceMotion ? -66 : -902, shouldReduceMotion ? -66 : -902]);
+    const cameraScale = useTransform(progress, [0.4, 0.8, 1], [1, shouldReduceMotion ? 1.18 : 9.8, shouldReduceMotion ? 1.18 : 9.8]);
 
     return (
         <div className="relative h-full w-full overflow-hidden bg-surface-container-low">
-            <div className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.58] sm:scale-[0.74] md:scale-[0.86] xl:scale-100">
+            <div className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.58] sm:scale-[0.74] md:scale-[0.86] lg:scale-100">
                 <motion.div className="absolute inset-0" style={{x: cameraX, y: cameraY, scale: cameraScale}}>
                     <svg className="absolute inset-0 size-full" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
                         {CONNECTIONS.map((connection) => (
