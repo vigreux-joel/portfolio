@@ -1,0 +1,68 @@
+---
+import { Card } from "@components/Card";
+import { Line } from "@components/Line";
+import { LinearGradient } from "@components/LinearGradient";
+import { Button, Icon } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iRoute } from "@udixio/icons-outlined-400/route";
+import { iIdCard } from "@udixio/icons-outlined-400/id_card";
+import { contextCards } from "./homeContent";
+
+const icons = [iRoute, iIdCard];
+---
+
+<div id="contextes" class="tab-menu theme-purple bg-surface">
+  <section>
+    <div class="max-width">
+      <div class="flex pt-8">
+        <div>
+          <Line client:idle icon={iRoute} nextTheme="green" />
+        </div>
+
+        <div class="padding pt-0 flex flex-col justify-center max-w-5xl">
+          <h2 class="text-title-large text-tertiary" data-sidebar-label="Contextes">Deux lectures possibles</h2>
+          <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+            <h3 class="text-gradient">Vous cherchez un développeur capable de prendre des décisions produit et techniques.</h3>
+          </div>
+          <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+            Le contexte peut changer — mission ou recrutement — mais le sujet reste le même : fiabilité, autonomie, qualité d’exécution et compréhension des enjeux métier.
+          </p>
+        </div>
+      </div>
+
+      <div class="padding-x mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {contextCards.map((card, index) => (
+          <Card client:visible variant="filled" className="group h-full">
+            <article class="p-6 md:p-8 h-full flex flex-col">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+                  <Icon icon={icons[index]} className="h-6 w-6" />
+                </span>
+                <span class="text-label-large text-tertiary uppercase tracking-wide">{card.eyebrow}</span>
+              </div>
+
+              <h3 class="text-headline-small text-on-surface">{card.title}</h3>
+              <p class="mt-5 text-body-large text-on-surface-variant">{card.description}</p>
+
+              <div class="mt-auto pt-8">
+                {index === 0 ? (
+                  <Button href={card.href} icon={iArrowForward} label={card.cta} />
+                ) : (
+                  <Button href={card.href} icon={iArrowForward} label={card.cta} variant="outlined" />
+                )}
+              </div>
+            </article>
+          </Card>
+        ))}
+      </div>
+
+      <div class="flex h-24 md:h-32">
+        <div>
+          <Line client:idle />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <LinearGradient nextTheme="green" />
+</div>
