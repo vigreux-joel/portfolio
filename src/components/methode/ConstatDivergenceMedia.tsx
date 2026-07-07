@@ -144,12 +144,12 @@ function PaymentBox({children, className = ""}: {children: ReactNode; className?
 
 function PaymentZoom({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const panelOpacity = useTransform(progress, [0.78, 0.84], [0, 1]);
-    const panelScale = useTransform(progress, [0.78, 0.84], [0.12, 1]);
-    const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
-    const duplicateOpacity = useTransform(progress, [0.86, 0.91], [0, 1]);
-    const missingOpacity = useTransform(progress, [0.89, 0.94], [0, 1]);
-    const securityOpacity = useTransform(progress, [0.92, 0.97], [0, 1]);
+    const panelOpacity = useTransform(progress, [0.84, 0.88], [0, 1]);
+    const panelScale = useTransform(progress, [0.84, 0.88], [0.12, 1]);
+    const flowOpacity = useTransform(progress, [0.87, 0.91], [0, 1]);
+    const duplicateOpacity = useTransform(progress, [0.9, 0.94], [0, 1]);
+    const missingOpacity = useTransform(progress, [0.93, 0.97], [0, 1]);
+    const securityOpacity = useTransform(progress, [0.95, 0.99], [0, 1]);
 
     return (
         <motion.div
@@ -212,8 +212,8 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
 }
 
 function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
-    const opacity = useTransform(progress, [0.94, 0.99], [0, 1]);
-    const y = useTransform(progress, [0.94, 0.99], [18, 0]);
+    const opacity = useTransform(progress, [0.98, 1], [0, 1]);
+    const y = useTransform(progress, [0.98, 1], [18, 0]);
 
     return (
         <motion.div
@@ -233,9 +233,9 @@ function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
 
 export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const cameraX = useTransform(progress, [0.4, 0.8], [0, shouldReduceMotion ? 96 : 290]);
-    const cameraY = useTransform(progress, [0.4, 0.8], [0, shouldReduceMotion ? -66 : -202]);
-    const cameraScale = useTransform(progress, [0.4, 0.8], [1, shouldReduceMotion ? 1.18 : 2.2]);
+    const cameraX = useTransform(progress, [0.4, 0.8, 0.84], [0, shouldReduceMotion ? 96 : 713, shouldReduceMotion ? 96 : 177]);
+    const cameraY = useTransform(progress, [0.4, 0.8, 0.84], [0, shouldReduceMotion ? -66 : -497, shouldReduceMotion ? -66 : -123]);
+    const cameraScale = useTransform(progress, [0.4, 0.8, 0.84], [1, shouldReduceMotion ? 1.18 : 5.4, shouldReduceMotion ? 1.18 : 1.34]);
 
     return (
         <div className="relative h-full w-full overflow-hidden bg-surface-container-low">
