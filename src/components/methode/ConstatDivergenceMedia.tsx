@@ -95,7 +95,7 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
 
 function ConnectionPath({connection, progress}: {connection: Connection; progress: MotionValue<number>}) {
     const pathLength = useTransform(progress, [connection.at, connection.at + 0.08], [0, 1]);
-    const opacity = useTransform(progress, [connection.at, connection.at + 0.04, 0.4, 0.58], [0, 0.58, 0.58, 0.3]);
+    const opacity = useTransform(progress, [connection.at, connection.at + 0.04, 0.4, 0.64, 0.74], [0, 0.58, 0.58, 0.22, 0]);
 
     return (
         <motion.path
@@ -116,7 +116,7 @@ function FlowDot({connection, progress, delay}: {
     delay: number;
 }) {
     const shouldReduceMotion = useReducedMotion();
-    const opacity = useTransform(progress, [0.22, 0.3, 0.52, 0.6], [0, 0.7, 0.7, 0]);
+    const opacity = useTransform(progress, [0.22, 0.3, 0.56, 0.68], [0, 0.7, 0.45, 0]);
 
     if (shouldReduceMotion) return null;
 
@@ -178,6 +178,14 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
             <div className="absolute left-[calc(100%+4px)] top-1/2 hidden -translate-y-1/2 rounded-full border border-outline-variant bg-surface-container-low px-1.5 py-0.5 text-[2px] font-medium text-on-surface-variant sm:block">
                 Commandes
             </div>
+            <motion.span
+                className="absolute left-0 top-1/2 h-px w-4 -translate-x-full bg-primary/70"
+                style={{opacity: flowOpacity}}
+            />
+            <motion.span
+                className="absolute right-0 top-1/2 h-px w-4 translate-x-full bg-primary/70"
+                style={{opacity: flowOpacity}}
+            />
 
             <motion.div className="absolute inset-x-4 top-[17px] z-20 grid grid-cols-3 items-center gap-1" style={{opacity: flowOpacity}}>
                 <PaymentBox>Interface</PaymentBox>
@@ -216,8 +224,6 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
                 <motion.g style={{opacity: flowOpacity}} fill="none" stroke="var(--color-primary)" strokeLinecap="round" strokeWidth="1.2">
                     <path d="M34 23 H37" />
                     <path d="M55 23 H58" />
-                    <path d="M0 24 H13" strokeDasharray="2 2" />
-                    <path d="M79 24 H92" strokeDasharray="2 2" />
                 </motion.g>
                 <motion.g style={{opacity: missingOpacity}} fill="none" stroke="var(--color-error)" strokeLinecap="round" strokeWidth="1.2" strokeDasharray="5 6">
                     <path d="M46 26 C45 29 45 31 46 33" />
