@@ -40,20 +40,38 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
     const shouldReduceMotion = useReducedMotion();
     const opacity = useTransform(progress, [feature.at, feature.at + 0.035], [0, 1]);
     const scale = useTransform(progress, [feature.at, feature.at + 0.035], [0.72, 1]);
+    const labelOpacity = useTransform(progress, [0.74, 0.8], [1, feature.selected ? 0 : 1]);
+    const solidBorderOpacity = useTransform(progress, [0.74, 0.8], [1, feature.selected ? 0 : 1]);
+    const dashedBorderOpacity = useTransform(progress, [0.74, 0.8], [0, feature.selected ? 1 : 0]);
     const selectedGlow = feature.selected ? "ring-1 ring-primary/45 shadow-lg" : "";
 
     return (
         <motion.div
-            className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
+            className={feature.selected
+                ? "absolute z-40 -translate-x-1/2 -translate-y-1/2"
+                : "absolute z-20 -translate-x-1/2 -translate-y-1/2"
+            }
             style={{left: feature.x, top: feature.y, opacity, scale}}
         >
             <motion.div
-                className={`relative whitespace-nowrap rounded-full border border-primary/40 bg-surface-container-high px-4 py-2 text-[11px] font-medium text-on-surface shadow-sm ${selectedGlow}`}
+                className={`relative whitespace-nowrap rounded-full bg-surface-container-high px-4 py-2 text-[11px] font-medium text-on-surface shadow-sm ${selectedGlow}`}
                 animate={shouldReduceMotion ? undefined : {y: [0, -2, 0]}}
                 transition={{duration: 3 + feature.at * 5, repeat: Infinity, ease: "easeInOut"}}
             >
-                <span className="mr-1.5 inline-block size-1.5 rounded-full bg-primary" />
-                {feature.label}
+                <motion.span
+                    className="absolute inset-0 rounded-full border border-primary/40"
+                    style={{opacity: solidBorderOpacity}}
+                />
+                {feature.selected && (
+                    <motion.span
+                        className="absolute inset-0 rounded-full border border-dashed border-primary/70"
+                        style={{opacity: dashedBorderOpacity}}
+                    />
+                )}
+                <motion.span className="relative" style={{opacity: labelOpacity}}>
+                    <span className="mr-1.5 inline-block size-1.5 rounded-full bg-primary" />
+                    {feature.label}
+                </motion.span>
             </motion.div>
         </motion.div>
     );
@@ -126,17 +144,17 @@ function PaymentBox({children, className = ""}: {children: ReactNode; className?
 
 function PaymentZoom({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const panelOpacity = useTransform(progress, [0.52, 0.6], [0, 1]);
-    const panelScale = useTransform(progress, [0.52, 0.6], [0.84, 1]);
-    const flowOpacity = useTransform(progress, [0.56, 0.64], [0, 1]);
-    const duplicateOpacity = useTransform(progress, [0.64, 0.7], [0, 1]);
-    const missingOpacity = useTransform(progress, [0.7, 0.76], [0, 1]);
-    const securityOpacity = useTransform(progress, [0.76, 0.82], [0, 1]);
+    const panelOpacity = useTransform(progress, [0.78, 0.84], [0, 1]);
+    const panelScale = useTransform(progress, [0.78, 0.84], [0.12, 1]);
+    const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
+    const duplicateOpacity = useTransform(progress, [0.86, 0.91], [0, 1]);
+    const missingOpacity = useTransform(progress, [0.89, 0.94], [0, 1]);
+    const securityOpacity = useTransform(progress, [0.92, 0.97], [0, 1]);
 
     return (
         <motion.div
             className="absolute left-[168px] top-[292px] z-30 h-[230px] w-[360px] -translate-x-1/2 -translate-y-1/2"
-            style={{opacity: panelOpacity, scale: panelScale}}
+            style={{opacity: panelOpacity, scale: panelScale, transformOrigin: "50% 50%"}}
         >
             <div className="absolute left-0 top-1/2 hidden -translate-x-[86%] -translate-y-1/2 text-[10px] font-medium text-on-surface-variant sm:block">
                 Panier
@@ -194,8 +212,8 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
 }
 
 function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
-    const opacity = useTransform(progress, [0.84, 0.92], [0, 1]);
-    const y = useTransform(progress, [0.84, 0.92], [18, 0]);
+    const opacity = useTransform(progress, [0.94, 0.99], [0, 1]);
+    const y = useTransform(progress, [0.94, 0.99], [18, 0]);
 
     return (
         <motion.div
@@ -215,11 +233,9 @@ function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
 
 export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const cameraX = useTransform(progress, [0.4, 0.56], [0, shouldReduceMotion ? 0 : 92]);
-    const cameraY = useTransform(progress, [0.4, 0.56], [0, shouldReduceMotion ? 0 : -58]);
-    const cameraScale = useTransform(progress, [0.4, 0.56], [1, shouldReduceMotion ? 1.06 : 1.34]);
-    const overviewHintOpacity = useTransform(progress, [0.2, 0.3, 0.44, 0.52], [0, 1, 1, 0]);
-    const zoomHintOpacity = useTransform(progress, [0.54, 0.62, 0.78, 0.84], [0, 1, 1, 0]);
+    const cameraX = useTransform(progress, [0.4, 0.8], [0, shouldReduceMotion ? 96 : 290]);
+    const cameraY = useTransform(progress, [0.4, 0.8], [0, shouldReduceMotion ? -66 : -202]);
+    const cameraScale = useTransform(progress, [0.4, 0.8], [1, shouldReduceMotion ? 1.18 : 2.2]);
 
     return (
         <div className="relative h-full w-full overflow-hidden bg-surface-container-low">
@@ -243,20 +259,6 @@ export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number
                     <PaymentZoom progress={progress} />
                 </motion.div>
             </div>
-
-            <motion.div
-                className="absolute left-1/2 top-[7%] z-40 -translate-x-1/2 rounded-full border border-outline-variant/70 bg-surface-container-low/85 px-4 py-2 text-center text-[10px] font-medium text-on-surface-variant backdrop-blur-sm"
-                style={{opacity: overviewHintOpacity}}
-            >
-                Vu de loin, tout semble relié
-            </motion.div>
-
-            <motion.div
-                className="absolute left-1/2 top-[7%] z-40 -translate-x-1/2 rounded-full border border-outline-variant/70 bg-surface-container-low/85 px-4 py-2 text-center text-[10px] font-medium text-on-surface-variant backdrop-blur-sm"
-                style={{opacity: zoomHintOpacity}}
-            >
-                Dans une seule fonctionnalité, les écarts deviennent visibles
-            </motion.div>
 
             <ConclusionOverlay progress={progress} />
         </div>
