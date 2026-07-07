@@ -108,7 +108,7 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
             <motion.div
                 className={
                     "flex relative padding-x rounded-md z-20 " +
-                    (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")
+                    "theme-" + content[activeCard]?.theme
                 }
                 ref={ref}
             >

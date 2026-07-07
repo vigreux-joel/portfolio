@@ -40,7 +40,7 @@ export const ConstatScroll = () => {
                         Mais que contient réellement une fonctionnalité ?
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Derrière un paiement, il n’y a pas qu’un bouton. Il faut aligner les
+                        Derrière un module Paiement, il n’y a pas qu’un bouton. Il faut aligner les
                         états, les données, les erreurs, les contrôles et les autres modules.
                     </p>
                 </>
