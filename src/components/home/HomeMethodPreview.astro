@@ -1,0 +1,65 @@
+---
+import { Card } from "@components/Card";
+import { Line } from "@components/Line";
+import { Button, Icon } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { iArchitecture } from "@udixio/icons-outlined-400/architecture";
+import { iSearch } from "@udixio/icons-outlined-400/search";
+import { iShield } from "@udixio/icons-outlined-400/shield";
+import { methodProofs } from "./homeContent";
+
+const proofIcons = [iSearch, iArchitecture, iShield];
+---
+
+<div id="methode-preview" class="tab-menu theme-blue bg-surface">
+  <section>
+    <div class="max-width">
+      <div class="flex pt-8">
+        <div>
+          <Line client:idle icon={iFactCheck} />
+        </div>
+
+        <div class="padding pt-0 flex flex-col justify-center max-w-5xl">
+          <h2 class="text-title-large text-tertiary" data-sidebar-label="Méthode">Méthode</h2>
+          <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+            <h3 class="text-gradient">L’IA accélère, l’ingénierie sécurise</h3>
+          </div>
+          <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+            Cadrage, architecture, revue, tests et arbitrages : la méthode explique comment éviter les produits fragiles.
+          </p>
+        </div>
+      </div>
+
+      <div class="padding-x mt-12 mb-16">
+        <Card client:visible variant="filled" energyX className="group">
+          <div class="p-6 md:p-10">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8">
+              <div>
+                <span class="text-label-large text-tertiary uppercase tracking-wide">Anti-vibe coding</span>
+                <h3 class="mt-4 text-headline-medium text-on-surface max-w-prose">
+                  Accélérer sans perdre la maîtrise
+                </h3>
+                <p class="mt-5 text-body-large text-on-surface-variant">
+                  L’IA peut produire vite. La différence se joue dans le cadrage, la revue, les tests et les arbitrages qui transforment du code en solution fiable.
+                </p>
+                <div class="mt-8">
+                  <Button href="/methode" icon={iArrowForward} label="Comprendre la méthode" />
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                {methodProofs.map((proof, index) => (
+                  <div class="flex items-center gap-3 rounded-2xl bg-surface-container-low p-5">
+                    <Icon icon={proofIcons[index]} className="h-5 w-5 text-tertiary shrink-0" />
+                    <span class="text-body-large text-on-surface">{proof}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+</div>
