@@ -1,9 +1,9 @@
 import type {MotionValue} from "motion/react";
-import {StickyScroll} from "@components/sticky-scroll-reveal";
+import {StickyScroll, type StickyScrollItem} from "@components/sticky-scroll-reveal";
 import {ConstatDivergenceMedia} from "./ConstatDivergenceMedia";
 
 export const ConstatScroll = () => {
-    const content = [
+    const content: StickyScrollItem[] = [
         {
             text: (
                 <>
