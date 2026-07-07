@@ -138,10 +138,10 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
             className="absolute left-[168px] top-[292px] z-30 h-[230px] w-[360px] -translate-x-1/2 -translate-y-1/2"
             style={{opacity: panelOpacity, scale: panelScale}}
         >
-            <div className="absolute left-0 top-1/2 -translate-x-[86%] -translate-y-1/2 text-[10px] font-medium text-on-surface-variant">
+            <div className="absolute left-0 top-1/2 hidden -translate-x-[86%] -translate-y-1/2 text-[10px] font-medium text-on-surface-variant sm:block">
                 Panier
             </div>
-            <div className="absolute right-0 top-1/2 translate-x-[92%] -translate-y-1/2 text-[10px] font-medium text-on-surface-variant">
+            <div className="absolute right-0 top-1/2 hidden translate-x-[92%] -translate-y-1/2 text-[10px] font-medium text-on-surface-variant sm:block">
                 Commandes
             </div>
 
@@ -215,35 +215,34 @@ function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
 
 export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const cameraX = useTransform(progress, [0.4, 0.56], [0, shouldReduceMotion ? 0 : 125]);
-    const cameraY = useTransform(progress, [0.4, 0.56], [0, shouldReduceMotion ? 0 : -80]);
-    const cameraScale = useTransform(progress, [0.4, 0.56], [1, shouldReduceMotion ? 1.08 : 1.55]);
+    const cameraX = useTransform(progress, [0.4, 0.56], [0, shouldReduceMotion ? 0 : 92]);
+    const cameraY = useTransform(progress, [0.4, 0.56], [0, shouldReduceMotion ? 0 : -58]);
+    const cameraScale = useTransform(progress, [0.4, 0.56], [1, shouldReduceMotion ? 1.06 : 1.34]);
     const overviewHintOpacity = useTransform(progress, [0.2, 0.3, 0.44, 0.52], [0, 1, 1, 0]);
     const zoomHintOpacity = useTransform(progress, [0.54, 0.62, 0.78, 0.84], [0, 1, 1, 0]);
 
     return (
         <div className="relative h-full w-full overflow-hidden bg-surface-container-low">
-            <motion.div
-                className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2"
-                style={{x: cameraX, y: cameraY, scale: cameraScale}}
-            >
-                <svg className="absolute inset-0 size-full" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
-                    {CONNECTIONS.map((connection) => (
-                        <ConnectionPath key={connection.id} connection={connection} progress={progress} />
+            <div className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.58] sm:scale-[0.74] md:scale-[0.86] xl:scale-100">
+                <motion.div className="absolute inset-0" style={{x: cameraX, y: cameraY, scale: cameraScale}}>
+                    <svg className="absolute inset-0 size-full" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+                        {CONNECTIONS.map((connection) => (
+                            <ConnectionPath key={connection.id} connection={connection} progress={progress} />
+                        ))}
+                        {CONNECTIONS.slice(0, 5).map((connection, index) => (
+                            <FlowDot key={`flow-${connection.id}`} connection={connection} progress={progress} delay={index * 0.45} />
+                        ))}
+                    </svg>
+
+                    <AppCore progress={progress} />
+
+                    {FEATURES.map((feature) => (
+                        <FeatureNode key={feature.id} feature={feature} progress={progress} />
                     ))}
-                    {CONNECTIONS.slice(0, 5).map((connection, index) => (
-                        <FlowDot key={`flow-${connection.id}`} connection={connection} progress={progress} delay={index * 0.45} />
-                    ))}
-                </svg>
 
-                <AppCore progress={progress} />
-
-                {FEATURES.map((feature) => (
-                    <FeatureNode key={feature.id} feature={feature} progress={progress} />
-                ))}
-
-                <PaymentZoom progress={progress} />
-            </motion.div>
+                    <PaymentZoom progress={progress} />
+                </motion.div>
+            </div>
 
             <motion.div
                 className="absolute left-1/2 top-[7%] z-40 -translate-x-1/2 rounded-full border border-outline-variant/70 bg-surface-container-low/85 px-4 py-2 text-center text-[10px] font-medium text-on-surface-variant backdrop-blur-sm"
