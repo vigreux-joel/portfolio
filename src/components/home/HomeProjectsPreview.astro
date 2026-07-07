@@ -1,0 +1,84 @@
+---
+import { Card } from "@components/Card";
+import { Line } from "@components/Line";
+import { LinearGradient } from "@components/LinearGradient";
+import { BackgroundColor } from "@components/BackgroundColor";
+import { Button, Icon } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { iSearch } from "@udixio/icons-outlined-400/search";
+import { iArchitecture } from "@udixio/icons-outlined-400/architecture";
+import { iTaskAlt } from "@udixio/icons-outlined-400/task_alt";
+import { projectProofs } from "./homeContent";
+
+const proofIcons = [iSearch, iArchitecture, iTaskAlt, iFactCheck];
+---
+
+<div id="projets" class="tab-menu theme-green bg-surface relative overflow-hidden">
+  <BackgroundColor
+    speed={5_000}
+    size="max(60vw, 760px)"
+    count={4}
+    client:idle
+    className="absolute opacity-15 size-full top-0 left-0 -z-10"
+  />
+
+  <section>
+    <div class="max-width relative z-10">
+      <div class="flex pt-8">
+        <div>
+          <Line client:idle icon={iFactCheck} nextTheme="orange" />
+        </div>
+
+        <div class="padding pt-0 flex flex-col justify-center max-w-5xl">
+          <h2 class="text-title-large text-tertiary" data-sidebar-label="Projets">Projets / études de cas</h2>
+          <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+            <h3 class="text-gradient">Des décisions concrètes, pas seulement une stack</h3>
+          </div>
+          <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+            Les projets doivent montrer le problème, les contraintes, les arbitrages et ce que les choix techniques changent réellement pour le produit.
+          </p>
+        </div>
+      </div>
+
+      <div class="padding-x mt-12 grid grid-cols-1 lg:grid-cols-[1.15fr_.85fr] gap-6">
+        <Card client:visible variant="filled" energyX className="group">
+          <div class="p-6 md:p-10 h-full flex flex-col">
+            <span class="text-label-large text-tertiary uppercase tracking-wide">Études de cas</span>
+            <h3 class="mt-4 text-headline-medium text-on-surface max-w-prose">
+              Comprendre le raisonnement derrière la livraison
+            </h3>
+            <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+              La future page projets doit servir de preuve : pas une galerie de captures, mais une lecture des décisions qui rendent un produit fiable, maintenable et utilisable.
+            </p>
+            <div class="mt-8">
+              <Button href="/projets" icon={iArrowForward} label="Explorer les projets" />
+            </div>
+          </div>
+        </Card>
+
+        <Card client:visible variant="filled" className="group">
+          <div class="p-6 md:p-8 h-full">
+            <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Lecture attendue</span>
+            <div class="mt-6 space-y-4">
+              {projectProofs.map((proof, index) => (
+                <div class="flex items-center gap-3 text-body-large text-on-surface">
+                  <Icon icon={proofIcons[index]} className="h-5 w-5 text-tertiary shrink-0" />
+                  <span>{proof}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <div class="flex h-24 md:h-32">
+        <div>
+          <Line client:idle />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <LinearGradient nextTheme="orange" />
+</div>
