@@ -58,14 +58,14 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
         }
     }, []);
 
-    const [activeCard, setActiveCard] = React.useState<number | null>(null);
+    const [activeCard, setActiveCard] = React.useState<number>(0);
     const ref = useRef<any>(null);
     const {scrollYProgress} = useScroll({
         target: ref,
         offset: ["start center", "end center"],
     });
     const cardLength = content.length;
-    const [displayText, setDisplayText] = useState(false);
+    const [displayText, setDisplayText] = useState(true);
 
     // Un "groupe" = un media défini sur un item, qui reste monté et actif jusqu'au
     // prochain item qui redéfinit un media (les items sans media héritent du précédent).
@@ -212,9 +212,7 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
                             }}
                         >
                             {mediaGroups.map((group) => {
-                                const isVisible = activeCard != null
-                                    ? activeCard >= group.ownerIndex && activeCard < group.endIndex
-                                    : group.ownerIndex === 0;
+                                const isVisible = activeCard >= group.ownerIndex && activeCard < group.endIndex;
                                 return (
                                     <motion.div
                                         key={group.ownerIndex}
