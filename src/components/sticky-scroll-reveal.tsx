@@ -1,13 +1,36 @@
-import React, {useEffect, useRef, useState} from "react";
-import {motion, useMotionValueEvent, useScroll} from "motion/react";
-import {Link} from "@components/Link.tsx";
+import React, {useEffect, useMemo, useRef, useState} from "react";
+import {motion, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue} from "motion/react";
 import {classNames} from "@udixio/ui-react";
 import {updateTheme} from "@components/ThemeProvider.tsx";
 
 export interface StickyScrollItem {
     text: React.ReactNode;
-    media: React.ReactNode;
-    theme?: string;
+    /**
+     * Un media statique, ou une fonction recevant la progression de scroll (0→1, remappée
+     * sur la plage couverte par ce media) pour animer son contenu en continu sans re-render.
+     * Optionnel : si omis, l'item hérite du media du dernier item précédent qui en définit un
+     * (le media reste monté et actif sur toute la plage couverte, au lieu d'être redémonté).
+     */
+    media?: React.ReactNode | ((progress: MotionValue<number>) => React.ReactNode);
+    theme?: Parameters<typeof updateTheme>[0];
+}
+
+function MediaRenderer({media, scrollProgress, start, end}: {
+    media: NonNullable<StickyScrollItem["media"]>;
+    scrollProgress: MotionValue<number>;
+    start: number;
+    end: number;
+}) {
+    const localProgress = useTransform(scrollProgress, [start, end], [0, 1], {clamp: true});
+    const smoothProgress = useSpring(localProgress, {
+        stiffness: 90,
+        damping: 20,
+        mass: 0.45,
+        restDelta: 0.0005,
+        restSpeed: 0.001,
+    });
+
+    return <>{typeof media === "function" ? media(smoothProgress) : media}</>;
 }
 
 export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
@@ -43,6 +66,21 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
     });
     const cardLength = content.length;
     const [displayText, setDisplayText] = useState(false);
+
+    // Un "groupe" = un media défini sur un item, qui reste monté et actif jusqu'au
+    // prochain item qui redéfinit un media (les items sans media héritent du précédent).
+    const mediaGroups = useMemo(() => {
+        const groups: { ownerIndex: number; endIndex: number; media: NonNullable<StickyScrollItem["media"]> }[] = [];
+        content.forEach((item, index) => {
+            if (item.media != null) {
+                groups.push({ownerIndex: index, endIndex: cardLength, media: item.media});
+            }
+        });
+        groups.forEach((group, i) => {
+            if (groups[i + 1]) group.endIndex = groups[i + 1].ownerIndex;
+        });
+        return groups;
+    }, [content, cardLength]);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         if (!isLg) return;
@@ -90,19 +128,29 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
                         "div mask-inverse left lg:w-[400px] w-full relative flex flex-col lg:gap-32 gap-16 "
                     }
                 >
-                    {content.map((item, index) => (
-                        <div
-                            className={
-                                "max-w-lg lg:max-w-full " + (index == 1 ? "self-end" : "")
-                            }
-                        >
-                            {!isLg && (
-                                <div className={classNames("rounded-2xl mb-4 overflow-hidden")}>
-                                    {item.media}
+                    {content.map((item, index) => {
+                        const mobileMediaGroup = mediaGroups.find(
+                            (group) => index >= group.ownerIndex && index < group.endIndex
+                        );
+
+                        return (
+                            <div
+                                key={index}
+                                className={
+                                    "max-w-lg lg:max-w-full " + (index == 1 ? "self-end" : "")
+                                }
+                            >
+                            {!isLg && mobileMediaGroup != null && (
+                                <div className={classNames("mb-4 h-[360px] overflow-hidden rounded-2xl sm:h-[420px]")}>
+                                    <MediaRenderer
+                                        media={mobileMediaGroup.media}
+                                        scrollProgress={scrollYProgress}
+                                        start={mobileMediaGroup.ownerIndex / cardLength}
+                                        end={mobileMediaGroup.endIndex / cardLength}
+                                    />
                                 </div>
                             )}
                             <motion.div
-                                key={index}
                                 variants={{
                                     hidden: {
                                         opacity: 0,
@@ -123,7 +171,8 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
                                 {item.text}
                             </motion.div>
                         </div>
-                    ))}
+                        );
+                    })}
                 </motion.div>
 
                 {isLg && (
@@ -156,16 +205,19 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
                             }}
                             initial="hidden"
                             animate={displayText ? "visible" : "hidden"}
-                            className={"rounded-2xl sticky overflow-hidden"}
+                            className={"w-full rounded-2xl sticky overflow-hidden"}
                             transition={{
                                 duration: 0.75,
                                 // ease: [0.1, 0.25, 0.3, 1]
                             }}
                         >
-                            {content.map((card, index) => {
+                            {mediaGroups.map((group) => {
+                                const isVisible = activeCard != null
+                                    ? activeCard >= group.ownerIndex && activeCard < group.endIndex
+                                    : group.ownerIndex === 0;
                                 return (
                                     <motion.div
-                                        key={index}
+                                        key={group.ownerIndex}
                                         layout
                                         variants={{
                                             hidden: {
@@ -184,19 +236,18 @@ export const StickyScroll = ({ content }: { content: StickyScrollItem[] }) => {
                                             },
                                         }}
                                         className={classNames("w-full h-[500px]", {
-                                            "!block":
-                                                index == activeCard ||
-                                                (activeCard == null && index == 0),
+                                            "!block": isVisible,
                                         })}
                                         initial="hidden"
-                                        animate={
-                                            index == activeCard || (activeCard == null && index == 0)
-                                                ? "visible"
-                                                : "hidden"
-                                        }
+                                        animate={isVisible ? "visible" : "hidden"}
                                         transition={{duration: 0}}
                                     >
-                                        {card.media}
+                                        <MediaRenderer
+                                            media={group.media}
+                                            scrollProgress={scrollYProgress}
+                                            start={group.ownerIndex / cardLength}
+                                            end={group.endIndex / cardLength}
+                                        />
                                     </motion.div>
                                 );
                             })}

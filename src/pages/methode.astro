@@ -5,7 +5,7 @@ import ConstatSection from "../components/methode/ConstatSection.astro";
 import DemarcationSection from "../components/methode/DemarcationSection.astro";
 import LegitimiteSection from "../components/methode/LegitimiteSection.astro";
 import ProcessSection from "../components/methode/ProcessSection.astro";
-import CtaMethodeSection from "../components/methode/CtaMethodeSection.astro";
+import CtaSection from "@/components/CtaSection.astro";
 
 const faq = [
     {
@@ -32,7 +32,7 @@ const faq = [
   faq={faq}
   seo={{
     title: `Joël Vigreux - Méthode - L'IA génère du code, l'ingénierie construit des solutions`,
-    description: "Ma méthode : l'IA accélère l'écriture du code, l'ingénierie construit des solutions pérennes. Architecture, sécurité et revue de code systématique — du cadrage à la mise en production.",
+    description: "Ma méthode : l'IA accélère l'écriture du code, l'ingénierie construit des solutions pérennes. Architecture, sécurité et revue de code systématique, du cadrage à la mise en production.",
     openGraph: {
       basic: {
         title: "Joël Vigreux - Méthode de travail",
@@ -67,8 +67,15 @@ const faq = [
     .animate-float-slow { animation: float 6s ease-in-out infinite; }
     .animate-float-medium { animation: float 5s ease-in-out infinite; }
     .animate-float-fast { animation: float 4s ease-in-out infinite; }
+    @keyframes chip-shake {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-2px, 1px); }
+      50% { transform: translate(2px, -1px); }
+      75% { transform: translate(-1px, -2px); }
+    }
+    .chip-shake { animation: chip-shake 0.12s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) {
-      .animate-float-slow, .animate-float-medium, .animate-float-fast { animation: none; }
+      .animate-float-slow, .animate-float-medium, .animate-float-fast, .chip-shake { animation: none; }
     }
   </style>
 
@@ -90,5 +97,5 @@ const faq = [
   <DemarcationSection />
   <LegitimiteSection />
   <ProcessSection />
-  <CtaMethodeSection />
+  <CtaSection />
 </Layout>

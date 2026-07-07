@@ -9,13 +9,32 @@ import { iMail } from "@udixio/icons-outlined-400/mail";
         <Card client:visible variant="filled" className="w-full" energyX>
             <div class="p-8 md:p-12 flex flex-col items-start gap-6">
                 <div class="text-headline-large md:text-display-medium max-w-prose">
-                    <h2 class="text-gradient">Un projet en tête ?</h2>
-                    <p>Parlons-en dès maintenant — premier échange gratuit.</p>
+                    <h2 class="text-gradient">Avant de vous engager, on cadre ensemble</h2>
                 </div>
-                <p class="text-body-large max-w-prose text-on-surface-variant">
-                    Décrivez-moi votre besoin, je vous propose une estimation rapide et sans engagement.
-                </p>
-                <Button className="w-fit" href="/contact" icon={iMail} label="Démarrer mon projet" />
+                <div class="max-w-prose space-y-4 text-body-large text-on-surface-variant">
+                    <p>
+                        Vous avez un projet, une idée, ou simplement une question d'architecture
+                        à trancher. Avant tout engagement, on en parle : 30 minutes pour que je
+                        comprenne vos enjeux, que vous jaugiez ma manière de raisonner, et qu'on
+                        voie ensemble si on est alignés.
+                    </p>
+                    <p>
+                        Sans promesse, sans pression : juste un échange de cadrage honnête. S'il
+                        apparaît que je ne suis pas le bon profil pour votre besoin,
+                        <span class="text-on-surface">je vous le dirai.</span>
+                    </p>
+                </div>
+                <div class="flex flex-col items-start gap-2 mt-2">
+                    <Button
+                            client:visible
+                            href={import.meta.env.PUBLIC_CALENDLY || "https://calendly.com"}
+                            target="_blank"
+                            className="w-fit relative z-10"
+                            label="Réserver un échange de cadrage"
+                            icon={iMail}
+                    />
+                    <span class="text-body-small text-on-surface-variant">30 minutes, sans engagement.</span>
+                </div>
             </div>
         </Card>
     </div>

@@ -1,6 +1,18 @@
 ---
+import CtaSection from "@/components/CtaSection.astro";
+import type {FaqItem} from "@components/FaqSection.astro";
+import FaqSection from "@components/FaqSection.astro";
+interface Props {
+    faq: FaqItem[];
+    showCta?: boolean;
+}
+
+const { faq, showCta = true}: Props = Astro.props;
 
 ---
+
+<FaqSection questions={faq} />
+{showCta && <CtaSection />}
 <footer class="relative">
     <p class="absolute left-1/2 text-body-small text-on-surface -translate-x-1/2 bottom-4">© 2024-{new Date().getFullYear()} CONÇU PAR VIGREUX
         JOËL</p>

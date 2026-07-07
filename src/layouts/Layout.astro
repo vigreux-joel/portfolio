@@ -167,9 +167,8 @@ const seoDefault: SEOProps = {
 
 </div>
 <ThemeProvider transition:name="theme-provider" client:idle/>
-<FaqSection questions={faq} />
-{showCta && <CtaSection />}
-<Footer/>
+
+<Footer faq={faq} showCta={showCta}/>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const observer = new IntersectionObserver((entries) => {

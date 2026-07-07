@@ -1,50 +1,118 @@
 ---
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
+import { Card } from "@components/Card";
+import { Icon } from "@udixio/ui-react";
 
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
+import { iFoundation } from "@udixio/icons-outlined-400/foundation";
+import { iVisibility } from "@udixio/icons-outlined-400/visibility";
+import { iPsychology } from "@udixio/icons-outlined-400/psychology";
+import { iRoute } from "@udixio/icons-outlined-400/route";
 ---
 
-<div class="theme-purple surface">
+<div class="theme-purple bg-surface">
   <section class="max-width">
     <div class="flex pt-8">
       <div>
-        <Line client:idle icon={iIdCard} nextTheme="purple" />
+        <Line client:idle icon={iIdCard} nextTheme="green" />
       </div>
       <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
         <h2 class="text-title-large text-tertiary" data-sidebar-label="Légitimité">La légitimité</h2>
         <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
           <h3 class="text-gradient">On ne pilote pas une machine qu'on ne comprend pas</h3>
         </div>
+        <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+          L'IA génère du code à partir de patterns. Elle ne sait pas pourquoi une
+          décision est bonne dans votre contexte, ni pourquoi une autre prépare un
+          problème plus tard. Cette lecture-là vient de l'expérience.
+        </p>
+      </div>
+    </div>
 
-        <div class="mt-8 max-w-prose space-y-6 text-body-large text-on-surface-variant">
-          <p>
-            L'IA génère du code à partir de patterns. Elle ne sait pas <em>pourquoi</em>
-            une décision a été prise, ni <em>pourquoi</em> une autre serait dangereuse
-            dans votre contexte. Cette intuition-là ne s'invente pas : elle se construit
-            en construisant, en cassant, en réparant.
-          </p>
-          <p>
-            Je viens du back-end. C'est-à-dire du côté des fondations — la donnée, la
-            structure, l'architecture — là où la moindre erreur de conception ne pardonne
-            pas. Cette origine m'a donné des réflexes que je garde aujourd'hui sur l'ensemble
-            d'un produit : concevoir un projet de bout en bout, des fondations jusqu'à
-            l'expérience utilisateur, c'est un profil que je crois précieux et trop rare.
-          </p>
-          <p>
-            Savoir concevoir des systèmes complexes, de zéro, c'est aussi savoir relire
-            ce que l'IA produit : on voit immédiatement où elle a triché, là où un œil
-            moins exercé ne verra qu'un code qui a l'air correct.
-          </p>
-          <p>
-            Mon rapport à l'IA n'est pas idéologique. Je m'en sers tous les jours. Mais
-            à plusieurs reprises, son résultat est passé sous mon seuil d'exigence — sans
-            que ce soit visible au premier regard. C'est précisément le risque pour votre
-            projet : un code qui a l'air correct, et qui ne l'est pas. C'est pour ça que
-            <span class="text-on-surface">chaque ligne est lue, testée, corrigée.</span>
+    <div class="padding-x mt-12 mb-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-min">
+      <Card client:visible variant="filled" className="group md:col-span-2">
+        <div class="p-6 md:p-8 h-full flex flex-col">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+              <Icon icon={iFoundation} className="h-6 w-6" />
+            </span>
+            <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Fondations</span>
+          </div>
+          <h4 class="text-headline-medium mb-3">Je viens du <span class="text-gradient">back-end</span></h4>
+          <div class="space-y-4 text-body-large text-on-surface-variant max-w-prose">
+            <p>
+              C'est le côté des fondations : la donnée, la structure, l'architecture,
+              les effets de bord. Quand une erreur de conception arrive là, elle finit
+              presque toujours par coûter cher.
+            </p>
+            <p>
+              Cette origine me donne une manière de lire un produit dans son ensemble :
+              pas seulement l'écran final, mais ce qui permettra au système d'évoluer
+              proprement derrière.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      <Card client:visible variant="filled" className="group">
+        <div class="p-6 md:p-8 h-full flex flex-col">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+              <Icon icon={iRoute} className="h-6 w-6" />
+            </span>
+          </div>
+          <h4 class="text-headline-small mb-4">De bout en bout</h4>
+          <p class="text-body-medium text-on-surface-variant">
+            Concevoir un projet complet, des fondations jusqu'à l'expérience utilisateur,
+            demande de faire tenir ensemble des contraintes qui sont souvent traitées séparément.
           </p>
         </div>
-      </div>
+      </Card>
+
+      <Card client:visible variant="filled" className="group">
+        <div class="p-6 md:p-8 h-full flex flex-col">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+              <Icon icon={iVisibility} className="h-6 w-6" />
+            </span>
+          </div>
+          <h4 class="text-headline-small mb-4">Relire vraiment</h4>
+          <p class="text-body-medium text-on-surface-variant">
+            Un code généré peut avoir l'air correct tout en masquant une hypothèse fragile,
+            un raccourci dangereux ou une complexité déplacée au mauvais endroit.
+          </p>
+        </div>
+      </Card>
+
+      <Card client:visible variant="filled" className="group md:col-span-2">
+        <div class="p-6 md:p-8 h-full flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+              <Icon icon={iPsychology} className="h-6 w-6" />
+            </span>
+            <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Usage quotidien</span>
+          </div>
+          <div class="space-y-4 text-body-large text-on-surface-variant max-w-prose">
+            <p>
+              Mon rapport à l'IA n'est pas idéologique. Je m'en sers tous les jours,
+              parce qu'elle fait gagner du temps quand elle est bien cadrée.
+            </p>
+            <p>
+              Mais je ne confonds pas vitesse et validation. Le résultat doit passer
+              sous un vrai seuil d'exigence avant d'entrer dans votre produit.
+            </p>
+          </div>
+        </div>
+      </Card>
+    </div>
+
+    <div class="padding-x pb-16">
+      <p class="text-body-large max-w-prose mx-auto text-center text-on-surface">
+        C'est précisément le risque pour votre projet : un code qui a l'air
+        correct, et qui ne l'est pas. C'est pour ça que
+        <span class="text-gradient font-medium">chaque ligne est lue, testée, corrigée.</span>
+      </p>
     </div>
 
     <div class="flex h-24">
@@ -54,5 +122,5 @@ import { iIdCard } from "@udixio/icons-outlined-400/id_card";
     </div>
   </section>
 
-  <LinearGradient nextTheme="purple" />
+  <LinearGradient nextTheme="green" />
 </div>

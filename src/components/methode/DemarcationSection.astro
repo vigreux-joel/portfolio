@@ -6,11 +6,11 @@ import { Icon } from "@udixio/ui-react";
 
 import { iCode } from "@udixio/icons-outlined-400/code";
 import { iArchitecture } from "@udixio/icons-outlined-400/architecture";
+import { iCheckCircle } from "@udixio/icons-outlined-400/check_circle";
 ---
 
-<div id="demarcation" class="theme-orange surface">
+<div id="demarcation" class="theme-orange bg-surface">
   <section class="max-width">
-    <!-- Introduction -->
     <div class="flex pt-8">
       <div>
         <Line client:idle icon={iArchitecture} nextTheme="purple" />
@@ -23,64 +23,60 @@ import { iArchitecture } from "@udixio/icons-outlined-400/architecture";
       </div>
     </div>
 
-    <!-- Deux colonnes : contraste IA / humain -->
     <div class="padding-x mt-12 mb-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-
-      <!-- Colonne gauche : ce que je délègue à la machine -->
       <Card client:visible variant="filled" className="group">
         <div class="p-6 md:p-8 h-full flex flex-col">
           <div class="flex items-center gap-3 mb-6">
             <span class="grid place-items-center h-12 w-12 rounded-2xl bg-surface-container-high text-on-surface-variant">
               <Icon icon={iCode} className="h-6 w-6" />
             </span>
-            <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Exécution</span>
+            <div>
+              <span class="block text-label-large text-on-surface-variant uppercase tracking-wide">Exécution</span>
+              <h4 class="text-headline-small text-on-surface-variant">Ce que je peux déléguer</h4>
+            </div>
           </div>
-          <h4 class="text-headline-small md:text-headline-medium text-on-surface-variant mb-2">
-            Ce que je délègue à la machine
-          </h4>
-          <p class="text-body-medium text-on-surface-variant mb-6">
-            L'exécution, sans illusion sur ce qu'elle vaut.
+          <p class="text-body-large text-on-surface-variant/70 mb-6">
+            L'IA est efficace quand le cadre est clair. Je l'utilise pour accélérer ce
+            qui est répétitif, documenté ou déjà suffisamment borné.
           </p>
-          <ul class="space-y-3 text-body-medium text-on-surface-variant">
-            <li class="flex gap-3"><span class="text-on-surface-variant/60 mt-1">—</span>Génération de code répétitif et de tuyauterie technique</li>
-            <li class="flex gap-3"><span class="text-on-surface-variant/60 mt-1">—</span>Premières versions de fonctions, tests, documentation</li>
-            <li class="flex gap-3"><span class="text-on-surface-variant/60 mt-1">—</span>Accélération du time-to-market sur les tâches connues</li>
+          <ul class="space-y-3 text-body-medium text-on-surface-variant/70 mt-auto">
+            <li class="flex gap-3 items-start"><span class="mt-1 text-on-surface-variant/50">•</span><span>Générer du code répétitif et de la tuyauterie technique</span></li>
+            <li class="flex gap-3 items-start"><span class="mt-1 text-on-surface-variant/50">•</span><span>Produire une première version de fonctions, tests ou documentation</span></li>
+            <li class="flex gap-3 items-start"><span class="mt-1 text-on-surface-variant/50">•</span><span>Accélérer les tâches connues sans les livrer telles quelles</span></li>
           </ul>
         </div>
       </Card>
 
-      <!-- Colonne droite : ce que je suis seul à maîtriser -->
       <Card client:visible variant="filled" energyX className="group relative ring-1 ring-primary/30">
         <div class="p-6 md:p-8 h-full flex flex-col">
           <div class="flex items-center gap-3 mb-6">
             <span class="grid place-items-center h-12 w-12 rounded-2xl bg-primary text-on-primary">
               <Icon icon={iArchitecture} className="h-6 w-6" />
             </span>
-            <span class="text-label-large text-tertiary uppercase tracking-wide">Maîtrise</span>
+            <div>
+              <span class="block text-label-large text-tertiary uppercase tracking-wide">Ingénierie</span>
+              <h4 class="text-headline-small text-on-surface">Ce que je garde sous contrôle</h4>
+            </div>
           </div>
-          <h4 class="text-headline-small md:text-headline-medium mb-2">
-            Ce que je suis seul à <span class="text-gradient">maîtriser</span>
-          </h4>
-          <p class="text-body-medium text-on-surface-variant mb-6">
-            Les décisions qui déterminent si votre projet tiendra.
+          <p class="text-body-large text-on-surface mb-6">
+            Les décisions structurantes restent humaines. C'est là que se joue la tenue
+            du produit : dans les arbitrages, les limites posées, et la relecture.
           </p>
-          <ul class="space-y-3 text-body-medium text-on-surface">
-            <li class="flex gap-3"><span class="text-primary mt-1 font-bold">+</span>Architecture pensée pour l'évolution de votre produit</li>
-            <li class="flex gap-3"><span class="text-primary mt-1 font-bold">+</span>Protection des données et du business</li>
-            <li class="flex gap-3"><span class="text-primary mt-1 font-bold">+</span>Traduction des enjeux métier en choix techniques</li>
-            <li class="flex gap-3"><span class="text-primary mt-1 font-bold">+</span>Revue systématique : chaque ligne est lue, comprise, validée</li>
+          <ul class="space-y-3 text-body-medium text-on-surface mt-auto">
+            <li class="flex gap-3 items-start"><Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span>Architecture pensée pour l'évolution de votre produit</span></li>
+            <li class="flex gap-3 items-start"><Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span>Protection des données et du business</span></li>
+            <li class="flex gap-3 items-start"><Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span>Traduction des enjeux métier en choix techniques</span></li>
+            <li class="flex gap-3 items-start"><Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5" /><span>Revue systématique : chaque ligne est lue, comprise, validée</span></li>
           </ul>
         </div>
       </Card>
-
     </div>
 
-    <!-- Phrase de pivot -->
     <div class="padding-x pb-16">
-      <p class="text-body-large max-w-prose mx-auto text-center text-on-surface">
-        Déléguer l'exécution ne réduit pas l'exigence — elle l'élève. Plus l'IA
-        s'invite dans un projet, plus le pilotage humain devient le facteur qui sépare
-        un produit fiable d'une bombe à retardement.
+      <p class="text-body-large max-w-prose mx-auto text-center text-on-surface-variant">
+        Déléguer une partie de l'exécution ne baisse pas le niveau d'exigence. Au contraire :
+        plus l'IA intervient, plus il faut quelqu'un capable de comprendre, trier et assumer
+        ce qui entre réellement dans le produit.
       </p>
     </div>
 
