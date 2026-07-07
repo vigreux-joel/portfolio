@@ -172,12 +172,6 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
             className="absolute left-[168px] top-[292px] z-30 h-[46px] w-[92px] -translate-x-1/2 -translate-y-1/2"
             style={{opacity: panelOpacity, scale: panelScale, transformOrigin: "50% 50%"}}
         >
-            <div className="absolute right-[calc(100%+4px)] top-1/2 hidden -translate-y-1/2 rounded-full border border-outline-variant bg-surface-container-low px-1.5 py-0.5 text-[2px] font-medium text-on-surface-variant sm:block">
-                Panier
-            </div>
-            <div className="absolute left-[calc(100%+4px)] top-1/2 hidden -translate-y-1/2 rounded-full border border-outline-variant bg-surface-container-low px-1.5 py-0.5 text-[2px] font-medium text-on-surface-variant sm:block">
-                Commandes
-            </div>
             <motion.span
                 className="absolute left-0 top-1/2 h-px w-4 -translate-x-full bg-primary/70"
                 style={{opacity: flowOpacity}}
