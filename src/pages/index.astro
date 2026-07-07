@@ -28,6 +28,22 @@ const faq = [
       "L’IA est un levier de vitesse, pas un pilote automatique. Ma méthode repose sur le cadrage, l’architecture, la revue de code, les tests et les arbitrages humains.",
   },
 ];
+
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Joël Vigreux",
+  jobTitle: "Développeur full-stack",
+  url: "https://vigreux-joel.fr/",
+  image: "https://vigreux-joel.fr/images/photo.webp",
+});
+
+const websiteJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Joël Vigreux - Développeur full-stack",
+  url: "https://vigreux-joel.fr/",
+});
 ---
 
 <Layout
@@ -63,29 +79,8 @@ const faq = [
     },
   }}
 >
-  <script type="application/ld+json" is:inline>
-    {
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Joël Vigreux",
-        "jobTitle": "Développeur full-stack",
-        "url": "https://vigreux-joel.fr/",
-        "image": "https://vigreux-joel.fr/images/photo.webp"
-      })
-    }
-  </script>
-
-  <script type="application/ld+json" is:inline>
-    {
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Joël Vigreux - Développeur full-stack",
-        "url": "https://vigreux-joel.fr/"
-      })
-    }
-  </script>
+  <script type="application/ld+json" set:html={personJsonLd} />
+  <script type="application/ld+json" set:html={websiteJsonLd} />
 
   <HomeHero />
   <HomeContextPaths />
