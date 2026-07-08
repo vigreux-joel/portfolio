@@ -168,6 +168,12 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
     const panelOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
     const panelScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
+    const panelRadius = useTransform(progress, [0.8, 0.9], ["999px", "32px"]);
+    const panelBackground = useTransform(
+        progress,
+        [0.8, 0.9],
+        ["color-mix(in srgb, var(--color-primary) 0%, transparent)", "color-mix(in srgb, var(--color-primary) 9%, transparent)"],
+    );
     const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
     const duplicateOpacity = useTransform(progress, [0.86, 0.92], [0, 1]);
     const missingOpacity = useTransform(progress, [0.89, 0.95], [0, 1]);
@@ -175,8 +181,14 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
 
     return (
         <motion.div
-            className="absolute inset-x-4 top-1/2 z-40 h-[88%] -translate-y-1/2 rounded-[44px] border border-dashed border-primary/70 bg-surface-container-low/45 shadow-[0_0_40px_color-mix(in_srgb,var(--color-primary)_12%,transparent)] backdrop-blur-[2px] sm:inset-x-8 sm:rounded-[56px]"
-            style={{opacity: panelOpacity, scale: panelScale, transformOrigin: "50% 50%"}}
+            className="absolute inset-x-4 top-1/2 z-40 h-[88%] -translate-y-1/2 border border-dashed border-primary/70 shadow-[0_0_36px_color-mix(in_srgb,var(--color-primary)_10%,transparent)] sm:inset-x-8"
+            style={{
+                opacity: panelOpacity,
+                scale: panelScale,
+                borderRadius: panelRadius,
+                background: panelBackground,
+                transformOrigin: "50% 50%",
+            }}
         >
             <motion.span
                 className="absolute left-0 top-1/2 h-px w-10 -translate-x-full bg-primary/70"
