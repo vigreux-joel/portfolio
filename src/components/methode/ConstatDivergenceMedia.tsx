@@ -42,15 +42,17 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
     const focusOpacity = useTransform(
         progress,
         [0.42, 0.62, 0.8, 0.84],
-        feature.selected ? [1, 1, 1, 0] : [1, 0.08, 0, 0],
+        feature.selected ? [1, 1, 1, 1] : [1, 0.08, 0, 0],
     );
     const opacity = useTransform([appearOpacity, focusOpacity], ([appear, focus]: number[]) => appear * focus);
     const scale = useTransform(progress, [feature.at, feature.at + 0.035], [0.72, 1]);
     const labelOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
-    const surfaceOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
+    const surfaceOpacity = useTransform(progress, [0.62, 0.8], [1, 1]);
+    const selectedFillOpacity = useTransform(progress, [0.62, 0.8], [0, feature.selected ? 1 : 0]);
     const solidBorderOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
     const dashedBorderOpacity = useTransform(progress, [0.62, 0.8], [0, feature.selected ? 1 : 0]);
     const selectedGlowOpacity = useTransform(progress, [0.42, 0.8], [feature.selected ? 1 : 0, 0]);
+    const shapeRadius = useTransform(progress, [0.62, 0.8], feature.selected ? ["999px", "3.3px"] : ["999px", "999px"]);
     const selectedGlow = feature.selected ? "" : "shadow-sm";
 
     return (
@@ -69,25 +71,32 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
                 }`}
                 animate={shouldReduceMotion ? undefined : {y: [0, -2, 0]}}
                 transition={{duration: 3 + feature.at * 5, repeat: Infinity, ease: "easeInOut"}}
+                style={{borderRadius: shapeRadius}}
             >
                 {feature.selected && (
                     <motion.span
                         className="absolute inset-0 rounded-full ring-1 ring-primary/45 shadow-lg"
-                        style={{opacity: selectedGlowOpacity}}
+                        style={{opacity: selectedGlowOpacity, borderRadius: shapeRadius}}
                     />
                 )}
                 <motion.span
                     className="absolute inset-0 rounded-full bg-surface-container-high"
-                    style={{opacity: surfaceOpacity}}
+                    style={{opacity: surfaceOpacity, borderRadius: shapeRadius}}
                 />
+                {feature.selected && (
+                    <motion.span
+                        className="absolute inset-0 rounded-full bg-primary/10"
+                        style={{opacity: selectedFillOpacity, borderRadius: shapeRadius}}
+                    />
+                )}
                 <motion.span
                     className="absolute inset-0 rounded-full border border-primary/40"
-                    style={{opacity: solidBorderOpacity}}
+                    style={{opacity: solidBorderOpacity, borderRadius: shapeRadius}}
                 />
                 {feature.selected && (
                     <motion.span
                         className="absolute inset-0 rounded-full border border-dashed border-primary/70"
-                        style={{opacity: dashedBorderOpacity}}
+                        style={{opacity: dashedBorderOpacity, borderRadius: shapeRadius}}
                     />
                 )}
                 <motion.span className="relative" style={{opacity: labelOpacity}}>
@@ -166,14 +175,8 @@ function PaymentBox({children, className = ""}: {children: ReactNode; className?
 
 function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const panelOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
-    const panelScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
-    const panelRadius = useTransform(progress, [0.8, 0.9], ["999px", "32px"]);
-    const panelBackground = useTransform(
-        progress,
-        [0.8, 0.9],
-        ["color-mix(in srgb, var(--color-primary) 0%, transparent)", "color-mix(in srgb, var(--color-primary) 9%, transparent)"],
-    );
+    const contentOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
+    const contentScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
     const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
     const duplicateOpacity = useTransform(progress, [0.86, 0.92], [0, 1]);
     const missingOpacity = useTransform(progress, [0.89, 0.95], [0, 1]);
@@ -181,12 +184,10 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
 
     return (
         <motion.div
-            className="absolute inset-x-4 top-1/2 z-40 h-[88%] -translate-y-1/2 border border-dashed border-primary/70 shadow-[0_0_36px_color-mix(in_srgb,var(--color-primary)_10%,transparent)] sm:inset-x-8"
+            className="absolute inset-x-4 top-1/2 z-40 h-[88%] -translate-y-1/2 sm:inset-x-8"
             style={{
-                opacity: panelOpacity,
-                scale: panelScale,
-                borderRadius: panelRadius,
-                background: panelBackground,
+                opacity: contentOpacity,
+                scale: contentScale,
                 transformOrigin: "50% 50%",
             }}
         >
