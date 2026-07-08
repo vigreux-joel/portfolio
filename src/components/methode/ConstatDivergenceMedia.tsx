@@ -39,7 +39,11 @@ const CONNECTIONS: Connection[] = [
 function FeatureNode({feature, progress}: {feature: Feature; progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
     const appearOpacity = useTransform(progress, [feature.at, feature.at + 0.035], [0, 1]);
-    const focusOpacity = useTransform(progress, [0.42, 0.62], [1, feature.selected ? 1 : 0.08]);
+    const focusOpacity = useTransform(
+        progress,
+        [0.42, 0.62, 0.8, 0.84],
+        feature.selected ? [1, 1, 1, 0] : [1, 0.08, 0, 0],
+    );
     const opacity = useTransform([appearOpacity, focusOpacity], ([appear, focus]: number[]) => appear * focus);
     const scale = useTransform(progress, [feature.at, feature.at + 0.035], [0.72, 1]);
     const labelOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
@@ -154,16 +158,16 @@ function AppCore({progress}: {progress: MotionValue<number>}) {
 
 function PaymentBox({children, className = ""}: {children: ReactNode; className?: string}) {
     return (
-        <div className={`rounded-[3px] border border-primary/35 bg-surface-container-high px-1 py-0.5 text-center text-[2.2px] font-medium leading-tight text-on-surface shadow-sm ${className}`}>
+        <div className={`rounded-xl border border-primary/35 bg-surface-container-high px-3 py-2 text-center text-[10px] font-medium leading-tight text-on-surface shadow-sm sm:text-[11px] ${className}`}>
             {children}
         </div>
     );
 }
 
-function PaymentZoom({progress}: {progress: MotionValue<number>}) {
+function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
     const panelOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
-    const panelScale = useTransform(progress, [0.8, 0.84], [0.12, 1]);
+    const panelScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
     const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
     const duplicateOpacity = useTransform(progress, [0.86, 0.92], [0, 1]);
     const missingOpacity = useTransform(progress, [0.89, 0.95], [0, 1]);
@@ -171,58 +175,58 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
 
     return (
         <motion.div
-            className="absolute left-[168px] top-[292px] z-30 h-[46px] w-[92px] -translate-x-1/2 -translate-y-1/2"
+            className="absolute inset-x-4 top-1/2 z-40 h-[88%] -translate-y-1/2 rounded-[44px] border border-dashed border-primary/70 bg-surface-container-low/45 shadow-[0_0_40px_color-mix(in_srgb,var(--color-primary)_12%,transparent)] backdrop-blur-[2px] sm:inset-x-8 sm:rounded-[56px]"
             style={{opacity: panelOpacity, scale: panelScale, transformOrigin: "50% 50%"}}
         >
             <motion.span
-                className="absolute left-0 top-1/2 h-px w-4 -translate-x-full bg-primary/70"
+                className="absolute left-0 top-1/2 h-px w-10 -translate-x-full bg-primary/70"
                 style={{opacity: flowOpacity}}
             />
             <motion.span
-                className="absolute right-0 top-1/2 h-px w-4 translate-x-full bg-primary/70"
+                className="absolute right-0 top-1/2 h-px w-10 translate-x-full bg-primary/70"
                 style={{opacity: flowOpacity}}
             />
 
-            <motion.div className="absolute inset-x-4 top-[17px] z-20 grid grid-cols-3 items-center gap-1" style={{opacity: flowOpacity}}>
+            <motion.div className="absolute inset-x-[10%] top-[42%] z-20 grid grid-cols-3 items-center gap-3 sm:gap-5" style={{opacity: flowOpacity}}>
                 <PaymentBox>Interface</PaymentBox>
                 <PaymentBox>Traitement</PaymentBox>
                 <PaymentBox>Transaction</PaymentBox>
             </motion.div>
 
             <motion.div
-                className="absolute left-[36px] top-[4px] z-10 w-[20px]"
+                className="absolute left-[41%] top-[18%] z-10 w-[25%] max-w-[150px]"
                 style={{opacity: duplicateOpacity}}
-                animate={shouldReduceMotion ? undefined : {x: [0, 4, 0], rotate: [0, -1.5, 0]}}
+                animate={shouldReduceMotion ? undefined : {x: [0, 6, 0], rotate: [0, -1.5, 0]}}
                 transition={{duration: 2.2, repeat: Infinity, ease: "easeInOut"}}
             >
                 <PaymentBox className="border-tertiary/60 bg-tertiary/15 text-tertiary">
                     Traitement
-                    <span className="mt-0.5 block text-[1.8px] font-normal">copie séparée</span>
+                    <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">copie séparée</span>
                 </PaymentBox>
             </motion.div>
 
-            <motion.div className="absolute left-[24px] top-[31px] z-20 w-[34px]" style={{opacity: missingOpacity}}>
-                <div className="rounded-[3px] border border-dashed border-error/60 bg-error/10 px-1 py-0.5 text-center text-[2.2px] font-medium leading-tight text-error">
+            <motion.div className="absolute bottom-[18%] left-[12%] z-20 w-[34%] max-w-[190px]" style={{opacity: missingOpacity}}>
+                <div className="rounded-xl border border-dashed border-error/60 bg-error/10 px-3 py-2 text-center text-[10px] font-medium leading-tight text-error sm:text-[11px]">
                     Échecs & remboursements
-                    <span className="mx-auto mt-0.5 block h-px w-4 bg-error/60" />
-                    <span className="mt-0.5 block text-[1.8px] font-normal">absent</span>
+                    <span className="mx-auto mt-2 block h-px w-14 bg-error/60" />
+                    <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">absent</span>
                 </div>
             </motion.div>
 
-            <motion.div className="absolute right-[4px] top-[31px] z-20 w-[25px]" style={{opacity: securityOpacity}}>
-                <div className="rounded-[3px] border border-dashed border-outline bg-surface-container-low px-1 py-0.5 text-center text-[2.2px] font-medium leading-tight text-on-surface">
+            <motion.div className="absolute bottom-[18%] right-[12%] z-20 w-[28%] max-w-[170px]" style={{opacity: securityOpacity}}>
+                <div className="rounded-xl border border-dashed border-outline bg-surface-container-low px-3 py-2 text-center text-[10px] font-medium leading-tight text-on-surface sm:text-[11px]">
                     Sécurité / tests
-                    <span className="mt-0.5 block text-[1.8px] font-normal text-error">non garanti</span>
+                    <span className="mt-1 block text-[9px] font-normal text-error sm:text-[10px]">non garanti</span>
                 </div>
             </motion.div>
 
-            <svg className="absolute inset-0 size-full" viewBox="0 0 92 46" aria-hidden="true">
+            <svg className="absolute inset-0 size-full" viewBox="0 0 100 100" aria-hidden="true">
                 <motion.g style={{opacity: flowOpacity}} fill="none" stroke="var(--color-primary)" strokeLinecap="round" strokeWidth="1.2">
-                    <path d="M34 23 H37" />
-                    <path d="M55 23 H58" />
+                    <path d="M31 50 H38" />
+                    <path d="M62 50 H69" />
                 </motion.g>
                 <motion.g style={{opacity: missingOpacity}} fill="none" stroke="var(--color-error)" strokeLinecap="round" strokeWidth="1.2" strokeDasharray="5 6">
-                    <path d="M46 26 C45 29 45 31 46 33" />
+                    <path d="M50 55 C49 61 49 65 50 70" />
                 </motion.g>
             </svg>
         </motion.div>
@@ -273,11 +277,10 @@ export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number
                     {FEATURES.map((feature) => (
                         <FeatureNode key={feature.id} feature={feature} progress={progress} />
                     ))}
-
-                    <PaymentZoom progress={progress} />
                 </motion.div>
             </div>
 
+            <PaymentMicroscope progress={progress} />
             <ConclusionOverlay progress={progress} />
         </div>
     );
