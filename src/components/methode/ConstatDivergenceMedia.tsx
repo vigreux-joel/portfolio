@@ -187,46 +187,65 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
                 style={{opacity: flowOpacity}}
             />
 
-            <motion.div className="absolute inset-x-[10%] top-[42%] z-20 grid grid-cols-3 items-center gap-3 sm:gap-5" style={{opacity: flowOpacity}}>
-                <PaymentBox>Interface</PaymentBox>
-                <PaymentBox>Traitement</PaymentBox>
-                <PaymentBox>Transaction</PaymentBox>
+            <motion.div
+                className="absolute left-[10%] top-[13%] z-20 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-primary"
+                style={{opacity: flowOpacity}}
+            >
+                Parcours livré
+            </motion.div>
+
+            <motion.div className="absolute inset-x-[10%] top-[36%] z-20 grid grid-cols-3 items-stretch gap-3 sm:gap-5" style={{opacity: flowOpacity}}>
+                <PaymentBox>
+                    <span className="block">Bouton payer</span>
+                    <span className="mt-1 block text-[9px] font-normal text-on-surface-variant sm:text-[10px]">visible</span>
+                </PaymentBox>
+                <PaymentBox>
+                    <span className="block">Valider paiement</span>
+                    <span className="mt-1 block text-[9px] font-normal text-on-surface-variant sm:text-[10px]">fonctionne</span>
+                </PaymentBox>
+                <PaymentBox>
+                    <span className="block">Commande créée</span>
+                    <span className="mt-1 block text-[9px] font-normal text-on-surface-variant sm:text-[10px]">cas simple</span>
+                </PaymentBox>
             </motion.div>
 
             <motion.div
-                className="absolute left-[41%] top-[18%] z-10 w-[25%] max-w-[150px]"
+                className="absolute right-[13%] top-[14%] z-10 w-[30%] max-w-[180px]"
                 style={{opacity: duplicateOpacity}}
                 animate={shouldReduceMotion ? undefined : {x: [0, 6, 0], rotate: [0, -1.5, 0]}}
                 transition={{duration: 2.2, repeat: Infinity, ease: "easeInOut"}}
             >
                 <PaymentBox className="border-tertiary/60 bg-tertiary/15 text-tertiary">
-                    Traitement
+                    Valider paiement
                     <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">copie séparée</span>
                 </PaymentBox>
             </motion.div>
 
-            <motion.div className="absolute bottom-[18%] left-[12%] z-20 w-[34%] max-w-[190px]" style={{opacity: missingOpacity}}>
+            <motion.div className="absolute bottom-[18%] left-[11%] z-20 w-[36%] max-w-[210px]" style={{opacity: missingOpacity}}>
                 <div className="rounded-xl border border-dashed border-error/60 bg-error/10 px-3 py-2 text-center text-[10px] font-medium leading-tight text-error sm:text-[11px]">
-                    Échecs & remboursements
+                    Paiement refusé
                     <span className="mx-auto mt-2 block h-px w-14 bg-error/60" />
-                    <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">absent</span>
+                    <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">parcours absent</span>
                 </div>
             </motion.div>
 
-            <motion.div className="absolute bottom-[18%] right-[12%] z-20 w-[28%] max-w-[170px]" style={{opacity: securityOpacity}}>
+            <motion.div className="absolute bottom-[18%] right-[11%] z-20 w-[34%] max-w-[200px]" style={{opacity: securityOpacity}}>
                 <div className="rounded-xl border border-dashed border-outline bg-surface-container-low px-3 py-2 text-center text-[10px] font-medium leading-tight text-on-surface sm:text-[11px]">
-                    Sécurité / tests
+                    Montant / droits
                     <span className="mt-1 block text-[9px] font-normal text-error sm:text-[10px]">non garanti</span>
                 </div>
             </motion.div>
 
             <svg className="absolute inset-0 size-full" viewBox="0 0 100 100" aria-hidden="true">
                 <motion.g style={{opacity: flowOpacity}} fill="none" stroke="var(--color-primary)" strokeLinecap="round" strokeWidth="1.2">
-                    <path d="M31 50 H38" />
-                    <path d="M62 50 H69" />
+                    <path d="M31 45 H38" />
+                    <path d="M62 45 H69" />
                 </motion.g>
                 <motion.g style={{opacity: missingOpacity}} fill="none" stroke="var(--color-error)" strokeLinecap="round" strokeWidth="1.2" strokeDasharray="5 6">
-                    <path d="M50 55 C49 61 49 65 50 70" />
+                    <path d="M50 52 C46 60 39 65 31 70" />
+                </motion.g>
+                <motion.g style={{opacity: securityOpacity}} fill="none" stroke="var(--color-outline)" strokeLinecap="round" strokeWidth="1.2" strokeDasharray="4 5">
+                    <path d="M69 52 C72 60 77 65 82 70" />
                 </motion.g>
             </svg>
         </motion.div>
@@ -247,7 +266,8 @@ function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
                 Livré ne veut pas dire maîtrisé.
             </h5>
             <p className="mx-auto mt-2 max-w-lg text-body-small text-on-surface-variant sm:text-body-medium">
-                Sans pilotage, chaque évolution peut laisser une partie du produit hors cohérence.
+                Le parcours simple fonctionne, mais le prochain changement révèle les copies,
+                les oublis et les garanties absentes.
             </p>
         </motion.div>
     );
