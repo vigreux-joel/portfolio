@@ -52,7 +52,11 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
     const solidBorderOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
     const dashedBorderOpacity = useTransform(progress, [0.62, 0.8], [0, feature.selected ? 1 : 0]);
     const selectedGlowOpacity = useTransform(progress, [0.42, 0.8], [feature.selected ? 1 : 0, 0]);
-    const shapeRadius = useTransform(progress, [0.62, 0.8], feature.selected ? ["999px", "3.3px"] : ["999px", "999px"]);
+    const shapeRadius = useTransform(
+        progress,
+        [0.42, 0.8, 1],
+        feature.selected ? ["999px", "3.3px", "3.3px"] : ["999px", "999px", "999px"],
+    );
     const selectedGlow = feature.selected ? "" : "shadow-sm";
 
     return (
@@ -69,7 +73,7 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
                         ? "grid h-[46px] w-[92px] place-items-center"
                         : "whitespace-nowrap px-4 py-2"
                 }`}
-                animate={shouldReduceMotion ? undefined : {y: [0, -2, 0]}}
+                animate={shouldReduceMotion || feature.selected ? undefined : {y: [0, -2, 0]}}
                 transition={{duration: 3 + feature.at * 5, repeat: Infinity, ease: "easeInOut"}}
                 style={{borderRadius: shapeRadius}}
             >
@@ -174,7 +178,6 @@ function PaymentBox({children, className = ""}: {children: ReactNode; className?
 }
 
 function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
-    const shouldReduceMotion = useReducedMotion();
     const contentOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
     const contentScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
     const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
@@ -225,8 +228,6 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
             <motion.div
                 className="absolute right-[13%] top-[14%] z-10 w-[30%] max-w-[180px]"
                 style={{opacity: duplicateOpacity}}
-                animate={shouldReduceMotion ? undefined : {x: [0, 6, 0], rotate: [0, -1.5, 0]}}
-                transition={{duration: 2.2, repeat: Infinity, ease: "easeInOut"}}
             >
                 <PaymentBox className="border-tertiary/60 bg-tertiary/15 text-tertiary">
                     Valider paiement
