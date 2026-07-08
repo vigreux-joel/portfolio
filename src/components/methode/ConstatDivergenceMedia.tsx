@@ -38,13 +38,15 @@ const CONNECTIONS: Connection[] = [
 
 function FeatureNode({feature, progress}: {feature: Feature; progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const opacity = useTransform(progress, [feature.at, feature.at + 0.035], [0, 1]);
+    const appearOpacity = useTransform(progress, [feature.at, feature.at + 0.035], [0, 1]);
+    const focusOpacity = useTransform(progress, [0.42, 0.62], [1, feature.selected ? 1 : 0.08]);
+    const opacity = useTransform([appearOpacity, focusOpacity], ([appear, focus]: number[]) => appear * focus);
     const scale = useTransform(progress, [feature.at, feature.at + 0.035], [0.72, 1]);
-    const labelOpacity = useTransform(progress, [0.74, 0.8], [1, feature.selected ? 0 : 1]);
-    const surfaceOpacity = useTransform(progress, [0.74, 0.8], [1, feature.selected ? 0 : 1]);
-    const solidBorderOpacity = useTransform(progress, [0.74, 0.8], [1, feature.selected ? 0 : 1]);
-    const dashedBorderOpacity = useTransform(progress, [0.74, 0.8], [0, feature.selected ? 1 : 0]);
-    const selectedGlowOpacity = useTransform(progress, [0.68, 0.8], [feature.selected ? 1 : 0, 0]);
+    const labelOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
+    const surfaceOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
+    const solidBorderOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
+    const dashedBorderOpacity = useTransform(progress, [0.62, 0.8], [0, feature.selected ? 1 : 0]);
+    const selectedGlowOpacity = useTransform(progress, [0.42, 0.8], [feature.selected ? 1 : 0, 0]);
     const selectedGlow = feature.selected ? "" : "shadow-sm";
 
     return (
@@ -95,7 +97,7 @@ function FeatureNode({feature, progress}: {feature: Feature; progress: MotionVal
 
 function ConnectionPath({connection, progress}: {connection: Connection; progress: MotionValue<number>}) {
     const pathLength = useTransform(progress, [connection.at, connection.at + 0.08], [0, 1]);
-    const opacity = useTransform(progress, [connection.at, connection.at + 0.04, 0.4, 0.64, 0.74], [0, 0.58, 0.58, 0.22, 0]);
+    const opacity = useTransform(progress, [connection.at, connection.at + 0.04, 0.42, 0.62], [0, 0.58, 0.58, 0]);
 
     return (
         <motion.path
@@ -116,7 +118,7 @@ function FlowDot({connection, progress, delay}: {
     delay: number;
 }) {
     const shouldReduceMotion = useReducedMotion();
-    const opacity = useTransform(progress, [0.22, 0.3, 0.56, 0.68], [0, 0.7, 0.45, 0]);
+    const opacity = useTransform(progress, [0.22, 0.3, 0.42, 0.56], [0, 0.7, 0.45, 0]);
 
     if (shouldReduceMotion) return null;
 
@@ -129,7 +131,7 @@ function FlowDot({connection, progress, delay}: {
 
 function AppCore({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const opacity = useTransform(progress, [0, 0.01], [1, 1]);
+    const opacity = useTransform(progress, [0, 0.01, 0.42, 0.62], [1, 1, 1, 0]);
     const scale = useTransform(progress, [0, 0.08], [0.9, 1]);
 
     return (
@@ -160,12 +162,12 @@ function PaymentBox({children, className = ""}: {children: ReactNode; className?
 
 function PaymentZoom({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const panelOpacity = useTransform(progress, [0.84, 0.88], [0, 1]);
-    const panelScale = useTransform(progress, [0.84, 0.88], [0.12, 1]);
-    const flowOpacity = useTransform(progress, [0.87, 0.91], [0, 1]);
-    const duplicateOpacity = useTransform(progress, [0.9, 0.94], [0, 1]);
-    const missingOpacity = useTransform(progress, [0.93, 0.97], [0, 1]);
-    const securityOpacity = useTransform(progress, [0.95, 0.99], [0, 1]);
+    const panelOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
+    const panelScale = useTransform(progress, [0.8, 0.84], [0.12, 1]);
+    const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
+    const duplicateOpacity = useTransform(progress, [0.86, 0.92], [0, 1]);
+    const missingOpacity = useTransform(progress, [0.89, 0.95], [0, 1]);
+    const securityOpacity = useTransform(progress, [0.92, 0.98], [0, 1]);
 
     return (
         <motion.div
@@ -228,19 +230,19 @@ function PaymentZoom({progress}: {progress: MotionValue<number>}) {
 }
 
 function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
-    const opacity = useTransform(progress, [0.98, 1], [0, 1]);
-    const y = useTransform(progress, [0.98, 1], [18, 0]);
+    const opacity = useTransform(progress, [0.92, 0.98], [0, 1]);
+    const y = useTransform(progress, [0.92, 0.98], [12, 0]);
 
     return (
         <motion.div
-            className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-surface-container-low/95 px-8 text-center backdrop-blur-sm"
+            className="absolute inset-x-4 bottom-4 z-50 rounded-2xl border border-outline-variant/70 bg-surface-container-low/90 px-5 py-4 text-center shadow-lg backdrop-blur-sm sm:inset-x-8"
             style={{opacity, y}}
         >
             <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Le constat</span>
-            <h5 className="mt-3 text-headline-medium text-on-surface sm:text-headline-large">
+            <h5 className="mt-2 text-title-medium text-on-surface sm:text-title-large">
                 Livré ne veut pas dire maîtrisé.
             </h5>
-            <p className="mt-4 max-w-lg text-body-medium text-on-surface-variant">
+            <p className="mx-auto mt-2 max-w-lg text-body-small text-on-surface-variant sm:text-body-medium">
                 Sans pilotage, chaque évolution peut laisser une partie du produit hors cohérence.
             </p>
         </motion.div>
@@ -249,9 +251,9 @@ function ConclusionOverlay({progress}: {progress: MotionValue<number>}) {
 
 export function ConstatDivergenceMedia({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const cameraX = useTransform(progress, [0.4, 0.8, 1], [0, shouldReduceMotion ? 96 : 1294, shouldReduceMotion ? 96 : 1294]);
-    const cameraY = useTransform(progress, [0.4, 0.8, 1], [0, shouldReduceMotion ? -66 : -902, shouldReduceMotion ? -66 : -902]);
-    const cameraScale = useTransform(progress, [0.4, 0.8, 1], [1, shouldReduceMotion ? 1.18 : 9.8, shouldReduceMotion ? 1.18 : 9.8]);
+    const cameraX = useTransform(progress, [0.42, 0.8, 1], [0, shouldReduceMotion ? 96 : 1294, shouldReduceMotion ? 96 : 1294]);
+    const cameraY = useTransform(progress, [0.42, 0.8, 1], [0, shouldReduceMotion ? -66 : -902, shouldReduceMotion ? -66 : -902]);
+    const cameraScale = useTransform(progress, [0.42, 0.8, 1], [1, shouldReduceMotion ? 1.18 : 9.8, shouldReduceMotion ? 1.18 : 9.8]);
 
     return (
         <div className="relative h-full w-full overflow-hidden bg-surface-container-low">
