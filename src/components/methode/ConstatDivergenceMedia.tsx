@@ -177,6 +177,21 @@ function PaymentBox({children, className = ""}: {children: ReactNode; className?
     );
 }
 
+function PaymentIssue({children, className = "", opacity}: {
+    children: ReactNode;
+    className?: string;
+    opacity: MotionValue<number>;
+}) {
+    return (
+        <motion.div
+            className={`rounded-xl border border-dashed px-3 py-2 text-center text-[10px] font-medium leading-tight shadow-sm sm:text-[11px] ${className}`}
+            style={{opacity}}
+        >
+            {children}
+        </motion.div>
+    );
+}
+
 function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
     const contentOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
     const contentScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
@@ -194,31 +209,20 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
                 transformOrigin: "50% 50%",
             }}
         >
-            <motion.span
-                className="absolute left-0 top-1/2 h-px w-10 -translate-x-full bg-primary/70"
-                style={{opacity: flowOpacity}}
-            />
-            <motion.span
-                className="absolute right-0 top-1/2 h-px w-10 translate-x-full bg-primary/70"
-                style={{opacity: flowOpacity}}
-            />
-
             <motion.div
-                className="absolute left-[10%] top-[13%] z-20 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-primary"
+                className="absolute inset-x-[8%] top-[25%] z-20 grid grid-cols-[1fr_18px_1fr_18px_1fr] items-center gap-2 sm:inset-x-[10%] sm:grid-cols-[1fr_28px_1fr_28px_1fr] sm:gap-3"
                 style={{opacity: flowOpacity}}
             >
-                Parcours livré
-            </motion.div>
-
-            <motion.div className="absolute inset-x-[10%] top-[36%] z-20 grid grid-cols-3 items-stretch gap-3 sm:gap-5" style={{opacity: flowOpacity}}>
                 <PaymentBox>
                     <span className="block">Bouton payer</span>
                     <span className="mt-1 block text-[9px] font-normal text-on-surface-variant sm:text-[10px]">visible</span>
                 </PaymentBox>
+                <span className="h-px bg-primary/45" />
                 <PaymentBox>
-                    <span className="block">Valider paiement</span>
+                    <span className="block">Validation</span>
                     <span className="mt-1 block text-[9px] font-normal text-on-surface-variant sm:text-[10px]">fonctionne</span>
                 </PaymentBox>
+                <span className="h-px bg-primary/45" />
                 <PaymentBox>
                     <span className="block">Commande créée</span>
                     <span className="mt-1 block text-[9px] font-normal text-on-surface-variant sm:text-[10px]">cas simple</span>
@@ -226,42 +230,21 @@ function PaymentMicroscope({progress}: {progress: MotionValue<number>}) {
             </motion.div>
 
             <motion.div
-                className="absolute right-[13%] top-[14%] z-10 w-[30%] max-w-[180px]"
-                style={{opacity: duplicateOpacity}}
+                className="absolute inset-x-[8%] bottom-[21%] z-20 grid grid-cols-3 gap-2 sm:inset-x-[10%] sm:gap-3"
             >
-                <PaymentBox className="border-tertiary/60 bg-tertiary/15 text-tertiary">
-                    Valider paiement
+                <PaymentIssue opacity={duplicateOpacity} className="border-tertiary/60 bg-tertiary/15 text-tertiary">
+                    Validation copiée
                     <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">copie séparée</span>
-                </PaymentBox>
-            </motion.div>
-
-            <motion.div className="absolute bottom-[18%] left-[11%] z-20 w-[36%] max-w-[210px]" style={{opacity: missingOpacity}}>
-                <div className="rounded-xl border border-dashed border-error/60 bg-error/10 px-3 py-2 text-center text-[10px] font-medium leading-tight text-error sm:text-[11px]">
-                    Paiement refusé
-                    <span className="mx-auto mt-2 block h-px w-14 bg-error/60" />
+                </PaymentIssue>
+                <PaymentIssue opacity={missingOpacity} className="border-error/60 bg-error/10 text-error">
+                    Refus oublié
                     <span className="mt-1 block text-[9px] font-normal sm:text-[10px]">parcours absent</span>
-                </div>
-            </motion.div>
-
-            <motion.div className="absolute bottom-[18%] right-[11%] z-20 w-[34%] max-w-[200px]" style={{opacity: securityOpacity}}>
-                <div className="rounded-xl border border-dashed border-outline bg-surface-container-low px-3 py-2 text-center text-[10px] font-medium leading-tight text-on-surface sm:text-[11px]">
+                </PaymentIssue>
+                <PaymentIssue opacity={securityOpacity} className="border-outline bg-surface-container-low text-on-surface">
                     Montant / droits
                     <span className="mt-1 block text-[9px] font-normal text-error sm:text-[10px]">non garanti</span>
-                </div>
+                </PaymentIssue>
             </motion.div>
-
-            <svg className="absolute inset-0 size-full" viewBox="0 0 100 100" aria-hidden="true">
-                <motion.g style={{opacity: flowOpacity}} fill="none" stroke="var(--color-primary)" strokeLinecap="round" strokeWidth="1.2">
-                    <path d="M31 45 H38" />
-                    <path d="M62 45 H69" />
-                </motion.g>
-                <motion.g style={{opacity: missingOpacity}} fill="none" stroke="var(--color-error)" strokeLinecap="round" strokeWidth="1.2" strokeDasharray="5 6">
-                    <path d="M50 52 C46 60 39 65 31 70" />
-                </motion.g>
-                <motion.g style={{opacity: securityOpacity}} fill="none" stroke="var(--color-outline)" strokeLinecap="round" strokeWidth="1.2" strokeDasharray="4 5">
-                    <path d="M69 52 C72 60 77 65 82 70" />
-                </motion.g>
-            </svg>
         </motion.div>
     );
 }
