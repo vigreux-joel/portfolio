@@ -2,12 +2,7 @@
 import { BackgroundColor } from "@components/BackgroundColor";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
-import { Button } from "@udixio/ui-react";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
-import { heroHighlights } from "./homeContent";
-
-const highlightDuration = `${heroHighlights.length * 2.4}s`;
+import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 ---
 
 <section id="accueil" class="tab-menu relative overflow-hidden theme-blue">
@@ -21,58 +16,30 @@ const highlightDuration = `${heroHighlights.length * 2.4}s`;
 
   <div class="max-width flex justify-between h-full pt-32 md:pt-42 xl:pt-54">
     <div class="relative z-10 flex flex-col overflow-visible w-full">
-      <div class="flex flex-col relative">
-        <div class="flex">
-          <div>
-            <Line client:load isFirst />
-          </div>
-
-          <div class="padding pt-0 pb-16 relative w-full">
-            <p class="text-title-medium text-tertiary mb-4">Joël Vigreux</p>
-            <h1 class="text-display-medium xl:text-display-large relative z-10">
-              Développeur <span class="block text-gradient">full-stack</span>
-            </h1>
-
-            <p class="mt-6 text-headline-small md:text-headline-medium text-on-surface">
-              <span class="sr-only">
-                orienté produit, interfaces premium, architecture maintenable, livraison pragmatique, IA utilisée avec rigueur
-              </span>
-              <span
-                class="home-hero-highlight-wrap relative inline-grid overflow-hidden align-bottom text-tertiary"
-                style={`--highlight-duration: ${highlightDuration};`}
-                aria-hidden="true"
-              >
-                {heroHighlights.map((highlight, index) => (
-                  <span
-                    class="home-hero-highlight col-start-1 row-start-1"
-                    style={`--highlight-delay: ${index * 2.4}s;`}
-                  >
-                    {highlight}
-                  </span>
-                ))}
-              </span>
-            </p>
-          </div>
+      <div class="flex">
+        <div>
+          <Line client:load isFirst />
+        </div>
+        <div class="padding pt-0 pb-16 relative w-full">
+          <p class="text-title-large text-tertiary mb-5">Joël Vigreux</p>
+          <h1 class="text-display-medium xl:text-display-large relative z-10">
+            Développeur
+            <span class="block text-gradient">full-stack.</span>
+          </h1>
         </div>
       </div>
 
       <div class="flex mt-8">
         <div>
-          <Line client:load icon={iFactCheck} nextTheme="purple" />
+          <Line client:load icon={iIdCard} nextTheme="purple" />
         </div>
-
         <div class="padding pt-0">
-          <p class="text-body-large max-w-3xl">
-            Je conçois et développe des produits web fiables, lisibles et évolutifs — de l’expérience utilisateur à l’architecture technique.
+          <p class="text-headline-small max-w-3xl">
+            Je crée des sites et des applications web simples à utiliser, rapides et solides dans le temps.
           </p>
-          <p class="max-w-3xl mt-6 text-on-surface-variant">
-            Mon travail ne se limite pas à assembler une stack : il consiste à comprendre le besoin, cadrer les bons arbitrages et livrer une solution qui reste saine après la première version.
+          <p class="max-w-2xl mt-6 text-body-large text-on-surface-variant">
+            Je peux partir d’une idée, améliorer un produit existant ou reprendre un projet devenu difficile à faire évoluer.
           </p>
-
-          <div class="flex flex-col sm:flex-row sm:flex-wrap gap-4 mt-8">
-            <Button href="/projets" icon={iArrowForward} label="Voir les projets" />
-            <Button href="/methode" icon={iFactCheck} label="Comprendre ma méthode" variant="outlined" />
-          </div>
         </div>
       </div>
     </div>
@@ -80,48 +47,3 @@ const highlightDuration = `${heroHighlights.length * 2.4}s`;
 
   <LinearGradient className="h-1/2" nextTheme="purple" />
 </section>
-
-<style>
-  .home-hero-highlight-wrap {
-    min-height: 1.2em;
-  }
-
-  .home-hero-highlight {
-    opacity: 0;
-    transform: translateY(0.45em);
-    animation: home-hero-highlight var(--highlight-duration) ease-in-out infinite;
-    animation-delay: var(--highlight-delay);
-    will-change: opacity, transform;
-  }
-
-  @keyframes home-hero-highlight {
-    0%,
-    100% {
-      opacity: 0;
-      transform: translateY(0.45em);
-    }
-
-    5%,
-    18% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    24% {
-      opacity: 0;
-      transform: translateY(-0.45em);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .home-hero-highlight {
-      animation: none;
-      transform: none;
-      opacity: 0;
-    }
-
-    .home-hero-highlight:first-child {
-      opacity: 1;
-    }
-  }
-</style>

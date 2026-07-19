@@ -1,36 +1,41 @@
 ---
 export interface FaqItem {
-    question: string;
-    answer: string;
+  question: string;
+  answer: string;
 }
 
 interface Props {
-    questions: FaqItem[];
+  questions: FaqItem[];
 }
 
-const {questions} = Astro.props;
+const { questions } = Astro.props;
 
 const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": questions.map(q => ({
-        "@type": "Question",
-        "name": q.question,
-        "acceptedAnswer": {"@type": "Answer", "text": q.answer}
-    }))
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: questions.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
 };
 ---
-<section id="faq" class="tab-menu theme-blue py-16">
-    <div class="max-width padding">
-        <h2 class="text-title-large text-tertiary">FAQ</h2>
-        <div class="mt-4 grid md:grid-cols-2 gap-6">
-            {questions.map(item => (
-                <div>
-                    <h3 class="text-headline-small">{item.question}</h3>
-                    <p set:html={item.answer}></p>
-                </div>
-            ))}
-        </div>
+
+<section id="faq" class="tab-menu theme-blue bg-surface py-16 md:py-24">
+  <div class="max-width padding-x">
+    <h2 class="text-headline-large md:text-display-small text-on-surface">Questions avant un premier échange</h2>
+
+    <div class="mt-10 max-w-5xl divide-y divide-outline-variant border-y border-outline-variant">
+      {questions.map((item) => (
+        <details class="group py-2">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 rounded-2xl px-3 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <h3 class="text-title-large text-on-surface">{item.question}</h3>
+            <span class="grid size-8 shrink-0 place-items-center rounded-full bg-surface-container-high text-title-large text-primary transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="max-w-3xl px-3 pb-6 text-body-large text-on-surface-variant">{item.answer}</p>
+        </details>
+      ))}
     </div>
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
+  </div>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqLd)} />
 </section>

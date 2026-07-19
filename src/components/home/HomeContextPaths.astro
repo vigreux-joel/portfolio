@@ -1,68 +1,66 @@
 ---
-import { Card } from "@components/Card";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
-import { Button, Icon } from "@udixio/ui-react";
+import { Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { iRoute } from "@udixio/icons-outlined-400/route";
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
-import { contextCards } from "./homeContent";
-
-const icons = [iRoute, iIdCard];
+import { iRoute } from "@udixio/icons-outlined-400/route";
 ---
 
-<div id="contextes" class="tab-menu theme-purple bg-surface">
-  <section>
-    <div class="max-width">
-      <div class="flex pt-8">
-        <div>
-          <Line client:idle icon={iRoute} nextTheme="green" />
-        </div>
-
-        <div class="padding pt-0 flex flex-col justify-center max-w-5xl">
-          <h2 class="text-title-large text-tertiary" data-sidebar-label="Contextes">Deux lectures possibles</h2>
-          <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-            <h3 class="text-gradient">Vous cherchez un développeur capable de prendre des décisions produit et techniques.</h3>
-          </div>
-          <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
-            Le contexte peut changer — mission ou recrutement — mais le sujet reste le même : fiabilité, autonomie, qualité d’exécution et compréhension des enjeux métier.
-          </p>
-        </div>
-      </div>
-
-      <div class="padding-x mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {contextCards.map((card, index) => (
-          <Card client:visible variant="filled" className="group h-full">
-            <article class="p-6 md:p-8 h-full flex flex-col">
-              <div class="flex items-center gap-3 mb-6">
-                <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
-                  <Icon icon={icons[index]} className="h-6 w-6" />
-                </span>
-                <span class="text-label-large text-tertiary uppercase tracking-wide">{card.eyebrow}</span>
-              </div>
-
-              <h3 class="text-headline-small text-on-surface">{card.title}</h3>
-              <p class="mt-5 text-body-large text-on-surface-variant">{card.description}</p>
-
-              <div class="mt-auto pt-8">
-                {index === 0 ? (
-                  <Button href={card.href} icon={iArrowForward} label={card.cta} />
-                ) : (
-                  <Button href={card.href} icon={iArrowForward} label={card.cta} variant="outlined" />
-                )}
-              </div>
-            </article>
-          </Card>
-        ))}
-      </div>
-
-      <div class="flex h-24 md:h-32">
-        <div>
-          <Line client:idle />
+<section id="travailler-ensemble" class="tab-menu theme-green bg-surface">
+  <div class="max-width">
+    <div class="flex pt-8">
+      <div><Line client:idle icon={iRoute} nextTheme="green" /></div>
+      <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Travailler ensemble">Travailler ensemble</h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+          <p class="text-gradient">Un projet à prendre en main</p>
+          <p>ou une équipe à renforcer.</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <LinearGradient nextTheme="green" />
-</div>
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle />
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
+      <article class="flex">
+        <div><Line client:idle icon={iRoute} isLast /></div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-title-medium text-tertiary">Confier un projet</span>
+          <h3 class="mt-2 text-headline-small md:text-headline-medium">Créer, améliorer ou reprendre un produit web</h3>
+          <p class="mt-4 text-body-large text-on-surface-variant max-w-prose">
+            Je cadre le besoin, construis la solution et vous accompagne jusqu’à sa mise en ligne.
+          </p>
+          <a href="/developpement-produit" class="group mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary">
+            <span>Voir l’accompagnement produit</span>
+            <Icon icon={iArrowForward} className="size-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </article>
+
+      <article class="flex">
+        <div><Line client:idle icon={iIdCard} /></div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-title-medium text-tertiary">Renforcer une équipe</span>
+          <h3 class="mt-2 text-headline-small md:text-headline-medium">Intégrer un développeur full-stack à votre organisation</h3>
+          <p class="mt-4 text-body-large text-on-surface-variant max-w-prose">
+            Je rejoins vos outils, vos habitudes et votre rythme pour faire avancer le produit avec l’équipe en place.
+          </p>
+          <a href="/profil" class="group mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary">
+            <span>Voir mon profil</span>
+            <Icon icon={iArrowForward} className="size-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <div class="relative h-16 md:h-20 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle />
+    </div>
+  </div>
+  <LinearGradient nextTheme="orange" />
+</section>

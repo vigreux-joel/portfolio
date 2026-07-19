@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Obfuscate from "react-obfuscate";
 import { Button, Divider, Icon } from "@udixio/ui-react";
 import { Card } from "@components/Card";
 import { BackgroundColor } from "@components/BackgroundColor";
@@ -11,6 +10,11 @@ import { iComment } from "@udixio/icons-outlined-400/comment";
 import { iCall } from "@udixio/icons-outlined-400/call";
 import { iCalendarMonth } from "@udixio/icons-outlined-400/calendar_month";
 import { LinearGradient } from "@components/LinearGradient";
+
+const email = import.meta.env.PUBLIC_EMAIL_TO || "contact@vigreux-joel.fr";
+const emailSubject = encodeURIComponent("Nouveau projet de développement web");
+const emailBody = encodeURIComponent("Bonjour Joël,\n\nJe vous contacte concernant...\n\nCordialement,");
+const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
 ---
 
 <Layout
@@ -118,16 +122,12 @@ import { LinearGradient } from "@components/LinearGradient";
                 </div>
                 <div>
                   <h3 class="text-title-medium">Email</h3>
-                  <Obfuscate
-                    client:visible
-                    className="text-body-large text-on-surface-variant hover:text-primary transition-colors underline-offset-4 underline mt-1 block"
-                    email={import.meta.env.PUBLIC_EMAIL_TO ||
-                      "contact@vigreux-joel.fr"}
-                    headers={{
-                      subject: "Nouveau projet de développement web",
-                      body: `Bonjour Joël,\n\nJe vous contacte concernant...\n\nCordialement,`,
-                    }}
-                  />
+                  <a
+                    class="text-body-large text-on-surface-variant hover:text-primary transition-colors underline-offset-4 underline mt-1 block"
+                    href={mailtoHref}
+                  >
+                    {email}
+                  </a>
                 </div>
               </div>
 

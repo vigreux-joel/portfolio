@@ -5,37 +5,65 @@ import HomeContextPaths from "../components/home/HomeContextPaths.astro";
 import HomeProjectsPreview from "../components/home/HomeProjectsPreview.astro";
 import HomeExpertisePreview from "../components/home/HomeExpertisePreview.astro";
 import HomeMethodPreview from "../components/home/HomeMethodPreview.astro";
+import HomeAbout from "../components/home/HomeAbout.astro";
 
 const faq = [
   {
-    question: "Que peut-on trouver sur cette page d’accueil ?",
+    question: "Sur quels types de projets pouvez-vous intervenir ?",
     answer:
-      "Une lecture rapide de mon profil : développeur full-stack, mes contextes de collaboration, mes projets, mon expertise et ma méthode de travail.",
+      "Sur la création ou la refonte d’un site, d’une application web ou d’un outil métier. Je peux aussi reprendre un projet existant devenu lent, difficile à utiliser ou compliqué à faire évoluer.",
   },
   {
-    question: "Travaillez-vous en mission ou en équipe ?",
+    question: "Pouvez-vous intégrer une équipe existante ?",
     answer:
-      "Les deux contextes sont possibles. Le site présente mon approche pour confier une mission et mon profil pour évaluer une intégration dans une équipe produit ou technique.",
+      "Oui. Je m’adapte aux outils et au rythme déjà en place. Je documente mon travail et partage les décisions pour que l’équipe puisse reprendre facilement la suite.",
   },
   {
-    question: "Où voir votre niveau technique en détail ?",
+    question: "Comment vérifier votre niveau technique ?",
     answer:
-      "La page Expertise détaille les sujets front-end, back-end, architecture, CMS, performance et adaptation aux stacks existantes.",
+      "La page Expertise présente mes compétences en détail. Udixio UI et le code source de ce portfolio permettent également de consulter directement une partie de mon travail.",
   },
   {
-    question: "Comment évaluez-vous l’usage de l’IA dans le développement ?",
+    question: "Quelle place donnez-vous à l’IA dans le développement ?",
     answer:
-      "L’IA est un levier de vitesse, pas un pilote automatique. Ma méthode repose sur le cadrage, l’architecture, la revue de code, les tests et les arbitrages humains.",
+      "Je l’utilise pour accélérer certaines recherches et tâches de production. Je reste responsable des choix, de la relecture, des vérifications et de ce qui est finalement livré.",
   },
 ];
 
 const personJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://vigreux-joel.fr/#joel-vigreux",
   name: "Joël Vigreux",
   jobTitle: "Développeur full-stack",
   url: "https://vigreux-joel.fr/",
   image: "https://vigreux-joel.fr/images/photo.webp",
+  description:
+    "Développeur full-stack français. Création et amélioration de sites et applications web, de l’interface à la mise en ligne.",
+  sameAs: [
+    "https://github.com/vigreux-joel",
+    "https://linkedin.com/in/vigreux-joel",
+  ],
+  knowsAbout: [
+    "Développement web",
+    "Astro",
+    "React",
+    "Angular",
+    "TypeScript",
+    "NestJS",
+    "Accessibilité web",
+    "Architecture logicielle",
+  ],
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "Titre professionnel de niveau 5",
+    name: "Développeur web et web mobile",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Béthune",
+    addressCountry: "FR",
+  },
 });
 
 const websiteJsonLd = JSON.stringify({
@@ -43,6 +71,21 @@ const websiteJsonLd = JSON.stringify({
   "@type": "WebSite",
   name: "Joël Vigreux - Développeur full-stack",
   url: "https://vigreux-joel.fr/",
+  inLanguage: "fr-FR",
+  publisher: { "@id": "https://vigreux-joel.fr/#joel-vigreux" },
+});
+
+const profilePageJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://vigreux-joel.fr/#profile-page",
+  url: "https://vigreux-joel.fr/",
+  name: "Joël Vigreux — Développeur full-stack",
+  description:
+    "Profil, expertise, méthode et réalisations de Joël Vigreux, développeur full-stack.",
+  inLanguage: "fr-FR",
+  dateModified: "2026-07-19",
+  mainEntity: { "@id": "https://vigreux-joel.fr/#joel-vigreux" },
 });
 ---
 
@@ -50,12 +93,12 @@ const websiteJsonLd = JSON.stringify({
   showSidebar={false}
   faq={faq}
   seo={{
-    title: "Joël Vigreux - Développeur full-stack orienté produit",
+    title: "Joël Vigreux — Développeur full-stack à Béthune",
     description:
-      "Joël Vigreux, développeur full-stack. Conception de produits web fiables, interfaces premium, architecture maintenable et méthode d’ingénierie pragmatique.",
+      "Développeur full-stack à Béthune. Je crée et améliore des sites et applications web simples à utiliser, rapides et conçus pour durer.",
     openGraph: {
       basic: {
-        title: "Joël Vigreux - Développeur full-stack",
+        title: "Joël Vigreux — Développeur full-stack",
         type: "website",
         image: "https://vigreux-joel.fr/images/photo.webp",
         url: "https://vigreux-joel.fr/",
@@ -64,7 +107,7 @@ const websiteJsonLd = JSON.stringify({
         siteName: "Joël Vigreux",
         locale: "fr_FR",
         description:
-          "Développeur full-stack orienté produit : interfaces premium, architecture maintenable et livraison pragmatique.",
+          "Création et amélioration de sites et applications web, de l’interface à la mise en ligne.",
       },
       image: {
         alt: "Portrait de Joël Vigreux, développeur full-stack",
@@ -74,16 +117,18 @@ const websiteJsonLd = JSON.stringify({
       card: "summary_large_image",
       title: "Joël Vigreux - Développeur full-stack",
       description:
-        "Développeur full-stack orienté produit. Interfaces premium, architecture maintenable et méthode d’ingénierie pragmatique.",
+        "Création et amélioration de sites et applications web, de l’interface à la mise en ligne.",
       image: "https://vigreux-joel.fr/images/photo.webp",
       imageAlt: "Portrait de Joël Vigreux",
     },
   }}
 >
-  <script type="application/ld+json" set:html={personJsonLd} />
-  <script type="application/ld+json" set:html={websiteJsonLd} />
+  <script type="application/ld+json" is:inline set:html={personJsonLd} />
+  <script type="application/ld+json" is:inline set:html={websiteJsonLd} />
+  <script type="application/ld+json" is:inline set:html={profilePageJsonLd} />
 
   <HomeHero />
+  <HomeAbout />
   <HomeContextPaths />
   <HomeProjectsPreview />
   <HomeExpertisePreview />
