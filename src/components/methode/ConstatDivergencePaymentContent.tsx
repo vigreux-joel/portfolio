@@ -1,181 +1,112 @@
-import type {ReactNode} from "react";
 import {motion, useTransform, type MotionValue} from "motion/react";
 
-interface FlowStep {
-    title: string;
-    glyph: string;
-}
-
-interface Issue {
-    title: string;
+interface UnsaidItem {
     label: string;
-    type: "duplicate" | "missing" | "unguarded";
+    glyph: string;
+    at: number;
 }
 
-const PAYMENT_FLOW: FlowStep[] = [
-    {title: "Payer", glyph: "1"},
-    {title: "Valider", glyph: "2"},
-    {title: "Créer", glyph: "3"},
+const UNSAID_ITEMS: UnsaidItem[] = [
+    {label: "Métier", glyph: "◇", at: 0.55},
+    {label: "Exceptions", glyph: "!", at: 0.59},
+    {label: "Sécurité", glyph: "⌾", at: 0.63},
 ];
 
-const PAYMENT_ISSUES: Issue[] = [
-    {title: "Doublon", label: "x2", type: "duplicate"},
-    {title: "Oubli", label: "×", type: "missing"},
-    {title: "Fragile", label: "!", type: "unguarded"},
-];
-
-function StepCard({step}: {step: FlowStep}) {
+function FlowArrow() {
     return (
-        <div className="relative grid min-w-0 place-items-center rounded-2xl border border-primary/30 bg-surface-container-high/95 px-2 py-3 text-center shadow-[0_10px_26px_color-mix(in_srgb,var(--color-primary)_7%,transparent)]">
-            <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-primary text-[10px] font-semibold leading-none text-on-primary shadow-sm">
-                ✓
-            </span>
-            <span className="grid size-9 place-items-center rounded-full border border-primary/30 bg-primary/10 text-[13px] font-semibold text-primary sm:size-10">
-                {step.glyph}
-            </span>
-            <span className="mt-2 block truncate text-[10px] font-semibold leading-tight text-on-surface sm:text-[11px]">
-                {step.title}
-            </span>
-        </div>
-    );
-}
-
-function Connector() {
-    return (
-        <span className="relative h-0.5 min-w-4 overflow-hidden rounded-full bg-primary/25">
-            <span className="absolute inset-y-0 left-0 w-2/3 rounded-full bg-primary/65" />
-            <span className="absolute right-0 top-1/2 size-1.5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-primary/65" />
+        <span className="relative h-px w-8 bg-primary/40">
+            <span className="absolute -right-px -top-0.5 size-1.5 rotate-45 border-r border-t border-primary/60" />
         </span>
     );
 }
 
-function IssueCard({issue, opacity}: {issue: Issue; opacity: MotionValue<number>}) {
-    const toneClassName = {
-        duplicate: "border-tertiary/55 bg-tertiary/15 text-tertiary",
-        missing: "border-error/60 bg-error/10 text-error",
-        unguarded: "border-outline/70 bg-surface-container-low/85 text-on-surface",
-    }[issue.type];
+function UnsaidCard({item, progress}: {item: UnsaidItem; progress: MotionValue<number>}) {
+    const opacity = useTransform(progress, [item.at, item.at + 0.06], [0, 1]);
+    const y = useTransform(progress, [item.at, item.at + 0.06], [10, 0]);
 
     return (
         <motion.div
-            className={`relative min-w-0 overflow-hidden rounded-2xl border border-dashed px-2 py-3 text-center shadow-sm ${toneClassName}`}
-            style={{opacity}}
+            className="relative flex h-[76px] items-center gap-3 rounded-xl border border-dashed border-error/50 bg-error-container/35 px-4 text-on-error-container"
+            style={{opacity, y}}
         >
-            <IssueVisual issue={issue} />
-            <span className="mt-2 block text-[10px] font-semibold leading-tight sm:text-[11px]">
-                {issue.title}
+            <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-error/40 bg-error-container text-lg font-bold text-error">
+                {item.glyph}
+            </span>
+            <span className="text-[11px] font-bold">{item.label}</span>
+            <span className="absolute -right-2 -top-2 grid size-6 place-items-center rounded-full bg-error text-[12px] font-black text-on-error shadow-sm">
+                ?
             </span>
         </motion.div>
     );
 }
 
-function IssueVisual({issue}: {issue: Issue}) {
-    if (issue.type === "duplicate") {
-        return (
-            <span className="relative mx-auto block h-11 w-14">
-                <span className="absolute left-1 top-2 h-7 w-9 rounded-lg border border-current bg-current/10" />
-                <span className="absolute left-4 top-0 h-7 w-9 rounded-lg border border-current bg-current/15 shadow-sm" />
-                <span className="absolute bottom-0 right-0 rounded-full bg-current px-1.5 py-0.5 text-[9px] font-bold leading-none text-on-primary">
-                    {issue.label}
-                </span>
-            </span>
-        );
-    }
-
-    if (issue.type === "missing") {
-        return (
-            <span className="relative mx-auto grid h-11 w-16 place-items-center">
-                <span className="absolute left-1 top-1/2 h-0.5 w-5 -translate-y-1/2 bg-current/55" />
-                <span className="absolute left-7 top-1/2 h-0.5 w-4 -translate-y-1/2 border-t border-dashed border-current/60" />
-                <span className="absolute right-1 top-1/2 grid size-6 -translate-y-1/2 place-items-center rounded-full border border-current bg-current/10 text-[12px] font-bold leading-none">
-                    {issue.label}
-                </span>
-            </span>
-        );
-    }
-
-    return (
-        <span className="relative mx-auto grid h-11 w-14 place-items-center">
-            <span className="absolute top-0 h-10 w-9 rounded-t-2xl rounded-b-lg border border-current bg-current/10" />
-            <span className="absolute h-10 w-px rotate-[24deg] bg-current/70" />
-            <span className="relative grid size-6 place-items-center rounded-full bg-current text-[12px] font-bold leading-none text-on-primary">
-                {issue.label}
-            </span>
-        </span>
-    );
-}
-
-function SectionLabel({children}: {children: ReactNode}) {
-    return (
-        <span className="text-[8px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant/80 sm:text-[9px]">
-            {children}
-        </span>
-    );
-}
-
 export function ConstatDivergencePaymentContent({progress}: {progress: MotionValue<number>}) {
-    const contentOpacity = useTransform(progress, [0.8, 0.84], [0, 1]);
-    const contentScale = useTransform(progress, [0.8, 0.84], [0.96, 1]);
-    const flowOpacity = useTransform(progress, [0.82, 0.88], [0, 1]);
-    const duplicateOpacity = useTransform(progress, [0.86, 0.92], [0, 1]);
-    const missingOpacity = useTransform(progress, [0.89, 0.95], [0, 1]);
-    const securityOpacity = useTransform(progress, [0.92, 0.98], [0, 1]);
-    const issueDividerOpacity = useTransform(progress, [0.86, 0.92], [0, 1]);
+    const sceneOpacity = useTransform(progress, [0.39, 0.47, 0.78, 0.85], [0, 1, 1, 0]);
+    const sceneY = useTransform(progress, [0.39, 0.47, 0.78, 0.85], [12, 0, 0, -10]);
+    const requestOpacity = useTransform(progress, [0.42, 0.48], [0, 1]);
+    const aiOpacity = useTransform(progress, [0.45, 0.51], [0, 1]);
+    const resultOpacity = useTransform(progress, [0.48, 0.54], [0, 1]);
+    const dividerScale = useTransform(progress, [0.52, 0.6], [0, 1]);
+    const verdictOpacity = useTransform(progress, [0.66, 0.74], [0, 1]);
 
     return (
         <motion.div
-            className="absolute inset-x-4 top-1/2 z-40 h-[88%] -translate-y-1/2 sm:inset-x-8"
-            style={{
-                opacity: contentOpacity,
-                scale: contentScale,
-                transformOrigin: "50% 50%",
-            }}
+            className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.44] min-[340px]:scale-[0.5] min-[400px]:scale-[0.56] sm:scale-[0.72] md:scale-[0.84] lg:scale-[0.72] min-[1100px]:scale-[0.82] min-[1180px]:scale-[0.92] xl:scale-100"
+            style={{opacity: sceneOpacity, y: sceneY}}
         >
-            <div className="absolute inset-x-[7%] top-[12%] z-20 sm:inset-x-[9%]">
+            <div className="absolute inset-x-12 top-[54px] flex items-center justify-center gap-4">
                 <motion.div
-                    className="flex items-center justify-between gap-3"
-                    style={{opacity: flowOpacity}}
+                    className="flex h-[86px] w-[150px] items-center gap-3 rounded-2xl border border-outline-variant/70 bg-surface-container-lowest px-4 shadow-sm"
+                    style={{opacity: requestOpacity}}
                 >
-                    <SectionLabel>Visible</SectionLabel>
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[9px] font-medium text-primary sm:text-[10px]">
-                        cas simple
+                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-surface-container-high text-lg font-bold text-on-surface">€</span>
+                    <span>
+                        <span className="block text-[8px] font-semibold uppercase tracking-[0.16em] text-on-surface-variant">Demandé</span>
+                        <strong className="mt-1 block text-[12px] text-on-surface">Paiement</strong>
                     </span>
                 </motion.div>
 
+                <motion.div className="flex items-center gap-4" style={{opacity: aiOpacity}}>
+                    <FlowArrow />
+                    <span className="grid size-[72px] place-items-center rounded-full bg-primary text-[28px] text-on-primary shadow-lg">✦</span>
+                    <FlowArrow />
+                </motion.div>
+
                 <motion.div
-                    className="mt-3 grid grid-cols-[1fr_18px_1fr_18px_1fr] items-center gap-2 sm:grid-cols-[1fr_28px_1fr_28px_1fr] sm:gap-3"
-                    style={{opacity: flowOpacity}}
+                    className="relative grid h-[86px] w-[150px] place-items-center rounded-2xl border border-tertiary/35 bg-tertiary-container text-center text-on-tertiary-container shadow-sm"
+                    style={{opacity: resultOpacity}}
                 >
-                    <StepCard step={PAYMENT_FLOW[0]} />
-                    <Connector />
-                    <StepCard step={PAYMENT_FLOW[1]} />
-                    <Connector />
-                    <StepCard step={PAYMENT_FLOW[2]} />
+                    <span>
+                        <span className="mx-auto grid size-8 place-items-center rounded-full bg-tertiary text-sm font-bold text-on-tertiary">✓</span>
+                        <strong className="mt-2 block text-[12px]">Ça fonctionne</strong>
+                    </span>
                 </motion.div>
             </div>
 
             <motion.div
-                className="absolute inset-x-[7%] top-[53%] z-20 h-px bg-gradient-to-r from-transparent via-outline-variant to-transparent sm:inset-x-[9%]"
-                style={{opacity: issueDividerOpacity}}
-            />
+                className="absolute inset-x-12 top-[188px] flex origin-left items-center gap-3"
+                style={{scaleX: dividerScale}}
+            >
+                <span className="h-px flex-1 bg-error/35" />
+                <span className="rounded-full bg-error-container px-3 py-1 text-[9px] font-bold uppercase tracking-[0.16em] text-on-error-container">
+                    hors du prompt
+                </span>
+                <span className="h-px flex-1 bg-error/35" />
+            </motion.div>
 
-            <div className="absolute inset-x-[7%] bottom-[9%] z-20 sm:inset-x-[9%]">
-                <motion.div
-                    className="mb-2 flex items-center justify-between gap-3 sm:mb-3"
-                    style={{opacity: issueDividerOpacity}}
-                >
-                    <SectionLabel>Sous la surface</SectionLabel>
-                    <span className="rounded-full border border-outline/60 px-2.5 py-1 text-[8px] font-medium text-on-surface-variant sm:text-[9px]">
-                        dette
-                    </span>
-                </motion.div>
-
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    <IssueCard issue={PAYMENT_ISSUES[0]} opacity={duplicateOpacity} />
-                    <IssueCard issue={PAYMENT_ISSUES[1]} opacity={missingOpacity} />
-                    <IssueCard issue={PAYMENT_ISSUES[2]} opacity={securityOpacity} />
-                </div>
+            <div className="absolute inset-x-12 top-[226px] grid grid-cols-3 gap-4">
+                {UNSAID_ITEMS.map((item) => (
+                    <UnsaidCard key={item.label} item={item} progress={progress} />
+                ))}
             </div>
+
+            <motion.div
+                className="absolute inset-x-20 bottom-8 flex items-center justify-center gap-3 rounded-2xl bg-on-surface px-5 py-3 text-center text-surface shadow-lg"
+                style={{opacity: verdictOpacity}}
+            >
+                <span className="grid size-6 shrink-0 place-items-center rounded-full bg-error text-[13px] font-black text-on-error">?</span>
+                <strong className="text-[12px]">L’IA ne devine pas le non-dit.</strong>
+            </motion.div>
         </motion.div>
     );
 }

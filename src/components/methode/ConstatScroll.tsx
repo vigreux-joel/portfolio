@@ -8,11 +8,10 @@ export const ConstatScroll = () => {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Les fonctionnalités apparaissent à toute vitesse
+                        Une consigne. Une fonctionnalité.
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Accès, recherche, suivi, paiement, profil… en surface, le produit
-                        semble avancer très vite.
+                        L’IA transforme rapidement une demande en code.
                     </p>
                 </>
             ),
@@ -23,11 +22,10 @@ export const ConstatScroll = () => {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Très vite, tout semble relié
+                        À l’écran, tout fonctionne
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Les écrans se connectent, les données circulent, les parcours semblent
-                        complets. Vu de l’extérieur, l’application paraît cohérente.
+                        Le parcours idéal passe. La démo rassure.
                     </p>
                 </>
             ),
@@ -37,11 +35,10 @@ export const ConstatScroll = () => {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Mais que contient réellement une fonctionnalité ?
+                        Mais elle ne voit que la demande
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Derrière un module Paiement, il n’y a pas qu’un bouton. Il faut aligner les
-                        états, les données, les erreurs, les contrôles et les autres modules.
+                        Le métier, les risques et les exceptions restent hors du prompt.
                     </p>
                 </>
             ),
@@ -51,11 +48,10 @@ export const ConstatScroll = () => {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        C’est ici que la dette se forme
+                        Le non-dit devient de la dette
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Sans pilotage, une évolution peut être ajoutée localement : une logique
-                        est dupliquée, un cas d’échec est oublié, un contrôle reste implicite.
+                        Ça fonctionne aujourd’hui. Sans garantie pour demain.
                     </p>
                 </>
             ),
@@ -65,11 +61,10 @@ export const ConstatScroll = () => {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Livré ne veut pas dire maîtrisé
+                        La vitesse a besoin d’un pilote
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Le produit continue de fonctionner, mais chaque ajout devient moins sûr :
-                        ce qui manque n’est pas toujours visible au moment de la livraison.
+                        L’IA accélère. L’expérience anticipe.
                     </p>
                 </>
             ),

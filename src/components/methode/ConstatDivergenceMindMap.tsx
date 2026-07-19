@@ -1,197 +1,120 @@
 import {motion, useReducedMotion, useTransform, type MotionValue} from "motion/react";
 
-interface Feature {
-    id: string;
+const FEATURES = [
+    {label: "Accès", glyph: "●", at: 0.09},
+    {label: "Recherche", glyph: "⌕", at: 0.12},
+    {label: "Suivi", glyph: "↗", at: 0.15},
+];
+
+function FeatureTile({label, glyph, at, progress}: {
     label: string;
-    x: number;
-    y: number;
+    glyph: string;
     at: number;
-    selected?: boolean;
-}
-
-interface Connection {
-    id: string;
-    d: string;
-    at: number;
-    dashed?: boolean;
-}
-
-const FEATURES: Feature[] = [
-    {id: "access", label: "Accès", x: 120, y: 105, at: 0.02},
-    {id: "search", label: "Recherche", x: 300, y: 64, at: 0.06},
-    {id: "tracking", label: "Suivi", x: 480, y: 122, at: 0.1},
-    {id: "payment", label: "Paiement", x: 168, y: 292, at: 0.14, selected: true},
-    {id: "profile", label: "Profil", x: 438, y: 294, at: 0.18},
-];
-
-const CONNECTIONS: Connection[] = [
-    {id: "core-access", d: "M300 200 C238 152 185 120 120 105", at: 0.18},
-    {id: "core-search", d: "M300 200 C294 145 292 102 300 64", at: 0.2},
-    {id: "core-tracking", d: "M300 200 C365 145 420 125 480 122", at: 0.22},
-    {id: "core-payment", d: "M300 200 C244 238 204 262 168 292", at: 0.24},
-    {id: "core-profile", d: "M300 200 C354 238 400 266 438 294", at: 0.26},
-    {id: "access-search", d: "M120 105 C170 52 238 46 300 64", at: 0.3, dashed: true},
-    {id: "payment-profile", d: "M168 292 C238 346 360 344 438 294", at: 0.33, dashed: true},
-    {id: "tracking-payment", d: "M480 122 C390 176 270 244 168 292", at: 0.36, dashed: true},
-];
-
-function FeatureNode({feature, progress}: {feature: Feature; progress: MotionValue<number>}) {
-    const shouldReduceMotion = useReducedMotion();
-    const appearOpacity = useTransform(progress, [feature.at, feature.at + 0.035], [0, 1]);
-    const focusOpacity = useTransform(
-        progress,
-        [0.42, 0.62, 0.8, 0.84],
-        feature.selected ? [1, 1, 1, 1] : [1, 0.08, 0, 0],
-    );
-    const opacity = useTransform([appearOpacity, focusOpacity], ([appear, focus]: number[]) => appear * focus);
-    const scale = useTransform(progress, [feature.at, feature.at + 0.035], [0.72, 1]);
-    const labelOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
-    const surfaceOpacity = useTransform(progress, [0.62, 0.8], [1, 1]);
-    const selectedFillOpacity = useTransform(progress, [0.62, 0.8], [0, feature.selected ? 1 : 0]);
-    const solidBorderOpacity = useTransform(progress, [0.62, 0.8], [1, feature.selected ? 0 : 1]);
-    const dashedBorderOpacity = useTransform(progress, [0.62, 0.8], [0, feature.selected ? 1 : 0]);
-    const selectedGlowOpacity = useTransform(progress, [0.42, 0.8], [feature.selected ? 1 : 0, 0]);
-    const shapeRadius = useTransform(
-        progress,
-        [0.42, 0.8, 1],
-        feature.selected ? ["999px", "3.3px", "3.3px"] : ["999px", "999px", "999px"],
-    );
-    const selectedGlow = feature.selected ? "" : "shadow-sm";
-
-    return (
-        <motion.div
-            className={feature.selected
-                ? "absolute z-40 -translate-x-1/2 -translate-y-1/2"
-                : "absolute z-20 -translate-x-1/2 -translate-y-1/2"
-            }
-            style={{left: feature.x, top: feature.y, opacity, scale}}
-        >
-            <motion.div
-                className={`relative rounded-full text-[11px] font-medium text-on-surface ${selectedGlow} ${
-                    feature.selected
-                        ? "grid h-[46px] w-[92px] place-items-center"
-                        : "whitespace-nowrap px-4 py-2"
-                }`}
-                animate={shouldReduceMotion || feature.selected ? undefined : {y: [0, -2, 0]}}
-                transition={{duration: 3 + feature.at * 5, repeat: Infinity, ease: "easeInOut"}}
-                style={{borderRadius: shapeRadius}}
-            >
-                {feature.selected && (
-                    <motion.span
-                        className="absolute inset-0 rounded-full ring-1 ring-primary/45 shadow-lg"
-                        style={{opacity: selectedGlowOpacity, borderRadius: shapeRadius}}
-                    />
-                )}
-                <motion.span
-                    className="absolute inset-0 rounded-full bg-surface-container-high"
-                    style={{opacity: surfaceOpacity, borderRadius: shapeRadius}}
-                />
-                {feature.selected && (
-                    <motion.span
-                        className="absolute inset-0 rounded-full bg-primary/10"
-                        style={{opacity: selectedFillOpacity, borderRadius: shapeRadius}}
-                    />
-                )}
-                <motion.span
-                    className="absolute inset-0 rounded-full border border-primary/40"
-                    style={{opacity: solidBorderOpacity, borderRadius: shapeRadius}}
-                />
-                {feature.selected && (
-                    <motion.span
-                        className="absolute inset-0 rounded-full border border-dashed border-primary/70"
-                        style={{opacity: dashedBorderOpacity, borderRadius: shapeRadius}}
-                    />
-                )}
-                <motion.span className="relative" style={{opacity: labelOpacity}}>
-                    <span className="mr-1.5 inline-block size-1.5 rounded-full bg-primary" />
-                    {feature.label}
-                </motion.span>
-            </motion.div>
-        </motion.div>
-    );
-}
-
-function ConnectionPath({connection, progress}: {connection: Connection; progress: MotionValue<number>}) {
-    const pathLength = useTransform(progress, [connection.at, connection.at + 0.08], [0, 1]);
-    const opacity = useTransform(progress, [connection.at, connection.at + 0.04, 0.42, 0.62], [0, 0.58, 0.58, 0]);
-
-    return (
-        <motion.path
-            d={connection.d}
-            fill="none"
-            stroke={connection.dashed ? "var(--color-tertiary)" : "var(--color-primary)"}
-            strokeDasharray={connection.dashed ? "5 6" : undefined}
-            strokeLinecap="round"
-            strokeWidth={connection.dashed ? 1.2 : 1.5}
-            style={{pathLength, opacity}}
-        />
-    );
-}
-
-function FlowDot({connection, progress, delay}: {
-    connection: Connection;
     progress: MotionValue<number>;
-    delay: number;
 }) {
-    const shouldReduceMotion = useReducedMotion();
-    const opacity = useTransform(progress, [0.22, 0.3, 0.42, 0.56], [0, 0.7, 0.45, 0]);
-
-    if (shouldReduceMotion) return null;
-
-    return (
-        <motion.circle r="2" fill="var(--color-primary)" style={{opacity}}>
-            <animateMotion path={connection.d} dur="3.4s" begin={`${delay}s`} repeatCount="indefinite" />
-        </motion.circle>
-    );
-}
-
-function AppCore({progress}: {progress: MotionValue<number>}) {
-    const shouldReduceMotion = useReducedMotion();
-    const opacity = useTransform(progress, [0, 0.01, 0.42, 0.62], [1, 1, 1, 0]);
-    const scale = useTransform(progress, [0, 0.08], [0.9, 1]);
+    const opacity = useTransform(progress, [at, at + 0.04], [0, 1]);
+    const y = useTransform(progress, [at, at + 0.04], [8, 0]);
 
     return (
         <motion.div
-            className="absolute left-[300px] top-[200px] z-10 grid size-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-primary/50 bg-surface-container-low text-center"
-            style={{opacity, scale}}
+            className="flex items-center gap-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-3"
+            style={{opacity, y}}
         >
-            <motion.span
-                className="absolute inset-1 rounded-full border border-primary/25"
-                animate={shouldReduceMotion ? undefined : {scale: [1, 1.22, 1], opacity: [0.5, 0, 0.5]}}
-                transition={{duration: 2.8, repeat: Infinity, ease: "easeInOut"}}
-            />
-            <span>
-                <span className="block text-[8px] uppercase tracking-wider text-on-surface-variant">Application</span>
-                <span className="text-[11px] font-semibold text-on-surface">fonctionne</span>
+            <span className="grid size-8 place-items-center rounded-lg bg-surface-container text-[14px] font-semibold text-on-surface-variant">
+                {glyph}
             </span>
+            <span className="text-[11px] font-medium text-on-surface">{label}</span>
         </motion.div>
     );
 }
 
 export function ConstatDivergenceMindMap({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const cameraX = useTransform(progress, [0.42, 0.8, 1], [0, shouldReduceMotion ? 96 : 1294, shouldReduceMotion ? 96 : 1294]);
-    const cameraY = useTransform(progress, [0.42, 0.8, 1], [0, shouldReduceMotion ? -66 : -902, shouldReduceMotion ? -66 : -902]);
-    const cameraScale = useTransform(progress, [0.42, 0.8, 1], [1, shouldReduceMotion ? 1.18 : 9.8, shouldReduceMotion ? 1.18 : 9.8]);
+    const sceneOpacity = useTransform(progress, [0, 0.02, 0.39, 0.47], [0, 1, 1, 0]);
+    const sceneY = useTransform(progress, [0, 0.06, 0.39, 0.47], [10, 0, 0, -10]);
+    const promptOpacity = useTransform(progress, [0.01, 0.06], [0, 1]);
+    const appOpacity = useTransform(progress, [0.06, 0.12], [0, 1]);
+    const appScale = useTransform(progress, [0.06, 0.12], [0.96, 1]);
+    const paymentOpacity = useTransform(progress, [0.17, 0.23], [0, 1]);
+    const paymentScale = useTransform(progress, [0.17, 0.23, 0.27, 0.32], [0.76, 1.08, 1.08, 1]);
+    const successOpacity = useTransform(progress, [0.27, 0.34], [0, 1]);
+    const promptDoneOpacity = useTransform(progress, [0.2, 0.28], [0, 1]);
 
     return (
-        <div className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.58] sm:scale-[0.74] md:scale-[0.86] lg:scale-100">
-            <motion.div className="absolute inset-0" style={{x: cameraX, y: cameraY, scale: cameraScale}}>
-                <svg className="absolute inset-0 size-full" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
-                    {CONNECTIONS.map((connection) => (
-                        <ConnectionPath key={connection.id} connection={connection} progress={progress} />
-                    ))}
-                    {CONNECTIONS.slice(0, 5).map((connection, index) => (
-                        <FlowDot key={`flow-${connection.id}`} connection={connection} progress={progress} delay={index * 0.45} />
-                    ))}
-                </svg>
-
-                <AppCore progress={progress} />
-
-                {FEATURES.map((feature) => (
-                    <FeatureNode key={feature.id} feature={feature} progress={progress} />
-                ))}
+        <motion.div
+            className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.44] min-[340px]:scale-[0.5] min-[400px]:scale-[0.56] sm:scale-[0.72] md:scale-[0.84] lg:scale-[0.72] min-[1100px]:scale-[0.82] min-[1180px]:scale-[0.92] xl:scale-100"
+            style={{opacity: sceneOpacity, y: sceneY}}
+        >
+            <motion.div
+                className="absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full border border-primary/25 bg-surface-container-lowest px-4 py-2.5 shadow-md"
+                style={{opacity: promptOpacity}}
+            >
+                <span className="grid size-7 place-items-center rounded-full bg-primary text-sm font-semibold text-on-primary">✦</span>
+                <span className="text-[12px] font-semibold text-on-surface">Ajouter le paiement</span>
+                <motion.span
+                    className="grid size-5 place-items-center rounded-full bg-tertiary text-[10px] font-bold text-on-tertiary"
+                    style={{opacity: promptDoneOpacity}}
+                >
+                    ✓
+                </motion.span>
             </motion.div>
-        </div>
+
+            <motion.div
+                className="absolute inset-x-12 bottom-4 top-24 flex flex-col overflow-hidden rounded-2xl border border-outline-variant/70 bg-surface-container-lowest shadow-[0_22px_60px_color-mix(in_srgb,var(--color-on-surface)_10%,transparent)]"
+                style={{opacity: appOpacity, scale: appScale}}
+            >
+                <div className="flex h-11 items-center gap-2 border-b border-outline-variant/60 bg-surface-container-low px-4">
+                    <span className="size-2 rounded-full bg-outline-variant" />
+                    <span className="size-2 rounded-full bg-outline-variant" />
+                    <span className="size-2 rounded-full bg-outline-variant" />
+                    <span className="ml-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-on-surface-variant">Application</span>
+                    <motion.span
+                        className="ml-auto flex items-center gap-1.5 rounded-full bg-tertiary-container px-2.5 py-1 text-[9px] font-semibold text-on-tertiary-container"
+                        style={{opacity: successOpacity}}
+                    >
+                        <span className="size-1.5 rounded-full bg-tertiary" />
+                        Démo OK
+                    </motion.span>
+                </div>
+
+                <div className="grid flex-1 grid-cols-[110px_1fr]">
+                    <div className="border-r border-outline-variant/60 bg-surface-container-low/55 p-4">
+                        <div className="h-2 w-14 rounded-full bg-on-surface/12" />
+                        <div className="mt-5 grid gap-3">
+                            {["w-16", "w-12", "w-14", "w-10"].map((width, index) => (
+                                <span key={index} className={`h-1.5 rounded-full bg-on-surface/10 ${width}`} />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 p-4">
+                        {FEATURES.map((feature) => (
+                            <FeatureTile key={feature.label} {...feature} progress={progress} />
+                        ))}
+
+                        <motion.div
+                            className="relative flex items-center gap-3 overflow-hidden rounded-xl border border-primary/45 bg-primary-container px-4 py-3 text-on-primary-container shadow-sm"
+                            style={{opacity: paymentOpacity, scale: paymentScale}}
+                        >
+                            {!shouldReduceMotion && (
+                                <motion.span
+                                    className="absolute inset-0 bg-primary/10"
+                                    animate={{opacity: [0, 0.55, 0]}}
+                                    transition={{duration: 1.5, repeat: Infinity, ease: "easeInOut"}}
+                                />
+                            )}
+                            <span className="relative grid size-8 place-items-center rounded-lg bg-primary text-[15px] font-bold text-on-primary">€</span>
+                            <span className="relative text-[12px] font-bold">Paiement</span>
+                            <motion.span
+                                className="relative ml-auto grid size-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-on-primary"
+                                style={{opacity: successOpacity}}
+                            >
+                                ✓
+                            </motion.span>
+                        </motion.div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
     );
 }
