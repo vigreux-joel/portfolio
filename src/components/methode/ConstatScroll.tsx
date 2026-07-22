@@ -8,67 +8,72 @@ export const ConstatScroll = () => {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Une consigne. Une fonctionnalité.
+                        Une demande claire
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        L’IA transforme rapidement une demande en code.
+                        « Ajoute le paiement. » Le besoin paraît précis, et l’IA peut produire
+                        rapidement l’interface, les appels et la logique nécessaires.
                     </p>
                 </>
             ),
             media: (progress: MotionValue<number>) => <ConstatDivergenceMedia progress={progress} />,
-            theme: "orange",
+            theme: "cyan",
         },
         {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        À l’écran, tout fonctionne
+                        Quelques secondes plus tard…
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Le parcours idéal passe. La démo rassure.
+                        Le bouton répond, la transaction aboutit, le parcours idéal passe.
+                        À l’écran, la fonctionnalité semble terminée.
                     </p>
                 </>
             ),
-            theme: "orange",
+            theme: "cyan",
         },
         {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Mais elle ne voit que la demande
+                        L’IA a bien répondu
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Le métier, les risques et les exceptions restent hors du prompt.
+                        Elle a traduit le prompt en code avec efficacité. Mais elle ne connaît ni
+                        vos règles métier ni vos contraintes réelles si elles ne lui sont pas transmises.
                     </p>
                 </>
             ),
-            theme: "orange",
+            theme: "cyan",
         },
         {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        Le non-dit devient de la dette
+                        Mais le produit dépasse le prompt
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        Ça fonctionne aujourd’hui. Sans garantie pour demain.
+                        Que faire d’un paiement interrompu, d’un droit mal attribué ou d’un état
+                        incohérent ? Ces décisions invisibles structurent pourtant la fiabilité du produit.
                     </p>
                 </>
             ),
-            theme: "orange",
+            theme: "cyan",
         },
         {
             text: (
                 <>
                     <h4 className="text-headline-small text-primary">
-                        La vitesse a besoin d’un pilote
+                        L’expérience transforme la vitesse en maîtrise
                     </h4>
                     <p className="lg:mt-6 mt-2 text-body-large text-on-surface-variant">
-                        L’IA accélère. L’expérience anticipe.
+                        Un professionnel repère ces non-dits, les transforme en règles explicites
+                        et choisit où les garantir. L’IA accélère alors une direction maîtrisée.
                     </p>
                 </>
             ),
-            theme: "orange",
+            theme: "cyan",
         },
     ];
 

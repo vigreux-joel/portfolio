@@ -2,6 +2,8 @@
 import { BackgroundColor } from "@components/BackgroundColor";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
+import { Image } from "astro:assets";
+import photo from "@assets/images/photo.png";
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 ---
 
@@ -31,19 +33,37 @@ import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 
       <div class="flex mt-8">
         <div>
-          <Line client:load icon={iIdCard} nextTheme="purple" />
+          <Line client:load icon={iIdCard} nextTheme="green" />
         </div>
-        <div class="padding pt-0">
-          <p class="text-headline-small max-w-3xl">
-            Je crée des sites et des applications web simples à utiliser, rapides et solides dans le temps.
-          </p>
-          <p class="max-w-2xl mt-6 text-body-large text-on-surface-variant">
-            Je peux partir d’une idée, améliorer un produit existant ou reprendre un projet devenu difficile à faire évoluer.
-          </p>
+        <div class="padding pt-0 pb-20 md:pb-28 w-full">
+          <div class="grid lg:grid-cols-[1fr_280px] gap-12 lg:gap-20 items-start">
+            <div>
+              <p class="text-headline-small max-w-3xl">
+                Je crée des sites et des applications web simples à utiliser, rapides et solides dans le temps.
+              </p>
+              <p class="max-w-2xl mt-6 text-body-large text-on-surface-variant">
+                Je peux partir d’une idée, améliorer un produit existant ou reprendre un projet devenu difficile à faire évoluer. Du premier échange à la mise en ligne, vous discutez directement avec moi, sans jargon inutile.
+              </p>
+
+            </div>
+
+            <figure>
+              <Image
+                src={photo}
+                alt="Portrait de Joël Vigreux"
+                widths={[240, 360, 560]}
+                sizes="(min-width: 1024px) 280px, 60vw"
+                format="webp"
+                class="w-full max-w-70 aspect-[4/5] object-cover rounded-3xl"
+                loading="eager"
+                decoding="async"
+              />
+            </figure>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <LinearGradient className="h-1/2" nextTheme="purple" />
+  <LinearGradient className="h-1/2" nextTheme="green" />
 </section>

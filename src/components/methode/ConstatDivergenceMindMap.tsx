@@ -1,54 +1,41 @@
 import {motion, useReducedMotion, useTransform, type MotionValue} from "motion/react";
 
 const FEATURES = [
-    {label: "Accès", glyph: "●", at: 0.09},
-    {label: "Recherche", glyph: "⌕", at: 0.12},
-    {label: "Suivi", glyph: "↗", at: 0.15},
+    {label: "Accès", glyph: "●"},
+    {label: "Recherche", glyph: "⌕"},
+    {label: "Suivi", glyph: "↗"},
 ];
 
-function FeatureTile({label, glyph, at, progress}: {
+function FeatureTile({label, glyph}: {
     label: string;
     glyph: string;
-    at: number;
-    progress: MotionValue<number>;
 }) {
-    const opacity = useTransform(progress, [at, at + 0.04], [0, 1]);
-    const y = useTransform(progress, [at, at + 0.04], [8, 0]);
-
     return (
-        <motion.div
-            className="flex items-center gap-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-3"
-            style={{opacity, y}}
-        >
+        <div className="flex items-center gap-3 rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-3">
             <span className="grid size-8 place-items-center rounded-lg bg-surface-container text-[14px] font-semibold text-on-surface-variant">
                 {glyph}
             </span>
             <span className="text-[11px] font-medium text-on-surface">{label}</span>
-        </motion.div>
+        </div>
     );
 }
 
 export function ConstatDivergenceMindMap({progress}: {progress: MotionValue<number>}) {
     const shouldReduceMotion = useReducedMotion();
-    const sceneOpacity = useTransform(progress, [0, 0.02, 0.39, 0.47], [0, 1, 1, 0]);
-    const sceneY = useTransform(progress, [0, 0.06, 0.39, 0.47], [10, 0, 0, -10]);
-    const promptOpacity = useTransform(progress, [0.01, 0.06], [0, 1]);
-    const appOpacity = useTransform(progress, [0.06, 0.12], [0, 1]);
-    const appScale = useTransform(progress, [0.06, 0.12], [0.96, 1]);
-    const paymentOpacity = useTransform(progress, [0.17, 0.23], [0, 1]);
-    const paymentScale = useTransform(progress, [0.17, 0.23, 0.27, 0.32], [0.76, 1.08, 1.08, 1]);
-    const successOpacity = useTransform(progress, [0.27, 0.34], [0, 1]);
-    const promptDoneOpacity = useTransform(progress, [0.2, 0.28], [0, 1]);
+    const sceneOpacity = useTransform(progress, [0, 0.39, 0.47], [1, 1, 0]);
+    const sceneY = useTransform(progress, [0, 0.39, 0.47], [0, 0, -10]);
+    const placeholderOpacity = useTransform(progress, [0.08, 0.16], [1, 0]);
+    const paymentOpacity = useTransform(progress, [0.08, 0.16], [0, 1]);
+    const paymentScale = useTransform(progress, [0.08, 0.16, 0.2, 0.25], [0.76, 1.08, 1.08, 1]);
+    const successOpacity = useTransform(progress, [0.2, 0.28], [0, 1]);
+    const promptDoneOpacity = useTransform(progress, [0.14, 0.22], [0, 1]);
 
     return (
         <motion.div
             className="absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 scale-[0.44] min-[340px]:scale-[0.5] min-[400px]:scale-[0.56] sm:scale-[0.72] md:scale-[0.84] lg:scale-[0.72] min-[1100px]:scale-[0.82] min-[1180px]:scale-[0.92] xl:scale-100"
             style={{opacity: sceneOpacity, y: sceneY}}
         >
-            <motion.div
-                className="absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full border border-primary/25 bg-surface-container-lowest px-4 py-2.5 shadow-md"
-                style={{opacity: promptOpacity}}
-            >
+            <div className="absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full border border-primary/25 bg-surface-container-lowest px-4 py-2.5 shadow-md">
                 <span className="grid size-7 place-items-center rounded-full bg-primary text-sm font-semibold text-on-primary">✦</span>
                 <span className="text-[12px] font-semibold text-on-surface">Ajouter le paiement</span>
                 <motion.span
@@ -57,12 +44,9 @@ export function ConstatDivergenceMindMap({progress}: {progress: MotionValue<numb
                 >
                     ✓
                 </motion.span>
-            </motion.div>
+            </div>
 
-            <motion.div
-                className="absolute inset-x-12 bottom-4 top-24 flex flex-col overflow-hidden rounded-2xl border border-outline-variant/70 bg-surface-container-lowest shadow-[0_22px_60px_color-mix(in_srgb,var(--color-on-surface)_10%,transparent)]"
-                style={{opacity: appOpacity, scale: appScale}}
-            >
+            <div className="absolute inset-x-12 bottom-4 top-24 flex flex-col overflow-hidden rounded-2xl border border-outline-variant/70 bg-surface-container-lowest shadow-[0_22px_60px_color-mix(in_srgb,var(--color-on-surface)_10%,transparent)]">
                 <div className="flex h-11 items-center gap-2 border-b border-outline-variant/60 bg-surface-container-low px-4">
                     <span className="size-2 rounded-full bg-outline-variant" />
                     <span className="size-2 rounded-full bg-outline-variant" />
@@ -89,32 +73,42 @@ export function ConstatDivergenceMindMap({progress}: {progress: MotionValue<numb
 
                     <div className="grid grid-cols-2 gap-3 p-4">
                         {FEATURES.map((feature) => (
-                            <FeatureTile key={feature.label} {...feature} progress={progress} />
+                            <FeatureTile key={feature.label} {...feature} />
                         ))}
 
-                        <motion.div
-                            className="relative flex items-center gap-3 overflow-hidden rounded-xl border border-primary/45 bg-primary-container px-4 py-3 text-on-primary-container shadow-sm"
-                            style={{opacity: paymentOpacity, scale: paymentScale}}
-                        >
-                            {!shouldReduceMotion && (
-                                <motion.span
-                                    className="absolute inset-0 bg-primary/10"
-                                    animate={{opacity: [0, 0.55, 0]}}
-                                    transition={{duration: 1.5, repeat: Infinity, ease: "easeInOut"}}
-                                />
-                            )}
-                            <span className="relative grid size-8 place-items-center rounded-lg bg-primary text-[15px] font-bold text-on-primary">€</span>
-                            <span className="relative text-[12px] font-bold">Paiement</span>
-                            <motion.span
-                                className="relative ml-auto grid size-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-on-primary"
-                                style={{opacity: successOpacity}}
+                        <div className="relative min-h-0">
+                            <motion.div
+                                className="absolute inset-0 flex items-center justify-center gap-2 rounded-xl border border-dashed border-primary/35 bg-primary/5 text-[11px] font-semibold text-primary"
+                                style={{opacity: placeholderOpacity}}
                             >
-                                ✓
-                            </motion.span>
-                        </motion.div>
+                                <span className="grid size-7 place-items-center rounded-full border border-primary/35 text-base">+</span>
+                                Paiement à générer
+                            </motion.div>
+
+                            <motion.div
+                                className="absolute inset-0 flex items-center gap-3 overflow-hidden rounded-xl border border-primary/45 bg-primary-container px-4 py-3 text-on-primary-container shadow-sm"
+                                style={{opacity: paymentOpacity, scale: paymentScale}}
+                            >
+                                {!shouldReduceMotion && (
+                                    <motion.span
+                                        className="absolute inset-0 bg-primary/10"
+                                        animate={{opacity: [0, 0.55, 0]}}
+                                        transition={{duration: 1.5, repeat: Infinity, ease: "easeInOut"}}
+                                    />
+                                )}
+                                <span className="relative grid size-8 place-items-center rounded-lg bg-primary text-[15px] font-bold text-on-primary">€</span>
+                                <span className="relative text-[12px] font-bold">Paiement</span>
+                                <motion.span
+                                    className="relative ml-auto grid size-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-on-primary"
+                                    style={{opacity: successOpacity}}
+                                >
+                                    ✓
+                                </motion.span>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
-            </motion.div>
+            </div>
         </motion.div>
     );
 }

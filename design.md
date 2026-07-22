@@ -77,8 +77,7 @@ Les couleurs s'adaptent dynamiquement au mode actif (clair/sombre).
 *   **Sub-Themes :** Le composant parent peut définir une couleur thématique locale en appliquant l'une des classes suivantes :
     *   `theme-blue` (Thème par défaut)
     *   `theme-green`
-    *   `theme-purple`
-    *   `theme-orange`
+    *   `theme-cyan`
     Allégées par `@udixio/tailwind`, toutes les couleurs sémantiques (`primary`, `secondary`, `surface-container`, etc.) se remappent dynamiquement.
 
 ### B. Typographies & Rôles Textuels
@@ -123,7 +122,7 @@ Séparateur vertical hautement interactif reliant les sections au fil du défile
     *   **Courant d'énergie :** Un flux d'énergie rapide traverse périodiquement la ligne à 60fps (géré par `requestAnimationFrame` sur les coordonnées absolues de l'écran) pour dynamiser la mise en page.
     *   **Orbes et Icônes :** Des icônes de transition peuvent être insérées. Elles s'animent en taille (zoom) et en éclat (flash de lumière intense) au moment précis où le courant d'énergie les traverse.
 *   **Props :**
-    *   `nextTheme?: string` : Thème de la ligne suivante (`"blue"`, `"green"`, `"purple"`, `"orange"`) pour colorer le gradient du courant d'énergie.
+    *   `nextTheme?: string` : Thème de la ligne suivante (`"blue"`, `"green"`, `"cyan"`) pour colorer le gradient du courant d'énergie.
     *   `icon?: Icon` : Icône Material 3 (importée de `@udixio/ui-react`) à placer sur la ligne.
     *   `isFirst?: boolean` : Désactive le trait supérieur et réduit la taille du premier orbe.
     *   `isLast?: boolean` : Estompe progressivement le trait inférieur vers le transparent.

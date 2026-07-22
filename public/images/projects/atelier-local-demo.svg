@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title description">
+  <title id="title">Interface fictive Atelier Local</title>
+  <desc id="description">Catalogue illustré de réservation d’ateliers créatifs.</desc>
+  <rect width="1200" height="720" rx="44" fill="#f6e7d2"/>
+  <circle cx="1050" cy="88" r="180" fill="#e9b985" opacity=".55"/>
+  <circle cx="112" cy="650" r="210" fill="#c96e50" opacity=".2"/>
+  <rect x="48" y="42" width="1104" height="636" rx="32" fill="#fffaf4"/>
+  <text x="92" y="104" fill="#492a20" font-family="Georgia, serif" font-size="28" font-weight="700">Atelier Local</text>
+  <rect x="882" y="72" width="92" height="12" rx="6" fill="#9e796b"/>
+  <rect x="1000" y="72" width="108" height="44" rx="22" fill="#743c2a"/>
+  <text x="1024" y="99" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="700">Mes réservations</text>
+  <text x="92" y="192" fill="#492a20" font-family="Georgia, serif" font-size="40" font-weight="700">Créer de ses mains,</text>
+  <text x="92" y="242" fill="#b45e3e" font-family="Georgia, serif" font-size="40" font-weight="700">près de chez soi.</text>
+  <text x="92" y="282" fill="#80665c" font-family="Arial, sans-serif" font-size="16">Choisissez une date, réservez votre place et venez apprendre.</text>
+  <rect x="92" y="340" width="308" height="262" rx="24" fill="#efd0ac"/>
+  <circle cx="246" cy="430" r="72" fill="#bc704f"/>
+  <ellipse cx="246" cy="430" rx="42" ry="20" fill="#f7d9b8"/>
+  <rect x="118" y="522" width="106" height="12" rx="6" fill="#5b3428"/>
+  <rect x="118" y="550" width="176" height="10" rx="5" fill="#9c7467"/>
+  <rect x="118" y="574" width="74" height="10" rx="5" fill="#b45e3e"/>
+  <rect x="446" y="340" width="308" height="262" rx="24" fill="#d9c5a8"/>
+  <rect x="538" y="380" width="124" height="106" rx="16" fill="#7b5a3e" transform="rotate(-8 600 433)"/>
+  <path d="M558 402h86M550 430h94M548 458h78" stroke="#e8d9c3" stroke-width="9" stroke-linecap="round"/>
+  <rect x="472" y="522" width="122" height="12" rx="6" fill="#5b3428"/>
+  <rect x="472" y="550" width="184" height="10" rx="5" fill="#9c7467"/>
+  <rect x="472" y="574" width="88" height="10" rx="5" fill="#b45e3e"/>
+  <rect x="800" y="340" width="308" height="262" rx="24" fill="#cfddd5"/>
+  <rect x="898" y="382" width="112" height="110" rx="56" fill="#507767"/>
+  <path d="M922 402c36 20 58 46 62 76M989 404c-30 20-50 44-60 74" fill="none" stroke="#dcece4" stroke-width="8" stroke-linecap="round"/>
+  <rect x="826" y="522" width="132" height="12" rx="6" fill="#5b3428"/>
+  <rect x="826" y="550" width="178" height="10" rx="5" fill="#748d82"/>
+  <rect x="826" y="574" width="64" height="10" rx="5" fill="#b45e3e"/>
+</svg>

@@ -1,5 +1,6 @@
 import {defineConfig, fontProviders} from 'astro/config';
 import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import compressor from "astro-compressor";
@@ -15,7 +16,7 @@ export default defineConfig({
     compressHTML: true,
     experimental: {},
     output: 'static',
-    integrations: [react(), sitemap(), robotsTxt(), compress(), compressor(),],
+    integrations: [react(), mdx(), sitemap(), robotsTxt(), compress(), compressor(),],
     fonts: [
         {
             provider: fontProviders.google(),

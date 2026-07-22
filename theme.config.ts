@@ -2,13 +2,12 @@ import {hexFromArgb} from "@material/material-color-utilities";
 import {defineConfig} from '@udixio/ui-react';
 import {Hct} from "@udixio/theme";
 
-export const sourceColor = Hct.from(270, 55, 75)
+export const sourceColor = Hct.from(280, 45, 75)
 
 export const subThemes = {
     blue: hexFromArgb(sourceColor.toInt()),
-    green: '#7cb894',
-    purple: "#bba1da",
-    orange: '#e69883'
+    green: hexFromArgb(Hct.from(161, sourceColor.hue, sourceColor.tone).toInt()),
+    cyan: hexFromArgb(Hct.from(205, sourceColor.hue, sourceColor.tone).toInt()),
 }
 
 export default defineConfig({

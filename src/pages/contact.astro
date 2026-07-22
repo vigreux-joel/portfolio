@@ -8,6 +8,7 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { iMail } from "@udixio/icons-outlined-400/mail";
 import { iComment } from "@udixio/icons-outlined-400/comment";
 import { iCall } from "@udixio/icons-outlined-400/call";
+import { iLocationOn } from "@udixio/icons-outlined-400/location_on";
 import { iCalendarMonth } from "@udixio/icons-outlined-400/calendar_month";
 import { LinearGradient } from "@components/LinearGradient";
 
@@ -146,6 +147,21 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
                   >
                     {import.meta.env.PUBLIC_PHONE || "+33 6 00 00 00 00"}
                   </a>
+                </div>
+              </div>
+
+              <!-- Mobilité -->
+              <div class="flex items-center gap-4 group">
+                <div
+                  class="bg-tertiary-container p-4 rounded-2xl text-on-tertiary-container group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors duration-300"
+                >
+                  <Icon icon={iLocationOn} className="size-6" />
+                </div>
+                <div>
+                  <h3 class="text-title-medium">Mobilité</h3>
+                  <p class="text-body-large text-on-surface-variant mt-1">
+                    Déplacements autour d’Amiens et de Lille · à distance
+                  </p>
                 </div>
               </div>
 

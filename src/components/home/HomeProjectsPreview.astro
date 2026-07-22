@@ -1,57 +1,40 @@
 ---
+import { getCollection } from "astro:content";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
-import { Icon } from "@udixio/ui-react";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
-import { selectedProject } from "./homeContent";
+import { ProjectsCarousel, type ProjectSlide } from "./ProjectsCarousel";
+
+const entries = await getCollection("projects", ({ data }) => data.featured && !data.draft);
+const projects: ProjectSlide[] = entries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ id, data }) => ({
+    id,
+    title: data.title,
+    eyebrow: data.eyebrow,
+    headline: data.headline,
+    cover: data.cover,
+  }));
 ---
 
-<section id="projets" class="tab-menu theme-orange bg-surface">
+<section id="projets" class="tab-menu theme-cyan bg-surface">
   <div class="max-width">
     <div class="flex pt-8">
-      <div><Line client:idle icon={iFactCheck} nextTheme="orange" /></div>
+      <div><Line client:idle icon={iFactCheck} nextTheme="cyan" /></div>
       <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-        <h2 class="text-title-large text-tertiary" data-sidebar-label="Projet">Projet sélectionné</h2>
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Projets">Projets sélectionnés</h2>
         <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-          <p class="text-gradient">{selectedProject.name}</p>
-          <p>{selectedProject.headline}</p>
+          <p class="text-gradient">Des réalisations à ouvrir,</p>
+          <p>tester et parcourir.</p>
         </div>
       </div>
     </div>
 
-    <div class="padding-x mt-14 grid lg:grid-cols-[.75fr_1.25fr] gap-10 lg:gap-16 items-center">
-      <div>
-        <div class="border-t border-outline-variant pt-5">
-          <h3 class="text-title-large text-tertiary">Le besoin</h3>
-          <p class="mt-3 text-body-large text-on-surface-variant">{selectedProject.need}</p>
-        </div>
-        <div class="border-t border-outline-variant pt-5 mt-8">
-          <h3 class="text-title-large text-tertiary">Ce que j’ai construit</h3>
-          <p class="mt-3 text-body-large text-on-surface-variant">{selectedProject.solution}</p>
-        </div>
-        <p class="mt-7 text-body-small text-on-surface-variant">{selectedProject.technicalNote}</p>
-        <a href={selectedProject.href} target="_blank" rel="noopener noreferrer" class="group mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary">
-          <span>Ouvrir Udixio UI</span>
-          <Icon icon={iArrowForward} className="size-4 group-hover:translate-x-1 transition-transform" />
-          <span class="sr-only">(nouvel onglet)</span>
-        </a>
-      </div>
-
-      <figure>
-        <img
-          src="/images/material-theme.webp"
-          alt="Plusieurs variantes colorées d’une même interface créées avec Udixio UI"
-          width="1024"
-          height="590"
-          loading="lazy"
-          class="w-full rounded-3xl object-cover"
-        />
-        <figcaption class="mt-3 text-body-small text-on-surface-variant">Un même écran, plusieurs thèmes générés par le système.</figcaption>
-      </figure>
+    <div class="padding-x mt-14">
+      <ProjectsCarousel projects={projects} client:visible />
     </div>
 
     <div class="flex h-24 md:h-32"><div><Line client:idle /></div></div>
   </div>
-  <LinearGradient nextTheme="purple" />
+  <LinearGradient nextTheme="green" />
 </section>

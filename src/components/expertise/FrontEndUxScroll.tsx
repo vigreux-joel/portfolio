@@ -29,7 +29,7 @@ export const FrontEndUxScroll = () => {
                     Sorry, your browser doesn't support embedded videos.
                 </video>
             ),
-            theme: "purple",
+            theme: "cyan",
         },
         {
             text: (
