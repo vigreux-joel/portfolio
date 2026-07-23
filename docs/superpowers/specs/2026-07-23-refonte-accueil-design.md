@@ -236,3 +236,28 @@ de repli tient la place proprement en attendant des captures.
   conservé, aucun lien externe.
 - Les présentations de projets (phare et cartes) sont **entièrement pilotées par la
   collection MDX** via les composants partagés `ProjectFeature` / `ProjectCard`.
+
+## Addendum du 2026-07-23 (après retour utilisateur)
+
+- **La section « Ce portfolio » est supprimée de la page d’accueil** (décision
+  utilisateur : suppression pure et simple, pas de bandeau de remplacement).
+  Le portfolio reste une étude de cas sur `/projets`.
+- **La page de listing `/projets` existe désormais** : études de cas en grand
+  format alterné, puis « Autres réalisations » (section conditionnelle, vide à ce
+  jour). Le menu pointe vers `/projets`.
+- **Deux types de projets** via le champ `kind` : `etude-de-cas` (page dédiée,
+  champs narratifs obligatoires) et `realisation` (carte simple avec lien externe,
+  pas de page). Pour ajouter une réalisation : créer un `.mdx` avec
+  `kind: "realisation"`, `externalUrl`, et sans `home`.
+- **Doubles fonds corrigés** : le panneau de repli de `ProjectVisual` hérite du
+  fond de sa carte au lieu d’empiler un `bg-surface-container` plus sombre.
+
+### Écarts par rapport au plan d’implémentation
+
+- Les tâches 1 et 3 du plan ont été **fusionnées en un seul commit** : retirer
+  l’emplacement `home: "story"` du schéma et supprimer `HomePortfolioStory.astro`
+  (son unique consommateur) sont indissociables — le build échoue entre les deux.
+- La page `/projets` doit fournir une prop `faq` au `Layout` : `Footer` rend
+  `FaqSection` inconditionnellement et `questions.map()` échoue sinon. Une FAQ
+  propre à la page projets a été rédigée (captures manquantes, étude de cas vs
+  réalisation, accès au code).
