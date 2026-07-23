@@ -1,7 +1,7 @@
 ---
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
-import { Icon } from "@udixio/ui-react";
+import { Button } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 import { iRoute } from "@udixio/icons-outlined-400/route";
@@ -12,11 +12,14 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
     <div class="flex pt-8">
       <div><Line client:idle icon={iRoute} nextTheme="green" /></div>
       <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-        <h2 class="text-title-large text-tertiary" data-sidebar-label="Travailler ensemble">Travailler ensemble</h2>
-        <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-          <p class="text-gradient">Un projet à prendre en main</p>
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Collaboration">Travailler ensemble</h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+          <p class="text-gradient">Un projet à réaliser</p>
           <p>ou une équipe à renforcer.</p>
         </div>
+        <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+          Le contexte change, pas le niveau d’exigence&nbsp;: comprendre l’existant, rendre les décisions lisibles et livrer un travail que d’autres pourront reprendre.
+        </p>
       </div>
     </div>
 
@@ -29,38 +32,37 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
       <article class="flex">
         <div><Line client:idle icon={iRoute} isLast /></div>
         <div class="padding pt-8 md:pt-0">
-          <span class="block text-title-medium text-tertiary">Confier un projet</span>
-          <h3 class="mt-2 text-headline-small md:text-headline-medium">Créer, améliorer ou reprendre un produit web</h3>
+          <span class="block text-title-medium text-tertiary">Pour un projet</span>
+          <h3 class="mt-2 text-headline-small md:text-headline-medium">Créer, compléter ou reprendre une application</h3>
           <p class="mt-4 text-body-large text-on-surface-variant max-w-prose">
-            Je cadre le besoin, construis la solution et vous accompagne jusqu’à sa mise en ligne.
+            Avant de développer, nous précisons le périmètre, les priorités et les contraintes. Le travail peut ensuite avancer par livraisons vérifiables jusqu’à la mise en ligne.
           </p>
-          <a href="/developpement-produit" class="group mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary">
-            <span>Voir l’accompagnement produit</span>
-            <Icon icon={iArrowForward} className="size-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div class="mt-8">
+            <Button href="/contact" icon={iArrowForward} label="Présenter votre projet" />
+          </div>
         </div>
       </article>
 
       <article class="flex">
         <div><Line client:idle icon={iIdCard} /></div>
         <div class="padding pt-8 md:pt-0">
-          <span class="block text-title-medium text-tertiary">Renforcer une équipe</span>
-          <h3 class="mt-2 text-headline-small md:text-headline-medium">Intégrer un développeur full-stack à votre organisation</h3>
+          <span class="block text-title-medium text-tertiary">Pour une équipe</span>
+          <h3 class="mt-2 text-headline-small md:text-headline-medium">Contribuer dans une organisation existante</h3>
           <p class="mt-4 text-body-large text-on-surface-variant max-w-prose">
-            Je rejoins vos outils, vos habitudes et votre rythme pour faire avancer le produit avec l’équipe en place.
+            Je m’intègre à la base de code, aux outils et aux conventions déjà en place. Je documente les décisions prises afin que ma contribution reste compréhensible et reprenable.
           </p>
-          <a href="/profil" class="group mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary">
-            <span>Consulter mon CV</span>
-            <Icon icon={iArrowForward} className="size-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div class="mt-8">
+            <Button href="/profil" icon={iIdCard} label="Consulter mon CV · PDF" variant="outlined" />
+          </div>
         </div>
       </article>
     </div>
 
-    <div class="relative h-16 md:h-20 hidden md:block">
+    <div class="relative h-20 md:h-28 hidden md:block">
       <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
       <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle />
     </div>
   </div>
-  <LinearGradient nextTheme="cyan" />
+
+  <LinearGradient nextTheme="blue" />
 </section>

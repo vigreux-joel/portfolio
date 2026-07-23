@@ -4,7 +4,9 @@ import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import { Image } from "astro:assets";
 import photo from "@assets/images/photo.png";
-import { iIdCard } from "@udixio/icons-outlined-400/id_card";
+import { Button } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 ---
 
 <section id="accueil" class="tab-menu relative overflow-hidden theme-blue">
@@ -28,23 +30,30 @@ import { iIdCard } from "@udixio/icons-outlined-400/id_card";
             Développeur
             <span class="block text-gradient">full-stack.</span>
           </h1>
+          <p class="mt-7 text-headline-small md:text-headline-medium max-w-4xl text-on-surface">
+            Des interfaces soignées sur des fondations solides.
+          </p>
         </div>
       </div>
 
       <div class="flex mt-8">
         <div>
-          <Line client:load icon={iIdCard} nextTheme="green" />
+          <Line client:load icon={iFactCheck} nextTheme="green" />
         </div>
         <div class="padding pt-0 pb-20 md:pb-28 w-full">
           <div class="grid lg:grid-cols-[1fr_280px] gap-12 lg:gap-20 items-start">
             <div>
-              <p class="text-headline-small max-w-3xl">
-                Je crée des sites et des applications web simples à utiliser, rapides et solides dans le temps.
+              <p class="text-body-large max-w-3xl">
+                Spécialisé dans l’écosystème TypeScript, je développe et fais évoluer des applications web, du front-end aux services qui les font fonctionner.
               </p>
-              <p class="max-w-2xl mt-6 text-body-large text-on-surface-variant">
-                Je peux partir d’une idée, améliorer un produit existant ou reprendre un projet devenu difficile à faire évoluer. Du premier échange à la mise en ligne, vous discutez directement avec moi, sans jargon inutile.
+              <p class="max-w-3xl mt-6 text-body-large text-on-surface-variant">
+                J’accorde la même attention à la qualité visible de l’interface et à la clarté du code que l’équipe devra maintenir.
               </p>
 
+              <div class="flex flex-col sm:flex-row sm:flex-wrap gap-4 mt-9">
+                <Button href="#projets" icon={iArrowForward} label="Voir une réalisation" />
+                <Button href="/profil" icon={iFactCheck} label="Consulter mon CV" variant="outlined" />
+              </div>
             </div>
 
             <figure>

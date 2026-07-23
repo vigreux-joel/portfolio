@@ -6,69 +6,84 @@ import { iApi } from "@udixio/icons-outlined-400/api";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iCode } from "@udixio/icons-outlined-400/code";
 import { iDevices } from "@udixio/icons-outlined-400/devices";
+import { iSync } from "@udixio/icons-outlined-400/sync";
 ---
 
-<div id="expertise-preview" class="tab-menu theme-green bg-surface">
-  <section>
-    <div class="max-width">
-      <div class="flex pt-8">
-        <div><Line client:idle icon={iCode} nextTheme="green" /></div>
-        <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-          <h2 class="text-title-large text-tertiary" data-sidebar-label="Expertise">Ce que je peux prendre en charge</h2>
-          <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-            <p class="text-gradient">Un seul interlocuteur,</p>
-            <p>de l’écran à la mise en ligne.</p>
-          </div>
+<section id="expertise-preview" class="tab-menu theme-green bg-surface">
+  <div class="max-width">
+    <div class="flex pt-8">
+      <div><Line client:idle icon={iCode} nextTheme="green" /></div>
+      <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Périmètre">Un périmètre clair</h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+          <p class="text-gradient">Construire et faire évoluer</p>
+          <p>l’application.</p>
         </div>
+        <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+          Je pars d’un besoin fonctionnel défini, de maquettes ou d’un produit existant. Mon rôle est de les traduire en une solution technique cohérente, puis de la rendre simple à maintenir.
+        </p>
       </div>
-
-      <div class="relative h-20 md:h-28 hidden md:block">
-        <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
-        <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle />
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
-        <div class="flex">
-          <div><Line client:idle icon={iDevices} isLast /></div>
-          <div class="padding pt-8 md:pt-0">
-            <span class="block text-title-medium text-tertiary">L’expérience visible</span>
-            <h3 class="text-headline-small md:text-headline-medium mt-2">Un produit simple à utiliser</h3>
-            <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
-              Des pages claires, rapides sur mobile comme sur ordinateur, et accessibles.
-            </p>
-            <p class="max-w-prose mt-5 text-body-medium text-on-surface-variant">
-              Selon le projet&nbsp;: Astro, React ou Angular.
-            </p>
-          </div>
-        </div>
-        <div class="flex">
-          <div><Line client:idle icon={iApi} /></div>
-          <div class="padding pt-8 md:pt-0">
-            <span class="block text-title-medium text-tertiary">Le fonctionnement en coulisses</span>
-            <h3 class="text-headline-small md:text-headline-medium mt-2">Une base fiable</h3>
-            <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
-              Comptes, données, automatisations et échanges avec d’autres services&nbsp;: tout ce qui doit fonctionner sans être visible.
-            </p>
-            <p class="max-w-prose mt-5 text-body-medium text-on-surface-variant">
-              Principalement avec TypeScript et NestJS.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="padding-x mt-12">
-        <a href="/expertise" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
-          <span>Voir mes compétences en détail</span>
-          <Icon icon={iArrowForward} className="size-4 text-on-surface-variant group-hover:translate-x-1 transition-transform" />
-        </a>
-      </div>
-
-      <div class="relative h-20 md:h-28 hidden md:block">
-        <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
-        <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle />
-      </div>
-      <div class="flex h-20 md:h-28"><div><Line client:idle /></div></div>
     </div>
-  </section>
+
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle />
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
+      <article class="flex">
+        <div><Line client:idle icon={iDevices} isLast /></div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-title-medium text-tertiary">Côté interface</span>
+          <h3 class="text-headline-small md:text-headline-medium mt-2">Transformer une conception en interface fiable</h3>
+          <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
+            Intégration responsive, composants réutilisables, accessibilité et performance avec Astro, React ou Angular.
+          </p>
+          <p class="max-w-prose mt-5 text-body-medium text-on-surface-variant">
+            L’identité visuelle et les parcours sont définis en amont ou avec les spécialistes concernés&nbsp;; je veille ensuite à leur traduction fidèle dans le navigateur.
+          </p>
+        </div>
+      </article>
+
+      <article class="flex">
+        <div><Line client:idle icon={iApi} /></div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-title-medium text-tertiary">Côté application</span>
+          <h3 class="text-headline-small md:text-headline-medium mt-2">Relier l’interface aux services nécessaires</h3>
+          <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
+            API, authentification, données, automatisations et intégrations avec d’autres services, principalement avec TypeScript, NestJS et AWS.
+          </p>
+          <p class="max-w-prose mt-5 text-body-medium text-on-surface-variant">
+            Les choix techniques partent des contraintes réelles du projet et de ce que l’équipe devra pouvoir faire évoluer.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="padding-x mt-12">
+      <div class="rounded-3xl border border-outline-variant bg-surface-container-low p-7 md:flex md:items-center md:gap-8 md:p-9">
+        <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary-container text-on-primary-container">
+          <Icon icon={iSync} className="size-6" />
+        </span>
+        <div class="mt-5 md:mt-0">
+          <p class="text-title-large text-on-surface">Et lorsque le produit existe déjà</p>
+          <p class="mt-2 max-w-4xl text-body-large text-on-surface-variant">
+            Je commence par comprendre la base de code et ses contraintes avant d’ajouter une fonctionnalité, corriger un point bloquant ou engager une migration progressive.
+          </p>
+        </div>
+      </div>
+
+      <a href="/expertise" class="group mt-8 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+        <span>Voir mon expertise technique</span>
+        <Icon icon={iArrowForward} className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1" />
+      </a>
+    </div>
+
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle />
+    </div>
+  </div>
+
   <LinearGradient nextTheme="blue" />
-</div>
+</section>

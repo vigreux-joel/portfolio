@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HomeHero from "../components/home/HomeHero.astro";
+import HomeExperienceProof from "../components/home/HomeExperienceProof.astro";
 import HomeContextPaths from "../components/home/HomeContextPaths.astro";
 import HomeProjectsPreview from "../components/home/HomeProjectsPreview.astro";
 import HomeExpertisePreview from "../components/home/HomeExpertisePreview.astro";
@@ -8,24 +9,24 @@ import HomeMethodPreview from "../components/home/HomeMethodPreview.astro";
 
 const faq = [
   {
-    question: "Sur quels types de projets pouvez-vous intervenir ?",
+    question: "Sur quels types de produits pouvez-vous intervenir ?",
     answer:
-      "Sur la création ou la refonte d’un site, d’une application web ou d’un outil métier. Je peux aussi reprendre un projet existant devenu lent, difficile à utiliser ou compliqué à faire évoluer.",
+      "Sur un site, une application web ou un outil métier, pour développer une première version, ajouter une fonctionnalité ou reprendre une base existante. Mon périmètre couvre le front-end et les services back-end qui lui sont nécessaires.",
   },
   {
-    question: "Pouvez-vous intégrer une équipe existante ?",
+    question: "Pouvez-vous reprendre un code existant ?",
     answer:
-      "Oui. Je m’adapte aux outils et au rythme déjà en place. Je documente mon travail et partage les décisions pour que l’équipe puisse reprendre facilement la suite.",
+      "Oui. Je commence par comprendre l’architecture, les conventions et les contraintes de la base actuelle. L’objectif est d’avancer progressivement sans imposer une réécriture complète par principe.",
   },
   {
-    question: "Comment vérifier votre niveau technique ?",
+    question: "Comment se déroule un premier échange ?",
     answer:
-      "La page Expertise présente mes compétences en détail. Udixio UI et le code source de ce portfolio permettent également de consulter directement une partie de mon travail.",
+      "Vous pouvez me présenter ce qui existe, l’objectif recherché et le point qui bloque aujourd’hui. Je vous réponds avec les premières questions utiles pour préciser le périmètre, les contraintes et la prochaine étape.",
   },
   {
-    question: "Quelle place donnez-vous à l’IA dans le développement ?",
+    question: "Pouvez-vous intégrer une équipe déjà constituée ?",
     answer:
-      "Je l’utilise pour accélérer certaines recherches et tâches de production. Je reste responsable des choix, de la relecture, des vérifications et de ce qui est finalement livré.",
+      "Oui. Je m’adapte aux outils, aux conventions et au rythme déjà en place. Je partage les décisions importantes et documente ce qui doit l’être pour que ma contribution reste compréhensible par l’équipe.",
   },
 ];
 
@@ -38,7 +39,7 @@ const personJsonLd = JSON.stringify({
   url: "https://vigreux-joel.fr/",
   image: "https://vigreux-joel.fr/images/photo.webp",
   description:
-    "Développeur full-stack français. Création et amélioration de sites et applications web, de l’interface à la mise en ligne.",
+    "Développeur full-stack spécialisé dans l’écosystème TypeScript. Développement et évolution d’applications web, du front-end aux services back-end.",
   sameAs: [
     "https://github.com/vigreux-joel",
     "https://linkedin.com/in/vigreux-joel",
@@ -81,9 +82,9 @@ const profilePageJsonLd = JSON.stringify({
   url: "https://vigreux-joel.fr/",
   name: "Joël Vigreux — Développeur full-stack",
   description:
-    "Profil, expertise, méthode et réalisations de Joël Vigreux, développeur full-stack.",
+    "Expérience, projet, expertise et méthode de Joël Vigreux, développeur full-stack spécialisé dans l’écosystème TypeScript.",
   inLanguage: "fr-FR",
-  dateModified: "2026-07-19",
+  dateModified: "2026-07-22",
   mainEntity: { "@id": "https://vigreux-joel.fr/#joel-vigreux" },
 });
 ---
@@ -92,9 +93,9 @@ const profilePageJsonLd = JSON.stringify({
   showSidebar={false}
   faq={faq}
   seo={{
-    title: "Joël Vigreux — Développeur full-stack à Béthune",
+    title: "Joël Vigreux — Développeur full-stack TypeScript",
     description:
-      "Développeur full-stack à Béthune. Je crée et améliore des sites et applications web simples à utiliser, rapides et conçus pour durer.",
+      "Développeur full-stack spécialisé en TypeScript. Je développe et fais évoluer des applications web, du front-end aux services back-end.",
     openGraph: {
       basic: {
         title: "Joël Vigreux — Développeur full-stack",
@@ -106,7 +107,7 @@ const profilePageJsonLd = JSON.stringify({
         siteName: "Joël Vigreux",
         locale: "fr_FR",
         description:
-          "Création et amélioration de sites et applications web, de l’interface à la mise en ligne.",
+          "Des interfaces soignées sur des fondations solides, du front-end aux services back-end.",
       },
       image: {
         alt: "Portrait de Joël Vigreux, développeur full-stack",
@@ -116,7 +117,7 @@ const profilePageJsonLd = JSON.stringify({
       card: "summary_large_image",
       title: "Joël Vigreux - Développeur full-stack",
       description:
-        "Création et amélioration de sites et applications web, de l’interface à la mise en ligne.",
+        "Développement et évolution d’applications web, du front-end aux services back-end.",
       image: "https://vigreux-joel.fr/images/photo.webp",
       imageAlt: "Portrait de Joël Vigreux",
     },
@@ -127,8 +128,9 @@ const profilePageJsonLd = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={profilePageJsonLd} />
 
   <HomeHero />
-  <HomeContextPaths />
+  <HomeExperienceProof />
   <HomeProjectsPreview />
   <HomeExpertisePreview />
   <HomeMethodPreview />
+  <HomeContextPaths />
 </Layout>
