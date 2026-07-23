@@ -4,6 +4,8 @@ import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import ProjectCard from "@components/projects/ProjectCard.astro";
 import ProjectFeature from "@components/projects/ProjectFeature.astro";
+import { Icon } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 
 const published = await getCollection("projects", ({ data }) => !data.draft);
@@ -49,6 +51,17 @@ if (!feature) {
           </div>
         )
       }
+
+      <a
+        href="/projets"
+        class="group mt-8 inline-flex items-center gap-2 text-body-large text-on-surface transition-colors hover:text-primary"
+      >
+        <span>Voir tous les projets</span>
+        <Icon
+          icon={iArrowForward}
+          className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1"
+        />
+      </a>
     </div>
   </div>
 
