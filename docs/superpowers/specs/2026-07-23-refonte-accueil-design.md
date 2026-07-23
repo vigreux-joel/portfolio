@@ -102,11 +102,26 @@ détail technique reste sur `/expertise` (lien discret en fin de section :
 | **Plateforme pour agences web** | « Produit en cours · depuis 2025 » | Logiciel métier modulaire : CRM, gestion commerciale, blog, audits E-E-A-T et assistance IA. |
 | **Netsimpler** | « Expérience · 3 ans sur un SaaS en production » | Cadré sur la contribution : migration progressive du front Angular vers Astro/React, restructuration du back-end vers AWS (AppSync, Cognito, Lambda). Aucune promesse sur le produit. |
 
-**Contenu induit** : créer `src/content/projects/mojoe.mdx` et
-`src/content/projects/plateforme-agences.mdx` (nom définitif à confirmer), avec au
-minimum le frontmatter nécessaire aux cartes. Les études de cas complètes peuvent venir
-dans un second temps (les cartes peuvent temporairement ne pas avoir de lien détail).
-La carte Netsimpler peut pointer vers `/profil` plutôt que vers une étude de cas.
+**Architecture : tout piloté par la collection `projects`.** La section ne code plus
+aucun projet en dur (l'actuel `HomeProjectsPreview` hardcode Udixio UI et sa liste de
+preuves). À la place :
+
+- **Chaque projet est une entrée MDX** de la collection, y compris Netsimpler et le
+  portfolio lui-même. Le frontmatter s'enrichit d'un champ `highlights` (liste de points
+  de preuve, remplace le tableau `proofs` hardcodé) et si besoin d'un champ de mise en
+  avant (`featured` existant + `order` pour l'ordre d'affichage).
+- **Deux composants partagés** rendent n'importe quelle entrée de la collection :
+  - `ProjectFeature.astro` — grand format « phare » (utilisé pour Udixio UI en section 3
+    et pour le portfolio en section 5) ;
+  - `ProjectCard.astro` — format carte secondaire (les 3 cartes de la grille).
+- Ces composants sont réutilisables sur `/projets` pour garder une présentation unique.
+
+**Contenu induit** : créer `src/content/projects/mojoe.mdx`,
+`src/content/projects/plateforme-agences.mdx`, `src/content/projects/netsimpler.mdx`
+(cadrée expérience) et `src/content/projects/vigreux-joel-fr.mdx` (l'histoire du site,
+alimente la section 5). Les études de cas complètes peuvent venir dans un second temps.
+La **plateforme pour agences web est privée et sans nom public** : sa carte n'a ni lien
+externe ni démo, elle garde son intitulé générique et pointe vers sa page étude de cas.
 
 ### 4. Méthode *(conservée, retitrée)*
 
@@ -123,6 +138,8 @@ La carte Netsimpler peut pointer vers `/profil` plutôt que vers une étude de c
 - **Titre proposé** : « Le site que vous êtes en train de consulter. »
 - **Rôle** : clore la page sur une preuve vérifiable en un clic — le lecteur vient de
   parcourir le produit.
+- **Rendu via `ProjectFeature.astro`**, alimenté par l'entrée
+  `vigreux-joel-fr.mdx` de la collection — même présentation que le phare Udixio UI.
 - **Contenu — l'histoire du site** :
   - conçu comme démonstration du niveau d'exigence défendu sur la page ;
   - construit avec Astro et Udixio UI (le design system présenté plus haut, la boucle
@@ -160,12 +177,14 @@ Ajouter une question sur l'estimation, peur client non couverte :
 | `HomeHero.astro` | Modifié (paragraphe + CTA) |
 | `HomeExperienceProof.astro` | **Supprimé** |
 | `HomeExpertisePreview.astro` | **Remplacé** par `HomeSituations.astro` (nouvelles cartes besoins) |
-| `HomeProjectsPreview.astro` | Étendu : phare + grille de 3 cartes depuis la collection |
+| `HomeProjectsPreview.astro` | Réécrit : phare + grille de 3 cartes, entièrement piloté par la collection |
+| `ProjectFeature.astro`, `ProjectCard.astro` | **Nouveaux** composants partagés de présentation |
 | `HomeMethodPreview.astro` | Titre modifié uniquement |
-| `HomePortfolioStory.astro` | **Nouveau** (section 5) |
+| `HomePortfolioStory.astro` | **Nouveau** (section 5, wrapper autour de `ProjectFeature`) |
 | `HomeContextPaths.astro` | Textes raccourcis |
+| Schéma de la collection `projects` | Champ `highlights` ajouté (points de preuve des cartes/phares) |
 | `atelier-local-demo.mdx`, `clair-habitat-demo.mdx` | Supprimés ou `draft: true` |
-| `mojoe.mdx`, `plateforme-agences.mdx` | **À créer** |
+| `mojoe.mdx`, `plateforme-agences.mdx`, `netsimpler.mdx`, `vigreux-joel-fr.mdx` | **À créer** |
 
 Les enchaînements de thèmes couleur (`theme-blue` → `theme-green` → …) et les
 `LinearGradient` devront être revus après réordonnancement des sections pour garder des
@@ -188,7 +207,12 @@ transitions cohérentes.
 
 ## Points ouverts
 
-1. **Nom public de la plateforme pour agences web** (le CV dit « Plateforme de gestion
-   pour agence web » ; un nom de produit serait plus fort sur la carte).
-2. **Lien du portfolio (section 5)** : dépôt GitHub public, étude de cas, ou aucun CTA ?
-3. **Visuels des cartes Mojoe et plateforme** : captures disponibles ?
+1. **Lien du portfolio (section 5)** : dépôt GitHub public, étude de cas, ou aucun CTA ?
+2. **Visuels des cartes Mojoe et plateforme** : captures disponibles ?
+
+## Décisions complémentaires (2026-07-23)
+
+- La plateforme pour agences web est **privée et sans nom public** : intitulé générique
+  conservé, aucun lien externe.
+- Les présentations de projets (phare et cartes) sont **entièrement pilotées par la
+  collection MDX** via les composants partagés `ProjectFeature` / `ProjectCard`.
