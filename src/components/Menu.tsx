@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 
 const MENU_ITEMS = [
     { label: "Accueil", href: "/" },
-    { label: "Projets", href: "/#projets" },
+    { label: "Projets", href: "/projets" },
     { label: "Expertise", href: "/expertise" },
     { label: "Méthode", href: "/methode" },
 ];

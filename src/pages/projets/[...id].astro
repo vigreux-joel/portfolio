@@ -8,7 +8,10 @@ import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 
 export async function getStaticPaths() {
-  const projects = await getCollection("projects", ({ data }) => !data.draft);
+  const projects = await getCollection(
+    "projects",
+    ({ data }) => !data.draft && data.kind === "etude-de-cas",
+  );
   return projects.map((project) => ({
     params: { id: project.id },
     props: { project },

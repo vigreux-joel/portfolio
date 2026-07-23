@@ -1,0 +1,143 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Line } from "@components/Line";
+import ProjectCard from "@components/projects/ProjectCard.astro";
+import ProjectFeature from "@components/projects/ProjectFeature.astro";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { iWeb } from "@udixio/icons-outlined-400/web";
+
+const published = await getCollection("projects", ({ data }) => !data.draft);
+const byOrder = (a: (typeof published)[number], b: (typeof published)[number]) =>
+  a.data.order - b.data.order;
+
+const caseStudies = published.filter(({ data }) => data.kind === "etude-de-cas").sort(byOrder);
+const realisations = published.filter(({ data }) => data.kind === "realisation").sort(byOrder);
+
+const faq = [
+  {
+    question: "Pourquoi certains projets n’ont-ils pas de capture d’écran ?",
+    answer:
+      "Certains projets sont privés ou internes à une entreprise : je ne peux pas en publier les interfaces. Leur fiche décrit alors le besoin, la solution et mon rôle, sans illustration fabriquée pour l’occasion.",
+  },
+  {
+    question: "Quelle différence entre une étude de cas et une réalisation ?",
+    answer:
+      "Une étude de cas détaille un problème, la solution développée et les décisions techniques prises. Une réalisation est un livrable plus court, que vous pouvez simplement consulter en ligne.",
+  },
+  {
+    question: "Puis-je voir le code de vos projets ?",
+    answer:
+      "Le code de ce portfolio et celui d’Udixio UI sont publics sur GitHub. Les projets clients et les produits en cours de développement restent privés, mais je peux en présenter le fonctionnement lors d’un échange.",
+  },
+];
+
+const collectionJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://vigreux-joel.fr/projets#collection",
+  url: "https://vigreux-joel.fr/projets",
+  name: "Projets — Joël Vigreux",
+  description:
+    "Études de cas et réalisations de Joël Vigreux, développeur full-stack spécialisé dans l’écosystème TypeScript.",
+  inLanguage: "fr-FR",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: [...caseStudies, ...realisations].map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: project.data.title,
+      url:
+        project.data.kind === "etude-de-cas"
+          ? `https://vigreux-joel.fr/projets/${project.id}`
+          : project.data.externalUrl,
+    })),
+  },
+});
+---
+
+<Layout
+  showSidebar={false}
+  faq={faq}
+  seo={{
+    title: "Projets — Joël Vigreux, développeur full-stack",
+    description:
+      "Études de cas détaillées et réalisations livrées : bibliothèque de composants, applications métier, sites en production.",
+    openGraph: {
+      basic: {
+        title: "Projets — Joël Vigreux",
+        type: "website",
+        image: "https://vigreux-joel.fr/images/photo.webp",
+        url: "https://vigreux-joel.fr/projets",
+      },
+      optional: {
+        siteName: "Joël Vigreux",
+        locale: "fr_FR",
+        description:
+          "Études de cas détaillées et réalisations livrées par Joël Vigreux, développeur full-stack.",
+      },
+      image: {
+        alt: "Portrait de Joël Vigreux, développeur full-stack",
+      },
+    },
+  }}
+>
+  <script type="application/ld+json" is:inline set:html={collectionJsonLd} />
+
+  <section class="tab-menu theme-cyan bg-surface pt-32 md:pt-42 xl:pt-54">
+    <div class="max-width">
+      <div class="flex">
+        <div><Line client:load isFirst /></div>
+        <div class="padding pt-0 pb-12">
+          <p class="text-title-large text-tertiary">Projets</p>
+          <h1 class="mt-5 text-display-medium xl:text-display-large text-gradient">
+            Des projets réels, que vous pouvez consulter.
+          </h1>
+          <p class="mt-7 text-body-large text-on-surface-variant max-w-3xl">
+            Chaque étude de cas détaille un besoin, la solution développée et mon rôle. Aucun
+            projet présenté ici n’est une maquette de démonstration.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex">
+        <div><Line client:idle icon={iFactCheck} /></div>
+        <div class="padding pt-0 w-full">
+          <h2 class="text-headline-large md:text-display-small">Études de cas</h2>
+        </div>
+      </div>
+
+      <div class="padding-x mt-8 flex flex-col gap-8">
+        {caseStudies.map((project, index) => (
+          <ProjectFeature project={project} reverse={index % 2 === 1} />
+        ))}
+      </div>
+
+      {
+        realisations.length > 0 && (
+          <>
+            <div class="flex mt-16 md:mt-24">
+              <div>
+                <Line client:idle icon={iWeb} />
+              </div>
+              <div class="padding pt-0 w-full">
+                <h2 class="text-headline-large md:text-display-small">Autres réalisations</h2>
+                <p class="mt-4 text-body-large text-on-surface-variant max-w-3xl">
+                  Des livrables plus courts, consultables directement en ligne.
+                </p>
+              </div>
+            </div>
+
+            <div class="padding-x mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {realisations.map((project) => (
+                <ProjectCard project={project} />
+              ))}
+            </div>
+          </>
+        )
+      }
+
+      <div class="pb-20 md:pb-28"></div>
+    </div>
+  </section>
+</Layout>
