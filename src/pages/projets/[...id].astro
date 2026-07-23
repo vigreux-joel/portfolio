@@ -29,11 +29,12 @@ const projectUrl = new URL(`/projets/${project.id}`, Astro.site ?? Astro.url.ori
 
 const faq = [
   {
-    question: `Quel était mon rôle sur ${data.title} ?`,
-    answer: data.solution,
+    question: `Quel était mon rôle sur ${data.title} ?`,
+    // superRefine garantit `solution` pour une étude de cas ; description en repli pour le typage.
+    answer: data.solution ?? data.description,
   },
   {
-    question: "Où consulter le projet ?",
+    question: "Où consulter le projet ?",
     answer: data.externalUrl
       ? `Le projet est accessible à l’adresse ${data.externalUrl}.`
       : "Les éléments consultables sont présentés dans cette étude de cas.",

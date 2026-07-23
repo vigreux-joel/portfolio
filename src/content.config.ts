@@ -66,6 +66,13 @@ const projects = defineCollection({
           message: "Une réalisation ne peut pas occuper d’emplacement sur la page d’accueil.",
         });
       }
+      if (data.kind === "realisation" && !data.externalUrl) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["externalUrl"],
+          message: "Une réalisation doit pointer vers un site consultable (externalUrl).",
+        });
+      }
     }),
 });
 
