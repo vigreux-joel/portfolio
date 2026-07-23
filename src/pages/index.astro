@@ -1,10 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HomeHero from "../components/home/HomeHero.astro";
-import HomeExperienceProof from "../components/home/HomeExperienceProof.astro";
+import HomeSituations from "../components/home/HomeSituations.astro";
 import HomeContextPaths from "../components/home/HomeContextPaths.astro";
 import HomeProjectsPreview from "../components/home/HomeProjectsPreview.astro";
-import HomeExpertisePreview from "../components/home/HomeExpertisePreview.astro";
+import HomePortfolioStory from "../components/home/HomePortfolioStory.astro";
 import HomeMethodPreview from "../components/home/HomeMethodPreview.astro";
 
 const faq = [
@@ -27,6 +27,11 @@ const faq = [
     question: "Pouvez-vous intégrer une équipe déjà constituée ?",
     answer:
       "Oui. Je m’adapte aux outils, aux conventions et au rythme déjà en place. Je partage les décisions importantes et documente ce qui doit l’être pour que ma contribution reste compréhensible par l’équipe.",
+  },
+  {
+    question: "Comment estimez-vous les délais ?",
+    answer:
+      "Après un premier échange, je découpe le besoin en livraisons vérifiables et j’estime chacune d’elles. Vous connaissez le contenu et le délai de la prochaine étape avant qu’elle ne commence, plutôt qu’une estimation globale difficile à vérifier.",
   },
 ];
 
@@ -82,9 +87,9 @@ const profilePageJsonLd = JSON.stringify({
   url: "https://vigreux-joel.fr/",
   name: "Joël Vigreux — Développeur full-stack",
   description:
-    "Expérience, projet, expertise et méthode de Joël Vigreux, développeur full-stack spécialisé dans l’écosystème TypeScript.",
+    "Projets, méthode et modes de collaboration de Joël Vigreux, développeur full-stack spécialisé dans l’écosystème TypeScript.",
   inLanguage: "fr-FR",
-  dateModified: "2026-07-22",
+  dateModified: "2026-07-23",
   mainEntity: { "@id": "https://vigreux-joel.fr/#joel-vigreux" },
 });
 ---
@@ -128,9 +133,9 @@ const profilePageJsonLd = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={profilePageJsonLd} />
 
   <HomeHero />
-  <HomeExperienceProof />
+  <HomeSituations />
   <HomeProjectsPreview />
-  <HomeExpertisePreview />
   <HomeMethodPreview />
+  <HomePortfolioStory />
   <HomeContextPaths />
 </Layout>

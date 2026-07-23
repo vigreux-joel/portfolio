@@ -19,13 +19,24 @@ const projects = defineCollection({
     order: z.number().int().nonnegative(),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
-    cover: z.object({
-      src: z.string(),
-      alt: z.string(),
-      width: z.number().int().positive(),
-      height: z.number().int().positive(),
-      caption: z.string().optional(),
-    }),
+    /**
+     * Emplacement occupé sur la page d’accueil :
+     * "feature" projet mis en avant, "card" grille secondaire, "story" section finale.
+     */
+    home: z.enum(["feature", "card", "story"]).optional(),
+    /** Paragraphes affichés sous le titre dans la présentation mise en avant. */
+    intro: z.array(z.string()).default([]),
+    /** Points de preuve listés sur la présentation mise en avant. */
+    highlights: z.array(z.string()).default([]),
+    cover: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+        width: z.number().int().positive(),
+        height: z.number().int().positive(),
+        caption: z.string().optional(),
+      })
+      .optional(),
     externalUrl: z.string().url().optional(),
     repositoryUrl: z.string().url().optional(),
     technologies: z.array(z.string()).default([]),

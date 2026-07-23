@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import { Line } from "@components/Line";
+import { LinearGradient } from "@components/LinearGradient";
+import ProjectFeature from "@components/projects/ProjectFeature.astro";
+import { iDeployedCode } from "@udixio/icons-outlined-400/deployed_code";
+
+const published = await getCollection("projects", ({ data }) => !data.draft);
+const story = published
+  .filter(({ data }) => data.home === "story")
+  .sort((a, b) => a.data.order - b.data.order)[0];
+
+if (!story) {
+  throw new Error(
+    'La page d’accueil attend un projet avec `home: "story"` dans la collection projects.',
+  );
+}
+---
+
+<section id="ce-portfolio" class="tab-menu theme-green bg-surface">
+  <div class="max-width">
+    <div class="flex pt-8">
+      <div><Line client:idle icon={iDeployedCode} nextTheme="green" /></div>
+      <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
+        <h2 class="text-title-large text-tertiary" data-sidebar-label="Ce portfolio">
+          Ce portfolio
+        </h2>
+        <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+          <p class="text-gradient">La démonstration,</p>
+          <p>c’est la page que vous lisez.</p>
+        </div>
+        <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+          Tout ce qui précède décrit une façon de travailler. Ce site en est l’application
+          directe&nbsp;: vous pouvez juger le résultat pendant que vous le parcourez, et lire son
+          code source pour vérifier le reste.
+        </p>
+      </div>
+    </div>
+
+    <div class="padding-x mt-12 mb-20 md:mb-28">
+      <ProjectFeature project={story} reverse externalLabel="Voir le code sur GitHub" />
+    </div>
+  </div>
+
+  <LinearGradient nextTheme="cyan" />
+</section>

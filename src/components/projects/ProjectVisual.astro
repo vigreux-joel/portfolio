@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  class?: string;
+  loading?: "eager" | "lazy";
+}
+
+const { project, class: className = "", loading = "lazy" } = Astro.props;
+const { cover, technologies, title } = project.data;
+---
+
+{
+  cover ? (
+    <img
+      src={cover.src}
+      alt={cover.alt}
+      width={cover.width}
+      height={cover.height}
+      loading={loading}
+      decoding="async"
+      class:list={["h-full w-full object-cover", className]}
+    />
+  ) : (
+    <div
+      class:list={[
+        "relative flex h-full w-full flex-col justify-end gap-5 overflow-hidden bg-surface-container p-7 md:p-9",
+        className,
+      ]}
+      aria-hidden="true"
+    >
+      <span class="absolute -right-16 -top-20 size-64 rounded-full bg-primary-container opacity-40 blur-2xl" />
+      <span class="absolute -bottom-24 -left-12 size-56 rounded-full bg-tertiary-container opacity-30 blur-2xl" />
+
+      <p class="relative text-headline-medium text-gradient">{title}</p>
+
+      {technologies.length > 0 && (
+        <ul class="relative flex flex-wrap gap-2">
+          {technologies.map((technology) => (
+            <li class="rounded-full border border-outline-variant bg-surface-container-low px-3 py-1 text-label-medium text-on-surface-variant">
+              {technology}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}

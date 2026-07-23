@@ -1,7 +1,7 @@
 # Refonte de la page d'accueil — design
 
 **Date :** 2026-07-23
-**Statut :** validé en brainstorming, en attente de relecture finale
+**Statut :** implémenté (voir « État de l’implémentation » en fin de document)
 **Pages concernées :** `src/pages/index.astro` et `src/components/home/*`
 
 ## Objectif
@@ -205,10 +205,30 @@ transitions cohérentes.
   de la home sont requises pour cette refonte).
 - Témoignages clients (à envisager quand ils existeront).
 
-## Points ouverts
+## État de l’implémentation
 
-1. **Lien du portfolio (section 5)** : dépôt GitHub public, étude de cas, ou aucun CTA ?
-2. **Visuels des cartes Mojoe et plateforme** : captures disponibles ?
+Réalisé le 2026-07-23. Le build passe et les cinq pages projet sont générées.
+
+**Choix faits pendant l’implémentation :**
+
+- **Pilotage par la collection** : un champ `home: "feature" | "card" | "story"` détermine
+  l’emplacement occupé sur la page d’accueil, et `order` l’ordre d’affichage. Aucun
+  identifiant de projet n’est codé en dur dans les composants.
+- **`cover` devient optionnel** dans le schéma. Les projets sans capture (Mojoe,
+  plateforme agences, Netsimpler, ce portfolio) affichent un panneau de repli
+  (`ProjectVisual.astro`) : dégradé thématique, titre du projet et technologies en
+  pastilles. Aucune fausse capture d’écran n’a été fabriquée.
+- **Lien du portfolio (point ouvert n° 1) : résolu.** Le dépôt
+  `github.com/vigreux-joel/portfolio` est public, il sert de CTA secondaire
+  (« Voir le code sur GitHub ») via le champ `repositoryUrl`.
+- **Champs ajoutés au schéma** : `home`, `intro` (paragraphes de la présentation mise en
+  avant) et `highlights` (points de preuve), qui remplacent le contenu auparavant codé en
+  dur dans `HomeProjectsPreview`.
+- **Chaîne des thèmes** : bleu → vert → cyan → bleu → vert → cyan → bleu
+  (les sections finales `CtaSection` et `FaqSection` sont en bleu).
+
+**Point ouvert restant :** visuels réels pour Mojoe et la plateforme agences. Le panneau
+de repli tient la place proprement en attendant des captures.
 
 ## Décisions complémentaires (2026-07-23)
 
