@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
 import ProjectVisual from "./ProjectVisual.astro";
 
 interface Props {
@@ -9,12 +10,17 @@ interface Props {
   linkLabel?: string;
 }
 
-const { project, linkLabel = "Voir le projet" } = Astro.props;
+const { project, linkLabel } = Astro.props;
 const { data } = project;
+
+const isRealisation = data.kind === "realisation";
+const href = isRealisation ? data.externalUrl : `/projets/${project.id}`;
+const label = linkLabel ?? (isRealisation ? "Voir le site" : "Voir le projet");
+const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
 ---
 
 <article class="group flex flex-col overflow-hidden rounded-3xl border border-outline-variant bg-surface-container-low">
-  <div class="aspect-[16/10] overflow-hidden bg-surface-container">
+  <div class:list={["aspect-[16/10] overflow-hidden", data.cover && "bg-surface-container"]}>
     <ProjectVisual project={project} class="transition-transform duration-500 group-hover:scale-105" />
   </div>
 
@@ -23,16 +29,26 @@ const { data } = project;
     <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
     <p class="mt-4 text-body-medium text-on-surface-variant">{data.description}</p>
 
-    <a
-      href={`/projets/${project.id}`}
-      class="mt-6 inline-flex items-center gap-2 self-start text-body-medium text-on-surface transition-colors hover:text-primary focus-visible:text-primary"
-    >
-      <span>{linkLabel}</span>
-      <span class="sr-only"> — {data.title}</span>
-      <Icon
-        icon={iArrowForward}
-        className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1"
-      />
-    </a>
+    {
+      href && (
+        <a
+          href={href}
+          target={isRealisation ? "_blank" : undefined}
+          rel={isRealisation ? "noopener noreferrer" : undefined}
+          class="mt-6 inline-flex items-center gap-2 self-start text-body-medium text-on-surface transition-colors hover:text-primary focus-visible:text-primary"
+        >
+          <span>{label}</span>
+          <span class="sr-only">
+            {" — "}
+            {data.title}
+            {isRealisation && " (nouvel onglet)"}
+          </span>
+          <Icon
+            icon={linkIcon}
+            className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1"
+          />
+        </a>
+      )
+    }
   </div>
 </article>
