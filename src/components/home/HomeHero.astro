@@ -5,18 +5,18 @@ import { LinearGradient } from "@components/LinearGradient";
 import { Image } from "astro:assets";
 import photo from "@assets/images/photo.png";
 import { Button } from "@udixio/ui-react";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iCode } from "@udixio/icons-outlined-400/code";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { iMail } from "@udixio/icons-outlined-400/mail";
 ---
 
-<section id="accueil" class="tab-menu relative overflow-hidden theme-blue">
+<section id="accueil" class="tab-menu relative  ">
   <BackgroundColor
-    speed={7_500}
-    size="max(66vw, 800px)"
-    count={5}
-    client:idle
-    className="absolute opacity-20 size-full top-0 left-0 -z-10"
+      speed={7_500}
+      size="max(66vw, 800px)"
+      count={5}
+      client:idle
+      className="absolute opacity-20 size-full min-h-[75vh] top-0 left-0 -z-10"
   />
 
   <div class="max-width flex justify-between h-full pt-32 md:pt-42 xl:pt-54">
@@ -26,34 +26,30 @@ import { iMail } from "@udixio/icons-outlined-400/mail";
           <Line client:load isFirst />
         </div>
         <div class="padding pt-0 pb-16 relative w-full">
-          <p class="text-title-large text-tertiary mb-5">Joël Vigreux</p>
-          <h1 class="text-display-medium xl:text-display-large relative z-10">
-            Développeur
-            <span class="block text-gradient">full-stack.</span>
+
+          <h1 class="text-display-medium xl:text-display-large ">
+            Joël Vigreux
+            <span class="text-gradient block">Développeur full-stack.</span>
           </h1>
-          <p class="mt-7 text-headline-small md:text-headline-medium max-w-4xl text-on-surface">
-            Des interfaces soignées sur des fondations solides.
-          </p>
+
         </div>
       </div>
 
       <div class="flex mt-8">
         <div>
-          <Line client:load icon={iFactCheck} nextTheme="green" />
+          <Line client:load icon={iFactCheck} />
         </div>
         <div class="padding pt-0 pb-20 md:pb-28 w-full">
           <div class="grid lg:grid-cols-[1fr_280px] gap-12 lg:gap-20 items-start">
             <div>
+              <h2 class="mb-4 text-headline-small text-tertiary">À propos de moi</h2>
               <p class="text-body-large max-w-3xl">
-                Vous avez un produit à créer, une application à faire évoluer ou une équipe à renforcer&nbsp;? Spécialisé dans l’écosystème TypeScript, je développe et fais évoluer des applications web, du front-end aux services qui les font fonctionner.
-              </p>
-              <p class="max-w-3xl mt-6 text-body-large text-on-surface-variant">
-                J’accorde la même attention à la qualité visible de l’interface et à la clarté du code que l’équipe devra maintenir.
+                Vous avez un produit à créer, une application à faire évoluer ou une équipe à renforcer&nbsp;? Spécialisé dans l’écosystème TypeScript, je développe des applications web du front-end aux services back-end, avec autant de soin pour l’interface visible que pour le code que votre équipe devra maintenir.
               </p>
 
               <div class="flex flex-col sm:flex-row sm:flex-wrap gap-4 mt-9">
-                <Button href="#projets" icon={iArrowForward} label="Voir mes projets" />
-                <Button href="/contact" icon={iMail} label="Me contacter" variant="outlined" />
+                <Button href="/contact" icon={iMail} label="Me contacter" />
+                <Button href="/expertise" icon={iCode} label="Voir mon expertise" variant="outlined" />
               </div>
             </div>
 
@@ -75,5 +71,4 @@ import { iMail } from "@udixio/icons-outlined-400/mail";
     </div>
   </div>
 
-  <LinearGradient className="h-1/2" nextTheme="green" />
 </section>
