@@ -4,11 +4,38 @@ import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import { Image } from "astro:assets";
 import photo from "@assets/images/photo.png";
+import astroLogo from "@assets/images/astro-logo.svg?raw";
+import nestLogo from "@assets/images/nest-logo.svg?raw";
+import reactLogo from "@assets/images/react-logo.svg?raw";
+import tailwindLogo from "@assets/images/tailwind-logo.svg?raw";
+import tsLogo from "@assets/images/ts-logo.svg?raw";
 import { Button } from "@udixio/ui-react";
 import { iCode } from "@udixio/icons-outlined-400/code";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { iMail } from "@udixio/icons-outlined-400/mail";
 ---
+
+<style>
+  @keyframes home-float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(2px, -6px) rotate(2deg); }
+  }
+
+  @keyframes home-float-reverse {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-2px, -10px) rotate(-2deg); }
+  }
+
+  .home-float-slow { animation: home-float 6s ease-in-out infinite; }
+  .home-float-medium { animation: home-float-reverse 5s ease-in-out infinite; }
+  .home-float-fast { animation: home-float 4s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-float-slow,
+    .home-float-medium,
+    .home-float-fast { animation: none; }
+  }
+</style>
 
 <section id="accueil" class="tab-menu relative  ">
   <BackgroundColor
@@ -27,10 +54,56 @@ import { iMail } from "@udixio/icons-outlined-400/mail";
         </div>
         <div class="padding pt-0 pb-16 relative w-full">
 
-          <h1 class="text-display-medium xl:text-display-large ">
-            Joël Vigreux
-            <span class="text-gradient block">Développeur full-stack.</span>
-          </h1>
+          <div class="flex items-center gap-7 sm:gap-9">
+            <div class="relative shrink-0 ml-6 sm:ml-0 size-28 sm:size-36 md:size-40">
+              <div
+                class="absolute pointer-events-none -z-10 blur-2xl inset-0 rounded-full"
+                style="background: conic-gradient(from 0deg at 50% 50%, var(--color-primary-container), var(--color-tertiary-container), var(--color-secondary-container), var(--color-primary-container)); opacity: .6;"
+                aria-hidden="true"
+              ></div>
+              <Image
+                src={photo}
+                alt="Portrait de Joël Vigreux"
+                widths={[112, 144, 160]}
+                sizes="(min-width: 768px) 160px, (min-width: 640px) 144px, 112px"
+                format="webp"
+                class="aspect-square size-full object-cover rounded-full ring-4 ring-surface-container-high/60"
+                loading="eager"
+                decoding="async"
+              />
+
+              <div aria-hidden="true" class="absolute opacity-80 size-8 -left-6 -top-4 md:size-10 home-float-slow">
+                <div class="flex items-center justify-center backdrop-blur-md bg-on-surface-container/50 fill-secondary p-1 ring-1 ring-outline rounded-full size-full">
+                  <div class="size-full" set:html={reactLogo}></div>
+                </div>
+              </div>
+              <div aria-hidden="true" class="absolute opacity-80 size-7 -bottom-3 -left-10 md:size-9 home-float-medium [animation-delay:150ms]">
+                <div class="flex items-center justify-center backdrop-blur-md bg-on-surface-container/50 fill-secondary p-1 ring-1 ring-outline rounded-full size-full">
+                  <div class="size-full" set:html={astroLogo}></div>
+                </div>
+              </div>
+              <div aria-hidden="true" class="absolute opacity-80 size-7 -right-8 -top-5 md:size-9 home-float-fast [animation-delay:300ms]">
+                <div class="flex items-center justify-center backdrop-blur-md bg-on-surface-container/50 fill-secondary p-1 ring-1 ring-outline rounded-full size-full overflow-hidden">
+                  <div class="size-full scale-130" set:html={tsLogo}></div>
+                </div>
+              </div>
+              <div aria-hidden="true" class="absolute opacity-80 size-8 -right-10 bottom-2 md:size-10 home-float-medium [animation-delay:500ms]">
+                <div class="flex items-center justify-center backdrop-blur-md bg-on-surface-container/50 fill-secondary p-1 ring-1 ring-outline rounded-full size-full">
+                  <div class="size-full" set:html={tailwindLogo}></div>
+                </div>
+              </div>
+              <div aria-hidden="true" class="absolute opacity-80 size-8 -left-14 top-12 hidden md:block home-float-slow [animation-delay:700ms]">
+                <div class="flex items-center justify-center backdrop-blur-md bg-on-surface-container/50 fill-secondary p-1 ring-1 ring-outline rounded-full size-full">
+                  <div class="size-full" set:html={nestLogo}></div>
+                </div>
+              </div>
+            </div>
+
+            <h1 class="text-display-medium xl:text-display-large">
+              Joël Vigreux
+              <span class="text-gradient block">Développeur full-stack.</span>
+            </h1>
+          </div>
 
         </div>
       </div>
@@ -40,7 +113,7 @@ import { iMail } from "@udixio/icons-outlined-400/mail";
           <Line client:load icon={iFactCheck} />
         </div>
         <div class="padding pt-0 pb-20 md:pb-28 w-full">
-          <div class="grid lg:grid-cols-[1fr_280px] gap-12 lg:gap-20 items-start">
+          <div>
             <div>
               <h2 class="mb-4 text-headline-small text-tertiary">À propos de moi</h2>
               <p class="text-body-large max-w-3xl">
@@ -52,19 +125,6 @@ import { iMail } from "@udixio/icons-outlined-400/mail";
                 <Button href="/expertise" icon={iCode} label="Mon expertise" variant="outlined" />
               </div>
             </div>
-
-            <figure>
-              <Image
-                src={photo}
-                alt="Portrait de Joël Vigreux"
-                widths={[240, 360, 560]}
-                sizes="(min-width: 1024px) 280px, 60vw"
-                format="webp"
-                class="w-full max-w-70 aspect-[4/5] object-cover rounded-3xl"
-                loading="eager"
-                decoding="async"
-              />
-            </figure>
           </div>
         </div>
       </div>

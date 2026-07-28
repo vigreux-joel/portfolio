@@ -6,12 +6,22 @@ export const sourceColor = Hct.from(280, 45, 75)
 
 export const subThemes = {
     blue: hexFromArgb(sourceColor.toInt()),
-    green: hexFromArgb(Hct.from(161, sourceColor.hue, sourceColor.tone).toInt()),
+    green: hexFromArgb(Hct.from(155, sourceColor.hue, sourceColor.tone).toInt()),
     cyan: hexFromArgb(Hct.from(205, sourceColor.hue, sourceColor.tone).toInt()),
 }
 
 export default defineConfig({
     sourceColor,
+    palettes: {
+        secondary: ({ sourceColor }) => ({
+            hue: sourceColor.hue + 20,
+            chroma: sourceColor.chroma * 0.75,
+        }),
+        tertiary: ({ sourceColor }) => ({
+            hue: sourceColor.hue + 55,
+            chroma: sourceColor.chroma,
+        }),
+    },
     fontStyles: {
         display: {
             large: {
