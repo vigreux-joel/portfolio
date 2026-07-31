@@ -1,8 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
+import { Card } from "@components/Card";
+import IconButtonIndicator from "@components/IconButtonIndicator.astro";
 import ProjectVisual from "./ProjectVisual.astro";
 
 interface Props {
@@ -14,41 +15,34 @@ const { project, linkLabel } = Astro.props;
 const { data } = project;
 
 const isRealisation = data.kind === "realisation";
-const href = isRealisation ? data.externalUrl : `/projets/${project.id}`;
+const href = isRealisation ? data.externalUrl! : `/projets/${project.id}`;
 const label = linkLabel ?? (isRealisation ? "Voir le site" : "Voir le projet");
 const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
 ---
 
-<article class="group flex flex-col overflow-hidden rounded-3xl border border-outline-variant bg-surface-container-low">
-  <div class:list={["aspect-[16/10] overflow-hidden", data.cover && "bg-surface-container"]}>
-    <ProjectVisual project={project} class="transition-transform duration-500 group-hover:scale-105" />
-  </div>
+<article>
+  <Card client:visible interactive variant="filled" className="flex h-full flex-col">
+    <a
+      href={href}
+      target={isRealisation ? "_blank" : undefined}
+      rel={isRealisation ? "noopener noreferrer" : undefined}
+      aria-label={`${label} : ${data.title}`}
+      class="relative z-10 flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
+    >
+      <div class:list={["relative aspect-[16/10] overflow-hidden", data.cover && "bg-surface-container"]}>
+        <ProjectVisual project={project} class="transition-transform duration-500 group-hover:scale-105" />
+        <IconButtonIndicator
+          icon={linkIcon}
+          variant="outlined"
+          class="absolute top-4 right-4 z-10 bg-surface-container-low/90 opacity-0 shadow-1 backdrop-blur transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 max-md:opacity-100"
+        />
+      </div>
 
-  <div class="flex flex-1 flex-col p-7">
-    <p class="text-label-large text-tertiary">{data.eyebrow}</p>
-    <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
-    <p class="mt-4 text-body-medium text-on-surface-variant">{data.description}</p>
-
-    {
-      href && (
-        <a
-          href={href}
-          target={isRealisation ? "_blank" : undefined}
-          rel={isRealisation ? "noopener noreferrer" : undefined}
-          class="mt-6 inline-flex items-center gap-2 self-start text-body-medium text-on-surface transition-colors hover:text-primary focus-visible:text-primary"
-        >
-          <span>{label}</span>
-          <span class="sr-only">
-            {" — "}
-            {data.title}
-            {isRealisation && " (nouvel onglet)"}
-          </span>
-          <Icon
-            icon={linkIcon}
-            className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1"
-          />
-        </a>
-      )
-    }
-  </div>
+      <div class="flex flex-1 flex-col p-7">
+        <p class="text-label-large text-tertiary">{data.eyebrow}</p>
+        <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
+        <p class="mt-4 text-body-medium text-on-surface-variant">{data.description}</p>
+      </div>
+    </a>
+  </Card>
 </article>

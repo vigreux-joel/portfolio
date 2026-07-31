@@ -4,7 +4,7 @@ import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import ProjectCard from "@components/projects/ProjectCard.astro";
 import ProjectFeature from "@components/projects/ProjectFeature.astro";
-import { Icon } from "@udixio/ui-react";
+import { Button, Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 
@@ -25,7 +25,7 @@ if (!feature) {
 <section id="projets" class="tab-menu theme-cyan ">
   <div class="max-width">
     <div class="flex pt-8">
-      <div><Line client:idle icon={iFactCheck} nextTheme="cyan" /></div>
+      <div class="theme-blue"><Line client:idle icon={iFactCheck} nextTheme="cyan" isLast /></div>
       <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
         <h2 class="text-title-large text-tertiary" data-sidebar-label="Projets">Projets</h2>
         <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
@@ -39,7 +39,7 @@ if (!feature) {
       </div>
     </div>
 
-    <div class="padding-x mt-12 mb-20 md:mb-28">
+    <div class="padding-x  mb-20 md:mb-28">
       <ProjectFeature project={feature} />
 
       {
@@ -52,6 +52,9 @@ if (!feature) {
         )
       }
 
+      <Button variant="tonal" href="/projets">
+        Voir tous les projets
+      </Button>
       <a
         href="/projets"
         class="group mt-8 inline-flex items-center gap-2 text-body-large text-on-surface transition-colors hover:text-primary"
