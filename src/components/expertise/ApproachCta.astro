@@ -1,0 +1,29 @@
+---
+import { Card } from "@components/Card";
+import { Button, Icon } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+---
+
+<section class="tab-menu theme-blue bg-surface pb-20 md:pb-28">
+  <div class="max-width padding-x">
+    <Card variant="outlined">
+      <div class="grid gap-8 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:p-9">
+        <span class="grid size-12 place-items-center rounded-2xl bg-primary text-on-primary">
+          <Icon icon={iFactCheck} className="size-6" />
+        </span>
+        <div>
+          <p class="text-label-large uppercase tracking-wide text-secondary">IA &amp; ingénierie</p>
+          <h2 class="mt-2 text-headline-medium text-on-surface">
+            La technologie accélère l’exécution. Le jugement technique garde le cap.
+          </h2>
+          <p class="mt-4 max-w-3xl text-body-large text-on-surface-variant">
+            Découvrez comment j’intègre l’IA au développement sans lui déléguer les
+            décisions structurantes ni la responsabilité de ce qui est livré.
+          </p>
+        </div>
+        <Button href="/approche" icon={iArrowForward} iconPosition="right" label="Découvrir mon approche" variant="tonal" />
+      </div>
+    </Card>
+  </div>
+</section>
