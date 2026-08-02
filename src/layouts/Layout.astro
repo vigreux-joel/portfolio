@@ -13,6 +13,7 @@ import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
+import {ThemeSectionObserver} from "../components/ThemeSectionObserver";
 import {ExpertiseSidebarReact} from "../components/expertise/ExpertiseSidebarReact";
 import Font from "astro/components/Font.astro";
 import CtaSection from "@components/CtaSection.astro";
@@ -167,6 +168,7 @@ const seoDefault: SEOProps = {
 
 </div>
 <ThemeProvider transition:name="theme-provider" client:idle/>
+<ThemeSectionObserver client:load />
 
 <Footer faq={faq} showCta={showCta}/>
 <script>

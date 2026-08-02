@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Card, Carousel, CarouselItem, Icon, IconButton } from "@udixio/ui-react";
-import { iArrowBack } from "@udixio/icons-outlined-400/arrow_back";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import {useState} from "react";
+import {Card, Carousel, CarouselItem, Icon, IconButton} from "@udixio/ui-react";
+import {iArrowBack} from "@udixio/icons-outlined-400/arrow_back";
+import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
 
 export interface ProjectSlide {
   id: string;
@@ -60,7 +60,7 @@ export function ProjectsCarousel({ projects }: Props) {
                 />
 
                 <div className="flex min-h-0 flex-1 flex-col p-6">
-                  <p className="line-clamp-1 text-label-large text-tertiary">{project.eyebrow}</p>
+                  <p className="line-clamp-1 text-secondary">{project.eyebrow}</p>
                   <h3 className="mt-3 text-headline-medium text-on-surface">{project.title}</h3>
                   <p className="mt-2 line-clamp-2 text-body-large text-on-surface-variant">{project.headline}</p>
 

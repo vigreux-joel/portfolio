@@ -14,8 +14,8 @@ export default defineConfig({
     sourceColor,
     palettes: {
         secondary: ({ sourceColor }) => ({
-            hue: sourceColor.hue + 20,
-            chroma: sourceColor.chroma * 0.75,
+            hue: sourceColor.hue + 5,
+            chroma: sourceColor.chroma * 2/3,
         }),
         tertiary: ({ sourceColor }) => ({
             hue: sourceColor.hue + 55,

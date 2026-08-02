@@ -7,11 +7,11 @@ import {sourceColor, subThemes} from "../../theme.config.ts";
 import {Hct} from "@udixio/theme";
 import {TailwindPlugin} from "@udixio/tailwind";
 
-export const updateTheme = (colorName?: keyof typeof subThemes) => {
-    if (colorName === undefined) return;
+export const updateTheme = (colorName?: string) => {
+    if (colorName === undefined || !(colorName in subThemes)) return;
     
     
-    const hex: string = subThemes[colorName];
+    const hex: string = subThemes[colorName as keyof typeof subThemes];
 
     if (hex === null) {
         themeStore.set({
@@ -32,6 +32,15 @@ export const updateTheme = (colorName?: keyof typeof subThemes) => {
         ...themeStore.get(),
         sourceColor: Hct.from(newHct.hue, sourceColor.chroma, sourceColor.tone),
     });
+    currentSourceHexStore.set(hex);
+};
+
+export const resetTheme = () => {
+    themeStore.set({
+        ...themeStore.get(),
+        sourceColor,
+    });
+    currentSourceHexStore.set(undefined);
 };
 
 export const ThemeProvider = () => {

@@ -27,7 +27,7 @@ if (!feature) {
     <div class="flex pt-8">
       <div class="theme-blue"><Line client:idle icon={iFactCheck} nextTheme="cyan" isLast /></div>
       <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-        <h2 class="text-title-large text-tertiary" data-sidebar-label="Projets">Projets</h2>
+        <h2 class="sub-title" data-sidebar-label="Projets">Projets</h2>
         <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
           <p class="text-gradient">Des projets réels,</p>
           <p>que vous pouvez consulter.</p>
@@ -52,19 +52,9 @@ if (!feature) {
         )
       }
 
-      <Button variant="tonal" href="/projets">
+      <Button className={"mt-8"} iconPosition="right" icon={iArrowForward} variant="tonal" href="/projets">
         Voir tous les projets
       </Button>
-      <a
-        href="/projets"
-        class="group mt-8 inline-flex items-center gap-2 text-body-large text-on-surface transition-colors hover:text-primary"
-      >
-        <span>Voir tous les projets</span>
-        <Icon
-          icon={iArrowForward}
-          className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1"
-        />
-      </a>
     </div>
   </div>
 

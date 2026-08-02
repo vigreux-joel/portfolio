@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import ProjectTechnologies from "./ProjectTechnologies.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const { project, class: className = "", loading = "lazy" } = Astro.props;
-const { cover, technologies, title } = project.data;
+const { cover, technologies } = project.data;
 ---
 
 {
@@ -25,7 +26,7 @@ const { cover, technologies, title } = project.data;
   ) : (
     <div
       class:list={[
-        "relative flex h-full w-full flex-col justify-end gap-5 overflow-hidden p-7 md:p-9",
+        "relative flex h-full w-full flex-col justify-end overflow-hidden p-7 md:p-9",
         className,
       ]}
       aria-hidden="true"
@@ -33,17 +34,7 @@ const { cover, technologies, title } = project.data;
       <span class="absolute -right-16 -top-20 size-64 rounded-full bg-primary-container opacity-40 blur-2xl" />
       <span class="absolute -bottom-24 -left-12 size-56 rounded-full bg-tertiary-container opacity-30 blur-2xl" />
 
-      <p class="relative text-headline-medium text-gradient">{title}</p>
-
-      {technologies.length > 0 && (
-        <ul class="relative flex flex-wrap gap-2">
-          {technologies.map((technology) => (
-            <li class="rounded-full border border-outline-variant px-3 py-1 text-label-medium text-on-surface-variant">
-              {technology}
-            </li>
-          ))}
-        </ul>
-      )}
+      <ProjectTechnologies technologies={technologies} class="relative" />
     </div>
   )
 }

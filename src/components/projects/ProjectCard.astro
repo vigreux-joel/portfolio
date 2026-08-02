@@ -3,8 +3,10 @@ import type { CollectionEntry } from "astro:content";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
 import { Card } from "@components/Card";
-import IconButtonIndicator from "@components/IconButtonIndicator.astro";
+
+import ProjectTechnologies from "./ProjectTechnologies.astro";
 import ProjectVisual from "./ProjectVisual.astro";
+import { IconButton } from "@udixio/ui-react";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -27,21 +29,40 @@ const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
       target={isRealisation ? "_blank" : undefined}
       rel={isRealisation ? "noopener noreferrer" : undefined}
       aria-label={`${label} : ${data.title}`}
-      class="relative z-10 flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
+      class="group/card-link relative z-10 flex h-full flex-col"
     >
-      <div class:list={["relative aspect-[16/10] overflow-hidden", data.cover && "bg-surface-container"]}>
-        <ProjectVisual project={project} class="transition-transform duration-500 group-hover:scale-105" />
-        <IconButtonIndicator
-          icon={linkIcon}
-          variant="outlined"
-          class="absolute top-4 right-4 z-10 bg-surface-container-low/90 opacity-0 shadow-1 backdrop-blur transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 max-md:opacity-100"
-        />
-      </div>
+      {
+        data.cover && (
+          <div class="relative aspect-16/10 overflow-hidden bg-surface-container">
+            <ProjectVisual project={project} class="transition-transform duration-500 group-hover:scale-105" />
+          </div>
+        )
+      }
+
+      <IconButton
+        icon={linkIcon}
+        variant="outlined"
+        className="absolute top-4 right-4 z-10"
+      >
+        {`${label} : ${data.title}`}
+      </IconButton>
 
       <div class="flex flex-1 flex-col p-7">
-        <p class="text-label-large text-tertiary">{data.eyebrow}</p>
-        <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
+        <div class:list={[!data.cover && "pr-16"]}>
+          <p class="text-title-medium-large text-secondary">{data.eyebrow}</p>
+          <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
+        </div>
         <p class="mt-4 text-body-medium text-on-surface-variant">{data.description}</p>
+
+        {
+          !data.cover && (
+            <ProjectTechnologies
+              technologies={data.technologies}
+              label={`Technologies utilisées pour ${data.title}`}
+              class="mt-auto pt-8"
+            />
+          )
+        }
       </div>
     </a>
   </Card>
