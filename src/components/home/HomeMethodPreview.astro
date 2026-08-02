@@ -2,79 +2,69 @@
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import { Card } from "../Card";
-import { Divider, Icon } from "@udixio/ui-react";
+import { Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { iArticle } from "@udixio/icons-outlined-400/article";
-import { iCode } from "@udixio/icons-outlined-400/code";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { iRocketLaunch } from "@udixio/icons-outlined-400/rocket_launch";
 import { iSearch } from "@udixio/icons-outlined-400/search";
+import { iVerifiedUser } from "@udixio/icons-outlined-400/verified_user";
 
-const steps = [
+const principles = [
   {
     number: "01",
-    title: "Clarifier",
-    description: "Reformuler le besoin, identifier les contraintes et convenir précisément de ce qui doit être livré.",
+    title: "Cadrage humain",
+    description: "Le métier, les contraintes et les décisions structurantes sont clarifiés avant de produire du code.",
     icon: iSearch,
   },
   {
     number: "02",
-    title: "Découper",
-    description: "Organiser le travail en éléments compréhensibles et vérifiables, avec des priorités explicites.",
-    icon: iArticle,
+    title: "Exécution assistée",
+    description: "L’IA accélère les tâches suffisamment définies, répétitives ou déjà bien documentées.",
+    icon: iRocketLaunch,
   },
   {
     number: "03",
-    title: "Construire et vérifier",
-    description: "Développer progressivement, relire le code et contrôler les parcours importants avant la livraison.",
-    icon: iCode,
-  },
-  {
-    number: "04",
-    title: "Transmettre",
-    description: "Documenter les décisions utiles pour que la maintenance et les prochaines évolutions restent accessibles.",
-    icon: iFactCheck,
+    title: "Contrôle technique",
+    description: "Chaque contribution est comprise, relue et vérifiée avant d’entrer réellement dans le produit.",
+    icon: iVerifiedUser,
   },
 ];
 ---
 
-<section id="methode-preview" class="tab-menu theme-blue ">
+<section id="approche-preview" class="tab-menu theme-blue ">
   <div class="max-width">
     <div class="flex pt-8">
       <div><Line client:idle icon={iFactCheck} /></div>
       <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-        <h2 class="sub-title" data-sidebar-label="Méthode">Méthode</h2>
+        <h2 class="sub-title" data-sidebar-label="Approche">Mon approche</h2>
         <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
-          <p class="text-gradient">Un déroulement lisible,</p>
-          <p>du premier échange à la livraison.</p>
+          <p class="text-gradient">L’IA accélère l’exécution.</p>
+          <p>L’ingénierie garde le contrôle.</p>
         </div>
         <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
-          Vous savez à tout moment où en est le projet. Il avance par étapes courtes, les décisions importantes sont expliquées et chaque livraison peut être relue et testée.
+          Je m’appuie sur l’IA lorsqu’elle apporte un gain réel, sans lui déléguer la compréhension du métier, l’architecture ou la responsabilité de ce qui est livré.
         </p>
       </div>
     </div>
 
-    <Card variant="outlined" className="mt-12 md:flex" role="list">
-      {steps.map((step, index) => (
-        <>
-          {index > 0 && <Divider orientation="vertical" />}
-          <article class="flex flex-1 flex-col p-7 md:p-8" role="listitem">
+    <Card variant="outlined" className="mt-12" role="list">
+      <div class="grid md:grid-cols-3">
+        {principles.map((principle) => (
+          <article class="flex flex-col border-b border-outline-variant p-7 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 md:p-8" role="listitem">
             <div class="flex items-center justify-between gap-4">
-              <span class="text-label-large text-secondary">{step.number}</span>
-              <Icon icon={step.icon} className="size-6 text-primary" />
+              <span class="text-label-large text-secondary">{principle.number}</span>
+              <Icon icon={principle.icon} className="size-6 text-primary" />
             </div>
-            <h3 class="mt-10 text-headline-small text-on-surface">{step.title}</h3>
-            <p class="mt-4 text-body-large text-on-surface-variant">{step.description}</p>
+            <h3 class="mt-8 text-headline-small text-on-surface">{principle.title}</h3>
+            <p class="mt-4 text-body-large text-on-surface-variant">{principle.description}</p>
           </article>
-        </>
-      ))}
+        ))}
+      </div>
     </Card>
 
     <div class="padding-x mt-8 mb-20 md:mb-28">
-      <p class="max-w-4xl border-l-2 border-primary pl-5 text-body-large text-on-surface-variant">
-        J’utilise des outils d’IA lorsqu’ils accélèrent utilement la recherche ou la production. Leurs propositions restent relues, comprises et vérifiées avant d’être intégrées.
-      </p>
-      <a href="/methode" class="group mt-8 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
-        <span>Découvrir ma méthode</span>
+      <a href="/approche" class="group mt-8 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+        <span>Découvrir mon approche de l’IA</span>
         <Icon icon={iArrowForward} className="size-4 text-on-surface-variant transition-transform group-hover:translate-x-1" />
       </a>
     </div>

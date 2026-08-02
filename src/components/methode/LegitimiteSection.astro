@@ -4,114 +4,125 @@ import { LinearGradient } from "@components/LinearGradient";
 import { Card } from "@components/Card";
 import { Icon } from "@udixio/ui-react";
 
-import { iIdCard } from "@udixio/icons-outlined-400/id_card";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFoundation } from "@udixio/icons-outlined-400/foundation";
-import { iVisibility } from "@udixio/icons-outlined-400/visibility";
 import { iPsychology } from "@udixio/icons-outlined-400/psychology";
 import { iRoute } from "@udixio/icons-outlined-400/route";
+import { iVisibility } from "@udixio/icons-outlined-400/visibility";
 ---
 
-<div class="theme-blue bg-surface">
+<div id="savoir-faire" class="theme-blue bg-surface">
   <section class="max-width">
     <div class="flex pt-8">
       <div>
-        <Line client:idle icon={iIdCard} nextTheme="green" />
+        <Line client:idle icon={iRoute} nextTheme="blue" />
       </div>
       <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
-        <h2 class="sub-title" data-sidebar-label="Légitimité">La légitimité</h2>
+        <h2 class="sub-title" data-sidebar-label="Savoir-faire">Le savoir-faire</h2>
         <div class="mt-4 text-headline-large md:text-display-medium max-w-prose">
-          <h3 class="text-gradient">On ne pilote pas une machine qu'on ne comprend pas</h3>
+          <h3 class="text-gradient">L’expérience donne du recul sur ce que le code ne montre pas</h3>
         </div>
         <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
-          L'IA génère du code à partir de patterns. Elle ne sait pas pourquoi une
-          décision est bonne dans votre contexte, ni pourquoi une autre prépare un
-          problème plus tard. Cette lecture-là vient de l'expérience.
+          Les projets réels confrontent les décisions techniques à la durée, aux usages
+          et aux contraintes qui apparaissent en production. C’est cette expérience qui
+          permet de savoir quoi accélérer, quoi vérifier et où ne pas prendre de raccourci.
         </p>
       </div>
     </div>
 
     <div class="padding-x mt-12 mb-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-min">
       <Card client:visible variant="filled" className="group md:col-span-2">
-        <div class="p-6 md:p-8 h-full flex flex-col">
+        <article class="p-6 md:p-8 h-full flex flex-col">
           <div class="flex items-center gap-3 mb-5">
             <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
               <Icon icon={iFoundation} className="h-6 w-6" />
             </span>
             <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Fondations</span>
           </div>
-          <h4 class="text-headline-medium mb-3">Je viens du <span class="text-gradient">back-end</span></h4>
+          <h4 class="text-headline-medium mb-3">Comprendre ce qui fera tenir le produit</h4>
           <div class="space-y-4 text-body-large text-on-surface-variant max-w-prose">
             <p>
-              C'est le côté des fondations : la donnée, la structure, l'architecture,
-              les effets de bord. Quand une erreur de conception arrive là, elle finit
-              presque toujours par coûter cher.
+              Mon expérience du back-end m’a appris à regarder au-delà de l’écran final :
+              la donnée, l’architecture, les effets de bord, la sécurité et les conditions
+              dans lesquelles le système devra évoluer.
             </p>
             <p>
-              Cette origine me donne une manière de lire un produit dans son ensemble :
-              pas seulement l'écran final, mais ce qui permettra au système d'évoluer
-              proprement derrière.
+              Ce sont souvent des choix peu visibles au départ, mais déterminants lorsque
+              le produit grandit ou qu’une équipe doit le reprendre.
             </p>
           </div>
-        </div>
+          <a href="/expertise#back-end" class="group/link mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+            <span>Approfondir mon expertise back-end</span>
+            <Icon icon={iArrowForward} className="size-4 transition-transform group-hover/link:translate-x-1" />
+          </a>
+        </article>
       </Card>
 
       <Card client:visible variant="filled" className="group">
-        <div class="p-6 md:p-8 h-full flex flex-col">
+        <article class="p-6 md:p-8 h-full flex flex-col">
           <div class="flex items-center gap-3 mb-5">
             <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
               <Icon icon={iRoute} className="h-6 w-6" />
             </span>
           </div>
-          <h4 class="text-headline-small mb-4">De bout en bout</h4>
+          <h4 class="text-headline-small mb-4">Raisonner de bout en bout</h4>
           <p class="text-body-medium text-on-surface-variant">
-            Concevoir un projet complet, des fondations jusqu'à l'expérience utilisateur,
-            demande de faire tenir ensemble des contraintes qui sont souvent traitées séparément.
+            Concevoir des produits complets apprend à faire tenir ensemble le besoin métier,
+            l’expérience utilisateur, les interfaces et les services qui les alimentent.
           </p>
-        </div>
+          <a href="/expertise" class="group/link mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+            <span>Voir l’ensemble de mon expertise</span>
+            <Icon icon={iArrowForward} className="size-4 transition-transform group-hover/link:translate-x-1" />
+          </a>
+        </article>
       </Card>
 
       <Card client:visible variant="filled" className="group">
-        <div class="p-6 md:p-8 h-full flex flex-col">
+        <article class="p-6 md:p-8 h-full flex flex-col">
           <div class="flex items-center gap-3 mb-5">
             <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
               <Icon icon={iVisibility} className="h-6 w-6" />
             </span>
           </div>
-          <h4 class="text-headline-small mb-4">Relire vraiment</h4>
+          <h4 class="text-headline-small mb-4">Apprendre des contraintes réelles</h4>
           <p class="text-body-medium text-on-surface-variant">
-            Un code généré peut avoir l'air correct tout en masquant une hypothèse fragile,
-            un raccourci dangereux ou une complexité déplacée au mauvais endroit.
+            Bases existantes, migrations progressives, besoins métier et maintenance :
+            chaque projet apporte des contraintes différentes et oblige à arbitrer autrement.
           </p>
-        </div>
+          <a href="/projets" class="group/link mt-7 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+            <span>Parcourir mes projets</span>
+            <Icon icon={iArrowForward} className="size-4 transition-transform group-hover/link:translate-x-1" />
+          </a>
+        </article>
       </Card>
 
       <Card client:visible variant="filled" className="group md:col-span-2">
-        <div class="p-6 md:p-8 h-full flex flex-col justify-center">
+        <article class="p-6 md:p-8 h-full flex flex-col justify-center">
           <div class="flex items-center gap-3 mb-5">
             <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
               <Icon icon={iPsychology} className="h-6 w-6" />
             </span>
-            <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Usage quotidien</span>
+            <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Discernement</span>
           </div>
+          <h4 class="text-headline-small mb-4">Relire avec le contexte en tête</h4>
           <div class="space-y-4 text-body-large text-on-surface-variant max-w-prose">
             <p>
-              Mon rapport à l'IA n'est pas idéologique. Je m'en sers tous les jours,
-              parce qu'elle fait gagner du temps quand elle est bien cadrée.
+              Un code généré peut être valide en apparence tout en reposant sur une hypothèse
+              fragile ou en déplaçant la complexité au mauvais endroit.
             </p>
             <p>
-              Mais je ne confonds pas vitesse et validation. Le résultat doit passer
-              sous un vrai seuil d'exigence avant d'entrer dans votre produit.
+              L’expérience permet de reconnaître ces signaux, de questionner la proposition
+              et de ne conserver que ce que l’on est capable de comprendre et d’assumer.
             </p>
           </div>
-        </div>
+        </article>
       </Card>
     </div>
 
     <div class="padding-x pb-16">
       <p class="text-body-large max-w-prose mx-auto text-center text-on-surface">
-        C'est précisément le risque pour votre projet : un code qui a l'air
-        correct, et qui ne l'est pas. C'est pour ça que
-        <span class="text-gradient font-medium">chaque ligne est lue, testée, corrigée.</span>
+        Le savoir-faire ne sert donc pas à produire davantage de code. Il sert à prendre
+        de meilleures décisions et à conserver un produit compréhensible dans la durée.
       </p>
     </div>
 
@@ -122,5 +133,5 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
     </div>
   </section>
 
-  <LinearGradient nextTheme="green" />
+  <LinearGradient nextTheme="blue" />
 </div>

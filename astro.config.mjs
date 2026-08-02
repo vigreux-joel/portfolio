@@ -13,6 +13,9 @@ import {vitePlugin} from "@udixio/theme";
 // https://astro.build/config
 export default defineConfig({
     site: "https://vigreux-joel.fr/",
+    redirects: {
+        "/methode": "/approche",
+    },
     compressHTML: true,
     experimental: {},
     output: 'static',

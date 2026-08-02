@@ -1,10 +1,41 @@
 ---
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
-import { Button } from "@udixio/ui-react";
+import { Button, Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iArticle } from "@udixio/icons-outlined-400/article";
+import { iCode } from "@udixio/icons-outlined-400/code";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 import { iRoute } from "@udixio/icons-outlined-400/route";
+import { iSearch } from "@udixio/icons-outlined-400/search";
+
+const steps = [
+  {
+    number: "01",
+    title: "Clarifier",
+    description: "Reformuler le besoin et convenir précisément de ce qui doit être livré.",
+    icon: iSearch,
+  },
+  {
+    number: "02",
+    title: "Découper",
+    description: "Organiser le travail en étapes compréhensibles, vérifiables et prioritaires.",
+    icon: iArticle,
+  },
+  {
+    number: "03",
+    title: "Construire et vérifier",
+    description: "Développer progressivement, relire le code et tester les parcours importants.",
+    icon: iCode,
+  },
+  {
+    number: "04",
+    title: "Transmettre",
+    description: "Documenter les décisions utiles pour faciliter la maintenance et les évolutions.",
+    icon: iFactCheck,
+  },
+];
 ---
 
 <section id="travailler-ensemble" class="tab-menu  ">
@@ -56,6 +87,31 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
           </div>
         </div>
       </article>
+    </div>
+
+    <div class="padding-x mt-16 md:mt-20">
+      <div class="max-w-3xl">
+        <p class="sub-title text-secondary">Déroulement</p>
+        <h3 class="mt-3 text-headline-medium md:text-headline-large">
+          Un cadre clair pour avancer sans tunnel opaque.
+        </h3>
+        <p class="mt-5 text-body-large text-on-surface-variant">
+          Vous savez où en est le travail, ce qui a été décidé et ce qui sera vérifié avant la prochaine livraison.
+        </p>
+      </div>
+
+      <ol class="mt-10 grid gap-px overflow-hidden rounded-3xl bg-outline-variant/50 sm:grid-cols-2 xl:grid-cols-4">
+        {steps.map((step) => (
+          <li class="bg-surface-container-low p-6 md:p-7">
+            <div class="flex items-center justify-between gap-4">
+              <span class="text-label-large text-secondary">{step.number}</span>
+              <Icon icon={step.icon} className="size-5 text-primary" />
+            </div>
+            <h4 class="mt-8 text-title-large text-on-surface">{step.title}</h4>
+            <p class="mt-3 text-body-medium text-on-surface-variant">{step.description}</p>
+          </li>
+        ))}
+      </ol>
     </div>
 
     <div class="relative h-20 md:h-28 hidden md:block">
