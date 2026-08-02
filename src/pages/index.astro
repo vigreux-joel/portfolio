@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HomeHero from "../components/home/HomeHero.astro";
+import HomeExpertisePreview from "../components/home/HomeExpertisePreview.astro";
 import HomeContextPaths from "../components/home/HomeContextPaths.astro";
 import HomeProjectsPreview from "../components/home/HomeProjectsPreview.astro";
-import HomeMethodPreview from "../components/home/HomeMethodPreview.astro";
 
 const faq = [
   {
@@ -131,7 +131,7 @@ const profilePageJsonLd = JSON.stringify({
   <script type="application/ld+json" is:inline set:html={profilePageJsonLd} />
 
   <HomeHero />
-  <HomeContextPaths />
+  <HomeExpertisePreview />
   <HomeProjectsPreview />
-  <HomeMethodPreview />
+  <HomeContextPaths />
 </Layout>
