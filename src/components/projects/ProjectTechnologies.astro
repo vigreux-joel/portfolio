@@ -1,0 +1,27 @@
+---
+interface Props {
+  technologies: readonly string[];
+  label?: string;
+  class?: string;
+}
+
+const { technologies, label, class: className } = Astro.props;
+---
+
+{
+  technologies.length > 0 && (
+    <ul
+      class:list={["flex flex-row-reverse flex-wrap-reverse justify-end gap-2", className]}
+      aria-label={label}
+    >
+      {technologies.map((technology, index) => (
+        <li
+          class="rounded-full border border-outline-variant px-3 py-1 text-label-medium text-on-surface-variant"
+          style={`order: ${technologies.length - index}`}
+        >
+          {technology}
+        </li>
+      ))}
+    </ul>
+  )
+}
