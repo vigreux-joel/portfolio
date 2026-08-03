@@ -150,6 +150,7 @@ export const Line = ({
     toPx,
     isFirst,
     isLast,
+    className,
 }: {
     nextTheme?: string;
     icon?: Icon;
@@ -166,6 +167,7 @@ export const Line = ({
     toPx?: number;
     isFirst?: boolean;
     isLast?: boolean;
+    className?: string;
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
@@ -433,7 +435,11 @@ export const Line = ({
         return (
             <div
                 ref={ref}
-                className={`absolute inset-0 not-detect-theme theme-${nextTheme}`}
+                className={classNames(
+                    "absolute inset-0 not-detect-theme",
+                    { [`theme-${nextTheme}`]: !!nextTheme },
+                    className,
+                )}
             >
                 <svg className="w-full h-full overflow-visible">
                     {svgContent}
@@ -445,7 +451,11 @@ export const Line = ({
     return (
         <div
             ref={ref}
-            className={"h-full ml-4 md:ml-12 flex flex-col items-center " + (!hasNode ? "" : "gap-8")}
+            className={classNames(
+                "h-full ml-4 md:ml-12 flex flex-col items-center",
+                { "gap-8": hasNode },
+                className,
+            )}
         >
             <style>{`
                 @keyframes wait-flare {

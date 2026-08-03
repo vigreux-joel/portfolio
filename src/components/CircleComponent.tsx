@@ -20,7 +20,8 @@ export const CircleComponent: FC<{
     const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
 
 
-    const resolvedRef = defaultRef ?? useRef(null);
+    const internalRef = useRef<SVGSVGElement>(null);
+    const resolvedRef = defaultRef ?? internalRef;
 
 
     const [currentPos, setCurrentPos] = useState<{x: number | string, y: number | string}>({
@@ -30,33 +31,38 @@ export const CircleComponent: FC<{
 
     useEffect(() => {
         if (speed === null) return;
+
+        let interval: ReturnType<typeof setInterval> | undefined;
+
         const mouve = () => {
-            const parent = (resolvedRef.current as any).parentElement;
+            const parent = resolvedRef.current?.parentElement;
             if (parent) {
                 const parentWidth = parent.clientWidth;
                 const parentHeight = parent.clientHeight;
                 const elemWidth = 50;
                 const elemHeight = 50;
 
-                // position actuelle en pixels
-                const currentX = typeof currentPos.x === "string" ? parentWidth * position.x : currentPos.x;
-                const currentY = typeof currentPos.y === "string" ? parentHeight * position.y : currentPos.y;
+                setCurrentPos((previousPos) => {
+                    // Convertit la position initiale en pixels, puis repart toujours
+                    // de la dernière destination sans recréer l'effet.
+                    const currentX = typeof previousPos.x === "string"
+                        ? parentWidth * position.x
+                        : previousPos.x;
+                    const currentY = typeof previousPos.y === "string"
+                        ? parentHeight * position.y
+                        : previousPos.y;
 
-                // delta limité pour lisser le mouvement
-                const maxStep = 1000; // distance max à parcourir par mouvement
-                
-                // On calcule la nouvelle position absolue souhaitée
-                let absoluteX = currentX + (Math.random() * 2 - 1) * maxStep;
-                let absoluteY = currentY + (Math.random() * 2 - 1) * maxStep;
+                    const maxStep = 1000;
+                    const absoluteX = Math.min(
+                        parentWidth - elemWidth / 2,
+                        Math.max(elemWidth / 2, currentX + (Math.random() * 2 - 1) * maxStep)
+                    );
+                    const absoluteY = Math.min(
+                        parentHeight - elemHeight / 2,
+                        Math.max(elemHeight / 2, currentY + (Math.random() * 2 - 1) * maxStep)
+                    );
 
-                // clamp pour ne pas sortir du parent
-                absoluteX = Math.min(parentWidth - elemWidth / 2, Math.max(elemWidth / 2, absoluteX));
-                absoluteY = Math.min(parentHeight - elemHeight / 2, Math.max(elemHeight / 2, absoluteY));
-
-                // on met à jour la position top/left directement
-                setCurrentPos({
-                    x: absoluteX, 
-                    y: absoluteY
+                    return {x: absoluteX, y: absoluteY};
                 });
             }
         };
@@ -64,16 +70,15 @@ export const CircleComponent: FC<{
         const initialDelay = Math.random() * speed;
 
         const timeout = setTimeout(() => {
-            mouve(); // premier mouvement décalé
-
-            const interval = setInterval(() => {
-                mouve();
-            }, speed); // ensuite, bouge toutes les 5s
-
-            // cleanup
-            return () => clearInterval(interval);
+            mouve();
+            interval = setInterval(mouve, speed);
         }, initialDelay);
-    }, [speed, position, currentPos]);
+
+        return () => {
+            clearTimeout(timeout);
+            if (interval !== undefined) clearInterval(interval);
+        };
+    }, [speed, position.x, position.y, resolvedRef]);
 
     return (
         <svg

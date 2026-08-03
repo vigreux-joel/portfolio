@@ -1,6 +1,8 @@
 ---
 import { IconButton } from "@udixio/ui-react";
+import { Line } from "@components/Line";
 import { iKeyboardArrowDown } from "@udixio/icons-outlined-400/keyboard_arrow_down";
+import { iQuestionMark } from "@udixio/icons-outlined-400/question_mark";
 
 export interface FaqItem {
   question: string;
@@ -29,13 +31,15 @@ const faqLd = {
   class="tab-menu theme-blue z-10"
   aria-labelledby="faq-title"
 >
-  <div class="section">
-    <div class="grid gap-12 lg:grid-cols-[minmax(16rem,0.8fr)_minmax(0,1.35fr)] lg:gap-20 xl:gap-28">
+  <div class="max-width">
+    <div class="flex pt-8">
+      <div>
+        <Line className="h-1/2" client:idle icon={iQuestionMark} isLast />
+      </div>
+      <div class="min-w-0 flex-1 padding pt-0">
+        <div class="grid gap-12 lg:grid-cols-[minmax(16rem,0.8fr)_minmax(0,1.35fr)] lg:gap-20 xl:gap-28">
       <header class="max-w-xl lg:sticky lg:top-28 lg:self-start">
-        <p class="flex items-center gap-3 text-title-medium text-secondary">
-          <span class="h-px w-8 bg-secondary/60" aria-hidden="true"></span>
-          En pratique
-        </p>
+        <p class="sub-title" data-sidebar-label="FAQ">En pratique</p>
         <h2 id="faq-title" class="mt-3 text-headline-large text-on-surface md:text-display-small">
           Questions fréquentes
         </h2>
@@ -94,6 +98,8 @@ const faqLd = {
           </article>
           );
         })}
+      </div>
+        </div>
       </div>
     </div>
   </div>

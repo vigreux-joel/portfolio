@@ -135,7 +135,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
           "group",
        "transition-bg duration-1000",
         {
-            "bg-surface-container-high/50": isPowered,
+            "bg-surface-container/50": isPowered,
             "bg-surface-container-low ": !isPowered
         },
                         className,
