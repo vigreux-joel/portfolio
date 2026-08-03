@@ -8,13 +8,13 @@ import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 import { iRoute } from "@udixio/icons-outlined-400/route";
 ---
 
-<section id="travailler-ensemble" class="tab-menu theme-blue isolate">
+<section id="travailler-ensemble" class="tab-menu theme-blue ">
   <BackgroundColor
     speed={10_000}
-    size="max(44vw, 560px)"
-    count={3}
+    size="max(66vw, 800px)"
+    count={5}
     client:idle
-    className="absolute inset-0 -z-10 overflow-hidden opacity-10"
+    className="absolute inset-0 -z-10  opacity-10"
   />
   <div class="max-width">
     <div class="flex pt-8">
@@ -71,6 +71,5 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
       <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle isLast />
     </div>
   </div>
-
-  <LinearGradient nextTheme="blue" />
+  <LinearGradient nextTheme="blue"  className="h-1/2 -z-10"  />
 </section>

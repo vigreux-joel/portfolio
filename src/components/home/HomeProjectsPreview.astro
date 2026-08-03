@@ -7,6 +7,7 @@ import ProjectFeature from "@components/projects/ProjectFeature.astro";
 import { Button, Icon } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { BackgroundColor } from "../BackgroundColor";
 
 const published = await getCollection("projects", ({ data }) => !data.draft);
 const byOrder = (a: (typeof published)[number], b: (typeof published)[number]) =>
@@ -23,6 +24,13 @@ if (!feature) {
 ---
 
 <section id="projets" class="tab-menu theme-cyan ">
+  <BackgroundColor
+      speed={9_000}
+      size="max(66vw, 800px)"
+      count={4}
+      client:idle
+      className="absolute inset-0 h-1/2 -z-10 top-1/4  opacity-20"
+  />
   <div class="max-width">
     <div class="flex pt-8">
       <div class="theme-blue"><Line client:idle icon={iFactCheck} nextTheme="cyan" isLast /></div>
@@ -39,7 +47,7 @@ if (!feature) {
       </div>
     </div>
 
-    <div class="padding-x  mb-20 md:mb-28">
+    <div class="section pt-0">
       <ProjectFeature project={feature} />
 
       {
