@@ -1,4 +1,5 @@
 ---
+import { BackgroundColor } from "@components/BackgroundColor";
 import { Card } from "@components/Card";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
@@ -12,94 +13,116 @@ import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 
 const areas = [
   {
+    eyebrow: "Front-end & UX",
     title: "Interfaces web et expérience utilisateur",
     description:
       "Concevoir des interfaces performantes, accessibles et adaptées aux usages réels, du site de contenu à l’application métier.",
     href: "/expertise#front-end",
     label: "Explorer le front-end",
     icon: iCode,
+    iconClass: "bg-primary text-on-primary",
+    energy: true,
   },
   {
-    title: "Applications multiplateformes",
-    description:
-      "Prolonger un produit au-delà du navigateur lorsque le contexte demande une expérience mobile ou installable cohérente.",
-    href: "/expertise#multiplateforme",
-    label: "Explorer le multiplateforme",
-    icon: iDevices,
-  },
-  {
+    eyebrow: "Back-end",
     title: "APIs, données et architecture",
     description:
       "Construire les services, les modèles de données et l’infrastructure nécessaires pour faire évoluer le produit durablement.",
     href: "/expertise#back-end",
     label: "Explorer le back-end",
     icon: iApi,
+    iconClass: "bg-secondary-container text-on-secondary-container",
+    energy: true,
+  },
+  {
+    eyebrow: "Multiplateforme",
+    title: "Applications au-delà du navigateur",
+    description:
+      "Prolonger un produit lorsque le contexte demande une expérience mobile ou installable cohérente avec le reste de l’écosystème.",
+    href: "/expertise#multiplateforme",
+    label: "Explorer le multiplateforme",
+    icon: iDevices,
+    iconClass: "bg-tertiary-container text-on-tertiary-container",
   },
 ];
 ---
 
-<section id="expertise-preview" class="tab-menu theme-blue">
-  <div class="max-width">
-    <div class="flex pt-8">
-      <div><Line client:idle icon={iCode} /></div>
-      <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-        <h2 class="sub-title" data-sidebar-label="Expertise">Expertise</h2>
-        <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
-          <p class="text-gradient">Une vision full-stack,</p>
-          <p>forgée sur des produits réels.</p>
-        </div>
-        <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
-          Je peux intervenir sur une interface, un service back-end ou l’ensemble du produit.
-          L’expérience de la production me permet aussi de reprendre l’existant, d’en comprendre
-          les contraintes et de le faire évoluer sans imposer une réécriture par principe.
-        </p>
-      </div>
-    </div>
+<section id="expertise-preview" class="tab-menu theme-blue isolate">
+  <BackgroundColor
+    speed={9_000}
+    size="max(52vw, 680px)"
+    count={4}
+    client:idle
+    className="absolute inset-0 -z-10 overflow-hidden opacity-15"
+  />
 
-    <div class="padding-x mt-12 mb-20 md:mb-28">
-      <div class="grid gap-6 md:grid-cols-3">
-        {areas.map((area) => (
-          <Card variant="filled" className="group h-full">
-            <article class="flex h-full flex-col p-6 md:p-8">
-              <span class="grid size-12 place-items-center rounded-2xl bg-secondary-container text-on-secondary-container">
-                <Icon icon={area.icon} className="size-6" />
-              </span>
-              <h3 class="mt-8 text-headline-small text-on-surface">{area.title}</h3>
-              <p class="mt-4 text-body-large text-on-surface-variant">{area.description}</p>
-              <a href={area.href} class="group/link mt-8 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors md:mt-auto md:pt-8">
-                <span>{area.label}</span>
+  <div class="max-width">
+    <div class="flex">
+      <div><Line client:idle icon={iCode} nextTheme="cyan" /></div>
+      <div class="padding pt-0 pb-20 md:pb-28 min-w-0 flex-1">
+        <header class="max-w-7xl">
+          <h2 class="sub-title" data-sidebar-label="Expertise">Expertise</h2>
+          <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+            <p class="text-gradient">Une vision full-stack,</p>
+            <p>forgée sur des produits réels.</p>
+          </div>
+          <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+            Je peux intervenir sur une interface, un service back-end ou l’ensemble du produit.
+            L’expérience de la production me permet aussi de reprendre l’existant, d’en comprendre
+            les contraintes et de le faire évoluer sans imposer une réécriture par principe.
+          </p>
+        </header>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-2">
+          {areas.map((area) => (
+            <Card variant="filled" energyX={area.energy ? true : undefined} className="group h-full">
+              <article class="relative z-10 flex h-full flex-col p-6 md:p-8">
+                <div class="flex items-center justify-between gap-5">
+                  <span class={`grid size-12 place-items-center rounded-2xl ${area.iconClass}`}>
+                    <Icon icon={area.icon} className="size-6" />
+                  </span>
+                  <span class="text-label-large uppercase tracking-wide text-secondary">{area.eyebrow}</span>
+                </div>
+                <h3 class="mt-8 text-headline-small md:text-headline-medium text-on-surface">{area.title}</h3>
+                <p class="mt-4 max-w-prose text-body-large text-on-surface-variant">{area.description}</p>
+                <a href={area.href} class="group/link mt-8 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors lg:mt-auto lg:pt-8">
+                  <span>{area.label}</span>
+                  <Icon icon={iArrowForward} className="size-4 transition-transform group-hover/link:translate-x-1" />
+                </a>
+              </article>
+            </Card>
+          ))}
+
+          <Card variant="outlined" className="group h-full ring-1 ring-primary/20">
+            <article class="relative z-10 flex h-full flex-col p-6 md:p-8">
+              <div class="flex items-center justify-between gap-5">
+                <span class="grid size-12 place-items-center rounded-2xl bg-primary text-on-primary">
+                  <Icon icon={iFactCheck} className="size-6" />
+                </span>
+                <span class="text-label-large uppercase tracking-wide text-secondary">IA &amp; ingénierie</span>
+              </div>
+              <h3 class="mt-8 text-headline-small md:text-headline-medium text-on-surface">
+                Accélérer sans déléguer la responsabilité.
+              </h3>
+              <p class="mt-4 max-w-prose text-body-large text-on-surface-variant">
+                J’utilise l’IA sur les tâches suffisamment cadrées. La compréhension du métier,
+                l’architecture, la sécurité et la validation restent sous contrôle humain.
+              </p>
+              <a href="/approche" class="group/link mt-8 inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors lg:mt-auto lg:pt-8">
+                <span>Découvrir mon approche de l’IA</span>
                 <Icon icon={iArrowForward} className="size-4 transition-transform group-hover/link:translate-x-1" />
               </a>
             </article>
           </Card>
-        ))}
+        </div>
+
+        <Button className="mt-8" href="/expertise" icon={iArrowForward} iconPosition="right" label="Découvrir toute mon expertise" variant="tonal" />
       </div>
-
-      <Card variant="outlined" className="mt-6">
-        <article class="grid gap-7 p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:p-8">
-          <span class="grid size-12 place-items-center rounded-2xl bg-primary text-on-primary">
-            <Icon icon={iFactCheck} className="size-6" />
-          </span>
-          <div>
-            <p class="text-label-large uppercase tracking-wide text-secondary">IA &amp; ingénierie</p>
-            <h3 class="mt-2 text-headline-small text-on-surface">
-              Accélérer l’exécution sans déléguer la responsabilité.
-            </h3>
-            <p class="mt-3 max-w-3xl text-body-large text-on-surface-variant">
-              J’utilise l’IA sur les tâches suffisamment cadrées. La compréhension du métier,
-              l’architecture, la sécurité et la validation restent sous contrôle humain.
-            </p>
-          </div>
-          <a href="/approche" class="group/link inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors md:justify-self-end">
-            <span>Découvrir mon approche de l’IA</span>
-            <Icon icon={iArrowForward} className="size-4 transition-transform group-hover/link:translate-x-1" />
-          </a>
-        </article>
-      </Card>
-
-      <Button className="mt-8" href="/expertise" icon={iArrowForward} iconPosition="right" label="Découvrir toute mon expertise" variant="tonal" />
     </div>
   </div>
 
+  <div class="pointer-events-none absolute -bottom-8 left-1/2 z-10 h-8 w-full max-w-screen-2xl -translate-x-1/2">
+    <Line fromX={0} fromPx={60} toX={0} toPx={60} nextTheme="cyan" client:idle />
+  </div>
   <LinearGradient nextTheme="cyan" />
 </section>

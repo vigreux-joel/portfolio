@@ -1,16 +1,24 @@
 ---
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
+import { BackgroundColor } from "@components/BackgroundColor";
 import { Button } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iIdCard } from "@udixio/icons-outlined-400/id_card";
 import { iRoute } from "@udixio/icons-outlined-400/route";
 ---
 
-<section id="travailler-ensemble" class="tab-menu theme-blue">
+<section id="travailler-ensemble" class="tab-menu theme-blue isolate">
+  <BackgroundColor
+    speed={10_000}
+    size="max(44vw, 560px)"
+    count={3}
+    client:idle
+    className="absolute inset-0 -z-10 overflow-hidden opacity-10"
+  />
   <div class="max-width">
     <div class="flex pt-8">
-      <div><Line client:idle icon={iRoute} /></div>
+      <div><Line client:idle icon={iRoute} isFirst /></div>
       <div class="padding pt-0 pb-8 flex flex-col justify-center max-w-7xl">
         <p class="sub-title text-secondary" data-sidebar-label="Collaboration">Travailler ensemble</p>
         <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
@@ -60,7 +68,7 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
 
     <div class="relative h-20 md:h-28 hidden md:block">
       <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle  />
-      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle isLast />
     </div>
   </div>
 
