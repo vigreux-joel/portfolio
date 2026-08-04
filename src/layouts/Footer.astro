@@ -12,7 +12,7 @@ const { faq, showCta = true } = Astro.props;
 ---
 
 <div class="overflow-hidden">
-<FaqSection questions={faq} />
+{faq.length > 0 && <FaqSection questions={faq} />}
 {showCta && <CtaSection />}
 
 <footer class=" relative border-t border-outline-variant bg-surface-container-low z-10">
@@ -29,7 +29,7 @@ const { faq, showCta = true } = Astro.props;
     </nav>
   </div>
   <div class="max-width padding-x pb-8">
-    <p class="text-body-small text-on-surface-variant">© 2024–{new Date().getFullYear()} Joël Vigreux. Conception et développement par l’auteur.</p>
+    <p class="text-body-small text-on-surface-variant">© 2024–{new Date().getFullYear()} Joël Vigreux, conçu avec ❤️, dans les Hauts-de-France.</p>
   </div>
 </footer>
 </div>

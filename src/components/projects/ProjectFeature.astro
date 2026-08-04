@@ -5,6 +5,7 @@ import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
 import { iCheckCircle } from "@udixio/icons-outlined-400/check_circle";
 import { Card } from "@components/Card";
+import ProjectTechnologies from "./ProjectTechnologies.astro";
 import ProjectVisual from "./ProjectVisual.astro";
 
 interface Props {
@@ -23,6 +24,9 @@ const {
 } = Astro.props;
 
 const { data } = project;
+const hasVisual = Boolean(data.cover || data.previewUrl);
+const visualWidth = data.cover?.width ?? 1440;
+const visualHeight = data.cover?.height ?? 900;
 const paragraphs = data.intro.length > 0 ? data.intro : [data.description];
 
 const secondaryLink = data.externalUrl
@@ -34,12 +38,19 @@ const secondaryLink = data.externalUrl
 
 <article>
   <Card client:visible variant="filled" className="overflow-hidden">
-    <div class="grid lg:grid-cols-[1.08fr_.92fr]">
-      <div class:list={["min-h-72", project.data.cover && "bg-surface-container", reverse && "lg:order-2"]}>
-        <ProjectVisual project={project} />
-      </div>
+    <div class:list={[hasVisual && "grid items-start lg:grid-cols-[1.15fr_.85fr]"]}>
+      {
+        hasVisual && (
+          <div
+            class:list={["self-start overflow-hidden bg-surface-container", reverse && "lg:order-2"]}
+            style={`aspect-ratio: ${visualWidth} / ${visualHeight}`}
+          >
+            <ProjectVisual project={project} />
+          </div>
+        )
+      }
 
-      <div class="p-7 md:p-10 lg:p-12">
+      <div class:list={["p-7 md:p-10", !hasVisual && "max-w-5xl"]}>
         <p class="text-label-large text-secondary">{data.eyebrow}</p>
         <h3 class="mt-3 text-headline-large text-on-surface">{data.title}</h3>
         {data.headline && <p class="mt-4 text-headline-small text-on-surface">{data.headline}</p>}
@@ -60,6 +71,16 @@ const secondaryLink = data.externalUrl
                 </li>
               ))}
             </ul>
+          )
+        }
+
+        {
+          !data.cover && data.technologies.length > 0 && (
+            <ProjectTechnologies
+              technologies={data.technologies}
+              label={`Technologies utilisées pour ${data.title}`}
+              class="mt-8"
+            />
           )
         }
 

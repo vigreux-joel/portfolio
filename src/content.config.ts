@@ -54,6 +54,8 @@ const projects = defineCollection({
         })
         .optional(),
       externalUrl: z.string().url().optional(),
+      /** URL publique à enregistrer pour générer la preview vidéo du projet. */
+      previewUrl: z.string().url().optional(),
       repositoryUrl: z.string().url().optional(),
       technologies: z.array(z.string()).default([]),
     })

@@ -20,6 +20,8 @@ const isRealisation = data.kind === "realisation";
 const href = isRealisation ? data.externalUrl! : `/projets/${project.id}`;
 const label = linkLabel ?? (isRealisation ? "Voir le site" : "Voir le projet");
 const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
+const visualWidth = data.cover?.width ?? 1440;
+const visualHeight = data.cover?.height ?? 900;
 ---
 
 <article>
@@ -32,9 +34,12 @@ const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
       class="group/card-link relative z-10 flex h-full flex-col"
     >
       {
-        data.cover && (
-          <div class="relative aspect-16/10 overflow-hidden bg-surface-container">
-            <ProjectVisual project={project} class="transition-transform duration-500 group-hover:scale-105" />
+        (data.cover || data.previewUrl) && (
+          <div
+            class="relative overflow-hidden bg-surface-container"
+            style={`aspect-ratio: ${visualWidth} / ${visualHeight}`}
+          >
+            <ProjectVisual project={project} />
           </div>
         )
       }
@@ -48,7 +53,7 @@ const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
       </IconButton>
 
       <div class="flex flex-1 flex-col p-7">
-        <div class:list={[!data.cover && "pr-16"]}>
+        <div class:list={[!data.cover && !data.previewUrl && "pr-16"]}>
           <p class="text-title-medium-large text-secondary">{data.eyebrow}</p>
           <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
         </div>

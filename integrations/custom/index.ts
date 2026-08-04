@@ -1,183 +1,108 @@
-import type {AstroIntegration} from 'astro';
-import {promises as fs} from 'fs';
-import matter from 'gray-matter';
-import {join} from 'path';
-import {loadEnv} from 'vite';
+import type { AstroIntegration, AstroIntegrationLogger } from "astro";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-import {getAllMDXFiles, getMDXMetadata} from './mdx';
-import {recordPageScrollWithAnimations} from './screenshot';
-import {createVideoOptimizer, extractFirstFrameAsWebP} from './video';
-import {generateBackgroundMockup} from './background';
-import {extractSourceColor} from './color';
+import { recordProjectPage } from "./screenshot";
+
+interface ProjectToRender {
+  slug: string;
+  sourcePath: string;
+  url: string;
+}
+
+function readScalar(frontmatter: string, field: string): string | null {
+  const value = frontmatter.match(new RegExp(`^${field}:\\s*["']?([^"'\\n]+)["']?\\s*$`, "m"))?.[1];
+  return value?.trim() || null;
+}
+
+async function findProjectsWithoutCover(root: string): Promise<ProjectToRender[]> {
+  const projectsDirectory = path.join(root, "src", "content", "projects");
+  const files = (await fs.readdir(projectsDirectory)).filter((file) => /\.mdx?$/.test(file));
+  const projects: ProjectToRender[] = [];
+
+  for (const file of files) {
+    const sourcePath = path.join(projectsDirectory, file);
+    const source = await fs.readFile(sourcePath, "utf8");
+    const frontmatter = source.match(/^---\s*\n([\s\S]*?)\n---/)?.[1];
+
+    const previewUrl = frontmatter ? readScalar(frontmatter, "previewUrl") : null;
+    if (
+      !frontmatter ||
+      !previewUrl ||
+      /^cover:\s*$/m.test(frontmatter) ||
+      /^draft:\s*true\s*$/m.test(frontmatter)
+    ) {
+      continue;
+    }
+
+    projects.push({
+      slug: path.basename(file, path.extname(file)),
+      sourcePath,
+      url: previewUrl,
+    });
+  }
+
+  return projects;
+}
+
+async function isCurrent(sourcePath: string, ...outputs: string[]): Promise<boolean> {
+  const sourceStats = await fs.stat(sourcePath);
+  const outputStats = await Promise.all(outputs.map((output) => fs.stat(output).catch(() => null)));
+  return outputStats.every((stats) => stats && stats.mtimeMs >= sourceStats.mtimeMs);
+}
+
+async function generateProjectMedia(
+  root: string,
+  logger: AstroIntegrationLogger,
+): Promise<void> {
+  const projects = await findProjectsWithoutCover(root);
+  const capturesDirectory = path.join(root, "public", "images", "projects", "generated");
+  const videosDirectory = path.join(root, "public", "videos", "projects");
+  await Promise.all([
+    fs.mkdir(capturesDirectory, { recursive: true }),
+    fs.mkdir(videosDirectory, { recursive: true }),
+  ]);
+
+  let generated = 0;
+  for (const [index, project] of projects.entries()) {
+    const capturePath = path.join(capturesDirectory, `${project.slug}.webp`);
+    const videoPath = path.join(videosDirectory, `${project.slug}.webm`);
+
+    if (await isCurrent(project.sourcePath, capturePath, videoPath)) continue;
+
+    logger.info(`Rendu ${index + 1}/${projects.length} : ${project.slug}`);
+    await recordProjectPage({
+      url: project.url,
+      capturePath,
+      videoPath,
+    });
+    generated += 1;
+  }
+
+  logger.info(
+    generated > 0
+      ? `${generated} rendu${generated > 1 ? "s" : ""} vidéo et capture généré${generated > 1 ? "s" : ""}.`
+      : "Les vidéos et captures des projets sont à jour.",
+  );
+}
 
 export default function customIntegration(): AstroIntegration {
-    return {
-        name: 'astro-custom-integration',
-        hooks: {
-            'astro:config:setup': async ({logger}) => {
-                // loadEnv charge le .env avant que Vite l'injecte dans process.env
-                const env = loadEnv('', process.cwd(), '');
-                const openrouterApiKey = env.OPENROUTER_API_KEY;
+  let root = process.cwd();
 
-                const realisationsDir = join('src', 'data', 'realisation');
-                const mdxFiles = await getAllMDXFiles(realisationsDir);
-                const realisationsData: any[] = await getMDXMetadata(realisationsDir, mdxFiles);
-
-                // ── Pass 1 : Video recording & optimization ────────────────────────────
-                const validRealisations = realisationsData.filter(({website}) => website);
-                logger.info(`🎬 Starting video processing for ${validRealisations.length} projects`);
-
-                for (const [index, {website: url, slug}] of validRealisations.entries()) {
-                    logger.info(`\n📊 Processing ${index + 1}/${validRealisations.length}: ${slug}`);
-
-                    const videoPath     = join('public', 'videos', 'renders', `${slug}.mp4`);
-                    const maltVideoPath = join('public', 'videos', 'renders', `${slug}-malt.mp4`);
-
-                    // Standard 1080p
-                    try {
-                        await fs.access(videoPath);
-                        logger.info(`✅ Standard video exists: ${slug}`);
-                    } catch {
-                        logger.info(`🎬 Recording standard video (1920x1080): ${slug}`);
-                        await recordPageScrollWithAnimations(url, videoPath, 1080);
-                        logger.info(`✅ Standard recording complete: ${slug}`);
-
-                        extractFirstFrameAsWebP(videoPath, `./src/assets/renders/${slug}.webp`, slug)
-                            .catch(err => console.error(`❌ Thumbnail error: ${slug}`, err));
-
-                        createVideoOptimizer(videoPath.replace('.mp4', '-720.webm'), videoPath).size('1280x720').run();
-                        createVideoOptimizer(videoPath.replace('.mp4', '-480.webm'), videoPath).size('720x480').run();
-                    }
-
-                    // Malt 1380p
-                    try {
-                        await fs.access(maltVideoPath);
-                        logger.info(`✅ Malt video exists: ${slug}`);
-                    } catch {
-                        logger.info(`🎬 Recording Malt video (1920x1380): ${slug}`);
-                        await recordPageScrollWithAnimations(url, maltVideoPath, 1380);
-                        logger.info(`✅ Malt recording complete: ${slug}`);
-
-                        createVideoOptimizer(maltVideoPath.replace('.mp4', '-malt.webm'), maltVideoPath)
-                            .size('1920x1380')
-                            .screenshots({
-                                timestamps: ['00:00:00.000'],
-                                filename: `${slug}-malt.webp`,
-                                folder: './src/assets/renders',
-                                size: '522x375',
-                            })
-                            .run();
-                    }
-
-                    const remaining = validRealisations.length - (index + 1);
-                    if (remaining > 0) logger.info(`⏳ ${remaining} projects remaining`);
-                }
-                logger.info(`🎉 All video processing complete!`);
-
-                // ── Pass 2 : Background mockup generation (OpenRouter) ─────────────────
-                logger.info(`🖼️  Checking for missing background images...`);
-
-                for (const file of mdxFiles) {
-                    const filePath         = join(realisationsDir, file);
-                    const slug             = file.replace('.mdx', '');
-                    const content          = await fs.readFile(filePath, 'utf-8');
-                    const parsed           = matter(content);
-                    const newBackgroundPath = join('src', 'assets', 'backgrounds', `${slug}-background.webp`);
-
-                    // Vérifie l'existence du fichier dans src/assets/backgrounds/ (nouvelle localisation)
-                    const expectedRelPath = `../../assets/backgrounds/${slug}-background.webp`;
-                    try {
-                        await fs.access(newBackgroundPath);
-                        // Fichier présent — s'assure que le MDX référence bien le chemin relatif correct
-                        if (parsed.data.images?.background?.src !== expectedRelPath) {
-                            logger.info(`🔄 Migrating background path for ${slug}...`);
-                            parsed.data.images = {
-                                ...parsed.data.images,
-                                background: {
-                                    src: expectedRelPath,
-                                    alt: parsed.data.images?.background?.alt ?? "",
-                                    sourceColor: parsed.data.images?.background?.sourceColor,
-                                },
-                            };
-                            await fs.writeFile(filePath, matter.stringify(parsed.content, parsed.data), 'utf-8');
-                        } else {
-                            logger.info(`✅ Background already generated: ${slug}`);
-                        }
-                        continue;
-                    } catch { /* pas encore généré */ }
-
-                    if (!parsed.data.title || !parsed.data.description) {
-                        logger.warn(`⚠️  Skipping ${slug} — frontmatter incomplete (title/description missing, check YAML indentation)`);
-                        continue;
-                    }
-
-                    logger.info(`🖼️  No background for ${slug} — generating mockup via OpenRouter...`);
-
-                    try {
-                        const backgroundSrc = await generateBackgroundMockup({
-                            slug,
-                            title:       parsed.data.title,
-                            description: parsed.data.description,
-                            themeSource: parsed.data.theme?.source ?? '#000000',
-                            isDark:      parsed.data.theme?.isDark ?? false,
-                            renderPath:  join('src', 'assets', 'renders', `${slug}.webp`),
-                            logoSrc:     parsed.data.images?.logo?.src,
-                            apiKey:      openrouterApiKey,
-                        });
-
-                        if (backgroundSrc) {
-                            parsed.data.images = {
-                                ...parsed.data.images,
-                                background: {
-                                    src: backgroundSrc.src,  // chemin relatif ../../assets/backgrounds/...
-                                    alt: backgroundSrc.alt,
-                                },
-                            };
-                            await fs.writeFile(filePath, matter.stringify(parsed.content, parsed.data), 'utf-8');
-                            logger.info(`✅ Background set for ${slug}: ${backgroundSrc.src}`);
-                        }
-                    } catch (err) {
-                        logger.error(`❌ Background generation failed for ${slug}: ${err}`);
-                    }
-                }
-                logger.info(`🖼️  Background generation pass complete!`);
-
-                // ── Pass 3 : Material You source color extraction ──────────────────────
-                logger.info(`🎨 Extracting source colors from project images...`);
-
-                for (const file of mdxFiles) {
-                    const filePath         = join(realisationsDir, file);
-                    const slug             = file.replace('.mdx', '');
-                    const content          = await fs.readFile(filePath, 'utf-8');
-                    const parsed           = matter(content);
-                    const backgroundFilePath = join('src', 'assets', 'backgrounds', `${slug}-background.webp`);
-
-                    try {
-                        await fs.access(backgroundFilePath);
-                    } catch {
-                        logger.warn(`⚠️  No background at new location for ${slug}, skipping color extraction`);
-                        continue;
-                    }
-
-                    if (parsed.data.images?.background?.sourceColor) {
-                        logger.info(`✅ sourceColor already set for ${slug}: ${parsed.data.images.background.sourceColor}`);
-                        continue;
-                    }
-
-                    try {
-                        const hex = await extractSourceColor(backgroundFilePath);
-                        parsed.data.images = {
-                            ...parsed.data.images,
-                            background: {...parsed.data.images.background, sourceColor: hex},
-                        };
-                        await fs.writeFile(filePath, matter.stringify(parsed.content, parsed.data), 'utf-8');
-                        logger.info(`🎨 Set sourceColor for ${slug}: ${hex}`);
-                    } catch (err) {
-                        logger.error(`❌ Color extraction failed for ${slug}: ${err}`);
-                    }
-                }
-                logger.info(`🎨 Source color extraction complete!`);
-            },
-        },
-    };
+  return {
+    name: "project-media-generator",
+    hooks: {
+      "astro:config:done": ({ config }) => {
+        root = fileURLToPath(config.root);
+      },
+      "astro:server:start": async ({ logger }) => {
+        try {
+          await generateProjectMedia(root, logger);
+        } catch (error) {
+          logger.error(`La génération des médias projet a échoué : ${String(error)}`);
+        }
+      },
+    },
+  };
 }

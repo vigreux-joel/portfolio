@@ -5,41 +5,17 @@ import { Line } from "@components/Line";
 import ProjectCard from "@components/projects/ProjectCard.astro";
 import ProjectFeature from "@components/projects/ProjectFeature.astro";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
-import { iWeb } from "@udixio/icons-outlined-400/web";
 
 const published = await getCollection("projects", ({ data }) => !data.draft);
 const byOrder = (a: (typeof published)[number], b: (typeof published)[number]) =>
   a.data.order - b.data.order;
 
-const caseStudies = published.filter(({ data }) => data.kind === "etude-de-cas").sort(byOrder);
-const realisations = published.filter(({ data }) => data.kind === "realisation").sort(byOrder);
-
-const faq = [
-  ...(realisations.length > 0
-    ? [
-        {
-          question: "Que permet de vérifier chaque format ?",
-          answer:
-            "Une étude de cas explique le besoin, ce que j’ai réalisé et les choix effectués. Une réalisation permet de juger directement un site livré et accessible en ligne.",
-        },
-      ]
-    : []),
-  {
-    question: "Quelle part de chaque projet a été réalisée par Joël ?",
-    answer:
-      "Chaque étude de cas distingue le contexte du projet, ce que j’ai conçu ou développé et mon rôle. Lorsque je n’étais pas responsable de l’ensemble du produit, je le précise également.",
-  },
-  {
-    question: "Pourquoi certains projets n’ont-ils pas de capture d’écran ?",
-    answer:
-      "Certains projets sont privés ou appartiennent à une entreprise : je ne peux pas en publier les interfaces. Je présente alors uniquement ce que je peux montrer honnêtement : le besoin, ce que j’ai réalisé et mon rôle, sans inventer de visuel.",
-  },
-  {
-    question: "Quels dépôts sont publics ?",
-    answer:
-      "Lorsqu’un dépôt est public, sa fiche contient un lien direct vers GitHub. C’est actuellement le cas de ce portfolio. Udixio UI peut être testé en ligne ; les autres fiches ne donnent pas accès à leur code.",
-  },
-];
+const projects = published.sort(byOrder);
+const featuredProjects = projects.filter(
+  ({ data }) => data.featured && data.kind === "etude-de-cas",
+);
+const featuredProjectIds = new Set(featuredProjects.map(({ id }) => id));
+const regularProjects = projects.filter(({ id }) => !featuredProjectIds.has(id));
 
 const collectionJsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -52,7 +28,7 @@ const collectionJsonLd = JSON.stringify({
   inLanguage: "fr-FR",
   mainEntity: {
     "@type": "ItemList",
-    itemListElement: [...caseStudies, ...realisations].map((project, index) => ({
+    itemListElement: projects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: project.data.title,
@@ -67,7 +43,7 @@ const collectionJsonLd = JSON.stringify({
 
 <Layout
   showSidebar={false}
-  faq={faq}
+  faq={[]}
   seo={{
     title: "Projets — Joël Vigreux, développeur full-stack",
     description:
@@ -104,8 +80,8 @@ const collectionJsonLd = JSON.stringify({
             Je montre ce que j’ai conçu et pourquoi.
           </h1>
           <p class="mt-7 text-body-large text-on-surface-variant max-w-3xl">
-            Chaque étude de cas détaille un besoin, la solution développée et mon rôle. Aucun
-            projet présenté ici n’est une maquette de démonstration.
+            Chaque projet correspond à une réalisation concrète. Lorsque le contexte le permet,
+            j’en détaille aussi le besoin, les choix effectués et mon rôle.
           </p>
         </div>
       </div>
@@ -113,39 +89,21 @@ const collectionJsonLd = JSON.stringify({
       <div class="flex">
         <div><Line client:idle icon={iFactCheck} /></div>
         <div class="padding pt-0 w-full">
-          <h2 class="text-headline-large md:text-display-small">Études de cas</h2>
+          <h2 class="text-headline-large md:text-display-small">Projets réalisés</h2>
         </div>
       </div>
 
-      <div class="padding-x mt-8 flex flex-col gap-8">
-        {caseStudies.map((project, index) => (
+      <div class="padding-x mt-8 flex flex-col gap-6">
+        {featuredProjects.map((project, index) => (
           <ProjectFeature project={project} reverse={index % 2 === 1} />
         ))}
       </div>
 
-      {
-        realisations.length > 0 && (
-          <>
-            <div class="flex mt-16 md:mt-24">
-              <div>
-                <Line client:idle icon={iWeb} />
-              </div>
-              <div class="padding pt-0 w-full">
-                <h2 class="text-headline-large md:text-display-small">Autres réalisations</h2>
-                <p class="mt-4 text-body-large text-on-surface-variant max-w-3xl">
-                  Des livrables plus courts, consultables directement en ligne.
-                </p>
-              </div>
-            </div>
-
-            <div class="padding-x mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {realisations.map((project) => (
-                <ProjectCard project={project} />
-              ))}
-            </div>
-          </>
-        )
-      }
+      <div class="padding-x mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {regularProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
 
       <div class="pb-20 md:pb-28"></div>
     </div>

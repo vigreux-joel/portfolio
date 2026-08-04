@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 import compress from "astro-compress";
 import {vitePlugin} from "@udixio/theme";
+import {customIntegration} from "./integrations/index.ts";
 
 const isBuild = process.argv.includes("build");
 
@@ -21,7 +22,7 @@ export default defineConfig({
     compressHTML: true,
     experimental: {},
     output: 'static',
-    integrations: [react(), mdx(), sitemap(), robotsTxt(), compress(), compressor(),],
+    integrations: [customIntegration(), react(), mdx(), sitemap(), robotsTxt(), compress(), compressor()],
     fonts: [
         {
             provider: fontProviders.google(),
