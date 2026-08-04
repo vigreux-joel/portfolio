@@ -39,10 +39,10 @@ Cordialement,
             </div>
         </div>
         <div className="right padding bg-surface-container-low flex-2 m-2 pt-8 rounded-2xl">
-            <h2 className="text-display-small max-w-prose"><span
-                className="text-gradient">Restons en contact</span><br/>
-                pour
-                donner vie à votre projet !</h2>
+            <p className="sub-title">Contact</p>
+            <h2 className="mt-3 text-display-small max-w-prose"><span
+                className="text-gradient block">Parlez-moi de votre projet.</span>
+                Je vous aide à définir la prochaine étape.</h2>
             <p className="mt-4 max-w-prose">Partagez les détails de votre projet, vos idées et découvrons
                 ensemble comment
                 je

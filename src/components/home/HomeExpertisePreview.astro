@@ -35,15 +35,15 @@ const expertiseAreas = [
       <div><Line client:idle icon={iCode} nextTheme="cyan" isLast /></div>
       <div class="padding pt-0  pb-16 flex-1">
         <div class="max-w-7xl">
-          <h2 class="sub-title" data-sidebar-label="Expertise">Expertise</h2>
-          <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
-            <p class="text-gradient">Une vision full-stack,</p>
-            <p>forgée sur des produits réels.</p>
-          </div>
+          <p class="sub-title" data-sidebar-label="Expertise">Expertise</p>
+          <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+            <span class="block text-gradient">Concrétisez votre projet simplement.</span>
+            <span class="block">Je prends en charge chaque étape.</span>
+          </h2>
           <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
-            Je peux intervenir sur une interface, un service back-end ou l’ensemble du produit.
-            L’expérience de la production me permet aussi de reprendre l’existant, d’en comprendre
-            les contraintes et de le faire évoluer sans imposer une réécriture par principe.
+            Selon votre besoin, je peux intervenir sur une partie précise ou prendre en charge
+            l’ensemble du produit. Interface, fonctionnement, expérience et choix techniques&nbsp;:
+            découvrez comment ces compétences se complètent.
           </p>
         </div>
       </div>
@@ -82,7 +82,7 @@ const expertiseAreas = [
           <h3 class="mt-4 max-w-2xl text-headline-small">
             Accélérer le travail, jamais la prise de risque.
           </h3>
-          <p class="mt-4 max-w-2xl text-body-large text-on-surface-variant">
+          <p class="mt-4  text-on-surface-variant">
             J’utilise l’IA sur les tâches suffisamment cadrées. La compréhension du métier,
             l’architecture, la sécurité et la validation restent sous contrôle humain.
           </p>
@@ -99,10 +99,10 @@ const expertiseAreas = [
           </div>
         </Card>
 
-        <Card client:idle variant="filled" className="group relative z-10 flex h-full min-h-72 flex-col bg-surface-container-highest px-8  py-6 xl:col-span-2">
+        <Card client:idle variant="filled" className="group relative z-10 flex h-full min-h-72 flex-col bg-surface-container-highest/90 px-8  py-6 xl:col-span-2">
           <span class="sub-title text-secondary">Vue d’ensemble</span>
           <h3 class="mt-4 text-headline-small text-on-surface">Voir comment toutes ces expertises s’articulent.</h3>
-          <p class="mt-4 text-body-large text-on-surface-variant">
+          <p class="mt-4  text-on-surface-variant">
             Technologies, design d’expérience, multiplateforme et choix d’architecture.
           </p>
           <div class="mt-auto pt-8">
@@ -111,7 +111,7 @@ const expertiseAreas = [
               label="Découvrir toute mon expertise"
               icon={iArrowForward}
               iconPosition="right"
-              variant="filled"
+              variant="tonal"
 
             />
           </div>

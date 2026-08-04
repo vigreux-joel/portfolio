@@ -12,6 +12,16 @@ const projects = defineCollection({
       title: z.string(),
       eyebrow: z.string(),
       headline: z.string().optional(),
+      heroContext: z.string().optional(),
+      heroResponse: z.string().optional(),
+      faq: z
+        .array(
+          z.object({
+            question: z.string().min(1),
+            answer: z.string().min(1),
+          }),
+        )
+        .default([]),
       description: z.string(),
       need: z.string().optional(),
       solution: z.string().optional(),
@@ -49,7 +59,14 @@ const projects = defineCollection({
     })
     .superRefine((data, ctx) => {
       if (data.kind === "etude-de-cas") {
-        for (const field of ["headline", "need", "solution", "technicalNote"] as const) {
+        for (const field of [
+          "headline",
+          "heroContext",
+          "heroResponse",
+          "need",
+          "solution",
+          "technicalNote",
+        ] as const) {
           if (!data[field]) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
@@ -57,6 +74,13 @@ const projects = defineCollection({
               message: `Le champ « ${field} » est requis pour une étude de cas.`,
             });
           }
+        }
+        if (data.faq.length < 2) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ["faq"],
+            message: "Une étude de cas doit proposer au moins deux questions fréquentes.",
+          });
         }
       }
       if (data.kind === "realisation" && data.home) {

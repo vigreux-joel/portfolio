@@ -64,7 +64,7 @@ export default defineConfig({
     },
     responsiveBreakPoints: {
         lg: 1.2,
-        xl: 1.4,
+        xl: 1.3,
     },
     subThemes
 })

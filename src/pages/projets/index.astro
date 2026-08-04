@@ -15,20 +15,29 @@ const caseStudies = published.filter(({ data }) => data.kind === "etude-de-cas")
 const realisations = published.filter(({ data }) => data.kind === "realisation").sort(byOrder);
 
 const faq = [
+  ...(realisations.length > 0
+    ? [
+        {
+          question: "Que permet de vérifier chaque format ?",
+          answer:
+            "Une étude de cas explique le besoin, ce que j’ai réalisé et les choix effectués. Une réalisation permet de juger directement un site livré et accessible en ligne.",
+        },
+      ]
+    : []),
   {
-    question: "Pourquoi certains projets n’ont-ils pas de capture d’écran ?",
+    question: "Quelle part de chaque projet a été réalisée par Joël ?",
     answer:
-      "Certains projets sont privés ou internes à une entreprise : je ne peux pas en publier les interfaces. Leur fiche décrit alors le besoin, la solution et mon rôle, sans illustration fabriquée pour l’occasion.",
+      "Chaque étude de cas distingue le contexte du projet, ce que j’ai conçu ou développé et mon rôle. Lorsque je n’étais pas responsable de l’ensemble du produit, je le précise également.",
   },
   {
-    question: "Quelle différence entre une étude de cas et une réalisation ?",
+    question: "Pourquoi certains projets n’ont-ils pas de capture d’écran ?",
     answer:
-      "Une étude de cas détaille un problème, la solution développée et les décisions techniques prises. Une réalisation est un livrable plus court, que vous pouvez simplement consulter en ligne.",
+      "Certains projets sont privés ou appartiennent à une entreprise : je ne peux pas en publier les interfaces. Je présente alors uniquement ce que je peux montrer honnêtement : le besoin, ce que j’ai réalisé et mon rôle, sans inventer de visuel.",
   },
   {
-    question: "Puis-je voir le code de vos projets ?",
+    question: "Quels dépôts sont publics ?",
     answer:
-      "Le code de ce portfolio et celui d’Udixio UI sont publics sur GitHub. Les projets clients et les produits en cours de développement restent privés, mais je peux en présenter le fonctionnement lors d’un échange.",
+      "Lorsqu’un dépôt est public, sa fiche contient un lien direct vers GitHub. C’est actuellement le cas de ce portfolio. Udixio UI peut être testé en ligne ; les autres fiches ne donnent pas accès à leur code.",
   },
 ];
 
@@ -90,8 +99,9 @@ const collectionJsonLd = JSON.stringify({
         <div><Line client:load isFirst /></div>
         <div class="padding pt-0 pb-12">
           <p class="sub-title">Projets</p>
-          <h1 class="mt-5 text-display-medium xl:text-display-large text-gradient">
-            Des projets réels, que vous pouvez consulter.
+          <h1 class="mt-5 text-display-medium xl:text-display-large max-w-5xl">
+            <span class="block text-gradient">Jugez mon travail à travers mes projets.</span>
+            Je montre ce que j’ai conçu et pourquoi.
           </h1>
           <p class="mt-7 text-body-large text-on-surface-variant max-w-3xl">
             Chaque étude de cas détaille un besoin, la solution développée et mon rôle. Aucun

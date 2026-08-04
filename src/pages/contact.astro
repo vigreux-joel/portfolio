@@ -23,20 +23,20 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
   showCta={false}
   faq={[
     {
-      question: "Sous quel délai répondez-vous ?",
-      answer: "Généralement sous 24 à 48h ouvrées. Pour un besoin urgent, précisez-le dans le message."
+      question: "Que préparer avant un premier contact ?",
+      answer: "Indiquez simplement votre objectif, le contexte et votre échéance si vous en avez une. Nous préciserons le reste ensemble."
     },
     {
-      question: "Le premier échange est-il payant ?",
-      answer: "Non. Le premier rendez-vous de cadrage est gratuit : on clarifie le besoin, le périmètre et une estimation, sans engagement."
+      question: "Quel est le délai de réponse ?",
+      answer: "Je réponds généralement sous 48 h ouvrées. Si votre demande est urgente, indiquez votre échéance dans le message."
     },
     {
-      question: "Intervenez-vous en présentiel ?",
-      answer: "Je travaille principalement à distance, avec des déplacements possibles selon le projet et la zone géographique."
+      question: "Le premier échange est-il gratuit ?",
+      answer: "Oui, et il ne vous engage à rien. Il sert à comprendre votre demande et à vérifier que je peux vous aider."
     },
     {
-      question: "Quels types de projets acceptez-vous ?",
-      answer: "Sites vitrines, applications web et mobiles, APIs, refontes ou reprises de code existant. Tout projet où la qualité de code fait la différence."
+      question: "Les échanges se font-ils à distance ou en présentiel ?",
+      answer: "Les échanges se font surtout à distance. Je peux aussi me déplacer autour d’Amiens et de Lille, selon le projet."
     }
   ]}
   seo={{
@@ -77,8 +77,10 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
 
     <div class="max-width padding-x mx-auto w-full relative z-10">
       <div class="text-center mb-16">
-        <h1 class="text-display-medium xl:text-display-large relative">
-          Contactez-<span class="text-gradient">moi</span>
+        <p class="sub-title">Contact</p>
+        <h1 class="mt-4 text-display-medium xl:text-display-large relative">
+          <span class="block text-gradient">Dites-moi ce qui vous amène.</span>
+          Je prends le temps de vous répondre.
         </h1>
         <p
           class="text-body-large max-w-2xl mx-auto mt-4 text-on-surface-variant"
@@ -242,14 +244,16 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
             className="p-8 md:p-10 rounded-3xl h-full bg-surface-container/60 backdrop-blur-xl border border-outline-variant/50 shadow-2xl relative overflow-hidden flex flex-col justify-center"
           >
             <div class="relative z-10">
-              <h2 class="text-display-small text-on-surface mb-2">
-                Envoyez-moi un <span class="text-gradient">message</span>
+              <p class="sub-title">Votre message</p>
+              <h2 class="mt-3 text-display-small text-on-surface mb-2">
+                <span class="block text-gradient">Quelques mots suffisent pour commencer.</span>
+                Je réponds généralement sous 48 h ouvrées.
               </h2>
               <p
                 class="text-body-large text-on-surface-variant mb-8 max-w-prose"
               >
-                Détaillez votre projet ou votre besoin, je vous répondrai dans
-                les plus brefs délais.
+                Indiquez-moi l’essentiel de votre demande&nbsp;; nous pourrons préciser
+                le reste ensemble.
               </p>
 
               <FormContact client:visible />

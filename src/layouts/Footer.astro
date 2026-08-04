@@ -11,10 +11,11 @@ interface Props {
 const { faq, showCta = true } = Astro.props;
 ---
 
+<div class="overflow-hidden">
 <FaqSection questions={faq} />
 {showCta && <CtaSection />}
 
-<footer class="theme-blue border-t border-outline-variant bg-surface-container-low">
+<footer class=" relative border-t border-outline-variant bg-surface-container-low z-10">
   <div class="max-width padding-x py-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
     <div>
       <p class="text-title-large text-on-surface">Joël Vigreux</p>
@@ -31,3 +32,4 @@ const { faq, showCta = true } = Astro.props;
     <p class="text-body-small text-on-surface-variant">© 2024–{new Date().getFullYear()} Joël Vigreux. Conception et développement par l’auteur.</p>
   </div>
 </footer>
+</div>

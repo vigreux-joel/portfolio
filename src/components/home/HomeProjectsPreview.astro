@@ -1,10 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import { Card } from "@components/Card";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import ProjectCard from "@components/projects/ProjectCard.astro";
 import ProjectFeature from "@components/projects/ProjectFeature.astro";
-import { Button, Icon } from "@udixio/ui-react";
+import { Button } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { BackgroundColor } from "../BackgroundColor";
@@ -15,6 +16,7 @@ const byOrder = (a: (typeof published)[number], b: (typeof published)[number]) =
 
 const feature = published.filter(({ data }) => data.home === "feature").sort(byOrder)[0];
 const cards = published.filter(({ data }) => data.home === "card").sort(byOrder);
+const previewCards = cards.slice(0, 2);
 
 if (!feature) {
   throw new Error(
@@ -35,11 +37,11 @@ if (!feature) {
     <div class="flex pt-8">
       <div class="theme-cyan"><Line client:idle icon={iFactCheck}  isLast /></div>
       <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
-        <h2 class="sub-title" data-sidebar-label="Projets">Projets</h2>
-        <div class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
-          <p class="text-gradient">Des projets réels,</p>
-          <p>que vous pouvez consulter.</p>
-        </div>
+        <p class="sub-title" data-sidebar-label="Projets">Projets</p>
+        <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+          <span class="block text-gradient">Voyez ce que je réalise concrètement.</span>
+          <span class="block">Je présente des projets réels, pas des maquettes.</span>
+        </h2>
         <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
           Chaque projet ci-dessous a été développé, mis en service ou est en cours de
           développement. Aucun n’est une maquette de démonstration.
@@ -53,16 +55,32 @@ if (!feature) {
       {
         cards.length > 0 && (
           <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {cards.map((project) => (
+            {previewCards.map((project) => (
               <ProjectCard project={project} />
             ))}
+
+            <Card
+              client:idle
+              variant="filled"
+              className="group relative z-10 flex h-full min-h-72 flex-col bg-surface-container-highest/90 px-8 py-6"
+            >
+              <span class="sub-title text-secondary">Tous les projets</span>
+              <h3 class="mt-4 text-headline-small text-on-surface">
+                Découvrez mes autres réalisations.
+              </h3>
+              <div class="mt-auto pt-8">
+                <Button
+                  href="/projets"
+                  label="Voir tous les projets"
+                  icon={iArrowForward}
+                  iconPosition="right"
+                  variant="tonal"
+                />
+              </div>
+            </Card>
           </div>
         )
       }
-
-      <Button className={"mt-8"} iconPosition="right" icon={iArrowForward} variant="tonal" href="/projets">
-        Voir tous les projets
-      </Button>
     </div>
   </div>
 

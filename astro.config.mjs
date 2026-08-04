@@ -10,6 +10,8 @@ import tailwindcss from '@tailwindcss/vite';
 import compress from "astro-compress";
 import {vitePlugin} from "@udixio/theme";
 
+const isBuild = process.argv.includes("build");
+
 // https://astro.build/config
 export default defineConfig({
     site: "https://vigreux-joel.fr/",
@@ -73,6 +75,7 @@ export default defineConfig({
         },
     ],
     vite: {
+        cacheDir: isBuild ? "node_modules/.vite-build" : "node_modules/.vite",
         plugins: [tailwindcss(), vitePlugin()],
         ssr: {
             noExternal: ["react-markdown", "@udixio/theme", "@udixio/tailwind", "@udixio/ui-react", "react-obfuscate", "react-google-recaptcha-v3", "tailwindcss"]

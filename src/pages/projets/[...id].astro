@@ -27,19 +27,7 @@ const { Content } = await render(project);
 const { data } = project;
 const projectUrl = new URL(`/projets/${project.id}`, Astro.site ?? Astro.url.origin).toString();
 
-const faq = [
-  {
-    question: `Quel était mon rôle sur ${data.title} ?`,
-    // superRefine garantit `solution` pour une étude de cas ; description en repli pour le typage.
-    answer: data.solution ?? data.description,
-  },
-  {
-    question: "Où consulter le projet ?",
-    answer: data.externalUrl
-      ? `Le projet est accessible à l’adresse ${data.externalUrl}.`
-      : "Les éléments consultables sont présentés dans cette étude de cas.",
-  },
-];
+const faq = data.faq;
 ---
 
 <Layout
@@ -69,9 +57,11 @@ const faq = [
       <div class="flex">
         <div><Line client:load isFirst /></div>
         <div class="padding pt-0 pb-12">
-          <p class="sub-title">{data.eyebrow}</p>
-          <h1 class="mt-5 text-display-medium xl:text-display-large text-gradient">{data.title}</h1>
-          <p class="mt-7 text-headline-small md:text-headline-medium max-w-4xl">{data.headline}</p>
+          <p class="sub-title">{data.heroContext}</p>
+          <h1 class="mt-5 text-display-medium xl:text-display-large max-w-5xl">
+            <span class="block text-gradient">{data.headline}</span>
+            <span class="block">{data.heroResponse}</span>
+          </h1>
           <p class="mt-6 text-body-large text-on-surface-variant max-w-3xl">{data.description}</p>
         </div>
       </div>
@@ -100,9 +90,19 @@ const faq = [
       >
         <Content />
 
-        {data.externalUrl && (
-          <div class="mt-14">
-            <Button href={data.externalUrl} icon={iArrowOutward} label="Ouvrir le projet" />
+        {(data.externalUrl || data.repositoryUrl) && (
+          <div class="mt-14 flex flex-wrap gap-4">
+            {data.externalUrl && (
+              <Button href={data.externalUrl} icon={iArrowOutward} label="Ouvrir le projet" />
+            )}
+            {data.repositoryUrl && (
+              <Button
+                href={data.repositoryUrl}
+                icon={iArrowOutward}
+                label="Voir le code sur GitHub"
+                variant={data.externalUrl ? "outlined" : "filled"}
+              />
+            )}
           </div>
         )}
       </article>

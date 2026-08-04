@@ -9,9 +9,9 @@ export const FrontEndUxScroll = () => {
         {
             text: (
                 <>
-                    <h4 className="text-headline-small text-primary">
+                    <h3 className="text-headline-small text-primary">
                         L'expérience utilisateur comme priorité
-                    </h4>
+                    </h3>
                     <p className="lg:mt-6 mt-2 text-body-large">
                         L'excellence d'une application ne se limite pas à son code : elle se ressent. Mon approche est centrée sur l'utilisateur, combinant une esthétique soignée à une navigation parfaitement fluide.
                     </p>
@@ -34,9 +34,9 @@ export const FrontEndUxScroll = () => {
         {
             text: (
                 <>
-                    <h4 className="text-headline-small text-primary">
+                    <h3 className="text-headline-small text-primary">
                         Architecture UI
-                    </h4>
+                    </h3>
                     <p className="lg:mt-6 mt-2 text-body-large">
                         Habitué aux standards comme Material 3, j'intègre vos maquettes avec une exigence millimétrée. Je traduis votre charte graphique en un système technique solide, pour garantir un rendu visuel harmonieux, sans la moindre friction pour vous.
                     </p>
@@ -63,9 +63,9 @@ export const FrontEndUxScroll = () => {
         {
             text: (
                 <>
-                    <h4 className="text-headline-small text-primary">
+                    <h3 className="text-headline-small text-primary">
                         Motion Design & Fluidité
-                    </h4>
+                    </h3>
                     <p className="lg:mt-6 mt-2 text-body-large">
                         Les animations ne sont pas de simples gadgets. Elles guident l'utilisateur et renforcent l'identité du projet. Je développe des interfaces fluides à 60 fps, enrichies de micro-interactions qui rendent chaque action intuitive et mémorable.
                     </p>
