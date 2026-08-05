@@ -1,5 +1,6 @@
 # build output
 dist/
+.vercel/
 # generated types
 .astro/
 .idea
@@ -20,8 +21,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-/.vercel/output/
 
 # superpowers brainstorming companion
 .superpowers/
-/.vercel/
