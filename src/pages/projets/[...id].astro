@@ -6,6 +6,8 @@ import { Line } from "@components/Line";
 import { Button } from "@udixio/ui-react";
 import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { BackgroundColor } from "@components/BackgroundColor";
+import ProjectTechnologies from "@components/projects/ProjectTechnologies.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection(
@@ -52,46 +54,81 @@ const faq = data.faq;
     },
   }}
 >
-  <section class="tab-menu theme-cyan bg-surface pt-32 md:pt-42 xl:pt-54">
+  <section class="tab-menu theme-cyan pt-32 md:pt-42 xl:pt-54">
+    <BackgroundColor
+      speed={9_000}
+      size="max(66vw, 800px)"
+      count={4}
+      client:idle
+      className="absolute inset-x-0 top-0 -z-10 h-[52rem] opacity-20"
+    />
     <div class="max-width">
       <div class="flex">
         <div><Line client:load isFirst /></div>
         <div class="padding pt-0 pb-12">
+          <a
+            href="/projets"
+            class="mb-7 inline-flex items-center gap-2 text-label-large text-primary underline-offset-4 hover:underline"
+          >
+            <span class="sr-only">Retour à la page </span>
+            <span aria-hidden="true">←</span>
+            Projets
+          </a>
           <p class="sub-title">{data.heroContext}</p>
           <h1 class="mt-5 text-display-medium xl:text-display-large max-w-5xl">
             <span class="block text-gradient">{data.headline}</span>
             <span class="block">{data.heroResponse}</span>
           </h1>
           <p class="mt-6 text-body-large text-on-surface-variant max-w-3xl">{data.description}</p>
+          <ProjectTechnologies
+            technologies={data.technologies}
+            label={`Technologies utilisées pour ${data.title}`}
+            class="mt-8"
+          />
         </div>
       </div>
 
       {data.cover && (
-        <div class="padding-x mt-8">
-          <img
-            src={data.cover.src}
-            alt={data.cover.alt}
-            width={data.cover.width}
-            height={data.cover.height}
-            class="w-full rounded-3xl object-cover"
-          />
+        <figure class="padding-x mt-4">
+          <div class="overflow-hidden rounded-3xl border border-outline-variant bg-surface-container-low p-2 md:p-3">
+            <img
+              src={data.cover.src}
+              alt={data.cover.alt}
+              width={data.cover.width}
+              height={data.cover.height}
+              class="w-full rounded-2xl object-cover"
+            />
+          </div>
           {data.cover.caption && <p class="mt-3 text-body-small text-on-surface-variant">{data.cover.caption}</p>}
-        </div>
+        </figure>
       )}
 
-      <div class="flex h-20 md:h-28"><div><Line client:idle icon={iFactCheck} /></div></div>
+      <div class="flex h-24 md:h-32"><div><Line client:idle icon={iFactCheck} /></div></div>
+
+      <div class="padding-x">
+        <div class="grid gap-4 lg:grid-cols-12">
+          <div class="rounded-3xl bg-surface-container-low p-6 md:p-8 lg:col-span-7">
+            <p class="text-label-large text-tertiary">Le besoin</p>
+            <p class="mt-4 text-headline-small text-on-surface">{data.need}</p>
+          </div>
+          <div class="rounded-3xl bg-primary-container p-6 text-on-primary-container md:p-8 lg:col-span-5 lg:row-span-2">
+            <p class="text-label-large">Ma réponse</p>
+            <p class="mt-4 text-headline-small">{data.solution}</p>
+          </div>
+          <div class="rounded-3xl border border-outline-variant p-6 md:p-8 lg:col-span-7">
+            <p class="text-label-large text-tertiary">Cadre technique</p>
+            <p class="mt-3 text-body-large text-on-surface-variant">{data.technicalNote}</p>
+          </div>
+        </div>
+      </div>
 
       <article
-        class="padding-x max-w-4xl pb-20
-          [&_h2]:mt-14 [&_h2]:text-headline-medium [&_h2]:text-on-surface
-          [&_p]:mt-5 [&_p]:text-body-large [&_p]:text-on-surface-variant
-          [&_ul]:mt-6 [&_ul]:space-y-3 [&_ul]:pl-6 [&_ul]:text-body-large [&_ul]:text-on-surface-variant [&_ul]:list-disc
-          [&_strong]:text-on-surface"
+        class="padding-x mt-16 pb-20 md:mt-24"
       >
         <Content />
 
         {(data.externalUrl || data.repositoryUrl) && (
-          <div class="mt-14 flex flex-wrap gap-4">
+          <div class="mt-4 flex flex-wrap gap-4 border-t border-outline-variant pt-10">
             {data.externalUrl && (
               <Button href={data.externalUrl} icon={iArrowOutward} label="Ouvrir le projet" />
             )}
@@ -105,6 +142,14 @@ const faq = data.faq;
             )}
           </div>
         )}
+
+        <a
+          href="/projets"
+          class="mt-12 inline-flex items-center gap-2 text-label-large text-primary underline-offset-4 hover:underline"
+        >
+          <span aria-hidden="true">←</span>
+          Voir tous les projets
+        </a>
       </article>
     </div>
   </section>

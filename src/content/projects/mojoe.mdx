@@ -23,19 +23,38 @@ faq:
     answer: "L’outil doit s’intégrer aux gestes déjà réalisés plutôt que leur ajouter un processus séparé. Dans Mojoe, la saisie intervient à la réception, l’emplacement est associé au rangement et la même information est retrouvée au retrait : chaque action correspond à une étape réelle du travail en réserve."
 ---
 
-## Le point de départ
+import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectPoints from "@components/projects/ProjectPoints.astro";
+import ProjectNote from "@components/projects/ProjectNote.astro";
+
+<ProjectChapter eyebrow="Le contexte" title="Retrouver un colis ne devrait pas dépendre de la mémoire." number="01">
 
 Les livraisons fournisseurs arrivaient en continu et étaient stockées là où il restait de la place. L’information sur ce qui était reçu, et sur l’endroit où cela se trouvait, restait dispersée entre les bons de livraison papier et la mémoire de l’équipe.
 
 Le retrait client devenait alors la partie la plus fragile du parcours : il fallait chercher, parfois faire patienter, parfois rappeler.
 
-## Ce que fait l’application
+</ProjectChapter>
 
-- l’enregistrement des livraisons dès leur réception ;
-- l’association de chaque colis à un emplacement de stockage ;
-- le suivi du stock disponible ;
-- la recherche rapide d’un colis lors du retrait client.
+<ProjectChapter eyebrow="Le produit" title="Quatre actions calées sur le travail en réserve." number="02">
 
-## Mon rôle
+<ProjectPoints
+  label="Fonctions principales de Mojoe"
+  items={[
+    "Enregistrer les livraisons dès leur réception",
+    "Associer chaque colis à un emplacement de stockage",
+    "Suivre le stock disponible",
+    "Retrouver rapidement un colis lors du retrait client",
+  ]}
+/>
 
-J’ai développé l’application mobile avec Flutter, en partant des besoins exprimés par l’équipe qui l’utilise au quotidien. Le parcours a été construit autour des gestes réellement effectués en réserve, plutôt qu’autour d’un modèle de données abstrait.
+</ProjectChapter>
+
+<ProjectChapter eyebrow="Ma contribution" title="Une application construite autour des gestes réels." number="03">
+
+J’ai développé l’application mobile avec Flutter, en partant des besoins exprimés par l’équipe qui l’utilise au quotidien.
+
+<ProjectNote title="Le principe retenu">
+  Le parcours a été construit autour des gestes réellement effectués en réserve, plutôt qu’autour d’un modèle de données abstrait.
+</ProjectNote>
+
+</ProjectChapter>

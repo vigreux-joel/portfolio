@@ -33,25 +33,51 @@ faq:
     answer: "Non. Leur impact dépend surtout de leur nombre, de leur déclenchement et du JavaScript nécessaire pour les exécuter. Sur ce portfolio, le contenu reste généré statiquement et seules les parties interactives chargent du JavaScript ; les animations respectent aussi la préférence de réduction des mouvements."
 ---
 
-## Pourquoi ce site est un projet
+import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectPoints from "@components/projects/ProjectPoints.astro";
+import ProjectNote from "@components/projects/ProjectNote.astro";
+
+<ProjectChapter eyebrow="Le parti pris" title="Traiter le portfolio comme un produit." number="01">
 
 Un portfolio est le seul projet dont le visiteur peut juger la qualité pendant qu’il le lit. C’est aussi le seul sur lequel je décide de tout : le contenu, l’architecture, les compromis.
 
 Je l’ai donc traité comme un produit, pas comme une plaquette.
 
-## Les choix techniques
+</ProjectChapter>
 
-- **Astro** pour un rendu statique : des pages rapides, sans JavaScript inutile côté client, et une bonne base pour le référencement.
-- **Udixio UI**, ma bibliothèque de composants, pour l’interface. Le site est ainsi le premier utilisateur réel du design system.
-- **Des îlots interactifs ciblés** : seules les parties qui en ont besoin sont hydratées côté navigateur.
+<ProjectChapter eyebrow="Les choix techniques" title="Servir le contenu d’abord, hydrater seulement l’utile." number="02">
 
-## Ce à quoi j’ai fait attention
+<ProjectPoints
+  label="Choix techniques du portfolio"
+  items={[
+    "Astro pour servir des pages statiques sans JavaScript inutile",
+    "Udixio UI pour éprouver le design system sur un produit réel",
+    "Des îlots interactifs ciblés, hydratés uniquement lorsque nécessaire",
+  ]}
+/>
 
-- la navigation complète au clavier et les contrastes de couleur ;
-- le poids des pages et le chargement des images ;
-- des contenus structurés et des données Schema.org pour le référencement ;
-- des textes écrits pour être compris, y compris par des lecteurs non techniques.
+</ProjectChapter>
 
-## Le code est public
+<ProjectChapter eyebrow="La qualité" title="Des exigences visibles et vérifiables." number="03">
 
-Le dépôt est consultable sur GitHub. C’est la façon la plus directe de vérifier ce que valent les affirmations de ce site.
+<ProjectPoints
+  label="Exigences de qualité du portfolio"
+  items={[
+    "Une navigation complète au clavier et des contrastes vérifiés",
+    "Le poids des pages et le chargement des images",
+    "Des contenus structurés et des données Schema.org",
+    "Des textes compréhensibles par les lecteurs non techniques",
+  ]}
+/>
+
+</ProjectChapter>
+
+<ProjectChapter eyebrow="La preuve" title="Le code reste consultable." number="04">
+
+Le dépôt est consultable sur GitHub.
+
+<ProjectNote title="Vérifier plutôt que croire">
+  Le dépôt public est la façon la plus directe de vérifier ce que valent les affirmations de ce site.
+</ProjectNote>
+
+</ProjectChapter>

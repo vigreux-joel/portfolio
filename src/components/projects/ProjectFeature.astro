@@ -14,6 +14,7 @@ interface Props {
   reverse?: boolean;
   caseStudyLabel?: string;
   externalLabel?: string;
+  layout?: "horizontal" | "vertical";
 }
 
 const {
@@ -21,13 +22,15 @@ const {
   reverse = false,
   caseStudyLabel = "Voir l’étude de cas",
   externalLabel,
+  layout = "horizontal",
 } = Astro.props;
 
 const { data } = project;
 const hasVisual = Boolean(data.cover || data.previewUrl);
+const isHorizontal = layout === "horizontal";
 const visualWidth = data.cover?.width ?? 1440;
 const visualHeight = data.cover?.height ?? 900;
-const paragraphs = data.intro.length > 0 ? data.intro : [data.description];
+const paragraphs = isHorizontal && data.intro.length > 0 ? data.intro : [data.description];
 
 const secondaryLink = data.externalUrl
   ? { href: data.externalUrl, label: externalLabel ?? `Ouvrir ${data.title}` }
@@ -38,14 +41,19 @@ const secondaryLink = data.externalUrl
 
 <article>
   <Card client:visible variant="filled" className="overflow-hidden">
-    <div class:list={[hasVisual && "grid items-start lg:grid-cols-[1.15fr_.85fr]"]}>
+    <div class:list={[hasVisual && isHorizontal && "grid lg:grid-cols-[1.15fr_.85fr]"]}>
       {
         hasVisual && (
           <div
-            class:list={["self-start overflow-hidden bg-surface-container", reverse && "lg:order-2"]}
-            style={`aspect-ratio: ${visualWidth} / ${visualHeight}`}
+            class:list={[
+              "overflow-hidden bg-surface-container",
+              isHorizontal && "aspect-8/5 lg:aspect-auto lg:h-full lg:min-h-72",
+              !isHorizontal && "self-start",
+              reverse && isHorizontal && "lg:order-2",
+            ]}
+            style={!isHorizontal ? `aspect-ratio: ${visualWidth} / ${visualHeight}` : undefined}
           >
-            <ProjectVisual project={project} />
+            <ProjectVisual project={project} fit={isHorizontal ? "cover" : "contain"} />
           </div>
         )
       }
@@ -62,7 +70,7 @@ const secondaryLink = data.externalUrl
         }
 
         {
-          data.highlights.length > 0 && (
+          isHorizontal && data.highlights.length > 0 && (
             <ul class="mt-8 grid gap-3 sm:grid-cols-2" aria-label={`Caractéristiques de ${data.title}`}>
               {data.highlights.map((highlight) => (
                 <li class="flex items-start gap-3 text-body-medium text-on-surface-variant">
@@ -75,7 +83,7 @@ const secondaryLink = data.externalUrl
         }
 
         {
-          !data.cover && data.technologies.length > 0 && (
+          data.technologies.length > 0 && (
             <ProjectTechnologies
               technologies={data.technologies}
               label={`Technologies utilisées pour ${data.title}`}

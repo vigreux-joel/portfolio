@@ -11,10 +11,12 @@ import { IconButton } from "@udixio/ui-react";
 interface Props {
   project: CollectionEntry<"projects">;
   linkLabel?: string;
+  layout?: "horizontal" | "vertical";
 }
 
-const { project, linkLabel } = Astro.props;
+const { project, linkLabel, layout = "vertical" } = Astro.props;
 const { data } = project;
+const isHorizontal = layout === "horizontal";
 
 const isRealisation = data.kind === "realisation";
 const href = isRealisation ? data.externalUrl! : `/projets/${project.id}`;
@@ -24,19 +26,27 @@ const visualWidth = data.cover?.width ?? 1440;
 const visualHeight = data.cover?.height ?? 900;
 ---
 
-<article>
-  <Card client:visible interactive variant="filled" className="flex h-full flex-col">
+<article class="h-full">
+  <Card client:visible interactive variant="filled" className="flex h-full flex-col !overflow-hidden">
     <a
       href={href}
       target={isRealisation ? "_blank" : undefined}
       rel={isRealisation ? "noopener noreferrer" : undefined}
       aria-label={`${label} : ${data.title}`}
-      class="group/card-link relative z-10 flex h-full flex-col"
+      class:list={[
+        "group/card-link relative z-10 h-full",
+        isHorizontal
+          ? "grid md:grid-cols-[minmax(0,1.15fr)_minmax(18rem,.85fr)]"
+          : "flex flex-col",
+      ]}
     >
       {
         (data.cover || data.previewUrl) && (
           <div
-            class="relative overflow-hidden bg-surface-container"
+            class:list={[
+              "relative overflow-hidden border-outline-variant bg-surface-container-low",
+              isHorizontal ? "border-b md:border-b-0 md:border-r" : "border-b",
+            ]}
             style={`aspect-ratio: ${visualWidth} / ${visualHeight}`}
           >
             <ProjectVisual project={project} />
@@ -52,22 +62,18 @@ const visualHeight = data.cover?.height ?? 900;
         {`${label} : ${data.title}`}
       </IconButton>
 
-      <div class="flex flex-1 flex-col p-7">
+      <div class="flex flex-1 flex-col p-6 md:p-7">
         <div class:list={[!data.cover && !data.previewUrl && "pr-16"]}>
           <p class="text-title-medium-large text-secondary">{data.eyebrow}</p>
           <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
         </div>
         <p class="mt-4 text-body-medium text-on-surface-variant">{data.description}</p>
 
-        {
-          !data.cover && (
-            <ProjectTechnologies
-              technologies={data.technologies}
-              label={`Technologies utilisées pour ${data.title}`}
-              class="mt-auto pt-8"
-            />
-          )
-        }
+        <ProjectTechnologies
+          technologies={data.technologies}
+          label={`Technologies utilisées pour ${data.title}`}
+          class="mt-auto pt-8"
+        />
       </div>
     </a>
   </Card>

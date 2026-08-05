@@ -10,7 +10,7 @@ solution: "J’ai conduit des migrations progressives plutôt que des réécritu
 technicalNote: "Poste de développeur full-stack, d’avril 2023 à juin 2026."
 publishedAt: 2023-04-01
 order: 4
-featured: true
+featured: false
 draft: false
 home: "card"
 previewUrl: "https://netsimpler.io/"
@@ -27,28 +27,48 @@ faq:
     answer: "Elle est préférable lorsque le produit doit continuer de fonctionner, que des évolutions restent attendues et que certaines parties de l’existant peuvent encore être conservées. Elle réduit le risque d’une bascule unique et permet de valider les bénéfices de chaque étape avant de poursuivre."
 ---
 
-## Le contexte
+import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectPoints from "@components/projects/ProjectPoints.astro";
+import ProjectNote from "@components/projects/ProjectNote.astro";
+
+<ProjectChapter eyebrow="Le contexte" title="Faire évoluer un SaaS déjà utilisé chaque jour." number="01">
 
 Netsimpler est une plateforme SaaS de création de sites web. J’y ai travaillé comme développeur full-stack pendant un peu plus de trois ans, sur un produit déjà en production et utilisé quotidiennement.
 
 Cette fiche décrit ma contribution technique. Elle ne présente pas le produit lui-même, dont les orientations ne dépendaient pas de moi.
 
-## Ce que j’ai développé
+</ProjectChapter>
 
-- des interfaces avec Astro, React et TypeScript ;
-- des API et des services back-end sur AWS ;
-- l’authentification, la gestion des données et du contenu, et des traitements serverless.
+<ProjectChapter eyebrow="Ma contribution" title="Du front-end aux services back-end." number="02">
 
-## Les deux migrations
+<ProjectPoints
+  label="Périmètre de ma contribution chez Netsimpler"
+  items={[
+    "Des interfaces avec Astro, React et TypeScript",
+    "Des API et services back-end sur AWS",
+    "L’authentification et la gestion des données et du contenu",
+    "Des traitements serverless ciblés",
+  ]}
+/>
+
+</ProjectChapter>
+
+<ProjectChapter eyebrow="Les migrations" title="Remplacer progressivement, sans couper le service." number="03">
 
 **Le front-end.** Le socle Angular a été migré progressivement vers Astro et React, écran par écran, afin de simplifier l’architecture et d’améliorer les performances sans bloquer les évolutions fonctionnelles en cours.
 
 **Le back-end.** Une architecture en microservices reposant sur NestJS, Apollo Federation et MongoDB a été restructurée vers AppSync, Cognito et des fonctions Lambda ciblées.
 
-Dans les deux cas, la contrainte principale était la même : le produit devait continuer de fonctionner pendant la transition.
+<ProjectNote title="La contrainte commune">
+  Dans les deux cas, le produit devait continuer de fonctionner pendant la transition.
+</ProjectNote>
 
-## Ce que j’en retire
+</ProjectChapter>
+
+<ProjectChapter eyebrow="Le recul" title="La production impose des étapes vérifiables." number="04">
 
 Travailler pendant trois ans sur une base existante apprend des choses qu’un projet neuf n’enseigne pas : composer avec des dépendances techniques que l’on n’a pas choisies, mesurer le coût réel d’une migration, et préférer une série d’étapes vérifiables à une réécriture qui promet de tout régler.
 
 C’est cette expérience de la production, plus que la plateforme elle-même, que j’apporte aujourd’hui sur les projets que je reprends.
+
+</ProjectChapter>

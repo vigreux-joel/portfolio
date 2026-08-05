@@ -39,21 +39,38 @@ faq:
     answer: "Non. Un design system peut partager les composants et leurs comportements sans figer l’identité visuelle. Dans Udixio UI, les thèmes sont générés à partir d’une couleur principale afin d’adapter l’apparence tout en conservant des interactions et des états cohérents."
 ---
 
-## Le point de départ
+import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectPoints from "@components/projects/ProjectPoints.astro";
+import ProjectNote from "@components/projects/ProjectNote.astro";
+
+<ProjectChapter eyebrow="Le constat" title="La cohérence se perd une décision après l’autre." number="01">
 
 Une interface évolue rarement d’un seul bloc. De nouvelles pages arrivent, plusieurs personnes interviennent et des différences apparaissent peu à peu dans les couleurs, les espacements ou le comportement des composants.
 
 L’objectif d’Udixio UI est de fournir une base commune sans enfermer le produit dans une identité visuelle figée.
 
-## Ce que le système prend en charge
+</ProjectChapter>
 
-- des composants prêts à être réutilisés dans plusieurs écrans ;
-- des thèmes générés à partir d’une couleur principale ;
-- des comportements et états cohérents au clavier, à la souris et au toucher ;
-- une API TypeScript commune pour limiter les décisions répétitives.
+<ProjectChapter eyebrow="Le système" title="Une base commune, du thème jusqu’aux interactions." number="02">
 
-## Mon rôle
+<ProjectPoints
+  label="Responsabilités prises en charge par Udixio UI"
+  items={[
+    "Des composants prêts à être réutilisés dans plusieurs écrans",
+    "Des thèmes générés à partir d’une couleur principale",
+    "Des états cohérents au clavier, à la souris et au toucher",
+    "Une API TypeScript commune pour limiter les décisions répétitives",
+  ]}
+/>
+
+</ProjectChapter>
+
+<ProjectChapter eyebrow="Ma contribution" title="Concevoir, développer et documenter le même système." number="03">
 
 J’ai défini les règles du système, conçu l’architecture des composants, développé la bibliothèque React et rédigé sa documentation.
 
-Le portfolio que vous consultez utilise directement Udixio UI. Le projet est donc confronté à un usage réel plutôt qu’à une simple démonstration isolée.
+<ProjectNote title="Une validation en conditions réelles">
+  Le portfolio que vous consultez utilise directement Udixio UI. Le projet est donc confronté à un usage réel plutôt qu’à une simple démonstration isolée.
+</ProjectNote>
+
+</ProjectChapter>

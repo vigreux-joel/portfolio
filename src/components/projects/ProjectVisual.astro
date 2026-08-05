@@ -6,11 +6,13 @@ interface Props {
   project: CollectionEntry<"projects">;
   class?: string;
   loading?: "eager" | "lazy";
+  fit?: "cover" | "contain";
 }
 
-const { project, class: className = "", loading = "lazy" } = Astro.props;
+const { project, class: className = "", loading = "lazy", fit = "contain" } = Astro.props;
 const { cover, previewUrl, technologies } = project.data;
 const src = cover?.src ?? `/images/projects/generated/${project.id}.webp`;
+const fitClass = fit === "cover" ? "object-cover" : "object-contain";
 ---
 
 {
@@ -22,7 +24,11 @@ const src = cover?.src ?? `/images/projects/generated/${project.id}.webp`;
       height={cover.height}
       loading={loading}
       decoding="async"
-      class:list={["h-full w-full object-contain", className]}
+      class:list={[
+        "h-full w-full transition-transform duration-700 group-hover/card-link:scale-[1.02]",
+        fitClass,
+        className,
+      ]}
     />
   ) : previewUrl ? (
     <video
@@ -33,7 +39,11 @@ const src = cover?.src ?? `/images/projects/generated/${project.id}.webp`;
       playsinline
       preload="none"
       aria-hidden="true"
-      class:list={["h-full w-full object-contain", className]}
+      class:list={[
+        "h-full w-full transition-transform duration-700 group-hover/card-link:scale-[1.02]",
+        fitClass,
+        className,
+      ]}
     >
       <source src={`/videos/projects/${project.id}.webm`} type="video/webm" />
     </video>
