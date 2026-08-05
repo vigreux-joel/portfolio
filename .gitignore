@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # superpowers brainstorming companion
 .superpowers/
+
+# local application documents
+motivation.md
+motiovation.md
