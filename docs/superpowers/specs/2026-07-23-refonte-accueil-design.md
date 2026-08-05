@@ -108,10 +108,10 @@ preuves). À la place :
 
 - **Chaque projet est une entrée MDX** de la collection, y compris Netsimpler et le
   portfolio lui-même. Le frontmatter s'enrichit d'un champ `highlights` (liste de points
-  de preuve, remplace le tableau `proofs` hardcodé) et si besoin d'un champ de mise en
-  avant (`featured` existant + `order` pour l'ordre d'affichage).
+  de preuve, remplace le tableau `proofs` hardcodé). Le champ nullable `order` définit
+  uniquement la position éditoriale souhaitée commune à tous les affichages.
 - **Deux composants partagés** rendent n'importe quelle entrée de la collection :
-  - `ProjectFeature.astro` — grand format « phare » (utilisé pour Udixio UI en section 3
+  - `ProjectDetailedCard.astro` — grand format détaillé (utilisé pour Udixio UI en section 3
     et pour le portfolio en section 5) ;
   - `ProjectCard.astro` — format carte secondaire (les 3 cartes de la grille).
 - Ces composants sont réutilisables sur `/projets` pour garder une présentation unique.
@@ -138,7 +138,7 @@ externe ni démo, elle garde son intitulé générique et pointe vers sa page é
 - **Titre proposé** : « Le site que vous êtes en train de consulter. »
 - **Rôle** : clore la page sur une preuve vérifiable en un clic — le lecteur vient de
   parcourir le produit.
-- **Rendu via `ProjectFeature.astro`**, alimenté par l'entrée
+- **Rendu via `ProjectDetailedCard.astro`**, alimenté par l'entrée
   `vigreux-joel-fr.mdx` de la collection — même présentation que le phare Udixio UI.
 - **Contenu — l'histoire du site** :
   - conçu comme démonstration du niveau d'exigence défendu sur la page ;
@@ -178,9 +178,9 @@ Ajouter une question sur l'estimation, peur client non couverte :
 | `HomeExperienceProof.astro` | **Supprimé** |
 | `HomeExpertisePreview.astro` | **Remplacé** par `HomeSituations.astro` (nouvelles cartes besoins) |
 | `HomeProjectsPreview.astro` | Réécrit : phare + grille de 3 cartes, entièrement piloté par la collection |
-| `ProjectFeature.astro`, `ProjectCard.astro` | **Nouveaux** composants partagés de présentation |
+| `ProjectDetailedCard.astro`, `ProjectCard.astro` | **Nouveaux** composants partagés de présentation |
 | `HomeMethodPreview.astro` | Titre modifié uniquement |
-| `HomePortfolioStory.astro` | **Nouveau** (section 5, wrapper autour de `ProjectFeature`) |
+| `HomePortfolioStory.astro` | **Nouveau** (section 5, wrapper autour de `ProjectDetailedCard`) |
 | `HomeContextPaths.astro` | Textes raccourcis |
 | Schéma de la collection `projects` | Champ `highlights` ajouté (points de preuve des cartes/phares) |
 | `atelier-local-demo.mdx`, `clair-habitat-demo.mdx` | Supprimés ou `draft: true` |
@@ -211,8 +211,8 @@ Réalisé le 2026-07-23. Le build passe et les cinq pages projet sont générée
 
 **Choix faits pendant l’implémentation :**
 
-- **Pilotage par la collection** : un champ `home: "feature" | "card" | "story"` détermine
-  l’emplacement occupé sur la page d’accueil, et `order` l’ordre d’affichage. Aucun
+- **Pilotage par la collection** : `order` détermine la priorité éditoriale. La page
+  d’accueil choisit combien de projets afficher et présente le premier en détail. Aucun
   identifiant de projet n’est codé en dur dans les composants.
 - **`cover` devient optionnel** dans le schéma. Les projets sans capture (Mojoe,
   plateforme agences, Netsimpler, ce portfolio) affichent un panneau de repli
@@ -234,8 +234,8 @@ de repli tient la place proprement en attendant des captures.
 
 - La plateforme pour agences web est **privée et sans nom public** : intitulé générique
   conservé, aucun lien externe.
-- Les présentations de projets (phare et cartes) sont **entièrement pilotées par la
-  collection MDX** via les composants partagés `ProjectFeature` / `ProjectCard`.
+- Les présentations de projets (détaillée et compacte) sont alimentées par la
+  collection MDX via les composants partagés `ProjectDetailedCard` / `ProjectCard`.
 
 ## Addendum du 2026-07-23 (après retour utilisateur)
 
@@ -248,15 +248,14 @@ de repli tient la place proprement en attendant des captures.
 - **Deux types de projets** via le champ `kind` : `etude-de-cas` (page dédiée,
   champs narratifs obligatoires) et `realisation` (carte simple avec lien externe,
   pas de page). Pour ajouter une réalisation : créer un `.mdx` avec
-  `kind: "realisation"`, `externalUrl`, et sans `home`.
+  `kind: "realisation"` et `externalUrl`.
 - **Doubles fonds corrigés** : le panneau de repli de `ProjectVisual` hérite du
   fond de sa carte au lieu d’empiler un `bg-surface-container` plus sombre.
 
 ### Écarts par rapport au plan d’implémentation
 
-- Les tâches 1 et 3 du plan ont été **fusionnées en un seul commit** : retirer
-  l’emplacement `home: "story"` du schéma et supprimer `HomePortfolioStory.astro`
-  (son unique consommateur) sont indissociables — le build échoue entre les deux.
+- Les tâches 1 et 3 du plan ont été **fusionnées en un seul commit** : supprimer
+  `HomePortfolioStory.astro` et adapter son unique consommateur sont indissociables.
 - La page `/projets` doit fournir une prop `faq` au `Layout` : `Footer` rend
   `FaqSection` inconditionnellement et `questions.map()` échoue sinon. Une FAQ
   propre à la page projets a été rédigée (captures manquantes, étude de cas vs

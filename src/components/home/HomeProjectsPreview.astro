@@ -4,25 +4,19 @@ import { Card } from "@components/Card";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import ProjectCard from "@components/projects/ProjectCard.astro";
-import ProjectFeature from "@components/projects/ProjectFeature.astro";
+import ProjectDetailedCard from "@components/projects/ProjectDetailedCard.astro";
+import { sortProjects } from "../../utils/projects";
 import { Button } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { BackgroundColor } from "../BackgroundColor";
 
 const published = await getCollection("projects", ({ data }) => !data.draft);
-const byOrder = (a: (typeof published)[number], b: (typeof published)[number]) =>
-  a.data.order - b.data.order;
-
-const feature = published.filter(({ data }) => data.home === "feature").sort(byOrder)[0];
-const cards = published.filter(({ data }) => data.home === "card").sort(byOrder);
-const previewCards = cards.slice(0, 2);
-
-if (!feature) {
-  throw new Error(
-    'La page d’accueil attend un projet avec `home: "feature"` dans la collection projects.',
-  );
-}
+const HOME_PROJECT_LIMIT = 3;
+const [primaryProject, ...secondaryProjects] = sortProjects(published).slice(
+  0,
+  HOME_PROJECT_LIMIT,
+);
 ---
 
 <section id="projets" class="tab-menu theme-cyan ">
@@ -50,12 +44,12 @@ if (!feature) {
     </div>
 
     <div class="section pt-0">
-      <ProjectFeature project={feature} />
+      {primaryProject && <ProjectDetailedCard project={primaryProject} />}
 
       {
-        cards.length > 0 && (
+        secondaryProjects.length > 0 && (
           <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {previewCards.map((project) => (
+            {secondaryProjects.map((project) => (
               <ProjectCard project={project} />
             ))}
 

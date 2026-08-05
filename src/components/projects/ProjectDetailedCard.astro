@@ -30,17 +30,23 @@ const hasVisual = Boolean(data.cover || data.previewUrl);
 const isHorizontal = layout === "horizontal";
 const visualWidth = data.cover?.width ?? 1440;
 const visualHeight = data.cover?.height ?? 900;
-const paragraphs = isHorizontal && data.intro.length > 0 ? data.intro : [data.description];
+const introduction = isHorizontal ? (data.intro ?? data.description) : data.description;
+const isRealisation = data.kind === "realisation";
+const visibleHighlights = isHorizontal ? data.highlights : data.highlights.slice(0, 3);
 
-const secondaryLink = data.externalUrl
+const primaryLink = isRealisation
+  ? { href: data.externalUrl!, label: externalLabel ?? "Voir le site", icon: iArrowOutward }
+  : { href: `/projets/${project.id}`, label: caseStudyLabel, icon: iArrowForward };
+
+const secondaryLink = !isRealisation && data.externalUrl
   ? { href: data.externalUrl, label: externalLabel ?? `Ouvrir ${data.title}` }
   : data.repositoryUrl
     ? { href: data.repositoryUrl, label: externalLabel ?? "Voir le code sur GitHub" }
     : null;
 ---
 
-<article>
-  <Card client:visible variant="filled" className="overflow-hidden">
+<article class="h-full">
+  <Card client:visible variant="filled" className="h-full overflow-hidden">
     <div class:list={[hasVisual && isHorizontal && "grid lg:grid-cols-[1.15fr_.85fr]"]}>
       {
         hasVisual && (
@@ -63,16 +69,39 @@ const secondaryLink = data.externalUrl
         <h3 class="mt-3 text-headline-large text-on-surface">{data.title}</h3>
         {data.headline && <p class="mt-4 text-headline-small text-on-surface">{data.headline}</p>}
 
+        <p class="mt-6 text-body-large text-on-surface-variant">{introduction}</p>
+
         {
-          paragraphs.map((paragraph) => (
-            <p class="mt-6 text-body-large text-on-surface-variant">{paragraph}</p>
-          ))
+          isHorizontal && data.supportingText && (
+            <p class="mt-6 border-l-2 border-primary/40 pl-4 text-body-medium text-on-surface-variant">
+              {data.supportingText}
+            </p>
+          )
         }
 
         {
-          isHorizontal && data.highlights.length > 0 && (
-            <ul class="mt-8 grid gap-3 sm:grid-cols-2" aria-label={`Caractéristiques de ${data.title}`}>
-              {data.highlights.map((highlight) => (
+          !isHorizontal && !isRealisation && (
+            <dl class="mt-7 grid gap-3 sm:grid-cols-2">
+              <div class="rounded-2xl bg-surface-container-high/70 p-5">
+                <dt class="text-label-large text-tertiary">Besoin</dt>
+                <dd class="mt-2 line-clamp-3 text-body-medium text-on-surface-variant">
+                  {data.need}
+                </dd>
+              </div>
+              <div class="rounded-2xl bg-primary-container/35 p-5">
+                <dt class="text-label-large text-primary">Réponse</dt>
+                <dd class="mt-2 line-clamp-3 text-body-medium text-on-surface-variant">
+                  {data.solution}
+                </dd>
+              </div>
+            </dl>
+          )
+        }
+
+        {
+          visibleHighlights.length > 0 && (
+            <ul class="mt-8 grid gap-3 sm:grid-cols-2" aria-label={`Points clés de ${data.title}`}>
+              {visibleHighlights.map((highlight) => (
                 <li class="flex items-start gap-3 text-body-medium text-on-surface-variant">
                   <Icon icon={iCheckCircle} className="mt-0.5 size-5 shrink-0 text-primary" />
                   <span>{highlight}</span>
@@ -93,7 +122,7 @@ const secondaryLink = data.externalUrl
         }
 
         <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-          <Button href={`/projets/${project.id}`} icon={iArrowForward} label={caseStudyLabel} />
+          <Button href={primaryLink.href} icon={primaryLink.icon} label={primaryLink.label} />
           {
             secondaryLink && (
               <Button

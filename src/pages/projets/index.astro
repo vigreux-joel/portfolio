@@ -3,15 +3,13 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Line } from "@components/Line";
 import ProjectCard from "@components/projects/ProjectCard.astro";
-import ProjectFeature from "@components/projects/ProjectFeature.astro";
+import ProjectDetailedCard from "@components/projects/ProjectDetailedCard.astro";
+import { sortProjects } from "../../utils/projects";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { BackgroundColor } from "@components/BackgroundColor";
 
 const published = await getCollection("projects", ({ data }) => !data.draft);
-const byOrder = (a: (typeof published)[number], b: (typeof published)[number]) =>
-  a.data.order - b.data.order;
-
-const projects = published.sort(byOrder);
+const projects = sortProjects(published);
 
 const collectionJsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -104,18 +102,14 @@ const collectionJsonLd = JSON.stringify({
         </div>
       </div>
 
-      <ol class="padding-x grid gap-6 md:grid-cols-2 xl:grid-cols-6">
+      <ol class="padding-x grid items-stretch gap-6 md:grid-cols-2">
         {projects.map((project) => (
-          <li class:list={[
-            "min-w-0",
-            project.data.kind === "realisation" && "md:col-span-2 xl:col-span-6",
-            project.data.kind === "etude-de-cas" && "xl:col-span-3",
-          ]}>
+          <li class="min-w-0">
             {
               project.data.kind === "etude-de-cas" ? (
-                <ProjectFeature project={project} layout="vertical" />
+                <ProjectDetailedCard project={project} layout="vertical" />
               ) : (
-                <ProjectCard project={project} layout="horizontal" />
+                <ProjectCard project={project} />
               )
             }
           </li>

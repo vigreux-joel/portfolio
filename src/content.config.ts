@@ -27,22 +27,19 @@ const projects = defineCollection({
       solution: z.string().optional(),
       technicalNote: z.string().optional(),
       publishedAt: z.coerce.date(),
-      order: z.number().int().nonnegative(),
-      featured: z.boolean().default(false),
+      /** Position éditoriale souhaitée. Les projets sans ordre remplissent les places libres. */
+      order: z.number().int().positive().nullable().default(null),
       draft: z.boolean().default(false),
       /**
        * "etude-de-cas" : page dédiée et présentation riche.
        * "realisation" : simple carte pointant vers le site en ligne, sans page dédiée.
        */
       kind: z.enum(["etude-de-cas", "realisation"]).default("etude-de-cas"),
-      /**
-       * Emplacement occupé sur la page d’accueil :
-       * "feature" projet mis en avant, "card" grille secondaire.
-       */
-      home: z.enum(["feature", "card"]).optional(),
-      /** Paragraphes affichés sous le titre dans la présentation mise en avant. */
-      intro: z.array(z.string()).default([]),
-      /** Points de preuve listés sur la présentation mise en avant. */
+      /** Introduction unique affichée dans la présentation détaillée. */
+      intro: z.string().optional(),
+      /** Complément court affiché avec une emphase plus discrète que l’introduction. */
+      supportingText: z.string().optional(),
+      /** Points de preuve listés sur la présentation détaillée. */
       highlights: z.array(z.string()).default([]),
       cover: z
         .object({
@@ -84,13 +81,6 @@ const projects = defineCollection({
             message: "Une étude de cas doit proposer au moins deux questions fréquentes.",
           });
         }
-      }
-      if (data.kind === "realisation" && data.home) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["home"],
-          message: "Une réalisation ne peut pas occuper d’emplacement sur la page d’accueil.",
-        });
       }
       if (data.kind === "realisation" && !data.externalUrl) {
         ctx.addIssue({

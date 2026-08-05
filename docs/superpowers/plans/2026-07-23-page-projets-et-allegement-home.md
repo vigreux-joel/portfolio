@@ -4,7 +4,7 @@
 
 **Goal:** Créer la vraie page de listing `/projets` (études de cas vs réalisations), supprimer la section « Ce portfolio » de la page d'accueil, et corriger les doubles fonds de couleur dans les cartes projet.
 
-**Architecture:** Le site est un portfolio Astro statique. Les projets vivent dans la collection de contenu `projects` (MDX + schéma Zod dans `src/content.config.ts`) et sont rendus par trois composants partagés (`ProjectFeature`, `ProjectCard`, `ProjectVisual` dans `src/components/projects/`). On introduit un champ discriminant `kind` (« etude-de-cas » a une page dédiée et un format riche ; « realisation » est une simple carte pointant vers le site en ligne). La home garde 1 projet phare + 3 cartes ; tout le reste vit sur la nouvelle page `/projets`.
+**Architecture:** Le site est un portfolio Astro statique. Les projets vivent dans la collection de contenu `projects` (MDX + schéma Zod dans `src/content.config.ts`) et sont rendus par trois composants partagés (`ProjectDetailedCard`, `ProjectCard`, `ProjectVisual` dans `src/components/projects/`). Le champ `order`, nullable, définit uniquement leur position éditoriale souhaitée ; les doublons se décalent vers la première place libre et les projets sans ordre remplissent les trous. Chaque page choisit ensuite le nombre d’entrées et leur présentation. Le champ discriminant `kind` distingue l’étude de cas avec page dédiée de la réalisation pointant vers un site en ligne.
 
 **Tech Stack:** Astro 6 (rendu statique), TypeScript, Tailwind, collection de contenu Astro (loader glob + Zod), design system maison `@udixio/ui-react` (composants `Button`, `Icon`), icônes `@udixio/icons-outlined-400`.
 
@@ -21,9 +21,9 @@
 ## État des lieux (contexte pour l'exécutant)
 
 - `src/pages/projets/index.astro` **n'existe pas** — seule la page de détail `src/pages/projets/[...id].astro` existe. Le menu (`src/components/Menu.tsx:6`) pointe vers l'ancre `/#projets`.
-- La collection contient 5 entrées, toutes des études de cas de fait : `udixio-ui` (order 1, `home: "feature"`), `mojoe` (2, `home: "card"`), `plateforme-agences` (3, `home: "card"`), `netsimpler` (4, `home: "card"`), `vigreux-joel-fr` (5, `home: "story"`).
+- La collection contient des entrées ordonnées par le seul champ `order`; aucune entrée ne choisit son emplacement ou son format d’affichage.
 - La home affiche actuellement : Hero → Situations → Projets → Méthode → **HomePortfolioStory** (section à supprimer) → ContextPaths.
-- **Bug visuel à corriger** : `ProjectVisual.astro` (panneau de repli sans capture) pose un fond `bg-surface-container` (sombre) à l'intérieur des cartes `bg-surface-container-low` (claires) de `ProjectFeature`/`ProjectCard`, qui posent en plus leur propre `bg-surface-container` sur la zone visuelle. Résultat : double fond disgracieux sur les cartes sans capture.
+- **Bug visuel à corriger** : `ProjectVisual.astro` (panneau de repli sans capture) pose un fond `bg-surface-container` (sombre) à l'intérieur des cartes `bg-surface-container-low` (claires) de `ProjectDetailedCard`/`ProjectCard`, qui posent en plus leur propre `bg-surface-container` sur la zone visuelle. Résultat : double fond disgracieux sur les cartes sans capture.
 - Aucune entrée `realisation` n'existe encore : la section « Autres réalisations » de `/projets` doit être **conditionnelle** (rendue seulement si la liste est non vide).
 
 ---
@@ -35,7 +35,7 @@
 - Modify: `src/content/projects/vigreux-joel-fr.mdx` (frontmatter uniquement)
 
 **Interfaces:**
-- Produces: `data.kind: "etude-de-cas" | "realisation"` (défaut `"etude-de-cas"`) et `data.home?: "feature" | "card"` (la valeur `"story"` disparaît de l'enum). `headline`, `need`, `solution`, `technicalNote` deviennent optionnels mais restent **obligatoires pour les études de cas** via `superRefine`.
+- Produces: `data.kind: "etude-de-cas" | "realisation"` (défaut `"etude-de-cas"`) et `data.order: number | null`. `headline`, `need`, `solution`, `technicalNote` deviennent optionnels mais restent **obligatoires pour les études de cas** via `superRefine`.
 
 - [ ] **Step 1: Mettre à jour le schéma**
 
@@ -52,22 +52,18 @@ Dans `src/content.config.ts`, remplacer le bloc `schema: z.object({ ... })` (act
       solution: z.string().optional(),
       technicalNote: z.string().optional(),
       publishedAt: z.coerce.date(),
-      order: z.number().int().nonnegative(),
-      featured: z.boolean().default(false),
+      order: z.number().int().positive().nullable().default(null),
       draft: z.boolean().default(false),
       /**
        * "etude-de-cas" : page dédiée et présentation riche.
        * "realisation" : simple carte pointant vers le site en ligne, sans page dédiée.
        */
       kind: z.enum(["etude-de-cas", "realisation"]).default("etude-de-cas"),
-      /**
-       * Emplacement occupé sur la page d’accueil :
-       * "feature" projet mis en avant, "card" grille secondaire.
-       */
-      home: z.enum(["feature", "card"]).optional(),
-      /** Paragraphes affichés sous le titre dans la présentation mise en avant. */
-      intro: z.array(z.string()).default([]),
-      /** Points de preuve listés sur la présentation mise en avant. */
+      /** Introduction unique affichée dans la présentation détaillée. */
+      intro: z.string().optional(),
+      /** Complément court affiché avec une emphase plus discrète. */
+      supportingText: z.string().optional(),
+      /** Points de preuve listés sur la présentation détaillée. */
       highlights: z.array(z.string()).default([]),
       cover: z
         .object({
@@ -94,25 +90,12 @@ Dans `src/content.config.ts`, remplacer le bloc `schema: z.object({ ... })` (act
           }
         }
       }
-      if (data.kind === "realisation" && data.home) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ["home"],
-          message: "Une réalisation ne peut pas occuper d’emplacement sur la page d’accueil.",
-        });
-      }
     }),
 ```
 
-- [ ] **Step 2: Retirer `home: "story"` du frontmatter du portfolio**
+- [ ] **Step 2: Vérifier que le contenu ne pilote aucun emplacement d’affichage**
 
-Dans `src/content/projects/vigreux-joel-fr.mdx`, supprimer la ligne :
-
-```yaml
-home: "story"
-```
-
-(Le projet reste une étude de cas visible sur `/projets` ; il n'apparaît plus sur la home.)
+Les fichiers MDX ne contiennent que leur priorité `order`. Leur présence et leur format sur une page sont décidés par le composant consommateur.
 
 - [ ] **Step 3: Vérifier le build**
 
@@ -142,12 +125,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 **Files:**
 - Modify: `src/components/projects/ProjectVisual.astro`
-- Modify: `src/components/projects/ProjectFeature.astro`
+- Modify: `src/components/projects/ProjectDetailedCard.astro`
 - Modify: `src/components/projects/ProjectCard.astro`
 
 **Interfaces:**
 - Consumes: `data.kind` défini en Task 1.
-- Produces: `ProjectCard` rend un lien externe (`externalUrl`, nouvelle icône `arrow_outward`, `target="_blank"`) quand `kind === "realisation"`, un lien interne `/projets/{id}` sinon. Aucun changement d'API pour `ProjectFeature` ni `ProjectVisual`.
+- Produces: `ProjectCard` rend un lien externe (`externalUrl`, nouvelle icône `arrow_outward`, `target="_blank"`) quand `kind === "realisation"`, un lien interne `/projets/{id}` sinon. Aucun changement d'API pour `ProjectDetailedCard` ni `ProjectVisual`.
 
 - [ ] **Step 1: Supprimer le fond du panneau de repli dans `ProjectVisual.astro`**
 
@@ -182,7 +165,7 @@ Deux changements : plus de `bg-surface-container` sur le panneau (il hérite du 
 
 - [ ] **Step 2: Fond de la zone visuelle conditionné à la présence d'une capture**
 
-Dans `src/components/projects/ProjectFeature.astro`, remplacer :
+Dans `src/components/projects/ProjectDetailedCard.astro`, remplacer :
 
 ```astro
     <div class:list={["min-h-72 bg-surface-container", reverse && "lg:order-2"]}>
@@ -206,7 +189,7 @@ par :
   <div class:list={["aspect-[16/10] overflow-hidden", data.cover && "bg-surface-container"]}>
 ```
 
-- [ ] **Step 3: `headline` optionnel dans `ProjectFeature.astro`**
+- [ ] **Step 3: `headline` optionnel dans `ProjectDetailedCard.astro`**
 
 `headline` peut désormais être absent (Task 1). Remplacer :
 
@@ -375,7 +358,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 - Modify: `src/pages/projets/[...id].astro:11` (filtre `getStaticPaths`)
 
 **Interfaces:**
-- Consumes: `data.kind` (Task 1), `ProjectFeature` avec prop `reverse` (existant), `ProjectCard` variante réalisation (Task 2).
+- Consumes: `data.kind` (Task 1), `ProjectDetailedCard` avec prop `reverse` (existant), `ProjectCard` variante réalisation (Task 2).
 - Produces: route `/projets` listant toutes les études de cas (grand format alterné) puis, si présentes, les réalisations (grille de cartes). Plus aucune page `/projets/{id}` générée pour une réalisation.
 
 - [ ] **Step 1: Créer `src/pages/projets/index.astro`**
@@ -386,7 +369,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Line } from "@components/Line";
 import ProjectCard from "@components/projects/ProjectCard.astro";
-import ProjectFeature from "@components/projects/ProjectFeature.astro";
+import ProjectDetailedCard from "@components/projects/ProjectDetailedCard.astro";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { iWeb } from "@udixio/icons-outlined-400/web";
 
@@ -473,7 +456,7 @@ const collectionJsonLd = JSON.stringify({
 
       <div class="padding-x mt-8 flex flex-col gap-8">
         {caseStudies.map((project, index) => (
-          <ProjectFeature project={project} reverse={index % 2 === 1} />
+          <ProjectDetailedCard project={project} reverse={index % 2 === 1} />
         ))}
       </div>
 
