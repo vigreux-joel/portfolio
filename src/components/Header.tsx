@@ -4,7 +4,11 @@ import {motion} from "motion/react";
 import {useEffect, useRef, useState} from "react";
 import {iComment} from "@udixio/icons-outlined-400/comment";
 
-export const Header = () => {
+interface HeaderProps {
+    showFab?: boolean;
+}
+
+export const Header = ({showFab = true}: HeaderProps) => {
     const [isMenuVisible, setIsMenuVisible] = useState(true);
     const [fabIsHovered, setFabIsHovered] = useState(false);
     const previousScrollPosition = useRef<number | null>(null);
@@ -76,7 +80,7 @@ export const Header = () => {
             transition={{duration: 0.5}}
         >
             <Menu setFabVisible={setFabVisible} fabVisible={fabVisible}/>
-            <Fab
+            {showFab && <Fab
                 onMouseEnter={() => setFabIsHovered(true)}
                 onMouseLeave={() => setFabIsHovered(false)}
                 title={"Contacter Joël VIGREUX"}
@@ -89,7 +93,7 @@ export const Header = () => {
                 })}
                 variant={"primary"}
                 extended={!isCompactViewport && (isMenuVisible || fabIsHovered)}
-            ></Fab>
+            ></Fab>}
         </motion.div>
     );
 };

@@ -1,80 +1,99 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Button, type ButtonInterface } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
 import { Card } from "@components/Card";
-
 import ProjectTechnologies from "./ProjectTechnologies.astro";
 import ProjectVisual from "./ProjectVisual.astro";
-import { IconButton } from "@udixio/ui-react";
 
 interface Props {
   project: CollectionEntry<"projects">;
-  linkLabel?: string;
-  layout?: "horizontal" | "vertical";
+  buttonLabel?: string;
+  primaryButtonVariant?: ButtonInterface["props"]["variant"];
 }
 
-const { project, linkLabel, layout = "vertical" } = Astro.props;
-const { data } = project;
-const isHorizontal = layout === "horizontal";
+const {
+  project,
+  buttonLabel = "Voir le projet",
+  primaryButtonVariant = "filled",
+} = Astro.props;
 
-const isRealisation = data.kind === "realisation";
-const href = isRealisation ? data.externalUrl! : `/projets/${project.id}`;
-const label = linkLabel ?? (isRealisation ? "Voir le site" : "Voir le projet");
-const linkIcon = isRealisation ? iArrowOutward : iArrowForward;
+const { data } = project;
+const hasVisual = Boolean(data.cover || data.previewUrl);
 const visualWidth = data.cover?.width ?? 1440;
 const visualHeight = data.cover?.height ?? 900;
 ---
 
-<article class="h-full">
-  <Card client:visible interactive variant="filled" className="flex h-full flex-col !overflow-hidden">
-    <a
-      href={href}
-      target={isRealisation ? "_blank" : undefined}
-      rel={isRealisation ? "noopener noreferrer" : undefined}
-      aria-label={`${label} : ${data.title}`}
+<article class="@container h-full w-full min-w-0">
+  <Card
+    client:visible
+    variant="filled"
+    className="flex h-full w-full flex-col !overflow-hidden"
+  >
+    <div
       class:list={[
-        "group/card-link relative z-10 h-full",
-        isHorizontal
-          ? "grid md:grid-cols-[minmax(0,1.15fr)_minmax(18rem,.85fr)]"
-          : "flex flex-col",
+        "relative flex h-full min-h-0 w-full min-w-0 flex-1 flex-col",
+        hasVisual &&
+          "@4xl:grid @4xl:grid-cols-[minmax(0,1.1fr)_minmax(24rem,.9fr)]",
       ]}
     >
       {
-        (data.cover || data.previewUrl) && (
+        hasVisual && (
           <div
-            class:list={[
-              "relative overflow-hidden border-outline-variant bg-surface-container-low",
-              isHorizontal ? "border-b md:border-b-0 md:border-r" : "border-b",
-            ]}
-            style={`aspect-ratio: ${visualWidth} / ${visualHeight}`}
+            class="relative w-full min-w-0 shrink-0 overflow-hidden border-b border-outline-variant bg-surface-container @4xl:border-r @4xl:border-b-0"
+            style={`--project-aspect: ${visualWidth} / ${visualHeight}; aspect-ratio: var(--project-aspect)`}
+            transition:name={`project-visual-${project.id}`}
           >
-            <ProjectVisual project={project} />
+            <ProjectVisual project={project} fit="contain" />
           </div>
         )
       }
 
-      <IconButton
-        icon={linkIcon}
-        variant="outlined"
-        className="absolute top-4 right-4 z-10"
+      <div
+        class:list={[
+          "flex min-h-0 flex-1 flex-col p-6 @lg:p-8",
+          !hasVisual && "@4xl:max-w-5xl",
+        ]}
       >
-        {`${label} : ${data.title}`}
-      </IconButton>
+        <p class="text-title-medium text-secondary @lg:text-title-medium-large">{data.eyebrow}</p>
+        <h3
+          class="mt-2 text-headline-small text-on-surface @lg:mt-3 @lg:text-headline-large @4xl:line-clamp-2"
+          transition:name={`project-title-${project.id}`}
+        >
+          {data.title}
+        </h3>
 
-      <div class="flex flex-1 flex-col p-6 md:p-7">
-        <div class:list={[!data.cover && !data.previewUrl && "pr-16"]}>
-          <p class="text-title-medium-large text-secondary">{data.eyebrow}</p>
-          <h3 class="mt-2 text-headline-small text-on-surface">{data.title}</h3>
+        {
+          data.headline && (
+            <p class="mt-4 hidden text-title-large text-on-surface @xl:block @4xl:text-headline-small">
+              {data.headline}
+            </p>
+          )
+        }
+
+        <p class="mt-5 text-body-medium text-on-surface-variant @4xl:text-body-large">
+          {data.description}
+        </p>
+
+        {
+          data.technologies.length > 0 && (
+            <ProjectTechnologies
+              technologies={data.technologies}
+              label={`Technologies utilisées pour ${data.title}`}
+              class="hidden pt-8 @lg:flex"
+            />
+          )
+        }
+
+        <div class="mt-auto flex flex-col gap-3 pt-8 @sm:flex-row @sm:flex-wrap">
+          <Button
+            href={`/projets/${project.id}`}
+            icon={iArrowForward}
+            label={buttonLabel}
+            variant={primaryButtonVariant}
+          />
         </div>
-        <p class="mt-4 text-body-medium text-on-surface-variant">{data.description}</p>
-
-        <ProjectTechnologies
-          technologies={data.technologies}
-          label={`Technologies utilisées pour ${data.title}`}
-          class="mt-auto pt-8"
-        />
       </div>
-    </a>
+    </div>
   </Card>
 </article>

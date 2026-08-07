@@ -1,6 +1,7 @@
 ---
 import Footer from "./Footer.astro";
 import "../styles/base.css";
+import {ClientRouter} from "astro:transitions";
 import Header from "@layouts/Header.astro";
 import {SEO} from "astro-seo";
 import {getImage} from "astro:assets";
@@ -9,7 +10,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/600.css";
-import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
@@ -101,9 +101,10 @@ interface Props {
     hiddenMenu?: boolean;
     showSidebar?: boolean;
     showCta?: boolean;
+    showContactFab?: boolean;
 }
 
-const {seo, faq, hiddenFooter = false, hiddenMenu = false, showSidebar = true, showCta = true}: Props = Astro.props;
+const {seo, faq, hiddenFooter = false, hiddenMenu = false, showSidebar = true, showCta = true, showContactFab = true}: Props = Astro.props;
 
 // const currentPath = Astro.url.pathname.replace("/fr", "");
 // const domain = Astro.url.origin;
@@ -148,6 +149,7 @@ const seoDefault: SEOProps = {
     <Font cssVariable="--font-inter" preload />
     <Font cssVariable="--font-clash-grotesk" preload />
     <SEO {...seoDefault}/>
+    <ClientRouter fallback="animate" />
 </head>
 <body class="bg-surface dynamic">
 {/* Calque de texture global "spatial/lumière" placé en fond */}
@@ -163,7 +165,7 @@ const seoDefault: SEOProps = {
         mixBlendMode: "overlay"
     }}
 ></div>
-<Header/>
+<Header showFab={showContactFab}/>
 <div class="flex items-start">
     {showSidebar && <ExpertiseSidebarReact client:load />}
     <main class="flex-1 w-full min-w-0">
@@ -177,8 +179,11 @@ const seoDefault: SEOProps = {
 
 <Footer faq={faq} showCta={showCta}/>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const observer = new IntersectionObserver((entries) => {
+    let revealObserver: IntersectionObserver | undefined;
+
+    const initializeRevealLights = () => {
+        revealObserver?.disconnect();
+        revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('light');
@@ -191,8 +196,10 @@ const seoDefault: SEOProps = {
             rootMargin: '10000px 0px -33.3% 0px' 
         });
 
-        document.querySelectorAll('.reveal-light').forEach(el => observer.observe(el));
-    });
+        document.querySelectorAll('.reveal-light').forEach(el => revealObserver?.observe(el));
+    };
+
+    document.addEventListener("astro:page-load", initializeRevealLights);
 </script>
 </body>
 </html>

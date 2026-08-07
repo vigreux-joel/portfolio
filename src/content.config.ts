@@ -23,6 +23,16 @@ const projects = defineCollection({
         )
         .default([]),
       description: z.string(),
+      /** Rôle réellement tenu sur le projet, affiché dans le résumé de crédibilité. */
+      role: z.string().optional(),
+      /** État actuel vérifiable du projet : livré, en production, en développement… */
+      status: z.string().optional(),
+      /** Période de contribution, plus précise que la seule date de publication. */
+      period: z.string().optional(),
+      /** Public ou organisation principalement concerné par le projet. */
+      audience: z.string().optional(),
+      /** Résultats ou preuves observables, sans métrique inventée. */
+      outcomes: z.array(z.string()).default([]),
       need: z.string().optional(),
       solution: z.string().optional(),
       technicalNote: z.string().optional(),
@@ -32,7 +42,7 @@ const projects = defineCollection({
       draft: z.boolean().default(false),
       /**
        * "etude-de-cas" : page dédiée et présentation riche.
-       * "realisation" : simple carte pointant vers le site en ligne, sans page dédiée.
+       * "realisation" : page dédiée concise présentant l’essentiel et le lien public.
        */
       kind: z.enum(["etude-de-cas", "realisation"]).default("etude-de-cas"),
       /** Introduction unique affichée dans la présentation détaillée. */

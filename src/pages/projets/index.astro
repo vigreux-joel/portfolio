@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Line } from "@components/Line";
 import ProjectCard from "@components/projects/ProjectCard.astro";
-import ProjectDetailedCard from "@components/projects/ProjectDetailedCard.astro";
 import { sortProjects } from "../../utils/projects";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { BackgroundColor } from "@components/BackgroundColor";
@@ -76,7 +75,7 @@ const collectionJsonLd = JSON.stringify({
         <div><Line client:load isFirst /></div>
         <div class="padding pt-0 pb-16">
           <p class="sub-title">Projets</p>
-          <h1 class="mt-5 text-display-medium xl:text-display-large max-w-5xl">
+          <h1 class="mt-5 text-display-medium  max-w-5xl">
             <span class="block text-gradient">Jugez mon travail à travers mes projets.</span>
             Je montre ce que j’ai conçu et pourquoi.
           </h1>
@@ -90,28 +89,15 @@ const collectionJsonLd = JSON.stringify({
       <div class="flex items-end">
         <div><Line client:idle icon={iFactCheck} /></div>
         <div class="padding pt-0 pb-8 w-full">
-          <div class="flex flex-col justify-between gap-4 border-b border-outline-variant pb-6 sm:flex-row sm:items-end">
-            <div>
-              <p class="text-label-large text-tertiary">Sélection complète</p>
-              <h2 class="mt-2 text-headline-large md:text-display-small">Projets réalisés</h2>
-            </div>
-            <p class="text-title-medium text-on-surface-variant">
-              {String(projects.length).padStart(2, "0")} réalisations
-            </p>
-          </div>
+          <p class="sub-title">Sélection complète</p>
+          <h2 class="mt-2 text-headline-large md:text-display-small">Projets réalisés</h2>
         </div>
       </div>
 
       <ol class="padding-x grid items-stretch gap-6 md:grid-cols-2">
         {projects.map((project) => (
           <li class="min-w-0">
-            {
-              project.data.kind === "etude-de-cas" ? (
-                <ProjectDetailedCard project={project} layout="vertical" />
-              ) : (
-                <ProjectCard project={project} />
-              )
-            }
+            <ProjectCard project={project} />
           </li>
         ))}
       </ol>

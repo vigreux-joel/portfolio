@@ -7,9 +7,16 @@ interface Props {
   class?: string;
   loading?: "eager" | "lazy";
   fit?: "cover" | "contain";
+  interactive?: boolean;
 }
 
-const { project, class: className = "", loading = "lazy", fit = "contain" } = Astro.props;
+const {
+  project,
+  class: className = "",
+  loading = "lazy",
+  fit = "contain",
+  interactive = false,
+} = Astro.props;
 const { cover, previewUrl, technologies } = project.data;
 const src = cover?.src ?? `/images/projects/generated/${project.id}.webp`;
 const fitClass = fit === "cover" ? "object-cover" : "object-contain";
@@ -25,22 +32,24 @@ const fitClass = fit === "cover" ? "object-cover" : "object-contain";
       loading={loading}
       decoding="async"
       class:list={[
-        "h-full w-full transition-transform duration-700 group-hover/card-link:scale-[1.02]",
+        "block h-full w-full max-w-none transition-transform duration-700 group-hover/card-link:scale-[1.02]",
         fitClass,
         className,
       ]}
     />
   ) : previewUrl ? (
     <video
-      data-project-preview-video
+      data-project-preview-video={interactive ? undefined : ""}
       poster={src}
       muted
       loop
       playsinline
-      preload="none"
-      aria-hidden="true"
+      controls={interactive}
+      preload={interactive ? "metadata" : "none"}
+      aria-hidden={interactive ? undefined : "true"}
+      aria-label={interactive ? `Aperçu vidéo du projet ${project.data.title}` : undefined}
       class:list={[
-        "h-full w-full transition-transform duration-700 group-hover/card-link:scale-[1.02]",
+        "block h-full w-full max-w-none transition-transform duration-700 group-hover/card-link:scale-[1.02]",
         fitClass,
         className,
       ]}
@@ -63,19 +72,26 @@ const fitClass = fit === "cover" ? "object-cover" : "object-contain";
 }
 
 <script>
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const videos = document.querySelectorAll<HTMLVideoElement>("[data-project-preview-video]");
+  const initializeProjectPreviews = () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const videos = document.querySelectorAll<HTMLVideoElement>("[data-project-preview-video]");
 
-  videos.forEach((video) => {
-    video.addEventListener("mouseenter", () => {
-      if (reducedMotion.matches) return;
+    videos.forEach((video) => {
+      if (video.dataset.projectPreviewReady === "true") return;
+      video.dataset.projectPreviewReady = "true";
 
-      void video.play().catch(() => undefined);
+      video.addEventListener("mouseenter", () => {
+        if (reducedMotion.matches) return;
+
+        void video.play().catch(() => undefined);
+      });
+
+      video.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+      });
     });
+  };
 
-    video.addEventListener("mouseleave", () => {
-      video.pause();
-      video.currentTime = 0;
-    });
-  });
+  document.addEventListener("astro:page-load", initializeProjectPreviews);
 </script>

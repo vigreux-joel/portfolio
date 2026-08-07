@@ -3,37 +3,75 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Line } from "@components/Line";
-import { Button } from "@udixio/ui-react";
+import { Card } from "@components/Card";
+import { Button, Icon } from "@udixio/ui-react";
+import { iArrowBack } from "@udixio/icons-outlined-400/arrow_back";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
 import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
+import { iCheckCircle } from "@udixio/icons-outlined-400/check_circle";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { BackgroundColor } from "@components/BackgroundColor";
 import ProjectTechnologies from "@components/projects/ProjectTechnologies.astro";
+import ProjectVisual from "@components/projects/ProjectVisual.astro";
+import { sortProjects } from "../../utils/projects";
 
 export async function getStaticPaths() {
-  const projects = await getCollection(
-    "projects",
-    ({ data }) => !data.draft && data.kind === "etude-de-cas",
-  );
-  return projects.map((project) => ({
+  const projects = sortProjects(await getCollection("projects", ({ data }) => !data.draft));
+  return projects.map((project, index) => ({
     params: { id: project.id },
-    props: { project },
+    props: {
+      project,
+      previousProject: projects[index - 1],
+      nextProject: projects[index + 1],
+    },
   }));
 }
 
 interface Props {
   project: CollectionEntry<"projects">;
+  previousProject?: CollectionEntry<"projects">;
+  nextProject?: CollectionEntry<"projects">;
 }
 
-const { project } = Astro.props;
+const { project, previousProject, nextProject } = Astro.props;
 const { Content } = await render(project);
 const { data } = project;
+const isCaseStudy = data.kind === "etude-de-cas";
 const projectUrl = new URL(`/projets/${project.id}`, Astro.site ?? Astro.url.origin).toString();
+const projectImage = data.cover?.src
+  ?? (data.previewUrl ? `/images/projects/generated/${project.id}.webp` : "/images/photo.webp");
+const facts = [
+  { label: "Rôle", value: data.role },
+  { label: "Statut", value: data.status },
+  {
+    label: "Période",
+    value: data.period ?? data.publishedAt.toLocaleDateString("fr-FR", { year: "numeric" }),
+  },
+  { label: "Pour qui", value: data.audience },
+].filter((fact): fact is { label: string; value: string } => Boolean(fact.value));
+const projectLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: data.title,
+  description: data.description,
+  url: projectUrl,
+  dateCreated: data.publishedAt.toISOString(),
+  image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
+  creator: {
+    "@type": "Person",
+    name: "Joël Vigreux",
+    url: new URL("/profil", Astro.site ?? Astro.url.origin).toString(),
+  },
+  keywords: data.technologies,
+  sameAs: [data.externalUrl, data.repositoryUrl].filter(Boolean),
+};
 
 const faq = data.faq;
 ---
 
 <Layout
   showSidebar={false}
+  showContactFab={false}
   faq={faq}
   seo={{
     title: `${data.title} — Projet de Joël Vigreux`,
@@ -42,7 +80,7 @@ const faq = data.faq;
       basic: {
         title: `${data.title} — Projet de Joël Vigreux`,
         type: "article",
-        image: new URL(data.cover?.src ?? "/images/photo.webp", Astro.site ?? Astro.url.origin).toString(),
+        image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
         url: projectUrl,
       },
       optional: {
@@ -65,92 +103,212 @@ const faq = data.faq;
     <div class="max-width">
       <div class="flex">
         <div><Line client:load isFirst /></div>
-        <div class="padding pt-0 pb-12">
-          <a
-            href="/projets"
-            class="mb-7 inline-flex items-center gap-2 text-label-large text-primary underline-offset-4 hover:underline"
-          >
-            <span class="sr-only">Retour à la page </span>
-            <span aria-hidden="true">←</span>
-            Projets
-          </a>
-          <p class="sub-title">{data.heroContext}</p>
-          <h1 class="mt-5 text-display-medium xl:text-display-large max-w-5xl">
-            <span class="block text-gradient">{data.headline}</span>
-            <span class="block">{data.heroResponse}</span>
-          </h1>
-          <p class="mt-6 text-body-large text-on-surface-variant max-w-3xl">{data.description}</p>
-          <ProjectTechnologies
-            technologies={data.technologies}
-            label={`Technologies utilisées pour ${data.title}`}
-            class="mt-8"
-          />
+        <div class="padding pt-0 pb-12 w-full">
+          <nav aria-label="Fil d’Ariane">
+            <Button
+              href="/projets"
+              label="Tous les projets"
+              icon={iArrowBack}
+              variant="text"
+              className="mb-8 w-fit"
+              disableTextMargins
+            />
+          </nav>
+
+          <div class="grid gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(19rem,25rem)] xl:items-end xl:gap-16">
+            <div class="max-w-4xl">
+              <p class="sub-title">{data.heroContext ?? data.eyebrow}</p>
+              <h1
+                class="mt-5 text-display-medium text-gradient xl:text-display-large"
+                transition:name={`project-title-${project.id}`}
+              >
+                {data.title}
+              </h1>
+              {data.headline && (
+                <p class="mt-5 max-w-3xl text-headline-small text-on-surface md:text-headline-large">
+                  {data.headline} {data.heroResponse}
+                </p>
+              )}
+              <p class="mt-6 max-w-3xl text-body-large text-on-surface-variant">
+                {data.description}
+              </p>
+              {data.technologies.length > 0 && (
+                <ProjectTechnologies
+                  technologies={data.technologies}
+                  label={`Technologies utilisées pour ${data.title}`}
+                  class="mt-8"
+                />
+              )}
+              {(data.externalUrl || data.repositoryUrl) && (
+                <div class="mt-8 flex flex-wrap gap-4">
+                  {data.externalUrl && (
+                    <Button
+                      href={data.externalUrl}
+                      icon={iArrowOutward}
+                      label="Voir le site en ligne"
+                    />
+                  )}
+                  {data.repositoryUrl && (
+                    <Button
+                      href={data.repositoryUrl}
+                      icon={iArrowOutward}
+                      label="Consulter le code source"
+                      variant={data.externalUrl ? "outlined" : "filled"}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+
+            {facts.length > 0 && (
+              <Card
+                client:idle
+                variant="filled"
+                className="p-6 md:p-8"
+              >
+                <aside aria-labelledby="project-facts-title">
+                  <h2 id="project-facts-title" class="text-title-large text-on-surface">
+                    Le projet en bref
+                  </h2>
+                  <dl class="mt-6 divide-y divide-outline-variant">
+                    {facts.map((fact) => (
+                      <div class="grid gap-1 py-4 first:pt-0 last:pb-0">
+                        <dt class="text-label-large text-tertiary">{fact.label}</dt>
+                        <dd class="text-body-large text-on-surface">{fact.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </aside>
+              </Card>
+            )}
+          </div>
         </div>
       </div>
 
-      {data.cover && (
+      {(data.cover || data.previewUrl) && (
         <figure class="padding-x mt-4">
-          <div class="overflow-hidden rounded-3xl border border-outline-variant bg-surface-container-low p-2 md:p-3">
-            <img
-              src={data.cover.src}
-              alt={data.cover.alt}
-              width={data.cover.width}
-              height={data.cover.height}
-              class="w-full rounded-2xl object-cover"
-            />
+          <div
+            class="overflow-hidden rounded-3xl bg-surface-container-low"
+            style={`aspect-ratio: ${data.cover?.width ?? 1440} / ${data.cover?.height ?? 900}`}
+            transition:name={`project-visual-${project.id}`}
+          >
+            <ProjectVisual project={project} loading="eager" fit="contain" interactive />
           </div>
-          {data.cover.caption && <p class="mt-3 text-body-small text-on-surface-variant">{data.cover.caption}</p>}
+          {data.cover?.caption && <p class="mt-3 text-body-small text-on-surface-variant">{data.cover.caption}</p>}
         </figure>
       )}
 
-      <div class="flex h-24 md:h-32"><div><Line client:idle icon={iFactCheck} /></div></div>
+      {(data.outcomes.length > 0 || isCaseStudy) && (
+        <div class="mt-14 flex md:mt-20">
+          <div><Line client:idle icon={iFactCheck} isLast /></div>
+          <div class="padding-x w-full pb-20 md:pb-28">
+            {data.outcomes.length > 0 && (
+              <section aria-labelledby="project-outcomes-title">
+                <p class="text-label-large text-tertiary">À retenir</p>
+                <h2 id="project-outcomes-title" class="mt-2 max-w-3xl text-headline-large text-on-surface md:text-display-small">
+                  Des éléments concrets, avant le détail.
+                </h2>
+                <ul class="mt-8 grid max-w-5xl gap-px overflow-hidden rounded-3xl bg-outline-variant md:grid-cols-2">
+                  {data.outcomes.map((outcome) => (
+                    <li class="flex min-h-36 gap-4 bg-surface-container-low p-6 text-title-large text-on-surface md:p-8">
+                      <Icon icon={iCheckCircle} className="mt-0.5 size-7 shrink-0 text-primary" />
+                      <span>{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
-      <div class="padding-x">
-        <div class="grid gap-4 lg:grid-cols-12">
-          <div class="rounded-3xl bg-surface-container-low p-6 md:p-8 lg:col-span-7">
-            <p class="text-label-large text-tertiary">Le besoin</p>
-            <p class="mt-4 text-headline-small text-on-surface">{data.need}</p>
-          </div>
-          <div class="rounded-3xl bg-primary-container p-6 text-on-primary-container md:p-8 lg:col-span-5 lg:row-span-2">
-            <p class="text-label-large">Ma réponse</p>
-            <p class="mt-4 text-headline-small">{data.solution}</p>
-          </div>
-          <div class="rounded-3xl border border-outline-variant p-6 md:p-8 lg:col-span-7">
-            <p class="text-label-large text-tertiary">Cadre technique</p>
-            <p class="mt-3 text-body-large text-on-surface-variant">{data.technicalNote}</p>
+            {isCaseStudy && (
+              <section
+                class="mt-16 grid gap-10 lg:grid-cols-[minmax(18rem,.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16 xl:mt-24"
+                aria-labelledby="project-story-title"
+              >
+                <Card
+                  client:visible
+                  variant="filled"
+                  energyX
+                  className="p-6 md:p-8 lg:sticky lg:top-28"
+                >
+                  <aside>
+                    <p class="text-label-large text-tertiary">Le point de départ</p>
+                    <p class="mt-3 text-body-large text-on-surface-variant">{data.need}</p>
+
+                    <div class="my-7 h-px bg-outline-variant"></div>
+
+                    <p class="text-label-large text-primary">La décision centrale</p>
+                    <p class="mt-3 text-headline-small text-on-surface">{data.solution}</p>
+
+                    <div class="mt-7 rounded-2xl bg-surface-container-high p-5">
+                      <p class="text-label-large text-tertiary">Cadre technique</p>
+                      <p class="mt-2 text-body-medium text-on-surface-variant">{data.technicalNote}</p>
+                    </div>
+                  </aside>
+                </Card>
+
+                <div class="min-w-0">
+                  <p class="text-label-large text-tertiary">Étude de cas</p>
+                  <h2 id="project-story-title" class="mt-2 text-headline-large text-on-surface md:text-display-small">
+                    Explorez seulement ce qui vous intéresse.
+                  </h2>
+                  <p class="mt-4 max-w-2xl text-body-large text-on-surface-variant">
+                    Le premier chapitre est ouvert. Les autres restent disponibles sans alourdir la lecture.
+                  </p>
+                  <article class="mt-8 border-t border-outline-variant">
+                    <Content />
+                  </article>
+                </div>
+              </section>
+            )}
           </div>
         </div>
-      </div>
+      )}
 
-      <article
-        class="padding-x mt-16 pb-20 md:mt-24"
-      >
-        <Content />
-
-        {(data.externalUrl || data.repositoryUrl) && (
-          <div class="mt-4 flex flex-wrap gap-4 border-t border-outline-variant pt-10">
-            {data.externalUrl && (
-              <Button href={data.externalUrl} icon={iArrowOutward} label="Ouvrir le projet" />
+      <div class:list={["padding-x pb-20", isCaseStudy ? "pt-14" : "pt-16 md:pt-20"]}>
+        {(previousProject || nextProject) && (
+          <nav
+            class="grid gap-4 border-t border-outline-variant pt-8 md:grid-cols-2"
+            aria-label="Navigation entre les projets"
+          >
+            {previousProject ? (
+              <div
+                transition:name={`project-title-${previousProject.id}`}
+              >
+                <Button
+                  href={`/projets/${previousProject.id}`}
+                  label={`Projet précédent · ${previousProject.data.title}`}
+                  icon={iArrowBack}
+                  variant="outlined"
+                  className="w-full"
+                />
+              </div>
+            ) : <span />}
+            {nextProject && (
+              <div
+                transition:name={`project-title-${nextProject.id}`}
+              >
+                <Button
+                  href={`/projets/${nextProject.id}`}
+                  label={`Projet suivant · ${nextProject.data.title}`}
+                  icon={iArrowForward}
+                  iconPosition="right"
+                  variant="tonal"
+                  className="w-full"
+                />
+              </div>
             )}
-            {data.repositoryUrl && (
-              <Button
-                href={data.repositoryUrl}
-                icon={iArrowOutward}
-                label="Voir le code sur GitHub"
-                variant={data.externalUrl ? "outlined" : "filled"}
-              />
-            )}
-          </div>
+          </nav>
         )}
-
-        <a
+        <Button
           href="/projets"
-          class="mt-12 inline-flex items-center gap-2 text-label-large text-primary underline-offset-4 hover:underline"
-        >
-          <span aria-hidden="true">←</span>
-          Voir tous les projets
-        </a>
-      </article>
+          label="Revenir à tous les projets"
+          icon={iArrowBack}
+          variant="text"
+          className="mt-8 w-fit"
+          disableTextMargins
+        />
+      </div>
     </div>
   </section>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(projectLd)} />
 </Layout>

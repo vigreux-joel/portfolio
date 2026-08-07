@@ -111,9 +111,8 @@ preuves). À la place :
   de preuve, remplace le tableau `proofs` hardcodé). Le champ nullable `order` définit
   uniquement la position éditoriale souhaitée commune à tous les affichages.
 - **Deux composants partagés** rendent n'importe quelle entrée de la collection :
-  - `ProjectDetailedCard.astro` — grand format détaillé (utilisé pour Udixio UI en section 3
-    et pour le portfolio en section 5) ;
-  - `ProjectCard.astro` — format carte secondaire (les 3 cartes de la grille).
+  - `ProjectCard.astro` — format adaptatif unique, compact ou détaillé selon la largeur
+    de son conteneur grâce aux container queries.
 - Ces composants sont réutilisables sur `/projets` pour garder une présentation unique.
 
 **Contenu induit** : créer `src/content/projects/mojoe.mdx`,
@@ -138,7 +137,7 @@ externe ni démo, elle garde son intitulé générique et pointe vers sa page é
 - **Titre proposé** : « Le site que vous êtes en train de consulter. »
 - **Rôle** : clore la page sur une preuve vérifiable en un clic — le lecteur vient de
   parcourir le produit.
-- **Rendu via `ProjectDetailedCard.astro`**, alimenté par l'entrée
+- **Rendu via `ProjectCard.astro`**, alimenté par l'entrée
   `vigreux-joel-fr.mdx` de la collection — même présentation que le phare Udixio UI.
 - **Contenu — l'histoire du site** :
   - conçu comme démonstration du niveau d'exigence défendu sur la page ;
@@ -178,9 +177,9 @@ Ajouter une question sur l'estimation, peur client non couverte :
 | `HomeExperienceProof.astro` | **Supprimé** |
 | `HomeExpertisePreview.astro` | **Remplacé** par `HomeSituations.astro` (nouvelles cartes besoins) |
 | `HomeProjectsPreview.astro` | Réécrit : phare + grille de 3 cartes, entièrement piloté par la collection |
-| `ProjectDetailedCard.astro`, `ProjectCard.astro` | **Nouveaux** composants partagés de présentation |
+| `ProjectCard.astro` | **Nouveau** composant adaptatif partagé de présentation |
 | `HomeMethodPreview.astro` | Titre modifié uniquement |
-| `HomePortfolioStory.astro` | **Nouveau** (section 5, wrapper autour de `ProjectDetailedCard`) |
+| `HomePortfolioStory.astro` | **Nouveau** (section 5, wrapper autour de `ProjectCard`) |
 | `HomeContextPaths.astro` | Textes raccourcis |
 | Schéma de la collection `projects` | Champ `highlights` ajouté (points de preuve des cartes/phares) |
 | `atelier-local-demo.mdx`, `clair-habitat-demo.mdx` | Supprimés ou `draft: true` |
@@ -234,8 +233,8 @@ de repli tient la place proprement en attendant des captures.
 
 - La plateforme pour agences web est **privée et sans nom public** : intitulé générique
   conservé, aucun lien externe.
-- Les présentations de projets (détaillée et compacte) sont alimentées par la
-  collection MDX via les composants partagés `ProjectDetailedCard` / `ProjectCard`.
+- Les présentations de projets sont alimentées par la collection MDX via le composant
+  partagé `ProjectCard`, dont la densité dépend de la largeur du conteneur parent.
 
 ## Addendum du 2026-07-23 (après retour utilisateur)
 

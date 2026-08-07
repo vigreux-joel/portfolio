@@ -1,4 +1,7 @@
 ---
+import { Icon } from "@udixio/ui-react";
+import { iKeyboardArrowDown } from "@udixio/icons-outlined-400/keyboard_arrow_down";
+
 interface Props {
   eyebrow: string;
   title: string;
@@ -8,21 +11,33 @@ interface Props {
 const { eyebrow, title, number } = Astro.props;
 ---
 
-<section class="project-chapter border-t border-outline-variant py-10 md:py-14">
-  <div class="grid gap-5 lg:grid-cols-[minmax(9rem,14rem)_minmax(0,1fr)] lg:gap-12">
-    <div class="flex items-start justify-between gap-4 lg:block">
-      <p class="text-label-large text-tertiary">{eyebrow}</p>
-      {number && <p class="text-label-large text-outline lg:mt-3">{number}</p>}
-    </div>
-
-    <div class="min-w-0 max-w-3xl">
-      <h2 class="text-headline-medium text-on-surface md:text-headline-large">{title}</h2>
-      <div class="project-chapter__body mt-6 text-body-large text-on-surface-variant">
+<details
+  class="project-chapter group border-b border-outline-variant"
+  name="project-chapters"
+  open={number === "01"}
+>
+  <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-7 outline-none md:py-9">
+    <span class="min-w-0">
+      <span class="block text-label-large text-tertiary">{eyebrow}</span>
+      <span class="mt-2 block text-headline-small text-on-surface transition-colors group-hover:text-primary md:text-headline-medium">
+        {title}
+      </span>
+    </span>
+    <span class="mt-2 grid size-12 shrink-0 place-items-center rounded-full text-primary transition-colors group-hover:bg-surface-container-high">
+      <Icon
+        icon={iKeyboardArrowDown}
+        className="size-6 transition-transform duration-300 group-open:rotate-180"
+      />
+    </span>
+  </summary>
+  <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 group-open:grid-rows-[1fr]">
+    <div class="overflow-hidden">
+      <div class="project-chapter__body max-w-3xl pb-8 text-body-large text-on-surface-variant md:pb-10">
         <slot />
       </div>
     </div>
   </div>
-</section>
+</details>
 
 <style>
   .project-chapter__body :global(p) {
@@ -41,5 +56,9 @@ const { eyebrow, title, number } = Astro.props;
     color: var(--color-primary);
     text-decoration: underline;
     text-underline-offset: 0.2em;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
   }
 </style>

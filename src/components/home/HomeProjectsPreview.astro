@@ -4,7 +4,6 @@ import { Card } from "@components/Card";
 import { Line } from "@components/Line";
 import { LinearGradient } from "@components/LinearGradient";
 import ProjectCard from "@components/projects/ProjectCard.astro";
-import ProjectDetailedCard from "@components/projects/ProjectDetailedCard.astro";
 import { sortProjects } from "../../utils/projects";
 import { Button } from "@udixio/ui-react";
 import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
@@ -43,14 +42,17 @@ const [primaryProject, ...secondaryProjects] = sortProjects(published).slice(
       </div>
     </div>
 
-    <div class="section pt-0">
-      {primaryProject && <ProjectDetailedCard project={primaryProject} />}
+    <div class="section py-0">
+      {primaryProject && <ProjectCard project={primaryProject} />}
 
       {
         secondaryProjects.length > 0 && (
           <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {secondaryProjects.map((project) => (
-              <ProjectCard project={project} />
+              <ProjectCard
+                project={project}
+                primaryButtonVariant="text"
+              />
             ))}
 
             <Card

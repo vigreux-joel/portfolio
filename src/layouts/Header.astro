@@ -1,6 +1,12 @@
 ---
 import {Header} from "@components/Header"
+
+interface Props {
+  showFab?: boolean;
+}
+
+const { showFab = true } = Astro.props;
 ---
 <header>
-  <Header client:only="react"/>
+  <Header client:only="react" showFab={showFab}/>
 </header>

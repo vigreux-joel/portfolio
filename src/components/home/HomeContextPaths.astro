@@ -17,8 +17,13 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
     className="absolute inset-0 -z-10  opacity-10"
   />
   <div class="max-width">
-    <div class="flex pt-8">
-      <div><Line client:idle icon={iRoute} isFirst /></div>
+    <div class="flex">
+      <div><Line client:idle isFirst /></div>
+      <div class="padding pt-0 pb-8"></div>
+    </div>
+
+    <div class="flex mt-8">
+      <div><Line client:idle icon={iRoute} /></div>
       <div class="padding pt-0 pb-8 flex flex-col justify-center max-w-7xl">
         <p class="sub-title text-secondary" data-sidebar-label="Collaboration">Travailler ensemble</p>
         <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">

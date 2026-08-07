@@ -26,5 +26,4 @@ pnpm-debug.log*
 .superpowers/
 
 # local application documents
-motivation.md
-motiovation.md
+temp/
