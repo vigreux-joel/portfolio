@@ -8,24 +8,22 @@ import { iSelectWindow } from "@udixio/icons-outlined-400/select_window";
 import { iQuestionMark } from "@udixio/icons-outlined-400/question_mark";
 
 const links = [
-    { id: "accueil", label: "Intro", icon: iInfo },
-    { id: "front-end", label: "Front-end", icon: iDevices },
-    { id: "ux", label: "Design & UX", icon: iSelectWindow },
-    { id: "back-end", label: "Back-end", icon: iApi },
-    { id: "philosophie", label: "Philosophie", icon: iManufacturing },
-    { id: "faq", label: "FAQ", icon: iInfo },
+    { id: "accueil", icon: iInfo },
+    { id: "front-end", icon: iDevices },
+    { id: "ux", icon: iSelectWindow },
+    { id: "back-end", icon: iApi },
+    { id: "philosophie", icon: iManufacturing },
+    { id: "faq", icon: iInfo },
 ];
 ---
 
-<div class="hidden 2xl:flex sticky top-0 h-screen flex-col justify-center gap-4 px-8 z-40 shrink-0 group/sidebar">
+<div class="hidden 2xl:flex fixed left-0 top-0 h-screen flex-col justify-center gap-4 px-8 z-40">
     {links.map(link => (
         <a href={`#${link.id}`} class="sidebar-link group flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors relative" data-target={link.id}>
             <div class="w-12 h-12 shrink-0 rounded-full bg-surface-container/50 backdrop-blur-md flex items-center justify-center ring-1 ring-outline/20 group-[.active]:bg-primary group-[.active]:text-on-primary group-[.active]:ring-primary/50 group-[.active]:shadow-lg group-[.active]:shadow-primary/20 transition-all duration-300">
                 <Icon icon={link.icon} className="w-5 h-5" />
             </div>
-            <span class="text-label-large opacity-0 -translate-x-4 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 min-[1650px]:group-[.active]:opacity-100 min-[1650px]:group-[.active]:translate-x-0 group-hover/sidebar:group-[.active]:opacity-100 group-hover/sidebar:group-[.active]:translate-x-0 transition-all duration-300 absolute left-16 whitespace-nowrap bg-surface-container/80 backdrop-blur-md px-4 py-2 rounded-xl ring-1 ring-outline/20">
-                {link.label}
-            </span>
+            <span class="sub-title text-secondary absolute left-16 whitespace-nowrap rounded-xl bg-surface-container/80 px-4 py-2 opacity-0 transition-opacity group-hover:opacity-100 group-[.active]:opacity-100"></span>
         </a>
     ))}
 </div>
@@ -37,17 +35,19 @@ const links = [
 
         if (!sections.length || !links.length) return;
 
-        // Mise à jour dynamique du contenu (h2 et icône) depuis les sections
+        // Les libellés proviennent exclusivement du premier sous-titre de chaque section.
         links.forEach(link => {
             const targetId = link.getAttribute('data-target');
             const section = document.getElementById(targetId);
             
             if (section) {
-                // Trouver le premier h2 pour le label
-                const h2 = section.querySelector('h2');
-                if (h2) {
+                const subTitle = section.querySelector('.sub-title');
+                if (subTitle) {
                     const span = link.querySelector('span');
-                    if (span) span.textContent = h2.textContent.trim();
+                    const label = subTitle.getAttribute('data-sidebar-label') || subTitle.textContent?.trim();
+                    if (span && label) span.textContent = label;
+                } else {
+                    link.style.display = 'none';
                 }
 
                 // Trouver l'icône de la timeline (premier svg dans un conteneur w-6)

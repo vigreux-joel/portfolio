@@ -14,7 +14,6 @@ import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
 import {ThemeSectionObserver} from "../components/ThemeSectionObserver";
-import {ExpertiseSidebarReact} from "../components/expertise/ExpertiseSidebarReact";
 import Font from "astro/components/Font.astro";
 import CtaSection from "@components/CtaSection.astro";
 import FaqSection, {type FaqItem} from "@components/FaqSection.astro";
@@ -167,7 +166,6 @@ const seoDefault: SEOProps = {
 ></div>
 <Header showFab={showContactFab}/>
 <div class="flex items-start">
-    {showSidebar && <ExpertiseSidebarReact client:load />}
     <main class="flex-1 w-full min-w-0">
         <slot/>
 
