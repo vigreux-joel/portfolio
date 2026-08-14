@@ -91,7 +91,7 @@ export const Header = ({showFab = true}: HeaderProps) => {
                 className={classNames("!fixed bottom-8 right-8 z-50", {
                     "opacity-0": !fabVisible,
                 })}
-                variant={"primary"}
+                variant={"tertiary"}
                 extended={!isCompactViewport && (isMenuVisible || fabIsHovered)}
             ></Fab>}
         </motion.div>

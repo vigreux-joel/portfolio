@@ -63,13 +63,7 @@ const visualHeight = data.cover?.height ?? 900;
           {data.title}
         </h3>
 
-        {
-          data.headline && (
-            <p class="mt-4 hidden text-title-large text-on-surface @xl:block @4xl:text-headline-small">
-              {data.headline}
-            </p>
-          )
-        }
+
 
         <p class="mt-5 text-body-medium text-on-surface-variant @4xl:text-body-large">
           {data.description}
@@ -89,8 +83,10 @@ const visualHeight = data.cover?.height ?? 900;
           <Button
             href={`/projets/${project.id}`}
             icon={iArrowForward}
+            iconPosition="right"
             label={buttonLabel}
             variant={primaryButtonVariant}
+            disableTextMargins={primaryButtonVariant === "text"}
           />
         </div>
       </div>

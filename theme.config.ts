@@ -6,8 +6,8 @@ export const sourceColor = Hct.from(280, 45, 75)
 
 export const subThemes = {
     blue: hexFromArgb(sourceColor.toInt()),
-    green: hexFromArgb(Hct.from(155, sourceColor.hue, sourceColor.tone).toInt()),
-    cyan: hexFromArgb(Hct.from(205, sourceColor.hue, sourceColor.tone).toInt()),
+    green: hexFromArgb(Hct.from(155, sourceColor.chroma, sourceColor.tone).toInt()),
+    cyan: hexFromArgb(Hct.from(205, sourceColor.chroma, sourceColor.tone).toInt()),
 }
 
 export default defineConfig({
