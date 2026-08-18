@@ -1,0 +1,78 @@
+---
+import { Card } from "@components/Card";
+import { Button } from "@udixio/ui-react";
+import { iArrowOutward } from "@udixio/icons-outlined-400/arrow_outward";
+import ProjectFacts from "./ProjectFacts.astro";
+import ProjectTechnologies from "./ProjectTechnologies.astro";
+
+interface Fact {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title: string;
+  facts: readonly Fact[];
+  technologies: readonly string[];
+  externalUrl?: string;
+  repositoryUrl?: string;
+}
+
+const { title, facts, technologies, externalUrl, repositoryUrl } = Astro.props;
+---
+
+<aside class="min-w-0 flex-1" aria-labelledby="project-sidebar-title">
+  <div class="padding-x pb-16 pt-8 xl:sticky xl:top-24 xl:pb-20 xl:pt-8">
+    <Card
+      client:visible
+      variant="filled"
+      pointerGlow={false}
+      className="block w-full !bg-surface/20 p-5 md:p-6"
+    >
+      <h2 id="project-sidebar-title" class="text-label-large text-on-surface">
+        Informations clés
+      </h2>
+
+      {facts.length > 0 && <ProjectFacts facts={facts} layout="sidebar" compact />}
+
+      {technologies.length > 0 && (
+        <div class="mt-6">
+          <p class="mb-3 text-label-small text-on-surface">Technologies</p>
+          <ProjectTechnologies
+            technologies={technologies}
+            label={`Technologies utilisées pour ${title}`}
+            align="start"
+            compact
+          />
+        </div>
+      )}
+
+      {(externalUrl || repositoryUrl) && (
+        <div class="mt-6 grid gap-3">
+          {externalUrl && (
+            <Button
+              href={externalUrl}
+              icon={iArrowOutward}
+              iconPosition="right"
+              label="Voir le site en ligne"
+              variant="tonal"
+              size="small"
+              className="w-full"
+            />
+          )}
+          {repositoryUrl && (
+            <Button
+              href={repositoryUrl}
+              icon={iArrowOutward}
+              label="Consulter le code source"
+              variant={externalUrl ? "outlined" : "filled"}
+              size="small"
+              className="w-full"
+            />
+          )}
+        </div>
+      )}
+
+    </Card>
+  </div>
+</aside>

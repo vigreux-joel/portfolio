@@ -1,82 +1,139 @@
 ---
 title: "Udixio UI"
-eyebrow: "Design system personnel · depuis 2024"
-headline: "Gardez vos interfaces cohérentes."
-heroContext: "Udixio UI · Bibliothèque d’interfaces"
-heroResponse: "Je crée une base commune et accessible."
-description: "Une bibliothèque de composants pour créer des interfaces cohérentes, accessibles et personnalisables."
-role: "Créateur et mainteneur"
+eyebrow: "Bibliothèque UI personnelle · depuis 2024"
+description: "Une bibliothèque de 20 composants inspirés de Material 3, disponible pour React et Angular et éprouvée sur ce portfolio."
 status: "Utilisé en production"
 period: "Depuis 2024"
-audience: "Développeurs et équipes produit React"
-outcomes:
-  - "Le portfolio utilise directement la bibliothèque"
-  - "Des composants typés partageant les mêmes règles de thème et d’interaction"
-# TODO crédibilité : ajouter le nombre de composants stables, la couverture de tests
-# et un lien vers la documentation publique lorsque ces chiffres sont à jour.
-need: "Sur un produit qui grandit, les écrans finissent souvent par ne plus se ressembler. Chaque nouvelle page demande alors plus de décisions et plus de corrections."
-solution: "J’ai créé une bibliothèque de composants réutilisables : boutons, formulaires, menus et thèmes partagent les mêmes règles. Le résultat reste cohérent et plus rapide à faire évoluer."
-technicalNote: "Projet personnel développé avec React, TypeScript et Material 3."
+audience: "Développeurs et équipes produit React ou Angular"
 publishedAt: 2024-01-01
 order: 1
 draft: false
-intro: "Depuis 2024, je développe cette bibliothèque avec React, TypeScript et Material 3. J’en ai défini l’architecture des composants, les API et le système de thèmes."
-supportingText: "Le portfolio que vous consultez l’utilise directement : la bibliothèque est confrontée à un usage réel et continue d’évoluer avec lui."
-highlights:
-  - "Composants réutilisables et typés"
-  - "Thèmes générés à partir d’une couleur"
-  - "États cohérents au clavier, à la souris et au toucher"
-  - "Documentation maintenue avec la bibliothèque"
-cover:
-  src: "/images/material-theme.webp"
-  alt: "Plusieurs variantes colorées d’une même interface créées avec Udixio UI"
-  width: 1024
-  height: 590
-  caption: "Un même écran, plusieurs thèmes générés par le système."
+cover: { src: "/images/material-theme.webp", alt: "Plusieurs variantes colorées d’une même interface créées avec Udixio UI", width: 1024, height: 590, caption: "Un même écran, plusieurs thèmes générés par la bibliothèque." }
 externalUrl: "https://ui.udixio.fr"
 technologies:
   - React
   - TypeScript
   - Material 3
-faq:
-  - question: "À partir de quand un produit web a-t-il besoin d’un design system ?"
-    answer: "Le besoin apparaît lorsque les écrans, les composants ou les intervenants se multiplient et que leurs différences commencent à ralentir les évolutions. Un design system fournit alors des règles et des composants communs. Udixio UI répond à ce problème tout en restant personnalisable grâce à ses thèmes."
-  - question: "Un design system impose-t-il la même apparence à tous les produits ?"
-    answer: "Non. Un design system peut partager les composants et leurs comportements sans figer l’identité visuelle. Dans Udixio UI, les thèmes sont générés à partir d’une couleur principale afin d’adapter l’apparence tout en conservant des interactions et des états cohérents."
 ---
 
+
+
+
+
+
+
 import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
 import ProjectPoints from "@components/projects/ProjectPoints.astro";
 import ProjectNote from "@components/projects/ProjectNote.astro";
+import ProjectProof from "@components/projects/ProjectProof.astro";
+import ProjectProofs from "@components/projects/ProjectProofs.astro";
+import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
+import {iSearch} from "@udixio/icons-outlined-400/search";
+import {iWidgets} from "@udixio/icons-outlined-400/widgets";
+import {iArchitecture} from "@udixio/icons-outlined-400/architecture";
+import {iPalette} from "@udixio/icons-outlined-400/palette";
+import {iRocketLaunch} from "@udixio/icons-outlined-400/rocket_launch";
 
-<ProjectChapter eyebrow="Le constat" title="La cohérence se perd une décision après l’autre." number="01">
+<ProjectCaseStudy>
 
-Une interface évolue rarement d’un seul bloc. De nouvelles pages arrivent, plusieurs personnes interviennent et des différences apparaissent peu à peu dans les couleurs, les espacements ou le comportement des composants.
+    <Fragment slot="outcomes">
+        <ProjectProofs title="Ce qui existe concrètement aujourd’hui.">
+            <ProjectProof featured>**20 composants** publiés et documentés, du bouton au sélecteur de
+                date.</ProjectProof>
+            <ProjectProof>Un même catalogue de composants disponible pour React et Angular.</ProjectProof>
+            <ProjectProof>Le portfolio utgareilise directement la bibliothèque en production.</ProjectProof>
+        </ProjectProofs>
+    </Fragment>
 
-L’objectif d’Udixio UI est de fournir une base commune sans enfermer le produit dans une identité visuelle figée.
+    <Fragment slot="story-heading">
+        <ProjectStoryHeading eyebrow="Étude de cas" title="Construire une bibliothèque, puis la confronter à l’usage.">
+            Le catalogue n’est que la partie visible : l’enjeu est de faire tenir ensemble les API, les interactions,
+            les thèmes et la documentation.
+        </ProjectStoryHeading>
+    </Fragment>
 
-</ProjectChapter>
+    <Fragment slot="story">
 
-<ProjectChapter eyebrow="Le système" title="Une base commune, du thème jusqu’aux interactions." number="02">
+        <ProjectChapter eyebrow="Le constat" title="La cohérence se perd une décision après l’autre." icon={iSearch}>
 
-<ProjectPoints
-  label="Responsabilités prises en charge par Udixio UI"
-  items={[
-    "Des composants prêts à être réutilisés dans plusieurs écrans",
-    "Des thèmes générés à partir d’une couleur principale",
-    "Des états cohérents au clavier, à la souris et au toucher",
-    "Une API TypeScript commune pour limiter les décisions répétitives",
-  ]}
-/>
+            Une interface ne devient pas incohérente d’un seul coup. Une nouvelle page introduit un espacement
+            différent, un formulaire gère autrement ses erreurs, puis un bouton réagit différemment au clavier. À mesure
+            que le produit grandit, chaque écran ajoute ses propres décisions et rend les suivants plus coûteux à
+            concevoir et à maintenir.
 
-</ProjectChapter>
+            J’ai commencé Udixio UI en 2024 pour réunir ces décisions dans une même bibliothèque. L’objectif n’était pas
+            de donner la même apparence à tous les produits, mais de leur fournir des composants cohérents qu’ils
+            puissent adapter à leur identité.
 
-<ProjectChapter eyebrow="Ma contribution" title="Concevoir, développer et documenter le même système." number="03">
+        </ProjectChapter>
 
-J’ai défini les règles du système, conçu l’architecture des composants, développé la bibliothèque React et rédigé sa documentation.
+        <ProjectChapter eyebrow="Le catalogue" title="20 composants couvrent les interactions essentielles."
+                        icon={iWidgets}>
 
-<ProjectNote title="Une validation en conditions réelles">
-  Le portfolio que vous consultez utilise directement Udixio UI. Le projet est donc confronté à un usage réel plutôt qu’à une simple démonstration isolée.
-</ProjectNote>
+            La bibliothèque compte aujourd’hui **20 composants publiés et documentés**. Ils couvrent les actions, la
+            saisie, la navigation, la présentation de contenu et le retour d’état.
 
-</ProjectChapter>
+            <ProjectPoints
+                label="Principales familles de composants Udixio UI"
+                items={[
+                    "Actions : Button, IconButton, Fab et FabMenu",
+                    "Saisie : TextField, Checkbox, Switch, Slider et DatePicker",
+                    "Navigation : Menu, NavigationRail et Tabs",
+                    "Contenu et retours : Card, Carousel, SideSheet, Snackbar, Tooltip et ProgressIndicator",
+                ]}
+            />
+
+            Chaque composant possède une page dédiée avec son usage, ses variantes et des exemples. Le catalogue complet
+            est consultable dans la [documentation publique d’Udixio UI](https://ui.udixio.fr/components).
+
+
+        </ProjectChapter>
+
+        <ProjectChapter eyebrow="L’architecture"
+                        title="React et Angular partagent les mêmes règles, pas du code dupliqué." icon={iArchitecture}>
+
+            Material 3 fournit le référentiel de conception ; Udixio UI en propose une implémentation TypeScript. Le
+            même catalogue est disponible pour React et Angular afin qu’un produit retrouve les mêmes propriétés, les
+            mêmes états et les mêmes comportements quel que soit son framework.
+
+            Le travail ne s’arrête pas au rendu visuel. Pour chaque composant, je dois aussi définir son API, les
+            interactions au clavier et au toucher, la gestion du focus, les états désactivés ou chargés, puis maintenir
+            leur documentation et leurs tests.
+
+        </ProjectChapter>
+
+        <ProjectChapter eyebrow="La personnalisation" title="Le thème change l’identité sans réécrire les composants."
+                        icon={iPalette}>
+
+            Une bibliothèque commune ne doit pas obliger plusieurs produits à se ressembler. Udixio UI génère donc un
+            thème Material 3 à partir d’une couleur principale, puis applique les rôles de couleur, la typographie et
+            les états d’interaction à l’ensemble des composants.
+
+            Cette séparation permet de faire évoluer l’identité visuelle sans reprendre chaque bouton, champ ou menu.
+            Les comportements restent stables tandis que le thème porte la personnalité du produit.
+
+        </ProjectChapter>
+
+        <ProjectChapter eyebrow="La validation" title="La bibliothèque évolue au contact de produits réels."
+                        icon={iRocketLaunch} isLast>
+
+            Je conçois l’architecture, les API, les composants React et Angular, le système de thèmes et la
+            documentation. Cette responsabilité de bout en bout me permet de corriger une règle commune plutôt que ses
+            conséquences dans chaque application.
+
+            <ProjectNote title="Une validation en conditions réelles">
+                Le portfolio que vous consultez utilise directement le paquet React d’Udixio UI. La bibliothèque est
+                ainsi confrontée à la navigation, aux formulaires, aux thèmes et aux contraintes d’accessibilité d’un
+                site en production, plutôt qu’à une simple démonstration isolée.
+            </ProjectNote>
+
+            Les besoins rencontrés ici nourrissent la bibliothèque ; les corrections apportées à la bibliothèque
+            bénéficient ensuite à tous les écrans qui l’utilisent. Ce cycle est ce qui transforme progressivement une
+            collection de composants en bibliothèque maintenable.
+
+        </ProjectChapter>
+
+    </Fragment>
+
+</ProjectCaseStudy>

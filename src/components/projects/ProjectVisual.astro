@@ -8,6 +8,7 @@ interface Props {
   loading?: "eager" | "lazy";
   fit?: "cover" | "contain";
   interactive?: boolean;
+  autoplay?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   loading = "lazy",
   fit = "contain",
   interactive = false,
+  autoplay = false,
 } = Astro.props;
 const { cover, previewUrl, technologies } = project.data;
 const src = cover?.src ?? `/images/projects/generated/${project.id}.webp`;
@@ -44,8 +46,9 @@ const fitClass = fit === "cover" ? "object-cover" : "object-contain";
       muted
       loop
       playsinline
+      autoplay={autoplay}
       controls={interactive}
-      preload={interactive ? "metadata" : "none"}
+      preload={autoplay ? "auto" : interactive ? "metadata" : "none"}
       aria-hidden={interactive ? undefined : "true"}
       aria-label={interactive ? `Aperçu vidéo du projet ${project.data.title}` : undefined}
       class:list={[

@@ -10,11 +10,19 @@ interface Props {
 const { items, label } = Astro.props;
 ---
 
-<ul class="divide-y divide-outline-variant border-y border-outline-variant" aria-label={label}>
+<ul class="project-points" aria-label={label}>
   {items.map((item) => (
-    <li class="flex items-start gap-4 py-5 text-body-large text-on-surface-variant">
+    <li class="flex items-start gap-4 text-body-large text-on-surface-variant">
       <Icon icon={iCheckCircle} className="mt-0.5 size-6 shrink-0 text-primary" />
       <span>{item}</span>
     </li>
   ))}
 </ul>
+
+<style>
+  .project-points {
+    display: grid;
+    gap: 1.25rem;
+    margin-block: 2rem;
+  }
+</style>

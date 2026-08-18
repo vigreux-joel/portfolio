@@ -1,50 +1,40 @@
 ---
 title: "vigreux-joel.fr"
 eyebrow: "Projet open source · depuis 2024"
-headline: "Évaluez ce site pendant votre visite."
-heroContext: "vigreux-joel.fr · Portfolio open source"
-heroResponse: "J’y applique les exigences que je défends."
 description: "Ce portfolio est développé avec Astro et Udixio UI. Il sert de démonstration directe du niveau d’exigence défendu sur ces pages."
-role: "Conception, design, rédaction et développement"
 status: "En production et amélioré en continu"
 period: "Depuis septembre 2024"
 audience: "Clients, recruteurs et équipes techniques"
-outcomes:
-  - "Code source public et directement vérifiable"
-  - "Pages statiques avec hydratation limitée aux interactions utiles"
-# TODO crédibilité : ajouter les scores Lighthouse de production et la date de mesure,
-# puis éventuellement une métrique Web Vitals issue d’un trafic représentatif.
-need: "Un portfolio qui promet des interfaces soignées et un code maintenable doit pouvoir le prouver ailleurs que dans ses textes."
-solution: "J’ai construit ce site comme un vrai produit : itérations courtes, design system maison, attention portée à l’accessibilité, aux performances et au référencement. Son code est public."
-technicalNote: "Développé avec Astro, TypeScript et Udixio UI. Code source public sur GitHub."
 publishedAt: 2024-09-01
 order: 5
 draft: false
-intro: "Ce site est construit avec Astro et utilise Udixio UI, le design system présenté plus haut. Les deux projets avancent ensemble : chaque besoin réel rencontré ici devient une amélioration de la bibliothèque."
-supportingText: "Il évolue comme un produit et non comme une plaquette : par itérations courtes, avec des décisions documentées et un code source que vous pouvez lire."
-highlights:
-  - "Pages statiques rendues par Astro"
-  - "Interface construite avec mon propre design system"
-  - "Navigation utilisable au clavier et contrastes vérifiés"
-  - "Contenus structurés et données Schema.org"
 repositoryUrl: "https://github.com/vigreux-joel/portfolio"
 previewUrl: "https://vigreux-joel.fr/"
 technologies:
   - Astro
   - TypeScript
   - Udixio UI
-faq:
-  - question: "Comment concilier performances, accessibilité et référencement sur un site vitrine ?"
-    answer: "Il faut servir directement le contenu utile, limiter le JavaScript aux interactions nécessaires et soigner la structure des pages, la navigation au clavier, les contrastes et les images. Ce portfolio applique ces choix avec Astro et son code public permet de les vérifier."
-  - question: "Les animations ralentissent-elles forcément un site vitrine ?"
-    answer: "Non. Leur impact dépend surtout de leur nombre, de leur déclenchement et du JavaScript nécessaire pour les exécuter. Sur ce portfolio, le contenu reste généré statiquement et seules les parties interactives chargent du JavaScript ; les animations respectent aussi la préférence de réduction des mouvements."
 ---
 
 import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
 import ProjectPoints from "@components/projects/ProjectPoints.astro";
 import ProjectNote from "@components/projects/ProjectNote.astro";
+import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
+import { iLightbulb } from "@udixio/icons-outlined-400/lightbulb";
+import { iCode } from "@udixio/icons-outlined-400/code";
+import { iVerifiedUser } from "@udixio/icons-outlined-400/verified_user";
+import { iVisibility } from "@udixio/icons-outlined-400/visibility";
 
-<ProjectChapter eyebrow="Le parti pris" title="Traiter le portfolio comme un produit." number="01">
+<ProjectCaseStudy>
+
+<Fragment slot="story-heading">
+  <ProjectStoryHeading eyebrow="Projet open source" title="Un portfolio que l’on peut évaluer en le parcourant." />
+</Fragment>
+
+<Fragment slot="story">
+
+<ProjectChapter eyebrow="Le parti pris" title="Traiter le portfolio comme un produit." icon={iLightbulb}>
 
 Un portfolio est le seul projet dont le visiteur peut juger la qualité pendant qu’il le lit. C’est aussi le seul sur lequel je décide de tout : le contenu, l’architecture, les compromis.
 
@@ -52,20 +42,20 @@ Je l’ai donc traité comme un produit, pas comme une plaquette.
 
 </ProjectChapter>
 
-<ProjectChapter eyebrow="Les choix techniques" title="Servir le contenu d’abord, hydrater seulement l’utile." number="02">
+<ProjectChapter eyebrow="Les choix techniques" title="Servir le contenu d’abord, hydrater seulement l’utile." icon={iCode}>
 
 <ProjectPoints
   label="Choix techniques du portfolio"
   items={[
     "Astro pour servir des pages statiques sans JavaScript inutile",
-    "Udixio UI pour éprouver le design system sur un produit réel",
+    "Udixio UI pour éprouver la bibliothèque de composants sur un produit réel",
     "Des îlots interactifs ciblés, hydratés uniquement lorsque nécessaire",
   ]}
 />
 
 </ProjectChapter>
 
-<ProjectChapter eyebrow="La qualité" title="Des exigences visibles et vérifiables." number="03">
+<ProjectChapter eyebrow="La qualité" title="Des exigences visibles et vérifiables." icon={iVerifiedUser}>
 
 <ProjectPoints
   label="Exigences de qualité du portfolio"
@@ -79,7 +69,7 @@ Je l’ai donc traité comme un produit, pas comme une plaquette.
 
 </ProjectChapter>
 
-<ProjectChapter eyebrow="La preuve" title="Le code reste consultable." number="04">
+<ProjectChapter eyebrow="La preuve" title="Le code reste consultable." icon={iVisibility} isLast>
 
 Le dépôt est consultable sur GitHub.
 
@@ -88,3 +78,7 @@ Le dépôt est consultable sur GitHub.
 </ProjectNote>
 
 </ProjectChapter>
+
+</Fragment>
+
+</ProjectCaseStudy>

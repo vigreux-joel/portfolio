@@ -1,127 +1,133 @@
 ---
-import { Card } from "@components/Card";
-import { Line } from "@components/Line";
-import { LinearGradient } from "@components/LinearGradient";
-import { Button, Icon } from "@udixio/ui-react";
+import {Card} from "@components/Card";
+import {Line} from "@components/Line";
+import {LinearGradient} from "@components/LinearGradient";
+import {Button, Icon, Chip} from "@udixio/ui-react";
 
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { iCode } from "@udixio/icons-outlined-400/code";
+import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
+import {iCode} from "@udixio/icons-outlined-400/code";
 
 const expertiseAreas = [
-  {
-    eyebrow: "Front-end & UX",
-    title: "Des interfaces pensées autant que développées.",
-    description:
-      "Architecture front-end, design d’interface, accessibilité et animation : je transforme les usages métier en expériences claires, jusque sur mobile lorsque le produit l’exige.",
-    href: "/expertise#front-end",
-    label: "Mes choix d’interface",
-    tags: ["Design UI", "Web", "Mobile"],
-  },
-  {
-    eyebrow: "Back-end",
-    title: "Des fondations solides pour faire évoluer le produit.",
-    description:
-      "APIs, modèles de données, sécurité et mise en production : je construis les services nécessaires sans perdre de vue les contraintes du terrain.",
-    href: "/expertise#back-end",
-    label: "Mes fondations",
-    tags: ["APIs", "Données", "Architecture"],
-  },
+    {
+        eyebrow: "Front-end & UX",
+        title: "Des interfaces pensées autant que développées.",
+        description:
+            "Architecture front-end, design d’interface, accessibilité et animation : je transforme les usages métier en expériences claires, jusque sur mobile lorsque le produit l’exige.",
+        href: "/expertise#front-end",
+        label: "Mes choix d’interface",
+        tags: ["Design UI", "Web", "Mobile"],
+    },
+    {
+        eyebrow: "Back-end",
+        title: "Des fondations solides pour faire évoluer le produit.",
+        description:
+            "APIs, modèles de données, sécurité et mise en production : je construis les services nécessaires sans perdre de vue les contraintes du terrain.",
+        href: "/expertise#back-end",
+        label: "Mes fondations",
+        tags: ["APIs", "Données", "Architecture"],
+    },
 ];
 ---
 
 <section id="expertise-preview" class="tab-menu">
-  <div class="max-width">
-    <div class="flex mt-8">
-      <div><Line client:idle icon={iCode} nextTheme="cyan" isLast /></div>
-      <div class="padding pt-0  pb-16 flex-1">
-        <div class="max-w-7xl">
-          <p class="sub-title" data-sidebar-label="Expertise">Expertise</p>
-          <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
-            <span class="block text-gradient">Votre projet entre des mains expertes.</span>
-            <span class="block">Nous avançons ensemble, à chaque étape.</span>
-          </h2>
-          <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
-            On avance par points réguliers, avec des choix expliqués et décidés ensemble.
-            Interface, fonctionnement, expérience et choix techniques sont les compétences qui se
-            combinent pour faire vivre votre produit.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="padding-x ">
-      <div class="grid gap-6 lg:grid-cols-2">
-        {expertiseAreas.map((area) => (
-          <Card client:idle variant="filled" className="group relative z-10 flex h-full flex-col px-8  pt-6  pb-4">
-            <span class="sub-title text-secondary">{area.eyebrow}</span>
-            <h3 class="mt-4 max-w-xl text-headline-small ">{area.title}</h3>
-            <p class="mt-4  text-on-surface-variant">{area.description}</p>
-            <ul class="mt-6 flex flex-wrap gap-2" aria-label={`Domaines ${area.eyebrow}`}>
-              {area.tags.map((tag) => (
-                <li class="rounded-full bg-surface-container-high px-3 py-1 text-label-medium text-on-surface-variant">{tag}</li>
-              ))}
-            </ul>
-            <div class="mt-auto pt-8">
-              <Button
-                href={area.href}
-                label={area.label}
-                icon={iArrowForward}
-                iconPosition="right"
-                variant="text"
-                className="w-fit"
-                disableTextMargins
-              />
+    <div class="max-width">
+        <div class="flex mt-8">
+            <div>
+                <Line client:idle icon={iCode} nextTheme="cyan" isLast/>
             </div>
-          </Card>
-        ))}
-      </div>
+            <div class="padding pt-0  pb-16 flex-1">
+                <div class="max-w-7xl">
+                    <p class="sub-title" data-sidebar-label="Expertise">Expertise</p>
+                    <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+                        <span class="block text-gradient">Votre projet entre des mains expertes.</span>
+                        <span class="block">Nous avançons ensemble, à chaque étape.</span>
+                    </h2>
+                    <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+                        On avance par points réguliers, avec des choix expliqués et décidés ensemble.
+                        Interface, fonctionnement, expérience et choix techniques sont les compétences qui se
+                        combinent pour faire vivre votre produit.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-      <div class="mt-6 grid gap-6 xl:grid-cols-5">
-        <Card client:idle variant="filled" className="group relative z-10 flex h-full flex-col px-8  pt-6  pb-4 xl:col-span-3">
-          <span class="sub-title text-secondary">IA & ingénierie</span>
-          <h3 class="mt-4 max-w-2xl text-headline-small">
-            Accélérer le travail, jamais la prise de risque.
-          </h3>
-          <p class="mt-4  text-on-surface-variant">
-            J’utilise l’IA sur les tâches suffisamment cadrées. La compréhension du métier,
-            l’architecture, la sécurité et la validation restent sous contrôle humain.
-          </p>
-          <div class="mt-auto pt-8">
-            <Button
-              href="/approche"
-              label="Mon approche"
-              icon={iArrowForward}
-              iconPosition="right"
-              variant="text"
-              className="w-fit"
-              disableTextMargins
-            />
-          </div>
-        </Card>
+        <div class="padding-x ">
+            <div class="grid gap-6 lg:grid-cols-2">
+                {expertiseAreas.map((area) => (
+                        <Card client:idle variant="filled"
+                              className="group relative z-10 flex h-full flex-col px-8  pt-6  pb-4">
+                            <span class="sub-title text-secondary">{area.eyebrow}</span>
+                            <h3 class="mt-4 max-w-xl text-headline-small ">{area.title}</h3>
+                            <p class="mt-4  text-on-surface-variant">{area.description}</p>
+                            <ul class="mt-6 flex flex-wrap gap-2" aria-label={`Domaines ${area.eyebrow}`}>
+                                {area.tags.map((tag) => (
+                                        <Chip>{tag}</Chip>
+                                ))}
+                            </ul>
+                            <div class="mt-auto pt-8">
+                                <Button
+                                        href={area.href}
+                                        label={area.label}
+                                        icon={iArrowForward}
+                                        iconPosition="right"
+                                        variant="text"
+                                        className="w-fit"
+                                        disableTextMargins
+                                />
+                            </div>
+                        </Card>
+                ))}
+            </div>
 
-        <Card client:idle variant="filled" className="group relative z-10 flex h-full min-h-72 flex-col bg-surface-container-highest/90 px-8  py-6 xl:col-span-2">
-          <span class="sub-title text-secondary">Vue d’ensemble</span>
-          <h3 class="mt-4 text-headline-small text-on-surface">Voir comment toutes ces expertises s’articulent.</h3>
-          <p class="mt-4  text-on-surface-variant">
-            Technologies, design d’expérience, multiplateforme et choix d’architecture.
-          </p>
-          <div class="mt-auto pt-8">
-            <Button
-              href="/expertise"
-              label="Mes expertises"
-              icon={iArrowForward}
-              iconPosition="right"
-              variant="tonal"
+            <div class="mt-6 grid gap-6 xl:grid-cols-5">
+                <Card client:idle variant="filled"
+                      className="group relative z-10 flex h-full flex-col px-8  pt-6  pb-4 xl:col-span-3">
+                    <span class="sub-title text-secondary">IA & ingénierie</span>
+                    <h3 class="mt-4 max-w-2xl text-headline-small">
+                        Accélérer le travail, jamais la prise de risque.
+                    </h3>
+                    <p class="mt-4  text-on-surface-variant">
+                        J’utilise l’IA sur les tâches suffisamment cadrées. La compréhension du métier,
+                        l’architecture, la sécurité et la validation restent sous contrôle humain.
+                    </p>
+                    <div class="mt-auto pt-8">
+                        <Button
+                                href="/approche"
+                                label="Mon approche"
+                                icon={iArrowForward}
+                                iconPosition="right"
+                                variant="text"
+                                className="w-fit"
+                                disableTextMargins
+                        />
+                    </div>
+                </Card>
 
-            />
-          </div>
-        </Card>
-      </div>
+                <Card client:idle variant="filled"
+                      className="group relative z-10 flex h-full min-h-72 flex-col bg-surface-container-highest/90 px-8  py-6 xl:col-span-2">
+                    <span class="sub-title text-secondary">Vue d’ensemble</span>
+                    <h3 class="mt-4 text-headline-small text-on-surface">Voir comment toutes ces expertises
+                        s’articulent.</h3>
+                    <p class="mt-4  text-on-surface-variant">
+                        Technologies, design d’expérience, multiplateforme et choix d’architecture.
+                    </p>
+                    <div class="mt-auto pt-8">
+                        <Button
+                                href="/expertise"
+                                label="Mes expertises"
+                                icon={iArrowForward}
+                                iconPosition="right"
+                                variant="tonal"
+
+                        />
+                    </div>
+                </Card>
+            </div>
+        </div>
+
+        <div class="relative  h-20 md:h-28">
+            <Line nextTheme="cyan" fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst/>
+        </div>
     </div>
-
-    <div class="relative  h-20 md:h-28">
-      <Line nextTheme="cyan" fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
-    </div>
-  </div>
-  <LinearGradient nextTheme="cyan" />
+    <LinearGradient nextTheme="cyan"/>
 </section>

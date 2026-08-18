@@ -1,43 +1,33 @@
 ---
-import { Icon } from "@udixio/ui-react";
-import { iKeyboardArrowDown } from "@udixio/icons-outlined-400/keyboard_arrow_down";
+import type { ComponentProps } from "react";
+import { Line } from "@components/Line";
 
 interface Props {
   eyebrow: string;
   title: string;
-  number?: string;
+  icon: ComponentProps<typeof Line>["icon"];
+  isLast?: boolean;
 }
 
-const { eyebrow, title, number } = Astro.props;
+const { eyebrow, title, icon, isLast = false } = Astro.props;
 ---
 
-<details
-  class="project-chapter group border-b border-outline-variant"
-  name="project-chapters"
-  open={number === "01"}
->
-  <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-7 outline-none md:py-9">
-    <span class="min-w-0">
-      <span class="block text-label-large text-tertiary">{eyebrow}</span>
-      <span class="mt-2 block text-headline-small text-on-surface transition-colors group-hover:text-primary md:text-headline-medium">
+<section class="project-chapter flex pt-8 xl:block">
+  <div class="w-10 shrink-0 xl:absolute xl:bottom-0 xl:-left-3 xl:top-8 xl:w-6">
+    <Line client:idle icon={icon} isLast={isLast} className="xl:!ml-0" />
+  </div>
+  <div class="min-w-0 flex-1 padding-x pb-16 md:pb-24">
+    <header class="max-w-4xl">
+      <p class="text-label-large text-tertiary">{eyebrow}</p>
+      <h3 class="mt-2 text-headline-small text-on-surface md:text-headline-medium">
         {title}
-      </span>
-    </span>
-    <span class="mt-2 grid size-12 shrink-0 place-items-center rounded-full text-primary transition-colors group-hover:bg-surface-container-high">
-      <Icon
-        icon={iKeyboardArrowDown}
-        className="size-6 transition-transform duration-300 group-open:rotate-180"
-      />
-    </span>
-  </summary>
-  <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 group-open:grid-rows-[1fr]">
-    <div class="overflow-hidden">
-      <div class="project-chapter__body max-w-3xl pb-8 text-body-large text-on-surface-variant md:pb-10">
-        <slot />
-      </div>
+      </h3>
+    </header>
+    <div class="project-chapter__body mt-6 max-w-3xl text-body-large text-on-surface-variant">
+      <slot />
     </div>
   </div>
-</details>
+</section>
 
 <style>
   .project-chapter__body :global(p) {
@@ -56,9 +46,5 @@ const { eyebrow, title, number } = Astro.props;
     color: var(--color-primary);
     text-decoration: underline;
     text-underline-offset: 0.2em;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
   }
 </style>

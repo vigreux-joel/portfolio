@@ -1,22 +1,10 @@
 ---
 title: "Plateforme de gestion pour agences web"
 eyebrow: "Produit en cours · depuis 2025"
-headline: "Réunissez tous vos outils au même endroit."
-heroContext: "Plateforme de gestion · Agences web"
-heroResponse: "Je relie vos activités et leurs données."
 description: "Un logiciel métier modulaire qui rassemble CRM, gestion commerciale, publication de contenu, audits E-E-A-T et assistance IA."
-role: "Conception produit et développement full-stack"
 status: "En développement"
 period: "Depuis novembre 2025"
 audience: "Agences web et équipes de production"
-outcomes:
-  - "Un modèle de données commun aux différents modules"
-  - "Cinq domaines métier réunis dans une architecture modulaire"
-# TODO crédibilité : remplacer ou compléter ces preuves par des résultats d’usage
-# dès qu’une première version est testée par une agence pilote.
-need: "Une agence web travaille souvent avec un outil différent par activité : prospection, devis, contenu, suivi de la qualité. Les mêmes informations sont ressaisies plusieurs fois et personne n’a de vue d’ensemble."
-solution: "Je conçois une plateforme modulaire où chaque activité est un module distinct, mais partage les mêmes données clients, projets et contenus."
-technicalNote: "Produit personnel en développement depuis novembre 2025. Le code et l’instance sont privés."
 publishedAt: 2025-11-01
 order: 3
 draft: false
@@ -24,46 +12,68 @@ technologies:
   - TypeScript
   - NestJS
   - Astro
-faq:
-  - question: "Comment éviter de ressaisir les mêmes données entre les outils d’une agence ?"
-    answer: "Les activités peuvent rester séparées tout en partageant une base commune pour les clients, les projets et les contenus. La plateforme applique ce principe avec des modules distincts pour le CRM, la gestion commerciale, la publication et les audits, sans dupliquer les informations entre eux."
-  - question: "Comment faire évoluer un logiciel métier sans reconstruire toute la plateforme ?"
-    answer: "Chaque activité peut être séparée dans un module relié à une base de données commune. Un nouveau besoin peut alors être ajouté ou modifié sans remettre en cause le CRM, la gestion commerciale ou la publication déjà en place. C’est l’architecture retenue pour cette plateforme destinée aux agences web."
 ---
 
+
 import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
 import ProjectPoints from "@components/projects/ProjectPoints.astro";
 import ProjectNote from "@components/projects/ProjectNote.astro";
+import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
+import {iSearch} from "@udixio/icons-outlined-400/search";
+import {iDashboardCustomize} from "@udixio/icons-outlined-400/dashboard_customize";
+import {iArchitecture} from "@udixio/icons-outlined-400/architecture";
 
-<ProjectChapter eyebrow="Le constat" title="Des activités liées, mais des données dispersées." number="01">
+<ProjectCaseStudy>
 
-Une agence web fait cohabiter des activités très différentes : trouver des clients, produire des devis et des factures, publier du contenu, vérifier la qualité et la crédibilité des sites livrés. Chacune de ces activités a son outil, et les données circulent mal entre eux.
+    <Fragment slot="story-heading">
+        <ProjectStoryHeading eyebrow="Produit en cours"
+                             title="Relier les activités d’une agence autour des mêmes données."/>
+    </Fragment>
 
-Ce projet part de ce constat : plutôt qu’un outil de plus, une base commune sur laquelle chaque activité devient un module.
+    <Fragment slot="story">
 
-</ProjectChapter>
+        <ProjectChapter eyebrow="Le constat" title="Des activités liées, mais des données dispersées." icon={iSearch}>
 
-<ProjectChapter eyebrow="Le périmètre" title="Un socle commun, cinq modules spécialisés." number="02">
+            Une agence web fait cohabiter des activités très différentes : trouver des clients, produire des devis et
+            des factures, publier du contenu, vérifier la qualité et la crédibilité des sites livrés. Chacune de ces
+            activités a son outil, et les données circulent mal entre eux.
 
-<ProjectPoints
-  label="Modules de la plateforme"
-  items={[
-    "CRM : suivi des prospects et des clients",
-    "Gestion commerciale : devis, facturation et suivi des projets",
-    "Blog et contenu : publication et organisation éditoriale",
-    "Audits E-E-A-T : contrôle de la qualité et de la crédibilité",
-    "Assistance IA : propositions relues avant usage",
-  ]}
-/>
+            Ce projet part de ce constat : plutôt qu’un outil de plus, une base commune sur laquelle chaque activité
+            devient un module.
 
-</ProjectChapter>
+        </ProjectChapter>
 
-<ProjectChapter eyebrow="Ma contribution" title="Concevoir le produit comme un ensemble cohérent." number="03">
+        <ProjectChapter eyebrow="Le périmètre" title="Un socle commun, cinq modules spécialisés."
+                        icon={iDashboardCustomize}>
 
-Je conçois et développe l’ensemble : modèle de données commun, architecture modulaire, interfaces et services back-end.
+            <ProjectPoints
+                label="Modules de la plateforme"
+                items={[
+                    "CRM : suivi des prospects et des clients",
+                    "Gestion commerciale : devis, facturation et suivi des projets",
+                    "Blog et contenu : publication et organisation éditoriale",
+                    "Audits E-E-A-T : contrôle de la qualité et de la crédibilité",
+                    "Assistance IA : propositions relues avant usage",
+                ]}
+            />
 
-<ProjectNote title="Pourquoi le projet reste privé">
-  Il s’agit d’un produit en cours de développement, dont le code et l’instance ne sont pas publics. Cette fiche décrit la conception et le périmètre fonctionnel ; je peux présenter le produit plus en détail lors d’un échange.
-</ProjectNote>
+        </ProjectChapter>
 
-</ProjectChapter>
+        <ProjectChapter eyebrow="Ma contribution" title="Concevoir le produit comme un ensemble cohérent."
+                        icon={iArchitecture} isLast>
+
+            Je conçois et développe l’ensemble : modèle de données commun, architecture modulaire, interfaces et
+            services back-end.
+
+            <ProjectNote title="Pourquoi le projet reste privé">
+                Il s’agit d’un produit en cours de développement, dont le code et l’instance ne sont pas publics. Cette
+                fiche décrit la conception et le périmètre fonctionnel ; je peux présenter le produit plus en détail
+                lors d’un échange.
+            </ProjectNote>
+
+        </ProjectChapter>
+
+    </Fragment>
+
+</ProjectCaseStudy>

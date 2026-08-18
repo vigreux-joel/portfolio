@@ -5,7 +5,16 @@ import {v4 as uuidv4} from "uuid";
 import {useIsPowered} from "../hooks/useIsPowered";
 import {type EnergyNodeRegistration, registerEnergyNode, unregisterEnergyNode} from "./Line";
 
-export const Card = ({children, className, variant = "elevated", energyX, energyXOut, proximityPercent = 100, ...restProps}: any) => {
+export const Card = ({
+    children,
+    className,
+    variant = "elevated",
+    energyX,
+    energyXOut,
+    proximityPercent = 100,
+    pointerGlow = true,
+    ...restProps
+}: any) => {
 
     const ref = useRef<any>(null);
 
@@ -15,6 +24,8 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
     //   prox  = 0 (au-delà du rayon) → 1 (sur la carte), selon la distance au rectangle
     const [mouse, setMouse] = useState<{ mx: number; my: number; prox: number }>({ mx: 0, my: 0, prox: 0 });
     useEffect(() => {
+        if (!pointerGlow) return;
+
         const onMove = (e: MouseEvent) => {
             const el = ref.current;
             if (!el) return;
@@ -35,7 +46,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
         };
         window.addEventListener("mousemove", onMove, { passive: true });
         return () => window.removeEventListener("mousemove", onMove);
-    }, []);
+    }, [pointerGlow, proximityPercent]);
 
     const [uuid, setUuid] = useState(uuidv4())
     const isPowered = useIsPowered(ref);
@@ -143,7 +154,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
 
         {/* Bordure lumineuse : s'active au survol ET à l'approche de la souris */}
         <AnimatePresence>
-            {(mouse.prox > 0 && isPowered) && (
+            {(pointerGlow && mouse.prox > 0 && isPowered) && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: mouse.prox }}
@@ -189,7 +200,7 @@ export const Card = ({children, className, variant = "elevated", energyX, energy
 
         {/* Halo lumineux intérieur : suit aussi la souris à l'approche */}
         <AnimatePresence>
-            {(mouse.prox > 0 && isPowered) && (
+            {(pointerGlow && mouse.prox > 0 && isPowered) && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: mouse.prox }}

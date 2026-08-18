@@ -1,22 +1,10 @@
 ---
 title: "Netsimpler"
 eyebrow: "Expérience · 3 ans sur un SaaS en production"
-headline: "Faites évoluer votre plateforme en continu."
-heroContext: "Netsimpler · Création de sites web"
-heroResponse: "Je la modernise sans couper le service."
 description: "Trois années de développement sur une plateforme SaaS de création de sites web : migrations progressives du front-end et restructuration des services back-end."
-role: "Développeur full-stack"
 status: "SaaS en production"
 period: "Avril 2023 — juin 2026"
 audience: "Utilisateurs et équipes d’une plateforme de création de sites"
-outcomes:
-  - "Migration progressive du front-end Angular vers Astro et React"
-  - "Restructuration des services back-end vers des services AWS ciblés"
-# TODO crédibilité : compléter avec une donnée publiable et validée
-# (nombre de sites, utilisateurs, gain de performance ou réduction de maintenance).
-need: "La plateforme était en production et utilisée quotidiennement. Toute évolution devait se faire sans interruption de service ni régression pour les utilisateurs existants."
-solution: "J’ai conduit des migrations progressives plutôt que des réécritures : le front-end Angular vers Astro et React, et un back-end en microservices vers des services AWS ciblés."
-technicalNote: "Poste de développeur full-stack, d’avril 2023 à juin 2026."
 publishedAt: 2023-04-01
 order: 4
 draft: false
@@ -27,18 +15,27 @@ technologies:
   - Angular
   - TypeScript
   - AWS
-faq:
-  - question: "Comment moderniser une application web sans interrompre le service ?"
-    answer: "Une migration progressive permet de remplacer le socle écran par écran ou service par service, avec des étapes vérifiables et réversibles. Chez Netsimpler, cette approche a permis de faire évoluer le front-end et le back-end pendant que la plateforme restait utilisée quotidiennement."
-  - question: "Quand préférer une migration progressive à une réécriture complète ?"
-    answer: "Elle est préférable lorsque le produit doit continuer de fonctionner, que des évolutions restent attendues et que certaines parties de l’existant peuvent encore être conservées. Elle réduit le risque d’une bascule unique et permet de valider les bénéfices de chaque étape avant de poursuivre."
 ---
 
 import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
 import ProjectPoints from "@components/projects/ProjectPoints.astro";
 import ProjectNote from "@components/projects/ProjectNote.astro";
+import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
+import { iWeb } from "@udixio/icons-outlined-400/web";
+import { iCode } from "@udixio/icons-outlined-400/code";
+import { iSync } from "@udixio/icons-outlined-400/sync";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 
-<ProjectChapter eyebrow="Le contexte" title="Faire évoluer un SaaS déjà utilisé chaque jour." number="01">
+<ProjectCaseStudy>
+
+<Fragment slot="story-heading">
+  <ProjectStoryHeading eyebrow="Expérience" title="Trois ans à faire évoluer un SaaS en production." />
+</Fragment>
+
+<Fragment slot="story">
+
+<ProjectChapter eyebrow="Le contexte" title="Faire évoluer un SaaS déjà utilisé chaque jour." icon={iWeb}>
 
 Netsimpler est une plateforme SaaS de création de sites web. J’y ai travaillé comme développeur full-stack pendant un peu plus de trois ans, sur un produit déjà en production et utilisé quotidiennement.
 
@@ -46,7 +43,7 @@ Cette fiche décrit ma contribution technique. Elle ne présente pas le produit 
 
 </ProjectChapter>
 
-<ProjectChapter eyebrow="Ma contribution" title="Du front-end aux services back-end." number="02">
+<ProjectChapter eyebrow="Ma contribution" title="Du front-end aux services back-end." icon={iCode}>
 
 <ProjectPoints
   label="Périmètre de ma contribution chez Netsimpler"
@@ -60,7 +57,7 @@ Cette fiche décrit ma contribution technique. Elle ne présente pas le produit 
 
 </ProjectChapter>
 
-<ProjectChapter eyebrow="Les migrations" title="Remplacer progressivement, sans couper le service." number="03">
+<ProjectChapter eyebrow="Les migrations" title="Remplacer progressivement, sans couper le service." icon={iSync}>
 
 **Le front-end.** Le socle Angular a été migré progressivement vers Astro et React, écran par écran, afin de simplifier l’architecture et d’améliorer les performances sans bloquer les évolutions fonctionnelles en cours.
 
@@ -72,10 +69,14 @@ Cette fiche décrit ma contribution technique. Elle ne présente pas le produit 
 
 </ProjectChapter>
 
-<ProjectChapter eyebrow="Le recul" title="La production impose des étapes vérifiables." number="04">
+<ProjectChapter eyebrow="Le recul" title="La production impose des étapes vérifiables." icon={iFactCheck} isLast>
 
 Travailler pendant trois ans sur une base existante apprend des choses qu’un projet neuf n’enseigne pas : composer avec des dépendances techniques que l’on n’a pas choisies, mesurer le coût réel d’une migration, et préférer une série d’étapes vérifiables à une réécriture qui promet de tout régler.
 
 C’est cette expérience de la production, plus que la plateforme elle-même, que j’apporte aujourd’hui sur les projets que je reprends.
 
 </ProjectChapter>
+
+</Fragment>
+
+</ProjectCaseStudy>

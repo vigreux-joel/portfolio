@@ -95,7 +95,7 @@ export interface SEOProps {
 
 interface Props {
     seo: SEOProps;
-    faq: FaqItem[];
+    faq?: FaqItem[];
     hiddenFooter?: boolean;
     hiddenMenu?: boolean;
     showSidebar?: boolean;
@@ -103,7 +103,7 @@ interface Props {
     showContactFab?: boolean;
 }
 
-const {seo, faq, hiddenFooter = false, hiddenMenu = false, showSidebar = true, showCta = true, showContactFab = true}: Props = Astro.props;
+const {seo, faq = [], hiddenFooter = false, hiddenMenu = false, showSidebar = true, showCta = true, showContactFab = true}: Props = Astro.props;
 
 // const currentPath = Astro.url.pathname.replace("/fr", "");
 // const domain = Astro.url.origin;

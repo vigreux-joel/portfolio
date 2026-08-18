@@ -1,0 +1,39 @@
+---
+interface Fact {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  facts: readonly Fact[];
+  layout?: "row" | "column" | "sidebar";
+  compact?: boolean;
+}
+
+const { facts, layout = "row", compact = false } = Astro.props;
+---
+
+<dl
+  class:list={[
+    "max-w-5xl gap-x-12",
+    compact ? "mt-5 gap-y-4" : "mt-10 gap-y-6",
+    layout === "column" && "grid",
+    layout === "sidebar" && "grid md:grid-cols-3 xl:grid-cols-1",
+    layout === "row" && "flex flex-wrap",
+  ]}
+>
+  {facts.map((fact) => (
+    <div class="grid max-w-80 gap-1">
+      <dt class:list={[
+        compact ? "text-label-small text-on-surface" : "text-label-large text-tertiary",
+      ]}>
+        {fact.label}
+      </dt>
+      <dd class:list={[
+        compact ? "text-body-small text-on-surface-variant" : "text-body-large text-on-surface",
+      ]}>
+        {fact.value}
+      </dd>
+    </div>
+  ))}
+</dl>

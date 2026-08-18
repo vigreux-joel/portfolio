@@ -25,10 +25,7 @@ const collectionJsonLd = JSON.stringify({
       "@type": "ListItem",
       position: index + 1,
       name: project.data.title,
-      url:
-        project.data.kind === "etude-de-cas"
-          ? `https://vigreux-joel.fr/projets/${project.id}`
-          : project.data.externalUrl,
+      url: `https://vigreux-joel.fr/projets/${project.id}`,
     })),
   },
 });

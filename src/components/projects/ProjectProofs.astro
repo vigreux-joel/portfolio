@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+}
+
+const { title, eyebrow = "À retenir" } = Astro.props;
+---
+
+<section aria-labelledby="project-proofs-title">
+  <p class="text-label-large text-tertiary">{eyebrow}</p>
+  <h2 id="project-proofs-title" class="mt-2 max-w-3xl text-headline-medium text-on-surface md:text-headline-large">
+    {title}
+  </h2>
+  <div class="mt-6 grid max-w-5xl gap-4 md:grid-cols-2">
+    <slot />
+  </div>
+</section>

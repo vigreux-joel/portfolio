@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Line } from "@components/Line";
+import ProjectVisual from "./ProjectVisual.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+---
+
+<section class="flex pt-8 xl:relative xl:block">
+  <div class="w-10 shrink-0 xl:hidden">
+    <Line client:idle />
+  </div>
+  <div class="hidden xl:absolute xl:bottom-0 xl:-left-3 xl:top-20 xl:block xl:w-6">
+    <Line client:idle className="xl:!ml-0" />
+  </div>
+  <figure class="min-w-0 flex-1 padding-x pb-16 md:pb-24">
+    <div
+      class="overflow-hidden rounded-3xl"
+      style={`aspect-ratio: ${data.cover?.width ?? 1440} / ${data.cover?.height ?? 900}`}
+      transition:name={`project-visual-${project.id}`}
+    >
+      <ProjectVisual project={project} loading="eager" fit="contain" interactive autoplay />
+    </div>
+    {data.cover?.caption && (
+      <figcaption class="mt-4 text-body-medium text-on-surface-variant">
+        {data.cover.caption}
+      </figcaption>
+    )}
+  </figure>
+</section>

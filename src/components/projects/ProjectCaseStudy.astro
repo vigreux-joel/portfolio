@@ -1,0 +1,33 @@
+---
+import { Line } from "@components/Line";
+import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import { iRoute } from "@udixio/icons-outlined-400/route";
+
+const hasOutcomes = Astro.slots.has("outcomes");
+---
+
+<div>
+  {hasOutcomes && (
+    <section class="flex pt-8 xl:block">
+      <div class="w-10 shrink-0 xl:absolute xl:bottom-0 xl:-left-3 xl:top-8 xl:w-6">
+        <Line client:idle icon={iFactCheck} className="xl:!ml-0" />
+      </div>
+      <div class="min-w-0 flex-1 padding-x pb-20 md:pb-28">
+        <slot name="outcomes" />
+      </div>
+    </section>
+  )}
+
+  <section class="flex pt-8 xl:block" aria-labelledby="project-story-title">
+    <div class="w-10 shrink-0 xl:absolute xl:bottom-0 xl:-left-3 xl:top-8 xl:w-6">
+      <Line client:idle icon={iRoute} className="xl:!ml-0" />
+    </div>
+    <header class="min-w-0 flex-1 padding-x pb-14 md:pb-20">
+      <slot name="story-heading" />
+    </header>
+  </section>
+
+  <article>
+    <slot name="story" />
+  </article>
+</div>
