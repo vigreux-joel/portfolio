@@ -1,95 +1,94 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { Button, type ButtonInterface } from "@udixio/ui-react";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { Card } from "@components/Card";
+import type {CollectionEntry} from "astro:content";
+import {Button, type ButtonInterface} from "@udixio/ui-react";
+import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
+import {Card} from "@components/Card";
 import ProjectTechnologies from "./ProjectTechnologies.astro";
 import ProjectVisual from "./ProjectVisual.astro";
 
 interface Props {
-  project: CollectionEntry<"projects">;
-  buttonLabel?: string;
-  primaryButtonVariant?: ButtonInterface["props"]["variant"];
+    project: CollectionEntry<"projects">;
+    buttonLabel?: string;
+    primaryButtonVariant?: ButtonInterface["props"]["variant"];
 }
 
 const {
-  project,
-  buttonLabel = "Voir le projet",
-  primaryButtonVariant = "filled",
+    project,
+    buttonLabel = "Voir le projet",
+    primaryButtonVariant = "filled",
 } = Astro.props;
 
-const { data } = project;
+const {data} = project;
 const hasVisual = Boolean(data.cover || data.previewUrl);
 const visualWidth = data.cover?.width ?? 1440;
 const visualHeight = data.cover?.height ?? 900;
 ---
 
-<article class="@container h-full w-full min-w-0">
-  <Card
-    client:visible
-    variant="filled"
-    className="flex h-full w-full flex-col !overflow-hidden"
-  >
+
+<Card
+        client:visible
+        variant="filled"
+        className="@container flex   flex-col "
+>
     <div
-      class:list={[
-        "relative flex h-full min-h-0 w-full min-w-0 flex-1 flex-col",
-        hasVisual &&
-          "@4xl:grid @4xl:grid-cols-[minmax(0,1.1fr)_minmax(24rem,.9fr)]",
-      ]}
+            class:list={[
+                "relative flex h-full min-h-0 w-full min-w-0 flex-1 flex-col",
+                hasVisual &&
+                "@4xl:grid @4xl:grid-cols-[minmax(0,1.1fr)_minmax(24rem,.9fr)]",
+            ]}
     >
-      {
-        hasVisual && (
-          <div
-            class="relative w-full min-w-0 shrink-0 overflow-hidden border-b border-outline-variant bg-surface-container @4xl:border-r @4xl:border-b-0"
-            style={`--project-aspect: ${visualWidth} / ${visualHeight}; aspect-ratio: var(--project-aspect)`}
-            transition:name={`project-visual-${project.id}`}
-          >
-            <ProjectVisual project={project} fit="contain" />
-          </div>
-        )
-      }
-
-      <div
-        class:list={[
-          "flex min-h-0 flex-1 flex-col p-6 @lg:p-8",
-          !hasVisual && "@4xl:max-w-5xl",
-        ]}
-      >
-        <p class="text-title-medium text-secondary @lg:text-title-medium-large">{data.eyebrow}</p>
-        <h3
-          class="mt-2 text-headline-small text-on-surface @lg:mt-3 @lg:text-headline-large @4xl:line-clamp-2"
-          transition:name={`project-title-${project.id}`}
-        >
-          {data.title}
-        </h3>
-
-
-
-        <p class="mt-5 text-body-medium text-on-surface-variant @4xl:text-body-large">
-          {data.description}
-        </p>
-
         {
-          data.technologies.length > 0 && (
-            <ProjectTechnologies
-              technologies={data.technologies}
-              label={`Technologies utilisées pour ${data.title}`}
-              class="hidden pt-8 @lg:flex"
-            />
-          )
+            hasVisual && (
+                        <div
+                                class="relative w-full min-w-0 shrink-0 overflow-hidden border-b border-outline-variant bg-surface-container @4xl:border-r @4xl:border-b-0"
+                                style={`--project-aspect: ${visualWidth} / ${visualHeight}; aspect-ratio: var(--project-aspect)`}
+                                transition:name={`project-visual-${project.id}`}
+                        >
+                            <ProjectVisual project={project} fit="contain"/>
+                        </div>
+            )
         }
 
-        <div class="mt-auto flex flex-col gap-3 pt-8 @sm:flex-row @sm:flex-wrap">
-          <Button
-            href={`/projets/${project.id}`}
-            icon={iArrowForward}
-            iconPosition="right"
-            label={buttonLabel}
-            variant={primaryButtonVariant}
-            disableTextMargins={primaryButtonVariant === "text"}
-          />
+        <div
+                class:list={[
+                    "flex min-h-0 flex-1 flex-col p-6 @lg:p-8",
+                    !hasVisual && "@4xl:max-w-5xl",
+                ]}
+        >
+            <p class="text-title-medium text-secondary @lg:text-title-medium-large">{data.eyebrow}</p>
+            <h3
+                    class="mt-2 text-headline-small text-on-surface @lg:mt-3 @lg:text-headline-large @4xl:line-clamp-2"
+                    transition:name={`project-title-${project.id}`}
+            >
+                {data.title}
+            </h3>
+
+
+            <p class="mt-5 text-body-medium text-on-surface-variant @4xl:text-body-large">
+                {data.description}
+            </p>
+
+            {
+                data.technologies.length > 0 && (
+                            <ProjectTechnologies
+                                    technologies={data.technologies}
+                                    label={`Technologies utilisées pour ${data.title}`}
+                                    class="hidden pt-8 @lg:flex"
+                            />
+                )
+            }
+
+            <div class="mt-auto flex flex-col gap-3 pt-8 @sm:flex-row @sm:flex-wrap">
+                <Button
+                        href={`/projets/${project.id}`}
+                        icon={iArrowForward}
+                        iconPosition="right"
+                        label={buttonLabel}
+                        variant={primaryButtonVariant}
+                        disableTextMargins={primaryButtonVariant === "text"}
+                />
+            </div>
         </div>
-      </div>
     </div>
-  </Card>
-</article>
+</Card>
+

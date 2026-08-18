@@ -1,23 +1,22 @@
-import {hexFromArgb} from "@material/material-color-utilities";
-import {defineConfig} from '@udixio/ui-react';
-import {Hct} from "@udixio/theme";
+import {defineConfig} from '@udixio/tailwind';
+import {Color} from "@udixio/theme";
 
-export const sourceColor = Hct.from(280, 45, 75)
+export const sourceColor = Color.from({hue: 280, chroma: 45, tone: 75})
 
 export const subThemes = {
-    blue: hexFromArgb(sourceColor.toInt()),
-    green: hexFromArgb(Hct.from(155, sourceColor.chroma, sourceColor.tone).toInt()),
-    cyan: hexFromArgb(Hct.from(205, sourceColor.chroma, sourceColor.tone).toInt()),
+    blue: sourceColor,
+    green: sourceColor.withHue(155),
+    cyan: sourceColor.withHue(205),
 }
 
 export default defineConfig({
     sourceColor,
     palettes: {
-        secondary: ({ sourceColor }) => ({
+        secondary: ({sourceColor}) => ({
             hue: sourceColor.hue + 5,
             chroma: sourceColor.chroma * 0.625,
         }),
-        tertiary: ({ sourceColor }) => ({
+        tertiary: ({sourceColor}) => ({
             hue: sourceColor.hue + 55,
             chroma: sourceColor.chroma,
         }),
@@ -66,5 +65,6 @@ export default defineConfig({
         lg: 1.2,
         xl: 1.3,
     },
-    subThemes
+    subThemes,
+    outFile: 'src/styles/udixio.generated.css',
 })

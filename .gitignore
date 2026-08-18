@@ -27,3 +27,4 @@ pnpm-debug.log*
 
 # local application documents
 temp/
+udixio.generated.css

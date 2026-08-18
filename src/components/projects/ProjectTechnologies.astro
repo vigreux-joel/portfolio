@@ -1,38 +1,30 @@
 ---
+import {Chip} from "@udixio/ui-react"
 interface Props {
-  technologies: readonly string[];
-  label?: string;
-  class?: string;
-  align?: "start" | "end";
-  compact?: boolean;
+    technologies: readonly string[];
+    label?: string;
+    class?: string;
+    align?: "start" | "end";
+    compact?: boolean;
 }
 
-const { technologies, label, class: className, align = "end", compact = false } = Astro.props;
+const {technologies, label, class: className, align = "end", compact = false} = Astro.props;
 ---
 
 {
-  technologies.length > 0 && (
-    <ul
-      class:list={[
-        "flex flex-wrap gap-2",
-        align === "end" ? "flex-row-reverse flex-wrap-reverse justify-end" : "justify-start",
-        className,
-      ]}
-      aria-label={label}
+    technologies.length > 0 && (
+    <div
+            class:list={[
+                "flex flex-wrap gap-2",
+                align === "end" ? "flex-row-reverse flex-wrap-reverse justify-end" : "justify-start",
+                className,
+            ]}
+            role="list"
+            aria-label={label}
     >
-      {technologies.map((technology, index) => (
-        <li
-          class:list={[
-            "rounded-full border border-outline-variant",
-            compact
-              ? "px-2 py-0.5 text-label-small text-on-surface-variant"
-              : "px-3 py-1 text-label-medium text-on-surface-variant",
-          ]}
-          style={`order: ${technologies.length - index}`}
-        >
-          {technology}
-        </li>
-      ))}
-    </ul>
-  )
-}
+        {technologies.map((technology, index) => (
+                <Chip>{technology}</Chip>
+        ))}
+    </div>
+        )
+    }

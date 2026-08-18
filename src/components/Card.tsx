@@ -6,15 +6,15 @@ import {useIsPowered} from "../hooks/useIsPowered";
 import {type EnergyNodeRegistration, registerEnergyNode, unregisterEnergyNode} from "./Line";
 
 export const Card = ({
-    children,
-    className,
-    variant = "elevated",
-    energyX,
-    energyXOut,
-    proximityPercent = 100,
-    pointerGlow = true,
-    ...restProps
-}: any) => {
+                         children,
+                         className,
+                         variant = "elevated",
+                         energyX,
+                         energyXOut,
+                         proximityPercent = 100,
+                         pointerGlow = true,
+                         ...restProps
+                     }: any) => {
 
     const ref = useRef<any>(null);
 
@@ -22,7 +22,7 @@ export const Card = ({
     // réagissent dès que le curseur s'APPROCHE (plus seulement au survol).
     //   mx,my = position du curseur relative à la carte (peut sortir de [0,w]/[0,h])
     //   prox  = 0 (au-delà du rayon) → 1 (sur la carte), selon la distance au rectangle
-    const [mouse, setMouse] = useState<{ mx: number; my: number; prox: number }>({ mx: 0, my: 0, prox: 0 });
+    const [mouse, setMouse] = useState<{ mx: number; my: number; prox: number }>({mx: 0, my: 0, prox: 0});
     useEffect(() => {
         if (!pointerGlow) return;
 
@@ -41,15 +41,21 @@ export const Card = ({
             setMouse(prev => {
                 // loin et déjà éteint → on évite un re-render à chaque mouvement de souris
                 if (prox === 0 && prev.prox === 0) return prev;
-                return { mx: e.clientX - rect.left, my: e.clientY - rect.top, prox };
+                return {mx: e.clientX - rect.left, my: e.clientY - rect.top, prox};
             });
         };
-        window.addEventListener("mousemove", onMove, { passive: true });
+        window.addEventListener("mousemove", onMove, {passive: true});
         return () => window.removeEventListener("mousemove", onMove);
     }, [pointerGlow, proximityPercent]);
 
     const [uuid, setUuid] = useState(uuidv4())
     const isPowered = useIsPowered(ref);
+    const [supportsCornerShape, setSupportsCornerShape] = useState(false);
+
+    useEffect(() => {
+        if (typeof CSS === "undefined" || typeof CSS.supports !== "function") return;
+        setSupportsCornerShape(CSS.supports("corner-shape", "superellipse(2)"));
+    }, []);
 
     const energyBorderRef = useRef<HTMLDivElement>(null);
     const resolvedEnergyX = energyX === true ? "50%" : energyX;
@@ -113,17 +119,38 @@ export const Card = ({
                 // Distance px le long du périmètre, proportionnelle à la progression verticale
                 const segL = head <= H ? (head / H) * lenL : lenL + (head - H);
                 let lx: number, ly: number;
-                if (segL <= topL) { lx = topL - segL; ly = 0; }            // haut : entrée → coin
-                else if (segL <= topL + H) { lx = 0; ly = segL - topL; }   // côté gauche : descente
-                else if (segL <= lenL) { lx = segL - topL - H; ly = H; }   // bas : coin → sortie
-                else { lx = botL; ly = H + (segL - lenL); }                // glisse sous la sortie
+                if (segL <= topL) {
+                    lx = topL - segL;
+                    ly = 0;
+                }            // haut : entrée → coin
+                else if (segL <= topL + H) {
+                    lx = 0;
+                    ly = segL - topL;
+                }   // côté gauche : descente
+                else if (segL <= lenL) {
+                    lx = segL - topL - H;
+                    ly = H;
+                }   // bas : coin → sortie
+                else {
+                    lx = botL;
+                    ly = H + (segL - lenL);
+                }                // glisse sous la sortie
 
                 const segR = head <= H ? (head / H) * lenR : lenR + (head - H);
                 let rx: number, ry: number;
-                if (segR <= topR) { rx = entryFrac * w + segR; ry = 0; }
-                else if (segR <= topR + H) { rx = w; ry = segR - topR; }
-                else if (segR <= lenR) { rx = w - (segR - topR - H); ry = H; }
-                else { rx = w - botR; ry = H + (segR - lenR); }
+                if (segR <= topR) {
+                    rx = entryFrac * w + segR;
+                    ry = 0;
+                } else if (segR <= topR + H) {
+                    rx = w;
+                    ry = segR - topR;
+                } else if (segR <= lenR) {
+                    rx = w - (segR - topR - H);
+                    ry = H;
+                } else {
+                    rx = w - botR;
+                    ry = H + (segR - lenR);
+                }
 
                 el.style.setProperty('--energy-r', `${H * 0.5}px`); // lueur = 50% de la hauteur
                 el.style.setProperty('--ex-l', `${lx}px`);
@@ -138,35 +165,41 @@ export const Card = ({
     }, [resolvedEnergyX, resolvedEnergyXOut]);
 
     return <UiCard ref={ref}
-                   style={{ cornerShape: "superellipse(2)" }}
-                    className={classNames(
-
-        "rounded-3xl  bg-radial-[at_90%_90%]" ,
-          " from-secondary-container/20 to-transparent backdrop-blur-xl overflow-clip",
-          "group",
-       "transition-bg duration-1000",
-        {
-            "bg-surface-container/50": isPowered,
-            "bg-surface-container-low ": !isPowered
-        },
-                        className,
-      )} variant={variant} {...restProps}>
+                   style={{cornerShape: "superellipse(2)"}}
+                   className={classNames(
+                       " bg-radial-[at_90%_90%]",
+                       " from-secondary-container/20 to-transparent backdrop-blur-xl overflow-clip",
+                       "group",
+                       "transition-bg duration-1000",
+                       {
+                           "bg-surface-container/50": isPowered,
+                           "bg-surface-container-low ": !isPowered
+                       },
+                       {
+                           "rounded-[50px]": supportsCornerShape,
+                           "rounded-3xl": !supportsCornerShape
+                       },
+                       
+                       className,
+                   )} variant={variant} {...restProps}>
 
         {/* Bordure lumineuse : s'active au survol ET à l'approche de la souris */}
         <AnimatePresence>
             {(pointerGlow && mouse.prox > 0 && isPowered) && (
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: mouse.prox }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{opacity: 0}}
+                    animate={{opacity: mouse.prox}}
+                    exit={{opacity: 0}}
+                    transition={{duration: 0.3}}
                     className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
                     style={{
                         padding: "2px", // Épaisseur fine pour la bordure
                         background: `radial-gradient(300px circle at ${mouse.mx}px ${mouse.my}px, var(--color-primary), transparent 100%) border-box`,
                         WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                         WebkitMaskComposite: "xor",
-                        maskComposite: "exclude"
+                        maskComposite: "exclude",
+
+                        cornerShape: "superellipse(2)"
                     }}
                 />
             )}
@@ -193,7 +226,8 @@ export const Card = ({
                     WebkitMaskComposite: "xor",
                     maskComposite: "exclude",
                     transitionProperty: "opacity",
-                    transitionTimingFunction: "ease-out"
+                    transitionTimingFunction: "ease-out",
+                    cornerShape: "superellipse(2)"
                 }}
             />
         )}
@@ -202,14 +236,15 @@ export const Card = ({
         <AnimatePresence>
             {(pointerGlow && mouse.prox > 0 && isPowered) && (
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: mouse.prox }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{opacity: 0}}
+                    animate={{opacity: mouse.prox}}
+                    exit={{opacity: 0}}
+                    transition={{duration: 0.3}}
                     className="absolute inset-0 z-0 pointer-events-none rounded-[inherit] "
                     style={{
                         // Utilisation d'un dégradé CSS (bien plus lisse que le SVG étiré)
                         background: `radial-gradient(750px circle at ${mouse.mx}px ${mouse.my}px, rgba(255, 255, 255, 0.05), transparent 100%)`,
+                        cornerShape: "superellipse(2)"
                     }}
                 />
             )}

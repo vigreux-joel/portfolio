@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "^6.0.3",
-    "@astrojs/react": "^5.0.7",
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/ts-plugin": "^1.10.9",
-    "@astrojs/vercel": "^10.0.8",
+    "@astrojs/ts-plugin": "^1.10.10",
+    "@astrojs/vercel": "^11.0.5",
     "@fontsource/montserrat": "^5.2.8",
     "@fontsource/roboto": "^5.2.10",
     "@fontsource/roboto-flex": "^5.2.8",
@@ -23,13 +23,12 @@
     "@material/material-color-utilities": "^0.3.0",
     "@nanostores/react": "^1.1.0",
     "@react-hook/mouse-position": "^4.1.3",
-    "@tailwindcss/vite": "^4.3.0",
     "@udixio/icons-outlined-400": "^0.0.1",
-    "@udixio/tailwind": "^2.5.0",
-    "@udixio/theme": "^2.1.22",
-    "@udixio/ui-react": "^2.11.0",
+    "@udixio/tailwind": "^5.0.1-next.0",
+    "@udixio/theme": "^5.0.1-next.0",
+    "@udixio/ui-react": "^5.1.0-next.1",
     "aos": "^2.3.4",
-    "astro": "^6.4.6",
+    "astro": "^7.2.2",
     "astro-compress": "^2.4.1",
     "astro-compressor": "^1.3.0",
     "astro-critters": "^2.2.1",
@@ -48,7 +47,6 @@
     "sendmail": "^1.6.1",
     "sharp": "^0.33.5",
     "simplex-noise": "^4.0.3",
-    "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3",
     "uuid": "^11.1.1",
     "validator": "^13.15.35",
@@ -56,6 +54,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.3.0",
     "@types/aos": "^3.0.8",
     "@types/nodemailer": "^6.4.23",
     "@types/react": "^19.2.16",
@@ -63,6 +62,7 @@
     "@types/sendmail": "^1.4.7",
     "@types/validator": "^13.15.10",
     "puppeteer-core": "^25.5.0",
-    "puppeteer-screen-recorder": "^3.0.6"
+    "puppeteer-screen-recorder": "^3.0.6",
+    "tailwindcss": "^4.3.0"
   }
 }

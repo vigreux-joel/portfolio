@@ -1,12 +1,12 @@
 ---
 title: "Netsimpler"
-eyebrow: "Expérience · 3 ans sur un SaaS en production"
+eyebrow: "Expérience · SaaS, builder de site web"
 description: "Trois années de développement sur une plateforme SaaS de création de sites web : migrations progressives du front-end et restructuration des services back-end."
 status: "SaaS en production"
 period: "Avril 2023 — juin 2026"
 audience: "Utilisateurs et équipes d’une plateforme de création de sites"
 publishedAt: 2023-04-01
-order: 4
+order: 2
 draft: false
 previewUrl: "https://netsimpler.io/"
 technologies:
@@ -17,66 +17,77 @@ technologies:
   - AWS
 ---
 
+
 import ProjectChapter from "@components/projects/ProjectChapter.astro";
 import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
 import ProjectPoints from "@components/projects/ProjectPoints.astro";
 import ProjectNote from "@components/projects/ProjectNote.astro";
 import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
-import { iWeb } from "@udixio/icons-outlined-400/web";
-import { iCode } from "@udixio/icons-outlined-400/code";
-import { iSync } from "@udixio/icons-outlined-400/sync";
-import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
+import {iWeb} from "@udixio/icons-outlined-400/web";
+import {iCode} from "@udixio/icons-outlined-400/code";
+import {iSync} from "@udixio/icons-outlined-400/sync";
+import {iFactCheck} from "@udixio/icons-outlined-400/fact_check";
 
 <ProjectCaseStudy>
 
-<Fragment slot="story-heading">
-  <ProjectStoryHeading eyebrow="Expérience" title="Trois ans à faire évoluer un SaaS en production." />
-</Fragment>
+    <Fragment slot="story-heading">
+        <ProjectStoryHeading eyebrow="Expérience" title="Trois ans à faire évoluer un SaaS en production."/>
+    </Fragment>
 
-<Fragment slot="story">
+    <Fragment slot="story">
 
-<ProjectChapter eyebrow="Le contexte" title="Faire évoluer un SaaS déjà utilisé chaque jour." icon={iWeb}>
+        <ProjectChapter eyebrow="Le contexte" title="Faire évoluer un SaaS déjà utilisé chaque jour." icon={iWeb}>
 
-Netsimpler est une plateforme SaaS de création de sites web. J’y ai travaillé comme développeur full-stack pendant un peu plus de trois ans, sur un produit déjà en production et utilisé quotidiennement.
+            Netsimpler est une plateforme SaaS de création de sites web. J’y ai travaillé comme développeur full-stack
+            pendant un peu plus de trois ans, sur un produit déjà en production et utilisé quotidiennement.
 
-Cette fiche décrit ma contribution technique. Elle ne présente pas le produit lui-même, dont les orientations ne dépendaient pas de moi.
+            Cette fiche décrit ma contribution technique. Elle ne présente pas le produit lui-même, dont les
+            orientations ne dépendaient pas de moi.
 
-</ProjectChapter>
+        </ProjectChapter>
 
-<ProjectChapter eyebrow="Ma contribution" title="Du front-end aux services back-end." icon={iCode}>
+        <ProjectChapter eyebrow="Ma contribution" title="Du front-end aux services back-end." icon={iCode}>
 
-<ProjectPoints
-  label="Périmètre de ma contribution chez Netsimpler"
-  items={[
-    "Des interfaces avec Astro, React et TypeScript",
-    "Des API et services back-end sur AWS",
-    "L’authentification et la gestion des données et du contenu",
-    "Des traitements serverless ciblés",
-  ]}
-/>
+            <ProjectPoints
+                label="Périmètre de ma contribution chez Netsimpler"
+                items={[
+                    "Des interfaces avec Astro, React et TypeScript",
+                    "Des API et services back-end sur AWS",
+                    "L’authentification et la gestion des données et du contenu",
+                    "Des traitements serverless ciblés",
+                ]}
+            />
 
-</ProjectChapter>
+        </ProjectChapter>
 
-<ProjectChapter eyebrow="Les migrations" title="Remplacer progressivement, sans couper le service." icon={iSync}>
+        <ProjectChapter eyebrow="Les migrations" title="Remplacer progressivement, sans couper le service."
+                        icon={iSync}>
 
-**Le front-end.** Le socle Angular a été migré progressivement vers Astro et React, écran par écran, afin de simplifier l’architecture et d’améliorer les performances sans bloquer les évolutions fonctionnelles en cours.
+            **Le front-end.** Le socle Angular a été migré progressivement vers Astro et React, écran par écran, afin de
+            simplifier l’architecture et d’améliorer les performances sans bloquer les évolutions fonctionnelles en
+            cours.
 
-**Le back-end.** Une architecture en microservices reposant sur NestJS, Apollo Federation et MongoDB a été restructurée vers AppSync, Cognito et des fonctions Lambda ciblées.
+            **Le back-end.** Une architecture en microservices reposant sur NestJS, Apollo Federation et MongoDB a été
+            restructurée vers AppSync, Cognito et des fonctions Lambda ciblées.
 
-<ProjectNote title="La contrainte commune">
-  Dans les deux cas, le produit devait continuer de fonctionner pendant la transition.
-</ProjectNote>
+            <ProjectNote title="La contrainte commune">
+                Dans les deux cas, le produit devait continuer de fonctionner pendant la transition.
+            </ProjectNote>
 
-</ProjectChapter>
+        </ProjectChapter>
 
-<ProjectChapter eyebrow="Le recul" title="La production impose des étapes vérifiables." icon={iFactCheck} isLast>
+        <ProjectChapter eyebrow="Le recul" title="La production impose des étapes vérifiables." icon={iFactCheck}
+                        isLast>
 
-Travailler pendant trois ans sur une base existante apprend des choses qu’un projet neuf n’enseigne pas : composer avec des dépendances techniques que l’on n’a pas choisies, mesurer le coût réel d’une migration, et préférer une série d’étapes vérifiables à une réécriture qui promet de tout régler.
+            Travailler pendant trois ans sur une base existante apprend des choses qu’un projet neuf n’enseigne pas :
+            composer avec des dépendances techniques que l’on n’a pas choisies, mesurer le coût réel d’une migration, et
+            préférer une série d’étapes vérifiables à une réécriture qui promet de tout régler.
 
-C’est cette expérience de la production, plus que la plateforme elle-même, que j’apporte aujourd’hui sur les projets que je reprends.
+            C’est cette expérience de la production, plus que la plateforme elle-même, que j’apporte aujourd’hui sur les
+            projets que je reprends.
 
-</ProjectChapter>
+        </ProjectChapter>
 
-</Fragment>
+    </Fragment>
 
 </ProjectCaseStudy>
