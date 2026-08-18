@@ -15,7 +15,7 @@ interface Props {
 const {
     project,
     buttonLabel = "Voir le projet",
-    primaryButtonVariant = "filled",
+    primaryButtonVariant = "outlined",
 } = Astro.props;
 
 const {data} = project;
@@ -63,23 +63,24 @@ const visualHeight = data.cover?.height ?? 900;
                 {data.title}
             </h3>
 
-
-            <p class="mt-5 text-body-medium text-on-surface-variant @4xl:text-body-large">
-                {data.description}
-            </p>
-
             {
                 data.technologies.length > 0 && (
                             <ProjectTechnologies
                                     technologies={data.technologies}
                                     label={`Technologies utilisées pour ${data.title}`}
-                                    class="hidden pt-8 @lg:flex"
+                                    class="hidden pt-5 @lg:flex"
                             />
                 )
             }
 
+            <p class="mt-8 text-body-medium text-on-surface-variant @4xl:text-body-large">
+                {data.description}
+            </p>
+
+
             <div class="mt-auto flex flex-col gap-3 pt-8 @sm:flex-row @sm:flex-wrap">
                 <Button
+                        client:idle
                         href={`/projets/${project.id}`}
                         icon={iArrowForward}
                         iconPosition="right"

@@ -2,18 +2,16 @@ import {currentSourceHexStore, themeStore} from "@/stores/themeStore";
 import {useStore} from "@nanostores/react";
 import {useReducer} from "react";
 import {ThemeProvider as Theme} from "@udixio/ui-react";
-import {argbFromHex} from "@material/material-color-utilities";
 import {sourceColor, subThemes} from "../../theme.config.ts";
-import {Hct} from "@udixio/theme";
 import {TailwindPlugin} from "@udixio/tailwind";
 
 export const updateTheme = (colorName?: string) => {
     if (colorName === undefined || !(colorName in subThemes)) return;
-    
-    
-    const hex: string = subThemes[colorName as keyof typeof subThemes];
 
-    if (hex === null) {
+
+    const newColor = subThemes[colorName as keyof typeof subThemes];
+
+    if (newColor.hex === null) {
         themeStore.set({
             ...themeStore.get(),
             sourceColor: null,
@@ -22,17 +20,16 @@ export const updateTheme = (colorName?: string) => {
         return;
     }
 
-    const newHct = Hct.fromInt(argbFromHex(hex));
 
     const currentHex = currentSourceHexStore.get();
 
-    if (currentHex === hex) return;
+    if (currentHex === newColor.hex) return;
 
     themeStore.set({
         ...themeStore.get(),
-        sourceColor: Hct.from(newHct.hue, sourceColor.chroma, sourceColor.tone),
+        sourceColor: sourceColor.withHue(newColor.hue),
     });
-    currentSourceHexStore.set(hex);
+    currentSourceHexStore.set(newColor.hex);
 };
 
 export const resetTheme = () => {

@@ -1,35 +1,40 @@
 ---
 import CtaSection from "@/components/CtaSection.astro";
-import type { FaqItem } from "@components/FaqSection.astro";
+import type {FaqItem} from "@components/FaqSection.astro";
 import FaqSection from "@components/FaqSection.astro";
 
 interface Props {
-  faq: FaqItem[];
-  showCta?: boolean;
+    faq: FaqItem[];
+    showCta?: boolean;
 }
 
-const { faq, showCta = true } = Astro.props;
+const {faq, showCta = true} = Astro.props;
 ---
 
-<div class="overflow-hidden">
-{faq.length > 0 && <FaqSection questions={faq} />}
-{showCta && <CtaSection />}
+
+{faq.length > 0 &&
+<FaqSection questions={faq}/>}
+{showCta &&
+<CtaSection/>}
 
 <footer class=" relative border-t border-outline-variant bg-surface-container-low z-10">
-  <div class="max-width padding-x py-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
-    <div>
-      <p class="text-title-large text-on-surface">Joël Vigreux</p>
-      <p class="mt-2 text-body-medium text-on-surface-variant">Développeur full-stack · Béthune, France</p>
+    <div class="max-width padding-x py-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div>
+            <p class="text-title-large text-on-surface">Joël Vigreux</p>
+            <p class="mt-2 text-body-medium text-on-surface-variant">Développeur full-stack · Béthune, France</p>
+        </div>
+        <nav aria-label="Liens de pied de page" class="flex flex-wrap gap-x-6 gap-y-3">
+            <a href="/expertise"
+               class="text-label-large text-on-surface underline-offset-4 hover:underline">Expertise</a>
+            <a href="/approche" class="text-label-large text-on-surface underline-offset-4 hover:underline">Approche
+                IA</a>
+            <a href="/contact" class="text-label-large text-on-surface underline-offset-4 hover:underline">Contact</a>
+            <a href="https://github.com/vigreux-joel" target="_blank" rel="me noopener noreferrer"
+               class="text-label-large text-on-surface underline-offset-4 hover:underline">GitHub<span class="sr-only"> (nouvel onglet)</span></a>
+        </nav>
     </div>
-    <nav aria-label="Liens de pied de page" class="flex flex-wrap gap-x-6 gap-y-3">
-      <a href="/expertise" class="text-label-large text-on-surface underline-offset-4 hover:underline">Expertise</a>
-      <a href="/approche" class="text-label-large text-on-surface underline-offset-4 hover:underline">Approche IA</a>
-      <a href="/contact" class="text-label-large text-on-surface underline-offset-4 hover:underline">Contact</a>
-      <a href="https://github.com/vigreux-joel" target="_blank" rel="me noopener noreferrer" class="text-label-large text-on-surface underline-offset-4 hover:underline">GitHub<span class="sr-only"> (nouvel onglet)</span></a>
-    </nav>
-  </div>
-  <div class="max-width padding-x pb-8">
-    <p class="text-body-small text-on-surface-variant">© 2024–{new Date().getFullYear()} Joël Vigreux, conçu avec ❤️, dans les Hauts-de-France.</p>
-  </div>
+    <div class="max-width padding-x pb-8">
+        <p class="text-body-small text-on-surface-variant">© 2024–{new Date().getFullYear()} Joël Vigreux, conçu avec
+            ❤️, dans les Hauts-de-France.</p>
+    </div>
 </footer>
-</div>
