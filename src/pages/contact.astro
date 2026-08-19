@@ -1,21 +1,34 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import {Button, Divider, Icon} from "@udixio/ui-react";
-import {Card} from "@components/Card";
-import {BackgroundColor} from "@components/BackgroundColor";
-import {FormContact} from "@components/FormContact";
-import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
-import {iMail} from "@udixio/icons-outlined-400/mail";
-import {iComment} from "@udixio/icons-outlined-400/comment";
-import {iCall} from "@udixio/icons-outlined-400/call";
-import {iLocationOn} from "@udixio/icons-outlined-400/location_on";
-import {iCalendarMonth} from "@udixio/icons-outlined-400/calendar_month";
-import {LinearGradient} from "@components/LinearGradient";
+import ContactHero from "@components/contact/ContactHero.astro";
+import ContactChannels from "@components/contact/ContactChannels.astro";
 
 const email = import.meta.env.PUBLIC_EMAIL_TO || "contact@vigreux-joel.fr";
-const emailSubject = encodeURIComponent("Nouveau projet de développement web");
-const emailBody = encodeURIComponent("Bonjour Joël,\n\nJe vous contacte concernant...\n\nCordialement,");
-const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
+const phone = import.meta.env.PUBLIC_PHONE;
+
+const contactPageJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": "https://vigreux-joel.fr/contact#contact-page",
+    url: "https://vigreux-joel.fr/contact",
+    name: "Contact — Joël Vigreux",
+    description:
+        "Formulaire de contact, email et téléphone pour joindre Joël Vigreux, développeur full-stack.",
+    inLanguage: "fr-FR",
+    mainEntity: {
+        "@type": "Person",
+        "@id": "https://vigreux-joel.fr/#joel-vigreux",
+        name: "Joël Vigreux",
+        jobTitle: "Développeur full-stack",
+        email: `mailto:${email}`,
+        ...(phone ? {telephone: phone} : {}),
+        areaServed: ["Amiens", "Lille", "France", "Remote"],
+        sameAs: [
+            "https://github.com/vigreux-joel",
+            "https://linkedin.com/in/vigreux-joel",
+        ],
+    },
+});
 ---
 
 <Layout
@@ -24,7 +37,7 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
         seo={{
             title: `Contactez Joël Vigreux - Développeur full stack`,
             description:
-                "Contactez Joël VIGREUX pour discuter de votre projet de développement web. Formulaire de contact, email, téléphone et prise de rendez-vous Calendly.",
+                "Contactez Joël VIGREUX pour discuter de votre projet de développement web. Formulaire de contact, email et téléphone.",
             openGraph: {
                 basic: {
                     title: "Contactez Joël Vigreux",
@@ -36,7 +49,7 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
                     siteName: "Joël Vigreux",
                     locale: "fr_FR",
                     description:
-                        "Contactez Joël VIGREUX pour discuter de votre projet de développement web. Formulaire de contact, email, téléphone et prise de rendez-vous Calendly.",
+                        "Contactez Joël VIGREUX pour discuter de votre projet de développement web. Formulaire de contact, email et téléphone.",
                 },
                 image: {
                     alt: "Portrait de Joël Vigreux, développeur full-stack",
@@ -44,205 +57,8 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
             },
         }}
 >
-    <section
-            id="contact"
-            class="tab-menu theme-blue pt-32 md:pt-42 xl:pt-54 pb-16 min-h-screen relative overflow-hidden flex flex-col justify-center"
-    >
-        <!-- Fond animé et coloré comme dans le reste du site -->
-        <BackgroundColor
-                speed={7_000}
-                size="max(50vw, 800px)"
-                count={5}
-                client:idle
-                className="absolute opacity-30 size-full top-0 left-0 -z-10"
-        />
+    <script type="application/ld+json" is:inline set:html={contactPageJsonLd}/>
 
-        <div class="max-width padding-x mx-auto w-full relative z-10">
-            <div class="text-center mb-16">
-                <p class="sub-title">Contact</p>
-                <h1 class="mt-4 text-display-medium xl:text-display-large relative">
-                    <span class="block text-gradient">Dites-moi ce qui vous amène.</span>
-                    Je prends le temps de vous répondre.
-                </h1>
-                <p
-                        class="text-body-large max-w-2xl mx-auto mt-4 text-on-surface-variant"
-                >
-                    Que ce soit pour un projet, une question ou simplement pour échanger,
-                    je suis à votre disposition. Choisissez le moyen qui vous convient le
-                    mieux.
-                </p>
-            </div>
-
-            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
-                <!-- Informations de contact & Réseaux sociaux -->
-                <div
-                        class="lg:col-span-5 flex flex-col gap-6 h-full"
-
-                >
-                    <Card
-                            client:idle
-                            variant="filled"
-                            className="p-8 rounded-3xl h-full flex flex-col bg-surface-container-low/80 backdrop-blur-md border border-outline-variant/30 relative overflow-hidden"
-                    >
-                        <!-- Glow effect discret -->
-                        <div
-                                class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 blur-3xl rounded-full pointer-events-none"
-                        >
-                        </div>
-
-                        <h2
-                                class="text-headline-small mb-8 text-primary flex items-center gap-3 relative z-10"
-                        >
-                            <Icon icon={iComment} className="size-8"/>
-                            Mes coordonnées
-                        </h2>
-
-                        <div class="flex flex-col gap-8 flex-1 relative z-10">
-                            <!-- Email -->
-                            <div class="flex items-center gap-4 group">
-                                <div
-                                        class="bg-primary-container p-4 rounded-2xl text-on-primary-container group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300"
-                                >
-                                    <Icon icon={iMail} className="size-6"/>
-                                </div>
-                                <div>
-                                    <h3 class="text-title-medium">Email</h3>
-                                    <a
-                                            class="text-body-large text-on-surface-variant hover:text-primary transition-colors underline-offset-4 underline mt-1 block"
-                                            href={mailtoHref}
-                                    >
-                                        {email}
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Phone -->
-                            <div class="flex items-center gap-4 group">
-                                <div
-                                        class="bg-secondary-container p-4 rounded-2xl text-on-secondary-container group-hover:bg-secondary group-hover:text-on-secondary transition-colors duration-300"
-                                >
-                                    <Icon icon={iCall} className="size-6"/>
-                                </div>
-                                <div>
-                                    <h3 class="text-title-medium">Téléphone</h3>
-                                    <a
-                                            href={`tel:${import.meta.env.PUBLIC_PHONE || "+33600000000"}`}
-                                            class="text-body-large text-on-surface-variant hover:text-secondary transition-colors underline-offset-4 underline mt-1 block"
-                                    >
-                                        {import.meta.env.PUBLIC_PHONE || "+33 6 00 00 00 00"}
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Mobilité -->
-                            <div class="flex items-center gap-4 group">
-                                <div
-                                        class="bg-tertiary-container p-4 rounded-2xl text-on-tertiary-container group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors duration-300"
-                                >
-                                    <Icon icon={iLocationOn} className="size-6"/>
-                                </div>
-                                <div>
-                                    <h3 class="text-title-medium">Mobilité</h3>
-                                    <p class="text-body-large text-on-surface-variant mt-1">
-                                        Déplacements autour d’Amiens et de Lille · à distance
-                                    </p>
-                                </div>
-                            </div>
-
-                            <Divider className="my-2 border-outline-variant/50"/>
-
-                            <div>
-                                <h2 class="text-headline-small mb-4 text-primary">
-                                    Réseaux sociaux
-                                </h2>
-                                <div class="flex gap-4">
-                                    <a
-                                            href={import.meta.env.PUBLIC_LINKEDIN ||
-                                                "https://linkedin.com/in/vigreux-joel"}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="bg-surface-container-high p-4 rounded-2xl text-on-surface hover:text-[#0077b5] hover:bg-[#0077b5]/10 transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
-                                    >
-                                        <Icon icon={faLinkedin} className="size-8"/>
-                                        <span class="text-title-medium hidden sm:block"
-                                        >LinkedIn</span
-                                        >
-                                    </a>
-                                    <a
-                                            href={import.meta.env.PUBLIC_GITHUB ||
-                                                "https://github.com/joel-vigreux"}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="bg-surface-container-high p-4 rounded-2xl text-on-surface hover:text-[#333] dark:hover:text-white hover:bg-surface-variant transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
-                                    >
-                                        <Icon icon={faGithub} className="size-8"/>
-                                        <span class="text-title-medium hidden sm:block">GitHub</span
-                                        >
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!--<div class="mt-auto pt-8">-->
-                            <!--  <div-->
-                            <!--    class="bg-tertiary-container/30 p-6 rounded-3xl border border-tertiary/20 relative overflow-hidden group hover:border-tertiary/50 transition-colors duration-300"-->
-                            <!--  >-->
-                            <!--    <div-->
-                            <!--      class="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"-->
-                            <!--    >-->
-                            <!--    </div>-->
-                            <!--    <h3 class="sub-title mb-2 relative z-10">-->
-                            <!--      Prendre rendez-vous-->
-                            <!--    </h3>-->
-                            <!--    <p-->
-                            <!--      class="text-body-medium text-on-surface-variant mb-6 relative z-10"-->
-                            <!--    >-->
-                            <!--      Vous préférez qu'on s'appelle directement ? Planifiez un-->
-                            <!--      appel vidéo ou téléphonique à votre convenance.-->
-                            <!--    </p>-->
-                            <!--    <Button-->
-                            <!--      client:idle-->
-                            <!--      href={import.meta.env.PUBLIC_CALENDLY ||-->
-                            <!--        "https://calendly.com"}-->
-                            <!--      target="_blank"-->
-                            <!--      className="w-full relative z-10"-->
-                            <!--      label="Réserver un créneau Calendly"-->
-                            <!--      icon={iCalendarMonth}-->
-                            <!--    />-->
-                            <!--  </div>-->
-                            <!--</div>-->
-                        </div>
-                    </Card>
-                </div>
-
-                <!-- Formulaire -->
-                <div
-                        class="lg:col-span-7 h-full"
-
-
-                >
-                    <Card
-                            client:idle
-                            variant="filled"
-                            className="p-8 md:p-10 rounded-3xl h-full bg-surface-container/60 backdrop-blur-xl border border-outline-variant/50 shadow-2xl relative overflow-hidden flex flex-col justify-center"
-                    >
-                        <div class="relative z-10">
-                            <p class="sub-title">Votre message</p>
-                            <h2 class="mt-3 text-display-small text-on-surface mb-2">
-                                <span class="block text-gradient">Quelques mots suffisent pour commencer.</span>
-                                Je réponds généralement sous 48 h ouvrées.
-                            </h2>
-                            <p
-                                    class="text-body-large text-on-surface-variant mb-8 max-w-prose"
-                            >
-                                Indiquez-moi l’essentiel de votre demande&nbsp;; nous pourrons préciser
-                                le reste ensemble.
-                            </p>
-
-                            <FormContact client:visible/>
-                        </div>
-                    </Card>
-                </div>
-            </div>
-        </div>
-    </section>
+    <ContactHero/>
+    <ContactChannels/>
 </Layout>
