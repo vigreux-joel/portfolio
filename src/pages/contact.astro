@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ContactHero from "@components/contact/ContactHero.astro";
-import ContactChannels from "@components/contact/ContactChannels.astro";
+import ContactSection from "@components/contact/ContactSection.astro";
 
 const email = import.meta.env.PUBLIC_EMAIL_TO || "contact@vigreux-joel.fr";
 const phone = import.meta.env.PUBLIC_PHONE;
@@ -34,6 +33,7 @@ const contactPageJsonLd = JSON.stringify({
 <Layout
         showSidebar={false}
         showCta={false}
+        showContactFab={false}
         seo={{
             title: `Contactez Joël Vigreux - Développeur full stack`,
             description:
@@ -59,6 +59,5 @@ const contactPageJsonLd = JSON.stringify({
 >
     <script type="application/ld+json" is:inline set:html={contactPageJsonLd}/>
 
-    <ContactHero/>
-    <ContactChannels/>
+    <ContactSection/>
 </Layout>

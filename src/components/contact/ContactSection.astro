@@ -1,0 +1,101 @@
+---
+import {Icon} from "@udixio/ui-react";
+import {Card} from "@components/Card";
+import {BackgroundColor} from "@components/BackgroundColor";
+import {FormContact} from "@components/FormContact";
+import {faLinkedin} from "@fortawesome/free-brands-svg-icons";
+import {iMail} from "@udixio/icons-outlined-400/mail";
+import {iCall} from "@udixio/icons-outlined-400/call";
+import {iLocationOn} from "@udixio/icons-outlined-400/location_on";
+
+const email = import.meta.env.PUBLIC_EMAIL_TO || "contact@vigreux-joel.fr";
+const emailSubject = encodeURIComponent("Nouveau projet de développement web");
+const emailBody = encodeURIComponent(
+    "Bonjour Joël,\n\nJe vous contacte concernant...\n\nCordialement,",
+);
+const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
+
+const phone = import.meta.env.PUBLIC_PHONE;
+const phoneHref = phone?.replace(/\s/g, "");
+// +33612345678 se lit mal : on l'affiche groupé par deux, comme on le dicte.
+const phoneLabel = phoneHref?.replace(
+    /^\+33(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/,
+    "+33 $1 $2 $3 $4 $5",
+);
+
+const linkedin = "https://linkedin.com/in/vigreux-joel";
+---
+
+<section id="contact" class="tab-menu theme-blue pt-32 md:pt-42 xl:pt-54 pb-20 md:pb-28">
+    <BackgroundColor
+            speed={7_000}
+            size="max(66vw, 800px)"
+            count={5}
+            client:idle
+            className="absolute inset-x-0 top-0 -z-10 h-[46rem] opacity-20"
+    />
+
+    <div class="max-width padding-x">
+        <div class="mx-auto max-w-3xl">
+            <h1 class="text-display-medium">
+                <span class="block">Dites-moi ce qui vous amène.</span>
+                <span class="block text-gradient">Je prends le temps de vous répondre.</span>
+            </h1>
+            <p class="mt-6 text-body-large text-on-surface-variant">
+                Le contexte, ce qui existe déjà et ce que vous cherchez à obtenir.
+                Quelques lignes suffisent, je réponds sous 48 h ouvrées.
+            </p>
+
+            <Card
+                    client:visible
+                    variant="filled"
+                    className="mt-12 ring-1 ring-primary/30"
+            >
+                <div class="p-6 md:p-8">
+                    <FormContact client:visible/>
+                </div>
+            </Card>
+
+            <div class="mt-16 border-t border-outline-variant pt-8">
+                <h2 class="text-title-medium text-on-surface-variant">
+                    Vous préférez écrire directement
+                </h2>
+
+                <div class="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+                    <a
+                            class="flex items-center gap-2 text-body-large text-on-surface underline underline-offset-4 transition-colors hover:text-primary"
+                            href={mailtoHref}
+                    >
+                        <Icon icon={iMail} className="size-5 shrink-0"/>
+                        {email}
+                    </a>
+
+                    {phone && (
+                            <a
+                                    class="flex items-center gap-2 text-body-large text-on-surface underline underline-offset-4 transition-colors hover:text-primary"
+                                    href={`tel:${phoneHref}`}
+                            >
+                                <Icon icon={iCall} className="size-5 shrink-0"/>
+                                {phoneLabel}
+                            </a>
+                    )}
+
+                    <a
+                            class="flex items-center gap-2 text-body-large text-on-surface underline underline-offset-4 transition-colors hover:text-primary"
+                            href={linkedin}
+                            target="_blank"
+                            rel="me noopener noreferrer"
+                    >
+                        <Icon icon={faLinkedin} className="size-5 shrink-0"/>
+                        LinkedIn<span class="sr-only"> (nouvel onglet)</span>
+                    </a>
+                </div>
+
+                <p class="mt-6 flex items-center gap-2 text-body-medium text-on-surface-variant">
+                    <Icon icon={iLocationOn} className="size-5 shrink-0"/>
+                    Déplacements autour d’Amiens et de Lille · à distance
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
