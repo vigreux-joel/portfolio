@@ -52,7 +52,7 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
             Première version à mettre en ligne, fonctionnalité à ajouter ou base existante à reprendre&nbsp;: le travail avance par livraisons courtes que vous pouvez vérifier.
           </p>
           <div class="mt-8">
-            <Button href="/contact" icon={iArrowForward} iconPosition="right" label="Présenter votre projet" />
+            <Button client:idle href="/contact" icon={iArrowForward} iconPosition="right" label="Présenter votre projet" />
           </div>
         </div>
       </article>
@@ -66,7 +66,7 @@ import { iRoute } from "@udixio/icons-outlined-400/route";
             Mon CV détaille le parcours, les technologies pratiquées et les missions menées en production.
           </p>
           <div class="mt-8">
-            <Button href="/profil" icon={iIdCard} label="Consulter mon CV · PDF" variant="outlined" />
+            <Button client:idle href="/profil" icon={iIdCard} label="Consulter mon CV · PDF" variant="outlined" />
           </div>
         </div>
       </article>

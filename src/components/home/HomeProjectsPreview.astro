@@ -55,7 +55,7 @@ const [primaryProject, ...secondaryProjects] = sortProjects(published).slice(
                     Découvrez mes autres réalisations.
                 </h3>
                 <div class="mt-auto pt-8">
-                    <Button
+                    <Button client:idle
                             href="/projets"
                             label="Voir tous les projets"
                             icon={iArrowForward}

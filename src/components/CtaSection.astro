@@ -46,7 +46,7 @@ const calendlyUrl = import.meta.env.PUBLIC_CALENDLY;
 
         <div class="flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row lg:w-64 lg:flex-col lg:items-stretch">
           <Button
-            client:visible
+            client:idle
             className="w-fit lg:w-full"
             href="/contact"
             label="Écrire à Joël"
@@ -55,7 +55,7 @@ const calendlyUrl = import.meta.env.PUBLIC_CALENDLY;
           />
           {calendlyUrl && (
             <Button
-              client:visible
+              client:idle
               className="w-fit lg:w-full"
               href={calendlyUrl}
               target="_blank"

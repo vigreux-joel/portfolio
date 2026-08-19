@@ -22,74 +22,103 @@ const faq = [
 ];
 ---
 <Layout
-  showSidebar={false}
-  showCta={false}
-  faq={faq}
-  seo={{
-    title: `Joël Vigreux - Approche - L'IA génère du code, l'ingénierie construit des solutions`,
-    description: "Mon approche : l'IA accélère l'écriture du code, l'ingénierie construit des solutions pérennes. Architecture, sécurité et revue de code systématique, du cadrage à la mise en production.",
-    openGraph: {
-      basic: {
-        title: "Joël Vigreux - Approche de l’IA et de l’ingénierie",
-        type: "website",
-        image: "https://vigreux-joel.fr/images/photo.webp",
-        url: "https://vigreux-joel.fr/approche",
-      },
-      optional: {
-        siteName: "Joël Vigreux",
-        locale: "fr_FR",
-        description: "L'IA génère du code, l'ingénierie construit des solutions. Découvrez mon approche de l’IA, du cadrage à la mise en production.",
-      },
-      image: {
-        alt: "Portrait de Joël Vigreux, développeur full-stack",
-      },
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Joël Vigreux - Approche de l’IA et de l’ingénierie",
-      description: "L'IA génère du code, l'ingénierie construit des solutions.",
-      image: "https://vigreux-joel.fr/images/photo.webp",
-      imageAlt: "Portrait de Joël Vigreux",
-    },
-  }}
+        showSidebar={false}
+        faq={faq}
+        seo={{
+            title: `Joël Vigreux - Approche - L'IA génère du code, l'ingénierie construit des solutions`,
+            description: "Mon approche : l'IA accélère l'écriture du code, l'ingénierie construit des solutions pérennes. Architecture, sécurité et revue de code systématique, du cadrage à la mise en production.",
+            openGraph: {
+                basic: {
+                    title: "Joël Vigreux - Approche de l’IA et de l’ingénierie",
+                    type: "website",
+                    image: "https://vigreux-joel.fr/images/photo.webp",
+                    url: "https://vigreux-joel.fr/approche",
+                },
+                optional: {
+                    siteName: "Joël Vigreux",
+                    locale: "fr_FR",
+                    description: "L'IA génère du code, l'ingénierie construit des solutions. Découvrez mon approche de l’IA, du cadrage à la mise en production.",
+                },
+                image: {
+                    alt: "Portrait de Joël Vigreux, développeur full-stack",
+                },
+            },
+            twitter: {
+                card: "summary_large_image",
+                title: "Joël Vigreux - Approche de l’IA et de l’ingénierie",
+                description: "L'IA génère du code, l'ingénierie construit des solutions.",
+                image: "https://vigreux-joel.fr/images/photo.webp",
+                imageAlt: "Portrait de Joël Vigreux",
+            },
+        }}
 >
-  <style is:global>
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); }
-      50% { transform: translateY(-6px) translateX(2px) rotate(2deg); }
-      100% { transform: translateY(0) translateX(0) rotate(0deg); }
-    }
-    .animate-float-slow { animation: float 6s ease-in-out infinite; }
-    .animate-float-medium { animation: float 5s ease-in-out infinite; }
-    .animate-float-fast { animation: float 4s ease-in-out infinite; }
-    @keyframes chip-shake {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(-2px, 1px); }
-      50% { transform: translate(2px, -1px); }
-      75% { transform: translate(-1px, -2px); }
-    }
-    .chip-shake { animation: chip-shake 0.12s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) {
-      .animate-float-slow, .animate-float-medium, .animate-float-fast, .chip-shake { animation: none; }
-    }
-  </style>
+    <style is:global>
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-6px) translateX(2px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
 
-  <script type="application/ld+json" is:inline>
-    {
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Joël Vigreux",
-        "jobTitle": "Développeur full-stack",
-        "url": "https://vigreux-joel.fr/approche",
-        "image": "https://vigreux-joel.fr/images/photo.webp"
-      })
-    }
-  </script>
+        .animate-float-slow {
+            animation: float 6s ease-in-out infinite;
+        }
 
-  <HeroSection />
-  <ConstatSection />
-  <DemarcationSection />
-  <LegitimiteSection />
-  <CtaSection />
+        .animate-float-medium {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .animate-float-fast {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes chip-shake {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(-2px, 1px);
+            }
+            50% {
+                transform: translate(2px, -1px);
+            }
+            75% {
+                transform: translate(-1px, -2px);
+            }
+        }
+
+        .chip-shake {
+            animation: chip-shake 0.12s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float-slow, .animate-float-medium, .animate-float-fast, .chip-shake {
+                animation: none;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json" is:inline>
+        {
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Joël Vigreux",
+                "jobTitle": "Développeur full-stack",
+                "url": "https://vigreux-joel.fr/approche",
+                "image": "https://vigreux-joel.fr/images/photo.webp"
+            })
+        }
+    </script>
+
+    <HeroSection/>
+    <ConstatSection/>
+    <DemarcationSection/>
+    <LegitimiteSection/>
+
 </Layout>

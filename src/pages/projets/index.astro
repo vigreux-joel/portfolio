@@ -6,6 +6,7 @@ import ProjectCard from "@components/projects/ProjectCard.astro";
 import { sortProjects } from "../../utils/projects";
 import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
 import { BackgroundColor } from "@components/BackgroundColor";
+import ApproachSection from "@components/ApproachSection.astro";
 
 const published = await getCollection("projects", ({ data }) => !data.draft);
 const projects = sortProjects(published);
@@ -97,4 +98,10 @@ const collectionJsonLd = JSON.stringify({
       <div class="pb-20 md:pb-28"></div>
     </div>
   </section>
+
+  <ApproachSection
+    titleGradient="Ces projets n’ont pas été générés."
+    titleRest="Je les ai décidés, puis vérifiés."
+    body="Vous voyez ici les résultats. Ma page approche explique la part que prend l’IA dans le travail qui y mène et ce que je garde sous contrôle."
+  />
 </Layout>

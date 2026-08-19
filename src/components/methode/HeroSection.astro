@@ -1,75 +1,80 @@
 ---
-import { Line } from "@components/Line";
-import { BackgroundColor } from "@components/BackgroundColor";
-import { LinearGradient } from "@components/LinearGradient";
-import { Icon } from "@udixio/ui-react";
+import {Line} from "@components/Line";
+import {BackgroundColor} from "@components/BackgroundColor";
+import {LinearGradient} from "@components/LinearGradient";
+import {Icon} from "@udixio/ui-react";
 
-import { iSearch } from "@udixio/icons-outlined-400/search";
-import { iArchitecture } from "@udixio/icons-outlined-400/architecture";
-import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import {iSearch} from "@udixio/icons-outlined-400/search";
+import {iArchitecture} from "@udixio/icons-outlined-400/architecture";
+import {iFactCheck} from "@udixio/icons-outlined-400/fact_check";
+import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
 ---
 
-<section id="accueil" class="tab-menu relative overflow-hidden theme-blue">
-  <BackgroundColor
-      speed={7_500}
-      size="max(66vw, 800px)"
-      count={5}
-      client:idle
-      className="absolute opacity-20 size-full top-0 left-0 -z-10"
-  />
-  <div class="max-width flex justify-between h-full pt-32 md:pt-42 xl:pt-54">
-    <div class="relative z-10 flex flex-col overflow-visible w-full">
+<section id="accueil" class="tab-menu   theme-blue">
+    <BackgroundColor
+            speed={7_500}
+            size="max(66vw, 800px)"
+            count={5}
+            client:idle
+            className="absolute opacity-20 size-full top-0 left-0 -z-10"
+    />
+    <div class="max-width flex justify-between h-full pt-32 md:pt-42 xl:pt-54">
+        <div class="relative z-10 flex flex-col overflow-visible w-full">
 
-      <div class="flex flex-col relative">
-        <div class="flex">
-          <div>
-            <Line client:load isFirst />
-          </div>
-          <div class="padding pt-0 pb-16 relative w-full">
-            <p class="sub-title text-title-large">Approche de l’IA</p>
-            <h1 class="mt-4 text-display-medium xl:text-display-large relative z-10 max-w-5xl">
-              <span class="block text-gradient">Profitez de l’IA sans perdre en maîtrise.</span>
-              Je l’encadre et valide chaque résultat.
-            </h1>
-          </div>
+            <div class="flex flex-col relative">
+                <div class="flex">
+                    <div>
+                        <Line client:load isFirst/>
+                    </div>
+                    <div class="padding pt-0 pb-16 relative w-full">
+                        <p class="sub-title text-title-large">Approche de l’IA</p>
+                        <h1 class="mt-4 text-display-medium xl:text-display-large relative z-10 max-w-5xl">
+                            <span class="block text-gradient">Profitez de l’IA sans perdre en maîtrise.</span>
+                            Je l’encadre et valide chaque résultat.
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex mt-8">
+                <div>
+                    <Line client:load icon={iSearch} nextTheme="cyan"/>
+                </div>
+                <div class="padding pt-0">
+                    <p class="text-body-large max-w-3xl">
+                        L'IA a banalisé l'écriture du code. Mon travail consiste à comprendre
+                        votre métier, concevoir une architecture qui dure, garantir la sécurité
+                        et l'évolution de votre produit. Cette partie n'a jamais été aussi stratégique.
+                        C'est ce que je fais.
+                    </p>
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-x-8 gap-y-3 mt-8">
+                        <a href="#constat"
+                           class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+                            <Icon icon={iSearch} className="h-5 w-5 text-secondary"/>
+                            <span>Le constat</span>
+                            <Icon icon={iArrowForward}
+                                  className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"/>
+                        </a>
+                        <a href="#demarcation"
+                           class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+                            <Icon icon={iArchitecture} className="h-5 w-5 text-primary"/>
+                            <span>La démarcation</span>
+                            <Icon icon={iArrowForward}
+                                  className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"/>
+                        </a>
+                        <a href="#savoir-faire"
+                           class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
+                            <Icon icon={iFactCheck} className="h-5 w-5 text-primary"/>
+                            <span>Le savoir-faire</span>
+                            <Icon icon={iArrowForward}
+                                  className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-      </div>
-
-      <div class="flex mt-8">
-        <div>
-          <Line client:load icon={iSearch} nextTheme="cyan" />
-        </div>
-        <div class="padding pt-0">
-          <p class="text-body-large max-w-3xl">
-            L'IA a banalisé l'écriture du code. Mon travail consiste à comprendre
-            votre métier, concevoir une architecture qui dure, garantir la sécurité
-            et l'évolution de votre produit. Cette partie n'a jamais été aussi stratégique.
-            C'est ce que je fais.
-          </p>
-          <div class="flex flex-col sm:flex-row sm:flex-wrap gap-x-8 gap-y-3 mt-8">
-            <a href="#constat" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
-              <Icon icon={iSearch} className="h-5 w-5 text-secondary" />
-              <span>Le constat</span>
-              <Icon icon={iArrowForward} className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </a>
-            <a href="#demarcation" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
-              <Icon icon={iArchitecture} className="h-5 w-5 text-primary" />
-              <span>La démarcation</span>
-              <Icon icon={iArrowForward} className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </a>
-            <a href="#savoir-faire" class="group inline-flex items-center gap-2 text-body-large text-on-surface hover:text-primary transition-colors">
-              <Icon icon={iFactCheck} className="h-5 w-5 text-primary" />
-              <span>Le savoir-faire</span>
-              <Icon icon={iArrowForward} className="h-4 w-4 text-on-surface-variant opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-
     </div>
-  </div>
-
-  <LinearGradient className="h-1/2" nextTheme="cyan" />
+    <LinearGradient nextTheme="cyan"/>
 </section>

@@ -516,7 +516,7 @@ export const Line = ({
                 )}
             </div>
 
-            <div ref={bodyRef} className="flex-1 w-[3px] relative overflow-visible">
+            <div ref={bodyRef} className="flex-1 min-h-0 w-[3px] relative overflow-visible">
                 <svg style={{width: SIDEBAR_W, height: "100%"}} className="overflow-visible">
                     {svgContent}
                 </svg>

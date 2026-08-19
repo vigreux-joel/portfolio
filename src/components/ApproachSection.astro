@@ -1,0 +1,47 @@
+---
+import {Card} from "@components/Card";
+import {Icon, Button} from "@udixio/ui-react";
+import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
+import {iPsychology} from "@udixio/icons-outlined-400/psychology";
+
+interface Props {
+    eyebrow?: string;
+    titleGradient?: string;
+    titleRest?: string;
+    body?: string;
+    label?: string;
+}
+
+const {
+    eyebrow = "Ma position sur l’IA",
+    titleGradient = "Sachez quelle place l’IA prend dans votre projet.",
+    titleRest = "Je vous dis où je l’utilise et où je m’en passe.",
+    body = "L’IA occupe une place précise dans mon travail, ni marginale ni centrale. Je l’explique sans détour.",
+    label = "Lire ma position sur l’IA",
+}: Props = Astro.props;
+---
+
+<section class="tab-menu   pb-20 md:pb-28">
+    <div class="max-width padding-x">
+        <Card client:idle variant="outlined">
+            <div class="flex flex-col gap-5 p-6 md:p-9">
+        <span class="grid size-12 place-items-center rounded-2xl bg-primary text-on-primary">
+          <Icon icon={iPsychology} className="size-6"/>
+        </span>
+                <div>
+                    <p class="sub-title text-secondary">{eyebrow}</p>
+                    <h2 class="mt-2 text-headline-small text-on-surface max-w-prose">
+                        <span class="block text-gradient">{titleGradient}</span>
+                        {titleRest}
+                    </h2>
+                    <p class="mt-4 mb-8 max-w-prose text-body-large text-on-surface-variant">
+                        {body}
+                    </p>
+                    <Button icon={iArrowForward} href="/approche" variant="outlined" iconPosition="right">
+                        {label}
+                    </Button>
+                </div>
+            </div>
+        </Card>
+    </div>
+</section>

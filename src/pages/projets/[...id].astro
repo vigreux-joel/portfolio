@@ -1,206 +1,170 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { getCollection, render } from "astro:content";
+import type {CollectionEntry} from "astro:content";
+import {getCollection, render} from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { Line } from "@components/Line";
-import { Button, IconButton } from "@udixio/ui-react";
-import { iArrowBack } from "@udixio/icons-outlined-400/arrow_back";
-import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
-import { iGridView } from "@udixio/icons-outlined-400/grid_view";
-import { BackgroundColor } from "@components/BackgroundColor";
+import {Line} from "@components/Line";
+import {Button} from "@udixio/ui-react";
+import {iArrowBack} from "@udixio/icons-outlined-400/arrow_back";
+import {BackgroundColor} from "@components/BackgroundColor";
 import ProjectSidebar from "@components/projects/ProjectSidebar.astro";
 import ProjectStudyCover from "@components/projects/ProjectStudyCover.astro";
-import { sortProjects } from "../../utils/projects";
+import {sortProjects} from "../../utils/projects";
 
 export async function getStaticPaths() {
-  const projects = sortProjects(await getCollection("projects", ({ data }) => !data.draft));
-  return projects.map((project, index) => ({
-    params: { id: project.id },
-    props: {
-      project,
-      previousProject: projects[index - 1],
-      nextProject: projects[index + 1],
-    },
-  }));
+    const projects = sortProjects(await getCollection("projects", ({data}) => !data.draft));
+    return projects.map((project, index) => ({
+        params: {id: project.id},
+        props: {
+            project,
+            previousProject: projects[index - 1],
+            nextProject: projects[index + 1],
+        },
+    }));
 }
 
 interface Props {
-  project: CollectionEntry<"projects">;
-  previousProject?: CollectionEntry<"projects">;
-  nextProject?: CollectionEntry<"projects">;
+    project: CollectionEntry<"projects">;
+    previousProject?: CollectionEntry<"projects">;
+    nextProject?: CollectionEntry<"projects">;
 }
 
-const { project, previousProject, nextProject } = Astro.props;
-const { Content } = await render(project);
-const { data } = project;
+const {project, previousProject, nextProject} = Astro.props;
+const {Content} = await render(project);
+const {data} = project;
 const projectUrl = new URL(`/projets/${project.id}`, Astro.site ?? Astro.url.origin).toString();
 const projectImage = data.cover?.src
-  ?? (data.previewUrl ? `/images/projects/generated/${project.id}.webp` : "/images/photo.webp");
+    ?? (data.previewUrl ? `/images/projects/generated/${project.id}.webp` : "/images/photo.webp");
 const facts = [
-  { label: "Statut", value: data.status },
-  {
-    label: "Période",
-    value: data.period ?? data.publishedAt.toLocaleDateString("fr-FR", { year: "numeric" }),
-  },
-  { label: "Pour qui", value: data.audience },
+    {label: "Statut", value: data.status},
+    {
+        label: "Période",
+        value: data.period ?? data.publishedAt.toLocaleDateString("fr-FR", {year: "numeric"}),
+    },
+    {label: "Pour qui", value: data.audience},
 ].filter((fact): fact is { label: string; value: string } => Boolean(fact.value));
 const projectLd = {
-  "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  name: data.title,
-  description: data.description,
-  url: projectUrl,
-  dateCreated: data.publishedAt.toISOString(),
-  image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
-  creator: {
-    "@type": "Person",
-    name: "Joël Vigreux",
-    url: new URL("/profil", Astro.site ?? Astro.url.origin).toString(),
-  },
-  keywords: data.technologies,
-  sameAs: [data.externalUrl, data.repositoryUrl].filter(Boolean),
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: data.title,
+    description: data.description,
+    url: projectUrl,
+    dateCreated: data.publishedAt.toISOString(),
+    image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
+    creator: {
+        "@type": "Person",
+        name: "Joël Vigreux",
+        url: new URL("/profil", Astro.site ?? Astro.url.origin).toString(),
+    },
+    keywords: data.technologies,
+    sameAs: [data.externalUrl, data.repositoryUrl].filter(Boolean),
 };
-
 ---
 
 <Layout
-  showSidebar={false}
-  showContactFab={false}
-  seo={{
-    title: `${data.title} — Projet de Joël Vigreux`,
-    description: data.description,
-    openGraph: {
-      basic: {
-        title: `${data.title} — Projet de Joël Vigreux`,
-        type: "article",
-        image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
-        url: projectUrl,
-      },
-      optional: {
-        siteName: "Joël Vigreux",
-        locale: "fr_FR",
-        description: data.description,
-      },
-      image: { alt: data.cover?.alt ?? `${data.title} — projet de Joël Vigreux` },
-    },
-  }}
+        showSidebar={false}
+        showContactFab={false}
+        seo={{
+            title: `${data.title} — Projet de Joël Vigreux`,
+            description: data.description,
+            openGraph: {
+                basic: {
+                    title: `${data.title} — Projet de Joël Vigreux`,
+                    type: "article",
+                    image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
+                    url: projectUrl,
+                },
+                optional: {
+                    siteName: "Joël Vigreux",
+                    locale: "fr_FR",
+                    description: data.description,
+                },
+                image: {alt: data.cover?.alt ?? `${data.title} — projet de Joël Vigreux`},
+            },
+        }}
 >
-  <section class="tab-menu theme-cyan pt-32 md:pt-42 xl:pt-54">
-    <BackgroundColor
-      speed={9_000}
-      size="max(66vw, 800px)"
-      count={4}
-      client:idle
-      className="absolute inset-x-0 top-0 -z-10 h-[52rem] opacity-20"
-    />
-    <div class="max-width">
-      <div class="flex">
-        <div><Line client:load isFirst /></div>
-        <div class="min-w-0 flex-1">
-          <div class="padding-x pb-8 md:pb-10">
-          <nav aria-label="Fil d’Ariane">
-            <Button
-              href="/projets"
-              label="Tous les projets"
-              icon={iArrowBack}
-              variant="text"
-              className="mb-8 w-fit"
-              disableTextMargins
-            />
-          </nav>
+    <section class="tab-menu theme-cyan pt-32 md:pt-42 xl:pt-54">
+        <BackgroundColor
+                speed={9_000}
+                size="max(66vw, 800px)"
+                count={4}
+                client:idle
+                className="absolute inset-x-0 top-0 -z-10 h-[52rem] opacity-20"
+        />
+        <div class="max-width">
+            <div class="flex">
+                <div>
+                    <Line client:load isFirst/>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <div class="padding-x pb-8 md:pb-10">
+                        <nav aria-label="Fil d’Ariane">
+                            <Button client:idle
+                                    href="/projets"
+                                    label="Tous les projets"
+                                    icon={iArrowBack}
+                                    variant="text"
+                                    className="mb-8 w-fit"
+                                    disableTextMargins
+                            />
+                        </nav>
 
-          <header class="max-w-6xl">
-            <p class="sub-title">{data.eyebrow}</p>
-            <h1
-              class="mt-5 max-w-5xl text-display-medium text-gradient md:text-display-large"
-              transition:name={`project-title-${project.id}`}
-            >
-              {data.title}
-            </h1>
-            <p class="mt-7 max-w-4xl text-title-large text-on-surface-variant md:text-headline-small">
-              {data.description}
-            </p>
-          </header>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid min-w-0 xl:grid-cols-[minmax(16rem,1fr)_minmax(0,3fr)] xl:grid-rows-[5rem_auto_auto]">
-          <div class="relative h-14 xl:hidden">
-            <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
-          </div>
-
-          <div class="relative hidden h-20 xl:col-start-1 xl:row-start-1 xl:block">
-            <Line fromX={0} fromPx={60} toX={1} toPx={0} client:idle />
-          </div>
-
-          {(data.cover || data.previewUrl) && (
-            <div class="min-w-0 xl:col-start-2 xl:row-start-1 xl:row-span-2">
-              <ProjectStudyCover project={project} />
+                        <header class="max-w-6xl">
+                            <p class="sub-title">{data.eyebrow}</p>
+                            <h1
+                                    class="mt-5 max-w-5xl text-display-medium text-gradient md:text-display-large"
+                                    transition:name={`project-title-${project.id}`}
+                            >
+                                {data.title}
+                            </h1>
+                            <p class="mt-7 max-w-4xl text-title-large text-on-surface-variant md:text-headline-small">
+                                {data.description}
+                            </p>
+                        </header>
+                    </div>
+                </div>
             </div>
-          )}
 
-          <div class="flex min-h-0 flex-col xl:col-start-1 xl:row-start-2 xl:row-span-2">
-            <ProjectSidebar
-              title={data.title}
-              facts={facts}
-              technologies={data.technologies}
-              externalUrl={data.externalUrl}
-              repositoryUrl={data.repositoryUrl}
-            />
-          </div>
+            <div class="grid min-w-0 xl:grid-cols-[minmax(16rem,1fr)_minmax(0,3fr)] xl:grid-rows-[5rem_auto_auto]">
+                <div class="relative h-14 xl:hidden">
+                    <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle/>
+                </div>
 
-          <div class:list={[
-            "min-w-0 xl:col-start-2",
-            data.cover || data.previewUrl ? "xl:row-start-3" : "xl:row-start-2",
-          ]}>
-            <Content />
-          </div>
-      </div>
+                <div class="relative hidden h-20 xl:col-start-1 xl:row-start-1 xl:block">
+                    <Line fromX={0} fromPx={60} toX={1} toPx={0} client:idle/>
+                </div>
 
-      <nav
-        class="grid pb-20 pt-14 xl:grid-cols-[minmax(16rem,1fr)_minmax(0,3fr)]"
-        aria-label="Navigation des projets"
-      >
-        <div class="padding-x pt-8 xl:col-start-2">
-          <div class="flex items-center justify-center gap-3">
-            {previousProject && (
-              <IconButton
-                href={`/projets/${previousProject.id}`}
-                icon={iArrowBack}
-                label={`Projet précédent : ${previousProject.data.title}`}
-                title={`Projet précédent : ${previousProject.data.title}`}
-                variant="tonal"
-                size="medium"
-                shape="rounded"
-              />
-            )}
+                {(data.cover || data.previewUrl) && (
+                        <div class="min-w-0 xl:col-start-2 xl:row-start-1 xl:row-span-2">
+                            <ProjectStudyCover project={project}/>
+                        </div>
+                )}
 
-            <IconButton
-              href="/projets"
-              icon={iGridView}
-              label="Tous les projets"
-              title="Tous les projets"
-              variant="tonal"
-              size="medium"
-              shape="rounded"
-            />
+                <div class="flex min-h-0 flex-col xl:col-start-1 xl:row-start-2 xl:row-span-2">
+                    <ProjectSidebar
+                            title={data.title}
+                            facts={facts}
+                            technologies={data.technologies}
+                            externalUrl={data.externalUrl}
+                            repositoryUrl={data.repositoryUrl}
+                            previousProject={previousProject && {
+                                id: previousProject.id,
+                                title: previousProject.data.title,
+                            }}
+                            nextProject={nextProject && {
+                                id: nextProject.id,
+                                title: nextProject.data.title,
+                            }}
+                    />
+                </div>
 
-            {nextProject && (
-              <IconButton
-                href={`/projets/${nextProject.id}`}
-                icon={iArrowForward}
-                label={`Projet suivant : ${nextProject.data.title}`}
-                title={`Projet suivant : ${nextProject.data.title}`}
-                variant="tonal"
-                size="medium"
-                shape="rounded"
-              />
-            )}
-          </div>
+                <div class:list={[
+                    "min-w-0 pb-20 xl:col-start-2",
+                    data.cover || data.previewUrl ? "xl:row-start-3" : "xl:row-start-2",
+                ]}>
+                    <Content/>
+                </div>
+            </div>
         </div>
-      </nav>
-    </div>
-  </section>
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(projectLd)} />
+    </section>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(projectLd)}/>
 </Layout>
