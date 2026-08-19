@@ -1,6 +1,8 @@
 import validator from "validator";
 import nodemailer from "nodemailer";
 import xss from "xss";
+import { verifySolution } from "altcha-lib";
+import { deriveKey } from "altcha-lib/algorithms/pbkdf2";
 
 export const prerender = false;
 
@@ -9,7 +11,7 @@ export const POST: ({
 }: {
   request: any;
 }) => Promise<Response> = async ({ request }) => {
-  const { name, email, message } = await request.json();
+  const { name, email, message, altcha } = await request.json();
   let errors: Record<string, string> = {};
 
   if (!name) errors["name"] = "Veuillez fournir un nom";
@@ -35,30 +37,53 @@ export const POST: ({
     );
   }
 
-  const secretKey = import.meta.env.RECAPTCHA_SECRET_KEY;
+  const hmacSecret = import.meta.env.ALTCHA_HMAC_KEY;
 
-  const recaptchaToken = request.headers.get("recaptcha-token");
-
-  const responseRecaptcha = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`,
-    {
-      method: "post",
-    },
-  );
-
-  const recaptchaData = await responseRecaptcha.json();
-
-  if (!recaptchaData.success) {
+  if (!hmacSecret) {
+    console.warn("ALTCHA_HMAC_KEY n'est pas configuré");
     return new Response(
       JSON.stringify({
-        status: 400,
-        message: "reCaptcha validation failed",
+        status: 500,
+        message: "La protection anti-spam n'est pas configurée",
       }),
       {
         headers: { "Content-Type": "application/json" },
-        status: 400,
+        status: 500,
       },
     );
+  }
+
+  const altchaError = new Response(
+    JSON.stringify({
+      status: 400,
+      message: "La vérification anti-spam a échoué, veuillez réessayer",
+    }),
+    {
+      headers: { "Content-Type": "application/json" },
+      status: 400,
+    },
+  );
+
+  let payload: { challenge?: any; solution?: any };
+  try {
+    payload = JSON.parse(atob(altcha));
+  } catch {
+    return altchaError;
+  }
+
+  if (!payload.challenge || !payload.solution) {
+    return altchaError;
+  }
+
+  const altchaResult = await verifySolution({
+    challenge: payload.challenge,
+    solution: payload.solution,
+    deriveKey,
+    hmacSignatureSecret: hmacSecret,
+  });
+
+  if (!altchaResult.verified) {
+    return altchaError;
   } else {
     let transporter = nodemailer.createTransport({
       host: import.meta.env.EMAIL_HOST,

@@ -48,17 +48,23 @@ importers:
         specifier: ^4.1.3
         version: 4.1.3(react@19.2.7)
       '@udixio/icons-outlined-400':
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.2.2-next.0
+        version: 0.2.2-next.0
       '@udixio/tailwind':
-        specifier: ^5.0.1-next.0
-        version: 5.0.1-next.0
+        specifier: ^5.0.1-next.1
+        version: 5.0.1-next.1
       '@udixio/theme':
-        specifier: ^5.0.1-next.0
-        version: 5.0.1-next.0
+        specifier: ^5.0.1-next.1
+        version: 5.0.1-next.1
       '@udixio/ui-react':
-        specifier: ^5.1.0-next.1
-        version: 5.1.0-next.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: ^5.1.0-next.2
+        version: 5.1.0-next.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      altcha:
+        specifier: ^3.2.2
+        version: 3.2.2
+      altcha-lib:
+        specifier: ^2.3.2
+        version: 2.3.2
       aos:
         specifier: ^2.3.4
         version: 2.3.4
@@ -101,9 +107,6 @@ importers:
       react-dom:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
-      react-google-recaptcha-v3:
-        specifier: ^1.11.0
-        version: 1.11.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react-obfuscate:
         specifier: ^3.7.0
         version: 3.7.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1663,26 +1666,26 @@ packages:
   '@types/yauzl@2.10.3':
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
 
-  '@udixio/core@0.2.2-next.1':
-    resolution: {integrity: sha512-Od6CE8IMcP8uGZWzyfuFHiPRcL00q7agzGvu7F9VqgEkmaDYyPmyhokhq1T50qrxR4+Ybks8T5ixHoPiydrtQw==}
+  '@udixio/core@0.2.2-next.2':
+    resolution: {integrity: sha512-+B0AT/x6hIknbgDwH4KihhkIIGaUXPWNXxmsqUBmusgMVOWQ0zGtFy/rQz8c2pl0HF0m3WkMAPT5UybEYHg0RA==}
     peerDependencies:
       react: '>19.0.0'
 
-  '@udixio/icons-outlined-400@0.0.1':
-    resolution: {integrity: sha512-s2vJm5weBeP8PIDBJszfd6EuIvZjscCq+ytAQdjL7Hlnx3DjTQRRhCZpGTEjem81TtcTvIPk3jf2LBuxVq3v6Q==}
+  '@udixio/icons-outlined-400@0.2.2-next.0':
+    resolution: {integrity: sha512-uJV46B2vtxKfBfpXbDkKg4kxZ75A9HLKMf+LqiPQyOL8YkGNxdqvJS4B7YS3Ng07xzwe67sRSiz3jpKRqBLSfQ==}
 
-  '@udixio/icons-rounded-400@0.2.2-next.0':
-    resolution: {integrity: sha512-cpW1fx5yPyUVQBV2uL3LMWZt1DudD+vHpycODsz8ZK5iIsZO66MNc3UPhBNHN24v920a7eRPvQzkcKcTIH3ZxQ==}
+  '@udixio/icons-rounded-400@0.2.2-next.1':
+    resolution: {integrity: sha512-KD4VxAmjPS0udOvg7O7wCJU80POZIPRA4lRQkDPPYt1x6QC7Yo/91j/sX0kxhJzwnofFs7Pp6joTW5BObSOoBA==}
 
-  '@udixio/tailwind@5.0.1-next.0':
-    resolution: {integrity: sha512-qBLgbqNlcar+2/+YvYh7fd+Sx0qTGEFmY1Sw+9P5muvetyAEMTk6Rrmr60GwmmaKuUBuBx+/Nuarlb3LIWjS7g==}
+  '@udixio/tailwind@5.0.1-next.1':
+    resolution: {integrity: sha512-RagpWrBNVtn9/lbZ4vrNqZiqnxGtP4aFYinJFedCpXgLrqeOWv4GKs9nJipH4X5QXbyRl3sPWCrhTPMkbbDTVw==}
 
-  '@udixio/theme@5.0.1-next.0':
-    resolution: {integrity: sha512-x7nPNh0Pt+0/1h3lH5AIHMGyTB9wnvuCevqRY9OwhPNQ41apvCsvEF4MAdetIZ9rA21vkqnUVui44MAZqs4vlQ==}
+  '@udixio/theme@5.0.1-next.1':
+    resolution: {integrity: sha512-zOBunwnHkQcoM4juizzBuV3UXF/6jaqRjGcyHDdVSgF83ZddIRK9cRyQP1k/HLMYf1vweTr/xnCw/6MyEYq5PA==}
     hasBin: true
 
-  '@udixio/ui-react@5.1.0-next.1':
-    resolution: {integrity: sha512-dZcRyQR5wNxmDrkXOiIm4J50NdKDvinhEE4glFZR5sb4oeLEzdREJz4tDv6EG3XVX6zI5WSToe1YDhDG4vOORA==}
+  '@udixio/ui-react@5.1.0-next.2':
+    resolution: {integrity: sha512-N5xNOBvsl5hJBjOPBVMNH11w/HGmrms5/Ay59luU/+aRvh3bFGh7Jwk3jJzg5uVB1vhsLlu5voLOJTv6XnXn1Q==}
     peerDependencies:
       react: '>19.0.0'
       react-dom: '>19.0.0'
@@ -1822,6 +1825,54 @@ packages:
 
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
+
+  altcha-lib@2.3.2:
+    resolution: {integrity: sha512-puJp4aPn/kK2t5Z3dQkbFTmPusaYPkdlrXB4feWZzdNIiC3sPndKMlcjQFUU3a+sVlUt6DJhfWK2+HiwDBbW1Q==}
+    hasBin: true
+    peerDependencies:
+      '@fastify/cookie': ^11.0.0
+      '@fastify/cors': ^11.0.0
+      '@fastify/formbody': ^8.0.0
+      '@nestjs/common': ^10.0.0 || ^11.0.0
+      '@nestjs/core': ^10.0.0 || ^11.0.0
+      '@nestjs/platform-express': ^10.0.0 || ^11.0.0
+      '@sveltejs/kit': ^2.0.0
+      cookie-parser: ^1.0.0
+      cors: ^2.0.0
+      express: ^4.0.0 || ^5.0.0
+      fastify: ^5.0.0
+      h3: ^2.0.0
+      hono: ^4.0.0
+    peerDependenciesMeta:
+      '@fastify/cookie':
+        optional: true
+      '@fastify/cors':
+        optional: true
+      '@fastify/formbody':
+        optional: true
+      '@nestjs/common':
+        optional: true
+      '@nestjs/core':
+        optional: true
+      '@nestjs/platform-express':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      cookie-parser:
+        optional: true
+      cors:
+        optional: true
+      express:
+        optional: true
+      fastify:
+        optional: true
+      h3:
+        optional: true
+      hono:
+        optional: true
+
+  altcha@3.2.2:
+    resolution: {integrity: sha512-yNITQaRSkRe0u/hMxdzoXFFqxqn9iDt1rJ0reREU3D3uDD3w1oFz6v5C2PMww2XnGThtYUwe8MW+PxsiBglNqw==}
 
   am-i-vibing@0.4.0:
     resolution: {integrity: sha512-MxT4XZL7pzLHpuvhDKdMaQHMGGkJDLluKBLsbstn+8wv9sWcFT6h+0ve9qkml95amVTZtZV83gQe2hY+ojgHLg==}
@@ -2496,6 +2547,9 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  hash-wasm@4.12.0:
+    resolution: {integrity: sha512-+/2B2rYLb48I/evdOIhP+K/DD2ca2fgBjp6O+GBEnCDk2e4rpeXIK8GvIyRPjTezgmWn9gmKwkQjjx6BtqDHVQ==}
 
   hast-util-from-html@2.0.3:
     resolution: {integrity: sha512-CUSRHXyKjzHov8yKsQjGOElXy/3EKpyX56ELnkHH34vDVw1N1XSQ1ZcAvTyAPtGqLTuKP/uxM+aLkSPqF/EtMw==}
@@ -3428,12 +3482,6 @@ packages:
 
   react-fast-compare@2.0.4:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
-
-  react-google-recaptcha-v3@1.11.0:
-    resolution: {integrity: sha512-kLQqpz/77m8+trpBwzqcxNtvWZYoZ/YO6Vm2cVTHW8hs80BWUfDpC7RDwuAvpswwtSYApWfaSpIDFWAIBNIYxQ==}
-    peerDependencies:
-      react: ^16.3 || ^17.0 || ^18.0 || ^19.0
-      react-dom: ^17.0 || ^18.0 || ^19.0
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -5711,7 +5759,7 @@ snapshots:
       '@types/node': 25.9.1
     optional: true
 
-  '@udixio/core@0.2.2-next.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@udixio/core@0.2.2-next.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.2.0
       animejs: 4.5.0
@@ -5725,19 +5773,19 @@ snapshots:
       - react-dom
       - three
 
-  '@udixio/icons-outlined-400@0.0.1': {}
+  '@udixio/icons-outlined-400@0.2.2-next.0': {}
 
-  '@udixio/icons-rounded-400@0.2.2-next.0': {}
+  '@udixio/icons-rounded-400@0.2.2-next.1': {}
 
-  '@udixio/tailwind@5.0.1-next.0':
+  '@udixio/tailwind@5.0.1-next.1':
     dependencies:
-      '@udixio/theme': 5.0.1-next.0
+      '@udixio/theme': 5.0.1-next.1
       pathe: 2.0.3
       tailwindcss: 4.3.0
       text-case: 1.2.11
       tslib: 2.8.1
 
-  '@udixio/theme@5.0.1-next.0':
+  '@udixio/theme@5.0.1-next.1':
     dependencies:
       '@material/material-color-utilities': 0.3.0
       awilix: 12.1.1
@@ -5751,13 +5799,13 @@ snapshots:
       tailwindcss: 4.3.0
       unplugin: 2.3.11
 
-  '@udixio/ui-react@5.1.0-next.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@udixio/ui-react@5.1.0-next.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.2.0
-      '@udixio/core': 0.2.2-next.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@udixio/icons-rounded-400': 0.2.2-next.0
-      '@udixio/tailwind': 5.0.1-next.0
-      '@udixio/theme': 5.0.1-next.0
+      '@udixio/core': 0.2.2-next.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@udixio/icons-rounded-400': 0.2.2-next.1
+      '@udixio/tailwind': 5.0.1-next.1
+      '@udixio/theme': 5.0.1-next.1
       clsx: 1.2.1
       jiti: 2.7.0
       lenis: 1.3.23(react@19.2.7)
@@ -5930,6 +5978,12 @@ snapshots:
       fast-uri: 3.1.2
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
+
+  altcha-lib@2.3.2: {}
+
+  altcha@3.2.2:
+    dependencies:
+      hash-wasm: 4.12.0
 
   am-i-vibing@0.4.0:
     dependencies:
@@ -6885,6 +6939,8 @@ snapshots:
       uncrypto: 0.1.3
 
   has-flag@4.0.0: {}
+
+  hash-wasm@4.12.0: {}
 
   hast-util-from-html@2.0.3:
     dependencies:
@@ -8076,12 +8132,6 @@ snapshots:
 
   react-fast-compare@2.0.4: {}
 
-  react-google-recaptcha-v3@1.11.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
-    dependencies:
-      hoist-non-react-statics: 3.3.2
-      react: 19.2.7
-      react-dom: 19.2.7(react@19.2.7)
-
   react-is@16.13.1: {}
 
   react-obfuscate@3.7.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
@@ -8780,7 +8830,7 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       acorn: 8.16.0
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       webpack-virtual-modules: 0.6.2
 
   unstorage@1.17.5(@vercel/functions@3.7.1(ws@8.21.2)):

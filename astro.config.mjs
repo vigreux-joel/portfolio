@@ -79,7 +79,7 @@ export default defineConfig({
         cacheDir: isBuild ? "node_modules/.vite-build" : "node_modules/.vite",
         plugins: [tailwindcss(), vitePlugin()],
         ssr: {
-            noExternal: ["react-markdown", "@udixio/theme", "@udixio/tailwind", "@udixio/ui-react", "react-obfuscate", "react-google-recaptcha-v3", "tailwindcss"]
+            noExternal: ["react-markdown", "@udixio/theme", "@udixio/tailwind", "@udixio/ui-react", "react-obfuscate", "tailwindcss"]
         },
         optimizeDeps: {
             exclude: [
