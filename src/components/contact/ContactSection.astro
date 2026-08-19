@@ -36,7 +36,7 @@ const linkedin = "https://linkedin.com/in/vigreux-joel";
     />
 
     <div class="max-width padding-x">
-        <div class="mx-auto max-w-3xl">
+        <div class="mx-auto max-w-3xl text-center">
             <h1 class="text-display-medium">
                 <span class="block">Dites-moi ce qui vous amène.</span>
                 <span class="block text-gradient">Je prends le temps de vous répondre.</span>
@@ -45,57 +45,78 @@ const linkedin = "https://linkedin.com/in/vigreux-joel";
                 Le contexte, ce qui existe déjà et ce que vous cherchez à obtenir.
                 Quelques lignes suffisent, je réponds sous 48 h ouvrées.
             </p>
+        </div>
 
-            <Card
-                    client:visible
-                    variant="filled"
-                    className="mt-12 ring-1 ring-primary/30"
-            >
-                <div class="p-6 md:p-8">
-                    <FormContact client:visible/>
-                </div>
-            </Card>
-
-            <div class="mt-16 border-t border-outline-variant pt-8">
-                <h2 class="text-title-medium text-on-surface-variant">
-                    Vous préférez écrire directement
-                </h2>
-
-                <div class="mt-4 flex flex-wrap gap-x-8 gap-y-3">
-                    <a
-                            class="flex items-center gap-2 text-body-large text-on-surface underline underline-offset-4 transition-colors hover:text-primary"
-                            href={mailtoHref}
-                    >
-                        <Icon icon={iMail} className="size-5 shrink-0"/>
-                        {email}
-                    </a>
-
-                    {phone && (
-                            <a
-                                    class="flex items-center gap-2 text-body-large text-on-surface underline underline-offset-4 transition-colors hover:text-primary"
-                                    href={`tel:${phoneHref}`}
-                            >
-                                <Icon icon={iCall} className="size-5 shrink-0"/>
-                                {phoneLabel}
-                            </a>
-                    )}
-
-                    <a
-                            class="flex items-center gap-2 text-body-large text-on-surface underline underline-offset-4 transition-colors hover:text-primary"
-                            href={linkedin}
-                            target="_blank"
-                            rel="me noopener noreferrer"
-                    >
-                        <Icon icon={faLinkedin} className="size-5 shrink-0"/>
-                        LinkedIn<span class="sr-only"> (nouvel onglet)</span>
-                    </a>
-                </div>
-
-                <p class="mt-6 flex items-center gap-2 text-body-medium text-on-surface-variant">
-                    <Icon icon={iLocationOn} className="size-5 shrink-0"/>
-                    Déplacements autour d’Amiens et de Lille · à distance
-                </p>
+        <div class="mt-14 grid items-start gap-6 lg:grid-cols-12 lg:gap-8">
+            <!-- Le formulaire passe en premier dans le DOM : sur mobile il arrive
+                 directement sous le titre, sans la carte de repli au-dessus. -->
+            <div class="min-w-0 lg:order-2 lg:col-span-8">
+                <Card
+                        client:visible
+                        variant="filled"
+                        className="ring-1 ring-primary/30"
+                >
+                    <div class="p-6 md:p-8">
+                        <FormContact client:visible/>
+                    </div>
+                </Card>
             </div>
+
+            <aside class="min-w-0 lg:order-1 lg:col-span-4">
+                <Card
+                        client:visible
+                        variant="filled"
+                        pointerGlow={false}
+                        className="ring-1 ring-outline-variant"
+                >
+                    <div class="p-6">
+                        <h2 class="text-title-medium text-on-surface-variant">
+                            Me joindre directement
+                        </h2>
+
+                        <div class="mt-5 flex flex-col gap-4">
+                            <a
+                                    class="group flex items-start gap-3 text-on-surface-variant transition-colors hover:text-primary"
+                                    href={mailtoHref}
+                            >
+                                <Icon icon={iMail} className="size-5 shrink-0 mt-0.5"/>
+                                <span class="min-w-0 break-words text-body-medium underline underline-offset-4">
+                                    {email}
+                                </span>
+                            </a>
+
+                            {phone && (
+                                    <a
+                                            class="group flex items-start gap-3 text-on-surface-variant transition-colors hover:text-primary"
+                                            href={`tel:${phoneHref}`}
+                                    >
+                                        <Icon icon={iCall} className="size-5 shrink-0 mt-0.5"/>
+                                        <span class="text-body-medium underline underline-offset-4">
+                                            {phoneLabel}
+                                        </span>
+                                    </a>
+                            )}
+
+                            <a
+                                    class="group flex items-start gap-3 text-on-surface-variant transition-colors hover:text-primary"
+                                    href={linkedin}
+                                    target="_blank"
+                                    rel="me noopener noreferrer"
+                            >
+                                <Icon icon={faLinkedin} className="size-5 shrink-0 mt-0.5"/>
+                                <span class="text-body-medium underline underline-offset-4">
+                                    LinkedIn<span class="sr-only"> (nouvel onglet)</span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <p class="mt-6 flex items-start gap-3 border-t border-outline-variant pt-5 text-body-small text-on-surface-variant">
+                            <Icon icon={iLocationOn} className="size-5 shrink-0 mt-0.5"/>
+                            <span>Déplacements autour d’Amiens et de Lille · à distance</span>
+                        </p>
+                    </div>
+                </Card>
+            </aside>
         </div>
     </div>
 </section>
