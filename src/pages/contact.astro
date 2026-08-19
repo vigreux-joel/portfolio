@@ -21,16 +21,6 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
 <Layout
         showSidebar={false}
         showCta={false}
-        faq={[
-            {
-                question: "Que faut-il préparer pour demander une estimation à un développeur web ?",
-                answer: "Présentez l’objectif du projet, ses futurs utilisateurs, les fonctions indispensables et l’échéance envisagée. Un budget indicatif ou des contraintes existantes sont également utiles, mais une idée encore incomplète suffit pour commencer l’échange."
-            },
-            {
-                question: "Est-il possible de travailler avec un développeur web entièrement à distance ?",
-                answer: "Oui. Je travaille principalement à distance pour les échanges et le suivi du projet. Des rendez-vous en présentiel restent possibles autour d’Amiens et de Lille, selon le projet."
-            }
-        ]}
         seo={{
             title: `Contactez Joël Vigreux - Développeur full stack`,
             description:
@@ -60,7 +50,7 @@ const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
     >
         <!-- Fond animé et coloré comme dans le reste du site -->
         <BackgroundColor
-                speed={5_000}
+                speed={7_000}
                 size="max(50vw, 800px)"
                 count={5}
                 client:idle
