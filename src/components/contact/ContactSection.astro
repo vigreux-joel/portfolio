@@ -70,50 +70,64 @@ const linkedin = "https://linkedin.com/in/vigreux-joel";
                         className="ring-1 ring-outline-variant"
                 >
                     <div class="p-6">
-                        <h2 class="text-title-medium text-on-surface-variant">
-                            Me joindre directement
-                        </h2>
+                        <h2 class="text-title-large">Me joindre directement</h2>
 
-                        <div class="mt-5 flex flex-col gap-4">
-                            <a
-                                    class="group flex items-start gap-3 text-on-surface-variant transition-colors hover:text-primary"
-                                    href={mailtoHref}
-                            >
-                                <Icon icon={iMail} className="size-5 shrink-0 mt-0.5"/>
-                                <span class="min-w-0 break-words text-body-medium underline underline-offset-4">
-                                    {email}
+                        <div class="mt-6 flex flex-col gap-5">
+                            <a class="group flex items-center gap-4" href={mailtoHref}>
+                                <span class="grid place-items-center size-10 shrink-0 rounded-2xl bg-primary-container text-on-primary-container">
+                                    <Icon icon={iMail} className="size-5"/>
+                                </span>
+                                <span class="min-w-0">
+                                    <span class="block text-title-small">Email</span>
+                                    <span class="mt-0.5 block break-words text-body-medium text-on-surface-variant underline underline-offset-4 transition-colors group-hover:text-primary">
+                                        {email}
+                                    </span>
                                 </span>
                             </a>
 
                             {phone && (
-                                    <a
-                                            class="group flex items-start gap-3 text-on-surface-variant transition-colors hover:text-primary"
-                                            href={`tel:${phoneHref}`}
-                                    >
-                                        <Icon icon={iCall} className="size-5 shrink-0 mt-0.5"/>
-                                        <span class="text-body-medium underline underline-offset-4">
-                                            {phoneLabel}
+                                    <a class="group flex items-center gap-4" href={`tel:${phoneHref}`}>
+                                        <span class="grid place-items-center size-10 shrink-0 rounded-2xl bg-secondary-container text-on-secondary-container">
+                                            <Icon icon={iCall} className="size-5"/>
+                                        </span>
+                                        <span class="min-w-0">
+                                            <span class="block text-title-small">Téléphone</span>
+                                            <span class="mt-0.5 block text-body-medium text-on-surface-variant underline underline-offset-4 transition-colors group-hover:text-primary">
+                                                {phoneLabel}
+                                            </span>
                                         </span>
                                     </a>
                             )}
 
-                            <a
-                                    class="group flex items-start gap-3 text-on-surface-variant transition-colors hover:text-primary"
-                                    href={linkedin}
-                                    target="_blank"
-                                    rel="me noopener noreferrer"
-                            >
-                                <Icon icon={faLinkedin} className="size-5 shrink-0 mt-0.5"/>
-                                <span class="text-body-medium underline underline-offset-4">
-                                    LinkedIn<span class="sr-only"> (nouvel onglet)</span>
+                            <div class="flex items-center gap-4">
+                                <span class="grid place-items-center size-10 shrink-0 rounded-2xl bg-tertiary-container text-on-tertiary-container">
+                                    <Icon icon={iLocationOn} className="size-5"/>
                                 </span>
-                            </a>
+                                <span class="min-w-0">
+                                    <span class="block text-title-small">Mobilité</span>
+                                    <span class="mt-0.5 block text-body-medium text-on-surface-variant">
+                                        Amiens et Lille · à distance
+                                    </span>
+                                </span>
+                            </div>
                         </div>
 
-                        <p class="mt-6 flex items-start gap-3 border-t border-outline-variant pt-5 text-body-small text-on-surface-variant">
-                            <Icon icon={iLocationOn} className="size-5 shrink-0 mt-0.5"/>
-                            <span>Déplacements autour d’Amiens et de Lille · à distance</span>
-                        </p>
+                        <a
+                                class="group mt-6 flex items-center gap-4 border-t border-outline-variant pt-5"
+                                href={linkedin}
+                                target="_blank"
+                                rel="me noopener noreferrer"
+                        >
+                            <span class="grid place-items-center size-10 shrink-0 rounded-2xl bg-surface-container-high text-on-surface-variant">
+                                <Icon icon={faLinkedin} className="size-5"/>
+                            </span>
+                            <span class="min-w-0">
+                                <span class="block text-title-small">LinkedIn</span>
+                                <span class="mt-0.5 block text-body-medium text-on-surface-variant underline underline-offset-4 transition-colors group-hover:text-primary">
+                                    Voir le profil<span class="sr-only"> (nouvel onglet)</span>
+                                </span>
+                            </span>
+                        </a>
                     </div>
                 </Card>
             </aside>
