@@ -64,11 +64,11 @@ const projectLd = {
         showSidebar={false}
         showContactFab={false}
         seo={{
-            title: `${data.title} — Projet de Joël Vigreux`,
+            title: `${data.title} · Projet de Joël Vigreux`,
             description: data.description,
             openGraph: {
                 basic: {
-                    title: `${data.title} — Projet de Joël Vigreux`,
+                    title: `${data.title} · Projet de Joël Vigreux`,
                     type: "article",
                     image: new URL(projectImage, Astro.site ?? Astro.url.origin).toString(),
                     url: projectUrl,
@@ -78,7 +78,7 @@ const projectLd = {
                     locale: "fr_FR",
                     description: data.description,
                 },
-                image: {alt: data.cover?.alt ?? `${data.title} — projet de Joël Vigreux`},
+                image: {alt: data.cover?.alt ?? `${data.title} · projet de Joël Vigreux`},
             },
         }}
 >
