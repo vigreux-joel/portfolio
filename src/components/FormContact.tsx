@@ -47,17 +47,17 @@ export const FormContact = () => {
             const errors: Record<string, string> = {};
 
             if (!data.name) {
-                errors.name = "Votre nom est nécessaire.";
+                errors.name = "Indiquez votre nom.";
             }
             if (!data.email) {
-                errors.email = "L'email est nécessaire.";
+                errors.email = "Indiquez votre adresse e-mail.";
             } else if (!isValidEmail(data.email)) {
-                errors.email = "Veuillez fournir un email valide.";
+                errors.email = "Cette adresse e-mail ne semble pas valide.";
             }
             if (!data.message) {
-                errors.message = "Veuillez entrer votre message.";
+                errors.message = "Décrivez brièvement votre besoin.";
             } else if (data.message.trim().length < MESSAGE_MIN_LENGTH) {
-                errors.message = `Encore un peu de contexte, ${MESSAGE_MIN_LENGTH} caractères minimum.`;
+                errors.message = `Ajoutez encore un peu de contexte (${MESSAGE_MIN_LENGTH} caractères minimum).`;
             }
             return errors;
         },
@@ -125,10 +125,10 @@ export const FormContact = () => {
                     className="size-7 shrink-0 text-primary mt-0.5"
                 />
                 <div>
-                    <p className="text-title-large">Message envoyé</p>
+                    <p className="text-title-large">Merci, votre message est bien parti.</p>
                     <p className="mt-2 text-body-medium text-on-surface-variant max-w-prose">
-                        Je vous réponds sous 48 h ouvrées à l'adresse que vous avez
-                        indiquée. Sans nouvelle de ma part, écrivez-moi à{" "}
+                        Je vous répondrai sous 48 h ouvrées à l'adresse indiquée.
+                        Si vous ne recevez rien passé ce délai, écrivez-moi à{" "}
                         <a
                             className="text-secondary underline underline-offset-4"
                             href={`mailto:${contactEmail}`}
@@ -153,55 +153,59 @@ export const FormContact = () => {
     }
 
     return (
-        <form onSubmit={formik.handleSubmit} className="mt-8 max-w-prose relative">
-            <TextField
-                variant={"outlined"}
-                type="text"
-                name="name"
-                autoComplete="name"
-                value={formik.values.name}
-                label={"Nom & prénom"}
-                placeholder={"Votre nom et votre prénom"}
-                errorText={getFormErrorMessage("name")}
-                onChange={(e: string) => {
-                    formik.setFieldValue("name", e);
-                }}
-                onBlur={() => formik.setFieldTouched("name", true)}
-                supportingText={"\u00A0"}
-                showSupportingText
-            ></TextField>
-            <TextField
-                variant={"outlined"}
-                type="email"
-                name="email"
-                autoComplete="email"
-                label={"E-mail"}
-                value={formik.values.email}
-                placeholder={"Votre e-mail"}
-                errorText={getFormErrorMessage("email")}
-                onChange={(e: string) => {
-                    formik.setFieldValue("email", e);
-                }}
-                onBlur={() => formik.setFieldTouched("email", true)}
-                supportingText={"\u00A0"}
-                showSupportingText
-            ></TextField>
-            <TextField
-                multiline
-                variant={"outlined"}
-                type="text"
-                name="message"
-                label={"Message"}
-                value={formik.values.message}
-                onChange={(e: string) => {
-                    formik.setFieldValue("message", e);
-                }}
-                onBlur={() => formik.setFieldTouched("message", true)}
-                placeholder={"Votre message"}
-                errorText={getFormErrorMessage("message")}
-                supportingText="Le contexte, ce qui existe déjà et ce que vous cherchez à obtenir."
-                showSupportingText
-            ></TextField>
+        <form onSubmit={formik.handleSubmit} className="@container relative mt-6 max-w-none">
+            <div className="grid gap-4 @3xl:grid-cols-2">
+                <TextField
+                    variant={"outlined"}
+                    type="text"
+                    name="name"
+                    autoComplete="name"
+                    value={formik.values.name}
+                    label={"Nom & prénom"}
+                    placeholder={"Votre nom et votre prénom"}
+                    errorText={getFormErrorMessage("name")}
+                    onChange={(e: string) => {
+                        formik.setFieldValue("name", e);
+                    }}
+                    onBlur={() => formik.setFieldTouched("name", true)}
+                    supportingText={"\u00A0"}
+                    showSupportingText
+                ></TextField>
+                <TextField
+                    variant={"outlined"}
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    label={"E-mail"}
+                    value={formik.values.email}
+                    placeholder={"Votre e-mail"}
+                    errorText={getFormErrorMessage("email")}
+                    onChange={(e: string) => {
+                        formik.setFieldValue("email", e);
+                    }}
+                    onBlur={() => formik.setFieldTouched("email", true)}
+                    supportingText={"\u00A0"}
+                    showSupportingText
+                ></TextField>
+            </div>
+            <div className="mt-4">
+                <TextField
+                    multiline
+                    variant={"outlined"}
+                    type="text"
+                    name="message"
+                    label={"Votre message"}
+                    value={formik.values.message}
+                    onChange={(e: string) => {
+                        formik.setFieldValue("message", e);
+                    }}
+                    onBlur={() => formik.setFieldTouched("message", true)}
+                    placeholder={"Expliquez-moi où vous en êtes et ce que vous voulez obtenir"}
+                    errorText={getFormErrorMessage("message")}
+                    supportingText="L'existant, le blocage actuel et le résultat attendu sont les éléments les plus utiles."
+                    showSupportingText
+                ></TextField>
+            </div>
             <altcha-widget
                 ref={altchaRef}
                 configuration={altchaConfiguration}
@@ -217,8 +221,8 @@ export const FormContact = () => {
                 </p>
             )}
 
-            <p className={"text-body-small text-outline mt-8 mb-4"}>
-                Vos coordonnées servent uniquement à vous répondre.
+            <p className={"mb-4 mt-6 text-body-small text-outline"}>
+                Vos coordonnées sont utilisées uniquement pour répondre à cette demande.
             </p>
             {/* `buttons` passe le CTA en pleine largeur sous 400px, comme partout ailleurs. */}
             <div className="buttons !mt-0">
