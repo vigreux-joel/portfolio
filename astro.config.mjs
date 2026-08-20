@@ -22,7 +22,7 @@ export default defineConfig({
     compressHTML: true,
     experimental: {},
     output: 'static',
-    integrations: [customIntegration(), react(), mdx(), sitemap(), robotsTxt(), compress(), compressor()],
+    integrations: [customIntegration(), react(), mdx(), sitemap(), robotsTxt(), compress({CSS: false}), compressor()],
     fonts: [
         {
             provider: fontProviders.google(),
