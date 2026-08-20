@@ -1,47 +1,48 @@
 ---
-import {Card} from "@components/Card";
-import {Icon, Button} from "@udixio/ui-react";
+import {Line} from "@components/Line";
+import {Card} from "@components/Card.tsx";
+import {Button, Divider, Icon} from "@udixio/ui-react";
 import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
 import {iPsychology} from "@udixio/icons-outlined-400/psychology";
-
-interface Props {
-    eyebrow?: string;
-    titleGradient?: string;
-    titleRest?: string;
-    body?: string;
-    label?: string;
-}
-
-const {
-    eyebrow = "Ma position sur l’IA",
-    titleGradient = "Sachez quelle place l’IA prend dans votre projet.",
-    titleRest = "Je vous dis où je l’utilise et où je m’en passe.",
-    body = "L’IA occupe une place précise dans mon travail, ni marginale ni centrale. Je l’explique sans détour.",
-    label = "Lire ma position sur l’IA",
-}: Props = Astro.props;
 ---
 
-<section class="tab-menu   pb-20 md:pb-28">
-    <div class="max-width padding-x">
-        <Card client:idle variant="outlined">
-            <div class="flex flex-col gap-5 p-6 md:p-9">
-        <span class="grid size-12 place-items-center rounded-2xl bg-primary text-on-primary">
-          <Icon icon={iPsychology} className="size-6"/>
-        </span>
-                <div>
-                    <p class="sub-title text-secondary">{eyebrow}</p>
-                    <h2 class="mt-2 text-headline-small text-on-surface max-w-prose">
-                        <span class="block text-gradient">{titleGradient}</span>
-                        {titleRest}
-                    </h2>
-                    <p class="mt-4 mb-8 max-w-prose text-body-large text-on-surface-variant">
-                        {body}
-                    </p>
-                    <Button icon={iArrowForward} href="/approche" variant="outlined" iconPosition="right">
-                        {label}
-                    </Button>
-                </div>
+<section class="tab-menu" aria-labelledby="approach-section-title">
+    <div class="max-width">
+        <div class="flex pt-8">
+            <div>
+                <Line client:idle icon={iPsychology} isLast/>
             </div>
-        </Card>
+            <div class="padding flex max-w-7xl flex-1 flex-col justify-center pb-20 pt-0 md:pb-28">
+                <p class="sub-title" data-sidebar-label="Approche de l’IA">Approche de l’IA</p>
+                <h2 id="approach-section-title" class="mt-4 max-w-5xl text-headline-large">
+                    <span class="block text-gradient">Aujourd’hui, l’IA est partout.</span>
+                    Je vous dis où je l’utilise et où je m’en passe.
+                </h2>
+                <Card client:visible variant="filled" className="group mt-10">
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start gap-4">
+                            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary text-on-primary">
+                                <Icon icon={iPsychology} className="size-6"/>
+                            </span>
+                            <div>
+                                <p class="sub-title text-secondary">Dans ma pratique</p>
+                                <p class="mt-3 max-w-3xl text-headline-small text-on-surface md:text-headline-medium">
+                                    Je l’utilise sur les tâches suffisamment cadrées.
+                                </p>
+                            </div>
+                        </div>
+                        <Divider className="my-8"/>
+                        <p class="max-w-2xl text-body-large text-on-surface-variant">
+                            La compréhension du métier, l’architecture, la sécurité et la validation restent sous
+                            contrôle humain.
+                        </p>
+                        <div class="mt-6">
+                            <Button client:idle href="/approche" icon={iArrowForward} iconPosition="right"
+                                    label="Mon approche de l’IA" variant="outlined"/>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </div>
     </div>
 </section>

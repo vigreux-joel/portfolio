@@ -18,43 +18,43 @@ const [primaryProject, ...secondaryProjects] = sortProjects(published).slice(
 );
 ---
 
-<section id="projets" class="tab-menu theme-cyan ">
+<section id="projets" class="tab-menu theme-cyan">
     <BackgroundColor
             speed={9_000}
             size="max(66vw, 800px)"
             count={4}
             client:idle
-            className="absolute inset-0 h-1/2 -z-10 top-1/4  opacity-20"
+            className="absolute inset-0 h-1/2 -z-10 top-1/4 opacity-20"
     />
     <div class="max-width">
-        <div class="flex pt-8">
-            <div class="theme-cyan">
+        <div class="flex flex-col md:flex-row pt-8">
+            <div class="theme-cyan hidden md:block">
                 <Line client:idle icon={iFactCheck} isLast/>
             </div>
             <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
                 <p class="sub-title" data-sidebar-label="Projets">Projets</p>
-                <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
-                    <span class="block text-gradient">La qualité se juge, elle ne s’annonce pas.</span>
+                <h2 class="mt-4 text-headline-medium md:text-headline-large lg:text-display-medium max-w-5xl">
+                    <span class="block text-gradient">La qualité se juge, elle ne s'annonce pas.</span>
                     <span class="block">Explorez mes projets et faites-vous votre propre avis.</span>
                 </h2>
-                <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+                <p class="mt-4 md:mt-8 text-body-medium md:text-body-large text-on-surface-variant max-w-3xl">
                     Chaque projet répond à un besoin réel rencontré en poste, en mission ou dans ma
-                    pratique personnelle, du cadrage jusqu’à la mise en service.
+                    pratique personnelle, du cadrage jusqu'à la mise en service.
                 </p>
             </div>
         </div>
 
-        <div class="section py-0 flex gap-8">
+        <div class="section py-0 flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-8">
             <Card
                     client:idle
                     variant="filled"
-                    className="flex-1 sticky top-36  z-10 flex h-full min-h-72 flex-col bg-surface-container-highest/90 px-8 py-6"
+                    className="lg:flex-1 lg:sticky lg:top-36 z-10 flex h-full min-h-48 md:min-h-60 lg:min-h-72 flex-col bg-surface-container-highest/90 px-6 py-4 md:px-8 md:py-6"
             >
                 <span class="sub-title text-secondary">Tous les projets</span>
-                <h3 class="mt-4 text-headline-small text-on-surface">
+                <h3 class="mt-2 md:mt-4 text-title-large md:text-headline-small text-on-surface">
                     Découvrez mes autres réalisations.
                 </h3>
-                <div class="mt-auto pt-8">
+                <div class="mt-auto pt-4 md:pt-8">
                     <Button client:idle
                             href="/projets"
                             label="Voir tous les projets"
@@ -64,26 +64,22 @@ const [primaryProject, ...secondaryProjects] = sortProjects(published).slice(
                     />
                 </div>
             </Card>
-            <div class="flex-3">
+            <div class="lg:flex-3">
                 {primaryProject &&
                         <ProjectCard project={primaryProject}/>}
 
                 {
                     secondaryProjects.length > 0 && (
-                                <div class="mt-8 grid gap-6 md:grid-cols-2 ">
+                                <div class="mt-4 md:mt-6 lg:mt-8 grid gap-4 md:gap-6 md:grid-cols-2">
                                     {secondaryProjects.map((project) => (
                                             <ProjectCard
                                                     project={project}
-
                                             />
                                     ))}
-
-
                                 </div>
                     )
                 }
             </div>
-
         </div>
     </div>
 

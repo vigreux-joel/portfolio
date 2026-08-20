@@ -26,7 +26,7 @@ const phoneLabel = phoneHref?.replace(
 const linkedin = "https://linkedin.com/in/vigreux-joel";
 ---
 
-<section id="contact" class="tab-menu theme-blue pt-32 md:pt-42 xl:pt-54 pb-20 md:pb-28">
+<section id="contact" class="tab-menu min-h-screen flex items-center theme-blue pt-32 md:pt-42 xl:pt-54 pb-20 md:pb-28">
     <BackgroundColor
             speed={7_000}
             size="max(66vw, 800px)"
@@ -47,16 +47,21 @@ const linkedin = "https://linkedin.com/in/vigreux-joel";
             </p>
         </div>
 
-        <div class="mt-14 grid items-start gap-6 lg:grid-cols-12 lg:gap-8">
+        <!-- items-stretch : les deux cartes partagent la hauteur de la plus haute. -->
+        <div class="mt-14 grid items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
             <!-- Le formulaire passe en premier dans le DOM : sur mobile il arrive
                  directement sous le titre, sans la carte de repli au-dessus. -->
             <div class="min-w-0 lg:order-2 lg:col-span-8">
                 <Card
                         client:visible
                         variant="filled"
-                        className="ring-1 ring-primary/30"
+                        className="h-full ring-1 ring-primary/30"
                 >
-                    <div class="p-6 md:p-8">
+                    <div class="p-6 md:p-8 h-full flex flex-col">
+                        <h2 class="text-title-large">Votre message</h2>
+                        <p class="mt-2 text-body-medium text-on-surface-variant max-w-prose">
+                            Trois champs suffisent. Je lis chaque demande moi-même.
+                        </p>
                         <FormContact client:visible/>
                     </div>
                 </Card>
@@ -67,9 +72,9 @@ const linkedin = "https://linkedin.com/in/vigreux-joel";
                         client:visible
                         variant="filled"
                         pointerGlow={false}
-                        className="ring-1 ring-outline-variant"
+                        className="h-full bg-surface-container-high/50"
                 >
-                    <div class="p-6">
+                    <div class="p-6 h-full flex flex-col">
                         <h2 class="text-title-large">Me joindre directement</h2>
 
                         <div class="mt-6 flex flex-col gap-5">
@@ -113,7 +118,7 @@ const linkedin = "https://linkedin.com/in/vigreux-joel";
                         </div>
 
                         <a
-                                class="group mt-6 flex items-center gap-4 border-t border-outline-variant pt-5"
+                                class="group mt-auto flex items-center gap-4 border-t border-outline-variant pt-6"
                                 href={linkedin}
                                 target="_blank"
                                 rel="me noopener noreferrer"

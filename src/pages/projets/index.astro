@@ -1,107 +1,107 @@
 ---
-import { getCollection } from "astro:content";
+import {getCollection} from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { Line } from "@components/Line";
+import {Line} from "@components/Line";
 import ProjectCard from "@components/projects/ProjectCard.astro";
-import { sortProjects } from "../../utils/projects";
-import { iFactCheck } from "@udixio/icons-outlined-400/fact_check";
-import { BackgroundColor } from "@components/BackgroundColor";
+import {sortProjects} from "../../utils/projects";
+import {iFactCheck} from "@udixio/icons-outlined-400/fact_check";
+import {BackgroundColor} from "@components/BackgroundColor";
 import ApproachSection from "@components/ApproachSection.astro";
 
-const published = await getCollection("projects", ({ data }) => !data.draft);
+const published = await getCollection("projects", ({data}) => !data.draft);
 const projects = sortProjects(published);
 
 const collectionJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": "https://vigreux-joel.fr/projets#collection",
-  url: "https://vigreux-joel.fr/projets",
-  name: "Projets — Joël Vigreux",
-  description:
-    "Études de cas et réalisations de Joël Vigreux, développeur full-stack spécialisé dans l’écosystème TypeScript.",
-  inLanguage: "fr-FR",
-  mainEntity: {
-    "@type": "ItemList",
-    itemListElement: projects.map((project, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: project.data.title,
-      url: `https://vigreux-joel.fr/projets/${project.id}`,
-    })),
-  },
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://vigreux-joel.fr/projets#collection",
+    url: "https://vigreux-joel.fr/projets",
+    name: "Projets — Joël Vigreux",
+    description:
+        "Études de cas et réalisations de Joël Vigreux, développeur full-stack spécialisé dans l’écosystème TypeScript.",
+    inLanguage: "fr-FR",
+    mainEntity: {
+        "@type": "ItemList",
+        itemListElement: projects.map((project, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: project.data.title,
+            url: `https://vigreux-joel.fr/projets/${project.id}`,
+        })),
+    },
 });
 ---
 
 <Layout
-  showSidebar={false}
-  faq={[]}
-  seo={{
-    title: "Projets — Joël Vigreux, développeur full-stack",
-    description:
-      "Études de cas détaillées et réalisations livrées : bibliothèque de composants, applications métier, sites en production.",
-    openGraph: {
-      basic: {
-        title: "Projets — Joël Vigreux",
-        type: "website",
-        image: "https://vigreux-joel.fr/images/photo.webp",
-        url: "https://vigreux-joel.fr/projets",
-      },
-      optional: {
-        siteName: "Joël Vigreux",
-        locale: "fr_FR",
-        description:
-          "Études de cas détaillées et réalisations livrées par Joël Vigreux, développeur full-stack.",
-      },
-      image: {
-        alt: "Portrait de Joël Vigreux, développeur full-stack",
-      },
-    },
-  }}
+        showSidebar={false}
+        faq={[]}
+        seo={{
+            title: "Projets — Joël Vigreux, développeur full-stack",
+            description:
+                "Études de cas détaillées et réalisations livrées : bibliothèque de composants, applications métier, sites en production.",
+            openGraph: {
+                basic: {
+                    title: "Projets — Joël Vigreux",
+                    type: "website",
+                    image: "https://vigreux-joel.fr/images/photo.webp",
+                    url: "https://vigreux-joel.fr/projets",
+                },
+                optional: {
+                    siteName: "Joël Vigreux",
+                    locale: "fr_FR",
+                    description:
+                        "Études de cas détaillées et réalisations livrées par Joël Vigreux, développeur full-stack.",
+                },
+                image: {
+                    alt: "Portrait de Joël Vigreux, développeur full-stack",
+                },
+            },
+        }}
 >
-  <script type="application/ld+json" is:inline set:html={collectionJsonLd} />
+    <script type="application/ld+json" is:inline set:html={collectionJsonLd}/>
 
-  <section class="tab-menu theme-cyan pt-32 md:pt-42 xl:pt-54">
-    <BackgroundColor
-      speed={9_000}
-      size="max(66vw, 800px)"
-      count={4}
-      client:idle
-      className="absolute inset-x-0 top-0 -z-10 h-[46rem] opacity-20"
-    />
-    <div class="max-width">
-      <div class="flex">
-        <div><Line client:load isFirst /></div>
-        <div class="padding pt-0 pb-16">
-          <h1 class="mt-5 text-display-medium  max-w-5xl">
-            <span class="block">Mes projets</span>
-            <span class="block text-gradient">et les choix derrière leur réalisation.</span>
-          </h1>
+    <section class="tab-menu  pt-32 md:pt-42 xl:pt-54">
+        <BackgroundColor
+                speed={9_000}
+                size="max(66vw, 800px)"
+                count={4}
+                client:idle
+                className="absolute inset-x-0 top-0 -z-10 h-[46rem] opacity-20"
+        />
+        <div class="max-width">
+            <div class="flex">
+                <div>
+                    <Line client:load isFirst/>
+                </div>
+                <div class="padding pt-0 pb-16">
+                    <h1 class="mt-5 text-display-medium  max-w-5xl">
+                        <span class="block">Mes projets</span>
+                        <span class="block text-gradient">et les choix derrière leur réalisation.</span>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="flex items-end">
+                <div>
+                    <Line client:idle icon={iFactCheck}/>
+                </div>
+                <div class="padding pt-0 pb-8 w-full">
+                    <p class="sub-title">Sélection complète</p>
+                    <h2 class="mt-2 text-headline-large md:text-display-small">Projets réalisés</h2>
+                </div>
+            </div>
+
+            <ol class="padding-x grid items-stretch gap-6 md:grid-cols-2">
+                {projects.map((project) => (
+                        <li class="min-w-0">
+                            <ProjectCard project={project}/>
+                        </li>
+                ))}
+            </ol>
+
+            <div class="pb-20 md:pb-28"></div>
         </div>
-      </div>
+    </section>
 
-      <div class="flex items-end">
-        <div><Line client:idle icon={iFactCheck} /></div>
-        <div class="padding pt-0 pb-8 w-full">
-          <p class="sub-title">Sélection complète</p>
-          <h2 class="mt-2 text-headline-large md:text-display-small">Projets réalisés</h2>
-        </div>
-      </div>
-
-      <ol class="padding-x grid items-stretch gap-6 md:grid-cols-2">
-        {projects.map((project) => (
-          <li class="min-w-0">
-            <ProjectCard project={project} />
-          </li>
-        ))}
-      </ol>
-
-      <div class="pb-20 md:pb-28"></div>
-    </div>
-  </section>
-
-  <ApproachSection
-    titleGradient="Ces projets n’ont pas été générés."
-    titleRest="Je les ai décidés, puis vérifiés."
-    body="Vous voyez ici les résultats. Ma page approche explique la part que prend l’IA dans le travail qui y mène et ce que je garde sous contrôle."
-  />
+    <ApproachSection/>
 </Layout>

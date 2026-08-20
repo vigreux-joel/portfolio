@@ -218,13 +218,7 @@ export const FormContact = () => {
             )}
 
             <p className={"text-body-small text-outline mt-8 mb-4"}>
-                Vos coordonnées servent uniquement à vous répondre. Ce formulaire est
-                protégé par{" "}
-                <a className={"text-secondary"} href="https://altcha.org">
-                    ALTCHA
-                </a>
-                , une alternative aux CAPTCHA qui ne dépose aucun traceur et n'envoie
-                aucune donnée à un service tiers.
+                Vos coordonnées servent uniquement à vous répondre.
             </p>
             {/* `buttons` passe le CTA en pleine largeur sous 400px, comme partout ailleurs. */}
             <div className="buttons !mt-0">
