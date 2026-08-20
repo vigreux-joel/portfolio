@@ -1,0 +1,260 @@
+---
+import {Card} from "@components/Card";
+import {Techno} from "@components/Techno";
+import {Line} from '@components/Line';
+import {LinearGradient} from "@components/LinearGradient";
+import {BackgroundColor} from "@components/BackgroundColor";
+import {Icon, Button} from "@udixio/ui-react";
+
+import {iApi} from "@udixio/icons-outlined-400/api";
+import {iArticle} from "@udixio/icons-outlined-400/article";
+import {iMail} from "@udixio/icons-outlined-400/mail";
+import {iDatabase} from "@udixio/icons-outlined-400/database";
+import {iTableChart} from "@udixio/icons-outlined-400/table_chart";
+import {iStack} from "@udixio/icons-outlined-400/stack";
+import {iHost} from "@udixio/icons-outlined-400/host";
+
+import {faNodeJs, faAws, faDocker} from "@fortawesome/free-brands-svg-icons";
+
+import nestLogo from "@assets/images/nest-logo.svg?raw";
+import expressLogo from "@assets/images/express-logo.svg?raw";
+import tsLogo from "@assets/images/ts-logo.svg?raw";
+import vercelLogo from "@assets/images/vercel-logo.svg?raw";
+import ovhLogo from "@assets/images/ovh-logo.svg?raw";
+import sanityLogo from "@assets/images/sanity-logo.svg?raw";
+---
+<div id="back-end" class="tab-menu theme-green surface">
+
+    <section>
+        <div class="max-width">
+            <!-- Introduction -->
+            <div class="flex pt-8">
+                <div>
+                    <Line client:idle icon={iApi}/>
+                </div>
+                <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
+                    <p class="sub-title" data-sidebar-label="Back-end">Services, données et hébergement</p>
+                    <h2 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                        <span class="block text-gradient">Préparez votre projet à évoluer.</span>
+                        <span class="block">Je structure ses données et ses services.</span>
+                    </h2>
+                    <p class="mt-8 text-body-large text-on-surface-variant max-w-prose">
+                        Le vrai sujet, c'est ce qui se passe dès qu'on touche au produit : une feature à intégrer à
+                        l'existant,
+                        un pic de charge à encaisser, une dépendance critique à mettre à jour. Je conçois des APIs
+                        typées et
+                        un schéma de données clair pour que ces évolutions restent fluides, pas des chantiers.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Line transition -->
+            <div class="flex h-24 md:h-32">
+                <div>
+                    <Line client:idle/>
+                </div>
+            </div>
+
+            <!-- NestJS : hero card pleine largeur qui coupe la Line spine -->
+            <div class="relative">
+                <!-- Line spine en arrière-plan, derrière la card -->
+                <div class="absolute left-0 top-0 bottom-0 z-0">
+                    <Line client:idle/>
+                </div>
+                <!-- NestJS pleine largeur, par-dessus la Line -->
+                <div class="relative z-10 padding-x">
+                    <Card client:visible variant="filled" className="group w-full" energyX>
+                        <Techno variant="primary" className="p-6 pb-10" image={nestLogo} name="NestJS">
+                            <p>Une API, c'est ce qui relie votre produit à ses utilisateurs, partenaires et outils. Avec
+                                NestJS,
+                                je la conçois claire et fiable : chaque module a un rôle, sécurité et validation des
+                                données sont
+                                intégrés dès le départ, jamais rajoutés après coup.</p>
+                            <p class="mt-6 text-body-medium text-on-surface-variant">
+                                Selon vos besoins :
+                                <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">APIs REST</span>
+                                claires et documentées,
+                                <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">temps réel</span>
+                                pour les notifications et la collaboration, ou
+                                <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">GraphQL</span>
+                                pour les cas plus avancés.
+                            </p>
+                        </Techno>
+                        <!-- Bandeau fondations intégré à la card NestJS -->
+                        <div class="px-6 pb-6 -mt-2">
+                            <div class="border-t border-outline-variant/50 pt-6">
+                                <span class="sub-title block">Une stack cohérente</span>
+                                <div class="mt-4 flex flex-wrap gap-x-8 gap-y-4 text-on-surface-variant">
+                                    <div class="flex flex-col items-center gap-2">
+                                        <Icon className="size-7" icon={faNodeJs}></Icon>
+                                        <span class="text-label-medium">Node.js</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <Icon className="size-7" icon={expressLogo}></Icon>
+                                        <span class="text-label-medium">Express</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <Icon className="size-7" icon={tsLogo}></Icon>
+                                        <span class="text-label-medium">TypeScript</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <Icon className="size-7" icon={iTableChart}></Icon>
+                                        <span class="text-label-medium">Prisma</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <Icon className="size-7" icon={iDatabase}></Icon>
+                                        <span class="text-label-medium">PostgreSQL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </div>
+
+            <!-- Bifurcation : AWS à gauche, Plateformes & VPS à droite -->
+            <div class="relative h-20 md:h-28 hidden md:block">
+                <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle/>
+                <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle/>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
+                <!-- AWS Cloud : à gauche (branche principale, isLast) -->
+                <div class="flex">
+                    <div>
+                        <Line client:idle icon={faAws} isLast/>
+                    </div>
+                    <div class="padding pt-8 md:pt-0">
+                        <h3 class="text-headline-small md:text-headline-medium mt-2 w-fit text-secondary">AWS Cloud</h3>
+                        <p class="mt-4 max-w-prose text-body-large text-on-surface-variant">
+                            AWS reste une option puissante pour scaler sans gérer d'infrastructure. Ma zone de
+                            prédilection :
+                            l'écosystème serverless et managé, entièrement décrit en Infrastructure as Code.
+                        </p>
+                        <p class="mt-6 text-body-medium text-on-surface-variant max-w-prose">
+                            Concrètement, je m'appuie sur
+                            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">Lambda &amp; DynamoDB</span>
+                            pour du serverless natif,
+                            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">AWS CDK</span>
+                            pour versionner toute l'infrastructure en code, et les
+                            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">services managés</span>
+                            (S3, SQS, RDS…) pour m'appuyer sur de l'éprouvé plutôt que de le recoder.
+                        </p>
+                        <p class="mt-6 text-body-small text-on-surface-variant max-w-prose">
+                            Le serverless brille pour les usages ciblés : webhooks, crons, jobs asynchrones. Pour un
+                            trafic
+                            constant, je privilégie plutôt une solution persistante : plus prédictible, souvent plus
+                            économique.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Plateformes & VPS : à droite (branche secondaire) -->
+                <div class="flex">
+                    <div>
+                        <Line client:idle icon={iHost}/>
+                    </div>
+                    <div class="padding pt-8 md:pt-0">
+                        <h3 class="text-headline-small md:text-headline-medium mt-2 w-fit text-tertiary">Plateformes
+                            &amp; VPS</h3>
+                        <p class="mt-4 max-w-prose text-body-large text-on-surface-variant">
+                            Sans parti pris, je vous oriente vers l'hébergement le plus pertinent pour votre produit,
+                            votre budget
+                            et votre public, pas le plus tendance.
+                        </p>
+                        <p class="mt-6 text-body-medium text-on-surface-variant max-w-prose">
+                            Le terrain que je couvre :
+                            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">managé</span>,
+                            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">hébergeurs français</span>,
+                            ou
+                            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">VPS Docker</span>
+                            que je gère de bout en bout. Déjà équipé chez l'un d'eux ? Tant mieux, je m'appuie sur
+                            l'existant.
+                        </p>
+                        <div class="mt-5 flex flex-wrap items-end gap-x-8 gap-y-4 text-on-surface-variant">
+                            <div class="flex flex-col items-center gap-2">
+                                <Icon className="size-7" icon={vercelLogo}></Icon>
+                                <span class="text-label-medium">Vercel</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2">
+                                <Icon className="size-7" icon={ovhLogo}></Icon>
+                                <span class="text-label-medium">OVH</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2">
+                                <Icon className="size-7" icon={faDocker}></Icon>
+                                <span class="text-label-medium">Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Convergence vers la gauche -->
+            <div class="relative h-20 md:h-28 hidden md:block">
+                <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst/>
+                <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle/>
+            </div>
+
+            <!-- Line de fin de séquence -->
+            <div class="relative h-16 md:h-24 hidden md:block">
+                <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle/>
+            </div>
+
+            <!-- Line transition -->
+            <div class="flex h-24 md:h-32">
+                <div>
+                    <Line client:idle/>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="pt-8 relative">
+        <BackgroundColor speed={5_000} size="max(60vw, 800px)" count={5} client:idle
+                         className="absolute opacity-20 size-full top-0 left-0"></BackgroundColor>
+        <div class="max-width relative z-10">
+            <div class="flex">
+                <div>
+                    <Line client:idle icon={iArticle}/>
+                </div>
+                <div class="padding pt-0">
+                    <p class="sub-title">Gestion de contenu</p>
+                    <h2 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                        <span class="block text-gradient">Gardez la maîtrise de votre contenu.</span>
+                        <span class="block">Je vous équipe pour le gérer simplement.</span>
+                    </h2>
+                    <div class="grid md:grid-cols-3 gap-6 mt-12">
+                        <Card client:visible variant="filled" className="group">
+                            <Techno variant="primary" className="p-6 pb-10" icon={sanityLogo} name="Sanity">
+                                <p>CMS moderne pour du contenu structuré. Idéal quand vous séparez contenu et
+                                    présentation.</p>
+                            </Techno>
+                        </Card>
+                        <Card client:visible variant="filled" className="group">
+                            <Techno variant="primary" className="p-6 pb-10" icon={iStack} name="Builder.io">
+                                <p>Création de pages par glisser-déposer, sans coder. Intégration fluide avec les
+                                    technos modernes.</p>
+                            </Techno>
+                        </Card>
+                        <Card client:visible variant="filled" className="group">
+                            <Techno variant="primary" className="p-6 pb-10" icon={iArticle}
+                                    name="Administration sur mesure">
+                                <p>Un espace conçu autour des contenus à gérer, sans exposer la complexité technique du
+                                    site.</p>
+                            </Techno>
+                        </Card>
+                    </div>
+                    <div>
+                        <p class="text-body-large max-w-prose mt-8">Votre CMS n'est pas listé ? Aucune inquiétude :
+                            cette
+                            liste n'est pas exhaustive. Même s'il m'est inconnu, je le prends en main et l'intègre
+                            proprement à
+                            votre projet.</p>
+                        <Button client:idle className="w-fit mt-4" href="/contact" icon={iMail} label="Contactez-moi"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

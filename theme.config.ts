@@ -1,93 +1,70 @@
-import {defineConfig, FontPlugin, Variants,} from "@udixio/theme";
-import {TailwindPlugin} from "@udixio/tailwind";
-import {argbFromHex, Hct, hexFromArgb, sanitizeDegreesDouble, TonalPalette} from "@material/material-color-utilities";
+import {defineConfig} from '@udixio/tailwind';
+import {Color} from "@udixio/theme";
 
-argbFromHex('#93b5cb')
-
-const source = Hct.fromInt(argbFromHex('#169fff'))
-const newSource = Hct.from(source.hue, 60, 25)
+export const sourceColor = Color.from({hue: 280, chroma: 45, tone: 75})
 
 export const subThemes = {
-    blue: hexFromArgb(newSource.toInt()),
-    green: '#81b88e',
-    purple: "#bba1da",
-    orange: '#e69883'
+    blue: sourceColor,
+    green: sourceColor.withHue(155),
+    cyan: sourceColor.withHue(205),
 }
 
 export default defineConfig({
-    sourceColor: subThemes.blue,
-    variant: {
-        ...Variants.Fidelity, palettes: {
-            ...Variants.Fidelity.palettes,
-            tertiary: ({sourceColorHct}) =>
-                TonalPalette.fromHueAndChroma(
-                    sanitizeDegreesDouble(sourceColorHct.hue + 55),
-                    sourceColorHct.chroma + 20,
-                ),
-        }
+    sourceColor,
+    palettes: {
+        secondary: ({sourceColor}) => ({
+            hue: sourceColor.hue + 5,
+            chroma: sourceColor.chroma * 0.625,
+        }),
+        tertiary: ({sourceColor}) => ({
+            hue: sourceColor.hue + 55,
+            chroma: sourceColor.chroma,
+        }),
     },
-    plugins: [
-        new FontPlugin({
-            fontStyles: {
-                // display: {
-                //     large: {
-                //         fontWeight: 600,
-                //     },
-                //     medium: {
-                //         fontWeight: 600,
-                //     },
-                //     small: {
-                //         fontWeight: 600,
-                //     },
-                // },
-                // headline: {
-                //     large: {
-                //         fontWeight: 600,
-                //     },
-                //     medium: {
-                //         fontWeight: 600,
-                //     },
-                //     small: {
-                //         fontWeight: 600,
-                //     },
-                // },
-                // title: {
-                //     large: {
-                //         fontWeight: 500,
-                //     },
-                //     medium: {
-                //         fontWeight: 500,
-                //     },
-                //     small: {
-                //         fontWeight: 500,
-                //     },
-                // },
-                body: {
-                    large: {
-                        // fontSize: 1.125,
-                    },
-                    medium: {
-                        // fontSize: 1,
-                        lineHeight: 1.25,
-                    },
-                    small: {
-                        // fontSize: 0.875,
-                        lineHeight: 1.125,
-                    },
-                },
+    fontStyles: {
+        display: {
+            large: {
+                fontWeight: 500,
+                // fontSize: 5,
+                // lineHeight: 5.8,
             },
-            fontFamily: {
-                expressive: ['Montserrat', 'sans-serif'],
-                neutral: ['Roboto', 'sans-serif'],
+            medium: {
+                fontWeight: 500,
+                // fontSize: 4,
+                // lineHeight: 4.5,
             },
-        }),
-        new TailwindPlugin({
-            darkMode: 'class',
-            responsiveBreakPoints: {
-                sm: 1.125,
+            small: {
+                fontWeight: 500,
+                // fontSize: 3,
+                // lineHeight: 3.5,
             },
-            subThemes
-        }),
-
-    ],
+        },
+        headline: {
+            large: {
+                fontWeight: 500,
+                // fontSize: 2.5,
+                // lineHeight: 3.5,
+            },
+            medium: {
+                fontWeight: 500,
+                // fontSize: 2,
+                // lineHeight: 2.6,
+            },
+            small: {
+                fontWeight: 500,
+                // fontSize: 1.5,
+                // lineHeight: 2,
+            },
+        },
+    },
+    fontFamily: {
+        expressive: ["var(--font-clash-grotesk)"],
+        neutral: ["var(--font-inter)"],
+    },
+    responsiveBreakPoints: {
+        lg: 1.2,
+        xl: 1.3,
+    },
+    subThemes,
+    outFile: 'src/styles/udixio.generated.css',
 })

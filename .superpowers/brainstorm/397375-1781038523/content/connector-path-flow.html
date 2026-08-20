@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connecteur — flux en chemin</title>
+<style>
+  body { background: #0f0f1a; color: #e2e8f0; font-family: sans-serif; margin: 0; padding: 40px 24px; box-sizing: border-box; }
+  h2 { font-size: 1.5rem; margin-bottom: 8px; }
+  .subtitle { color: #94a3b8; margin-bottom: 40px; font-size: 1rem; }
+
+  .demo-grid {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .demo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    min-width: 260px;
+  }
+
+  .demo-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #818cf8;
+  }
+
+  svg text { font-family: sans-serif; }
+
+  /* Path de fond (gris) */
+  .track { stroke: #2d2f52; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Path de remplissage (révélation scroll simulée) */
+  .filled { stroke: #4f46e5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Stream d'énergie */
+  .stream { stroke: #a5b4fc; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<h2>Flux d'énergie qui parcourt le connecteur</h2>
+<p class="subtitle">Le stream suit physiquement le chemin : tronc vertical → courbe → horizontal → courbe → branches</p>
+
+<div class="demo-grid">
+
+  <!-- SPLIT -->
+  <div class="demo-block">
+    <div class="demo-label">Split (1 → 2)</div>
+    <svg width="260" height="200" viewBox="0 0 260 200">
+      <defs>
+        <!-- Gradient pour simuler la "tête" du stream (fade to transparent à l'arrière) -->
+        <linearGradient id="grad-split" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0"/>
+          <stop offset="40%" stop-color="#a5b4fc" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#a5b4fc" stop-opacity="1"/>
+        </linearGradient>
+
+        <!-- Path split : tronc → horizontal → 2 branches -->
+        <!-- Le chemin complet : M130,0 V80 Q130,100 110,100 H30 Q10,100 10,120 V200
+                                                    et
+                               M130,100 Q150,100 150,120 V200 (branche droite) -->
+        <!-- On fait deux chemins séparés pour les branches -->
+
+        <!-- Animation du stream le long du path gauche total -->
+        <!-- Path total gauche: M130,0 L130,80 Q130,100 110,100 L30,100 Q10,100 10,120 L10,200 -->
+        <path id="split-left-path" d="M130,0 L130,80 Q130,100 110,100 L30,100 Q10,100 10,120 L10,200"/>
+        <!-- Path total droit: même tronc puis droite -->
+        <path id="split-right-path" d="M130,0 L130,80 Q130,100 150,100 L220,100 Q240,100 240,120 L240,200"/>
+      </defs>
+
+      <!-- Track (fond) -->
+      <use href="#split-left-path" class="track" stroke-width="3"/>
+      <use href="#split-right-path" class="track" stroke-width="3"/>
+
+      <!-- Filled (révélation) - animé comme si le scroll avançait -->
+      <use href="#split-left-path" class="filled" stroke-width="3" stroke-dasharray="340" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" values="340;0" dur="3s" repeatCount="indefinite" calcMode="linear" begin="-1.5s"/>
+      </use>
+      <use href="#split-right-path" class="filled" stroke-width="3" stroke-dasharray="310" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" values="310;0" dur="3s" repeatCount="indefinite" calcMode="linear" begin="-1.5s"/>
+      </use>
+
+      <!-- Stream gauche — une portion courte qui "court" sur le path -->
+      <use href="#split-left-path" stroke="#a5b4fc" stroke-width="3" fill="none" stroke-linecap="round"
+           stroke-dasharray="60 340">
+        <animate attributeName="stroke-dashoffset" values="400;-60" dur="2s" repeatCount="indefinite" calcMode="linear"/>
+      </use>
+
+      <!-- Stream droit — décalé légèrement -->
+      <use href="#split-right-path" stroke="#a5b4fc" stroke-width="3" fill="none" stroke-linecap="round"
+           stroke-dasharray="60 310">
+        <animate attributeName="stroke-dashoffset" values="370;-60" dur="2s" repeatCount="indefinite" calcMode="linear"/>
+      </use>
+
+      <!-- Tête de lecture (spark) gauche -->
+      <circle r="5" fill="#818cf8" filter="url(#glow)">
+        <animateMotion dur="2s" repeatCount="indefinite">
+          <mpath href="#split-left-path"/>
+        </animateMotion>
+      </circle>
+
+      <!-- Tête de lecture (spark) droite -->
+      <circle r="5" fill="#818cf8" filter="url(#glow)">
+        <animateMotion dur="2s" repeatCount="indefinite" begin="0.15s">
+          <mpath href="#split-right-path"/>
+        </animateMotion>
+      </circle>
+
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- MERGE -->
+  <div class="demo-block">
+    <div class="demo-label">Merge (2 → 1)</div>
+    <svg width="260" height="200" viewBox="0 0 260 200">
+      <defs>
+        <!-- Path merge gauche: M10,0 L10,80 Q10,100 30,100 L110,100 Q130,100 130,120 L130,200 -->
+        <path id="merge-left-path" d="M10,0 L10,80 Q10,100 30,100 L110,100 Q130,100 130,120 L130,200"/>
+        <!-- Path merge droit -->
+        <path id="merge-right-path" d="M240,0 L240,80 Q240,100 220,100 L150,100 Q130,100 130,120 L130,200"/>
+      </defs>
+
+      <use href="#merge-left-path" class="track" stroke-width="3"/>
+      <use href="#merge-right-path" class="track" stroke-width="3"/>
+
+      <use href="#merge-left-path" class="filled" stroke-width="3" stroke-dasharray="340" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" values="340;0" dur="3s" repeatCount="indefinite" calcMode="linear" begin="-1.5s"/>
+      </use>
+      <use href="#merge-right-path" class="filled" stroke-width="3" stroke-dasharray="310" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" values="310;0" dur="3s" repeatCount="indefinite" calcMode="linear" begin="-1.5s"/>
+      </use>
+
+      <!-- Streams -->
+      <use href="#merge-left-path" stroke="#a5b4fc" stroke-width="3" fill="none" stroke-linecap="round"
+           stroke-dasharray="60 340">
+        <animate attributeName="stroke-dashoffset" values="400;-60" dur="2s" repeatCount="indefinite" calcMode="linear"/>
+      </use>
+      <use href="#merge-right-path" stroke="#a5b4fc" stroke-width="3" fill="none" stroke-linecap="round"
+           stroke-dasharray="60 310">
+        <animate attributeName="stroke-dashoffset" values="370;-60" dur="2s" repeatCount="indefinite" calcMode="linear" begin="0.15s"/>
+      </use>
+
+      <!-- Sparks -->
+      <circle r="5" fill="#818cf8" filter="url(#glow2)">
+        <animateMotion dur="2s" repeatCount="indefinite">
+          <mpath href="#merge-left-path"/>
+        </animateMotion>
+      </circle>
+      <circle r="5" fill="#818cf8" filter="url(#glow2)">
+        <animateMotion dur="2s" repeatCount="indefinite" begin="0.15s">
+          <mpath href="#merge-right-path"/>
+        </animateMotion>
+      </circle>
+
+      <defs>
+        <filter id="glow2">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+
+</div>
+
+<div style="max-width:560px;margin:0 auto;padding:20px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:12px;">
+  <h3 style="margin:0 0 12px;font-size:1rem;color:#a5b4fc;">Lecture de l'animation</h3>
+  <ul style="margin:0;padding-left:20px;line-height:1.8;color:#94a3b8;font-size:0.9rem;">
+    <li>La ligne sombre = fond (toujours visible)</li>
+    <li>La ligne bleue = révélation scroll (like aujourd'hui)</li>
+    <li>Le point lumineux = stream d'énergie qui suit physiquement le chemin courbe</li>
+    <li>Pour le split : 2 streams partent en même temps depuis le tronc commun</li>
+    <li>Pour le merge : 2 streams viennent des branches et convergent</li>
+  </ul>
+</div>
+
+<div style="margin-top:32px;text-align:center;color:#64748b;font-size:0.85rem;">
+  Est-ce que c'est ça l'effet voulu ? Ou tu veux ajuster quelque chose ? Réponds dans le terminal.
+</div>
+
+</body>
+</html>

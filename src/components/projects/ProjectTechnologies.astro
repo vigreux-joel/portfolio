@@ -1,0 +1,30 @@
+---
+import {Chip} from "@udixio/ui-react"
+interface Props {
+    technologies: readonly string[];
+    label?: string;
+    class?: string;
+    align?: "start" | "end";
+    compact?: boolean;
+}
+
+const {technologies, label, class: className, align = "end", compact = false} = Astro.props;
+---
+
+{
+    technologies.length > 0 && (
+    <div
+            class:list={[
+                "flex flex-wrap gap-2",
+                align === "end" ? "flex-row-reverse flex-wrap-reverse justify-end" : "justify-start",
+                className,
+            ]}
+            role="list"
+            aria-label={label}
+    >
+        {technologies.map((technology, index) => (
+                <Chip>{technology}</Chip>
+        ))}
+    </div>
+        )
+    }

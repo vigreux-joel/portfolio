@@ -1,0 +1,136 @@
+---
+import {Card} from "@components/Card";
+import {Button, IconButton} from "@udixio/ui-react";
+import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
+import {iArrowBack} from "@udixio/icons-outlined-400/arrow_back";
+import {iArrowForward} from "@udixio/icons-outlined-400/arrow_forward";
+import {iGridView} from "@udixio/icons-outlined-400/grid_view";
+import ProjectFacts from "./ProjectFacts.astro";
+import ProjectTechnologies from "./ProjectTechnologies.astro";
+
+interface Fact {
+    label: string;
+    value: string;
+}
+
+interface ProjectLink {
+    id: string;
+    title: string;
+}
+
+interface Props {
+    title: string;
+    facts: readonly Fact[];
+    technologies: readonly string[];
+    externalUrl?: string;
+    repositoryUrl?: string;
+    previousProject?: ProjectLink;
+    nextProject?: ProjectLink;
+}
+
+const {
+    title,
+    facts,
+    technologies,
+    externalUrl,
+    repositoryUrl,
+    previousProject,
+    nextProject,
+} = Astro.props;
+---
+
+<aside class="min-w-0 flex-1" aria-labelledby="project-sidebar-title">
+    <div class="padding-x pb-16 pt-8 xl:sticky xl:top-24 xl:pb-20 xl:pt-8">
+        <Card
+                client:visible
+                variant="filled"
+                pointerGlow={false}
+                className="block w-full  p-5 md:p-6"
+        >
+            <p id="project-sidebar-title" class="text-label-large text-on-surface">
+                {title}
+            </p>
+
+            {facts.length > 0 &&
+                    <ProjectFacts facts={facts} layout="sidebar" compact/>}
+
+            {technologies.length > 0 && (
+                    <div class="mt-6">
+                        <p class="mb-3 text-label-small text-on-surface">Technologies</p>
+                        <ProjectTechnologies
+                                technologies={technologies}
+                                label={`Technologies utilisées pour ${title}`}
+                                align="start"
+                                compact
+                        />
+                    </div>
+            )}
+
+            {(externalUrl || repositoryUrl) && (
+                    <div class="mt-6 grid gap-3">
+                        {externalUrl && (
+                                <Button client:idle
+                                        href={externalUrl}
+                                        icon={iArrowOutward}
+                                        iconPosition="right"
+                                        label="Voir le site en ligne"
+                                        variant="tonal"
+                                        size="small"
+                                        className="w-full"
+                                />
+                        )}
+                        {repositoryUrl && (
+                                <Button client:idle
+                                        href={repositoryUrl}
+                                        icon={iArrowOutward}
+                                        label="Consulter le code source"
+                                        variant={externalUrl ? "outlined" : "filled"}
+                                        size="small"
+                                        className="w-full"
+                                />
+                        )}
+                    </div>
+            )}
+
+        </Card>
+
+        <nav class="mt-6 flex items-center justify-center gap-3" aria-label="Navigation des projets">
+            {previousProject && (
+                    <IconButton
+                            href={`/projets/${previousProject.id}`}
+                            icon={iArrowBack}
+                            label={`Projet précédent : ${previousProject.title}`}
+                            title={`Projet précédent : ${previousProject.title}`}
+                            variant="outlined"
+
+                            client:idle
+                            width="narrow"
+                    />
+            )}
+
+            <IconButton
+                    href="/projets"
+                    icon={iGridView}
+                    label="Tous les projets"
+                    title="Tous les projets"
+                    variant="outlined"
+
+                    width="wide"
+                    shape="squared"
+                    client:idle
+            />
+
+            {nextProject && (
+                    <IconButton
+                            href={`/projets/${nextProject.id}`}
+                            icon={iArrowForward}
+                            label={`Projet suivant : ${nextProject.title}`}
+                            title={`Projet suivant : ${nextProject.title}`}
+                            variant="outlined"
+                            
+                            client:idle
+                    />
+            )}
+        </nav>
+    </div>
+</aside>

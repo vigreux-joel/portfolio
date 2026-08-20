@@ -1,0 +1,67 @@
+---
+import {Line} from '@components/Line';
+import {Icon} from "@udixio/ui-react";
+
+import { iDevices } from "@udixio/icons-outlined-400/devices";
+import { iSelectWindow } from "@udixio/icons-outlined-400/select_window";
+import { faApple, faAndroid, faWindows, faLinux } from "@fortawesome/free-brands-svg-icons";
+---
+
+<div class="theme-cyan">
+  <section id="multiplateforme">
+  <div class="max-width">
+    <div class="flex pt-8">
+      <div>
+        <Line client:idle  icon={iDevices}/>
+      </div>
+      <div class="padding pt-0">
+        <div class="flex items-center md:flex-row flex-col">
+          <div class="left">
+            <p class="sub-title">Applications multiplateformes</p>
+            <h2 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+              <span class="block text-gradient">Touchez un public plus large.</span>
+              <span class="block">Je crée une application pour tous vos écrans.</span>
+            </h2>
+            <p class="max-w-prose mt-8 text-body-large">
+              Flutter me permet de créer des applications pour
+              mobiles, web, bureau et intégrés à partir d'une seule base de code. J'apprécie
+              particulièrement
+              son efficacité dans le développement multiplateforme, ce qui facilite grandement mon
+              travail.</p>
+          </div>
+        </div>
+        <!-- Bandeau d'icônes plateformes : une base de code, tous les écrans -->
+        <div class="mt-12">
+          <span class="sub-title">Une base de code → tous les écrans</span>
+          <div class="mt-6 flex flex-wrap items-start gap-x-10 gap-y-6 text-on-surface-variant">
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <Icon className="h-9 w-9" icon={iSelectWindow}/>
+              <span class="text-label-medium">Web</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <Icon className="h-9 w-9" icon={faApple}/>
+              <span class="text-label-medium">iOS</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <Icon className="h-9 w-9" icon={faAndroid}/>
+              <span class="text-label-medium">Android</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <Icon className="h-9 w-9" icon={faWindows}/>
+              <span class="text-label-medium">Windows</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <Icon className="h-9 w-9" icon={faApple}/>
+              <span class="text-label-medium">macOS</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors hover:text-primary">
+              <Icon className="h-9 w-9" icon={faLinux}/>
+              <span class="text-label-medium">Linux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

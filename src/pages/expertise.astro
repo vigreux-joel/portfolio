@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSection from "../components/expertise/HeroSection.astro";
+import FrontEndSection from "../components/expertise/FrontEndSection.astro";
+import MultiplatformSection from "../components/expertise/MultiplatformSection.astro";
+import UxSection from "../components/expertise/UxSection.astro";
+import BackEndSection from "../components/expertise/BackEndSection.astro";
+import ApproachSection from "@components/ApproachSection.astro";
+
+const faq = [
+    {
+        question: "Comment choisir entre un site vitrine et une application web ?",
+        answer: "Un site vitrine convient pour présenter une activité, publier du contenu et être trouvé en ligne. Une application web devient pertinente lorsque les utilisateurs doivent se connecter, gérer des données ou accomplir des tâches régulières. Le choix dépend donc des usages attendus, pas de la technologie préférée au départ."
+    },
+    {
+        question: "Un site sur mesure peut-il être administré sans toucher au code ?",
+        answer: "Oui. Je peux relier le site à un CMS headless pour séparer la gestion du contenu de l’interface développée sur mesure. Vous modifiez alors les textes, images ou pages depuis un espace d’administration, sans renoncer aux performances ni aux possibilités d’évolution du site."
+    },
+    {
+        question: "Vaut-il mieux moderniser un projet existant ou repartir de zéro ?",
+        answer: "Cela dépend de la qualité de l’existant, de la dette technique et du coût réel de chaque option. Je conserve une base saine ou modernisable par étapes. Si elle freine durablement le projet, une reconstruction peut être plus sûre et plus économique que l’accumulation de corrections."
+    }
+];
+---
+<Layout
+    faq={faq}
+    seo={{
+    title: `Joël Vigreux - Développeur full stack - Spécialiste Astro, React & NestJS`,
+    description: "Expert en technologies modernes telles que Astro, NestJS et React ! Joël VIGREUX : Développeur full stack vous accompagne du back-end au frontend",
+    openGraph: {
+        basic: {
+            title: "Joël Vigreux - Développeur full stack",
+            type: "website",
+            image: "https://vigreux-joel.fr/images/photo.webp",
+            url: "https://vigreux-joel.fr/"
+        },
+        optional: {
+            siteName: "Joël Vigreux",
+            locale: "fr_FR",
+            description: "Expert en technologies modernes telles que Astro, NestJS et React !"
+        },
+        image: {
+            alt: "Portrait de Joël Vigreux, développeur full-stack"
+        }
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Joël Vigreux - Développeur full stack",
+        description: "Spécialiste Astro, React & NestJS. Du back-end au front-end.",
+        image: "https://vigreux-joel.fr/images/photo.webp",
+        imageAlt: "Portrait de Joël Vigreux"
+    }
+}}>
+    <style is:global>
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-6px) translateX(2px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+
+        @keyframes float2 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-2px) rotate(-2deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+
+        .animate-float-slow {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-medium {
+            animation: float2 5s ease-in-out infinite;
+        }
+
+        .animate-float-fast {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float-slow, .animate-float-medium, .animate-float-fast {
+                animation: none;
+            }
+        }
+    </style>
+    <script type="application/ld+json" is:inline>
+        {
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Joël Vigreux",
+                "jobTitle": "Développeur full-stack",
+                "url": "https://vigreux-joel.fr/",
+                "image": "https://vigreux-joel.fr/images/photo.webp"
+            })
+        }
+    </script>
+    <script type="application/ld+json" is:inline>
+        {
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Joël Vigreux - Développeur full-stack",
+                "url": "https://vigreux-joel.fr/",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://vigreux-joel.fr/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            })
+        }
+    </script>
+    
+
+        <HeroSection />
+        <FrontEndSection />
+        <MultiplatformSection />
+        <UxSection />
+        <BackEndSection />
+        <ApproachSection />
+
+
+</Layout>

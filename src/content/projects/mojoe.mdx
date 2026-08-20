@@ -1,0 +1,75 @@
+---
+title: "Mojoe"
+eyebrow: "Projet client · 2024"
+description: "Une application mobile qui centralise la réception des livraisons fournisseurs, le suivi du stock et la localisation des colis au moment du retrait client."
+status: "Livré au client"
+period: "2024"
+audience: "Équipe chargée de la réception et du retrait des colis"
+publishedAt: 2024-06-01
+draft: false
+technologies:
+  - Flutter
+  - Dart
+---
+
+
+import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
+import ProjectPoints from "@components/projects/ProjectPoints.astro";
+import ProjectNote from "@components/projects/ProjectNote.astro";
+import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
+import {iInventory2} from "@udixio/icons-outlined-400/inventory_2";
+import {iLocalShipping} from "@udixio/icons-outlined-400/local_shipping";
+import {iTaskAlt} from "@udixio/icons-outlined-400/task_alt";
+
+<ProjectCaseStudy>
+
+    <Fragment slot="story-heading">
+        <ProjectStoryHeading eyebrow="Étude de cas" title="Du colis reçu au retrait client."/>
+    </Fragment>
+
+    <Fragment slot="story">
+
+        <ProjectChapter eyebrow="Le contexte" title="Retrouver un colis ne devrait pas dépendre de la mémoire."
+                        icon={iInventory2}>
+
+            Les livraisons fournisseurs arrivaient en continu et étaient stockées là où il restait de la place.
+            L’information sur ce qui était reçu, et sur l’endroit où cela se trouvait, restait dispersée entre les bons
+            de livraison papier et la mémoire de l’équipe.
+
+            Le retrait client devenait alors la partie la plus fragile du parcours : il fallait chercher, parfois faire
+            patienter, parfois rappeler.
+
+        </ProjectChapter>
+
+        <ProjectChapter eyebrow="Le produit" title="Quatre actions calées sur le travail en réserve."
+                        icon={iLocalShipping}>
+
+            <ProjectPoints
+                label="Fonctions principales de Mojoe"
+                items={[
+                    "Enregistrer les livraisons dès leur réception",
+                    "Associer chaque colis à un emplacement de stockage",
+                    "Suivre le stock disponible",
+                    "Retrouver rapidement un colis lors du retrait client",
+                ]}
+            />
+
+        </ProjectChapter>
+
+        <ProjectChapter eyebrow="Ma contribution" title="Une application construite autour des gestes réels."
+                        icon={iTaskAlt} isLast>
+
+            J’ai développé l’application mobile avec Flutter, en partant des besoins exprimés par l’équipe qui l’utilise
+            au quotidien.
+
+            <ProjectNote title="Le principe retenu">
+                Le parcours a été construit autour des gestes réellement effectués en réserve, plutôt qu’autour d’un
+                modèle de données abstrait.
+            </ProjectNote>
+
+        </ProjectChapter>
+
+    </Fragment>
+
+</ProjectCaseStudy>

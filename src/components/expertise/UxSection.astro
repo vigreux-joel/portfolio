@@ -1,0 +1,47 @@
+---
+import { Line } from "@components/Line";
+import { FrontEndUxScroll } from "./FrontEndUxScroll";
+import { LinearGradient } from "@components/LinearGradient";
+---
+
+<div class="theme-cyan">
+  <section id="ux" class="reveal-light opacity-50 [.light]:opacity-100 transition-opacity duration-2000 delay-200">
+  <!-- Ligne de connexion au-dessus du titre (gauche vers centre) -->
+  <div class="max-width">
+    <div class="relative h-24 hidden md:block">
+      <Line  toX={0.5} client:idle isLast />
+    </div>
+    <div class="relative h-12 md:hidden">
+      <Line  toX={0.5} client:idle isLast />
+    </div>
+  </div>
+
+  <!-- Titre de la section (centré, suite logique de la ligne) -->
+  <div class="max-width padding-x text-center mt-8 mb-12 md:mb-16 ">
+    <p class="transition-colors duration-1000 sub-title">Expérience utilisateur</p>
+    <h2 class="relative mt-6 text-headline-medium md:text-display-small max-w-prose mx-auto">
+      <span class="block text-gradient">Rendez chaque interaction plus intuitive.</span>
+      <span class="mt-4 block text-headline-small md:text-headline-medium">Je conçois des parcours clairs et fluides.</span>
+    </h2>
+  </div>
+
+  <div class="max-width relative z-20">
+    <FrontEndUxScroll client:idle />
+  </div>
+
+  <!-- Ligne de connexion en-dessous de la carte -->
+  <div class="max-width">
+    <div class="relative h-24 hidden md:block">
+      <Line fromX={0.5} toX={0.5} client:idle />
+    </div>
+  </div>
+
+  <!-- Connecteur return : centre revient à gauche -->
+  <div class="max-width">
+    <div class="relative h-24 md:h-32">
+      <Line fromX={0.5} fromPx={0} toX={0} toPx={60} client:idle />
+    </div>
+  </div>
+  <LinearGradient nextTheme="green" />
+</section>
+</div>

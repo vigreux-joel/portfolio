@@ -1,10 +1,14 @@
-import {faCommentSmile} from "@fortawesome/pro-light-svg-icons";
 import {classNames, Fab} from "@udixio/ui-react";
 import {Menu} from "@components/Menu.tsx";
 import {motion} from "motion/react";
 import {useEffect, useRef, useState} from "react";
+import {iComment} from "@udixio/icons-outlined-400/comment";
 
-export const Header = () => {
+interface HeaderProps {
+    showFab?: boolean;
+}
+
+export const Header = ({showFab = true}: HeaderProps) => {
     const [isMenuVisible, setIsMenuVisible] = useState(true);
     const [fabIsHovered, setFabIsHovered] = useState(false);
     const previousScrollPosition = useRef<number | null>(null);
@@ -12,6 +16,7 @@ export const Header = () => {
     const showMenuScrollPosition = useRef(0);
     const [scrollY, setScrollY] = useState<number>(0);
     const [fabVisible, setFabVisible] = useState(true);
+    const [isCompactViewport, setIsCompactViewport] = useState(false);
 
     const onScroll = (currentScrollPosition: number) => {
         if (previousScrollPosition.current !== null) {
@@ -47,16 +52,26 @@ export const Header = () => {
         };
 
         scroll();
-        window.addEventListener("scroll", () => {
+        const handleScroll = () => {
             if (previousScrollPosition.current == null) {
                 previousScrollPosition.current = 0;
             }
             scroll();
-        });
-        return () => {
-            window.removeEventListener("scroll", scroll);
         };
-    });
+        window.addEventListener("scroll", handleScroll, {passive: true});
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 767px)");
+        const updateViewport = () => setIsCompactViewport(mediaQuery.matches);
+
+        updateViewport();
+        mediaQuery.addEventListener("change", updateViewport);
+        return () => mediaQuery.removeEventListener("change", updateViewport);
+    }, []);
 
     return (
         <motion.div
@@ -65,20 +80,20 @@ export const Header = () => {
             transition={{duration: 0.5}}
         >
             <Menu setFabVisible={setFabVisible} fabVisible={fabVisible}/>
-            <Fab
+            {showFab && <Fab
                 onMouseEnter={() => setFabIsHovered(true)}
                 onMouseLeave={() => setFabIsHovered(false)}
                 title={"Contacter Joël VIGREUX"}
-                icon={faCommentSmile}
+                icon={iComment}
                 id={"button-contact"}
-                href={"#contact"}
+                href={"/contact"}
                 label={"Contactez-moi"}
                 className={classNames("!fixed bottom-8 right-8 z-50", {
                     "opacity-0": !fabVisible,
                 })}
-                variant={"primary"}
-                isExtended={isMenuVisible || fabIsHovered}
-            ></Fab>
+                variant={"tertiary"}
+                extended={!isCompactViewport && (isMenuVisible || fabIsHovered)}
+            ></Fab>}
         </motion.div>
     );
 };

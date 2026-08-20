@@ -1,304 +1,215 @@
-import React, {useEffect, useRef, useState} from "react";
-import {motion, useMotionValueEvent, useScroll} from "motion/react";
-import {Link} from "@components/Link.tsx";
-import {classNames} from "@udixio/ui-react";
-import {themeService} from "@/stores/themeStore.ts";
+import React, {useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore} from "react";
+import {motion, useMotionValueEvent, useScroll, useTransform, type MotionValue} from "motion/react";
+import {updateTheme} from "@components/ThemeProvider.tsx";
 
-const content: {
+export interface StickyScrollItem {
     text: React.ReactNode;
-    media: React.ReactNode;
-    theme?: string;
-}[] = [
-    {
-        text: (
-            <>
-                <h4 className="text-headline-small text-primary">
-                    Conception visuelle moderne et fluide
-                </h4>
-                <p className="lg:mt-6 mt-2 text-body-large">
-                    Grâce aux guidelines de Material Design 3, je conçois des interfaces
-                    fluides et adaptées à tous les écrans, assurant une navigation
-                    optimale et une esthétique harmonieuse.
-                </p>
-            </>
-        ),
-        media: (
-            <video
-                className={"md:h-[320px] h-[200px] lg:h-full w-full object-cover"}
-                autoPlay
-                loop
-                muted
-            >
-                <source src="/video/output.mp4" type="video/mp4"/>
-                Sorry, your browser doesn't support embedded videos.
-            </video>
-        ),
-        theme: "purple",
-    },
-    {
-        text: (
-            <>
-                <h4 className="text-headline-small text-primary">
-                    Harmonisation des couleurs pour une identité visuelle forte
-                </h4>
-                <p className="lg:mt-6 mt-2 text-body-large">
-                    Personnalisez facilement vos applications avec des palettes de
-                    couleurs cohérentes et dynamiques, inspirées par Material Design pour
-                    optimiser la lisibilité et l'attrait visuel de votre site.
-                </p>
-            </>
-        ),
-        media: (
-            <img
-                className={"w-full md:h-[320px] h-[200px] lg:h-full object-cover"}
-                loading={"lazy"}
-                alt={"Illustration de layout"}
-                src={"/images/material-theme.webp"}
-            />
-        ),
-        theme: "blue",
-    },
-    {
-        text: (
-            <>
-                <h4 className="text-headline-small text-primary">
-                    Dynamisez votre site avec des animations fluides
-                </h4>
-                <p className="lg:mt-6 mt-2 text-body-large">
-                    À l'aide de{" "}
-                    <Link href={"https://www.framer.com/motion/"} target={"_blank"}>
-                        Framer motion
-                    </Link>
-                    , je conçois des animations fluides et engageantes qui enrichissent
-                    l'expérience utilisateur et donnent vie à votre site.
-                </p>
-            </>
-        ),
-        media: (
-            <div
-                className={
-                    "bg-primary/80 w-full md:h-[320px] h-[200px] lg:h-full flex items-center justify-center backdrop-blur"
-                }
-            >
-                <div className={"h-32 w-32 p-6 bg-surface-variant rounded-2xl"}>
-                    <svg
-                        className={" "}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 100 100"
-                    >
-                        <motion.path
-                            d="M0 100V0l50 50 50-50v100L75 75l-25 25-25-25z"
-                            variants={{
-                                hidden: {
-                                    pathLength: 0,
-                                    fill: "rgb(var(--color-inverse-primary)/0)",
-                                },
-                                visible: {
-                                    pathLength: 1,
-                                    fill: "rgb(var(--color-surface)/1)",
-                                },
-                            }}
-                            className="stroke-2 stroke-surface"
-                            initial="hidden"
-                            animate="visible"
-                            transition={{repeat: Infinity, duration: 2, ease: "easeOut"}}
-                        />
-                    </svg>
-                </div>
-            </div>
-        ),
-        theme: "green",
-    },
-];
+    /**
+     * Un média statique, ou une fonction recevant la progression de scroll (0→1,
+     * remappée sur toute la plage couverte par ce média).
+     *
+     * Si un item ne définit pas de média, il conserve celui du dernier item qui en
+     * possède un. Le média reste ainsi monté pendant toute sa séquence.
+     */
+    media?: React.ReactNode | ((progress: MotionValue<number>) => React.ReactNode);
+    theme?: Parameters<typeof updateTheme>[0];
+}
 
-export const StickyScroll = () => {
-    const [isLg, setIsLg] = useState(false);
+interface MediaGroup {
+    ownerIndex: number;
+    endIndex: number;
+    media: NonNullable<StickyScrollItem["media"]>;
+}
 
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const initialIsLg = window.innerWidth > 1024;
-            setIsLg(initialIsLg);
+const DESKTOP_QUERY = "(min-width: 1024px)";
 
-            const handleResize = () => {
-                setIsLg(window.innerWidth > 1024);
-            };
+function subscribeToDesktopQuery(callback: () => void) {
+    if (typeof window === "undefined") return () => undefined;
 
-            window.addEventListener("resize", handleResize);
+    const query = window.matchMedia(DESKTOP_QUERY);
+    query.addEventListener("change", callback);
+    return () => query.removeEventListener("change", callback);
+}
 
-            return () => {
-                window.removeEventListener("resize", handleResize);
-            };
-        }
-    }, []);
+function getDesktopSnapshot() {
+    return typeof window !== "undefined" && window.matchMedia(DESKTOP_QUERY).matches;
+}
 
-    const [activeCard, setActiveCard] = React.useState<number | null>(null);
-    const ref = useRef<any>(null);
+function getServerDesktopSnapshot() {
+    return false;
+}
+
+function useDesktopLayout() {
+    return useSyncExternalStore(
+        subscribeToDesktopQuery,
+        getDesktopSnapshot,
+        getServerDesktopSnapshot,
+    );
+}
+
+function MediaRenderer({media, scrollProgress, start, end}: {
+    media: NonNullable<StickyScrollItem["media"]>;
+    scrollProgress: MotionValue<number>;
+    start: number;
+    end: number;
+}) {
+    // La progression suit directement le scroll. Le ressort précédent pouvait rester
+    // en retard après un geste rapide et laisser l'illustration dans un état intermédiaire.
+    const localProgress = useTransform(scrollProgress, [start, end], [0, 1], {clamp: true});
+
+    return <>{typeof media === "function" ? media(localProgress) : media}</>;
+}
+
+function AnimatedText({children}: {children: React.ReactNode}) {
+    const textRef = useRef<HTMLDivElement>(null);
     const {scrollYProgress} = useScroll({
-        target: ref,
-        offset: ["start center", "end center"],
+        target: textRef,
+        offset: ["start 92%", "end 18%"],
     });
-    const cardLength = content.length;
-    const [displayText, setDisplayText] = useState(false);
-    const [isOverlay, setIsOverlay] = useState(false);
-
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        setIsOverlay(latest > 0 && latest < 1);
-        if (!isLg) return;
-        const cardsBreakpoints = content.map((_, index) => index / cardLength);
-        let closestBreakpointIndex = 0;
-        for (let i = 0; i < cardsBreakpoints.length; i += 1) {
-            if (cardsBreakpoints[i] > latest) {
-                break;
-            }
-            window.screenX;
-            closestBreakpointIndex = i;
-        }
-        setDisplayText(latest > 0);
-        setActiveCard(closestBreakpointIndex);
-
-        const theme = content[closestBreakpointIndex].theme
-        if (theme)
-            themeService.updateTheme(theme);
-    });
+    const opacity = useTransform(
+        scrollYProgress,
+        [0, 0.22],
+        [0, 1],
+    );
+    const x = useTransform(
+        scrollYProgress,
+        [0, 0.22],
+        [-56, 0],
+    );
+    const filter = useTransform(
+        scrollYProgress,
+        [0, 0.22],
+        ["blur(7px)", "blur(0px)"],
+    );
 
     return (
-        <>
-            <motion.div
-                className={
-                    "flex relative padding-x rounded-md z-20 " +
-                    (activeCard != null ? "theme-" + content[activeCard!]?.theme : "")
-                }
-                ref={ref}
-            >
-                <motion.div
-                    variants={{
-                        hidden: {opacity: 0, marginLeft: "-400px", filter: "blur(10px)"},
-                        visible: {opacity: 1, marginLeft: "0%", filter: "blur(0px)"},
-                    }}
-                    initial={isLg ? "hidden" : "visible"}
-                    transition={{
-                        duration: 0.75,
-                        ease: [0.1, 0.25, 0.3, 1],
-                    }}
-                    animate={displayText || !isLg ? "visible" : "hidden"}
-                    layout
-                    className={
-                        "div mask-inverse left lg:w-[400px] w-full relative flex flex-col lg:gap-32 gap-16 "
-                    }
-                >
-                    {content.map((item, index) => (
-                        <div
-                            className={
-                                "max-w-lg lg:max-w-full " + (index == 1 ? "self-end" : "")
-                            }
-                        >
-                            {!isLg && (
-                                <div className={classNames("rounded-2xl mb-4 overflow-hidden")}>
-                                    {item.media}
-                                </div>
-                            )}
-                            <motion.div
-                                key={index}
-                                variants={{
-                                    hidden: {
-                                        opacity: 0,
-                                        x: "-400px",
-                                        filter: "blur(10px)",
-                                        transition: {x: {delay: 1}, filter: {delay: 1}},
-                                    },
-                                    visible: {opacity: 1, x: "0%", filter: "blur(0px)"},
-                                }}
-                                initial={isLg ? "hidden" : "visible"}
-                                transition={{
-                                    duration: 0.4,
-                                    ease: [0.1, 0.2, 0.4, 1],
-                                }}
-                                animate={activeCard == index || !isLg ? "visible" : "hidden"}
-                                className={"lg:my-40 "}
-                            >
-                                {item.text}
-                            </motion.div>
-                        </div>
-                    ))}
-                </motion.div>
+        <motion.div
+            ref={textRef}
+            style={{opacity, x, filter, willChange: "transform, opacity, filter"}}
+        >
+            {children}
+        </motion.div>
+    );
+}
 
-                {isLg && (
-                    <motion.div
-                        layout
-                        variants={{
-                            hidden: {x: "0%"},
-                            visible: {x: "0%", marginLeft: "4rem"},
-                        }}
-                        initial="hidden"
-                        animate={displayText ? "visible" : "hidden"}
-                        className={classNames(
-                            "right hidden lg:flex flex-2 items-start rounded-md",
-                        )}
-                        transition={{
-                            duration: 0.75,
-                            ease: [0.1, 0.25, 0.3, 1],
-                        }}
-                    >
-                        <motion.div
-                            layout
-                            layoutRoot
-                            style={{
-                                top: "calc(50% - " + 500 / 2 + "px)",
-                                minWidth: "100%",
-                            }}
-                            variants={{
-                                hidden: {maxHeight: "auto"},
-                                visible: {maxHeight: 500},
-                            }}
-                            initial="hidden"
-                            animate={displayText ? "visible" : "hidden"}
-                            className={"rounded-2xl sticky overflow-hidden"}
-                            transition={{
-                                duration: 0.75,
-                                // ease: [0.1, 0.25, 0.3, 1]
-                            }}
+export const StickyScroll = ({content}: {content: StickyScrollItem[]}) => {
+    const isDesktop = useDesktopLayout();
+    const [activeCard, setActiveCard] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const cardLength = Math.max(content.length, 1);
+
+    const {scrollYProgress} = useScroll({
+        target: containerRef,
+        offset: ["start center", "end center"],
+    });
+
+    const mediaGroups = useMemo<MediaGroup[]>(() => {
+        const groups: MediaGroup[] = [];
+
+        content.forEach((item, index) => {
+            if (item.media != null) {
+                groups.push({ownerIndex: index, endIndex: cardLength, media: item.media});
+            }
+        });
+
+        groups.forEach((group, index) => {
+            const nextGroup = groups[index + 1];
+            if (nextGroup) group.endIndex = nextGroup.ownerIndex;
+        });
+
+        return groups;
+    }, [content, cardLength]);
+
+    const syncActiveCard = useCallback((progress: number) => {
+        const boundedProgress = Math.min(Math.max(progress, 0), 1);
+        const nextCard = Math.min(Math.floor(boundedProgress * cardLength), cardLength - 1);
+        setActiveCard((currentCard) => currentCard === nextCard ? currentCard : nextCard);
+    }, [cardLength]);
+
+    useMotionValueEvent(scrollYProgress, "change", syncActiveCard);
+
+    // Synchronise aussi un chargement en milieu de page ou un retour via l'historique,
+    // sans attendre le prochain événement de scroll.
+    useEffect(() => {
+        syncActiveCard(scrollYProgress.get());
+    }, [scrollYProgress, syncActiveCard]);
+
+    useEffect(() => {
+        const theme = content[activeCard]?.theme;
+        if (theme) updateTheme(theme);
+    }, [activeCard, content]);
+
+    const activeTheme = content[activeCard]?.theme;
+
+    return (
+        <div
+            ref={containerRef}
+            className={`relative z-20 flex items-stretch gap-16 rounded-md padding-x ${activeTheme ? `theme-${activeTheme}` : ""}`}
+        >
+            <div className="relative flex w-full flex-col lg:w-[400px] lg:shrink-0">
+                {content.map((item, index) => {
+                    const mobileMediaGroup = mediaGroups.find(
+                        (group) => index >= group.ownerIndex && index < group.endIndex,
+                    );
+
+                    return (
+                        <div
+                            key={index}
+                            className="w-full max-w-lg py-8 sm:py-12 lg:flex lg:min-h-[65vh] lg:max-w-full lg:items-center lg:py-0"
                         >
-                            {content.map((card, index) => {
-                                return (
-                                    <motion.div
-                                        layout
-                                        variants={{
-                                            hidden: {
-                                                opacity: "0",
-                                                visibility: "hidden",
-                                                transitionEnd: {
-                                                    display: "none",
-                                                },
-                                            },
-                                            visible: {
-                                                opacity: "1",
-                                                visibility: "visible",
-                                                transitionEnd: {
-                                                    display: "block",
-                                                },
-                                            },
-                                        }}
-                                        className={classNames("w-full h-[500px]", {
-                                            "!block":
-                                                index == activeCard ||
-                                                (activeCard == null && index == 0),
-                                        })}
-                                        initial="hidden"
-                                        animate={
-                                            index == activeCard || (activeCard == null && index == 0)
-                                                ? "visible"
-                                                : "hidden"
-                                        }
-                                        transition={{duration: 0}}
-                                    >
-                                        {card.media}
-                                    </motion.div>
-                                );
-                            })}
-                        </motion.div>
-                    </motion.div>
-                )}
-            </motion.div>
-        </>
+                            <div className="w-full">
+                                {!isDesktop && mobileMediaGroup && (
+                                    <div className="mb-6 h-[360px] overflow-hidden rounded-2xl sm:h-[420px] lg:hidden">
+                                        <MediaRenderer
+                                            media={mobileMediaGroup.media}
+                                            scrollProgress={scrollYProgress}
+                                            start={mobileMediaGroup.ownerIndex / cardLength}
+                                            end={mobileMediaGroup.endIndex / cardLength}
+                                        />
+                                    </div>
+                                )}
+
+                                <AnimatedText>{item.text}</AnimatedText>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            {isDesktop && mediaGroups.length > 0 && (
+                <div className="hidden min-w-0 flex-1 self-stretch lg:block">
+                    <div
+                        className="sticky h-[500px] w-full overflow-hidden rounded-2xl"
+                        style={{top: "max(1rem, calc(50vh - 250px))"}}
+                    >
+                        {mediaGroups.map((group) => {
+                            const isVisible = activeCard >= group.ownerIndex && activeCard < group.endIndex;
+
+                            return (
+                                <motion.div
+                                    key={group.ownerIndex}
+                                    className="absolute inset-0 h-[500px] w-full"
+                                    initial={false}
+                                    animate={{opacity: isVisible ? 1 : 0}}
+                                    transition={{duration: 0.16, ease: "easeOut"}}
+                                    style={{
+                                        pointerEvents: isVisible ? "auto" : "none",
+                                        zIndex: isVisible ? 1 : 0,
+                                    }}
+                                    aria-hidden={!isVisible}
+                                >
+                                    <MediaRenderer
+                                        media={group.media}
+                                        scrollProgress={scrollYProgress}
+                                        start={group.ownerIndex / cardLength}
+                                        end={group.endIndex / cardLength}
+                                    />
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };

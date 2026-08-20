@@ -1,0 +1,15 @@
+{
+  "name": "plugin-dev",
+  "version": "1.0.0",
+  "description": "Developer tools for building, validating, and testing Antigravity plugins and agents.",
+  "author": {
+    "name": "Joël Vigreux",
+    "email": "vigreux.joel@hotmail.com"
+  },
+  "keywords": [
+    "development",
+    "plugins",
+    "agents",
+    "validation"
+  ]
+}

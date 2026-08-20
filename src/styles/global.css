@@ -10,7 +10,7 @@ body {
     @apply bg-surface;
 
     margin: 0;
-    overflow-x: clip;
+    overflow: clip;
     @supports not (overflow-x: clip) {
         overflow-x: hidden;
     }
@@ -75,35 +75,15 @@ body {
     @apply padding max-width;
 }
 
+@utility sub-title {
+    @apply text-title-medium text-tertiary;
+}
+
 section {
     @apply relative;
-    @apply after:bg-surface after:h-full after:w-full after:absolute after:top-0 after:left-0 after:-z-20
+    @apply after:bg-surface after:h-full after:w-full after:absolute after:top-0 after:left-0 after:-z-30;
 }
 
-.sub-title {
-    @apply font-semibold text-tertiary pl-7 relative uppercase text-base mb-2;
-
-    & + :first-of-type {
-        margin-top: 0;
-    }
-
-    &.text-center,
-    .center {
-        @apply mt-0;
-        @apply pl-0;
-
-        &:before {
-            @apply content-none;
-        }
-    }
-
-    &:before {
-        content: "";
-        transform: translateY(-50%);
-        height: 3px;
-        @apply absolute bg-primary w-5 left-0 top-1/2 rounded-full;
-    }
-}
 
 .text-gradient {
     @apply bg-gradient-to-r from-primary to-tertiary text-transparent bg-clip-text;

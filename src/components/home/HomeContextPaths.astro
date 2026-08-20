@@ -1,0 +1,81 @@
+---
+import { Line } from "@components/Line";
+import { LinearGradient } from "@components/LinearGradient";
+import { BackgroundColor } from "@components/BackgroundColor";
+import { Button } from "@udixio/ui-react";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iIdCard } from "@udixio/icons-outlined-400/id_card";
+import { iRoute } from "@udixio/icons-outlined-400/route";
+---
+
+<section id="travailler-ensemble" class="tab-menu theme-blue ">
+  <BackgroundColor
+    speed={10_000}
+    size="max(66vw, 800px)"
+    count={5}
+    client:idle
+    className="absolute inset-0 -z-10  opacity-10"
+  />
+  <div class="max-width">
+    <div class="flex">
+      <div><Line client:idle isFirst /></div>
+      <div class="padding pt-0 pb-8"></div>
+    </div>
+
+    <div class="flex mt-8">
+      <div><Line client:idle icon={iRoute} /></div>
+      <div class="padding pt-0 pb-8 flex flex-col justify-center max-w-7xl">
+        <p class="sub-title text-secondary" data-sidebar-label="Collaboration">Projet &amp; équipe</p>
+        <h2 class="mt-4 text-headline-large md:text-display-medium max-w-5xl">
+          <span class="text-gradient block">Un projet à construire, une équipe à rejoindre.</span>
+          Je m’implique comme si c’était le mien.
+        </h2>
+        <p class="mt-8 text-body-large text-on-surface-variant max-w-3xl">
+          Solo sur votre projet ou intégré à votre équipe, je vous dis clairement si mon profil
+          correspond à votre besoin, avant de m’engager.
+        </p>
+      </div>
+    </div>
+
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle />
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle />
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
+      <article class="flex">
+        <div><Line client:idle icon={iRoute}  /></div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-title-medium text-secondary">Pour un projet</span>
+          <h3 class="mt-2 text-headline-small md:text-headline-medium">Créer, compléter ou reprendre une application</h3>
+          <p class="mt-4 text-body-large text-on-surface-variant max-w-prose">
+            Première version à mettre en ligne, fonctionnalité à ajouter ou base existante à reprendre&nbsp;: le travail avance par livraisons courtes que vous pouvez vérifier.
+          </p>
+          <div class="mt-8">
+            <Button client:idle href="/contact" icon={iArrowForward} iconPosition="right" label="Présenter votre projet" />
+          </div>
+        </div>
+      </article>
+
+      <article class="flex">
+        <div><Line client:idle icon={iIdCard} /></div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block text-title-medium text-secondary">Pour une équipe</span>
+          <h3 class="mt-2 text-headline-small md:text-headline-medium">Contribuer dans une organisation existante</h3>
+          <p class="mt-4 text-body-large text-on-surface-variant max-w-prose">
+            Mon CV détaille le parcours, les technologies pratiquées et les missions menées en production.
+          </p>
+          <div class="mt-8">
+            <Button client:idle href="/profil" icon={iIdCard} label="Consulter mon CV · PDF" variant="outlined" />
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle  />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle isLast />
+    </div>
+  </div>
+  <LinearGradient nextTheme="blue"  className="h-1/2 -z-10"  />
+</section>

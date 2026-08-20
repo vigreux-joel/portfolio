@@ -1,6 +1,7 @@
 ---
 import Footer from "./Footer.astro";
 import "../styles/base.css";
+import {ClientRouter} from "astro:transitions";
 import Header from "@layouts/Header.astro";
 import {SEO} from "astro-seo";
 import {getImage} from "astro:assets";
@@ -9,10 +10,13 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/600.css";
-import {getImage} from "astro:assets";
 import defaultImage from "@assets/images/img.png";
 import {BackgroundColor} from "@components/BackgroundColor"
 import {ThemeProvider} from "../components/ThemeProvider";
+import {ThemeSectionObserver} from "../components/ThemeSectionObserver";
+import Font from "astro/components/Font.astro";
+import CtaSection from "@components/CtaSection.astro";
+import FaqSection, {type FaqItem} from "@components/FaqSection.astro";
 
 export interface Link extends HTMLLinkElement {
     prefetch: boolean;
@@ -91,11 +95,15 @@ export interface SEOProps {
 
 interface Props {
     seo: SEOProps;
-    hiddenFooter: boolean;
-    hiddenMenu: boolean;
+    faq?: FaqItem[];
+    hiddenFooter?: boolean;
+    hiddenMenu?: boolean;
+    showSidebar?: boolean;
+    showCta?: boolean;
+    showContactFab?: boolean;
 }
 
-const {seo, hiddenFooter = false, hiddenMenu = false}: Props = Astro.props;
+const {seo, faq = [], hiddenFooter = false, hiddenMenu = false, showSidebar = true, showCta = true, showContactFab = true}: Props = Astro.props;
 
 // const currentPath = Astro.url.pathname.replace("/fr", "");
 // const domain = Astro.url.origin;
@@ -137,20 +145,59 @@ const seoDefault: SEOProps = {
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/png" href="/favicon.png"/>
 
-
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-clash-grotesk" preload />
     <SEO {...seoDefault}/>
+    <ClientRouter fallback="animate" />
 </head>
 <body class="bg-surface dynamic">
-<Header/>
-<main>
-    <slot/>
-    <ThemeProvider client:idle/>
-</main>
-<Footer/>
-<script>
-    import AOS from 'aos'
+{/* Calque de texture global "spatial/lumière" placé en fond */}
+<div
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 opacity-20"
+    style={{
+        // Une tuile compacte à haute fréquence : le grain atténue le banding sans créer de taches.
+        // Le mode overlay est conservé pour que la bande de dégradé garde son atténuation colorée.
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='128' height='128' viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.2' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        backgroundSize: "128px 128px",
+        backgroundRepeat: "repeat",
+        mixBlendMode: "overlay"
+    }}
+></div>
+<Header showFab={showContactFab}/>
+<div class="flex items-start">
+    <main class="flex-1 w-full min-w-0">
+        <slot/>
 
-    AOS.init()
+    </main>
+
+</div>
+<ThemeProvider transition:name="theme-provider" client:idle/>
+<ThemeSectionObserver client:load />
+
+<Footer faq={faq} showCta={showCta}/>
+<script>
+    let revealObserver: IntersectionObserver | undefined;
+
+    const initializeRevealLights = () => {
+        revealObserver?.disconnect();
+        revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('light');
+                } else {
+                    entry.target.classList.remove('light');
+                }
+            });
+        }, {
+            // Déclenchement exactement aux 2/3 de l'écran (la box s'arrête à 66.6% depuis le haut)
+            rootMargin: '10000px 0px -33.3% 0px' 
+        });
+
+        document.querySelectorAll('.reveal-light').forEach(el => revealObserver?.observe(el));
+    };
+
+    document.addEventListener("astro:page-load", initializeRevealLights);
 </script>
 </body>
 </html>

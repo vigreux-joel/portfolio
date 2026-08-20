@@ -1,0 +1,7 @@
+{
+  "name": "ux-guidelines",
+  "version": "2.0.0",
+  "description": "Pipeline UX/UI guidé pour Antigravity : détection automatique du design system, conseils d'experts (stratégie, copy, UI, motion) et vérification hybride pour créer des interfaces sans erreur de design.",
+  "author": { "name": "Joël Vigreux", "email": "vigreux.joel@hotmail.com" },
+  "keywords": ["ux", "ui-design", "design-system", "accessibility", "copywriting", "antigravity"]
+}

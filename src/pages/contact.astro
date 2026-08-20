@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContactSection from "@components/contact/ContactSection.astro";
+
+const email = import.meta.env.PUBLIC_EMAIL_TO || "contact@vigreux-joel.fr";
+const phone = import.meta.env.PUBLIC_PHONE;
+
+const contactPageJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": "https://vigreux-joel.fr/contact#contact-page",
+    url: "https://vigreux-joel.fr/contact",
+    name: "Contact · Joël Vigreux",
+    description:
+        "Présenter un projet web, une application à faire évoluer ou un besoin de renfort technique à Joël Vigreux.",
+    inLanguage: "fr-FR",
+    mainEntity: {
+        "@type": "Person",
+        "@id": "https://vigreux-joel.fr/#joel-vigreux",
+        name: "Joël Vigreux",
+        jobTitle: "Développeur full-stack",
+        email: `mailto:${email}`,
+        ...(phone ? {telephone: phone} : {}),
+        areaServed: ["Amiens", "Lille", "France", "Remote"],
+        sameAs: [
+            "https://github.com/vigreux-joel",
+            "https://linkedin.com/in/vigreux-joel",
+        ],
+    },
+});
+---
+
+<Layout
+        showSidebar={false}
+        showCta={false}
+        showContactFab={false}
+        seo={{
+            title: `Contacter Joël Vigreux · Projet web ou renfort technique`,
+            description:
+                "Présentez votre projet, votre application à faire évoluer ou votre besoin de renfort technique à Joël Vigreux, développeur full-stack.",
+            openGraph: {
+                basic: {
+                    title: "Contactez Joël Vigreux",
+                    type: "website",
+                    image: "https://vigreux-joel.fr/images/photo.webp",
+                    url: "https://vigreux-joel.fr/contact",
+                },
+                optional: {
+                    siteName: "Joël Vigreux",
+                    locale: "fr_FR",
+                    description:
+                        "Présentez votre projet, votre application à faire évoluer ou votre besoin de renfort technique à Joël Vigreux.",
+                },
+                image: {
+                    alt: "Portrait de Joël Vigreux, développeur full-stack",
+                },
+            },
+        }}
+>
+    <script type="application/ld+json" is:inline set:html={contactPageJsonLd}/>
+
+    <ContactSection/>
+</Layout>

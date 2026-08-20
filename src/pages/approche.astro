@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSection from "../components/methode/HeroSection.astro";
+import ConstatSection from "../components/methode/ConstatSection.astro";
+import DemarcationSection from "../components/methode/DemarcationSection.astro";
+import LegitimiteSection from "../components/methode/LegitimiteSection.astro";
+import CtaSection from "@/components/CtaSection.astro";
+
+const faq = [
+    {
+        question: "L’utilisation de l’IA réduit-elle le coût d’un projet web ?",
+        answer: "Elle peut réduire le temps consacré aux tâches répétitives ou déjà bien définies, mais elle ne diminue pas mécaniquement le coût de tout le projet. Le cadrage, les choix techniques, les tests et la sécurisation restent nécessaires. L’estimation dépend donc surtout du périmètre, de la complexité et des risques du projet."
+    },
+    {
+        question: "Le code généré par l’IA est-il assez fiable pour être mis en production ?",
+        answer: "Un code généré doit être considéré comme une proposition de travail, pas comme un résultat prêt à livrer. Dans mes projets, chaque contribution est comprise, relue et corrigée avant d’être validée par des tests et les contrôles de sécurité adaptés au projet. Je reste responsable des décisions techniques et du code effectivement livré."
+    },
+    {
+        question: "Un projet assisté par l’IA est-il plus difficile à maintenir ?",
+        answer: "Pas par nature. Il le devient si du code généré est accumulé sans être compris, structuré ni testé. Je n’intègre que des contributions que je peux expliquer et faire évoluer ; le projet livré reste utilisable sans les outils d’IA employés pendant sa réalisation et peut être repris par un autre professionnel."
+    }
+];
+---
+<Layout
+        showSidebar={false}
+        faq={faq}
+        seo={{
+            title: `Joël Vigreux - Approche - L'IA génère du code, l'ingénierie construit des solutions`,
+            description: "Mon approche : l'IA accélère l'écriture du code, l'ingénierie construit des solutions pérennes. Architecture, sécurité et revue de code systématique, du cadrage à la mise en production.",
+            openGraph: {
+                basic: {
+                    title: "Joël Vigreux - Approche de l’IA et de l’ingénierie",
+                    type: "website",
+                    image: "https://vigreux-joel.fr/images/photo.webp",
+                    url: "https://vigreux-joel.fr/approche",
+                },
+                optional: {
+                    siteName: "Joël Vigreux",
+                    locale: "fr_FR",
+                    description: "L'IA génère du code, l'ingénierie construit des solutions. Découvrez mon approche de l’IA, du cadrage à la mise en production.",
+                },
+                image: {
+                    alt: "Portrait de Joël Vigreux, développeur full-stack",
+                },
+            },
+            twitter: {
+                card: "summary_large_image",
+                title: "Joël Vigreux - Approche de l’IA et de l’ingénierie",
+                description: "L'IA génère du code, l'ingénierie construit des solutions.",
+                image: "https://vigreux-joel.fr/images/photo.webp",
+                imageAlt: "Portrait de Joël Vigreux",
+            },
+        }}
+>
+    <style is:global>
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-6px) translateX(2px) rotate(2deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+        }
+
+        .animate-float-slow {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-medium {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .animate-float-fast {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes chip-shake {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(-2px, 1px);
+            }
+            50% {
+                transform: translate(2px, -1px);
+            }
+            75% {
+                transform: translate(-1px, -2px);
+            }
+        }
+
+        .chip-shake {
+            animation: chip-shake 0.12s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-float-slow, .animate-float-medium, .animate-float-fast, .chip-shake {
+                animation: none;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json" is:inline>
+        {
+            JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Joël Vigreux",
+                "jobTitle": "Développeur full-stack",
+                "url": "https://vigreux-joel.fr/approche",
+                "image": "https://vigreux-joel.fr/images/photo.webp"
+            })
+        }
+    </script>
+
+    <HeroSection/>
+    <ConstatSection/>
+    <DemarcationSection/>
+    <LegitimiteSection/>
+
+</Layout>

@@ -1,0 +1,26 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+}
+
+const { eyebrow, title } = Astro.props;
+---
+
+<p class="text-label-large text-tertiary">{eyebrow}</p>
+<h2 id="project-story-title" class="mt-2 text-headline-large text-on-surface md:text-display-small">
+  {title}
+</h2>
+{
+  Astro.slots.has("default") && (
+    <div class="project-story-heading__intro mt-4 max-w-2xl text-body-large text-on-surface-variant">
+      <slot />
+    </div>
+  )
+}
+
+<style>
+  .project-story-heading__intro :global(p + p) {
+    margin-top: 1rem;
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectTechnologies from "./ProjectTechnologies.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  class?: string;
+  loading?: "eager" | "lazy";
+  fit?: "cover" | "contain";
+  interactive?: boolean;
+  autoplay?: boolean;
+}
+
+const {
+  project,
+  class: className = "",
+  loading = "lazy",
+  fit = "contain",
+  interactive = false,
+  autoplay = false,
+} = Astro.props;
+const { cover, previewUrl, technologies } = project.data;
+const src = cover?.src ?? `/images/projects/generated/${project.id}.webp`;
+const fitClass = fit === "cover" ? "object-cover" : "object-contain";
+---
+
+{
+  cover ? (
+    <img
+      src={src}
+      alt={cover.alt}
+      width={cover.width}
+      height={cover.height}
+      loading={loading}
+      decoding="async"
+      class:list={[
+        "block h-full w-full max-w-none transition-transform duration-700 group-hover/card-link:scale-[1.02]",
+        fitClass,
+        className,
+      ]}
+    />
+  ) : previewUrl ? (
+    <video
+      data-project-preview-video={interactive ? undefined : ""}
+      poster={src}
+      muted
+      loop
+      playsinline
+      autoplay={autoplay}
+      controls={interactive}
+      preload={autoplay ? "auto" : interactive ? "metadata" : "none"}
+      aria-hidden={interactive ? undefined : "true"}
+      aria-label={interactive ? `Aperçu vidéo du projet ${project.data.title}` : undefined}
+      class:list={[
+        "block h-full w-full max-w-none transition-transform duration-700 group-hover/card-link:scale-[1.02]",
+        fitClass,
+        className,
+      ]}
+    >
+      <source src={`/videos/projects/${project.id}.webm`} type="video/webm" />
+    </video>
+  ) : (
+    <div
+      class:list={[
+        "relative flex h-full w-full flex-col justify-end overflow-hidden p-7 md:p-9",
+        className,
+      ]}
+      aria-hidden="true"
+    >
+      <span class="absolute -right-16 -top-20 size-64 rounded-full bg-primary-container opacity-40 blur-2xl" />
+      <span class="absolute -bottom-24 -left-12 size-56 rounded-full bg-tertiary-container opacity-30 blur-2xl" />
+      <ProjectTechnologies technologies={technologies} class="relative" />
+    </div>
+  )
+}
+
+<script>
+  const initializeProjectPreviews = () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const videos = document.querySelectorAll<HTMLVideoElement>("[data-project-preview-video]");
+
+    videos.forEach((video) => {
+      if (video.dataset.projectPreviewReady === "true") return;
+      video.dataset.projectPreviewReady = "true";
+
+      video.addEventListener("mouseenter", () => {
+        if (reducedMotion.matches) return;
+
+        void video.play().catch(() => undefined);
+      });
+
+      video.addEventListener("mouseleave", () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+  };
+
+  document.addEventListener("astro:page-load", initializeProjectPreviews);
+</script>

@@ -1,0 +1,36 @@
+---
+import { Card } from "@components/Card";
+import { Icon } from "@udixio/ui-react";
+import { iCheckCircle } from "@udixio/icons-outlined-400/check_circle";
+
+interface Props {
+  featured?: boolean;
+}
+
+const { featured = false } = Astro.props;
+---
+
+<Card
+  client:visible
+  variant={featured ? "elevated" : "filled"}
+  className={featured ? "project-proof min-h-40 p-6 md:col-span-2 md:p-8" : "project-proof min-h-32 p-6"}
+>
+  <div class:list={["flex h-full gap-4", featured && "items-end"]}>
+    <Icon icon={iCheckCircle} className="mt-0.5 size-7 shrink-0 text-primary" />
+    <div><slot /></div>
+  </div>
+</Card>
+
+<style>
+  .project-proof :global(p + p) {
+    margin-top: 0.75rem;
+  }
+
+  .project-proof :global(strong) {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    line-height: 0.95;
+  }
+</style>

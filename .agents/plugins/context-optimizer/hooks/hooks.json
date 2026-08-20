@@ -1,0 +1,38 @@
+{
+  "description": "Context Optimization Hooks that enforce delegating complex tasks to subagents",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/session_start.py\""
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/session_end.py\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content|multi_replace_file_content|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${ANTIGRAVITY_PLUGIN_ROOT}/hooks/scripts/pre_tool_use.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

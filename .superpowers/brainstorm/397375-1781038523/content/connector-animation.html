@@ -1,0 +1,199 @@
+<h2>Comment l'énergie se comporte-t-elle dans les connecteurs ?</h2>
+<p class="subtitle">Le composant Line a un flux d'énergie animé. Pour les connecteurs split/merge, quel comportement veux-tu ?</p>
+
+<style>
+  .connector-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    min-height: 180px;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* ---- Styles de lignes ---- */
+  .line-v { width: 3px; background: #6366f1; border-radius: 4px; }
+  .line-h { height: 3px; background: #6366f1; border-radius: 4px; }
+
+  /* Flux d'énergie simulé */
+  @keyframes energy-flow {
+    0%   { top: -30px; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { top: calc(100% + 10px); opacity: 0; }
+  }
+  @keyframes energy-flow-left {
+    0%   { left: 50%; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { left: 0%; opacity: 0; }
+  }
+  @keyframes energy-flow-right {
+    0%   { left: 50%; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  /* Option A - stream tombe sur la jonction puis se divise */
+  .demo-a .main-vert { height: 60px; position: relative; overflow: visible; }
+  .demo-a .junction { display: flex; align-items: center; height: 3px; width: 200px; position: relative; }
+  .demo-a .branch-left { height: 60px; position: relative; }
+  .demo-a .branch-right { height: 60px; position: relative; }
+
+  .demo-a .stream-main {
+    position: absolute; width: 3px; height: 30px;
+    background: linear-gradient(to bottom, transparent, #818cf8 60%, #a5b4fc);
+    border-radius: 4px; left: 0; top: -10px;
+    animation: energy-flow 2s ease-in-out infinite;
+  }
+  .demo-a .stream-left {
+    position: absolute; width: 3px; height: 24px;
+    background: linear-gradient(to bottom, transparent, #818cf8 60%, #a5b4fc);
+    border-radius: 4px;
+    animation: energy-flow 2s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+  .demo-a .stream-right {
+    position: absolute; width: 3px; height: 24px;
+    background: linear-gradient(to bottom, transparent, #818cf8 60%, #a5b4fc);
+    border-radius: 4px;
+    animation: energy-flow 2s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  /* Option B - chaque branche est indépendante */
+  .demo-b .stream-left-ind {
+    position: absolute; width: 3px; height: 24px;
+    background: linear-gradient(to bottom, transparent, #818cf8 60%, #a5b4fc);
+    border-radius: 4px;
+    animation: energy-flow 1.8s ease-in-out infinite;
+    animation-delay: 0.2s;
+  }
+  .demo-b .stream-right-ind {
+    position: absolute; width: 3px; height: 24px;
+    background: linear-gradient(to bottom, transparent, #818cf8 60%, #a5b4fc);
+    border-radius: 4px;
+    animation: energy-flow 1.8s ease-in-out infinite;
+    animation-delay: 0.8s;
+  }
+
+  /* Option C - pas d'animation sur les connecteurs */
+  .demo-c .line-v, .demo-c .line-h { opacity: 0.4; }
+
+  /* Layout helper */
+  .split-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .branches {
+    display: flex;
+    align-items: flex-start;
+    width: 200px;
+  }
+  .branch-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; }
+</style>
+
+<div class="cards" style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;">
+
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)" style="max-width:240px">
+    <div class="card-image" style="padding:24px 16px;">
+      <div class="connector-demo demo-a">
+        <div class="split-layout">
+          <!-- Tronc principal -->
+          <div class="line-v main-vert" style="height:50px;position:relative">
+            <div class="stream-main"></div>
+          </div>
+          <!-- Jonction horizontale -->
+          <div style="display:flex;width:200px;position:relative">
+            <div class="line-h" style="flex:1"></div>
+            <div class="line-h" style="flex:1"></div>
+          </div>
+          <!-- Deux branches -->
+          <div class="branches">
+            <div class="branch-wrap">
+              <div class="line-v" style="height:50px;position:relative">
+                <div class="stream-left"></div>
+              </div>
+            </div>
+            <div style="flex:1"></div>
+            <div class="branch-wrap">
+              <div class="line-v" style="height:50px;position:relative">
+                <div class="stream-right"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Flux en cascade</h3>
+      <p>L'énergie descend sur le tronc, puis se divise : deux streams partent simultanément dans les deux branches.</p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)" style="max-width:240px">
+    <div class="card-image" style="padding:24px 16px;">
+      <div class="connector-demo demo-b">
+        <div class="split-layout">
+          <div class="line-v" style="height:50px;"></div>
+          <div style="display:flex;width:200px;">
+            <div class="line-h" style="flex:1"></div>
+            <div class="line-h" style="flex:1"></div>
+          </div>
+          <div class="branches">
+            <div class="branch-wrap">
+              <div class="line-v" style="height:50px;position:relative">
+                <div class="stream-left-ind"></div>
+              </div>
+            </div>
+            <div style="flex:1"></div>
+            <div class="branch-wrap">
+              <div class="line-v" style="height:50px;position:relative">
+                <div class="stream-right-ind"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Branches indépendantes</h3>
+      <p>Chaque branche a son propre flux décalé dans le temps (déphasage). Le split/merge est juste un connecteur structurel.</p>
+    </div>
+  </div>
+
+  <!-- Option C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)" style="max-width:240px">
+    <div class="card-image" style="padding:24px 16px;">
+      <div class="connector-demo demo-c">
+        <div class="split-layout">
+          <div class="line-v" style="height:50px;"></div>
+          <div style="display:flex;width:200px;">
+            <div class="line-h" style="flex:1"></div>
+            <div class="line-h" style="flex:1"></div>
+          </div>
+          <div class="branches">
+            <div class="branch-wrap">
+              <div class="line-v" style="height:50px;"></div>
+            </div>
+            <div style="flex:1"></div>
+            <div class="branch-wrap">
+              <div class="line-v" style="height:50px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Connecteur statique</h3>
+      <p>Le split/merge n'a pas d'animation d'énergie — juste la révélation au scroll. Simple à implémenter.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,75 @@
+<h2>Structure de la section intro</h2>
+<p class="subtitle">Actuellement : H1 hero + "Mon parcours" (biographie inexacte). Quelle approche pour la réécriture ?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 20px; background: #0f0f17; border-radius: 8px; font-family: system-ui;">
+      <div style="border-left: 3px solid #7c6af5; padding-left: 16px; margin-bottom: 12px;">
+        <div style="font-size: 11px; color: #7c6af5; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">● code</div>
+        <div style="font-size: 22px; font-weight: 700; color: #e8e6f0; line-height: 1.2;">Mon <span style="background: linear-gradient(135deg, #7c6af5, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Expertise Technique</span></div>
+      </div>
+      <div style="margin-top: 8px; height: 40px; width: 2px; background: linear-gradient(to bottom, #7c6af5, transparent); margin-left: 7px;"></div>
+      <div style="border-left: 3px solid #c084fc; padding-left: 16px; margin-top: 0;">
+        <div style="font-size: 11px; color: #c084fc; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">● id_card</div>
+        <div style="font-size: 13px; color: #a89fc8; font-style: italic; max-width: 380px; line-height: 1.5;">"Développeur full-stack autodidacte, spécialisé dans les interfaces modernes hautes performances et les architectures back-end scalables."</div>
+        <div style="margin-top: 8px; font-size: 12px; color: #6c6490;">2 lignes, ton direct, pas de bio chronologique.</div>
+      </div>
+      <div style="margin-top: 8px; height: 30px; width: 2px; background: linear-gradient(to bottom, #c084fc, transparent); margin-left: 7px;"></div>
+      <div style="border-left: 3px solid #c084fc; padding-left: 16px; opacity: 0.5;">
+        <div style="font-size: 11px; color: #c084fc; text-transform: uppercase; letter-spacing: 2px;">● devices  →  FrontEndSection</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Positionnement direct</h3>
+      <p>Remplace "Mon parcours" par une phrase de positionnement expert : qui tu es, ce que tu construis. Pas de dates, pas de biographie. Confidence.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 20px; background: #0f0f17; border-radius: 8px; font-family: system-ui;">
+      <div style="border-left: 3px solid #7c6af5; padding-left: 16px; margin-bottom: 12px;">
+        <div style="font-size: 11px; color: #7c6af5; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">● code</div>
+        <div style="font-size: 22px; font-weight: 700; color: #e8e6f0;">Mon <span style="background: linear-gradient(135deg, #7c6af5, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Expertise Technique</span></div>
+      </div>
+      <div style="margin-top: 8px; height: 32px; width: 2px; background: linear-gradient(to bottom, #7c6af5, transparent); margin-left: 7px;"></div>
+      <div style="border-left: 3px solid #c084fc; padding-left: 16px; margin-top: 0;">
+        <div style="font-size: 11px; color: #c084fc; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">● id_card · Mon approche</div>
+        <div style="font-size: 13px; color: #a89fc8; line-height: 1.5; max-width: 380px;">"Autodidacte depuis 2019, formé en 2022, je construis des produits numériques complets — du design system au déploiement cloud. Mon filtre : qualité d'ingénierie avant vélocité."</div>
+      </div>
+      <div style="margin-top: 8px; height: 32px; width: 2px; background: linear-gradient(to bottom, #c084fc, transparent); margin-left: 7px;"></div>
+      <div style="border-left: 3px solid #4ade80; padding-left: 16px; opacity: 0.7;">
+        <div style="font-size: 11px; color: #4ade80; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">● layers · Domaines</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: #1a1a2e; border: 1px solid #7c6af5; color: #c084fc; font-size: 11px; padding: 3px 8px; border-radius: 20px;">Front-End</span>
+          <span style="background: #1a1a2e; border: 1px solid #4ade80; color: #86efac; font-size: 11px; padding: 3px 8px; border-radius: 20px;">Back-End</span>
+          <span style="background: #1a1a2e; border: 1px solid #f59e0b; color: #fcd34d; font-size: 11px; padding: 3px 8px; border-radius: 20px;">UX/UI</span>
+          <span style="background: #1a1a2e; border: 1px solid #38bdf8; color: #7dd3fc; font-size: 11px; padding: 3px 8px; border-radius: 20px;">Multiplateforme</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Bio courte + aperçu des domaines</h3>
+      <p>Une 3e Line "Domaines" qui liste front/back/ux/multi avant de plonger dans chaque section. Sert de sommaire visuel.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 20px; background: #0f0f17; border-radius: 8px; font-family: system-ui;">
+      <div style="border-left: 3px solid #7c6af5; padding-left: 16px; margin-bottom: 12px;">
+        <div style="font-size: 11px; color: #7c6af5; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">● code</div>
+        <div style="font-size: 22px; font-weight: 700; color: #e8e6f0;">Mon <span style="background: linear-gradient(135deg, #7c6af5, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Expertise Technique</span></div>
+        <div style="font-size: 14px; color: #a89fc8; margin-top: 8px; max-width: 360px; line-height: 1.5;">"Développeur full-stack. Interfaces haute performance, architectures scalables, zéro vibe coding."</div>
+      </div>
+      <div style="margin-top: 8px; height: 32px; width: 2px; background: linear-gradient(to bottom, #7c6af5, transparent); margin-left: 7px;"></div>
+      <div style="border-left: 3px solid #c084fc; padding-left: 16px; margin-top: 0; opacity: 0.5;">
+        <div style="font-size: 11px; color: #c084fc; text-transform: uppercase; letter-spacing: 2px;">● devices  →  FrontEndSection directement</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Hero seul, sans bio</h3>
+      <p>Supprime "Mon parcours". Le H1 + un sous-titre accrocheur, puis direct dans FrontEndSection. Laisse l'expertise parler d'elle-même.</p>
+    </div>
+  </div>
+
+</div>

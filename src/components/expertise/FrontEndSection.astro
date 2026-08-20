@@ -1,0 +1,143 @@
+---
+import {Card} from "@components/Card";
+import {Techno} from "@components/Techno";
+import {Line} from '@components/Line';
+import {LinearGradient} from "@components/LinearGradient";
+
+import {Icon, Button} from "@udixio/ui-react";
+
+import astroLogo from "@assets/images/astro-logo.svg?raw";
+import reactLogo from "@assets/images/react-logo.svg?raw";
+import angularLogo from "@assets/images/angular-logo.svg?raw";
+import tsLogo from "@assets/images/ts-logo.svg?raw";
+import tailwindLogo from "@assets/images/tailwind-logo.svg?raw";
+import motionLogo from "@assets/images/framer-motion-logo.svg?raw";
+import sassLogo from "@assets/images/sass-logo.svg?raw";
+
+import {iDevices} from "@udixio/icons-outlined-400/devices";
+import {iSelectWindow} from "@udixio/icons-outlined-400/select_window";
+import {iArrowOutward} from "@udixio/icons-outlined-400/arrow_outward";
+import {faAndroid, faApple, faLinux, faWindows} from "@fortawesome/free-brands-svg-icons";
+import { iCode } from "@udixio/icons-outlined-400/code";
+import {BackgroundColor} from "@components/BackgroundColor.tsx";
+---
+<div id="front-end" class="theme-cyan ">
+
+  <section >
+    <div class="max-width">
+    <!-- Introduction de Section : sur le spine (ligne continue, alignée au Hero) -->
+    <div class="flex  pt-8">
+      <div>
+        <Line client:idle icon={iCode} nextTheme="cyan" />
+      </div>
+      <div class="padding pt-0 flex flex-col justify-center max-w-7xl">
+        <p class="sub-title" data-sidebar-label="Front-end">Sites et applications web</p>
+        <h2 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+          <span class="block text-gradient">Votre interface s’adapte à vos usages.</span>
+          <span class="block">Je choisis la technologie qui lui convient.</span>
+        </h2>
+        <p class="mt-8 text-body-large text-on-surface-variant max-w-prose">
+          Je ne pars jamais d'un framework par défaut. Je choisis l'architecture front-end selon votre produit, ses contraintes de performance et l'échelle visée.
+        </p>
+      </div>
+    </div>
+
+    <!-- Le tracé se dédouble : Astro descend tout droit, Angular bifurque -->
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle  />
+      <Line fromX={0} fromPx={60} toX={0.5} toPx={76} client:idle />
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
+      <!-- Astro : le contenu -->
+      <div class="flex">
+        <div>
+          <Line client:idle image={astroLogo} isLast  />
+        </div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block sub-title">Le contenu</span>
+          <h3 class=" text-headline-small md:text-headline-medium mt-2 w-fit">Astro / React</h3>
+          <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
+            Pour les sites où la performance prime : Astro génère un HTML statique ultra-rapide pour un SEO optimal, tandis que React s'intègre par îlots pour apporter une interactivité riche et dynamique exactement là où c'est nécessaire.
+          </p>
+          <p class="mt-6 text-body-medium text-on-surface-variant max-w-prose">
+            Là où la vitesse sert vraiment le contenu : du
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">portfolio créatif</span>
+            au
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">média éditorial</span>,
+            jusqu'aux
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">vitrines à fort trafic</span>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Angular : l'application -->
+      <div class="flex">
+        <div>
+          <Line client:idle image={angularLogo}  />
+        </div>
+        <div class="padding pt-8 md:pt-0">
+          <span class="block sub-title">L'application</span>
+          <h3 class=" text-headline-small md:text-headline-medium mt-2 w-fit">Angular / Svelte</h3>
+          <p class="max-w-prose mt-4 text-body-large text-on-surface-variant">
+            Pour les applications web avancées : Angular offre une architecture stricte et robuste pour maintenir de grandes bases de code dans le temps, tandis que Svelte apporte une réactivité native inégalée et une légèreté maximale pour des interfaces fluides.
+          </p>
+          <p class="mt-6 text-body-medium text-on-surface-variant max-w-prose">
+            Pour les interfaces poussées en production au quotidien :
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">applications internes</span>,
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">portails métiers complexes</span>,
+            <span class="box-decoration-clone bg-tertiary/15 px-1 font-medium text-on-surface">dashboards</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bandeau technique (sans espace à gauche) -->
+    <div class="max-width relative">
+      <!-- La ligne droite continue en arrière-plan -->
+      <div class="absolute inset-0 hidden md:block z-0">
+         <Line fromX={0.5} fromPx={76} toX={0.5} toPx={76} client:idle />
+      </div>
+
+      <div class="flex relative z-10">
+        <div class="padding-x py-8  w-full">
+          <span class="sub-title block ">Des fondations robustes</span>
+          <div class="mt-6 flex flex-wrap justify-start gap-x-10 gap-y-6 text-on-surface-variant">
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={tsLogo}></Icon>
+              <span class="text-label-medium">TypeScript</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={tailwindLogo}></Icon>
+              <span class="text-label-medium">Tailwind CSS</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={motionLogo}></Icon>
+              <span class="text-label-medium">Motion</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 transition-colors ">
+              <Icon className="size-9" icon={sassLogo}></Icon>
+              <span class="text-label-medium">CSS / Sass</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Convergence vers la gauche -->
+    <div class="relative h-20 md:h-28 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60} client:idle isFirst />
+      <Line fromX={0.5} fromPx={76} toX={0} toPx={60} client:idle  />
+    </div>
+
+    <!-- Ligne de fin de Séquence 1 (isLast, à gauche) -->
+    <div class="relative h-16 md:h-24 hidden md:block">
+      <Line fromX={0} fromPx={60} toX={0} toPx={60}  client:idle  />
+    </div>
+
+    </div>
+  </section>
+</div>

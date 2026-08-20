@@ -1,0 +1,14 @@
+{
+  "name": "context-optimizer",
+  "version": "1.0.0",
+  "description": "Imposes subagent usage for complex tasks to optimize workspace context per task.",
+  "author": {
+    "name": "Joël Vigreux"
+  },
+  "keywords": [
+    "hooks",
+    "context-optimization",
+    "subagents"
+  ],
+  "hooks": "./hooks/hooks.json"
+}

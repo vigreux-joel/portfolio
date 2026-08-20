@@ -1,0 +1,93 @@
+---
+import { Icon } from "@udixio/ui-react";
+import { iInfo } from "@udixio/icons-outlined-400/info";
+import { iDevices } from "@udixio/icons-outlined-400/devices";
+import { iApi } from "@udixio/icons-outlined-400/api";
+import { iManufacturing } from "@udixio/icons-outlined-400/manufacturing";
+import { iSelectWindow } from "@udixio/icons-outlined-400/select_window";
+import { iQuestionMark } from "@udixio/icons-outlined-400/question_mark";
+
+const links = [
+    { id: "accueil", icon: iInfo },
+    { id: "front-end", icon: iDevices },
+    { id: "ux", icon: iSelectWindow },
+    { id: "back-end", icon: iApi },
+    { id: "philosophie", icon: iManufacturing },
+    { id: "faq", icon: iInfo },
+];
+---
+
+<div class="hidden 2xl:flex fixed left-0 top-0 h-screen flex-col justify-center gap-4 px-8 z-40">
+    {links.map(link => (
+        <a href={`#${link.id}`} class="sidebar-link group flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors relative" data-target={link.id}>
+            <div class="w-12 h-12 shrink-0 rounded-full bg-surface-container/50 backdrop-blur-md flex items-center justify-center ring-1 ring-outline/20 group-[.active]:bg-primary group-[.active]:text-on-primary group-[.active]:ring-primary/50 group-[.active]:shadow-lg group-[.active]:shadow-primary/20 transition-all duration-300">
+                <Icon icon={link.icon} className="w-5 h-5" />
+            </div>
+            <span class="sub-title text-secondary absolute left-16 whitespace-nowrap rounded-xl bg-surface-container/80 px-4 py-2 opacity-0 transition-opacity group-hover:opacity-100 group-[.active]:opacity-100"></span>
+        </a>
+    ))}
+</div>
+
+<script>
+    const setupObserver = () => {
+        const links = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('#accueil, #front-end, #ux, #back-end, #philosophie, #faq');
+
+        if (!sections.length || !links.length) return;
+
+        // Les libellés proviennent exclusivement du premier sous-titre de chaque section.
+        links.forEach(link => {
+            const targetId = link.getAttribute('data-target');
+            const section = document.getElementById(targetId);
+            
+            if (section) {
+                const subTitle = section.querySelector('.sub-title');
+                if (subTitle) {
+                    const span = link.querySelector('span');
+                    const label = subTitle.getAttribute('data-sidebar-label') || subTitle.textContent?.trim();
+                    if (span && label) span.textContent = label;
+                } else {
+                    link.style.display = 'none';
+                }
+
+                // Trouver l'icône de la timeline (premier svg dans un conteneur w-6)
+                const lineSvg = section.querySelector('.w-6 svg');
+                if (lineSvg) {
+                    const iconContainer = link.querySelector('div.w-12');
+                    if (iconContainer) {
+                        const newSvg = lineSvg.cloneNode(true);
+                        // Remplacer les classes pour s'adapter à la sidebar
+                        newSvg.setAttribute('class', 'w-5 h-5 fill-current');
+                        iconContainer.innerHTML = '';
+                        iconContainer.appendChild(newSvg);
+                    }
+                }
+            } else {
+                // Masquer si la section n'existe pas sur la page
+                if (targetId) link.style.display = 'none';
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    links.forEach(link => {
+                        if (link.getAttribute('data-target') === entry.target.id) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: "-40% 0px -60% 0px" });
+
+        sections.forEach(section => observer.observe(section));
+    };
+
+    // Run on initial load
+    setupObserver();
+    
+    // Support Astro View Transitions if enabled
+    document.addEventListener('astro:page-load', setupObserver);
+</script>

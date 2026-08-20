@@ -1,0 +1,100 @@
+---
+title: "Template paysagiste"
+eyebrow: "Template sectoriel · 2026"
+description: "Un template entièrement développé avec Astro, React et Udixio UI pour créer simplement des sites rapides, modernes et personnalisables destinés aux paysagistes."
+status: "Démonstration publique"
+period: "2026"
+audience: "Paysagistes et entreprises d’aménagement extérieur"
+publishedAt: 2026-08-04
+order: 3
+draft: false
+externalUrl: "https://template-landscaper-sigma.vercel.app/"
+previewUrl: "https://template-landscaper-sigma.vercel.app/"
+technologies:
+  - Astro
+  - React
+  - Udixio UI
+---
+
+
+import ProjectChapter from "@components/projects/ProjectChapter.astro";
+import ProjectCaseStudy from "@components/projects/ProjectCaseStudy.astro";
+import ProjectPoints from "@components/projects/ProjectPoints.astro";
+import ProjectNote from "@components/projects/ProjectNote.astro";
+import ProjectStoryHeading from "@components/projects/ProjectStoryHeading.astro";
+import {iLandscape2Edit} from "@udixio/icons-outlined-400/landscape_2_edit";
+import {iResponsiveLayout} from "@udixio/icons-outlined-400/responsive_layout";
+import {iSpeed} from "@udixio/icons-outlined-400/speed";
+
+<ProjectCaseStudy>
+
+    <Fragment slot="story-heading">
+        <ProjectStoryHeading
+            eyebrow="Étude de cas"
+            title="Transformer une base sectorielle en site réellement personnalisable."
+        >
+            Le template ne cherche pas seulement à montrer un beau site : il fournit une structure claire qu’un
+            paysagiste peut adapter à son activité et à son identité.
+        </ProjectStoryHeading>
+    </Fragment>
+
+    <Fragment slot="story">
+
+        <ProjectChapter
+            eyebrow="Le besoin"
+            title="Présenter un savoir-faire sans repartir d’une page blanche."
+            icon={iLandscape2Edit}
+        >
+
+            Un site de paysagiste doit rendre immédiatement lisibles les prestations, les réalisations et la manière de
+            prendre contact. Le template organise ces éléments dans un parcours cohérent, tout en laissant la place aux
+            contenus et aux visuels propres à chaque entreprise.
+
+            <ProjectPoints
+                label="Contenus structurés par le template"
+                items={[
+                    "Une présentation claire de l’activité",
+                    "Des services faciles à parcourir",
+                    "Des réalisations mises en avant visuellement",
+                    "Un chemin direct vers la prise de contact",
+                ]}
+            />
+
+        </ProjectChapter>
+
+        <ProjectChapter
+            eyebrow="La construction"
+            title="Une interface commune, pensée pour tous les formats d’écran."
+            icon={iResponsiveLayout}
+        >
+
+            Le projet associe Astro pour servir les pages, React pour les interactions utiles et Udixio UI pour les
+            composants visuels. Cette base permet de garder une présentation cohérente sans transformer chaque section
+            en développement isolé.
+
+            La composition reste responsive : la hiérarchie, les médias et les appels à l’action doivent conserver leur
+            rôle sur mobile comme sur un écran large.
+
+        </ProjectChapter>
+
+        <ProjectChapter
+            eyebrow="Le résultat"
+            title="Une démonstration publique, rapide à parcourir et à adapter."
+            icon={iSpeed}
+            isLast
+        >
+
+            Le résultat est consultable en ligne et sert de point de départ concret plutôt que de simple maquette. Les
+            textes, les médias et l’identité visuelle peuvent évoluer sans remettre en cause la structure générale du
+            parcours.
+
+            <ProjectNote title="Un template, pas une identité imposée">
+                La structure fournit un cadre de départ. La personnalisation doit ensuite permettre à chaque entreprise
+                de présenter ses propres prestations, réalisations et coordonnées.
+            </ProjectNote>
+
+        </ProjectChapter>
+
+    </Fragment>
+
+</ProjectCaseStudy>

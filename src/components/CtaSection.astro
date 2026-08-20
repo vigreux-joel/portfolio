@@ -1,0 +1,72 @@
+---
+import { Button, Icon } from "@udixio/ui-react";
+import { BackgroundColor } from "@components/BackgroundColor";
+import { Card } from "@components/Card";
+import { iArrowForward } from "@udixio/icons-outlined-400/arrow_forward";
+import { iCalendarMonth } from "@udixio/icons-outlined-400/calendar_month";
+import { iMail } from "@udixio/icons-outlined-400/mail";
+
+const calendlyUrl = import.meta.env.PUBLIC_CALENDLY;
+---
+
+<section class="tab-menu   ">
+  <div class="max-width padding-x mb-32 relative z-10">
+    <BackgroundColor
+        speed={10_000}
+        size="max(80%, 800px)"
+        count={3}
+        client:idle
+        className="absolute inset-0 -z-10 opacity-10"
+    />
+    <Card
+      client:idle
+      variant="filled"
+      proximityPercent={40}
+      className="relative isolate border border-primary/25 px-6 py-9 shadow-2xl shadow-primary/10 sm:px-9 md:p-12 lg:p-16"
+    >
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_88%_18%,color-mix(in_srgb,var(--color-primary-container)_36%,transparent),transparent_38%),radial-gradient(circle_at_8%_100%,color-mix(in_srgb,var(--color-tertiary-container)_18%,transparent),transparent_42%)]"
+      ></div>
+      <div class="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,auto)] lg:items-end lg:gap-16">
+        <div class="max-w-4xl">
+          <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-container/20 px-4 py-2 text-label-large text-primary">
+            <Icon icon={iMail} className="size-5" />
+            <span>Premier échange</span>
+          </div>
+
+          <h2 class="mt-6 text-headline-large text-on-surface md:text-display-small">
+            <span class="block text-gradient">Faites le point sur votre projet.</span>
+            Je vous aide à définir la prochaine étape.
+          </h2>
+          <p class="mt-6 max-w-3xl text-body-large text-on-surface-variant">
+            Présentez-moi le contexte et ce qui existe déjà. Je vous réponds avec les premières questions utiles pour cadrer la suite.
+          </p>
+        </div>
+
+        <div class="flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row lg:w-64 lg:flex-col lg:items-stretch">
+          <Button
+            client:idle
+            className="w-fit lg:w-full"
+            href="/contact"
+            label="Écrire à Joël"
+            icon={iArrowForward}
+            iconPosition="right"
+          />
+          {calendlyUrl && (
+            <Button
+              client:idle
+              className="w-fit lg:w-full"
+              href={calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              label="Réserver un créneau"
+              icon={iCalendarMonth}
+              variant="tonal"
+            />
+          )}
+        </div>
+      </div>
+    </Card>
+  </div>
+</section>

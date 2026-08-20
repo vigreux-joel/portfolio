@@ -1,0 +1,28 @@
+---
+import { Icon } from "@udixio/ui-react";
+import { iCheckCircle } from "@udixio/icons-outlined-400/check_circle";
+
+interface Props {
+  items: readonly string[];
+  label?: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<ul class="project-points" aria-label={label}>
+  {items.map((item) => (
+    <li class="flex items-start gap-4 text-body-large text-on-surface-variant">
+      <Icon icon={iCheckCircle} className="mt-0.5 size-6 shrink-0 text-primary" />
+      <span>{item}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .project-points {
+    display: grid;
+    gap: 1.25rem;
+    margin-block: 2rem;
+  }
+</style>

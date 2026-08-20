@@ -1,0 +1,145 @@
+---
+import {Icon} from "@udixio/ui-react";
+import {Card} from "@components/Card";
+import {BackgroundColor} from "@components/BackgroundColor";
+import {FormContact} from "@components/FormContact";
+import {faLinkedin} from "@fortawesome/free-brands-svg-icons";
+import {iMail} from "@udixio/icons-outlined-400/mail";
+import {iCall} from "@udixio/icons-outlined-400/call";
+import {iLocationOn} from "@udixio/icons-outlined-400/location_on";
+
+const email = import.meta.env.PUBLIC_EMAIL_TO || "contact@vigreux-joel.fr";
+const emailSubject = encodeURIComponent("Prise de contact depuis vigreux-joel.fr");
+const emailBody = encodeURIComponent(
+    "Bonjour Joël,\n\nVoici mon contexte :\n\nCe que je cherche à obtenir :\n\nCordialement,",
+);
+const mailtoHref = `mailto:${email}?subject=${emailSubject}&body=${emailBody}`;
+
+const phone = import.meta.env.PUBLIC_PHONE;
+const phoneHref = phone?.replace(/\s/g, "");
+const phoneLabel = phoneHref?.replace(
+    /^\+33(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/,
+    "+33 $1 $2 $3 $4 $5",
+);
+
+const linkedin = "https://linkedin.com/in/vigreux-joel";
+---
+
+<section
+    id="contact"
+    aria-labelledby="contact-title"
+    class="tab-menu theme-blue min-h-screen pb-16 pt-32 md:pb-20 md:pt-42 xl:pt-54"
+>
+    <BackgroundColor
+        speed={7_500}
+        size="max(66vw, 800px)"
+        count={5}
+        client:idle
+        className="absolute inset-x-0 top-0 -z-10 h-[46rem] opacity-20"
+    />
+
+    <div class="max-width padding-x @container">
+        <header class="max-w-5xl pb-10 @4xl:pb-14">
+            <p class="sub-title text-title-large">Travaillons ensemble</p>
+            <h1 id="contact-title" class="mt-4 text-display-small @4xl:text-display-medium">
+                <span class="block">Un produit à lancer, améliorer ou reprendre ?</span>
+                <span class="block text-gradient">Parlons de la prochaine étape.</span>
+            </h1>
+            <p class="mt-5 max-w-3xl text-body-large text-on-surface-variant">
+                Décrivez-moi ce qui existe, ce qui bloque et ce que vous voulez rendre possible.
+                Je vous réponds avec un premier avis concret sur le périmètre, les risques et la suite à donner.
+            </p>
+        </header>
+
+        <div class="grid items-stretch gap-5 @4xl:grid-cols-[minmax(0,2fr)_minmax(18rem,1fr)] @4xl:gap-8">
+            <div class="min-w-0">
+                <Card
+                    client:visible
+                    variant="filled"
+                    className="h-full"
+                >
+                    <div class="flex h-full flex-col p-6 md:p-8">
+                        <h2 class="text-title-large text-on-surface">Commençons par l'essentiel</h2>
+                        <p class="mt-2 max-w-prose text-body-medium text-on-surface-variant">
+                            Pas besoin de cahier des charges. Le contexte, l'objectif et les principales contraintes suffisent.
+                        </p>
+                        <FormContact client:visible />
+                    </div>
+                </Card>
+            </div>
+
+            <aside class="min-w-0">
+                <Card
+                    client:visible
+                    variant="filled"
+                    pointerGlow={false}
+                    className="h-full bg-surface-container-low"
+                >
+                    <div class="flex h-full flex-col p-6 md:p-8">
+                        <h2 class="text-title-large text-on-surface">Un échange direct vous convient mieux ?</h2>
+                        <p class="mt-2 text-body-medium text-on-surface-variant">
+                            Écrivez-moi ou appelez-moi. Si je ne suis pas disponible, laissez-moi un message : je vous réponds sous 48 h ouvrées.
+                        </p>
+
+                        <div class="mt-6 space-y-5">
+                            <a class="group flex items-start gap-4" href={mailtoHref}>
+                                <span class="grid size-10 shrink-0 place-items-center rounded-2xl bg-primary-container text-on-primary-container">
+                                    <Icon icon={iMail} className="size-5" />
+                                </span>
+                                <span class="min-w-0">
+                                    <span class="block text-title-small text-on-surface">Email</span>
+                                    <span class="mt-1 block break-words text-body-medium text-on-surface-variant underline underline-offset-4 transition-colors group-hover:text-primary">
+                                        {email}
+                                    </span>
+                                </span>
+                            </a>
+
+                            {phone && (
+                                <a class="group flex items-start gap-4" href={`tel:${phoneHref}`}>
+                                    <span class="grid size-10 shrink-0 place-items-center rounded-2xl bg-secondary-container text-on-secondary-container">
+                                        <Icon icon={iCall} className="size-5" />
+                                    </span>
+                                    <span class="min-w-0">
+                                        <span class="block text-title-small text-on-surface">Téléphone</span>
+                                        <span class="mt-1 block text-body-medium text-on-surface-variant underline underline-offset-4 transition-colors group-hover:text-primary">
+                                            {phoneLabel}
+                                        </span>
+                                    </span>
+                                </a>
+                            )}
+
+                            <div class="flex items-start gap-4">
+                                <span class="grid size-10 shrink-0 place-items-center rounded-2xl bg-tertiary-container text-on-tertiary-container">
+                                    <Icon icon={iLocationOn} className="size-5" />
+                                </span>
+                                <span class="min-w-0">
+                                    <span class="block text-title-small text-on-surface">Localisation</span>
+                                    <span class="mt-1 block text-body-medium text-on-surface-variant">
+                                        Hauts-de-France · à distance
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <a
+                            class="group mt-auto flex items-center gap-4 border-t border-outline-variant pt-5"
+                            href={linkedin}
+                            target="_blank"
+                            rel="me noopener noreferrer"
+                        >
+                            <span class="grid size-10 shrink-0 place-items-center rounded-2xl bg-surface-container-high text-on-surface-variant">
+                                <Icon icon={faLinkedin} className="size-5" />
+                            </span>
+                            <span class="min-w-0">
+                                <span class="block text-title-small text-on-surface">LinkedIn</span>
+                                <span class="mt-1 block text-body-medium text-on-surface-variant underline underline-offset-4 transition-colors group-hover:text-primary">
+                                    Voir le profil<span class="sr-only"> (nouvel onglet)</span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                </Card>
+            </aside>
+        </div>
+    </div>
+</section>

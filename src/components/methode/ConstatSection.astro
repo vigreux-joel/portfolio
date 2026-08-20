@@ -1,0 +1,40 @@
+---
+import {Line} from "@components/Line";
+import {LinearGradient} from "@components/LinearGradient";
+import {ConstatScroll} from "./ConstatScroll";
+
+import {iSearch} from "@udixio/icons-outlined-400/search";
+---
+
+
+<section id="constat" class="max-width theme-cyan">
+    <div class="flex pt-8">
+        <div>
+            <Line client:idle icon={iSearch} isLast/>
+        </div>
+        <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
+            <p class="sub-title" data-sidebar-label="Constat">IA et contexte</p>
+            <h2 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                <span class="block text-gradient">Allez au-delà du résultat visible.</span>
+                <span class="block">Je cherche ce que votre demande ne dit pas.</span>
+            </h2>
+            <p class="mt-6 text-body-large text-on-surface-variant max-w-prose">
+                L'IA produit du code vite, et c'est utile. Le problème commence quand cette
+                vitesse remplace le raisonnement : on obtient un résultat qui fonctionne en
+                apparence, mais dont les choix techniques n'ont pas vraiment été assumés.
+            </p>
+        </div>
+    </div>
+
+    <div class="relative z-20">
+        <ConstatScroll client:idle/>
+    </div>
+
+    <div class="flex h-40">
+        <div>
+            <Line client:idle isFirst/>
+        </div>
+    </div>
+
+    <LinearGradient nextTheme="cyan"/>
+</section>

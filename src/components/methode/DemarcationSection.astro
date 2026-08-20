@@ -1,0 +1,253 @@
+---
+import {Line} from "@components/Line";
+import {LinearGradient} from "@components/LinearGradient";
+import {Card} from "@components/Card";
+import {Icon} from "@udixio/ui-react";
+
+import {iCode} from "@udixio/icons-outlined-400/code";
+import {iArchitecture} from "@udixio/icons-outlined-400/architecture";
+import {iCheckCircle} from "@udixio/icons-outlined-400/check_circle";
+import {iFactCheck} from "@udixio/icons-outlined-400/fact_check";
+import {iRocketLaunch} from "@udixio/icons-outlined-400/rocket_launch";
+import {iSearch} from "@udixio/icons-outlined-400/search";
+import {iShield} from "@udixio/icons-outlined-400/shield";
+import {iTaskAlt} from "@udixio/icons-outlined-400/task_alt";
+import {iVerifiedUser} from "@udixio/icons-outlined-400/verified_user";
+---
+
+
+<section id="demarcation" class="max-width theme-cyan">
+    <div class="flex pt-8">
+        <div>
+            <Line client:idle icon={iArchitecture} isLast/>
+        </div>
+        <div class="padding pt-0 flex flex-col justify-center max-w-4xl">
+            <p class="sub-title" data-sidebar-label="Démarcation">IA et décisions</p>
+            <h2 class="mt-4 text-headline-large md:text-display-medium max-w-prose">
+                <span class="block text-gradient">Réservez l’IA aux tâches bien cadrées.</span>
+                <span class="block">Je lui confie les tâches, pas les décisions.</span>
+            </h2>
+        </div>
+    </div>
+
+    <div class="padding-x grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        <Card client:visible variant="filled" className="group">
+            <div class="p-6 md:p-8 h-full flex flex-col">
+                <div class="flex items-center gap-3 mb-6">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-surface-container-high text-on-surface-variant">
+              <Icon icon={iCode} className="h-6 w-6"/>
+            </span>
+                    <div>
+                        <span class="block text-label-large text-on-surface-variant uppercase tracking-wide">Exécution</span>
+                        <h3 class="text-headline-small text-on-surface-variant">Ce que je peux déléguer</h3>
+                    </div>
+                </div>
+                <p class="text-body-large text-on-surface-variant/70 mb-6">
+                    L'IA est efficace quand le cadre est clair. Je l'utilise pour accélérer ce
+                    qui est répétitif, documenté ou déjà suffisamment borné.
+                </p>
+                <ul class="space-y-3 text-body-medium text-on-surface-variant/70 mt-auto">
+                    <li class="flex gap-3 items-start"><span class="mt-1 text-on-surface-variant/50">•</span><span>Générer du code répétitif et de la tuyauterie technique</span>
+                    </li>
+                    <li class="flex gap-3 items-start"><span class="mt-1 text-on-surface-variant/50">•</span><span>Produire une première version de fonctions, tests ou documentation</span>
+                    </li>
+                    <li class="flex gap-3 items-start"><span class="mt-1 text-on-surface-variant/50">•</span><span>Accélérer les tâches connues sans les livrer telles quelles</span>
+                    </li>
+                </ul>
+            </div>
+        </Card>
+
+        <Card client:visible variant="filled" energyX className="group relative ring-1 ring-primary/30">
+            <div class="p-6 md:p-8 h-full flex flex-col">
+                <div class="flex items-center gap-3 mb-6">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-primary text-on-primary">
+              <Icon icon={iArchitecture} className="h-6 w-6"/>
+            </span>
+                    <div>
+                        <span class="block sub-title">Ingénierie</span>
+                        <h3 class="text-headline-small text-on-surface">Ce que je garde sous contrôle</h3>
+                    </div>
+                </div>
+                <p class="text-body-large text-on-surface mb-6">
+                    Les décisions structurantes restent humaines. C'est là que se joue la tenue
+                    du produit : dans les arbitrages, les limites posées, et la relecture.
+                </p>
+                <ul class="space-y-3 text-body-medium text-on-surface mt-auto">
+                    <li class="flex gap-3 items-start">
+                        <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5"/>
+                        <span>Architecture pensée pour l'évolution de votre produit</span></li>
+                    <li class="flex gap-3 items-start">
+                        <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5"/>
+                        <span>Protection des données et du business</span></li>
+                    <li class="flex gap-3 items-start">
+                        <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5"/>
+                        <span>Traduction des enjeux métier en choix techniques</span></li>
+                    <li class="flex gap-3 items-start">
+                        <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0 mt-0.5"/>
+                        <span>Revue systématique : chaque ligne est lue, comprise, validée</span></li>
+                </ul>
+            </div>
+        </Card>
+    </div>
+
+    <div class="flex">
+        <div>
+            <Line client:idle isFirst isLast/>
+        </div>
+        <div class="min-w-0 flex-1 padding-x pt-12 pb-10">
+            <p class="text-body-large max-w-prose mx-auto text-center text-on-surface-variant">
+                Déléguer une partie de l'exécution ne baisse pas le niveau d'exigence. Au contraire :
+                plus l'IA intervient, plus il faut quelqu'un capable de comprendre, trier et assumer
+                ce qui entre réellement dans le produit.
+            </p>
+
+            <div class="mt-16 border-t border-outline-variant pt-10 md:mt-20 md:pt-12">
+                <div class="max-w-3xl">
+                    <p class="sub-title text-secondary">En pratique</p>
+                    <h3 class="mt-3 text-headline-medium md:text-headline-large">
+                        <span class="block text-gradient">Accélérez sans sauter d’étape.</span>
+                        <span class="block">Je cadre, l’IA accélère, je contrôle.</span>
+                    </h3>
+                    <p class="mt-5 text-body-large text-on-surface-variant">
+                        Cette démarcation accompagne tout le projet : le raisonnement ouvre et ferme
+                        la boucle, tandis que l’IA intervient au centre lorsque le cadre est suffisamment clair.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="padding-x">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:auto-rows-min">
+            <Card client:visible variant="filled" className="group md:col-span-1 md:row-span-1">
+                <article class="p-6 md:p-8 h-full flex flex-col">
+                    <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+              <Icon icon={iSearch} className="h-6 w-6"/>
+            </span>
+                        <div>
+                            <span class="block text-label-large text-on-surface-variant uppercase tracking-wide">Phase 01</span>
+                            <h4 class="text-title-small text-on-surface">Cadrage et vision</h4>
+                        </div>
+                    </div>
+                    <span class="mb-5 w-fit bg-primary/15 px-2 py-1 text-body-small font-medium text-primary">100 % humain</span>
+
+                    <p class="mb-3 text-body-small text-on-surface-variant">Vous repartez avec :</p>
+                    <ul class="space-y-2.5 text-body-medium text-on-surface">
+                        <li class="flex items-center gap-2">
+                            <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0"/>
+                            <span>Une vision nette du périmètre</span></li>
+                        <li class="flex items-center gap-2">
+                            <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0"/>
+                            <span>Une estimation transparente</span></li>
+                        <li class="flex items-center gap-2">
+                            <Icon icon={iCheckCircle} className="h-5 w-5 text-primary shrink-0"/>
+                            <span>Un découpage en lots validé</span></li>
+                    </ul>
+
+                    <div class="mt-auto pt-6">
+                        <div class="border-t border-outline-variant/40 pt-4 text-body-small text-on-surface-variant">
+                                <span class="inline-flex items-start gap-2"><Icon icon={iTaskAlt}
+                                                                                  className="h-4 w-4 text-secondary shrink-0 mt-0.5"/><span>Évite de partir dans la mauvaise direction.</span></span>
+                        </div>
+                    </div>
+                </article>
+            </Card>
+
+            <Card client:visible variant="filled" energyX
+                  className="group md:col-span-2 md:row-span-2 relative ring-1 ring-primary/20">
+                <article class="p-6 md:p-10 h-full flex flex-col">
+                    <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-primary text-on-primary">
+              <Icon icon={iRocketLaunch} className="h-6 w-6"/>
+            </span>
+                        <div>
+                            <span class="block text-label-large text-secondary uppercase tracking-wide">Phase 02</span>
+                            <h4 class="text-title-medium text-on-surface">Exécution assistée</h4>
+                        </div>
+                    </div>
+                    <span class="mb-6 w-fit bg-tertiary/15 px-2 py-1 text-body-small font-medium text-on-surface">IA comme levier</span>
+
+                    <p class="mb-8 text-body-large text-on-surface-variant max-w-prose">
+                        L’IA accélère ce qui peut l’être : maquettes, tuyauterie technique, tâches
+                        répétitives, premières versions de tests ou de documentation. Le gain de
+                        temps est réel, mais il ne remplace pas la responsabilité technique.
+                    </p>
+
+                    <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="rounded-2xl bg-surface-container-low p-5">
+                            <div class="mb-2 flex items-center gap-2">
+                                <Icon icon={iRocketLaunch} className="h-5 w-5 text-on-surface-variant"/>
+                                <span class="text-label-large text-on-surface-variant uppercase tracking-wide">Production</span>
+                            </div>
+                            <p class="text-body-medium text-on-surface-variant">
+                                La machine propose rapidement une base de travail exploitable.
+                            </p>
+                        </div>
+                        <div class="rounded-2xl bg-tertiary/15 ring-1 ring-tertiary/30 p-5">
+                            <div class="mb-2 flex items-center gap-2">
+                                <Icon icon={iFactCheck} className="h-5 w-5 text-secondary"/>
+                                <span class="text-label-large text-secondary tracking-wide">Validation</span>
+                            </div>
+                            <p class="text-body-medium text-on-surface">
+                                Chaque proposition est comprise, corrigée si nécessaire, puis seulement
+                                intégrée.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto border-t border-outline-variant/40 pt-4 text-body-small text-on-surface-variant">
+                            <span class="inline-flex items-start gap-2"><Icon icon={iTaskAlt}
+                                                                              className="h-4 w-4 text-secondary shrink-0 mt-0.5"/><span>Réduit le temps d’exécution sans céder sur la fiabilité.</span></span>
+                    </div>
+                </article>
+            </Card>
+
+            <Card client:visible variant="filled" className="group md:col-span-1 md:row-span-1">
+                <article class="p-6 md:p-8 h-full flex flex-col">
+                    <div class="flex items-center gap-3 mb-5">
+            <span class="grid place-items-center h-12 w-12 rounded-2xl bg-secondary-container text-on-secondary-container">
+              <Icon icon={iShield} className="h-6 w-6"/>
+            </span>
+                        <div>
+                            <span class="block text-label-large text-on-surface-variant uppercase tracking-wide">Phase 03</span>
+                            <h4 class="text-title-small text-on-surface">Rigueur et contrôle</h4>
+                        </div>
+                    </div>
+                    <span class="mb-5 w-fit bg-primary/15 px-2 py-1 text-body-small font-medium text-primary">Expertise humaine</span>
+
+                    <p class="mb-3 text-body-small text-on-surface-variant">Contrôles systématiques :</p>
+                    <ul class="space-y-2.5 text-body-medium text-on-surface">
+                        <li class="flex items-center gap-2">
+                            <Icon icon={iFactCheck} className="h-5 w-5 text-primary shrink-0"/>
+                            <span>Revue de code</span></li>
+                        <li class="flex items-center gap-2">
+                            <Icon icon={iTaskAlt} className="h-5 w-5 text-primary shrink-0"/>
+                            <span>Tests automatisés</span></li>
+                        <li class="flex items-center gap-2">
+                            <Icon icon={iVerifiedUser} className="h-5 w-5 text-primary shrink-0"/>
+                            <span>Sécurisation</span></li>
+                    </ul>
+
+                    <div class="mt-auto pt-6">
+                        <div class="border-t border-outline-variant/40 pt-4 text-body-small text-on-surface-variant">
+                                <span class="inline-flex items-start gap-2"><Icon icon={iTaskAlt}
+                                                                                  className="h-4 w-4 text-secondary shrink-0 mt-0.5"/><span>Évite le code qui fonctionne en apparence seulement.</span></span>
+                        </div>
+                    </div>
+                </article>
+            </Card>
+        </div>
+    </div>
+
+    <div class="flex h-40">
+        <div>
+            <Line client:idle isFirst nextTheme="blue"/>
+        </div>
+    </div>
+
+    <LinearGradient nextTheme="blue"/>
+</section>
+
+
+

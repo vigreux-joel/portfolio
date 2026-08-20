@@ -20,88 +20,110 @@ export const CircleComponent: FC<{
     const [delta, setDelta] = useState(Math.random() * (0.25 * 2) - 0.25);
 
 
-    const resolvedRef = defaultRef ?? useRef(null);
+    const internalRef = useRef<SVGSVGElement>(null);
+    const resolvedRef = defaultRef ?? internalRef;
 
 
-    const [transformPosition, setTransformPosition] = useState({x: 0, y: 0});
+    const [currentPos, setCurrentPos] = useState<{x: number | string, y: number | string}>({
+        x: position.x * 100 + "%",
+        y: position.y * 100 + "%"
+    });
 
     useEffect(() => {
         if (speed === null) return;
+
+        let interval: ReturnType<typeof setInterval> | undefined;
+
         const mouve = () => {
-            const parent = (resolvedRef.current as any).parentElement;
+            const parent = resolvedRef.current?.parentElement;
             if (parent) {
                 const parentWidth = parent.clientWidth;
                 const parentHeight = parent.clientHeight;
                 const elemWidth = 50;
                 const elemHeight = 50;
 
-                // delta limité pour lisser le mouvement
-                const maxStep = 1000; // distance max à parcourir par mouvement
-                let newX = transformPosition.x + (Math.random() * 2 - 1) * maxStep;
-                let newY = transformPosition.y + (Math.random() * 2 - 1) * maxStep;
+                setCurrentPos((previousPos) => {
+                    // Convertit la position initiale en pixels, puis repart toujours
+                    // de la dernière destination sans recréer l'effet.
+                    const currentX = typeof previousPos.x === "string"
+                        ? parentWidth * position.x
+                        : previousPos.x;
+                    const currentY = typeof previousPos.y === "string"
+                        ? parentHeight * position.y
+                        : previousPos.y;
 
-                // clamp pour ne pas sortir du parent
-                newX = Math.min(parentWidth - elemWidth, Math.max(0, newX));
-                newY = Math.min(parentHeight - elemHeight, Math.max(0, newY));
+                    const maxStep = 1000;
+                    const absoluteX = Math.min(
+                        parentWidth - elemWidth / 2,
+                        Math.max(elemWidth / 2, currentX + (Math.random() * 2 - 1) * maxStep)
+                    );
+                    const absoluteY = Math.min(
+                        parentHeight - elemHeight / 2,
+                        Math.max(elemHeight / 2, currentY + (Math.random() * 2 - 1) * maxStep)
+                    );
 
-                setTransformPosition({x: newX, y: newY});
+                    return {x: absoluteX, y: absoluteY};
+                });
             }
         };
 
         const initialDelay = Math.random() * speed;
 
         const timeout = setTimeout(() => {
-            mouve(); // premier mouvement décalé
-
-            const interval = setInterval(() => {
-                mouve();
-            }, speed); // ensuite, bouge toutes les 5s
-
-            // cleanup
-            return () => clearInterval(interval);
+            mouve();
+            interval = setInterval(mouve, speed);
         }, initialDelay);
-    }, [speed]);
+
+        return () => {
+            clearTimeout(timeout);
+            if (interval !== undefined) clearInterval(interval);
+        };
+    }, [speed, position.x, position.y, resolvedRef]);
 
     return (
         <svg
             ref={resolvedRef}
             style={{
-                top: position.y * 100 + "%",
-                left: position.x * 100 + "%",
+                top: typeof currentPos.y === 'number' ? `${currentPos.y}px` : currentPos.y,
+                left: typeof currentPos.x === 'number' ? `${currentPos.x}px` : currentPos.x,
                 width,
                 aspectRatio: 1,
                 opacity: isVisible ? 1 : 0,
-                transform: `translate(${transformPosition.x}px, ${transformPosition.y}px) translate(-50%, -50%)`,
+                // Utilisation de la propriété CSS "translate" moderne (indépendante de "transform")
+                // pour le centrage, ce qui permet à top/left de gérer tout le déplacement.
+                translate: "-50% -50%",
                 transformOrigin: "center",
-                transition: `top 8s linear,
-                     left 8s linear,
-                     background 2s,
-                     transform ${(speed ?? 5000) / 1000}s linear
+                willChange: "top, left",
+                transition: `top ${(speed ?? 5000) / 1000}s linear,
+                     left ${(speed ?? 5000) / 1000}s linear,
+                     background 2s
                      `,
             }}
-            className={"absolute h-auto transition-all duration-2000 mix-blend-hue " + className}
+            className={"absolute mix-blend-hue h-auto transition-all duration-2000 " + className}
             xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"
             {...restProps}
 
         >
-            <radialGradient id={"grad-" + uuid} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop
-                    offset="0%"
-                    style={{
-                        stopColor: color,
-                        stopOpacity: 1,
-                        transition: "1s"
-                    }}
-                />
+            <defs>
+                <radialGradient id={"grad-" + uuid} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop
+                        offset="0%"
+                        style={{
+                            stopColor: color,
+                            stopOpacity: 1,
+                            transition: "1s"
+                        }}
+                    />
 
-                <stop
-                    offset="100%"
-                    style={{
-                        stopColor: `var(--color-surface)`,
-                        stopOpacity: 0
-                    }}
-                />
-            </radialGradient>
+                    <stop
+                        offset="100%"
+                        style={{
+                            stopColor: `var(--color-surface)`,
+                            stopOpacity: 0
+                        }}
+                    />
+                </radialGradient>
+            </defs>
             <circle cx="128" cy="128" r="128" fill={`url(#${"grad-" + uuid})`}/>
         </svg>
 

@@ -1,0 +1,50 @@
+---
+import type { ComponentProps } from "react";
+import { Line } from "@components/Line";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  icon: ComponentProps<typeof Line>["icon"];
+  isLast?: boolean;
+}
+
+const { eyebrow, title, icon, isLast = false } = Astro.props;
+---
+
+<section class="project-chapter flex pt-8 xl:block">
+  <div class="w-10 shrink-0 xl:absolute xl:bottom-0 xl:-left-3 xl:top-8 xl:w-6">
+    <Line client:idle icon={icon} isLast={isLast} className="xl:!ml-0" />
+  </div>
+  <div class="min-w-0 flex-1 padding-x pb-16 md:pb-24">
+    <header class="max-w-4xl">
+      <p class="text-label-large text-tertiary">{eyebrow}</p>
+      <h3 class="mt-2 text-headline-small text-on-surface md:text-headline-medium">
+        {title}
+      </h3>
+    </header>
+    <div class="project-chapter__body mt-6 max-w-3xl text-body-large text-on-surface-variant">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-chapter__body :global(p) {
+    margin-top: 1.25rem;
+  }
+
+  .project-chapter__body :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .project-chapter__body :global(strong) {
+    color: var(--color-on-surface);
+  }
+
+  .project-chapter__body :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+</style>
